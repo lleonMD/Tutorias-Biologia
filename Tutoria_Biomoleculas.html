@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoría Interactiva: Biomoléculas</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .slide-in { animation: slideIn 0.4s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        // Separate Timer component to isolate re-renders
+        function Timer({ initialMinutes = 60 }) {
+            const [displayTime, setDisplayTime] = useState(initialMinutes * 60);
+            const timerRef = useRef(null);
+            const startTimeRef = useRef(Date.now());
+            const initialSecondsRef = useRef(initialMinutes * 60);
+
+            useEffect(() => {
+                timerRef.current = setInterval(() => {
+                    const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000);
+                    const remaining = Math.max(0, initialSecondsRef.current - elapsed);
+                    setDisplayTime(remaining);
+                    if (remaining <= 0) {
+                        clearInterval(timerRef.current);
+                    }
+                }, 1000);
+
+                return () => {
+                    if (timerRef.current) {
+                        clearInterval(timerRef.current);
+                    }
+                };
+            }, []);
+
+            const minutes = Math.floor(displayTime / 60);
+            const seconds = displayTime % 60;
+
+            return (
+                <div className="flex items-center gap-2 bg-slate-800 px-3 py-1 rounded-lg">
+                    <span className="text-cyan-400">⏱️</span>
+                    <span className="font-mono text-white">{minutes}:{String(seconds).padStart(2, '0')}</span>
+                </div>
+            );
+        }
+
+        function TutoriaBiomoleculas() {
+            const [seccion, setSeccion] = useState('inicio');
+            const [glosarioVisible, setGlosarioVisible] = useState(false);
+            const [quiz, setQuiz] = useState({});
+            const [notas, setNotas] = useState('');
+
+            const glosario = {
+                'Biomolécula': 'Molécula producida por organismos vivos',
+                'Macromolécula': 'Molécula grande formada por unidades repetidas',
+                'Monómero': 'Unidad básica que forma polímeros',
+                'Polímero': 'Molécula grande de monómeros unidos',
+                'Polimerización': 'Proceso de unir monómeros',
+                'Condensación': 'Reacción que libera agua',
+                'Hidrólisis': 'Ruptura de enlaces con agua',
+                'Autoensamblaje': 'Organización espontánea de moléculas'
+            };
+
+            const secciones = [
+                { id: 'inicio', titulo: '🎯 Inicio' },
+                { id: 'definicion', titulo: '📚 Definición' },
+                { id: 'macromoleculas', titulo: '🧬 Macromoléculas' },
+                { id: 'monomeros', titulo: '🔗 Monómeros' },
+                { id: 'niveles', titulo: '📊 5 Niveles' },
+                { id: 'polimerizacion', titulo: '⚗️ 6 Principios' },
+                { id: 'autoensamblaje', titulo: '🏗️ Autoensamblaje' },
+                { id: 'clinica', titulo: '🏥 Casos Clínicos' },
+                { id: 'evaluacion', titulo: '✅ Evaluación' }
+            ];
+
+            const casosClinicosData = [
+                {
+                    titulo: 'El Deportista con Calambres',
+                    paciente: 'Hombre de 25 años, atleta',
+                    sintomas: 'Calambres musculares, fatiga extrema',
+                    historia: 'Corredor con niveles bajos de glucógeno muscular.',
+                    pregunta: '¿Qué biomolécula está afectada?',
+                    opciones: [
+                        { id: 'a', texto: 'Proteínas', correcto: false },
+                        { id: 'b', texto: 'Carbohidratos', correcto: true },
+                        { id: 'c', texto: 'Lípidos', correcto: false },
+                        { id: 'd', texto: 'Ác. nucleicos', correcto: false }
+                    ],
+                    explicacion: '¡CARBOHIDRATOS! El glucógeno es un POLÍMERO de glucosa.',
+                    conexion: 'Glucógeno = polímero de glucosa con enlaces glucosídicos.'
+                },
+                {
+                    titulo: 'La Piel que No Sana',
+                    paciente: 'Niño de 8 años',
+                    sintomas: 'Piel frágil, articulaciones hipermóviles',
+                    historia: 'Problema sospechado con el colágeno.',
+                    pregunta: '¿Qué biomolécula está alterada?',
+                    opciones: [
+                        { id: 'a', texto: 'Carbohidratos', correcto: false },
+                        { id: 'b', texto: 'Lípidos', correcto: false },
+                        { id: 'c', texto: 'Proteínas', correcto: true },
+                        { id: 'd', texto: 'Ác. nucleicos', correcto: false }
+                    ],
+                    explicacion: '¡PROTEÍNAS! El colágeno es un polímero de aminoácidos.',
+                    conexion: 'Colágeno = polímero de aminoácidos con enlaces peptídicos.'
+                },
+                {
+                    titulo: 'Bebé que No Digiere Grasas',
+                    paciente: 'Bebé de 6 meses',
+                    sintomas: 'Esteatorrea, deficiencia vitaminas',
+                    historia: 'No puede digerir grasas correctamente.',
+                    pregunta: '¿Qué biomolécula no puede procesar?',
+                    opciones: [
+                        { id: 'a', texto: 'Carbohidratos', correcto: false },
+                        { id: 'b', texto: 'Proteínas', correcto: false },
+                        { id: 'c', texto: 'Lípidos', correcto: true },
+                        { id: 'd', texto: 'Ác. nucleicos', correcto: false }
+                    ],
+                    explicacion: '¡LÍPIDOS! Los triglicéridos NO son polímeros.',
+                    conexion: 'Lípidos se forman por esterificación, NO polimerización.'
+                }
+            ];
+
+            const Glosario = () => (
+                <div className={`fixed right-0 top-20 w-72 bg-slate-800 border-l-4 border-emerald-500 shadow-2xl transition-transform duration-300 z-50 max-h-[80vh] overflow-y-auto ${glosarioVisible ? 'translate-x-0' : 'translate-x-full'}`}>
+                    <div className="p-4">
+                        <div className="flex justify-between items-center mb-4">
+                            <h3 className="text-lg font-bold text-emerald-400">📖 Glosario</h3>
+                            <button onClick={() => setGlosarioVisible(false)} className="text-slate-400 hover:text-white text-xl">✕</button>
+                        </div>
+                        <div className="space-y-3">
+                            {Object.entries(glosario).map(([term, def]) => (
+                                <div key={term} className="bg-slate-700/50 rounded-lg p-3 border-l-2 border-cyan-500">
+                                    <span className="font-bold text-cyan-300">{term}</span>
+                                    <p className="text-slate-300 text-sm mt-1">{def}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const BarraProgreso = () => (
+                <div className="fixed top-0 left-0 right-0 bg-slate-900/95 border-b border-slate-700 p-3 z-40">
+                    <div className="max-w-5xl mx-auto">
+                        <div className="flex items-center justify-between mb-2">
+                            <span className="text-lg font-bold text-white">🧬 Tutoría: Biomoléculas</span>
+                            <div className="flex items-center gap-3">
+                                <button onClick={() => setGlosarioVisible(!glosarioVisible)} className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-sm">📖 Glosario</button>
+                                <Timer initialMinutes={60} />
+                            </div>
+                        </div>
+                        <div className="flex gap-1">
+                            {secciones.map((s, idx) => (
+                                <button key={s.id} onClick={() => setSeccion(s.id)}
+                                    className={`flex-1 h-2 rounded-full transition-all ${seccion === s.id ? 'bg-emerald-500' : secciones.findIndex(x => x.id === seccion) > idx ? 'bg-green-500' : 'bg-slate-700'}`}
+                                    title={s.titulo} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const Inicio = () => (
+                <div className="space-y-6 slide-in">
+                    <div className="bg-gradient-to-br from-emerald-900/50 to-cyan-900/50 rounded-2xl p-8 border border-emerald-500/30">
+                        <h2 className="text-3xl font-bold mb-4 text-emerald-300">¡Bienvenida a Biomoléculas! 🧬</h2>
+                        <p className="text-slate-300 text-lg mb-6">Las moléculas de la vida: los "ladrillos" que construyen todo ser vivo.</p>
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div className="bg-slate-800/50 rounded-xl p-5">
+                                <h3 className="font-bold text-amber-400 mb-3">🎯 Resultados de Aprendizaje:</h3>
+                                <ul className="space-y-2 text-slate-300 text-sm">
+                                    <li>✓ RA1: Definir biomoléculas</li>
+                                    <li>✓ RA2: Identificar 4 macromoléculas</li>
+                                    <li>✓ RA3: Comparar sentido general/restringido</li>
+                                    <li>✓ RA4: Polímeros y monómeros</li>
+                                    <li>✓ RA5: Moléculas orgánicas simples</li>
+                                    <li>✓ RA6: Polimerización vs no</li>
+                                    <li>✓ RA7: 5 niveles estructurales</li>
+                                    <li>✓ RA8: 6 principios polimerización</li>
+                                    <li>✓ RA9: Autoensamblaje</li>
+                                </ul>
+                            </div>
+                            <div className="bg-slate-800/50 rounded-xl p-5">
+                                <h3 className="font-bold text-pink-400 mb-3">🩺 Importancia Médica:</h3>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div className="bg-slate-700/50 rounded-lg p-3 text-center">
+                                        <div className="text-2xl mb-1">💊</div>
+                                        <p className="text-xs text-slate-300">Blancos de fármacos</p>
+                                    </div>
+                                    <div className="bg-slate-700/50 rounded-lg p-3 text-center">
+                                        <div className="text-2xl mb-1">🔬</div>
+                                        <p className="text-xs text-slate-300">Biomarcadores</p>
+                                    </div>
+                                    <div className="bg-slate-700/50 rounded-lg p-3 text-center">
+                                        <div className="text-2xl mb-1">🧬</div>
+                                        <p className="text-xs text-slate-300">Genética</p>
+                                    </div>
+                                    <div className="bg-slate-700/50 rounded-lg p-3 text-center">
+                                        <div className="text-2xl mb-1">🥗</div>
+                                        <p className="text-xs text-slate-300">Nutrición</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onClick={() => setSeccion('definicion')} className="w-full py-4 bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 rounded-xl font-bold text-lg">Comenzar →</button>
+                </div>
+            );
+
+            const Definicion = () => (
+                <div className="space-y-6 slide-in">
+                    <div className="bg-slate-800 rounded-2xl p-6">
+                        <h2 className="text-2xl font-bold mb-2 text-emerald-300">📚 ¿Qué son las Biomoléculas?</h2>
+                        <p className="text-slate-400 mb-4">RA 1 y RA 3</p>
+                        <div className="bg-gradient-to-r from-emerald-900/40 to-cyan-900/30 rounded-xl p-5 border border-emerald-500/50 mb-6">
+                            <h3 className="text-xl font-bold text-emerald-400 mb-2">📖 Definición</h3>
+                            <p className="text-white text-lg">Las <strong className="text-emerald-300">biomoléculas</strong> son compuestos químicos en seres vivos, esenciales para procesos biológicos.</p>
+                            <p className="text-slate-300 mt-2 text-sm">Elementos: C, H, O, N, P, S</p>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-4 mb-6">
+                            <div className="bg-blue-900/30 rounded-xl p-4 border border-blue-500/30">
+                                <h4 className="font-bold text-blue-400 mb-2">🌐 Sentido GENERAL</h4>
+                                <p className="text-slate-300 text-sm mb-2">TODAS las moléculas en seres vivos:</p>
+                                <ul className="text-slate-400 text-xs space-y-1">
+                                    <li>• Agua, sales, gases</li>
+                                    <li>• Moléculas orgánicas</li>
+                                </ul>
+                            </div>
+                            <div className="bg-purple-900/30 rounded-xl p-4 border border-purple-500/30">
+                                <h4 className="font-bold text-purple-400 mb-2">🎯 Sentido RESTRINGIDO</h4>
+                                <p className="text-slate-300 text-sm mb-2">Solo 4 ORGÁNICAS:</p>
+                                <ul className="text-slate-400 text-xs space-y-1">
+                                    <li>• Carbohidratos, Lípidos</li>
+                                    <li>• Proteínas, Ác. nucleicos</li>
+                                </ul>
+                                <p className="text-purple-300 text-xs mt-2">📌 Enfoque del curso</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex gap-4">
+                        <button onClick={() => setSeccion('inicio')} className="flex-1 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl">← Anterior</button>
+                        <button onClick={() => setSeccion('macromoleculas')} className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl">Siguiente →</button>
+                    </div>
+                </div>
+            );
+
+            const Macromoleculas = () => (
+                <div className="space-y-6 slide-in">
+                    <div className="bg-slate-800 rounded-2xl p-6">
+                        <h2 className="text-2xl font-bold mb-2 text-emerald-300">🧬 Las 4 Macromoléculas</h2>
+                        <p className="text-slate-400 mb-4">RA 2 y RA 6</p>
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <div className="bg-green-900/30 rounded-xl p-4 border border-green-500/30">
+                                <div className="flex items-center gap-2 mb-2"><span className="text-2xl">🍞</span><h4 className="font-bold text-green-400">CARBOHIDRATOS</h4></div>
+                                <p className="text-slate-300 text-xs">C,H,O | Monosacáridos → Polisacáridos | Enlace glucosídico</p>
+                                <p className="text-green-300 text-xs mt-2">✓ SÍ polímero</p>
+                            </div>
+                            <div className="bg-yellow-900/30 rounded-xl p-4 border border-yellow-500/30">
+                                <div className="flex items-center gap-2 mb-2"><span className="text-2xl">🧈</span><h4 className="font-bold text-yellow-400">LÍPIDOS</h4></div>
+                                <p className="text-slate-300 text-xs">C,H,O | Glicerol+Ác.grasos | Enlace éster</p>
+                                <p className="text-red-300 text-xs mt-2">✗ NO polímero</p>
+                            </div>
+                            <div className="bg-pink-900/30 rounded-xl p-4 border border-pink-500/30">
+                                <div className="flex items-center gap-2 mb-2"><span className="text-2xl">🥩</span><h4 className="font-bold text-pink-400">PROTEÍNAS</h4></div>
+                                <p className="text-slate-300 text-xs">C,H,O,N,S | Aminoácidos (20) | Enlace peptídico</p>
+                                <p className="text-green-300 text-xs mt-2">✓ SÍ polímero</p>
+                            </div>
+                            <div className="bg-cyan-900/30 rounded-xl p-4 border border-cyan-500/30">
+                                <div className="flex items-center gap-2 mb-2"><span className="text-2xl">🧬</span><h4 className="font-bold text-cyan-400">ÁC. NUCLEICOS</h4></div>
+                                <p className="text-slate-300 text-xs">C,H,O,N,P | Nucleótidos | Enlace fosfodiéster</p>
+                                <p className="text-green-300 text-xs mt-2">✓ SÍ polímero</p>
+                            </div>
+                        </div>
+                        <div className="mt-4 bg-amber-900/30 rounded-xl p-4 border border-amber-500/50">
+                            <p className="text-amber-300 text-sm">⚠️ <strong>RA6:</strong> Los LÍPIDOS son la ÚNICA macromolécula que NO se forma por polimerización</p>
+                        </div>
+                    </div>
+                    <div className="flex gap-4">
+                        <button onClick={() => setSeccion('definicion')} className="flex-1 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl">← Anterior</button>
+                        <button onClick={() => setSeccion('monomeros')} className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl">Siguiente →</button>
+                    </div>
+                </div>
+            );
+
+            const Monomeros = () => (
+                <div className="space-y-6 slide-in">
+                    <div className="bg-slate-800 rounded-2xl p-6">
+                        <h2 className="text-2xl font-bold mb-2 text-emerald-300">🔗 Monómeros y Polímeros</h2>
+                        <p className="text-slate-400 mb-4">RA 4 y RA 5</p>
+                        <div className="grid md:grid-cols-2 gap-4 mb-6">
+                            <div className="bg-blue-900/30 rounded-xl p-4 border border-blue-500/30">
+                                <h4 className="font-bold text-blue-400 mb-2">🔹 MONÓMERO</h4>
+                                <p className="text-slate-300 text-sm">"mono"=uno - Unidad básica</p>
+                                <p className="text-blue-300 text-xs mt-2">🧱 Como un LEGO individual</p>
+                            </div>
+                            <div className="bg-purple-900/30 rounded-xl p-4 border border-purple-500/30">
+                                <h4 className="font-bold text-purple-400 mb-2">🔗 POLÍMERO</h4>
+                                <p className="text-slate-300 text-sm">"poli"=muchos - Cadena de monómeros</p>
+                                <p className="text-purple-300 text-xs mt-2">🏰 Construcción de LEGOs</p>
+                            </div>
+                        </div>
+                        <div className="bg-slate-700/30 rounded-xl p-4 mb-4">
+                            <h4 className="font-bold text-white mb-2">📋 Conversiones:</h4>
+                            <div className="space-y-1 text-sm">
+                                <p className="text-emerald-400">Monosacárido →→→ Polisacárido</p>
+                                <p className="text-pink-400">Aminoácido →→→ Proteína</p>
+                                <p className="text-cyan-400">Nucleótido →→→ ADN/ARN</p>
+                            </div>
+                        </div>
+                        <div className="bg-amber-900/30 rounded-xl p-4 border border-amber-500/40">
+                            <h4 className="font-bold text-amber-400 mb-2">🔬 Moléculas Simples (Precursores) - RA5</h4>
+                            <p className="text-slate-300 text-xs">Glucosa, fructosa, ácidos grasos, aminoácidos, bases nitrogenadas, glicerol, piruvato</p>
+                        </div>
+                    </div>
+                    <div className="flex gap-4">
+                        <button onClick={() => setSeccion('macromoleculas')} className="flex-1 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl">← Anterior</button>
+                        <button onClick={() => setSeccion('niveles')} className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl">Siguiente →</button>
+                    </div>
+                </div>
+            );
+
+            const Niveles = () => (
+                <div className="space-y-6 slide-in">
+                    <div className="bg-slate-800 rounded-2xl p-6">
+                        <h2 className="text-2xl font-bold mb-2 text-emerald-300">📊 5 Niveles Estructurales (Becker's)</h2>
+                        <p className="text-slate-400 mb-4">RA 7</p>
+                        <div className="space-y-3">
+                            <div className="bg-blue-900/30 rounded-xl p-3 border-l-4 border-blue-500 flex items-center gap-3">
+                                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                                <div><h4 className="font-bold text-blue-400 text-sm">Monómeros y Moléculas Pequeñas</h4><p className="text-slate-400 text-xs">Aminoácidos, nucleótidos, monosacáridos</p></div>
+                            </div>
+                            <div className="bg-green-900/30 rounded-xl p-3 border-l-4 border-green-500 flex items-center gap-3">
+                                <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                                <div><h4 className="font-bold text-green-400 text-sm">Macromoléculas</h4><p className="text-slate-400 text-xs">Proteínas, ác. nucleicos, polisacáridos</p></div>
+                            </div>
+                            <div className="bg-yellow-900/30 rounded-xl p-3 border-l-4 border-yellow-500 flex items-center gap-3">
+                                <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                                <div><h4 className="font-bold text-yellow-400 text-sm">Complejos Supramoleculares</h4><p className="text-slate-400 text-xs">Ribosomas, cromosomas (AUTOENSAMBLAJE)</p></div>
+                            </div>
+                            <div className="bg-pink-900/30 rounded-xl p-3 border-l-4 border-pink-500 flex items-center gap-3">
+                                <div className="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center font-bold text-sm">4</div>
+                                <div><h4 className="font-bold text-pink-400 text-sm">Organelos y Membranas</h4><p className="text-slate-400 text-xs">Mitocondrias, núcleo, RE, Golgi</p></div>
+                            </div>
+                            <div className="bg-purple-900/30 rounded-xl p-3 border-l-4 border-purple-500 flex items-center gap-3">
+                                <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center font-bold text-sm">5</div>
+                                <div><h4 className="font-bold text-purple-400 text-sm">La Célula</h4><p className="text-slate-400 text-xs">Unidad básica de la vida</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex gap-4">
+                        <button onClick={() => setSeccion('monomeros')} className="flex-1 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl">← Anterior</button>
+                        <button onClick={() => setSeccion('polimerizacion')} className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl">Siguiente →</button>
+                    </div>
+                </div>
+            );
+
+            const Polimerizacion = () => (
+                <div className="space-y-6 slide-in">
+                    <div className="bg-slate-800 rounded-2xl p-6">
+                        <h2 className="text-2xl font-bold mb-2 text-emerald-300">⚗️ 6 Principios de Polimerización</h2>
+                        <p className="text-slate-400 mb-4">RA 8</p>
+                        <div className="grid md:grid-cols-2 gap-3">
+                            <div className="bg-slate-700/50 rounded-lg p-3 border-l-4 border-cyan-500">
+                                <span className="bg-cyan-600 text-white w-6 h-6 rounded flex items-center justify-center text-sm font-bold inline-block mr-2">1</span>
+                                <span className="font-bold text-cyan-400 text-sm">Son POLÍMEROS</span>
+                                <p className="text-slate-300 text-xs mt-1">Monómeros unidos covalentemente</p>
+                            </div>
+                            <div className="bg-slate-700/50 rounded-lg p-3 border-l-4 border-pink-500">
+                                <span className="bg-pink-600 text-white w-6 h-6 rounded flex items-center justify-center text-sm font-bold inline-block mr-2">2</span>
+                                <span className="font-bold text-pink-400 text-sm">Por CONDENSACIÓN</span>
+                                <p className="text-slate-300 text-xs mt-1">Se libera H₂O</p>
+                            </div>
+                            <div className="bg-slate-700/50 rounded-lg p-3 border-l-4 border-amber-500">
+                                <span className="bg-amber-600 text-white w-6 h-6 rounded flex items-center justify-center text-sm font-bold inline-block mr-2">3</span>
+                                <span className="font-bold text-amber-400 text-sm">Ruptura: HIDRÓLISIS</span>
+                                <p className="text-slate-300 text-xs mt-1">Se añade H₂O para romper</p>
+                            </div>
+                            <div className="bg-slate-700/50 rounded-lg p-3 border-l-4 border-green-500">
+                                <span className="bg-green-600 text-white w-6 h-6 rounded flex items-center justify-center text-sm font-bold inline-block mr-2">4</span>
+                                <span className="font-bold text-green-400 text-sm">Requiere ENERGÍA</span>
+                                <p className="text-slate-300 text-xs mt-1">ATP necesario</p>
+                            </div>
+                            <div className="bg-slate-700/50 rounded-lg p-3 border-l-4 border-purple-500">
+                                <span className="bg-purple-600 text-white w-6 h-6 rounded flex items-center justify-center text-sm font-bold inline-block mr-2">5</span>
+                                <span className="font-bold text-purple-400 text-sm">Catalizada ENZIMAS</span>
+                                <p className="text-slate-300 text-xs mt-1">ADN pol, ribosoma</p>
+                            </div>
+                            <div className="bg-slate-700/50 rounded-lg p-3 border-l-4 border-red-500">
+                                <span className="bg-red-600 text-white w-6 h-6 rounded flex items-center justify-center text-sm font-bold inline-block mr-2">6</span>
+                                <span className="font-bold text-red-400 text-sm">DIRECCIONALIDAD</span>
+                                <p className="text-slate-300 text-xs mt-1">5'→3' | N→C</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex gap-4">
+                        <button onClick={() => setSeccion('niveles')} className="flex-1 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl">← Anterior</button>
+                        <button onClick={() => setSeccion('autoensamblaje')} className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl">Siguiente →</button>
+                    </div>
+                </div>
+            );
+
+            const Autoensamblaje = () => (
+                <div className="space-y-6 slide-in">
+                    <div className="bg-slate-800 rounded-2xl p-6">
+                        <h2 className="text-2xl font-bold mb-2 text-emerald-300">🏗️ Autoensamblaje</h2>
+                        <p className="text-slate-400 mb-4">RA 9</p>
+                        <div className="bg-purple-900/40 rounded-xl p-5 border border-purple-500/50 mb-6">
+                            <h3 className="font-bold text-purple-400 mb-2">📖 Definición</h3>
+                            <p className="text-white">Organización <strong className="text-purple-300">ESPONTÁNEA</strong> de macromoléculas en estructuras complejas, sin energía externa.</p>
+                            <p className="text-cyan-300 text-sm mt-2">🔑 Por enlaces NO covalentes: puentes H, hidrofóbicos, van der Waals, iónicos</p>
+                        </div>
+                        <div className="grid grid-cols-3 gap-2 mb-4">
+                            <div className="bg-slate-700/50 rounded p-2 text-center"><span className="text-xl">🧫</span><p className="text-cyan-400 text-xs">Membrana</p></div>
+                            <div className="bg-slate-700/50 rounded p-2 text-center"><span className="text-xl">🧬</span><p className="text-pink-400 text-xs">Doble hélice ADN</p></div>
+                            <div className="bg-slate-700/50 rounded p-2 text-center"><span className="text-xl">🔴</span><p className="text-amber-400 text-xs">Ribosomas</p></div>
+                            <div className="bg-slate-700/50 rounded p-2 text-center"><span className="text-xl">🧵</span><p className="text-green-400 text-xs">Microtúbulos</p></div>
+                            <div className="bg-slate-700/50 rounded p-2 text-center"><span className="text-xl">🦠</span><p className="text-purple-400 text-xs">Cápsides virales</p></div>
+                            <div className="bg-slate-700/50 rounded p-2 text-center"><span className="text-xl">🥩</span><p className="text-red-400 text-xs">Plegamiento 3D</p></div>
+                        </div>
+                        <div className="bg-emerald-900/30 rounded-xl p-4 border border-emerald-500/40">
+                            <h4 className="font-bold text-emerald-400 mb-2">🌟 Importancia</h4>
+                            <p className="text-slate-300 text-xs">Eficiencia energética • Rapidez • Fidelidad • Reversibilidad</p>
+                            <p className="text-amber-300 text-xs mt-2">🔗 Permite pasar del Nivel 2 al Nivel 3 (complejos supramoleculares)</p>
+                        </div>
+                    </div>
+                    <div className="flex gap-4">
+                        <button onClick={() => setSeccion('polimerizacion')} className="flex-1 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl">← Anterior</button>
+                        <button onClick={() => setSeccion('clinica')} className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl">Siguiente →</button>
+                    </div>
+                </div>
+            );
+
+            const Clinica = () => {
+                const [casoIdx, setCasoIdx] = useState(0);
+                const [respuesta, setRespuesta] = useState(null);
+                const caso = casosClinicosData[casoIdx];
+                return (
+                    <div className="space-y-6 slide-in">
+                        <div className="bg-red-900/40 rounded-2xl p-5 border border-red-500/50">
+                            <h2 className="text-2xl font-bold text-red-300">🏥 Casos Clínicos</h2>
+                        </div>
+                        <div className="bg-slate-800 rounded-2xl p-5">
+                            <span className="text-xs bg-red-600 px-2 py-1 rounded-full">Caso {casoIdx + 1}/{casosClinicosData.length}</span>
+                            <h3 className="text-lg font-bold text-white mt-2 mb-3">{caso.titulo}</h3>
+                            <div className="bg-slate-700/50 rounded-xl p-4 mb-4">
+                                <p className="text-slate-300 text-sm mb-2"><strong>👤</strong> {caso.paciente}</p>
+                                <p className="text-slate-300 text-sm mb-2">{caso.historia}</p>
+                                <p className="text-pink-400 text-sm"><strong>Síntomas:</strong> {caso.sintomas}</p>
+                            </div>
+                            <div className="bg-cyan-900/30 rounded-xl p-4 mb-4 border border-cyan-500/50">
+                                <p className="text-cyan-300 font-medium mb-3 text-sm">❓ {caso.pregunta}</p>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {caso.opciones.map(op => (
+                                        <button key={op.id} onClick={() => setRespuesta(op.id)} disabled={respuesta !== null}
+                                            className={`p-2 rounded-lg text-left text-sm ${respuesta === op.id ? (op.correcto ? 'bg-green-600' : 'bg-red-600') : respuesta && op.correcto ? 'bg-green-600/50' : 'bg-slate-600 hover:bg-slate-500'}`}>
+                                            {op.id}) {op.texto}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            {respuesta && (
+                                <div className="space-y-3">
+                                    <div className="bg-green-900/30 border border-green-500 rounded-xl p-3">
+                                        <p className="text-green-300 text-sm">{caso.explicacion}</p>
+                                    </div>
+                                    <div className="bg-purple-900/30 border border-purple-500 rounded-xl p-3">
+                                        <p className="text-purple-300 text-sm">🔬 {caso.conexion}</p>
+                                    </div>
+                                    {casoIdx < casosClinicosData.length - 1 && (
+                                        <button onClick={() => { setCasoIdx(casoIdx + 1); setRespuesta(null); }} className="w-full py-2 bg-cyan-600 hover:bg-cyan-500 rounded-xl text-sm">Siguiente caso →</button>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                        <div className="flex gap-4">
+                            <button onClick={() => setSeccion('autoensamblaje')} className="flex-1 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl">← Anterior</button>
+                            <button onClick={() => setSeccion('evaluacion')} className="flex-1 py-3 bg-green-600 hover:bg-green-500 rounded-xl">Evaluación →</button>
+                        </div>
+                    </div>
+                );
+            };
+
+            const Evaluacion = () => {
+                const [resp, setResp] = useState({});
+                const [mostrar, setMostrar] = useState(false);
+                const preguntas = [
+                    { id: 1, q: '¿Cuál NO es polímero?', ops: [{id:'a',t:'Proteínas',c:false},{id:'b',t:'Polisacáridos',c:false},{id:'c',t:'Lípidos',c:true},{id:'d',t:'Ác. nucleicos',c:false}] },
+                    { id: 2, q: '¿Qué se libera en condensación?', ops: [{id:'a',t:'ATP',c:false},{id:'b',t:'CO₂',c:false},{id:'c',t:'H₂O',c:true},{id:'d',t:'O₂',c:false}] },
+                    { id: 3, q: 'Nivel de ribosomas (Becker)', ops: [{id:'a',t:'Nivel 1',c:false},{id:'b',t:'Nivel 2',c:false},{id:'c',t:'Nivel 3',c:true},{id:'d',t:'Nivel 4',c:false}] },
+                    { id: 4, q: 'Monómero de proteínas', ops: [{id:'a',t:'Nucleótidos',c:false},{id:'b',t:'Monosacáridos',c:false},{id:'c',t:'Aminoácidos',c:true},{id:'d',t:'Ác. grasos',c:false}] },
+                    { id: 5, q: 'Enlaces de autoensamblaje', ops: [{id:'a',t:'Covalentes',c:false},{id:'b',t:'No covalentes',c:true},{id:'c',t:'Iónicos solo',c:false},{id:'d',t:'Metálicos',c:false}] },
+                    { id: 6, q: 'NO es principio polimerización', ops: [{id:'a',t:'Requiere ATP',c:false},{id:'b',t:'Enzimas',c:false},{id:'c',t:'Espontánea',c:true},{id:'d',t:'Direccionalidad',c:false}] },
+                    { id: 7, q: 'Elementos exclusivos proteínas', ops: [{id:'a',t:'C,H',c:false},{id:'b',t:'N,S',c:true},{id:'c',t:'O',c:false},{id:'d',t:'P',c:false}] },
+                    { id: 8, q: 'Sentido restringido son:', ops: [{id:'a',t:'Agua/sales',c:false},{id:'b',t:'Solo proteínas',c:false},{id:'c',t:'4 macromoléculas',c:true},{id:'d',t:'Todo',c:false}] },
+                    { id: 9, q: 'Enlace en ADN', ops: [{id:'a',t:'Peptídico',c:false},{id:'b',t:'Glucosídico',c:false},{id:'c',t:'Fosfodiéster',c:true},{id:'d',t:'Éster',c:false}] },
+                    { id: 10, q: 'Bicapa lipídica se forma por:', ops: [{id:'a',t:'Polimerización',c:false},{id:'b',t:'Hidrólisis',c:false},{id:'c',t:'Autoensamblaje',c:true},{id:'d',t:'Condensación',c:false}] }
+                ];
+                const puntaje = () => preguntas.filter(p => resp[p.id] === p.ops.find(o => o.c).id).length;
+                return (
+                    <div className="space-y-4 slide-in">
+                        <div className="bg-green-900/40 rounded-2xl p-5 border border-green-500/50">
+                            <h2 className="text-2xl font-bold text-green-300">✅ Evaluación Final</h2>
+                        </div>
+                        {preguntas.map((p, idx) => (
+                            <div key={p.id} className="bg-slate-800 rounded-xl p-4">
+                                <p className="font-medium text-white mb-2 text-sm"><span className="text-emerald-400">{idx + 1}.</span> {p.q}</p>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {p.ops.map(op => (
+                                        <button key={op.id} onClick={() => !mostrar && setResp({...resp, [p.id]: op.id})} disabled={mostrar}
+                                            className={`p-2 rounded-lg text-left text-xs ${mostrar && op.c ? 'bg-green-600' : mostrar && resp[p.id] === op.id && !op.c ? 'bg-red-600' : resp[p.id] === op.id ? 'bg-emerald-600' : 'bg-slate-700 hover:bg-slate-600'}`}>
+                                            {op.id}) {op.t}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                        <div className="flex justify-center">
+                            {!mostrar ? (
+                                <button onClick={() => setMostrar(true)} disabled={Object.keys(resp).length < preguntas.length} className="px-6 py-3 bg-green-600 hover:bg-green-500 disabled:bg-slate-600 rounded-xl font-bold">Ver Resultados</button>
+                            ) : (
+                                <div className="text-center bg-slate-800 rounded-xl p-5 w-full">
+                                    <div className="text-4xl font-bold mb-2">{puntaje()} / {preguntas.length}</div>
+                                    <p className="text-xl mb-3">{puntaje() === 10 ? '🎉 ¡Perfecto!' : puntaje() >= 8 ? '👏 ¡Excelente!' : puntaje() >= 6 ? '👍 ¡Bien!' : '💪 ¡Sigue!'}</p>
+                                    <div className="bg-slate-700/50 rounded-xl p-3 text-left text-xs">
+                                        <p className="font-bold text-emerald-400 mb-2">RA Cubiertos:</p>
+                                        <p className="text-slate-300">RA1-9: Definición, 4 macromoléculas, sentido amplio/restringido, monómeros/polímeros, moléculas simples, polimerización, 5 niveles, 6 principios, autoensamblaje</p>
+                                    </div>
+                                    <button onClick={() => { setResp({}); setMostrar(false); }} className="mt-3 px-4 py-2 bg-slate-600 hover:bg-slate-500 rounded-lg text-sm">Reintentar</button>
+                                </div>
+                            )}
+                        </div>
+                        <button onClick={() => setSeccion('clinica')} className="w-full py-3 bg-slate-700 hover:bg-slate-600 rounded-xl">← Volver</button>
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen text-white">
+                    <BarraProgreso />
+                    <Glosario />
+                    <div className="pt-24 pb-20 px-4 max-w-4xl mx-auto">
+                        {seccion === 'inicio' && <Inicio />}
+                        {seccion === 'definicion' && <Definicion />}
+                        {seccion === 'macromoleculas' && <Macromoleculas />}
+                        {seccion === 'monomeros' && <Monomeros />}
+                        {seccion === 'niveles' && <Niveles />}
+                        {seccion === 'polimerizacion' && <Polimerizacion />}
+                        {seccion === 'autoensamblaje' && <Autoensamblaje />}
+                        {seccion === 'clinica' && <Clinica />}
+                        {seccion === 'evaluacion' && <Evaluacion />}
+                    </div>
+                    <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-700 p-3">
+                        <div className="max-w-4xl mx-auto flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <span className="text-slate-400 text-sm">📝</span>
+                                <input type="text" value={notas} onChange={(e) => setNotas(e.target.value)} placeholder="Notas..." className="bg-slate-800 border border-slate-600 rounded-lg px-3 py-1 text-sm w-48 focus:outline-none focus:border-emerald-500" />
+                            </div>
+                            <span className="text-slate-500 text-xs">Tutoría Biomoléculas</span>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        ReactDOM.render(<TutoriaBiomoleculas />, document.getElementById('root'));
+    </script>
+</body>
+</html>
