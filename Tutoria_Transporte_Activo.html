@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Interactiva: Transporte Activo</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0e1a;
+    --bg-card: #111827;
+    --bg-card-alt: #1a2236;
+    --accent-primary: #06d6a0;
+    --accent-secondary: #118ab2;
+    --accent-warm: #ef476f;
+    --accent-gold: #ffd166;
+    --accent-purple: #8338ec;
+    --text-primary: #e8edf5;
+    --text-secondary: #8b99b0;
+    --border-subtle: #1e2a42;
+    --gradient-pump: linear-gradient(135deg, #06d6a0, #118ab2);
+    --gradient-warm: linear-gradient(135deg, #ef476f, #ffd166);
+    --gradient-cool: linear-gradient(135deg, #8338ec, #118ab2);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .app-container { max-width: 960px; margin: 0 auto; padding: 16px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1b2838 50%, #0d1b2a 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(6,214,160,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: var(--gradient-pump);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 4px;
+  }
+  .header-subtitle { color: var(--text-secondary); font-size: 0.9rem; }
+
+  /* Progress Bar */
+  .progress-container {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-subtle);
+  }
+  .progress-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-bar {
+    height: 6px;
+    background: #1e2a42;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--gradient-pump);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+
+  /* Navigation Pills */
+  .nav-pills {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-primary) transparent;
+  }
+  .nav-pill {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .nav-pill:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+  .nav-pill.active {
+    background: var(--gradient-pump);
+    color: #000;
+    border-color: transparent;
+  }
+  .nav-pill.completed {
+    background: rgba(6,214,160,0.15);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-highlight {
+    border-left: 3px solid var(--accent-primary);
+  }
+  .card-warm { border-left: 3px solid var(--accent-warm); }
+  .card-gold { border-left: 3px solid var(--accent-gold); }
+  .card-purple { border-left: 3px solid var(--accent-purple); }
+  .card h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .card p { color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; font-size: 0.92rem; }
+  .section-icon { font-size: 1.5rem; margin-bottom: 8px; display: block; }
+
+  /* Key concept box */
+  .key-concept {
+    background: rgba(6,214,160,0.08);
+    border: 1px solid rgba(6,214,160,0.25);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+  .key-concept .label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-primary);
+    margin-bottom: 6px;
+  }
+  .key-concept p { color: var(--text-primary); font-size: 0.9rem; margin: 0; }
+  .key-concept-warm {
+    background: rgba(239,71,111,0.08);
+    border-color: rgba(239,71,111,0.25);
+  }
+  .key-concept-warm .label { color: var(--accent-warm); }
+  .key-concept-gold {
+    background: rgba(255,209,102,0.08);
+    border-color: rgba(255,209,102,0.25);
+  }
+  .key-concept-gold .label { color: var(--accent-gold); }
+  .key-concept-purple {
+    background: rgba(131,56,236,0.08);
+    border-color: rgba(131,56,236,0.25);
+  }
+  .key-concept-purple .label { color: var(--accent-purple); }
+
+  /* Tables */
+  .data-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.85rem; margin: 12px 0; }
+  .data-table th {
+    background: var(--bg-card-alt);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--accent-primary);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .data-table th:first-child { border-radius: 8px 0 0 0; }
+  .data-table th:last-child { border-radius: 0 8px 0 0; }
+  .data-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+  }
+  .data-table tr:hover td { background: rgba(6,214,160,0.04); }
+
+  /* Buttons */
+  .btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+  }
+  .btn-primary {
+    background: var(--gradient-pump);
+    color: #000;
+  }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-secondary {
+    background: var(--bg-card-alt);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+  }
+  .btn-secondary:hover { border-color: var(--accent-primary); }
+  .nav-buttons { display: flex; gap: 12px; margin-top: 20px; }
+  .nav-buttons .btn { flex: 1; text-align: center; }
+
+  /* Quiz Options */
+  .quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card-alt);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .quiz-option:hover:not(.selected):not(.correct):not(.incorrect) {
+    border-color: var(--accent-secondary);
+    background: rgba(17,138,178,0.1);
+  }
+  .quiz-option.correct {
+    border-color: var(--accent-primary);
+    background: rgba(6,214,160,0.15);
+    color: var(--accent-primary);
+  }
+  .quiz-option.incorrect {
+    border-color: var(--accent-warm);
+    background: rgba(239,71,111,0.1);
+    color: var(--accent-warm);
+  }
+  .quiz-option.selected {
+    border-color: var(--accent-secondary);
+    background: rgba(17,138,178,0.15);
+  }
+  .feedback-box {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-top: 10px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    animation: fadeIn 0.3s ease;
+  }
+  .feedback-correct {
+    background: rgba(6,214,160,0.1);
+    border: 1px solid rgba(6,214,160,0.3);
+    color: #a7f3d0;
+  }
+  .feedback-incorrect {
+    background: rgba(239,71,111,0.1);
+    border: 1px solid rgba(239,71,111,0.3);
+    color: #fca5a5;
+  }
+
+  /* Interactive Diagram */
+  .diagram-container {
+    background: var(--bg-card-alt);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 12px 0;
+    text-align: center;
+    position: relative;
+  }
+  .diagram-cell {
+    display: inline-block;
+    border: 3px solid var(--accent-secondary);
+    border-radius: 24px;
+    padding: 20px;
+    min-width: 280px;
+    position: relative;
+    background: rgba(17,138,178,0.05);
+  }
+  .membrane-bar {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(90deg, #ffd166, #ef476f, #ffd166, #ef476f, #ffd166);
+    border-radius: 6px;
+    margin: 12px 0;
+    position: relative;
+  }
+
+  /* Clickable transport items */
+  .transport-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 4px;
+    font-size: 0.85rem;
+  }
+  .transport-item:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(6,214,160,0.15);
+  }
+  .transport-item.active {
+    border-color: var(--accent-primary);
+    background: rgba(6,214,160,0.1);
+  }
+
+  /* Detail Panel */
+  .detail-panel {
+    background: var(--bg-card-alt);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 12px;
+    animation: slideUp 0.3s ease;
+  }
+  .detail-panel h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    margin-bottom: 8px;
+  }
+  .detail-panel .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin: 2px;
+  }
+  .tag-green { background: rgba(6,214,160,0.15); color: var(--accent-primary); }
+  .tag-blue { background: rgba(17,138,178,0.15); color: var(--accent-secondary); }
+  .tag-red { background: rgba(239,71,111,0.15); color: var(--accent-warm); }
+  .tag-gold { background: rgba(255,209,102,0.15); color: var(--accent-gold); }
+  .tag-purple { background: rgba(131,56,236,0.15); color: var(--accent-purple); }
+
+  /* Clinical case */
+  .clinical-case {
+    background: linear-gradient(135deg, rgba(239,71,111,0.08), rgba(255,209,102,0.05));
+    border: 1px solid rgba(239,71,111,0.2);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 16px 0;
+  }
+  .clinical-case .case-badge {
+    display: inline-block;
+    background: var(--accent-warm);
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Objective checklist */
+  .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .obj-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--bg-card-alt);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+  }
+  .obj-item.done { border-color: rgba(6,214,160,0.3); background: rgba(6,214,160,0.05); }
+  .obj-check { font-size: 1rem; flex-shrink: 0; }
+
+  /* Visual transporter diagram */
+  .transporter-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .transporter-box {
+    width: 140px;
+    text-align: center;
+    padding: 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+  }
+  .transporter-box:hover { transform: scale(1.05); }
+  .transporter-box .icon { font-size: 2.2rem; margin-bottom: 6px; }
+  .transporter-box .name { font-size: 0.82rem; font-weight: 600; }
+  .transporter-box .sub { font-size: 0.7rem; color: var(--text-secondary); margin-top: 2px; }
+
+  /* SVG diagrams */
+  .svg-diagram { width: 100%; max-width: 500px; margin: 0 auto; display: block; }
+
+  /* Responsive columns */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+  /* Animations */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-in { animation: fadeIn 0.4s ease; }
+
+  /* Glucose transcytosis diagram */
+  .cell-diagram {
+    background: var(--bg-card-alt);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 12px 0;
+  }
+  .cell-side {
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin: 6px 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .apical-side {
+    background: rgba(255,209,102,0.12);
+    border: 1px dashed rgba(255,209,102,0.4);
+    color: var(--accent-gold);
+  }
+  .basolateral-side {
+    background: rgba(131,56,236,0.12);
+    border: 1px dashed rgba(131,56,236,0.4);
+    color: var(--accent-purple);
+  }
+  .protein-in-membrane {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 16px;
+    border-radius: 10px;
+    margin: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 3px; }
+
+  @media (max-width: 640px) {
+    .two-col, .three-col, .obj-grid { grid-template-columns: 1fr; }
+    .header-title { font-size: 1.3rem; }
+    .card { padding: 18px; }
+  }
+
+  /* Code / mono */
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+
+  /* Score counter */
+  .score-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(6,214,160,0.1);
+    border: 1px solid rgba(6,214,160,0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="app-container" id="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-title">⚡ Transporte Activo a Través de la Membrana Plasmática</div>
+    <div class="header-subtitle">Tutoría Interactiva — Biología Celular — Primer Año de Medicina</div>
+    <div style="margin-top:10px">
+      <span class="score-display" id="scoreDisplay">🎯 Puntuación: <span id="scoreValue">0</span>/100</span>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-container">
+    <div class="progress-label">
+      <span id="progressText">Sección 1 de 9</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="nav-pills" id="navPills"></div>
+
+  <!-- CONTENT SECTIONS -->
+  <div id="sectionContent"></div>
+
+</div>
+
+<script>
+// ============================================
+//  STATE MANAGEMENT
+// ============================================
+const state = {
+  currentSection: 0,
+  score: 0,
+  completedSections: new Set(),
+  answers: {},
+  selectedBomb: null,
+  selectedTransporter: null,
+  expandedDetails: {}
+};
+
+const sections = [
+  { id: 'inicio', title: '🎯 Inicio', short: 'Inicio' },
+  { id: 'definicion', title: '📖 Definición', short: 'Definición' },
+  { id: 'mecanismos', title: '🔄 Simporte/Antiporte', short: 'Sim/Anti/Uni' },
+  { id: 'primario', title: '⚡ T.A. Primario', short: 'Primario' },
+  { id: 'bombas', title: '🔬 Bombas P/V/F/ABC', short: 'Bombas' },
+  { id: 'secundario', title: '🔗 T.A. Secundario', short: 'Secundario' },
+  { id: 'glucosa', title: '🩸 Transcitosis Glucosa', short: 'Glucosa' },
+  { id: 'cftr', title: '🫁 CFTR', short: 'CFTR' },
+  { id: 'evaluacion', title: '✅ Evaluación Final', short: 'Evaluación' }
+];
+
+// ============================================
+//  RENDER ENGINE
+// ============================================
+function navigateTo(idx) {
+  if (idx >= 0 && idx < sections.length) {
+    if (state.currentSection < idx) {
+      state.completedSections.add(state.currentSection);
+    }
+    state.currentSection = idx;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function addScore(points, key) {
+  if (!state.answers[key]) {
+    state.answers[key] = true;
+    state.score += points;
+    document.getElementById('scoreValue').textContent = state.score;
+  }
+}
+
+function render() {
+  renderNav();
+  renderProgress();
+  renderSection();
+}
+
+function renderNav() {
+  const container = document.getElementById('navPills');
+  container.innerHTML = sections.map((s, i) => {
+    let cls = 'nav-pill';
+    if (i === state.currentSection) cls += ' active';
+    else if (state.completedSections.has(i)) cls += ' completed';
+    return `<button class="${cls}" onclick="navigateTo(${i})">${s.short}</button>`;
+  }).join('');
+}
+
+function renderProgress() {
+  const pct = Math.round((state.currentSection / (sections.length - 1)) * 100);
+  document.getElementById('progressText').textContent = `Sección ${state.currentSection + 1} de ${sections.length}`;
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function renderSection() {
+  const container = document.getElementById('sectionContent');
+  const renderers = [
+    renderInicio, renderDefinicion, renderMecanismos, renderPrimario,
+    renderBombas, renderSecundario, renderGlucosa, renderCFTR, renderEvaluacion
+  ];
+  container.innerHTML = '<div class="fade-in">' + renderers[state.currentSection]() + '</div>';
+}
+
+function navButtons(prevIdx, nextIdx, nextLabel) {
+  let html = '<div class="nav-buttons">';
+  if (prevIdx !== null) {
+    html += `<button class="btn btn-secondary" onclick="navigateTo(${prevIdx})">← Anterior</button>`;
+  }
+  if (nextIdx !== null) {
+    html += `<button class="btn btn-primary" onclick="navigateTo(${nextIdx})">${nextLabel || 'Siguiente →'}</button>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+function quizOption(quizId, optionId, text, isCorrect, explanation) {
+  const answeredKey = 'quiz_' + quizId;
+  const answered = state.answers[answeredKey + '_answered'];
+  let cls = 'quiz-option';
+  if (answered) {
+    if (optionId === state.answers[answeredKey + '_selected']) {
+      cls += isCorrect ? ' correct' : ' incorrect';
+    }
+    if (isCorrect) cls += ' correct';
+  }
+  return `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="handleQuiz('${quizId}','${optionId}',${isCorrect}, \`${explanation.replace(/`/g,"'")}\`)">${text}</button>`;
+}
+
+function handleQuiz(quizId, optionId, isCorrect, explanation) {
+  const key = 'quiz_' + quizId;
+  if (state.answers[key + '_answered']) return;
+  state.answers[key + '_answered'] = true;
+  state.answers[key + '_selected'] = optionId;
+  if (isCorrect) addScore(10, key);
+  state.answers[key + '_explanation'] = explanation;
+  state.answers[key + '_correct'] = isCorrect;
+  render();
+}
+
+function quizFeedback(quizId) {
+  const key = 'quiz_' + quizId;
+  if (!state.answers[key + '_answered']) return '';
+  const correct = state.answers[key + '_correct'];
+  const expl = state.answers[key + '_explanation'];
+  return `<div class="feedback-box ${correct ? 'feedback-correct' : 'feedback-incorrect'}">
+    ${correct ? '✅ ¡Correcto!' : '❌ No es la respuesta correcta.'} ${expl}
+  </div>`;
+}
+
+function toggleDetail(id) {
+  state.expandedDetails[id] = !state.expandedDetails[id];
+  render();
+}
+
+function selectBomb(type) {
+  state.selectedBomb = state.selectedBomb === type ? null : type;
+  render();
+}
+
+function selectTransporter(type) {
+  state.selectedTransporter = state.selectedTransporter === type ? null : type;
+  render();
+}
+
+// ============================================
+//  SECTION: INICIO
+// ============================================
+function renderInicio() {
+  return `
+  <div class="card card-highlight">
+    <span class="section-icon">🎯</span>
+    <h2>Bienvenido a la Tutoría de Transporte Activo</h2>
+    <p>En esta sesión exploraremos cómo las células utilizan energía para mover moléculas en contra de su gradiente de concentración. Conectaremos cada concepto con casos clínicos reales que encontrarás en tu práctica médica.</p>
+
+    <div class="key-concept" style="margin-top:16px">
+      <div class="label">Pregunta detonante</div>
+      <p>¿Cómo logra una célula del intestino absorber glucosa del lumen intestinal cuando la concentración de glucosa ya es menor en el lumen que dentro de la célula? 🤔</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📋 Objetivos de la Sesión</h3>
+    <div class="obj-grid">
+      ${[
+        'Definir transporte activo',
+        'Distinguir mecanismos de T.A.',
+        'Diferenciar T. activo vs pasivo',
+        'Simporte / Antiporte / Uniporte',
+        'Fuentes de energía primario/secundario',
+        'Bombas P, V, F, ABC',
+        'Transcitosis apical/basolateral de glucosa',
+        'Solutos por tipo de transportador',
+        'Mecanismo de acción de transportadores',
+        'CFTR y su importancia celular'
+      ].map((obj, i) => `
+        <div class="obj-item">
+          <span class="obj-check">📌</span>
+          <span>${i+1}. ${obj}</span>
+        </div>
+      `).join('')}
+    </div>
+  </div>
+
+  <div class="card card-warm">
+    <h3>🧠 Recuerda antes de comenzar</h3>
+    <p>El transporte pasivo (difusión simple, difusión facilitada, ósmosis) mueve solutos <strong>a favor</strong> de su gradiente de concentración sin gasto de energía. Todo lo que veremos hoy es lo opuesto: movimiento <strong>en contra</strong> del gradiente, lo cual requiere energía.</p>
+  </div>
+
+  ${navButtons(null, 1, 'Comenzar → ')}
+  `;
+}
+
+// ============================================
+//  SECTION: DEFINICIÓN
+// ============================================
+function renderDefinicion() {
+  return `
+  <div class="card card-highlight">
+    <span class="section-icon">📖</span>
+    <h2>¿Qué es el Transporte Activo?</h2>
+    <p>Obj. 1 y 3: Definir transporte activo y diferenciarlo del pasivo.</p>
+
+    <div class="key-concept">
+      <div class="label">Definición clave</div>
+      <p><strong>Transporte activo:</strong> Movimiento de solutos a través de la membrana plasmática <strong>en contra</strong> de su gradiente de concentración (o electroquímico), que requiere un <strong>aporte de energía</strong> (ATP, gradiente iónico, luz).</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚖️ Transporte Activo vs. Transporte Pasivo</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Característica</th>
+          <th style="color:var(--accent-primary)">🟢 T. Pasivo</th>
+          <th style="color:var(--accent-warm)">🔴 T. Activo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Dirección</td><td>A favor del gradiente</td><td>En contra del gradiente</td></tr>
+        <tr><td>Energía</td><td>No requiere (ΔG < 0)</td><td>Sí requiere (ΔG > 0)</td></tr>
+        <tr><td>Saturabilidad</td><td>Difusión simple: No / Facilitada: Sí</td><td>Sí (depende de transportadores)</td></tr>
+        <tr><td>Proteínas</td><td>Canales o carriers (o ninguna)</td><td>Bombas o cotransportadores</td></tr>
+        <tr><td>Ejemplos</td><td>O₂, CO₂, urea, glucosa por GLUT</td><td>Na⁺/K⁺-ATPasa, SGLT1, H⁺-ATPasa</td></tr>
+        <tr><td>Regulación</td><td>Gradiente de concentración</td><td>Disponibilidad de ATP / gradiente iónico</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card card-gold">
+    <h3>🔑 Concepto Termodinámico</h3>
+    <p>El transporte pasivo es <strong>exergónico</strong> (libera energía libre, ΔG < 0). El transporte activo es <strong>endergónico</strong> (requiere energía libre, ΔG > 0), por lo que debe estar acoplado a una reacción exergónica (como la hidrólisis de ATP o el flujo de un ión a favor de su gradiente).</p>
+
+    <div class="key-concept-gold" style="padding:14px; border-radius:10px; margin-top:10px; background: rgba(255,209,102,0.08); border:1px solid rgba(255,209,102,0.2);">
+      <p style="color:var(--accent-gold); margin:0; font-size:0.88rem;">⚡ <strong>Analogía clínica:</strong> Piensa en un paciente con insuficiencia cardíaca: el corazón (bomba) necesita energía (ATP) para mover sangre contra la presión. Si falla la energía, el sistema colapsa — igual que las bombas iónicas celulares.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ 1 -->
+  <div class="card">
+    <h3>🧪 Pregunta de Reflexión</h3>
+    <p>Una célula del túbulo renal necesita reabsorber glucosa del filtrado hacia la sangre, moviéndola de menor a mayor concentración. ¿Qué tipo de transporte se requiere?</p>
+    ${quizOption('def1', 'a', 'A) Difusión simple', false, 'La difusión simple no requiere proteínas y solo mueve a favor del gradiente.')}
+    ${quizOption('def1', 'b', 'B) Ósmosis', false, 'La ósmosis solo aplica al movimiento de agua.')}
+    ${quizOption('def1', 'c', 'C) Transporte activo', true, 'Correcto: mover glucosa contra su gradiente requiere energía → transporte activo (secundario, como veremos).')}
+    ${quizOption('def1', 'd', 'D) Difusión facilitada', false, 'La difusión facilitada sigue el gradiente, no va en contra.')}
+    ${quizFeedback('def1')}
+  </div>
+
+  ${navButtons(0, 2, 'Mecanismos →')}
+  `;
+}
+
+// ============================================
+//  SECTION: MECANISMOS (Simporte, Antiporte, Uniporte)
+// ============================================
+function renderMecanismos() {
+  const selected = state.selectedTransporter;
+  const transporterData = {
+    uniporte: {
+      name: 'Uniporte',
+      icon: '➡️',
+      color: 'var(--accent-primary)',
+      desc: 'Transporta <strong>un solo tipo</strong> de soluto en una dirección. La proteína solo tiene sitio de unión para una especie molecular.',
+      examples: 'GLUT1 (glucosa, transporte pasivo facilitado), canales iónicos selectivos. Nota: en transporte activo, las bombas tipo P que mueven un solo ión (como la Ca²⁺-ATPasa del retículo sarcoplásmico) actúan como uniportadores.',
+      diagram: '🟢 → [Proteína] → 🟢',
+      clinical: 'La Ca²⁺-ATPasa (SERCA) del retículo sarcoplásmico es un uniportador activo de Ca²⁺. Su disfunción se asocia a miopatías y fallo cardíaco.'
+    },
+    simporte: {
+      name: 'Simporte (Cotransporte)',
+      icon: '⇉',
+      color: 'var(--accent-secondary)',
+      desc: 'Transporta <strong>dos o más solutos</strong> en la <strong>misma dirección</strong>. Uno de ellos va a favor de su gradiente y "arrastra" al otro.',
+      examples: 'SGLT1 (Na⁺ + glucosa, intestino), NKCC2 (Na⁺/K⁺/2Cl⁻, asa de Henle), transportador Na⁺/aminoácidos.',
+      diagram: '🔵🟢 → [Proteína] → 🔵🟢',
+      clinical: 'SGLT2 (riñón) es el blanco de los inhibidores de SGLT2 (gliflozinas), medicamentos clave en diabetes tipo 2 que bloquean la reabsorción renal de glucosa.'
+    },
+    antiporte: {
+      name: 'Antiporte (Contratransporte)',
+      icon: '⇄',
+      color: 'var(--accent-warm)',
+      desc: 'Transporta <strong>dos solutos</strong> en <strong>direcciones opuestas</strong>. Uno entra mientras el otro sale.',
+      examples: 'Intercambiador Na⁺/Ca²⁺ (NCX, corazón), intercambiador Na⁺/H⁺ (NHE, riñón), intercambiador Cl⁻/HCO₃⁻ (banda 3, eritrocitos).',
+      diagram: '🔵 → [Proteína] ← 🔴',
+      clinical: 'El intercambiador Na⁺/H⁺ (NHE3) en el túbulo proximal es crucial para la reabsorción de bicarbonato y la regulación del pH sanguíneo. Su disfunción contribuye a acidosis tubular renal.'
+    }
+  };
+
+  return `
+  <div class="card card-highlight">
+    <span class="section-icon">🔄</span>
+    <h2>Simporte, Antiporte y Uniporte</h2>
+    <p>Obj. 2 y 4: Clasificación de mecanismos según la dirección y número de solutos transportados.</p>
+  </div>
+
+  <div class="card">
+    <h3>Selecciona un mecanismo para explorar:</h3>
+    <div class="transporter-visual">
+      ${Object.entries(transporterData).map(([key, val]) => `
+        <div class="transporter-box" style="background: ${selected === key ? 'rgba(6,214,160,0.12)' : 'var(--bg-card-alt)'}; border-color: ${selected === key ? val.color : 'var(--border-subtle)'};" onclick="selectTransporter('${key}')">
+          <div class="icon">${val.icon}</div>
+          <div class="name" style="color:${val.color}">${val.name}</div>
+          <div class="sub">Click para detalles</div>
+        </div>
+      `).join('')}
+    </div>
+
+    ${selected && transporterData[selected] ? `
+    <div class="detail-panel">
+      <h4 style="color:${transporterData[selected].color}">${transporterData[selected].icon} ${transporterData[selected].name}</h4>
+      <p>${transporterData[selected].desc}</p>
+      <div class="key-concept" style="margin:10px 0">
+        <div class="label">Diagrama simplificado</div>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; text-align:center; letter-spacing:2px;">${transporterData[selected].diagram}</p>
+      </div>
+      <p><strong>Ejemplos:</strong> ${transporterData[selected].examples}</p>
+      <div class="clinical-case" style="margin-top:12px">
+        <span class="case-badge">🩺 Relevancia clínica</span>
+        <p style="color:var(--text-primary); margin:0">${transporterData[selected].clinical}</p>
+      </div>
+    </div>
+    ` : '<p style="text-align:center; color:var(--text-secondary); margin-top:12px;">👆 Selecciona un mecanismo para ver los detalles</p>'}
+  </div>
+
+  <div class="card">
+    <h3>📊 Tabla Comparativa</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Característica</th>
+          <th style="color:var(--accent-primary)">Uniporte</th>
+          <th style="color:var(--accent-secondary)">Simporte</th>
+          <th style="color:var(--accent-warm)">Antiporte</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Solutos</td><td>1 solo tipo</td><td>2 o más (misma dir.)</td><td>2 (dirs. opuestas)</td></tr>
+        <tr><td>Dirección</td><td>Unidireccional</td><td>Misma dirección</td><td>Direcciones opuestas</td></tr>
+        <tr><td>Motor energético</td><td>ATP (si activo)</td><td>Gradiente de Na⁺ o H⁺</td><td>Gradiente de Na⁺ o H⁺</td></tr>
+        <tr><td>Ejemplo clave</td><td>Ca²⁺-ATPasa</td><td>SGLT1 (Na⁺/glucosa)</td><td>NCX (Na⁺/Ca²⁺)</td></tr>
+        <tr><td>Sitio clínico</td><td>Retículo sarcoplásmico</td><td>Intestino, riñón</td><td>Corazón, riñón</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- QUIZ 2 -->
+  <div class="card">
+    <h3>🧪 Caso Rápido</h3>
+    <p>Un paciente toma <strong>furosemida</strong> (diurético de asa). Este fármaco inhibe el cotransportador NKCC2 que introduce Na⁺, K⁺ y 2Cl⁻ al interior de la célula del asa de Henle. ¿Qué tipo de mecanismo tiene NKCC2?</p>
+    ${quizOption('mec1', 'a', 'A) Uniporte', false, 'NKCC2 transporta 3 tipos de iones simultáneamente en la misma dirección, no solo uno.')}
+    ${quizOption('mec1', 'b', 'B) Simporte', true, 'Correcto: NKCC2 es un simportador que mueve Na⁺, K⁺ y 2Cl⁻ en la misma dirección. La furosemida al bloquearlo impide la reabsorción de estos iones → diuresis.')}
+    ${quizOption('mec1', 'c', 'C) Antiporte', false, 'El antiporte mueve solutos en direcciones opuestas. NKCC2 los mueve todos hacia el interior.')}
+    ${quizOption('mec1', 'd', 'D) Difusión facilitada', false, 'La difusión facilitada es pasiva. NKCC2 es un transporte activo secundario.')}
+    ${quizFeedback('mec1')}
+  </div>
+
+  ${navButtons(1, 3, 'T.A. Primario →')}
+  `;
+}
+
+// ============================================
+//  SECTION: TRANSPORTE ACTIVO PRIMARIO
+// ============================================
+function renderPrimario() {
+  return `
+  <div class="card card-highlight">
+    <span class="section-icon">⚡</span>
+    <h2>Transporte Activo Primario</h2>
+    <p>Obj. 5 y 9: Fuente de energía directa y mecanismo de acción.</p>
+  </div>
+
+  <div class="card">
+    <div class="key-concept">
+      <div class="label">Definición</div>
+      <p><strong>T.A. Primario:</strong> Utiliza energía <strong>directamente</strong> de la hidrólisis de ATP (u otra fuente primaria como luz o reacciones redox) para mover solutos contra su gradiente. Las proteínas que lo realizan son llamadas <strong>bombas</strong> o <strong>ATPasas de transporte</strong>.</p>
+    </div>
+
+    <h3 style="margin-top:16px">🔋 Fuentes de Energía para T.A. Primario</h3>
+    <div class="two-col" style="margin-top:10px">
+      <div class="key-concept">
+        <div class="label">Principal: ATP</div>
+        <p>La hidrólisis ATP → ADP + Pi libera ~30.5 kJ/mol, suficiente para bombear iones contra gradientes elevados. Ejemplo: Na⁺/K⁺-ATPasa.</p>
+      </div>
+      <div class="key-concept-warm" style="padding:14px; border-radius:10px; background: rgba(239,71,111,0.08); border:1px solid rgba(239,71,111,0.2);">
+        <div class="label" style="color:var(--accent-warm); font-size:0.7rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px;">Otras fuentes</div>
+        <p style="color:var(--text-primary); font-size:0.9rem; margin:0;"><strong>Luz</strong> (bacteriorrodopsina en arqueas), <strong>reacciones redox</strong> (cadena de transporte de electrones en mitocondrias). En medicina, ATP es la fuente dominante.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-gold">
+    <h3>⚙️ Mecanismo General de una Bomba ATPasa</h3>
+    <p>Las bombas ATPasas funcionan mediante <strong>cambios conformacionales</strong> cíclicos:</p>
+
+    <div class="diagram-container" style="text-align:left">
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="background:var(--accent-primary); color:#000; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">1</span>
+          <span>La bomba se une al soluto en un lado de la membrana (estado E1, alta afinidad).</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="background:var(--accent-secondary); color:#000; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">2</span>
+          <span>ATP se hidroliza → se <strong>fosforila</strong> la bomba (en bombas tipo P) o el ATP provee energía mecánica.</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="background:var(--accent-gold); color:#000; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">3</span>
+          <span><strong>Cambio conformacional</strong>: el sitio de unión se reorienta al otro lado de la membrana (estado E2, baja afinidad).</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="background:var(--accent-warm); color:#000; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">4</span>
+          <span>El soluto se <strong>libera</strong> al otro lado. Se desfosforila la bomba. Vuelve al estado E1.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-concept" style="margin-top:12px">
+      <div class="label">Ejemplo: Na⁺/K⁺-ATPasa (la bomba más famosa)</div>
+      <p>Por cada ciclo: saca <strong>3 Na⁺</strong> al exterior y mete <strong>2 K⁺</strong> al interior. Consume 1 ATP. Es <strong>electrogénica</strong> (genera carga neta → contribuye al potencial de membrana). Consume ~25% del ATP corporal total en reposo.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="card">
+    <h3>🧪 Pregunta Clínica</h3>
+    <div class="clinical-case">
+      <span class="case-badge">🩺 Caso Clínico</span>
+      <p style="color:var(--text-primary)">Un paciente de 68 años con insuficiencia cardíaca congestiva recibe <strong>digoxina</strong>. Este fármaco inhibe la Na⁺/K⁺-ATPasa del cardiomiocito. ¿Cuál es la consecuencia inmediata?</p>
+    </div>
+    ${quizOption('prim1', 'a', 'A) Aumenta el Na⁺ intracelular', true, 'Al inhibir la bomba que saca Na⁺, este se acumula dentro de la célula. Esto indirectamente reduce la actividad del intercambiador Na⁺/Ca²⁺ → más Ca²⁺ intracelular → mayor contractilidad cardíaca (efecto inotrópico positivo).')}
+    ${quizOption('prim1', 'b', 'B) Disminuye el K⁺ intracelular y extracelular', false, 'Si bien el K⁺ intracelular baja, la respuesta más directa e inmediata es el aumento de Na⁺ intracelular.')}
+    ${quizOption('prim1', 'c', 'C) Aumenta el ATP disponible', false, 'Al inhibir la bomba, se consume menos ATP, pero esto no es el efecto terapéutico buscado.')}
+    ${quizOption('prim1', 'd', 'D) Hiperpolariza la membrana', false, 'Al contrario: al inhibir una bomba electrogénica, la membrana tiende a despolarizarse.')}
+    ${quizFeedback('prim1')}
+  </div>
+
+  ${navButtons(2, 4, 'Tipos de Bombas →')}
+  `;
+}
+
+// ============================================
+//  SECTION: BOMBAS P, V, F, ABC
+// ============================================
+function renderBombas() {
+  const bombs = {
+    P: {
+      name: 'Bombas tipo P',
+      color: 'var(--accent-primary)',
+      tagColor: 'tag-green',
+      icon: '🔋',
+      desc: 'Se <strong>autofosforilan</strong> durante el ciclo de transporte (de ahí la "P"). Forman un intermediario fosforilado aspartato (E1-P → E2-P). Son inhibidas por vanadato.',
+      examples: [
+        'Na⁺/K⁺-ATPasa → 3Na⁺ fuera, 2K⁺ dentro (todas las células)',
+        'Ca²⁺-ATPasa (SERCA) → bombea Ca²⁺ al retículo sarcoplásmico (músculo)',
+        'Ca²⁺-ATPasa de membrana plasmática (PMCA) → saca Ca²⁺ al exterior',
+        'H⁺/K⁺-ATPasa → secreta H⁺ al lumen gástrico (células parietales)'
+      ],
+      solutes: 'Na⁺, K⁺, Ca²⁺, H⁺',
+      clinical: 'La <strong>H⁺/K⁺-ATPasa</strong> es el blanco de los inhibidores de bomba de protones (IBP) como omeprazol, que se usan para tratar úlcera péptica y ERGE. Al inhibir esta bomba, se reduce la secreción de ácido gástrico.',
+      mechanism: 'Ciclo E1/E2: E1 (alta afinidad por soluto lado citosólico) → fosforilación por ATP → E1-P → cambio conformacional → E2-P (afinidad por soluto del otro lado) → desfosforilación → E2 → E1.'
+    },
+    V: {
+      name: 'Bombas tipo V (Vacuolares)',
+      color: 'var(--accent-purple)',
+      tagColor: 'tag-purple',
+      icon: '🧪',
+      desc: '<strong>NO</strong> se fosforilan (no forman intermediario fosforilado). Son ATPasas multisubunidad que bombean <strong>H⁺</strong> hacia el interior de organelos para acidificarlos. "V" de vacuolar.',
+      examples: [
+        'V-ATPasa de lisosomas → acidifica el lumen lisosomal (pH ~4.5-5)',
+        'V-ATPasa de endosomas → acidifica endosomas para disociación receptor-ligando',
+        'V-ATPasa de osteoclastos → acidifica la laguna de resorción ósea',
+        'V-ATPasa de células intercaladas renales tipo A → secreta H⁺ a la orina'
+      ],
+      solutes: 'H⁺ (protones)',
+      clinical: 'En la <strong>osteopetrosis</strong> (enfermedad de huesos de mármol), mutaciones en la V-ATPasa de osteoclastos impiden la acidificación necesaria para la resorción ósea. Los huesos se vuelven densos pero frágiles.',
+      mechanism: 'Complejo V₀V₁: la subunidad V₁ (citosólica) hidroliza ATP; la subunidad V₀ (transmembranal) forma el canal rotor que transloca H⁺ al lumen. El acoplamiento mecánico es rotatorio, similar a F-ATPasa.'
+    },
+    F: {
+      name: 'Bombas tipo F (F₀F₁-ATPasa / ATP sintasa)',
+      color: 'var(--accent-gold)',
+      tagColor: 'tag-gold',
+      icon: '🔄',
+      desc: 'Normalmente trabajan <strong>en reversa</strong>: en lugar de usar ATP para bombear H⁺, usan el <strong>gradiente de H⁺</strong> para <strong>sintetizar ATP</strong>. Son la ATP sintasa mitocondrial. "F" de factor de acoplamiento. Pueden funcionar como bomba de H⁺ en condiciones especiales.',
+      examples: [
+        'ATP sintasa mitocondrial (membrana interna) → sintetiza ATP usando gradiente de H⁺',
+        'ATP sintasa de cloroplastos (tilacoides) → sintetiza ATP en fotosíntesis',
+        'F-ATPasa bacteriana → puede sintetizar o hidrolizar ATP según condiciones'
+      ],
+      solutes: 'H⁺ (protones) — en dirección del gradiente para sintetizar ATP',
+      clinical: 'Las <strong>enfermedades mitocondriales</strong> que afectan la cadena de transporte de electrones reducen el gradiente de H⁺, disminuyendo la síntesis de ATP por la F-ATPasa. Resultado: miopatías, neuropatías, y acidosis láctica. Ejemplo: Síndrome de Leigh.',
+      mechanism: 'Motor rotatorio: F₀ (en membrana) = canal de protones con rotor. F₁ (en matriz) = subunidades catalíticas αβ. El flujo de H⁺ por F₀ genera rotación mecánica que impulsa la síntesis conformacional de ATP en F₁ (mecanismo de Boyer: cambio de unión).'
+    },
+    ABC: {
+      name: 'Transportadores ABC',
+      color: 'var(--accent-secondary)',
+      tagColor: 'tag-blue',
+      icon: '📦',
+      desc: '"ATP-Binding Cassette". Poseen dominios de unión a ATP (NBDs) y dominios transmembranales (TMDs). Transportan una enorme variedad de sustratos incluyendo moléculas grandes. Son la familia más grande de transportadores.',
+      examples: [
+        'MDR1 / P-glicoproteína → expulsa fármacos de las células (resistencia a quimioterapia)',
+        'CFTR → canal de Cl⁻ regulado por ATP (mutado en fibrosis quística)',
+        'ABCA1 → eflujo de colesterol y fosfolípidos (transporte reverso de colesterol)',
+        'TAP1/TAP2 → transporta péptidos al RE para presentación por MHC-I'
+      ],
+      solutes: 'Iones, lípidos, fármacos, péptidos, toxinas, colesterol',
+      clinical: 'La <strong>P-glicoproteína (MDR1)</strong> expulsa fármacos de células tumorales, causando <strong>resistencia a múltiples fármacos</strong> (MDR). Esto es un problema mayor en oncología. El <strong>CFTR</strong> (un ABC atípico que funciona como canal) es el protagonista de la fibrosis quística.',
+      mechanism: 'Ciclo de dimerización de NBDs: 2 ATP se unen → dimerización de NBDs → cambio conformacional de TMDs (apertura al exterior) → liberación del sustrato → hidrólisis de ATP → separación de NBDs → reset.'
+    }
+  };
+
+  const sel = state.selectedBomb;
+  const bomb = sel ? bombs[sel] : null;
+
+  return `
+  <div class="card card-highlight">
+    <span class="section-icon">🔬</span>
+    <h2>Tipos de Bombas: P, V, F y ABC</h2>
+    <p>Obj. 6, 8 y 9: Tipos, solutos que transportan y mecanismos de acción.</p>
+  </div>
+
+  <div class="card">
+    <h3>Selecciona un tipo de bomba:</h3>
+    <div class="transporter-visual">
+      ${Object.entries(bombs).map(([key, val]) => `
+        <div class="transporter-box" style="background: ${sel === key ? 'rgba(6,214,160,0.12)' : 'var(--bg-card-alt)'}; border-color: ${sel === key ? val.color : 'var(--border-subtle)'};" onclick="selectBomb('${key}')">
+          <div class="icon">${val.icon}</div>
+          <div class="name" style="color:${val.color}">Tipo ${key}</div>
+          <div class="sub">${val.name.replace('Bombas tipo ','').replace('Transportadores ','')}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    ${bomb ? `
+    <div class="detail-panel">
+      <h4 style="color:${bomb.color}">${bomb.icon} ${bomb.name}</h4>
+      <p>${bomb.desc}</p>
+
+      <div style="margin:12px 0">
+        <strong style="color:var(--text-primary); font-size:0.85rem;">Ejemplos importantes:</strong>
+        <div style="margin-top:6px">
+          ${bomb.examples.map(e => `<div style="padding:6px 0; border-bottom:1px solid var(--border-subtle); font-size:0.85rem; color:var(--text-secondary);">• ${e}</div>`).join('')}
+        </div>
+      </div>
+
+      <div class="key-concept" style="margin:12px 0">
+        <div class="label">Solutos transportados</div>
+        <p>${bomb.solutes}</p>
+      </div>
+
+      <div class="key-concept-purple" style="padding:14px; border-radius:10px; margin:12px 0; background:rgba(131,56,236,0.08); border:1px solid rgba(131,56,236,0.2);">
+        <div class="label" style="color:var(--accent-purple); font-size:0.7rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px;">⚙️ Mecanismo de acción</div>
+        <p style="color:var(--text-primary); font-size:0.87rem; margin:0;">${bomb.mechanism}</p>
+      </div>
+
+      <div class="clinical-case">
+        <span class="case-badge">🩺 Relevancia Clínica</span>
+        <p style="color:var(--text-primary); margin:0">${bomb.clinical}</p>
+      </div>
+    </div>
+    ` : '<p style="text-align:center; color:var(--text-secondary); margin-top:16px;">👆 Selecciona un tipo de bomba para explorar sus detalles</p>'}
+  </div>
+
+  <div class="card">
+    <h3>📊 Resumen Comparativo</h3>
+    <div style="overflow-x:auto">
+    <table class="data-table">
+      <thead>
+        <tr><th>Tipo</th><th>Fosforilación</th><th>Soluto principal</th><th>Ubicación clave</th><th>Fármaco/Patología</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="color:var(--accent-primary); font-weight:600;">P</td><td>Sí (Asp fosforilado)</td><td>Na⁺, K⁺, Ca²⁺, H⁺</td><td>Membrana plasmática, RE</td><td>Omeprazol, Digoxina</td></tr>
+        <tr><td style="color:var(--accent-purple); font-weight:600;">V</td><td>No</td><td>H⁺</td><td>Lisosomas, endosomas</td><td>Osteopetrosis</td></tr>
+        <tr><td style="color:var(--accent-gold); font-weight:600;">F</td><td>No</td><td>H⁺ (sintetiza ATP)</td><td>Mitocondria, cloroplasto</td><td>Oligomicina, Enf. mitocondrial</td></tr>
+        <tr><td style="color:var(--accent-secondary); font-weight:600;">ABC</td><td>No (une ATP)</td><td>Variado (fármacos, lípidos)</td><td>Ubicua</td><td>Fibrosis quística, MDR cáncer</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="card">
+    <h3>🧪 Pregunta Integradora</h3>
+    <p>Un paciente con enfermedad de reflujo gastroesofágico (ERGE) toma omeprazol. ¿Qué tipo de bomba inhibe este fármaco?</p>
+    ${quizOption('bomb1', 'a', 'A) Bomba tipo V (V-ATPasa lisosomal)', false, 'Las V-ATPasas acidifican organelos, no el estómago. La secreción gástrica usa H⁺/K⁺-ATPasa.')}
+    ${quizOption('bomb1', 'b', 'B) Bomba tipo P (H⁺/K⁺-ATPasa)', true, 'Correcto: la H⁺/K⁺-ATPasa es una bomba tipo P en las células parietales gástricas. Los IBP (omeprazol) se unen covalentemente a ella e inhiben la secreción de H⁺.')}
+    ${quizOption('bomb1', 'c', 'C) Bomba tipo F (ATP sintasa)', false, 'La ATP sintasa mitocondrial no secreta ácido gástrico.')}
+    ${quizOption('bomb1', 'd', 'D) Transportador ABC (MDR1)', false, 'MDR1 expulsa fármacos, no secreta H⁺ al estómago.')}
+    ${quizFeedback('bomb1')}
+  </div>
+
+  ${navButtons(3, 5, 'T.A. Secundario →')}
+  `;
+}
+
+// ============================================
+//  SECTION: TRANSPORTE ACTIVO SECUNDARIO
+// ============================================
+function renderSecundario() {
+  return `
+  <div class="card card-highlight">
+    <span class="section-icon">🔗</span>
+    <h2>Transporte Activo Secundario</h2>
+    <p>Obj. 5: Fuente de energía indirecta — el gradiente iónico generado por bombas primarias.</p>
+  </div>
+
+  <div class="card">
+    <div class="key-concept">
+      <div class="label">Definición</div>
+      <p><strong>T.A. Secundario:</strong> No usa ATP directamente. Aprovecha el <strong>gradiente electroquímico</strong> generado por una bomba primaria (típicamente el gradiente de Na⁺) para cotransportar otro soluto contra su gradiente. Es llamado también <strong>cotransporte</strong>.</p>
+    </div>
+
+    <div class="key-concept-warm" style="margin-top:12px; padding:14px; border-radius:10px; background:rgba(239,71,111,0.08); border:1px solid rgba(239,71,111,0.2);">
+      <div class="label" style="color:var(--accent-warm); font-size:0.7rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px;">⚠️ Concepto crucial</div>
+      <p style="color:var(--text-primary); font-size:0.9rem; margin:0;">El T.A. secundario depende <strong>indirectamente</strong> del ATP: la Na⁺/K⁺-ATPasa (primaria) genera el gradiente de Na⁺ que luego es aprovechado por simportadores y antiportadores. Si se inhibe la bomba primaria (ej. con ouabaína), ¡el transporte secundario también se detiene!</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔄 Relación Primario → Secundario</h3>
+    <div class="diagram-container">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <div style="background:rgba(239,71,111,0.12); padding:12px 24px; border-radius:10px; border:1px solid rgba(239,71,111,0.3); text-align:center;">
+          <strong style="color:var(--accent-warm)">Na⁺/K⁺-ATPasa (PRIMARIA)</strong><br>
+          <span style="font-size:0.82rem; color:var(--text-secondary)">ATP → 3Na⁺ fuera / 2K⁺ dentro</span>
+        </div>
+        <div style="font-size:1.5rem;">⬇️</div>
+        <div style="background:rgba(6,214,160,0.12); padding:10px 20px; border-radius:10px; border:1px solid rgba(6,214,160,0.3); text-align:center;">
+          <strong style="color:var(--accent-primary)">Gradiente de Na⁺ (alto fuera, bajo dentro)</strong>
+        </div>
+        <div style="font-size:1.5rem;">⬇️</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+          <div style="background:rgba(17,138,178,0.12); padding:10px 16px; border-radius:10px; border:1px solid rgba(17,138,178,0.3); text-align:center;">
+            <strong style="color:var(--accent-secondary)">Simporte</strong><br>
+            <span style="font-size:0.8rem; color:var(--text-secondary)">Na⁺ + glucosa (SGLT1)</span>
+          </div>
+          <div style="background:rgba(131,56,236,0.12); padding:10px 16px; border-radius:10px; border:1px solid rgba(131,56,236,0.3); text-align:center;">
+            <strong style="color:var(--accent-purple)">Antiporte</strong><br>
+            <span style="font-size:0.8rem; color:var(--text-secondary)">Na⁺ ↔ Ca²⁺ (NCX)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📋 Ejemplos Importantes de T.A. Secundario</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>Transportador</th><th>Tipo</th><th>Solutos</th><th>Ubicación</th><th>Relevancia</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SGLT1</td><td style="color:var(--accent-secondary)">Simporte</td><td>Na⁺ + glucosa</td><td>Intestino delgado (apical)</td><td>Absorción intestinal de glucosa</td></tr>
+        <tr><td>SGLT2</td><td style="color:var(--accent-secondary)">Simporte</td><td>Na⁺ + glucosa</td><td>Túbulo proximal (apical)</td><td>Diana de gliflozinas (DM2)</td></tr>
+        <tr><td>NKCC2</td><td style="color:var(--accent-secondary)">Simporte</td><td>Na⁺/K⁺/2Cl⁻</td><td>Asa de Henle</td><td>Diana de furosemida</td></tr>
+        <tr><td>NCC</td><td style="color:var(--accent-secondary)">Simporte</td><td>Na⁺/Cl⁻</td><td>Túbulo distal</td><td>Diana de tiazidas</td></tr>
+        <tr><td>NCX</td><td style="color:var(--accent-warm)">Antiporte</td><td>3Na⁺ ↔ 1Ca²⁺</td><td>Cardiomiocitos</td><td>Regulación Ca²⁺ cardíaco</td></tr>
+        <tr><td>NHE3</td><td style="color:var(--accent-warm)">Antiporte</td><td>Na⁺ ↔ H⁺</td><td>Túbulo proximal</td><td>Reabsorción de HCO₃⁻</td></tr>
+        <tr><td>Banda 3 (AE1)</td><td style="color:var(--accent-warm)">Antiporte</td><td>Cl⁻ ↔ HCO₃⁻</td><td>Eritrocitos</td><td>Cambio de cloruro (transporte CO₂)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="card">
+    <h3>🧪 Caso Clínico</h3>
+    <div class="clinical-case">
+      <span class="case-badge">🩺 Caso Clínico</span>
+      <p style="color:var(--text-primary)">Una paciente diabética tipo 2 inicia tratamiento con <strong>dapagliflozina</strong> (un inhibidor de SGLT2). Semanas después nota que orina más frecuentemente y pierde peso. ¿Por qué?</p>
+    </div>
+    ${quizOption('sec1', 'a', 'A) Se bloquea la reabsorción renal de glucosa → glucosuria → diuresis osmótica', true, 'Correcto: al inhibir SGLT2 en el túbulo proximal, la glucosa no se reabsorbe, se queda en la orina (glucosuria). Esto genera diuresis osmótica (más orina) y pérdida calórica (glucosa perdida → pérdida de peso). Efecto terapéutico deseado.')}
+    ${quizOption('sec1', 'b', 'B) Se inhibe la Na⁺/K⁺-ATPasa renal', false, 'La dapagliflozina no inhibe la Na⁺/K⁺-ATPasa directamente, sino el cotransportador SGLT2.')}
+    ${quizOption('sec1', 'c', 'C) Se bloquea GLUT2 en el hígado', false, 'GLUT2 hepático es un transportador facilitado, no es el blanco de las gliflozinas.')}
+    ${quizOption('sec1', 'd', 'D) Se aumenta la secreción de insulina', false, 'Las gliflozinas no actúan sobre las células beta ni estimulan insulina.')}
+    ${quizFeedback('sec1')}
+  </div>
+
+  ${navButtons(4, 6, 'Transcitosis Glucosa →')}
+  `;
+}
+
+// ============================================
+//  SECTION: TRANSCITOSIS DE GLUCOSA
+// ============================================
+function renderGlucosa() {
+  return `
+  <div class="card card-highlight">
+    <span class="section-icon">🩸</span>
+    <h2>Transcitosis de Glucosa: Localización Apical / Basolateral</h2>
+    <p>Obj. 7: Reconocer la localización de transportadores y comprender por qué están así distribuidos.</p>
+  </div>
+
+  <div class="card">
+    <p>Las células epiteliales del intestino delgado (enterocitos) y del túbulo renal proximal son <strong>polarizadas</strong>: tienen una membrana <strong>apical</strong> (hacia el lumen) y una membrana <strong>basolateral</strong> (hacia la sangre). Los transportadores de glucosa se distribuyen estratégicamente.</p>
+
+    <div class="cell-diagram">
+      <div style="text-align:center; margin-bottom:8px; font-weight:700; font-size:0.9rem; color:var(--accent-gold);">LUMEN INTESTINAL (alta [glucosa] después de comer)</div>
+      <div class="apical-side">
+        🟡 MEMBRANA APICAL (microvellosidades)
+      </div>
+      <div style="display:flex; justify-content:center; padding:8px 0;">
+        <div class="protein-in-membrane" style="background:rgba(17,138,178,0.15); border:1px solid rgba(17,138,178,0.3);">
+          <span style="font-size:1.4rem;">⇉</span>
+          <strong style="color:var(--accent-secondary);">SGLT1</strong>
+          <span style="font-size:0.75rem; color:var(--text-secondary);">Simporte Na⁺/Glucosa</span>
+          <span style="font-size:0.75rem; color:var(--text-secondary);">T.A. Secundario</span>
+        </div>
+      </div>
+
+      <div style="text-align:center; padding:16px; background:rgba(6,214,160,0.05); border-radius:10px; margin:8px 0;">
+        <div style="font-weight:700; color:var(--accent-primary); margin-bottom:4px;">🏠 INTERIOR DEL ENTEROCITO</div>
+        <span style="font-size:0.82rem; color:var(--text-secondary);">Glucosa se acumula aquí gracias a SGLT1 (entra con Na⁺)</span>
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:16px; padding:8px 0; flex-wrap:wrap;">
+        <div class="protein-in-membrane" style="background:rgba(131,56,236,0.15); border:1px solid rgba(131,56,236,0.3);">
+          <span style="font-size:1.4rem;">➡️</span>
+          <strong style="color:var(--accent-purple);">GLUT2</strong>
+          <span style="font-size:0.75rem; color:var(--text-secondary);">Uniporte (difusión facilitada)</span>
+          <span style="font-size:0.75rem; color:var(--text-secondary);">T. Pasivo</span>
+        </div>
+        <div class="protein-in-membrane" style="background:rgba(239,71,111,0.15); border:1px solid rgba(239,71,111,0.3);">
+          <span style="font-size:1.4rem;">🔋</span>
+          <strong style="color:var(--accent-warm);">Na⁺/K⁺-ATPasa</strong>
+          <span style="font-size:0.75rem; color:var(--text-secondary);">Bomba tipo P</span>
+          <span style="font-size:0.75rem; color:var(--text-secondary);">Mantiene gradiente Na⁺</span>
+        </div>
+      </div>
+      <div class="basolateral-side">
+        🟣 MEMBRANA BASOLATERAL
+      </div>
+      <div style="text-align:center; margin-top:8px; font-weight:700; font-size:0.9rem; color:var(--accent-purple);">SANGRE / CAPILARES (glucosa va hacia la sangre)</div>
+    </div>
+  </div>
+
+  <div class="card card-gold">
+    <h3>🔑 ¿Por qué esta distribución?</h3>
+    <div class="key-concept">
+      <div class="label">Lógica fisiológica</div>
+      <p><strong>SGLT1 en apical:</strong> Necesita transporte ACTIVO (secundario) para absorber glucosa del lumen incluso cuando la concentración luminal es baja. El Na⁺ que entra con la glucosa proviene del gradiente creado por la Na⁺/K⁺-ATPasa basolateral.</p>
+    </div>
+    <div class="key-concept" style="margin-top:8px">
+      <div class="label">Salida a la sangre</div>
+      <p><strong>GLUT2 en basolateral:</strong> Una vez que la glucosa se concentra dentro del enterocito, sale pasivamente por GLUT2 (difusión facilitada, a favor del gradiente) hacia los capilares sanguíneos. No necesita energía adicional.</p>
+    </div>
+    <div class="key-concept-warm" style="margin-top:8px; padding:14px; border-radius:10px; background:rgba(239,71,111,0.08); border:1px solid rgba(239,71,111,0.2);">
+      <div class="label" style="color:var(--accent-warm); font-size:0.7rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px;">Na⁺/K⁺-ATPasa en basolateral</div>
+      <p style="color:var(--text-primary); font-size:0.9rem; margin:0;">Es el motor de todo el sistema. Saca el Na⁺ que entró por SGLT1, manteniendo bajo el Na⁺ intracelular → perpetúa el gradiente para que SGLT1 siga funcionando. Siempre está en la membrana basolateral en células absortivas.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🩸 Aplicación en Túbulo Renal Proximal</h3>
+    <p>El mismo principio opera en el riñón: <strong>SGLT2</strong> (90% de reabsorción) y <strong>SGLT1</strong> (10% restante) están en la membrana apical del túbulo proximal, mientras que <strong>GLUT2</strong> y <strong>GLUT1</strong> están en la basolateral, con la Na⁺/K⁺-ATPasa basolateral manteniendo el gradiente.</p>
+
+    <div class="clinical-case">
+      <span class="case-badge">🩺 Correlación clínica</span>
+      <p style="color:var(--text-primary)"><strong>Glucosuria renal familiar:</strong> Mutaciones en SGLT2 causan pérdida de glucosa en orina sin hiperglucemia. Es benigna, pero nos enseñó que este transportador es esencial para la reabsorción renal de glucosa, lo cual llevó al desarrollo de las gliflozinas para tratar diabetes.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="card">
+    <h3>🧪 Pregunta de Integración</h3>
+    <p>Si se inhibe la Na⁺/K⁺-ATPasa basolateral de un enterocito con ouabaína, ¿qué sucede con la absorción de glucosa por SGLT1?</p>
+    ${quizOption('gluc1', 'a', 'A) No se afecta porque SGLT1 no usa ATP', false, 'Aunque SGLT1 no usa ATP directamente, depende del gradiente de Na⁺ que genera la Na⁺/K⁺-ATPasa.')}
+    ${quizOption('gluc1', 'b', 'B) Se detiene porque se pierde el gradiente de Na⁺', true, 'Correcto: sin Na⁺/K⁺-ATPasa, el Na⁺ se acumula dentro de la célula, el gradiente desaparece, y SGLT1 no puede funcionar. Esto demuestra la dependencia del T.A. secundario respecto al primario.')}
+    ${quizOption('gluc1', 'c', 'C) Se revierte: la glucosa sale al lumen', false, 'SGLT1 no revierte fácilmente. Simplemente se detiene el transporte.')}
+    ${quizOption('gluc1', 'd', 'D) Aumenta porque hay más Na⁺ intracelular', false, 'Más Na⁺ intracelular reduce el gradiente, lo cual disminuye (no aumenta) el transporte por SGLT1.')}
+    ${quizFeedback('gluc1')}
+  </div>
+
+  ${navButtons(5, 7, 'CFTR →')}
+  `;
+}
+
+// ============================================
+//  SECTION: CFTR
+// ============================================
+function renderCFTR() {
+  return `
+  <div class="card card-highlight">
+    <span class="section-icon">🫁</span>
+    <h2>CFTR: El Transportador ABC Atípico</h2>
+    <p>Obj. 10: Reconocer CFTR y su importancia celular.</p>
+  </div>
+
+  <div class="card">
+    <div class="key-concept">
+      <div class="label">¿Qué es CFTR?</div>
+      <p><strong>CFTR</strong> (Cystic Fibrosis Transmembrane Conductance Regulator) es un miembro de la familia <strong>ABC</strong>, pero es <strong>atípico</strong>: en lugar de funcionar como bomba, actúa como un <strong>canal de Cl⁻</strong> regulado por ATP y fosforilación por PKA (proteína cinasa A).</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚙️ Mecanismo de Funcionamiento</h3>
+    <div class="diagram-container" style="text-align:left">
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="background:var(--accent-secondary); color:#000; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:0.85rem;">1</span>
+          <span style="font-size:0.88rem;">Un estímulo (ej. AMPc) activa <strong>PKA</strong>, que fosforila el dominio regulador (R) de CFTR.</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="background:var(--accent-primary); color:#000; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:0.85rem;">2</span>
+          <span style="font-size:0.88rem;"><strong>ATP se une</strong> a los dominios NBD → dimerización → apertura del canal.</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="background:var(--accent-gold); color:#000; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:0.85rem;">3</span>
+          <span style="font-size:0.88rem;"><strong>Cl⁻ fluye</strong> a favor de su gradiente electroquímico a través del poro (es un canal, no una bomba).</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="background:var(--accent-warm); color:#000; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:0.85rem;">4</span>
+          <span style="font-size:0.88rem;">Hidrólisis de ATP → cierre del canal. El ciclo se repite.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-concept-gold" style="margin-top:12px; padding:14px; border-radius:10px; background:rgba(255,209,102,0.08); border:1px solid rgba(255,209,102,0.2);">
+      <div class="label" style="color:var(--accent-gold); font-size:0.7rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px;">⚠️ Punto clave</div>
+      <p style="color:var(--text-primary); font-size:0.88rem; margin:0;">CFTR usa ATP para <strong>regular la apertura</strong> del canal, NO para mover Cl⁻ contra gradiente. El movimiento de Cl⁻ es pasivo. Es por eso que se le llama un transportador ABC "atípico".</p>
+    </div>
+  </div>
+
+  <div class="card card-warm">
+    <h3>🩺 Fibrosis Quística: La Enfermedad</h3>
+    <div class="clinical-case">
+      <span class="case-badge">Caso Clínico Integrador</span>
+      <p style="color:var(--text-primary)">Un lactante de 3 meses es traído por sus padres por <strong>tos persistente, infecciones respiratorias recurrentes</strong> y <strong>falla de medro</strong> (no gana peso). El pediatra nota piel salada al besarlo. Se solicita una prueba de <strong>cloro en sudor</strong> que resulta >60 mEq/L (positiva). Se diagnostica <strong>Fibrosis Quística</strong>.</p>
+    </div>
+
+    <h4 style="margin-top:14px; color:var(--accent-warm);">¿Qué está pasando a nivel celular?</h4>
+    <p>La mutación más común es <strong>ΔF508</strong> (deleción de fenilalanina en posición 508): la proteína CFTR no se pliega correctamente → no llega a la membrana apical → no hay canal de Cl⁻ funcional.</p>
+
+    <div style="margin-top:12px">
+      <strong style="color:var(--text-primary); font-size:0.88rem;">Consecuencias por órgano:</strong>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+        <div style="background:var(--bg-card-alt); padding:10px 12px; border-radius:10px; font-size:0.84rem;">
+          <strong style="color:var(--accent-secondary);">🫁 Pulmones</strong><br>
+          <span style="color:var(--text-secondary)">Sin Cl⁻ en el lumen → no sale agua → moco espeso → infecciones crónicas (Pseudomonas)</span>
+        </div>
+        <div style="background:var(--bg-card-alt); padding:10px 12px; border-radius:10px; font-size:0.84rem;">
+          <strong style="color:var(--accent-gold);">🫀 Páncreas</strong><br>
+          <span style="color:var(--text-secondary)">Secreciones espesas obstruyen conductos → pancreatitis, insuficiencia pancreática exocrina, malabsorción</span>
+        </div>
+        <div style="background:var(--bg-card-alt); padding:10px 12px; border-radius:10px; font-size:0.84rem;">
+          <strong style="color:var(--accent-primary);">💧 Glándulas sudoríparas</strong><br>
+          <span style="color:var(--text-secondary)">No se reabsorbe Cl⁻ del sudor → sudor salado (base de la prueba diagnóstica)</span>
+        </div>
+        <div style="background:var(--bg-card-alt); padding:10px 12px; border-radius:10px; font-size:0.84rem;">
+          <strong style="color:var(--accent-warm);">🍽️ Intestino</strong><br>
+          <span style="color:var(--text-secondary)">Íleo meconial en neonatos, obstrucción intestinal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-concept" style="margin-top:14px">
+      <div class="label">Terapias modernas</div>
+      <p><strong>Ivacaftor</strong> (potenciador): aumenta la apertura de canales CFTR mutantes que sí llegan a la membrana. <strong>Lumacaftor/Tezacaftor</strong> (correctores): ayudan al plegamiento de CFTR-ΔF508 para que llegue a la membrana. <strong>Elexacaftor + Tezacaftor + Ivacaftor (Trikafta)</strong>: la triple terapia que ha revolucionado el tratamiento de FQ.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="card">
+    <h3>🧪 Pregunta sobre CFTR</h3>
+    <p>¿Cuál de las siguientes afirmaciones sobre CFTR es CORRECTA?</p>
+    ${quizOption('cftr1', 'a', 'A) CFTR es una bomba que transporta Cl⁻ contra su gradiente', false, 'CFTR es un canal, no una bomba. El Cl⁻ fluye a favor de su gradiente.')}
+    ${quizOption('cftr1', 'b', 'B) CFTR es un canal de Cl⁻ regulado por ATP y fosforilación, miembro de la familia ABC', true, 'Correcto: es un miembro atípico de la familia ABC que funciona como canal de Cl⁻. El ATP regula la apertura del canal, pero el movimiento de Cl⁻ es pasivo.')}
+    ${quizOption('cftr1', 'c', 'C) La mutación ΔF508 causa hiperactividad del canal CFTR', false, 'Al contrario: ΔF508 causa que CFTR no se pliegue bien y no llegue a la membrana → pérdida de función.')}
+    ${quizOption('cftr1', 'd', 'D) CFTR se ubica exclusivamente en células pulmonares', false, 'CFTR se expresa en muchos epitelios: pulmones, páncreas, intestino, glándulas sudoríparas, sistema reproductivo.')}
+    ${quizFeedback('cftr1')}
+  </div>
+
+  ${navButtons(6, 8, 'Evaluación Final →')}
+  `;
+}
+
+// ============================================
+//  SECTION: EVALUACIÓN FINAL
+// ============================================
+function renderEvaluacion() {
+  return `
+  <div class="card card-highlight">
+    <span class="section-icon">✅</span>
+    <h2>Evaluación Final Integradora</h2>
+    <p>Pon a prueba todo lo aprendido con estos casos clínicos complejos.</p>
+  </div>
+
+  <!-- CASO 1 -->
+  <div class="card">
+    <div class="clinical-case">
+      <span class="case-badge">🩺 Caso 1: El deportista con calambres</span>
+      <p style="color:var(--text-primary)">Un maratonista de 25 años llega a urgencias con calambres musculares severos, debilidad y arritmia cardíaca. Su potasio sérico es de 2.8 mEq/L (normal: 3.5-5.0). Refiere haber tomado grandes cantidades de un "té diurético natural" durante semanas.</p>
+    </div>
+    <p>El "té diurético" probablemente contiene compuestos que inhiben la reabsorción de Na⁺ y K⁺ en el asa de Henle. ¿Qué transportador es el principal afectado?</p>
+    ${quizOption('eval1', 'a', 'A) SGLT2 del túbulo proximal', false, 'SGLT2 transporta Na⁺/glucosa, no tiene relación directa con la reabsorción de K⁺ en el asa de Henle.')}
+    ${quizOption('eval1', 'b', 'B) NKCC2 del asa gruesa ascendente de Henle', true, 'Correcto: NKCC2 (simportador Na⁺/K⁺/2Cl⁻) es el principal transportador del asa de Henle. Su inhibición causa pérdida de Na⁺, K⁺ y Cl⁻ → hipopotasemia → calambres y arritmia. La furosemida actúa igual.')}
+    ${quizOption('eval1', 'c', 'C) Na⁺/K⁺-ATPasa de todas las células', false, 'Aunque una inhibición generalizada causaría problemas, el escenario apunta a un efecto diurético renal selectivo.')}
+    ${quizOption('eval1', 'd', 'D) Intercambiador Na⁺/H⁺ del túbulo proximal', false, 'NHE3 afecta principalmente la reabsorción de bicarbonato, no explica la hipopotasemia severa.')}
+    ${quizFeedback('eval1')}
+  </div>
+
+  <!-- CASO 2 -->
+  <div class="card">
+    <div class="clinical-case">
+      <span class="case-badge">🩺 Caso 2: El niño con huesos densos</span>
+      <p style="color:var(--text-primary)">Un niño de 6 años presenta fracturas patológicas recurrentes a pesar de que sus radiografías muestran huesos anormalmente densos ("huesos de mármol"). También tiene anemia y hepatoesplenomegalia por hematopoyesis extramedular (la médula ósea está "atrapada" en hueso denso).</p>
+    </div>
+    <p>¿Qué tipo de bomba está mutada en esta enfermedad (osteopetrosis)?</p>
+    ${quizOption('eval2', 'a', 'A) Bomba tipo P (Na⁺/K⁺-ATPasa)', false, 'La Na⁺/K⁺-ATPasa no está directamente implicada en la resorción ósea por osteoclastos.')}
+    ${quizOption('eval2', 'b', 'B) Bomba tipo V (V-ATPasa de osteoclastos)', true, 'Correcto: los osteoclastos necesitan la V-ATPasa para secretar H⁺ y acidificar la laguna de resorción, disolviendo el mineral óseo. Sin V-ATPasa funcional → no hay resorción → huesos densos pero frágiles.')}
+    ${quizOption('eval2', 'c', 'C) Bomba tipo F (ATP sintasa)', false, 'La ATP sintasa sintetiza ATP en la mitocondria, no participa directamente en la resorción ósea.')}
+    ${quizOption('eval2', 'd', 'D) Transportador ABC (CFTR)', false, 'CFTR es un canal de Cl⁻ que causa fibrosis quística cuando muta, no osteopetrosis.')}
+    ${quizFeedback('eval2')}
+  </div>
+
+  <!-- CASO 3 -->
+  <div class="card">
+    <div class="clinical-case">
+      <span class="case-badge">🩺 Caso 3: El tumor resistente</span>
+      <p style="color:var(--text-primary)">Una mujer de 52 años con cáncer de mama recibe quimioterapia. Inicialmente responde bien, pero tras varios ciclos el tumor deja de reducirse. Una biopsia revela sobreexpresión de una proteína de membrana que "expulsa" los fármacos de las células tumorales.</p>
+    </div>
+    <p>¿Qué proteína está sobreexpresada y a qué familia pertenece?</p>
+    ${quizOption('eval3', 'a', 'A) GLUT1, familia de transportadores facilitativos', false, 'GLUT1 transporta glucosa, no expulsa fármacos.')}
+    ${quizOption('eval3', 'b', 'B) SGLT2, simportador Na⁺/glucosa', false, 'SGLT2 está en el riñón y no expulsa fármacos de células tumorales.')}
+    ${quizOption('eval3', 'c', 'C) P-glicoproteína (MDR1), familia ABC', true, 'Correcto: MDR1 (ABCB1) es un transportador ABC que actúa como bomba de eflujo de múltiples fármacos. Su sobreexpresión es una causa principal de resistencia a quimioterapia (MDR = Multi-Drug Resistance).')}
+    ${quizOption('eval3', 'd', 'D) NHE3, antiportador Na⁺/H⁺', false, 'NHE3 intercambia Na⁺ por H⁺ en el riñón, no tiene relación con resistencia a quimioterapia.')}
+    ${quizFeedback('eval3')}
+  </div>
+
+  <!-- CASO 4 -->
+  <div class="card">
+    <div class="clinical-case">
+      <span class="case-badge">🩺 Caso 4: Integrando todo</span>
+      <p style="color:var(--text-primary)">Un paciente con insuficiencia cardíaca toma <strong>digoxina</strong> (inhibe Na⁺/K⁺-ATPasa). El médico nota que este efecto indirectamente aumenta el Ca²⁺ intracelular cardíaco. ¿A través de qué mecanismo indirecto?</p>
+    </div>
+    ${quizOption('eval4', 'a', 'A) Al acumularse Na⁺ dentro de la célula, el intercambiador Na⁺/Ca²⁺ (NCX, antiportador) funciona menos → menos Ca²⁺ sale → más Ca²⁺ intracelular', true, 'Excelente: digoxina inhibe Na⁺/K⁺-ATPasa (T.A. primario) → ↑Na⁺ intracelular → el antiportador NCX (T.A. secundario) no puede sacar Ca²⁺ eficientemente → ↑Ca²⁺ intracelular → mayor contractilidad. Esto integra T.A. primario, secundario y antiporte.')}
+    ${quizOption('eval4', 'b', 'B) La digoxina abre canales de Ca²⁺ directamente', false, 'La digoxina no actúa sobre canales de Ca²⁺ directamente. Su efecto es a través de la inhibición de la Na⁺/K⁺-ATPasa.')}
+    ${quizOption('eval4', 'c', 'C) Al inhibir la bomba, más ATP está disponible para la Ca²⁺-ATPasa', false, 'El ahorro de ATP no es el mecanismo terapéutico. El mecanismo es a través del intercambiador NCX.')}
+    ${quizOption('eval4', 'd', 'D) La digoxina estimula la liberación de Ca²⁺ del retículo sarcoplásmico', false, 'El mecanismo principal de la digoxina no involucra la liberación directa de Ca²⁺ del RS, sino la acumulación de Na⁺ y su efecto sobre NCX.')}
+    ${quizFeedback('eval4')}
+  </div>
+
+  <!-- SCORE -->
+  <div class="card" style="text-align:center; background: linear-gradient(135deg, rgba(6,214,160,0.1), rgba(17,138,178,0.1)); border-color: rgba(6,214,160,0.3);">
+    <h2 style="margin-bottom:12px;">🏆 Resumen de Puntuación</h2>
+    <div style="font-size:2.5rem; font-weight:800; background:var(--gradient-pump); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
+      ${state.score}/100
+    </div>
+    <p style="margin-top:8px;">Cada pregunta correcta vale 10 puntos. Total: 10 preguntas.</p>
+    <p>Revisa las secciones donde tuviste dificultad haciendo clic en las pestañas de navegación de arriba.</p>
+  </div>
+
+  <!-- OBJECTIVES CHECK -->
+  <div class="card">
+    <h3>📋 Verificación de Objetivos Cubiertos</h3>
+    <div class="obj-grid">
+      ${[
+        ['✅', 'Definir transporte activo', 'Sección Definición'],
+        ['✅', 'Distinguir mecanismos de T.A.', 'Secciones Primario y Secundario'],
+        ['✅', 'Diferenciar T. activo vs pasivo', 'Tabla comparativa en Definición'],
+        ['✅', 'Simporte / Antiporte / Uniporte', 'Sección interactiva de mecanismos'],
+        ['✅', 'Fuentes de energía primario/secundario', 'ATP directo vs gradiente iónico'],
+        ['✅', 'Bombas P, V, F, ABC', 'Sección interactiva de bombas'],
+        ['✅', 'Transcitosis apical/basolateral', 'Diagrama de enterocito/glucosa'],
+        ['✅', 'Solutos por transportador', 'Tablas en cada sección'],
+        ['✅', 'Mecanismo de transportadores', 'Ciclo E1/E2, rotor, NBD'],
+        ['✅', 'CFTR y su importancia', 'Sección CFTR + Fibrosis Quística']
+      ].map(([check, obj, where]) => `
+        <div class="obj-item done">
+          <span class="obj-check">${check}</span>
+          <span><strong>${obj}</strong><br><span style="font-size:0.75rem; color:var(--text-secondary)">${where}</span></span>
+        </div>
+      `).join('')}
+    </div>
+  </div>
+
+  ${navButtons(7, null)}
+
+  <div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:0.8rem;">
+    Tutoría Interactiva — Transporte Activo — Biología Celular<br>
+    Primer Año de Medicina
+  </div>
+  `;
+}
+
+// ============================================
+//  INIT
+// ============================================
+render();
+</script>
+</body>
+</html>
