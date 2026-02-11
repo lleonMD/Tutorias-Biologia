@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutoría: Membrana Celular</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .hidden{display:none!important}
+    .fase-btn.active{background:#2563eb!important;color:white}
+    .quiz-option.selected{background:#2563eb!important}
+    .quiz-option.correct{background:#16a34a!important}
+    .quiz-option.incorrect{background:#dc2626!important}
+    .component-btn:hover{opacity:0.8;cursor:pointer}
+    input[type="range"]{-webkit-appearance:none;height:12px;border-radius:6px;background:linear-gradient(to right,#3b82f6,#22c55e,#ef4444)}
+    input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:white;cursor:pointer}
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
+  
+  <div class="fixed top-0 left-0 right-0 bg-slate-900/95 border-b border-slate-700 z-50 p-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-between mb-2">
+        <h1 class="text-xl font-bold text-cyan-400">🔬 Tutoría: Membrana Celular</h1>
+        <span class="text-slate-400 text-sm">1 hora</span>
+      </div>
+      <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+        <div id="progressBar" class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all" style="width:0%"></div>
+      </div>
+      <div class="flex justify-between mt-3 gap-1 flex-wrap">
+        <button onclick="mostrarFase('inicio')" data-fase="inicio" class="fase-btn px-3 py-1 rounded text-xs bg-slate-700">1.Inicio</button>
+        <button onclick="mostrarFase('componentes')" data-fase="componentes" class="fase-btn px-3 py-1 rounded text-xs bg-slate-700">2.Componentes</button>
+        <button onclick="mostrarFase('fluidez')" data-fase="fluidez" class="fase-btn px-3 py-1 rounded text-xs bg-slate-700">3.Fluidez</button>
+        <button onclick="mostrarFase('asimetria')" data-fase="asimetria" class="fase-btn px-3 py-1 rounded text-xs bg-slate-700">4.Asimetría</button>
+        <button onclick="mostrarFase('clinica')" data-fase="clinica" class="fase-btn px-3 py-1 rounded text-xs bg-slate-700">5.Clínica</button>
+        <button onclick="mostrarFase('evaluacion')" data-fase="evaluacion" class="fase-btn px-3 py-1 rounded text-xs bg-slate-700">6.Evaluación</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-32 pb-12 px-4 max-w-6xl mx-auto">
+    
+    <!-- INICIO -->
+    <div id="fase-inicio" class="fase-content">
+      <div class="bg-gradient-to-br from-cyan-900/40 to-blue-900/30 rounded-2xl p-8 border border-cyan-500/50 mb-6">
+        <h2 class="text-3xl font-bold mb-4 text-cyan-300">🎯 Bienvenido</h2>
+        <p class="text-slate-300 text-lg mb-6">Exploraremos la estructura y función de la membrana plasmática.</p>
+        <div class="bg-slate-800/50 rounded-xl p-6 mb-6">
+          <h3 class="text-xl font-bold text-amber-400 mb-4">📋 Objetivos</h3>
+          <div class="grid md:grid-cols-2 gap-3">
+            <div class="flex gap-2"><span class="text-green-400">✓</span>Estructura de membranas biológicas</div>
+            <div class="flex gap-2"><span class="text-green-400">✓</span>Componentes lipídicos y proteicos</div>
+            <div class="flex gap-2"><span class="text-green-400">✓</span>Modelo de mosaico fluido</div>
+            <div class="flex gap-2"><span class="text-green-400">✓</span>Rol del colesterol en fluidez</div>
+            <div class="flex gap-2"><span class="text-green-400">✓</span>Asimetría de membrana</div>
+            <div class="flex gap-2"><span class="text-green-400">✓</span>Casos clínicos reales</div>
+          </div>
+        </div>
+        <div class="bg-slate-800/50 rounded-xl p-6">
+          <h3 class="text-xl font-bold text-pink-400 mb-4">🏠 Analogía: Célula como Casa</h3>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-slate-700/50 rounded-lg p-4 text-center"><div class="text-3xl mb-2">🧱</div><p class="text-sm"><strong>Paredes</strong> separan interior/exterior</p></div>
+            <div class="bg-slate-700/50 rounded-lg p-4 text-center"><div class="text-3xl mb-2">🚪</div><p class="text-sm"><strong>Puertas</strong> controlan acceso</p></div>
+            <div class="bg-slate-700/50 rounded-lg p-4 text-center"><div class="text-3xl mb-2">🪟</div><p class="text-sm"><strong>Ventanas</strong> comunicación</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end"><button onclick="mostrarFase('componentes')" class="px-6 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-medium">Comenzar →</button></div>
+    </div>
+
+    <!-- COMPONENTES -->
+    <div id="fase-componentes" class="fase-content hidden">
+      <div class="bg-gradient-to-br from-blue-900/40 to-indigo-900/30 rounded-2xl p-6 border border-blue-500/50 mb-6">
+        <h2 class="text-2xl font-bold mb-2 text-blue-300">🧬 Componentes de la Membrana</h2>
+        <p class="text-slate-400">~50% lípidos y ~50% proteínas (en masa)</p>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-bold mb-4">Membrana Interactiva <span class="text-sm text-slate-400">(Haz clic en componentes)</span></h3>
+        <svg viewBox="0 0 800 280" class="w-full bg-slate-900 rounded-lg mb-4">
+          <rect x="0" y="0" width="800" height="70" fill="#1e3a5f" opacity="0.5"/>
+          <rect x="0" y="210" width="800" height="70" fill="#312e81" opacity="0.3"/>
+          <text x="400" y="20" text-anchor="middle" fill="#94a3b8" font-size="11">EXTERIOR</text>
+          <text x="400" y="265" text-anchor="middle" fill="#94a3b8" font-size="11">CITOPLASMA</text>
+          
+          <!-- Glucocálix -->
+          <g class="component-btn" onclick="mostrarInfo('glucocalix')">
+            <line x1="100" y1="45" x2="100" y2="65" stroke="#fbbf24" stroke-width="2"/><circle cx="100" cy="40" r="4" fill="#fbbf24"/>
+            <line x1="300" y1="45" x2="300" y2="65" stroke="#fbbf24" stroke-width="2"/><circle cx="300" cy="40" r="4" fill="#fbbf24"/>
+            <line x1="500" y1="45" x2="500" y2="65" stroke="#fbbf24" stroke-width="2"/><circle cx="500" cy="40" r="4" fill="#fbbf24"/>
+            <line x1="700" y1="45" x2="700" y2="65" stroke="#fbbf24" stroke-width="2"/><circle cx="700" cy="40" r="4" fill="#fbbf24"/>
+          </g>
+          
+          <!-- Fosfolípidos externos -->
+          <g class="component-btn" onclick="mostrarInfo('fosfolipido')">
+            <circle cx="50" cy="75" r="6" fill="#3b82f6"/><line x1="48" y1="81" x2="46" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="52" y1="81" x2="54" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="80" cy="75" r="6" fill="#3b82f6"/><line x1="78" y1="81" x2="76" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="82" y1="81" x2="84" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="110" cy="75" r="6" fill="#3b82f6"/><line x1="108" y1="81" x2="106" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="112" y1="81" x2="114" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="180" cy="75" r="6" fill="#3b82f6"/><line x1="178" y1="81" x2="176" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="182" y1="81" x2="184" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="210" cy="75" r="6" fill="#3b82f6"/><line x1="208" y1="81" x2="206" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="212" y1="81" x2="214" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="280" cy="75" r="6" fill="#3b82f6"/><line x1="278" y1="81" x2="276" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="282" y1="81" x2="284" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="420" cy="75" r="6" fill="#3b82f6"/><line x1="418" y1="81" x2="416" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="422" y1="81" x2="424" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="480" cy="75" r="6" fill="#3b82f6"/><line x1="478" y1="81" x2="476" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="482" y1="81" x2="484" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="550" cy="75" r="6" fill="#3b82f6"/><line x1="548" y1="81" x2="546" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="552" y1="81" x2="554" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="620" cy="75" r="6" fill="#3b82f6"/><line x1="618" y1="81" x2="616" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="622" y1="81" x2="624" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="690" cy="75" r="6" fill="#3b82f6"/><line x1="688" y1="81" x2="686" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="692" y1="81" x2="694" y2="110" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="750" cy="75" r="6" fill="#3b82f6"/><line x1="748" y1="81" x2="746" y2="115" stroke="#fbbf24" stroke-width="2"/><line x1="752" y1="81" x2="754" y2="110" stroke="#fbbf24" stroke-width="2"/>
+          </g>
+          
+          <!-- Esfingolípido -->
+          <g class="component-btn" onclick="mostrarInfo('esfingolipido')">
+            <circle cx="140" cy="75" r="6" fill="#8b5cf6"/><line x1="140" y1="81" x2="140" y2="115" stroke="#c084fc" stroke-width="3"/>
+            <circle cx="510" cy="75" r="6" fill="#8b5cf6"/><line x1="510" y1="81" x2="510" y2="115" stroke="#c084fc" stroke-width="3"/>
+          </g>
+          
+          <!-- Glucolípidos -->
+          <g class="component-btn" onclick="mostrarInfo('glucolipido')">
+            <circle cx="240" cy="75" r="6" fill="#f59e0b"/><circle cx="240" cy="63" r="4" fill="#fcd34d"/><line x1="240" y1="81" x2="240" y2="115" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="660" cy="75" r="6" fill="#f59e0b"/><circle cx="660" cy="63" r="4" fill="#fcd34d"/><line x1="660" y1="81" x2="660" y2="115" stroke="#fbbf24" stroke-width="2"/>
+          </g>
+          
+          <!-- Colesterol -->
+          <g class="component-btn" onclick="mostrarInfo('colesterol')">
+            <circle cx="65" cy="88" r="3" fill="#ec4899"/><rect x="61" y="91" width="8" height="15" rx="1" fill="#ec4899" opacity="0.8"/>
+            <circle cx="195" cy="88" r="3" fill="#ec4899"/><rect x="191" y="91" width="8" height="15" rx="1" fill="#ec4899" opacity="0.8"/>
+            <circle cx="495" cy="88" r="3" fill="#ec4899"/><rect x="491" y="91" width="8" height="15" rx="1" fill="#ec4899" opacity="0.8"/>
+            <circle cx="635" cy="88" r="3" fill="#ec4899"/><rect x="631" y="91" width="8" height="15" rx="1" fill="#ec4899" opacity="0.8"/>
+          </g>
+          
+          <!-- Fosfolípidos internos -->
+          <g class="component-btn" onclick="mostrarInfo('fosfolipido')">
+            <circle cx="50" cy="205" r="6" fill="#3b82f6"/><line x1="48" y1="199" x2="46" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="52" y1="199" x2="54" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="80" cy="205" r="6" fill="#3b82f6"/><line x1="78" y1="199" x2="76" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="82" y1="199" x2="84" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="110" cy="205" r="6" fill="#3b82f6"/><line x1="108" y1="199" x2="106" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="112" y1="199" x2="114" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="140" cy="205" r="6" fill="#3b82f6"/><line x1="138" y1="199" x2="136" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="142" y1="199" x2="144" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="180" cy="205" r="6" fill="#3b82f6"/><line x1="178" y1="199" x2="176" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="182" y1="199" x2="184" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="210" cy="205" r="6" fill="#3b82f6"/><line x1="208" y1="199" x2="206" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="212" y1="199" x2="214" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="240" cy="205" r="6" fill="#3b82f6"/><line x1="238" y1="199" x2="236" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="242" y1="199" x2="244" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="280" cy="205" r="6" fill="#3b82f6"/><line x1="278" y1="199" x2="276" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="282" y1="199" x2="284" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="420" cy="205" r="6" fill="#3b82f6"/><line x1="418" y1="199" x2="416" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="422" y1="199" x2="424" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="480" cy="205" r="6" fill="#3b82f6"/><line x1="478" y1="199" x2="476" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="482" y1="199" x2="484" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="510" cy="205" r="6" fill="#3b82f6"/><line x1="508" y1="199" x2="506" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="512" y1="199" x2="514" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="550" cy="205" r="6" fill="#3b82f6"/><line x1="548" y1="199" x2="546" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="552" y1="199" x2="554" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="620" cy="205" r="6" fill="#3b82f6"/><line x1="618" y1="199" x2="616" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="622" y1="199" x2="624" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="660" cy="205" r="6" fill="#3b82f6"/><line x1="658" y1="199" x2="656" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="662" y1="199" x2="664" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="690" cy="205" r="6" fill="#3b82f6"/><line x1="688" y1="199" x2="686" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="692" y1="199" x2="694" y2="170" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="750" cy="205" r="6" fill="#3b82f6"/><line x1="748" y1="199" x2="746" y2="165" stroke="#fbbf24" stroke-width="2"/><line x1="752" y1="199" x2="754" y2="170" stroke="#fbbf24" stroke-width="2"/>
+          </g>
+          
+          <!-- Proteína Transmembranal -->
+          <g class="component-btn" onclick="mostrarInfo('transmembranal')">
+            <rect x="330" y="70" width="35" height="140" rx="5" fill="#ef4444" opacity="0.9"/>
+            <ellipse cx="347" cy="82" rx="8" ry="4" fill="#fca5a5"/>
+            <ellipse cx="347" cy="198" rx="8" ry="4" fill="#fca5a5"/>
+            <text x="347" y="145" text-anchor="middle" fill="white" font-size="7">Canal</text>
+          </g>
+          
+          <!-- Proteína Periférica Externa -->
+          <g class="component-btn" onclick="mostrarInfo('periferica')">
+            <ellipse cx="390" cy="62" rx="20" ry="8" fill="#22c55e"/>
+          </g>
+          
+          <!-- Espectrina (Periférica Interna) -->
+          <g class="component-btn" onclick="mostrarInfo('periferica')">
+            <line x1="30" y1="222" x2="150" y2="222" stroke="#22c55e" stroke-width="4"/>
+            <line x1="130" y1="222" x2="270" y2="222" stroke="#22c55e" stroke-width="4"/>
+            <ellipse cx="80" cy="222" rx="10" ry="5" fill="#4ade80"/>
+            <ellipse cx="200" cy="222" rx="10" ry="5" fill="#4ade80"/>
+          </g>
+          <text x="140" y="238" text-anchor="middle" fill="#22c55e" font-size="7">Espectrina (periférica interna)</text>
+          
+          <!-- Proteína Anclada GPI -->
+          <g class="component-btn" onclick="mostrarInfo('anclada_gpi')">
+            <ellipse cx="580" cy="55" rx="15" ry="10" fill="#06b6d4"/>
+            <line x1="580" y1="65" x2="580" y2="75" stroke="#06b6d4" stroke-width="2" stroke-dasharray="3,2"/>
+            <circle cx="580" cy="75" r="3" fill="#22d3ee"/>
+          </g>
+          <text x="580" y="42" text-anchor="middle" fill="#06b6d4" font-size="7">Anclada GPI</text>
+          
+          <!-- Proteína Anclada Lípido -->
+          <g class="component-btn" onclick="mostrarInfo('anclada_lipido')">
+            <ellipse cx="720" cy="228" rx="15" ry="8" fill="#84cc16"/>
+            <line x1="720" y1="220" x2="720" y2="208" stroke="#84cc16" stroke-width="2" stroke-dasharray="3,2"/>
+          </g>
+          <text x="720" y="248" text-anchor="middle" fill="#84cc16" font-size="7">Anclada lípido</text>
+        </svg>
+        
+        <div id="info-componente" class="bg-slate-700 rounded-lg p-4 border-l-4 border-cyan-500">
+          <h4 class="text-lg font-bold text-cyan-400 mb-2">👆 Haz clic en un componente</h4>
+          <p class="text-slate-300">Selecciona cualquier elemento para ver detalles.</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-4 mb-6">
+        <div class="flex flex-wrap justify-center gap-3 text-sm">
+          <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-blue-500"></div>Fosfolípido</div>
+          <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-purple-500"></div>Esfingolípido</div>
+          <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-pink-500"></div>Colesterol</div>
+          <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-amber-500"></div>Glucolípido</div>
+          <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-red-500"></div>Transmembranal</div>
+          <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-green-500"></div>Periférica</div>
+          <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-cyan-500"></div>Anclada GPI</div>
+          <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-lime-500"></div>Anclada lípido</div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-slate-800 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-blue-400 mb-3">🧬 Lípidos</h3>
+          <div class="space-y-2 text-sm">
+            <div class="bg-slate-700/50 rounded p-2"><span class="text-blue-400">Fosfolípidos:</span> PC, PS, PE, PI + Esfingomielina</div>
+            <div class="bg-slate-700/50 rounded p-2"><span class="text-purple-400">Esfingolípidos:</span> Cerebrósidos, Gangliósidos</div>
+            <div class="bg-slate-700/50 rounded p-2"><span class="text-amber-400">Glucolípidos:</span> SOLO cara externa</div>
+            <div class="bg-slate-700/50 rounded p-2"><span class="text-pink-400">Colesterol:</span> ~30%, buffer fluidez</div>
+          </div>
+        </div>
+        <div class="bg-slate-800 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-red-400 mb-3">🔴 Proteínas</h3>
+          <div class="space-y-2 text-sm">
+            <div class="bg-slate-700/50 rounded p-2"><span class="text-red-400">Integrales:</span> Transmembranales, Monotópicas</div>
+            <div class="bg-slate-700/50 rounded p-2"><span class="text-green-400">Periféricas:</span> Espectrina, Anquirina (interna)</div>
+            <div class="bg-slate-700/50 rounded p-2"><span class="text-cyan-400">Ancladas GPI:</span> Cara EXTERNA</div>
+            <div class="bg-slate-700/50 rounded p-2"><span class="text-lime-400">Ancladas lípido:</span> Cara INTERNA</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex justify-between">
+        <button onclick="mostrarFase('inicio')" class="px-6 py-3 bg-slate-700 rounded-xl">← Inicio</button>
+        <button onclick="mostrarFase('fluidez')" class="px-6 py-3 bg-cyan-600 rounded-xl">Fluidez →</button>
+      </div>
+    </div>
+
+    <!-- FLUIDEZ -->
+    <div id="fase-fluidez" class="fase-content hidden">
+      <div class="bg-gradient-to-br from-pink-900/40 to-purple-900/30 rounded-2xl p-6 border border-pink-500/50 mb-6">
+        <h2 class="text-2xl font-bold mb-2 text-pink-300">🌡️ Fluidez y Colesterol</h2>
+        <p class="text-slate-400">Modelo de mosaico fluido (Singer & Nicolson, 1972)</p>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-bold mb-4">🧪 Simulador: Efecto del Colesterol</h3>
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label class="block text-sm mb-2">🌡️ Temperatura: <span id="temp-value">37</span>°C</label>
+            <input type="range" id="temp-slider" min="5" max="60" value="37" class="w-full" oninput="actualizarSim()">
+            <div class="flex justify-between text-xs text-slate-400 mt-1"><span>5°C</span><span>37°C</span><span>60°C</span></div>
+          </div>
+          <div>
+            <label class="block text-sm mb-2">¿Colesterol?</label>
+            <button id="colesterol-btn" onclick="toggleCol()" class="w-full py-3 rounded-lg font-medium bg-pink-600">✓ CON Colesterol</button>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-slate-700 rounded-lg p-4">
+            <h4 class="font-medium mb-3 text-center">Estado</h4>
+            <div id="estado-membrana" class="text-center">
+              <div class="inline-block px-6 py-3 rounded-xl font-bold text-lg bg-green-500">ÓPTIMA</div>
+              <p id="estado-msg" class="mt-2 text-slate-300">Fluidez óptima</p>
+            </div>
+            <div class="mt-4">
+              <div class="h-4 bg-slate-600 rounded-full overflow-hidden">
+                <div id="fluidez-bar" class="h-full bg-green-500 transition-all" style="width:55%"></div>
+              </div>
+            </div>
+          </div>
+          <div id="explicacion" class="bg-green-900/30 border border-green-500 rounded-lg p-4">
+            <p class="text-slate-300 text-sm">✓ Con colesterol: Fluidez óptima y estable.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl p-6 text-center mb-6">
+        <h3 class="text-2xl font-bold mb-2">💡 Concepto Clave</h3>
+        <p class="text-xl">Colesterol = <strong>REGULADOR BIDIRECCIONAL</strong></p>
+        <p class="text-pink-200 mt-2">Efectos opuestos según temperatura</p>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-bold mb-4">📊 Efecto según Temperatura</h3>
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-slate-600"><th class="py-2 px-3 text-left">Temp</th><th class="py-2 px-3">Sin Col</th><th class="py-2 px-3">Con Col</th><th class="py-2 px-3">Acción</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-slate-700"><td class="py-2 px-3 text-blue-400">❄️ BAJA</td><td class="py-2 px-3 text-red-400">GEL</td><td class="py-2 px-3 text-green-400">Fluida</td><td class="py-2 px-3 text-pink-400">↑ Aumenta</td></tr>
+            <tr class="border-b border-slate-700"><td class="py-2 px-3 text-green-400">✓ NORMAL</td><td class="py-2 px-3 text-yellow-400">Variable</td><td class="py-2 px-3 text-green-400">Óptima</td><td class="py-2 px-3 text-pink-400">Estabiliza</td></tr>
+            <tr><td class="py-2 px-3 text-red-400">🔥 ALTA</td><td class="py-2 px-3 text-red-400">Muy fluida</td><td class="py-2 px-3 text-green-400">Controlada</td><td class="py-2 px-3 text-pink-400">↓ Reduce</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-bold mb-4">🔄 Movimientos de Lípidos</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-slate-700 rounded-lg p-3 text-center"><div class="text-xl">🔄</div><div class="font-bold text-blue-400 text-sm">Rotación</div><div class="text-green-400 text-xs">Muy rápido</div></div>
+          <div class="bg-slate-700 rounded-lg p-3 text-center"><div class="text-xl">↔️</div><div class="font-bold text-blue-400 text-sm">Lateral</div><div class="text-green-400 text-xs">~2 μm/s</div></div>
+          <div class="bg-slate-700 rounded-lg p-3 text-center"><div class="text-xl">〰️</div><div class="font-bold text-blue-400 text-sm">Flexión</div><div class="text-green-400 text-xs">Muy rápido</div></div>
+          <div class="bg-slate-700 rounded-lg p-3 text-center"><div class="text-xl">↕️</div><div class="font-bold text-red-400 text-sm">Flip-flop</div><div class="text-red-400 text-xs">¡Muy lento!</div></div>
+        </div>
+      </div>
+      
+      <div class="flex justify-between">
+        <button onclick="mostrarFase('componentes')" class="px-6 py-3 bg-slate-700 rounded-xl">← Componentes</button>
+        <button onclick="mostrarFase('asimetria')" class="px-6 py-3 bg-cyan-600 rounded-xl">Asimetría →</button>
+      </div>
+    </div>
+
+    <!-- ASIMETRÍA -->
+    <div id="fase-asimetria" class="fase-content hidden">
+      <div class="bg-gradient-to-br from-purple-900/40 to-indigo-900/30 rounded-2xl p-6 border border-purple-500/50 mb-6">
+        <h2 class="text-2xl font-bold mb-2 text-purple-300">⚖️ Asimetría de Membrana</h2>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-6 mb-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-blue-900/30 rounded-lg p-5 border border-blue-500">
+            <h4 class="font-bold text-blue-400 mb-3 text-center">🔵 EXTERNA</h4>
+            <ul class="space-y-2 text-sm">
+              <li>• Fosfatidilcolina (PC)</li>
+              <li>• Esfingomielina</li>
+              <li class="text-amber-400 font-bold">• TODOS los glucolípidos</li>
+              <li>• Proteínas ancladas GPI</li>
+            </ul>
+          </div>
+          <div class="bg-purple-900/30 rounded-lg p-5 border border-purple-500">
+            <h4 class="font-bold text-purple-400 mb-3 text-center">🟣 INTERNA</h4>
+            <ul class="space-y-2 text-sm">
+              <li>• Fosfatidiletanolamina (PE)</li>
+              <li class="text-pink-400 font-bold">• Fosfatidilserina (PS)</li>
+              <li>• Fosfatidilinositol (PI)</li>
+              <li>• Proteínas ancladas lípido</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-bold mb-4">🔄 Enzimas Translocadoras</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-slate-700 rounded-lg p-4"><h4 class="font-bold text-blue-400">Flipasas</h4><p class="text-sm">Ext→Int (ATP)</p></div>
+          <div class="bg-slate-700 rounded-lg p-4"><h4 class="font-bold text-green-400">Flopasas</h4><p class="text-sm">Int→Ext (ATP)</p></div>
+          <div class="bg-slate-700 rounded-lg p-4"><h4 class="font-bold text-purple-400">Scramblasas</h4><p class="text-sm">Bidireccional (Ca²⁺)</p></div>
+        </div>
+      </div>
+
+      <div class="bg-pink-900/30 border border-pink-500 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-bold text-pink-400 mb-3">🚨 Fosfatidilserina (PS)</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div><span class="text-green-400 font-bold">✓ Normal:</span> PS en cara INTERNA</div>
+          <div><span class="text-red-400 font-bold">⚠️ Apoptosis:</span> PS en cara EXTERNA = "eat-me"</div>
+        </div>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-bold mb-4">🔬 Estructuras Especiales</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-amber-900/30 border border-amber-500 rounded-lg p-4"><h4 class="font-bold text-amber-400">Glucocálix</h4><p class="text-xs">10-100 nm, protección</p></div>
+          <div class="bg-purple-900/30 border border-purple-500 rounded-lg p-4"><h4 class="font-bold text-purple-400">Balsas Lipídicas</h4><p class="text-xs">Colesterol + esfingolípidos</p></div>
+          <div class="bg-pink-900/30 border border-pink-500 rounded-lg p-4"><h4 class="font-bold text-pink-400">Caveolas</h4><p class="text-xs">Invaginaciones + caveolina</p></div>
+        </div>
+      </div>
+      
+      <div class="flex justify-between">
+        <button onclick="mostrarFase('fluidez')" class="px-6 py-3 bg-slate-700 rounded-xl">← Fluidez</button>
+        <button onclick="mostrarFase('clinica')" class="px-6 py-3 bg-cyan-600 rounded-xl">Clínica →</button>
+      </div>
+    </div>
+
+    <!-- CLÍNICA -->
+    <div id="fase-clinica" class="fase-content hidden">
+      <div class="bg-gradient-to-br from-red-900/40 to-orange-900/30 rounded-2xl p-6 border border-red-500/50 mb-6">
+        <h2 class="text-2xl font-bold mb-2 text-red-300">🏥 Conexión Clínica</h2>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-bold text-amber-400 mb-3">👶 Caso 1: Tay-Sachs</h3>
+        <p class="text-slate-300 text-sm mb-3">Deficiencia de β-hexosaminidasa A → acumulación de <strong>gangliósido GM2</strong></p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-red-900/30 border border-red-500 rounded-lg p-3"><span class="text-red-400">❌</span> No degrada GM2 en lisosomas</div>
+          <div class="bg-amber-900/30 border border-amber-500 rounded-lg p-3"><span class="text-amber-400">📍</span> GM2 = glucolípido = cara EXTERNA</div>
+        </div>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-bold text-green-400 mb-3">🏃 Caso 2: Esferocitosis Hereditaria</h3>
+        <p class="text-slate-300 text-sm mb-3">Defecto en <strong>espectrina/anquirina</strong> → eritrocitos esféricos → fragilidad osmótica</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-red-900/30 border border-red-500 rounded-lg p-3"><span class="text-red-400">❌</span> Citoesqueleto defectuoso</div>
+          <div class="bg-green-900/30 border border-green-500 rounded-lg p-3"><span class="text-green-400">📍</span> Proteínas PERIFÉRICAS (cara interna)</div>
+        </div>
+      </div>
+
+      <div class="bg-slate-800 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-bold text-purple-400 mb-3">💊 Caso 3: Resistencia a Quimioterapia</h3>
+        <p class="text-slate-300 text-sm mb-3">Sobreexpresión de <strong>P-glicoproteína (MDR1)</strong> → expulsa fármacos</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-red-900/30 border border-red-500 rounded-lg p-3"><span class="text-red-400">❌</span> Bomba de eflujo (flopasa)</div>
+          <div class="bg-purple-900/30 border border-purple-500 rounded-lg p-3"><span class="text-purple-400">📍</span> En balsas lipídicas</div>
+        </div>
+      </div>
+      
+      <div class="flex justify-between">
+        <button onclick="mostrarFase('asimetria')" class="px-6 py-3 bg-slate-700 rounded-xl">← Asimetría</button>
+        <button onclick="mostrarFase('evaluacion')" class="px-6 py-3 bg-cyan-600 rounded-xl">Evaluación →</button>
+      </div>
+    </div>
+
+    <!-- EVALUACIÓN -->
+    <div id="fase-evaluacion" class="fase-content hidden">
+      <div class="bg-gradient-to-br from-green-900/40 to-emerald-900/30 rounded-2xl p-6 border border-green-500/50 mb-6">
+        <h2 class="text-2xl font-bold mb-2 text-green-300">✅ Evaluación Final</h2>
+      </div>
+
+      <div id="quiz-container">
+        <div class="bg-slate-800 rounded-xl p-5 mb-4" data-q="1">
+          <p class="font-medium mb-4"><span class="text-cyan-400">1.</span> ¿Efecto del colesterol sobre la fluidez?</p>
+          <div class="space-y-2">
+            <button onclick="selResp(1,'a')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">a) Siempre aumenta</button>
+            <button onclick="selResp(1,'b')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">b) Siempre disminuye</button>
+            <button onclick="selResp(1,'c')" data-ok="1" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">c) Buffer bidireccional</button>
+            <button onclick="selResp(1,'d')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">d) No tiene efecto</button>
+          </div>
+        </div>
+
+        <div class="bg-slate-800 rounded-xl p-5 mb-4" data-q="2">
+          <p class="font-medium mb-4"><span class="text-cyan-400">2.</span> ¿Dónde están SIEMPRE los glucolípidos?</p>
+          <div class="space-y-2">
+            <button onclick="selResp(2,'a')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">a) Monocapa interna</button>
+            <button onclick="selResp(2,'b')" data-ok="1" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">b) Monocapa externa</button>
+            <button onclick="selResp(2,'c')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">c) Ambas</button>
+            <button onclick="selResp(2,'d')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">d) Citoplasma</button>
+          </div>
+        </div>
+
+        <div class="bg-slate-800 rounded-xl p-5 mb-4" data-q="3">
+          <p class="font-medium mb-4"><span class="text-cyan-400">3.</span> PS en cara externa indica:</p>
+          <div class="space-y-2">
+            <button onclick="selResp(3,'a')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">a) División celular</button>
+            <button onclick="selResp(3,'b')" data-ok="1" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">b) Apoptosis</button>
+            <button onclick="selResp(3,'c')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">c) Alta actividad</button>
+            <button onclick="selResp(3,'d')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">d) Infección</button>
+          </div>
+        </div>
+
+        <div class="bg-slate-800 rounded-xl p-5 mb-4" data-q="4">
+          <p class="font-medium mb-4"><span class="text-cyan-400">4.</span> Espectrina y anquirina son:</p>
+          <div class="space-y-2">
+            <button onclick="selResp(4,'a')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">a) Transmembranales</button>
+            <button onclick="selResp(4,'b')" data-ok="1" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">b) Periféricas (cara interna)</button>
+            <button onclick="selResp(4,'c')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">c) Ancladas GPI</button>
+            <button onclick="selResp(4,'d')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">d) Monotópicas</button>
+          </div>
+        </div>
+
+        <div class="bg-slate-800 rounded-xl p-5 mb-4" data-q="5">
+          <p class="font-medium mb-4"><span class="text-cyan-400">5.</span> GM2 en Tay-Sachs está en:</p>
+          <div class="space-y-2">
+            <button onclick="selResp(5,'a')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">a) Intercalado</button>
+            <button onclick="selResp(5,'b')" data-ok="1" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">b) Monocapa externa (glucolípido)</button>
+            <button onclick="selResp(5,'c')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">c) Monocapa interna</button>
+            <button onclick="selResp(5,'d')" class="quiz-option w-full text-left p-3 rounded-lg bg-slate-700">d) Ambas</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center mb-6">
+        <button id="btn-resultado" onclick="verResultados()" class="px-8 py-4 bg-green-600 disabled:bg-slate-600 rounded-xl font-bold text-lg" disabled>Ver Resultados</button>
+      </div>
+
+      <div id="resultados" class="hidden bg-slate-800 rounded-xl p-6 mb-6 text-center">
+        <div id="puntaje" class="text-5xl font-bold mb-3">0/5</div>
+        <p id="msg-resultado" class="text-2xl mb-4"></p>
+        <button onclick="reiniciar()" class="px-6 py-3 bg-cyan-600 rounded-xl">Intentar de nuevo</button>
+      </div>
+      
+      <div class="flex justify-between">
+        <button onclick="mostrarFase('clinica')" class="px-6 py-3 bg-slate-700 rounded-xl">← Clínica</button>
+        <button onclick="mostrarFase('inicio')" class="px-6 py-3 bg-cyan-600 rounded-xl">Volver al Inicio</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let conCol=true,resp={};
+    const info={
+      fosfolipido:{n:'Glicerofosfolípido',c:'#3b82f6',d:'Lípido más abundante. Glicerol + 2 ácidos grasos + fosfato.',u:'Ambas monocapas',f:'Estructura de bicapa'},
+      esfingolipido:{n:'Esfingolípido',c:'#8b5cf6',d:'Base de esfingosina. Esfingomielina, cerebrósidos, gangliósidos.',u:'Principalmente externa',f:'Balsas lipídicas'},
+      colesterol:{n:'Colesterol',c:'#ec4899',d:'Esteroide REGULADOR BIDIRECCIONAL de fluidez.',u:'~30% intercalado',f:'↑fluidez baja T°, ↓fluidez alta T°'},
+      glucolipido:{n:'Glucolípido',c:'#f59e0b',d:'Lípidos con azúcares. ¡SOLO externos!',u:'SOLO monocapa EXTERNA',f:'Reconocimiento, grupos ABO'},
+      glucocalix:{n:'Glucocálix',c:'#fbbf24',d:'Cubierta de carbohidratos externa.',u:'Superficie externa 10-100nm',f:'Protección, reconocimiento'},
+      transmembranal:{n:'Transmembranal',c:'#ef4444',d:'Atraviesa COMPLETAMENTE la bicapa.',u:'Atraviesa toda la membrana',f:'Canales, transportadores. Extracción: detergentes'},
+      periferica:{n:'Periférica',c:'#22c55e',d:'En SUPERFICIE. Fácil de extraer.',u:'Cara externa o INTERNA (espectrina)',f:'Citoesqueleto. Extracción: cambio pH'},
+      anclada_gpi:{n:'Anclada GPI',c:'#06b6d4',d:'Unida a glicosilfosfatidilinositol.',u:'Cara EXTERNA',f:'Señalización'},
+      anclada_lipido:{n:'Anclada lípido',c:'#84cc16',d:'Unida a ácido graso/prenil.',u:'Cara INTERNA',f:'Señalización (Ras, Src)'}
+    };
+
+    function mostrarFase(f){
+      document.querySelectorAll('.fase-content').forEach(e=>e.classList.add('hidden'));
+      document.getElementById('fase-'+f).classList.remove('hidden');
+      document.querySelectorAll('.fase-btn').forEach(b=>{b.classList.remove('active');if(b.dataset.fase===f)b.classList.add('active');});
+      const fases=['inicio','componentes','fluidez','asimetria','clinica','evaluacion'];
+      document.getElementById('progressBar').style.width=((fases.indexOf(f)+1)/fases.length*100)+'%';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    function mostrarInfo(k){
+      const i=info[k];if(!i)return;
+      document.getElementById('info-componente').innerHTML='<h4 class="text-lg font-bold" style="color:'+i.c+'">'+i.n+'</h4><p class="text-slate-300 mt-2">'+i.d+'</p><p class="text-sm mt-2"><span class="text-slate-400">Ubicación:</span> '+i.u+'</p><p class="text-sm"><span class="text-slate-400">Función:</span> '+i.f+'</p>';
+      document.getElementById('info-componente').style.borderColor=i.c;
+    }
+
+    function actualizarSim(){
+      const t=parseInt(document.getElementById('temp-slider').value);
+      document.getElementById('temp-value').textContent=t;
+      let e,fl,c,m,ex;
+      if(!conCol){
+        if(t<20){e='GEL';fl=15;c='#3b82f6';m='Muy rígida';ex='❄️ Sin colesterol: Fosfolípidos empaquetados → GEL.';}
+        else if(t>45){e='MUY FLUIDA';fl=95;c='#ef4444';m='Pierde integridad';ex='🔥 Sin colesterol: Demasiado fluida.';}
+        else{e='FLUIDA';fl=55;c='#22c55e';m='Normal';ex='✓ Sin colesterol: Fluidez normal pero sensible.';}
+      }else{
+        if(t<20){e='FLUIDA';fl=45;c='#22c55e';m='Colesterol impide empaquetamiento';ex='❄️+🛡️ Colesterol crea espacios → mantiene fluidez.';}
+        else if(t>45){e='ESTABLE';fl=65;c='#22c55e';m='Colesterol restringe movimiento';ex='🔥+🛡️ Anillos rígidos restringen movimiento excesivo.';}
+        else{e='ÓPTIMA';fl=55;c='#22c55e';m='Fluidez óptima';ex='✓ Con colesterol: Fluidez óptima y estable.';}
+      }
+      const ed=document.getElementById('estado-membrana').querySelector('div');
+      ed.textContent=e;ed.style.backgroundColor=c;
+      document.getElementById('estado-msg').textContent=m;
+      document.getElementById('fluidez-bar').style.width=fl+'%';
+      document.getElementById('fluidez-bar').style.backgroundColor=c;
+      document.getElementById('explicacion').innerHTML='<p class="text-slate-300 text-sm">'+ex+'</p>';
+    }
+
+    function toggleCol(){
+      conCol=!conCol;
+      const b=document.getElementById('colesterol-btn');
+      b.textContent=conCol?'✓ CON Colesterol':'✗ SIN Colesterol';
+      b.style.backgroundColor=conCol?'#db2777':'#475569';
+      actualizarSim();
+    }
+
+    function selResp(q,r){
+      resp[q]=r;
+      const c=document.querySelector('[data-q="'+q+'"]');
+      c.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));
+      event.target.classList.add('selected');
+      if(Object.keys(resp).length>=5)document.getElementById('btn-resultado').disabled=false;
+    }
+
+    function verResultados(){
+      let cor=0;
+      for(let i=1;i<=5;i++){
+        const c=document.querySelector('[data-q="'+i+'"]');
+        c.querySelectorAll('.quiz-option').forEach(b=>{
+          b.disabled=true;
+          if(b.dataset.ok==='1'){b.classList.add('correct');if(b.classList.contains('selected'))cor++;}
+          else if(b.classList.contains('selected'))b.classList.add('incorrect');
+        });
+      }
+      document.getElementById('puntaje').textContent=cor+'/5';
+      document.getElementById('msg-resultado').textContent=cor===5?'🎉 ¡Perfecto!':cor>=4?'👍 ¡Muy bien!':cor>=3?'👌 Buen progreso':'📚 Repasa el material';
+      document.getElementById('resultados').classList.remove('hidden');
+      document.getElementById('btn-resultado').classList.add('hidden');
+    }
+
+    function reiniciar(){
+      resp={};
+      document.querySelectorAll('.quiz-option').forEach(b=>{b.disabled=false;b.classList.remove('selected','correct','incorrect');});
+      document.getElementById('resultados').classList.add('hidden');
+      document.getElementById('btn-resultado').classList.remove('hidden');
+      document.getElementById('btn-resultado').disabled=true;
+    }
+
+    document.addEventListener('DOMContentLoaded',function(){mostrarFase('inicio');});
+  </script>
+</body>
+</html>
