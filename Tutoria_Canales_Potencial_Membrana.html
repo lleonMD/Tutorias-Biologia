@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría: Canales y Potencial de Membrana</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0e1a;--c1:#111827;--c2:#1a2235;--ion:#00e5ff;--k:#a855f7;--na:#f59e0b;--cl:#22c55e;--ca:#ef4444;--tx:#e2e8f0;--mu:#94a3b8;--bd:#1e293b;--ok:#22c55e;--er:#ef4444}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,229,255,.04),transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(168,85,247,.04),transparent 50%);pointer-events:none}
+h1,h2,h3{font-family:'DM Serif Display',serif}
+.app{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:16px}
+.hd{text-align:center;padding:24px 16px;border-bottom:1px solid var(--bd);margin-bottom:20px}
+.hd h1{font-size:2em;background:linear-gradient(135deg,var(--ion),var(--k));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hd p{color:var(--mu)}
+.pb{background:#1e293b;border-radius:20px;height:7px;margin:12px 0;overflow:hidden}
+.pf{height:100%;border-radius:20px;transition:width .5s;background:linear-gradient(90deg,var(--ion),var(--k))}
+.pt{text-align:center;font-size:.82em;color:var(--mu);margin-bottom:16px}
+.nv{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:10px;background:var(--c1);border-radius:12px;margin-bottom:20px;border:1px solid var(--bd)}
+.nb{padding:7px 12px;border-radius:8px;border:1px solid transparent;background:0;color:var(--mu);cursor:pointer;font-family:inherit;font-size:.78em;font-weight:600;transition:.3s}
+.nb:hover{background:rgba(0,229,255,.1);color:var(--tx)}
+.nb.a{background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(168,85,247,.15));color:var(--ion);border-color:rgba(0,229,255,.3)}
+.nb.d{color:var(--ok)}.nb.d::after{content:' ✓'}
+.s{display:none;animation:fi .4s}.s.on{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.cd{background:var(--c1);border:1px solid var(--bd);border-radius:14px;padding:20px;margin-bottom:16px}
+.cd h2{font-size:1.4em;margin-bottom:10px;color:var(--ion)}.cd h3{font-size:1.1em;margin-bottom:8px;color:var(--k)}
+.cd p{line-height:1.7;margin-bottom:8px}
+.ib{padding:14px 18px;border-radius:10px;margin:12px 0;border-left:4px solid}
+.ib.co{background:rgba(0,229,255,.07);border-color:var(--ion)}.ib.cl{background:rgba(239,68,68,.07);border-color:var(--ca)}
+.ib.ky{background:rgba(168,85,247,.07);border-color:var(--k)}.ib.su{background:rgba(34,197,94,.07);border-color:var(--ok)}
+.ib.wa{background:rgba(245,158,11,.07);border-color:var(--na)}
+.ibt{font-weight:800;margin-bottom:5px;font-size:.92em}
+table.t{width:100%;border-collapse:collapse;margin:14px 0;border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.t th{background:rgba(0,229,255,.1);padding:10px 12px;text-align:left;font-weight:700;font-size:.85em;color:var(--ion);border-bottom:1px solid var(--bd)}
+.t td{padding:9px 12px;font-size:.85em;line-height:1.5;border-bottom:1px solid var(--bd);vertical-align:top}
+.t tr:hover td{background:rgba(0,229,255,.03)}
+.qq{font-weight:700;font-size:1em;margin-bottom:12px;padding:10px 14px;background:rgba(168,85,247,.1);border-radius:8px}
+.qo{display:flex;flex-direction:column;gap:6px}
+.qb{padding:10px 16px;border-radius:8px;cursor:pointer;border:2px solid var(--bd);background:var(--c2);font-family:inherit;font-size:.9em;color:var(--tx);text-align:left;transition:.2s;font-weight:600}
+.qb:hover{border-color:var(--ion);background:rgba(0,229,255,.05)}
+.qb.ok{border-color:var(--ok)!important;background:rgba(34,197,94,.1)!important;color:var(--ok)!important}
+.qb.no{border-color:var(--er)!important;background:rgba(239,68,68,.07)!important;color:var(--er)!important;opacity:.7}
+.qf{margin-top:10px;padding:12px 16px;border-radius:8px;font-size:.9em;line-height:1.6;display:none}
+.qf.sh{display:block;animation:fi .3s}.qf.gf{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25)}.qf.bf{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25)}
+.ch{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--c2);border-radius:8px;cursor:pointer;margin:8px 0 0;border:1px solid var(--bd);font-weight:700;font-size:.92em;transition:.2s}
+.ch:hover{border-color:var(--ion)}.ch .ar{transition:transform .3s;font-size:.75em}.ch.op .ar{transform:rotate(180deg)}
+.cc{max-height:0;overflow:hidden;transition:max-height .4s;padding:0 16px}.cc.op{max-height:8000px;padding:14px 16px}
+.cas{background:linear-gradient(135deg,rgba(239,68,68,.05),rgba(168,85,247,.05));border:1px solid rgba(239,68,68,.2);border-radius:14px;padding:20px;margin:16px 0}
+.cas h3{color:var(--ca);margin-bottom:10px}
+.csb{display:inline-block;padding:3px 10px;border-radius:16px;background:rgba(239,68,68,.12);color:var(--ca);font-size:.78em;font-weight:700;margin-bottom:10px}
+.eq{text-align:center;padding:14px;margin:12px 0;background:rgba(168,85,247,.07);border-radius:8px;font-size:1em;font-weight:700;border:1px solid rgba(168,85,247,.2);font-family:'Courier New',monospace;line-height:1.5;overflow-x:auto}
+.ion{display:inline-block;padding:1px 8px;border-radius:16px;font-weight:800;font-size:.82em}
+.ik{background:rgba(168,85,247,.18);color:var(--k)}.ina{background:rgba(245,158,11,.18);color:var(--na)}.icl{background:rgba(34,197,94,.18);color:var(--cl)}.ica{background:rgba(239,68,68,.18);color:var(--ca)}
+.clc{background:var(--c2);border-radius:12px;padding:16px;margin:14px 0;border:1px solid var(--bd)}
+.cr{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+.cla{font-weight:700;min-width:170px;font-size:.9em}
+.ci{padding:7px 12px;border-radius:7px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-family:inherit;font-size:.92em;width:110px}
+.ci:focus{outline:0;border-color:var(--ion)}
+.btn{padding:9px 20px;border-radius:8px;border:0;cursor:pointer;background:linear-gradient(135deg,var(--ion),var(--k));color:#fff;font-family:inherit;font-weight:700;font-size:.92em;transition:.2s}
+.btn:hover{transform:scale(1.02)}
+.res{padding:14px;background:rgba(0,229,255,.07);border-radius:8px;margin-top:12px;text-align:center;font-weight:700;border:1px solid rgba(0,229,255,.2);display:none}
+.res.sh{display:block;animation:fi .3s}
+.dc{background:var(--c2);border-radius:12px;padding:16px;margin:14px 0;text-align:center;border:1px solid var(--bd)}
+.sn{font-size:2.8em;font-weight:800;background:linear-gradient(135deg,var(--ion),var(--k));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+@media(max-width:700px){.hd h1{font-size:1.4em}.nb{font-size:.72em;padding:5px 8px}.cd{padding:14px}.cr{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="hd"><h1>⚡ Canales Iónicos y Potencial de Membrana</h1><p>Tutoría Interactiva — Biología Celular</p></div>
+<div class="pb"><div class="pf" id="pbar"></div></div>
+<div class="pt" id="ptxt">Sección 1 de 12</div>
+<div class="nv" id="nav"></div>
+
+<!--S0-->
+<div class="s on" id="s-0"><div class="cd">
+<h2>🎯 Bienvenida</h2>
+<p>En esta sesión de <b>1 hora</b> exploraremos:</p>
+<div class="ib co"><div class="ibt">Parte I — Canales Proteicos</div><p>Acuaporinas, porinas, gap junctions, canales iónicos: estructura, función y clínica.</p></div>
+<div class="ib ky"><div class="ibt">Parte II — Potencial de Membrana</div><p>Gradientes electroquímicos, Nernst, Goldman, potencial de reposo.</p></div>
+<p><b>11 Resultados de aprendizaje</b> cubiertos con casos clínicos y evaluación final.</p>
+</div></div>
+
+<!--S1: CONCEPTO-->
+<div class="s" id="s-1"><div class="cd">
+<h2>🔬 Concepto de Canales Proteicos</h2>
+<div class="ib co"><div class="ibt">📖 Definición</div>
+<p><b>Canales proteicos:</b> proteínas integrales de membrana que forman <b>poros acuosos</b> a través de la bicapa lipídica, permitiendo el paso selectivo de moléculas (agua, iones) a favor del gradiente electroquímico, <b>sin gasto de ATP</b> (transporte pasivo).</p></div>
+<h3>Características</h3>
+<p><b>1. Poro hidrofílico:</b> Canal central acuoso que permite cruce de sustancias polares por la barrera hidrofóbica.</p>
+<p><b>2. Selectividad:</b> Paso preferente por tamaño, carga y química. Canal K⁺ discrimina contra Na⁺ pese a ser más pequeño.</p>
+<p><b>3. Velocidad:</b> Hasta 10⁸ iones/s, mucho más rápido que transportadores.</p>
+<p><b>4. Transporte pasivo:</b> Sin ATP. A favor del gradiente electroquímico.</p>
+<p><b>5. Regulación:</b> Muchos tienen gating (apertura/cierre) por estímulos específicos.</p>
+<div class="ib ky"><div class="ibt">🧠 Analogía</div><p>Canales = <em>puertas giratorias</em>: paso rápido y selectivo (credencial), sin guardia (sin ATP). Con sensores automáticos (regulados) o siempre abiertas (leak).</p></div>
+<div class="qq">❓ ¿Cuál NO es característica de los canales?</div><div class="qo" id="q1">
+<button class="qb" onclick="ck('q1',this,0)">A) Forman poros acuosos</button>
+<button class="qb" onclick="ck('q1',this,0)">B) Transporte pasivo a favor de gradiente</button>
+<button class="qb" onclick="ck('q1',this,1)">C) Requieren ATP para transportar iones</button>
+<button class="qb" onclick="ck('q1',this,0)">D) Millones de iones por segundo</button>
+</div><div class="qf" id="q1f"></div>
+</div></div>
+
+<!--S2: TIPOS-->
+<div class="s" id="s-2"><div class="cd">
+<h2>🧬 Comparación de Tipos de Canales</h2>
+<table class="t"><thead><tr><th></th><th>Acuaporinas</th><th>Porinas</th><th>Gap Junctions</th><th>Canales Iónicos</th></tr></thead><tbody>
+<tr><td><b>Localización</b></td><td>Membrana eucariota (riñón, eritrocitos, cerebro, ojo)</td><td>Membrana ext. Gram(−), mitocondrias</td><td>Entre células adyacentes (corazón, liso, SNC)</td><td>Prácticamente todas las células</td></tr>
+<tr><td><b>Estructura</b></td><td>Tetrámero; 6 hélices α/subunidad, poro propio</td><td>Barril β; 8-22 láminas β antiparalelas</td><td>2 conexones × 6 conexinas = dodecámero</td><td>Tetrámero o pentámero α</td></tr>
+<tr><td><b>Poro</b></td><td>~2.8 Å (solo H₂O)</td><td>Grande (600-6000 Da)</td><td>~1.5 nm (&lt;1 kDa)</td><td>Variable, muy selectivo</td></tr>
+<tr><td><b>Selectividad</b></td><td>Exclusiva H₂O; excluye H₃O⁺</td><td>Baja</td><td>Iones, ATP, IP₃, cAMP</td><td>K⁺ vs Na⁺ vs Ca²⁺ vs Cl⁻</td></tr>
+<tr><td><b>Función</b></td><td>Reabsorción agua, osmolaridad</td><td>Nutrientes bacterianos</td><td>Acoplamiento eléctrico/metabólico</td><td>Vm, señalización, contracción</td></tr>
+<tr><td><b>Regulación</b></td><td>Tráfico vesicular (ADH)</td><td>Constitutivamente abiertos</td><td>↓pH, ↑Ca²⁺ cierran</td><td>Voltaje, ligando, mecánico, T°, leak</td></tr>
+</tbody></table>
+
+<div class="ch" onclick="tg(this)">💧 Acuaporinas — Selectividad <span class="ar">▼</span></div>
+<div class="cc"><p><b>ar/R:</b> Sitio estrecho (His, Arg, aromáticos) — solo H₂O cabe.</p>
+<p><b>Motivos NPA:</b> Campo (+) central rompe cadena de puentes H → bloquea H₃O⁺ (impide mecanismo Grotthuss).</p></div>
+
+<div class="ch" onclick="tg(this)">🦠 Porinas y Antibióticos <span class="ar">▼</span></div>
+<div class="cc"><div class="ib cl"><div class="ibt">🏥 Porinas y Resistencia</div>
+<p>ATB hidrofílicos (β-lactámicos, fluoroquinolonas) entran por porinas: <b>OmpF/OmpC</b> (<em>E. coli</em>), <b>OprD</b> (<em>P. aeruginosa</em>).</p>
+<p><b>Resistencia:</b> 1) Pérdida/mutación de porinas (pérdida OprD → resistencia a imipenem). 2) Porinas con poro más estrecho. 3) Menor expresión de porinas.</p>
+<p><em>P. aeruginosa</em> multiresistente: grave en UCI, quemaduras, fibrosis quística.</p></div></div>
+
+<div class="ch" onclick="tg(this)">🔗 Gap Junctions <span class="ar">▼</span></div>
+<div class="cc"><p>2 conexones × 6 conexinas. >20 isoformas (Cx26, Cx32, Cx43). Acoplamiento eléctrico + metabólico.</p>
+<p>Cx43: discos intercalares cardíacos (sincitio). Sinapsis eléctricas SNC.</p>
+<div class="ib cl"><div class="ibt">🏥 Patología</div><p><b>Cx26 (GJB2):</b> Sordera hereditaria no sindrómica (reciclaje K⁺ cóclea). <b>Cx32:</b> Charcot-Marie-Tooth X.</p></div></div>
+
+<div class="qq">❓ Bacteria Gram(−) resistente a imipenem. ¿Mecanismo?</div><div class="qo" id="q2">
+<button class="qb" onclick="ck('q2',this,0)">A) ↑Acuaporinas</button>
+<button class="qb" onclick="ck('q2',this,1)">B) Pérdida/mutación porinas OprD</button>
+<button class="qb" onclick="ck('q2',this,0)">C) Cierre gap junctions</button>
+<button class="qb" onclick="ck('q2',this,0)">D) ↑Canales K⁺</button>
+</div><div class="qf" id="q2f"></div>
+</div></div>
+
+<!--S3: K+ SELECTIVIDAD-->
+<div class="s" id="s-3"><div class="cd">
+<h2>⚛️ Canal de K⁺: Selectividad</h2>
+<p>Modelo clásico. MacKinnon, Nobel 2003. <b>KcsA: tetrámero</b>, cada subunidad con 2 hélices TM + <b>P-loop</b>.</p>
+<div class="dc"><svg viewBox="0 0 460 260" width="460" height="260">
+<rect x="0" y="80" width="460" height="100" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.2)"/>
+<text x="8" y="72" font-size="10" fill="#f59e0b" font-weight="700">EXTRA</text><text x="8" y="200" font-size="10" fill="#a855f7" font-weight="700">INTRA</text>
+<rect x="150" y="76" width="24" height="108" rx="5" fill="rgba(0,229,255,.25)" stroke="#00e5ff" stroke-width="2"/>
+<rect x="280" y="76" width="24" height="108" rx="5" fill="rgba(0,229,255,.25)" stroke="#00e5ff" stroke-width="2"/>
+<path d="M174 105 Q195 62 228 62 Q260 62 280 105" fill="none" stroke="#f59e0b" stroke-width="2.5"/>
+<rect x="200" y="60" width="56" height="38" rx="3" fill="rgba(239,68,68,.15)" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3"/>
+<text x="205" y="80" font-size="8" fill="#ef4444" font-weight="700">Filtro TVGYG</text>
+<text x="206" y="92" font-size="8" fill="#ef4444">selectividad</text>
+<ellipse cx="228" cy="145" rx="28" ry="18" fill="rgba(0,229,255,.06)" stroke="rgba(0,229,255,.2)" stroke-dasharray="3"/>
+<text x="207" y="149" font-size="8" fill="#00e5ff">Cavidad</text>
+<circle cx="228" cy="48" r="7" fill="#a855f7" opacity=".8"/><text x="222" y="52" font-size="8" fill="#fff" font-weight="700">K⁺</text>
+<circle cx="360" cy="60" r="6" fill="#f59e0b" opacity=".5"/><text x="353" y="64" font-size="7" fill="#fff" font-weight="700">Na⁺</text><text x="374" y="64" font-size="9" fill="#ef4444">✗</text>
+<line x1="174" y1="182" x2="210" y2="170" stroke="#22c55e" stroke-width="2.5"/>
+<line x1="280" y1="182" x2="245" y2="170" stroke="#22c55e" stroke-width="2.5"/>
+<text x="195" y="210" font-size="8" fill="#22c55e" font-weight="700">Compuerta</text>
+</svg></div>
+<h3>Mecanismo</h3>
+<div class="ib co"><div class="ibt">1. Deshidratación y mimetismo</div><p>K⁺ pierde capa de hidratación al entrar al filtro. Los <b>oxígenos carbonilo</b> de TVGYG mimetizan exactamente la geometría de hidratación del K⁺ (1.33 Å) → costo energético compensado.</p></div>
+<div class="ib ky"><div class="ibt">2. Exclusión de Na⁺</div><p>Na⁺ (0.95 Å) es MÁS PEQUEÑO pero no pasa: oxígenos rígidamente posicionados para K⁺. Na⁺ no interactúa óptimamente → deshidratación NO compensada → prefiere quedarse hidratado. <b>Selectividad por tamaño óptimo</b>, no por exclusión del grande.</p></div>
+<div class="ib co"><div class="ibt">3. Repulsión ion-ion</div><p>4 sitios (S1-S4), 2 K⁺ en sitios alternos separados por H₂O. Repulsión electrostática empuja al ion externo → flujo rápido ~10⁸/s.</p></div>
+<div class="qq">❓ ¿Por qué Na⁺ no pasa por canal K⁺?</div><div class="qo" id="q3">
+<button class="qb" onclick="ck('q3',this,0)">A) Na⁺ es demasiado grande</button>
+<button class="qb" onclick="ck('q3',this,0)">B) Carga + y filtro es +</button>
+<button class="qb" onclick="ck('q3',this,1)">C) Oxígenos no compensan deshidratación del Na⁺</button>
+<button class="qb" onclick="ck('q3',this,0)">D) Na⁺ no puede deshidratarse</button>
+</div><div class="qf" id="q3f"></div>
+</div></div>
+
+<!--S4: REGULADOS VS LEAK-->
+<div class="s" id="s-4"><div class="cd">
+<h2>🎛️ Regulados vs. Leak</h2>
+<div class="ib co"><div class="ibt">Canales Leak (No regulados)</div><p>Constitutivamente abiertos. Flujo continuo. Esenciales para <b>potencial de reposo</b>. Ej: K2P (TWIK, TREK, TASK).</p></div>
+<div class="ib ky"><div class="ibt">Canales Regulados (Gated)</div><p>Compuerta que controla apertura/cierre. Solo conducen con estímulo. Para <b>señalización rápida</b>.</p></div>
+<table class="t"><thead><tr><th></th><th>Leak</th><th>Gated</th></tr></thead><tbody>
+<tr><td><b>Estado basal</b></td><td>Abierto</td><td>Cerrado</td></tr>
+<tr><td><b>Estímulo</b></td><td>Ninguno</td><td>Voltaje, ligando, mecánico, T°</td></tr>
+<tr><td><b>Función</b></td><td>Vm reposo</td><td>PA, PSP, señales</td></tr>
+<tr><td><b>Ejemplos</b></td><td>K2P, Cl⁻ leak</td><td>Nav, Kv, Cav, nAChR, GABA-A, TRPV1, Piezo</td></tr>
+</tbody></table>
+<h3>Mecanismos de Gating</h3>
+<div class="ch" onclick="tg(this)">⚡ Voltaje-gated <span class="ar">▼</span></div>
+<div class="cc"><p>Sensor S4 (+). Despolarización → desplazamiento → apertura.</p>
+<p><b>Nav:</b> Ascenso PA, inactivación rápida. <b>Kv:</b> Repolarización. <b>Cav:</b> Contracción, neurotransmisión.</p>
+<div class="ib cl"><div class="ibt">🏥 QT largo:</div><p>Mutaciones Kv (KCNQ1, HERG) o Nav (SCN5A) → arritmias → muerte súbita. Epilepsia: Nav1.1 → Dravet.</p></div></div>
+<div class="ch" onclick="tg(this)">🧪 Ligando-gated <span class="ar">▼</span></div>
+<div class="cc"><p><b>Extracelular:</b> nAChR (Na⁺/K⁺, placa motora), GABA-A (Cl⁻, inhibitorio SNC), NMDA/AMPA (glutamato, excitatorio).</p>
+<p><b>Intracelular:</b> cAMP/cGMP (olfato/visión), IP₃R (Ca²⁺ del RE), RyR (Ca²⁺ del RS).</p>
+<div class="ib cl"><div class="ibt">🏥</div><p>Benzodiacepinas modulan GABA-A. Miastenia gravis: anti-nAChR.</p></div></div>
+<div class="ch" onclick="tg(this)">🔧 Mecanosensibles <span class="ar">▼</span></div>
+<div class="cc"><p>Piezo1 (endotelio, eritrocitos). Piezo2 (tacto, propiocepción). ENaC (Na⁺ renal). Células ciliadas (audición).</p>
+<div class="ib cl"><div class="ibt">🏥</div><p>Mut. Piezo2 → pérdida de propiocepción.</p></div></div>
+<div class="ch" onclick="tg(this)">🌡️ Termosensibles (TRP) <span class="ar">▼</span></div>
+<div class="cc"><p>TRPV1: >43°C + capsaicina. TRPM8: &lt;25°C + mentol. TRPA1: &lt;17°C, wasabi.</p></div>
+<div class="qq">❓ QT largo → arritmias. ¿Canal mutado?</div><div class="qo" id="q4">
+<button class="qb" onclick="ck('q4',this,0)">A) K2P leak</button>
+<button class="qb" onclick="ck('q4',this,1)">B) Kv (HERG) voltaje-dependiente</button>
+<button class="qb" onclick="ck('q4',this,0)">C) AQP2</button>
+<button class="qb" onclick="ck('q4',this,0)">D) Piezo1</button>
+</div><div class="qf" id="q4f"></div>
+</div></div>
+
+<!--S5: ACUAPORINAS-->
+<div class="s" id="s-5"><div class="cd">
+<h2>💧 Acuaporinas en Fisiología</h2>
+<p>Homeostasis del agua. Peter Agre, Nobel 2003.</p>
+<div class="ib co"><div class="ibt">🫘 Riñón</div>
+<p><b>AQP1</b> (prox/Henle desc): constitutiva, ~70% reabsorción. <b>AQP2</b> (colector): regulada por ADH → V2 → cAMP → fusión vesicular. Sin ADH → orina diluida (DI: 18 L/día).</p></div>
+<div class="ib co"><div class="ibt">🧠 Cerebro</div><p>AQP4 en astrocitos perivasculares. Edema cerebral.</p></div>
+<div class="ib co"><div class="ibt">👁️ Ojo</div><p>AQP0: cristalino, transparencia. Mut → cataratas. AQP1: humor acuoso → glaucoma.</p></div>
+<div class="ib co"><div class="ibt">🫁 Pulmón</div><p>AQP3/5: epitelio alveolar, glándulas salivales/lagrimales.</p></div>
+<div class="cas"><span class="csb">CASO CLÍNICO 1</span><h3>Diabetes Insípida Nefrogénica</h3>
+<p><b>Niño 2 años:</b> Poliuria 4-5 L/día, polidipsia, deshidratación hipernatrémica.</p>
+<p><b>Labs:</b> Osm sérica 305↑, Osm urinaria 85 (diluida), ADH elevada. Test DDAVP: sin respuesta.</p>
+<div class="qq">❓ ¿Causa molecular?</div><div class="qo" id="q5">
+<button class="qb" onclick="ck('q5',this,0)">A) Déficit ADH hipotalámico</button>
+<button class="qb" onclick="ck('q5',this,1)">B) Mutación AQP2 o receptor V2</button>
+<button class="qb" onclick="ck('q5',this,0)">C) Exceso aldosterona</button>
+<button class="qb" onclick="ck('q5',this,0)">D) Defecto AQP4</button>
+</div><div class="qf" id="q5f"></div>
+<div class="ib cl" style="margin-top:10px"><div class="ibt">Explicación</div><p>DI nefrogénica: riñón no responde a ADH. Mut receptor V2 (X-linked, 90%) o AQP2 (AR/AD). Sin AQP2 en membrana → agua no se reabsorbe.</p></div>
+</div></div></div>
+
+<!--S6: CONCEPTOS VM-->
+<div class="s" id="s-6"><div class="cd">
+<h2>⚡ Potencial de Membrana: Conceptos</h2>
+<div class="ib co"><div class="ibt">📖 Potencial de Membrana (Vm)</div>
+<p>Diferencia de voltaje entre interior y exterior de la célula (V<sub>in</sub> − V<sub>out</sub>). En reposo: interior <b>negativo</b> (−40 a −90 mV).</p></div>
+<h3>Glosario</h3>
+<div class="ch" onclick="tg(this)">Electroneutralidad <span class="ar">▼</span></div>
+<div class="cc"><p>En bulk: Σ cargas (+) = Σ cargas (−). El Vm se genera por separación mínima (~1/100,000 iones) en la interfaz membrana. Bulk permanece electroneutro.</p></div>
+<div class="ch" onclick="tg(this)">Contraión <span class="ar">▼</span></div>
+<div class="cc"><p>Ion de carga opuesta que acompaña para electroneutralidad. Ej: Na⁺ contraión de Cl⁻. Si membrana es selectivamente permeable a uno → genera Vm.</p></div>
+<div class="ch" onclick="tg(this)">Gradiente Electroquímico <span class="ar">▼</span></div>
+<div class="cc"><p>Suma de: (1) gradiente químico (concentración) + (2) gradiente eléctrico (voltaje). Determina dirección neta del flujo iónico.</p></div>
+<div class="ch" onclick="tg(this)">Equilibrio Electroquímico <span class="ar">▼</span></div>
+<div class="cc"><p>Fuerza química = eléctrica (opuestas). Flujo neto = 0. El Vm al que ocurre = E<sub>ion</sub> (Nernst).</p></div>
+<div class="ch" onclick="tg(this)">Voltaje, Corriente, E<sub>ion</sub> <span class="ar">▼</span></div>
+<div class="cc"><p><b>Voltaje:</b> Diferencia de potencial (mV). <b>Corriente:</b> Flujo de carga/tiempo. <b>E<sub>ion</sub>:</b> Vm donde flujo neto = 0. <b>Driving force = Vm − E<sub>ion</sub></b>.</p></div>
+<div class="qq">❓ E<sub>K</sub>=−90 mV, Vm=−70 mV. ¿Dirección K⁺?</div><div class="qo" id="q6">
+<button class="qb" onclick="ck('q6',this,1)">A) K⁺ sale (Vm−E<sub>K</sub>=+20 mV)</button>
+<button class="qb" onclick="ck('q6',this,0)">B) K⁺ entra</button>
+<button class="qb" onclick="ck('q6',this,0)">C) Sin movimiento neto</button>
+<button class="qb" onclick="ck('q6',this,0)">D) Igual en ambas direcciones</button>
+</div><div class="qf" id="q6f"></div>
+</div></div>
+
+<!--S7: VM REPOSO-->
+<div class="s" id="s-7"><div class="cd">
+<h2>🔋 Potencial de Reposo</h2>
+<p>Neurona: ~<b>−70 mV</b>.</p>
+<div class="ib ky"><div class="ibt">Clave: Permeabilidad asimétrica</div>
+<p>P<sub>K</sub>:P<sub>Na</sub>:P<sub>Cl</sub> ≈ <b>1:0.04:0.45</b>. Muchos más canales leak K⁺ abiertos → Vm cerca de E<sub>K</sub> (−90) y lejos de E<sub>Na</sub> (+60).</p></div>
+<table class="t"><thead><tr><th>Ion</th><th>[Intra]</th><th>[Extra]</th><th>E<sub>ion</sub></th><th>Dirección</th></tr></thead><tbody>
+<tr><td><span class="ion ik">K⁺</span></td><td>140 mM</td><td>4 mM</td><td>−94 mV</td><td>↑ Sale</td></tr>
+<tr><td><span class="ion ina">Na⁺</span></td><td>12 mM</td><td>145 mM</td><td>+67 mV</td><td>↓ Entra</td></tr>
+<tr><td><span class="ion icl">Cl⁻</span></td><td>4 mM</td><td>120 mM</td><td>−90 mV</td><td>↓ Entra~eq</td></tr>
+<tr><td><span class="ion ica">Ca²⁺</span></td><td>0.0001</td><td>2.5 mM</td><td>+136 mV</td><td>↓↓ Entra</td></tr>
+</tbody></table>
+
+<h3>Bomba Na⁺/K⁺ ATPasa</h3>
+<div class="ib wa"><div class="ibt">🔄 Na⁺/K⁺ ATPasa (3Na⁺ out, 2K⁺ in, 1 ATP)</div>
+<p><b>Contribución directa (electrogénica):</b> Solo ~−3 a −5 mV (3 cargas+ salen, 2 entran → pérdida neta +1/ciclo). PEQUEÑA.</p>
+<p><b>Contribución indirecta (PRINCIPAL):</b> Mantiene los gradientes de [Na⁺] y [K⁺]. Sin bomba → gradientes se disiparían → Vm→0. La bomba mantiene [K⁺]<sub>i</sub> alta y [Na⁺]<sub>i</sub> baja → canales leak K⁺ siguen generando Vm negativo.</p></div>
+<div class="ib su"><div class="ibt">🧠 Resumen</div>
+<p><b>¿Quién GENERA Vm reposo?</b> Canales leak de K⁺ (alta P<sub>K</sub> → K⁺ sale → interior negativo).</p>
+<p><b>¿Quién MANTIENE Vm reposo?</b> Bomba Na⁺/K⁺ (repone gradientes que los leak disipan).</p></div>
+<div class="qq">❓ Si la bomba Na⁺/K⁺ se inhibe con ouabaína:</div><div class="qo" id="q7">
+<button class="qb" onclick="ck('q7',this,0)">A) Vm → 0 mV inmediatamente</button>
+<button class="qb" onclick="ck('q7',this,1)">B) Vm se despolariza gradualmente hacia 0 conforme gradientes se disipan</button>
+<button class="qb" onclick="ck('q7',this,0)">C) Hiperpolariza a −120 mV</button>
+<button class="qb" onclick="ck('q7',this,0)">D) No cambia</button>
+</div><div class="qf" id="q7f"></div>
+</div></div>
+
+<!--S8: NERNST-->
+<div class="s" id="s-8"><div class="cd">
+<h2>📐 Ecuación de Nernst</h2>
+<p>Calcula el <b>potencial de equilibrio (E<sub>ion</sub>)</b> — Vm donde flujo neto de ese ión = 0.</p>
+<div class="eq">E<sub>ion</sub> = (RT/zF) × ln([ion]<sub>ext</sub>/[ion]<sub>int</sub>)</div>
+<p style="text-align:center;color:var(--mu);font-size:.9em">A 37°C, con log₁₀:</p>
+<div class="eq">E<sub>ion</sub> = (61.5 mV / z) × log₁₀([ion]<sub>ext</sub>/[ion]<sub>int</sub>)</div>
+<p><b>R</b>=8.314 J/mol·K, <b>T</b>=310 K (37°C), <b>z</b>=valencia, <b>F</b>=96,485 C/mol.</p>
+<p>Para <b>Cl⁻</b> (z=−1): se invierte el signo o el cociente.</p>
+
+<h3>🧮 Calculadora de Nernst</h3>
+<div class="clc">
+<div class="cr"><span class="cla">Ion:</span>
+<select class="ci" id="ni" onchange="pn()" style="width:150px"><option value="">Personalizado</option><option value="K">K⁺</option><option value="Na">Na⁺</option><option value="Ca">Ca²⁺</option><option value="Cl">Cl⁻</option></select></div>
+<div class="cr"><span class="cla">Valencia (z):</span><input type="number" class="ci" id="nz" value="1"></div>
+<div class="cr"><span class="cla">[Ion] Extra (mM):</span><input type="number" class="ci" id="ne" value="4" step="0.1"></div>
+<div class="cr"><span class="cla">[Ion] Intra (mM):</span><input type="number" class="ci" id="nn" value="140" step="0.1"></div>
+<button class="btn" onclick="cn()">Calcular E<sub>ion</sub></button>
+<div class="res" id="nr"></div>
+</div>
+
+<h3>Predicción del movimiento</h3>
+<div class="ib co"><div class="ibt">Driving Force = Vm − E<sub>ion</sub></div>
+<p>Catión: si Vm > E<sub>ion</sub> → sale. Si Vm &lt; E<sub>ion</sub> → entra. Si Vm = E<sub>ion</sub> → equilibrio.</p>
+<p><b>Ej:</b> Vm=−70, E<sub>Na</sub>=+67 → DF=−137 mV → Na⁺ entra fuertemente.</p>
+<p><b>Ej:</b> Vm=−70, E<sub>K</sub>=−94 → DF=+24 mV → K⁺ sale.</p></div>
+
+<div class="qq">❓ E<sub>Ca</sub> con [Ca²⁺]ext=2.5, [Ca²⁺]int=0.0001, z=+2. ¿Valor aproximado?</div><div class="qo" id="q8">
+<button class="qb" onclick="ck('q8',this,0)">A) −90 mV</button>
+<button class="qb" onclick="ck('q8',this,0)">B) +67 mV</button>
+<button class="qb" onclick="ck('q8',this,1)">C) +135 mV</button>
+<button class="qb" onclick="ck('q8',this,0)">D) +30 mV</button>
+</div><div class="qf" id="q8f"></div>
+</div></div>
+
+<!--S9: GOLDMAN-->
+<div class="s" id="s-9"><div class="cd">
+<h2>📊 De Nernst a Goldman</h2>
+<div class="ib wa"><div class="ibt">⚠️ Limitación de Nernst</div><p>Nernst = 1 solo ión. Membrana real: permeable a K⁺, Na⁺, Cl⁻ simultáneamente. ¿Cómo predecir Vm real? → Goldman.</p></div>
+<div class="eq">Vm = (RT/F)×ln(P<sub>K</sub>[K⁺]<sub>e</sub>+P<sub>Na</sub>[Na⁺]<sub>e</sub>+P<sub>Cl</sub>[Cl⁻]<sub>i</sub>) / (P<sub>K</sub>[K⁺]<sub>i</sub>+P<sub>Na</sub>[Na⁺]<sub>i</sub>+P<sub>Cl</sub>[Cl⁻]<sub>e</sub>)</div>
+<div class="ib co"><div class="ibt">🔗 Nernst ↔ Goldman</div>
+<p><b>Nernst es caso particular de Goldman.</b> Si P<sub>Na</sub>=0, P<sub>Cl</sub>=0 → Goldman = Nernst para K⁺.</p>
+<p><b>Reposo:</b> P<sub>K</sub>>>P<sub>Na</sub> → Vm≈E<sub>K</sub> (pero no exacto: ~−70 por pequeña P<sub>Na</sub>).</p>
+<p><b>Pico PA:</b> P<sub>Na</sub>>>P<sub>K</sub> → Vm→E<sub>Na</sub> (+60). <b>Repolarización:</b> P<sub>K</sub>↑↑ → Vm→E<sub>K</sub>.</p></div>
+<div class="ib ky"><div class="ibt">Puntos clave</div>
+<p>1. Vm siempre entre E<sub>K</sub> y E<sub>Na</sub>. 2. <b>Ion con mayor P domina.</b> 3. Cl⁻ invertido en ecuación. 4. Goldman = estado estacionario (no equilibrio).</p></div>
+
+<h3>🧮 Calculadora Goldman</h3>
+<div class="clc">
+<div class="cr"><span class="cla"><span class="ion ik">K⁺</span> ext/int:</span><input type="number" class="ci" id="gke" value="4"><span>/</span><input type="number" class="ci" id="gki" value="140"><span class="cla" style="min-width:auto">P<sub>K</sub>:</span><input type="number" class="ci" id="gpk" value="1" style="width:70px"></div>
+<div class="cr"><span class="cla"><span class="ion ina">Na⁺</span> ext/int:</span><input type="number" class="ci" id="gne" value="145"><span>/</span><input type="number" class="ci" id="gni" value="12"><span class="cla" style="min-width:auto">P<sub>Na</sub>:</span><input type="number" class="ci" id="gpn" value="0.04" style="width:70px"></div>
+<div class="cr"><span class="cla"><span class="ion icl">Cl⁻</span> ext/int:</span><input type="number" class="ci" id="gce" value="120"><span>/</span><input type="number" class="ci" id="gci" value="4"><span class="cla" style="min-width:auto">P<sub>Cl</sub>:</span><input type="number" class="ci" id="gpc" value="0.45" style="width:70px"></div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
+<button class="btn" onclick="cg()">Calcular Vm</button>
+<button class="btn" onclick="pg('r')" style="background:linear-gradient(135deg,#a855f7,#6366f1)">Reposo</button>
+<button class="btn" onclick="pg('d')" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">Pico PA</button>
+<button class="btn" onclick="pg('h')" style="background:linear-gradient(135deg,#22c55e,#06b6d4)">Repolarización</button>
+</div>
+<div class="res" id="gr"></div>
+</div>
+<div class="qq">❓ Durante pico PA, P<sub>Na</sub>↑↑. ¿Vm se acerca a?</div><div class="qo" id="q9">
+<button class="qb" onclick="ck('q9',this,0)">A) E<sub>K</sub> (−94)</button>
+<button class="qb" onclick="ck('q9',this,1)">B) E<sub>Na</sub> (+67)</button>
+<button class="qb" onclick="ck('q9',this,0)">C) 0 mV</button>
+<button class="qb" onclick="ck('q9',this,0)">D) E<sub>Cl</sub> (−90)</button>
+</div><div class="qf" id="q9f"></div>
+</div></div>
+
+<!--S10: CASOS-->
+<div class="s" id="s-10"><div class="cd">
+<h2>🏥 Casos Clínicos Integradores</h2>
+<div class="cas"><span class="csb">CASO 2</span><h3>Hiperkalemia y Arritmia</h3>
+<p><b>Hombre 68a</b>, IRC. Debilidad, parestesias, palpitaciones. ECG: T picudas, QRS ancho. K⁺=7.2 mEq/L (N:3.5-5).</p>
+<p><b>Nernst:</b> K⁺ normal (4): E<sub>K</sub>=61.5×log(4/140)=<b>−94 mV</b></p>
+<p>K⁺ elevado (7.2): E<sub>K</sub>=61.5×log(7.2/140)=<b>−78 mV</b></p>
+<p>E<sub>K</sub> menos negativo → Vm reposo se despolariza → acerca al umbral → hiperexcitabilidad → luego inactivación Nav → bloqueo → <b>paro cardíaco</b>.</p>
+<div class="qq">❓ ¿Por qué hiperkalemia despolariza?</div><div class="qo" id="qc2">
+<button class="qb" onclick="ck('qc2',this,0)">A) Na⁺ entra masivamente</button>
+<button class="qb" onclick="ck('qc2',this,1)">B) ↑[K⁺]ext → ↓gradiente K⁺ → E<sub>K</sub> menos negativo → Vm se despolariza</button>
+<button class="qb" onclick="ck('qc2',this,0)">C) Bomba se activa excesivamente</button>
+<button class="qb" onclick="ck('qc2',this,0)">D) Ca²⁺ bloquea canales K⁺</button>
+</div><div class="qf" id="qc2f"></div></div>
+
+<div class="cas"><span class="csb">CASO 3</span><h3>Fibrosis Quística</h3>
+<p><b>Niña 6m:</b> Infecciones respiratorias recurrentes, esteatorrea, prueba sudor Cl⁻=85 (N:&lt;40).</p>
+<p><b>Dx:</b> FQ — mutación ΔF508 en <b>CFTR</b> (canal Cl⁻ regulado por cAMP/PKA).</p>
+<p>ΔF508 → plegamiento incorrecto → degradación en RE → CFTR no llega a membrana apical → sin secreción Cl⁻ → agua no sigue osmóticamente → secreciones espesas.</p>
+<p>Sudor: CFTR reabsorbe Cl⁻ del ducto. Sin CFTR → Cl⁻ alto en sudor.</p>
+<div class="qq">❓ ¿Regulación de CFTR?</div><div class="qo" id="qc3">
+<button class="qb" onclick="ck('qc3',this,0)">A) Voltaje</button>
+<button class="qb" onclick="ck('qc3',this,1)">B) Ligando intracelular (cAMP/PKA)</button>
+<button class="qb" onclick="ck('qc3',this,0)">C) Mecánico</button>
+<button class="qb" onclick="ck('qc3',this,0)">D) Leak constitutivo</button>
+</div><div class="qf" id="qc3f"></div></div>
+
+<div class="cas"><span class="csb">CASO 4</span><h3>Síndrome de Liddle</h3>
+<p><b>Adolescente 16a:</b> HTA severa (180/110), K⁺=2.8↓, alcalosis metabólica, aldosterona suprimida.</p>
+<p><b>Dx:</b> Mutación ganancia de función <b>ENaC</b>. Sin sitio Nedd4 → ENaC permanece en membrana apical del colector → reabsorción excesiva Na⁺/H₂O → HTA. Mayor electronegatividad luminal → secreción K⁺ → hipokalemia.</p>
+<p><b>Tx:</b> Amilorida (bloquea ENaC), NO espironolactona (aldosterona ya suprimida).</p></div>
+</div></div>
+
+<!--S11: EVALUACIÓN-->
+<div class="s" id="s-11"><div class="cd">
+<h2>✅ Evaluación Final</h2>
+<div class="qq">1. ¿Estructura del filtro de selectividad K⁺?</div><div class="qo" id="f1">
+<button class="qb" onclick="ck('f1',this,0)">A) 6 hélices α con NPA</button>
+<button class="qb" onclick="ck('f1',this,1)">B) TVGYG en 4 subunidades con oxígenos carbonilo</button>
+<button class="qb" onclick="ck('f1',this,0)">C) Barril β con 16 láminas</button>
+<button class="qb" onclick="ck('f1',this,0)">D) 6 conexinas formando conexón</button>
+</div><div class="qf" id="f1f"></div>
+
+<div class="qq" style="margin-top:16px">2. Causa más frecuente de sordera hereditaria no sindrómica:</div><div class="qo" id="f2">
+<button class="qb" onclick="ck('f2',this,0)">A) AQP2</button>
+<button class="qb" onclick="ck('f2',this,0)">B) CFTR</button>
+<button class="qb" onclick="ck('f2',this,1)">C) Cx26/GJB2 (gap junction)</button>
+<button class="qb" onclick="ck('f2',this,0)">D) Nav1.1/SCN1A</button>
+</div><div class="qf" id="f2f"></div>
+
+<div class="qq" style="margin-top:16px">3. ¿Por qué Vm reposo (~−70) está más cerca de E<sub>K</sub>?</div><div class="qo" id="f3">
+<button class="qb" onclick="ck('f3',this,0)">A) Más K⁺ extracelular</button>
+<button class="qb" onclick="ck('f3',this,0)">B) Bomba genera −70 directamente</button>
+<button class="qb" onclick="ck('f3',this,1)">C) P<sub>K</sub> >> P<sub>Na</sub> (más canales K⁺ leak)</button>
+<button class="qb" onclick="ck('f3',this,0)">D) K⁺ tiene mayor valencia</button>
+</div><div class="qf" id="f3f"></div>
+
+<div class="qq" style="margin-top:16px">4. Paciente K⁺=7.5 mEq/L. Su E<sub>K</sub> será:</div><div class="qo" id="f4">
+<button class="qb" onclick="ck('f4',this,1)">A) Menos negativo (despolarización relativa)</button>
+<button class="qb" onclick="ck('f4',this,0)">B) Más negativo (hiperpolarización)</button>
+<button class="qb" onclick="ck('f4',this,0)">C) Sin cambio</button>
+<button class="qb" onclick="ck('f4',this,0)">D) Positivo (+30)</button>
+</div><div class="qf" id="f4f"></div>
+
+<div class="qq" style="margin-top:16px">5. Goldman se reduce a Nernst para K⁺ cuando:</div><div class="qo" id="f5">
+<button class="qb" onclick="ck('f5',this,0)">A) T=37°C</button>
+<button class="qb" onclick="ck('f5',this,1)">B) P<sub>Na</sub>=0 y P<sub>Cl</sub>=0</button>
+<button class="qb" onclick="ck('f5',this,0)">C) [K⁺]ext=[K⁺]int</button>
+<button class="qb" onclick="ck('f5',this,0)">D) Bomba inhibida</button>
+</div><div class="qf" id="f5f"></div>
+
+<div class="qq" style="margin-top:16px">6. Canal regulado por temperatura:</div><div class="qo" id="f6">
+<button class="qb" onclick="ck('f6',this,1)">A) TRPV1 (capsaicina, >43°C)</button>
+<button class="qb" onclick="ck('f6',this,0)">B) GABA-A</button>
+<button class="qb" onclick="ck('f6',this,0)">C) Piezo1</button>
+<button class="qb" onclick="ck('f6',this,0)">D) Nav1.5</button>
+</div><div class="qf" id="f6f"></div>
+
+<div class="qq" style="margin-top:16px">7. Principal contribución de bomba Na⁺/K⁺ al Vm:</div><div class="qo" id="f7">
+<button class="qb" onclick="ck('f7',this,0)">A) Genera −70 mV directamente</button>
+<button class="qb" onclick="ck('f7',this,1)">B) Mantiene gradientes que usan canales leak</button>
+<button class="qb" onclick="ck('f7',this,0)">C) Abre canales Kv</button>
+<button class="qb" onclick="ck('f7',this,0)">D) Transporta Cl⁻ adentro</button>
+</div><div class="qf" id="f7f"></div>
+
+<div style="text-align:center;margin-top:20px">
+<button class="btn" onclick="fs()" style="font-size:1.05em;padding:12px 36px">Ver Resultado Final</button></div>
+<div class="sd" id="fsd" style="display:none;margin-top:18px">
+<p style="color:var(--mu)">Tu puntuación</p>
+<div class="sn" id="fsn">0/7</div>
+<p id="fmsg" style="margin-top:10px"></p></div>
+</div></div>
+
+</div>
+<script>
+var S=[
+{id:'0',t:'🎯 Inicio'},{id:'1',t:'🔬 Concepto'},{id:'2',t:'🧬 Tipos'},{id:'3',t:'⚛️ Canal K⁺'},
+{id:'4',t:'🎛️ Regulación'},{id:'5',t:'💧 Acuaporinas'},{id:'6',t:'⚡ Conceptos'},{id:'7',t:'🔋 Vm Reposo'},
+{id:'8',t:'📐 Nernst'},{id:'9',t:'📊 Goldman'},{id:'10',t:'🏥 Casos'},{id:'11',t:'✅ Evaluación'}
+];
+var cur=0,done=new Set(),sc={};
+
+function bn(){
+var n=document.getElementById('nav');n.innerHTML='';
+S.forEach(function(s,i){
+var b=document.createElement('button');b.className='nb'+(i===cur?' a':'')+(done.has(i)?' d':'');
+b.textContent=s.t;b.onclick=function(){go(i)};n.appendChild(b);
+});}
+
+function go(i){
+done.add(cur);cur=i;
+document.querySelectorAll('.s').forEach(function(e){e.classList.remove('on')});
+var t=document.getElementById('s-'+S[i].id);if(t)t.classList.add('on');
+var p=Math.round(done.size/S.length*100);
+document.getElementById('pbar').style.width=p+'%';
+document.getElementById('ptxt').textContent='Sección '+(i+1)+' de '+S.length+' — '+p+'%';
+bn();window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function tg(h){h.classList.toggle('op');h.nextElementSibling.classList.toggle('op');}
+
+function ck(id,btn,ok){
+var c=document.getElementById(id);
+c.querySelectorAll('.qb').forEach(function(b){b.disabled=true;b.style.pointerEvents='none'});
+var f=document.getElementById(id+'f');
+if(ok){btn.classList.add('ok');f.className='qf sh gf';f.innerHTML='✅ <b>¡Correcto!</b>';sc[id]=1;}
+else{btn.classList.add('no');f.className='qf sh bf';f.innerHTML='❌ <b>Incorrecto.</b> La correcta está en verde.';sc[id]=0;
+c.querySelectorAll('.qb').forEach(function(b){if(b.getAttribute('onclick').indexOf(',1)')>-1)b.classList.add('ok')});}}
+
+function pn(){
+var v=document.getElementById('ni').value,p={K:{z:1,e:4,i:140},Na:{z:1,e:145,i:12},Ca:{z:2,e:2.5,i:0.0001},Cl:{z:-1,e:120,i:4}};
+if(p[v]){document.getElementById('nz').value=p[v].z;document.getElementById('ne').value=p[v].e;document.getElementById('nn').value=p[v].i;}}
+
+function cn(){
+var z=+document.getElementById('nz').value,e=+document.getElementById('ne').value,i=+document.getElementById('nn').value;
+if(!z||e<=0||i<=0){alert('Valores inválidos');return;}
+var E=((8.314*310)/(z*96485))*Math.log(e/i)*1000;
+var r=document.getElementById('nr');r.className='res sh';
+r.innerHTML='E<sub>ion</sub> = <b style="font-size:1.3em;color:var(--ion)">'+E.toFixed(1)+' mV</b><br><span style="font-size:.85em;color:var(--mu)">(61.5/'+z+') × log('+e+'/'+i+') = '+E.toFixed(1)+' mV</span>';}
+
+function pg(m){
+var p={r:{pk:1,pn:.04,pc:.45},d:{pk:1,pn:20,pc:.45},h:{pk:10,pn:.04,pc:.45}};
+document.getElementById('gpk').value=p[m].pk;document.getElementById('gpn').value=p[m].pn;document.getElementById('gpc').value=p[m].pc;
+document.getElementById('gke').value=4;document.getElementById('gki').value=140;
+document.getElementById('gne').value=145;document.getElementById('gni').value=12;
+document.getElementById('gce').value=120;document.getElementById('gci').value=4;cg();}
+
+function cg(){
+var Pk=+document.getElementById('gpk').value,Pn=+document.getElementById('gpn').value,Pc=+document.getElementById('gpc').value;
+var Ke=+document.getElementById('gke').value,Ki=+document.getElementById('gki').value;
+var Ne=+document.getElementById('gne').value,Ni=+document.getElementById('gni').value;
+var Ce=+document.getElementById('gce').value,Ci=+document.getElementById('gci').value;
+var num=Pk*Ke+Pn*Ne+Pc*Ci,den=Pk*Ki+Pn*Ni+Pc*Ce;
+if(num<=0||den<=0){alert('Valores inválidos');return;}
+var Vm=((8.314*310)/96485)*Math.log(num/den)*1000;
+var r=document.getElementById('gr');r.className='res sh';
+var st=Vm<-80?'🟣 Hiperpolarizado':Vm<-50?'🟢 Reposo':Vm<-20?'🟡 Despolarizándose':'🔴 Despolarizado';
+r.innerHTML='Vm = <b style="font-size:1.3em;color:var(--ion)">'+Vm.toFixed(1)+' mV</b><br>'+st+'<br><span style="font-size:.82em;color:var(--mu)">P_K:P_Na:P_Cl = '+Pk+':'+Pn+':'+Pc+'</span>';}
+
+function fs(){
+var ids=['f1','f2','f3','f4','f5','f6','f7'],c=0;
+ids.forEach(function(id){if(sc[id]===1)c++});
+document.getElementById('fsd').style.display='block';
+document.getElementById('fsn').textContent=c+'/7';
+var p=c/7*100,m='';
+if(p===100)m='🌟 ¡PERFECTO! Dominas los canales y el potencial de membrana.';
+else if(p>=85)m='🎉 Excelente. Revisa lo que fallaste.';
+else if(p>=70)m='👍 Buen trabajo. Repasa las secciones faltantes.';
+else if(p>=50)m='📚 Necesitas repasar. Vuelve a las secciones.';
+else m='⚠️ Repasa toda la tutoría. ¡La repetición es clave!';
+document.getElementById('fmsg').textContent=m;
+done.add(cur);document.getElementById('pbar').style.width='100%';
+document.getElementById('ptxt').textContent='¡Tutoría completada! — 100%';bn();
+document.getElementById('fsd').scrollIntoView({behavior:'smooth'});}
+
+bn();
+</script>
+</body></html>
