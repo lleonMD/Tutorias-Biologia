@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorías Interactivas — Inicio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080c16;--c1:#0f1628;--c2:#161d33;--sig:#00e5ff;--rec:#a855f7;--lig:#f59e0b;--eff:#22c55e;--ca:#ef4444;--tx:#e2e8f0;--mu:#8899b3;--bd:#1c2744}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 25%,rgba(168,85,247,.06),transparent 55%),radial-gradient(ellipse at 80% 75%,rgba(0,229,255,.05),transparent 55%);pointer-events:none;z-index:0}
+h1,h2,h3{font-family:'Playfair Display',serif}
+a{text-decoration:none;color:inherit}
+
+/* ── App Shell ── */
+.app{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:16px}
+
+/* ── Hero Header ── */
+.hero{text-align:center;padding:52px 20px 42px;position:relative}
+.hero::after{content:'';display:block;width:280px;height:3px;margin:28px auto 0;background:linear-gradient(90deg,var(--sig),var(--rec),var(--lig));border-radius:4px;opacity:.7}
+.hero-icon{font-size:3.4em;margin-bottom:10px;display:block;filter:drop-shadow(0 0 18px rgba(0,229,255,.35))}
+.hero h1{font-size:2.6em;font-weight:900;background:linear-gradient(135deg,var(--sig),var(--rec),var(--lig));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;letter-spacing:-.02em}
+.hero p{color:var(--mu);margin-top:10px;font-size:1.05em;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7}
+
+/* ── Section Cards ── */
+.cd{background:var(--c1);border:1px solid var(--bd);border-radius:16px;padding:26px;margin-bottom:20px;position:relative;overflow:hidden}
+.cd::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sig),var(--rec),var(--lig));opacity:.6}
+.cd h2{font-size:1.5em;margin-bottom:6px}
+.cd .sub{color:var(--mu);font-size:.9em;margin-bottom:18px}
+
+/* ── Info Box ── */
+.ib{padding:16px 18px;border-radius:12px;margin:14px 0;border-left:4px solid;line-height:1.75;font-size:.92em}
+.ib.co{background:rgba(0,229,255,.06);border-color:var(--sig)}
+.ib.cl{background:rgba(239,68,68,.06);border-color:var(--ca)}
+.ib.ky{background:rgba(168,85,247,.06);border-color:var(--rec)}
+.ib.su{background:rgba(34,197,94,.06);border-color:var(--eff)}
+.ib.wa{background:rgba(245,158,11,.06);border-color:var(--lig)}
+.ib-title{font-weight:800;margin-bottom:4px;font-size:.95em}
+
+/* ══════════════════════════════════════════
+   LINKS SECTION — Add your tutoring links here
+   ══════════════════════════════════════════ */
+.links-section{margin:32px 0}
+.links-section h2{color:var(--sig)}
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:18px}
+
+.link-card{
+  display:flex;align-items:center;gap:14px;
+  background:var(--c2);border:1px solid var(--bd);border-radius:14px;
+  padding:18px 20px;transition:all .3s ease;cursor:pointer;
+  position:relative;overflow:hidden;
+}
+.link-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--sig),var(--rec));opacity:0;transition:opacity .3s;
+}
+.link-card:hover{border-color:rgba(0,229,255,.35);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,229,255,.08)}
+.link-card:hover::before{opacity:1}
+
+.link-icon{
+  flex-shrink:0;width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:1.5em;
+}
+.link-icon.cyan{background:rgba(0,229,255,.12)}
+.link-icon.purple{background:rgba(168,85,247,.12)}
+.link-icon.amber{background:rgba(245,158,11,.12)}
+.link-icon.green{background:rgba(34,197,94,.12)}
+.link-icon.red{background:rgba(239,68,68,.12)}
+
+.link-info{flex:1;min-width:0}
+.link-title{font-weight:800;font-size:.95em;margin-bottom:2px;color:var(--tx)}
+.link-desc{font-size:.8em;color:var(--mu);line-height:1.4}
+
+.link-arrow{flex-shrink:0;color:var(--mu);transition:color .3s,transform .3s}
+.link-card:hover .link-arrow{color:var(--sig);transform:translateX(3px)}
+
+/* ── About / Features Grid ── */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:18px 0}
+.feat{background:var(--c2);border:1px solid var(--bd);border-radius:12px;padding:18px;text-align:center;transition:.3s}
+.feat:hover{border-color:var(--sig);transform:translateY(-2px)}
+.feat-icon{font-size:2em;margin-bottom:8px;display:block}
+.feat-title{font-weight:800;font-size:.9em;margin-bottom:4px}
+.feat-desc{font-size:.8em;color:var(--mu);line-height:1.5}
+
+/* ── Code Block ── */
+pre{background:var(--c2);border:1px solid var(--bd);border-radius:12px;padding:18px 20px;overflow-x:auto;font-size:.82em;line-height:1.8;margin:14px 0;color:var(--mu)}
+pre .tag{color:var(--ca)}
+pre .attr{color:var(--lig)}
+pre .val{color:var(--eff)}
+pre .cmt{color:#4a5568;font-style:italic}
+pre .str{color:var(--sig)}
+
+/* ── Footer ── */
+.footer{text-align:center;padding:32px 16px;color:var(--mu);font-size:.82em;border-top:1px solid var(--bd);margin-top:20px}
+.footer span{background:linear-gradient(135deg,var(--sig),var(--rec));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .hero h1{font-size:1.7em}
+  .hero-icon{font-size:2.4em}
+  .cd{padding:16px}
+  .links-grid{grid-template-columns:1fr}
+  .features{grid-template-columns:1fr 1fr}
+}
+@media(max-width:420px){
+  .features{grid-template-columns:1fr}
+}
+
+/* ── Animations ── */
+@keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.app > *{animation:fi .5s ease both}
+.app > :nth-child(2){animation-delay:.08s}
+.app > :nth-child(3){animation-delay:.15s}
+.app > :nth-child(4){animation-delay:.22s}
+.app > :nth-child(5){animation-delay:.29s}
+.app > :nth-child(6){animation-delay:.36s}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ════════════════════════════════════════
+       HERO HEADER
+       ════════════════════════════════════════ -->
+  <div class="hero">
+    <span class="hero-icon">🧬</span>
+    <h1>Tutorías Interactivas</h1>
+    <p>Recursos de estudio con diagramas interactivos, simulaciones animadas y evaluaciones integradoras para ciencias biomédicas.</p>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       FEATURES / WHAT'S INSIDE
+       ════════════════════════════════════════ -->
+  <div class="cd">
+    <h2 style="color:var(--rec)">✨ ¿Qué encontrarás?</h2>
+    <p class="sub">Cada tutoría es una experiencia interactiva autocontenida</p>
+    <div class="features">
+      <div class="feat">
+        <span class="feat-icon">📊</span>
+        <div class="feat-title">Diagramas Interactivos</div>
+        <div class="feat-desc">Visualizaciones paso a paso con Canvas animados</div>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">⚡</span>
+        <div class="feat-title">Simulaciones</div>
+        <div class="feat-desc">Controla vías de señalización y cascadas en tiempo real</div>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">🧠</span>
+        <div class="feat-title">Evaluaciones</div>
+        <div class="feat-desc">Preguntas con retroalimentación inmediata y progreso</div>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">🏥</span>
+        <div class="feat-title">Correlación Clínica</div>
+        <div class="feat-desc">Casos y patologías relevantes para cada tema</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       ██  LINKS SECTION — PASTE YOUR TUTORING LINKS BELOW  ██
+       
+       Each link is an <a> tag with class "link-card".
+       See the coding instructions section at the bottom
+       of this page for details on how to add more links.
+       ════════════════════════════════════════════════════════════════ -->
+  <div class="cd links-section">
+    <h2>📚 Tutorías Disponibles</h2>
+    <p class="sub">Haz clic en cualquier tutoría para abrirla</p>
+
+    <div class="links-grid">
+
+      <!-- ─── LINK 1 ─── -->
+      <a class="link-card" href="Tutoria_Senalizacion_Celular_Parte2_1.html">
+        <div class="link-icon purple">📡</div>
+        <div class="link-info">
+          <div class="link-title">Señalización Celular — Parte 2</div>
+          <div class="link-desc">Vías específicas, mecanismos efectores y evaluación integradora</div>
+        </div>
+        <div class="link-arrow">→</div>
+      </a>
+
+      <!-- ─── LINK 2 (ejemplo — reemplazar o eliminar) ─── -->
+      <!--
+      <a class="link-card" href="tu-archivo.html">
+        <div class="link-icon cyan">🔬</div>
+        <div class="link-info">
+          <div class="link-title">Título de la Tutoría</div>
+          <div class="link-desc">Breve descripción del contenido</div>
+        </div>
+        <div class="link-arrow">→</div>
+      </a>
+      -->
+
+    </div>
+  </div>
+  <!-- ══════════════ END LINKS SECTION ══════════════ -->
+
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════ -->
+  <div class="footer">
+    Construido con 🧠 para el aprendizaje interactivo &nbsp;·&nbsp; <span>Tutorías Interactivas</span>
+  </div>
+
+</div>
+</body>
+</html>
