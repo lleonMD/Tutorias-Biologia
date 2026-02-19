@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Profunda: Potencial de Membrana, Nernst y Goldman</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080c16;--c1:#0f1628;--c2:#161d33;
+  --ion:#00e5ff;--k:#a855f7;--na:#f59e0b;--cl:#22c55e;--ca:#ef4444;
+  --tx:#e2e8f0;--mu:#8899b3;--bd:#1c2744;
+  --ok:#22c55e;--er:#ef4444;
+  --glow:rgba(0,229,255,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:
+  radial-gradient(ellipse at 15% 30%,rgba(168,85,247,.06),transparent 55%),
+  radial-gradient(ellipse at 85% 70%,rgba(0,229,255,.05),transparent 55%),
+  radial-gradient(ellipse at 50% 0%,rgba(245,158,11,.03),transparent 40%);
+  pointer-events:none;z-index:0}
+h1,h2,h3{font-family:'Playfair Display',serif}
+.app{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:16px}
+
+/* Header */
+.hd{text-align:center;padding:28px 16px 20px;border-bottom:1px solid var(--bd);margin-bottom:16px}
+.hd h1{font-size:2em;font-weight:900;background:linear-gradient(135deg,var(--ion),var(--k),var(--na));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.25}
+.hd p{color:var(--mu);margin-top:6px;font-size:.95em}
+
+/* Progress */
+.pb{background:var(--bd);border-radius:20px;height:6px;margin:10px 0;overflow:hidden}
+.pf{height:100%;border-radius:20px;transition:width .5s;background:linear-gradient(90deg,var(--ion),var(--k),var(--na))}
+.pt{text-align:center;font-size:.8em;color:var(--mu);margin-bottom:12px}
+
+/* Navigation */
+.nv{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:10px;background:var(--c1);border-radius:12px;margin-bottom:18px;border:1px solid var(--bd)}
+.nb{padding:7px 13px;border-radius:8px;border:1px solid transparent;background:0;color:var(--mu);cursor:pointer;font-family:inherit;font-size:.76em;font-weight:700;transition:.3s}
+.nb:hover{background:rgba(0,229,255,.1);color:var(--tx)}
+.nb.a{background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(168,85,247,.15));color:var(--ion);border-color:rgba(0,229,255,.3)}
+.nb.d{color:var(--ok)}.nb.d::after{content:' ✓'}
+
+/* Sections */
+.s{display:none;animation:fi .4s}.s.on{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* Cards */
+.cd{background:var(--c1);border:1px solid var(--bd);border-radius:16px;padding:22px;margin-bottom:16px;position:relative;overflow:hidden}
+.cd::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--ion),var(--k),var(--na));opacity:.6}
+.cd h2{font-size:1.45em;margin-bottom:12px;color:var(--ion)}.cd h3{font-size:1.1em;margin-bottom:8px;color:var(--k)}
+.cd p{line-height:1.75;margin-bottom:8px}
+
+/* Info boxes */
+.ib{padding:16px 18px;border-radius:12px;margin:14px 0;border-left:4px solid;position:relative}
+.ib.co{background:rgba(0,229,255,.06);border-color:var(--ion)}
+.ib.cl{background:rgba(239,68,68,.06);border-color:var(--ca)}
+.ib.ky{background:rgba(168,85,247,.06);border-color:var(--k)}
+.ib.su{background:rgba(34,197,94,.06);border-color:var(--ok)}
+.ib.wa{background:rgba(245,158,11,.06);border-color:var(--na)}
+.ibt{font-weight:800;margin-bottom:6px;font-size:.93em}
+
+/* Equations */
+.eq{text-align:center;padding:16px;margin:14px 0;background:rgba(168,85,247,.06);border-radius:10px;font-size:1.05em;font-weight:700;border:1px solid rgba(168,85,247,.2);font-family:'Courier New',monospace;line-height:1.6;overflow-x:auto}
+
+/* Ion badges */
+.ion{display:inline-block;padding:2px 9px;border-radius:16px;font-weight:800;font-size:.82em}
+.ik{background:rgba(168,85,247,.18);color:var(--k)}.ina{background:rgba(245,158,11,.18);color:var(--na)}
+.icl{background:rgba(34,197,94,.18);color:var(--cl)}.ica{background:rgba(239,68,68,.18);color:var(--ca)}
+
+/* Tables */
+table.t{width:100%;border-collapse:collapse;margin:14px 0;border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.t th{background:rgba(0,229,255,.08);padding:10px 12px;text-align:left;font-weight:700;font-size:.84em;color:var(--ion);border-bottom:1px solid var(--bd)}
+.t td{padding:9px 12px;font-size:.84em;line-height:1.5;border-bottom:1px solid var(--bd);vertical-align:top}
+.t tr:hover td{background:rgba(0,229,255,.03)}
+
+/* Quiz */
+.qq{font-weight:700;font-size:1em;margin-bottom:12px;padding:12px 16px;background:rgba(168,85,247,.08);border-radius:10px;border:1px solid rgba(168,85,247,.15)}
+.qo{display:flex;flex-direction:column;gap:6px}
+.qb{padding:11px 16px;border-radius:9px;cursor:pointer;border:2px solid var(--bd);background:var(--c2);font-family:inherit;font-size:.88em;color:var(--tx);text-align:left;transition:.2s;font-weight:600}
+.qb:hover{border-color:var(--ion);background:rgba(0,229,255,.05)}
+.qb.ok{border-color:var(--ok)!important;background:rgba(34,197,94,.1)!important;color:var(--ok)!important}
+.qb.no{border-color:var(--er)!important;background:rgba(239,68,68,.06)!important;color:var(--er)!important;opacity:.7}
+.qf{margin-top:10px;padding:14px 16px;border-radius:10px;font-size:.9em;line-height:1.7;display:none}
+.qf.sh{display:block;animation:fi .3s}.qf.gf{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2)}.qf.bf{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2)}
+
+/* Collapsibles */
+.ch{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--c2);border-radius:9px;cursor:pointer;margin:8px 0 0;border:1px solid var(--bd);font-weight:700;font-size:.9em;transition:.2s}
+.ch:hover{border-color:var(--ion)}.ch .ar{transition:transform .3s;font-size:.75em}.ch.op .ar{transform:rotate(180deg)}
+.cc{max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 16px}.cc.op{max-height:12000px;padding:14px 16px}
+
+/* Buttons */
+.btn{padding:10px 22px;border-radius:9px;border:0;cursor:pointer;background:linear-gradient(135deg,var(--ion),var(--k));color:#fff;font-family:inherit;font-weight:700;font-size:.9em;transition:.2s;white-space:nowrap}
+.btn:hover{transform:scale(1.03);box-shadow:0 4px 20px rgba(0,229,255,.2)}
+.btn-na{background:linear-gradient(135deg,var(--na),var(--ca))}
+.btn-ok{background:linear-gradient(135deg,var(--ok),#06b6d4)}
+.btn-k{background:linear-gradient(135deg,var(--k),#6366f1)}
+
+/* Calculator */
+.clc{background:var(--c2);border-radius:14px;padding:18px;margin:14px 0;border:1px solid var(--bd)}
+.cr{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+.cla{font-weight:700;min-width:160px;font-size:.88em}
+.ci{padding:8px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-family:inherit;font-size:.9em;width:100px}
+.ci:focus{outline:0;border-color:var(--ion);box-shadow:0 0 8px rgba(0,229,255,.15)}
+.res{padding:16px;background:rgba(0,229,255,.06);border-radius:10px;margin-top:12px;text-align:center;font-weight:700;border:1px solid rgba(0,229,255,.15);display:none}
+.res.sh{display:block;animation:fi .3s}
+
+/* Simulation canvas area */
+.sim{background:var(--c2);border-radius:14px;padding:4px;margin:16px 0;border:1px solid var(--bd);position:relative;overflow:hidden}
+.sim canvas{display:block;width:100%;border-radius:10px}
+.sim-ctrls{display:flex;flex-wrap:wrap;gap:8px;padding:12px;align-items:center;justify-content:center}
+.sim-label{font-size:.82em;font-weight:700;color:var(--mu)}
+
+/* Range sliders */
+input[type=range]{-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:var(--bd);outline:none;cursor:pointer;flex:1;min-width:100px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--ion);cursor:pointer;border:2px solid var(--bg)}
+
+/* Analogy cards */
+.anl{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(168,85,247,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:20px;margin:16px 0}
+.anl h3{color:var(--na);margin-bottom:8px}
+.anl-icon{font-size:2.5em;text-align:center;margin-bottom:8px}
+
+/* Step boxes */
+.step{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.step-n{min-width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--ion),var(--k));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;color:#fff;flex-shrink:0}
+.step-c{flex:1}
+
+/* Score */
+.sn{font-size:2.8em;font-weight:900;background:linear-gradient(135deg,var(--ion),var(--k));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Chart bars */
+.bar-chart{display:flex;align-items:flex-end;gap:12px;justify-content:center;padding:16px;min-height:200px}
+.bar-col{display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar{width:48px;border-radius:6px 6px 0 0;transition:height .6s ease;position:relative}
+.bar-val{font-size:.72em;font-weight:800;color:var(--tx)}
+.bar-lbl{font-size:.72em;font-weight:700;color:var(--mu);text-align:center}
+
+/* Voltage line visual */
+.vline{position:relative;height:300px;margin:20px auto;max-width:60px;background:linear-gradient(to bottom,rgba(245,158,11,.3),rgba(0,0,0,.1) 40%,rgba(0,0,0,.1) 60%,rgba(168,85,247,.3));border-radius:8px;border:1px solid var(--bd)}
+.vmark{position:absolute;left:-70px;right:-70px;height:2px;display:flex;align-items:center;font-size:.7em;font-weight:700}
+.vmark::before{content:'';flex:1;height:1px;border-top:1px dashed}
+.vmark-lbl{position:absolute;font-size:.72em;font-weight:700;white-space:nowrap}
+
+@media(max-width:700px){
+  .hd h1{font-size:1.4em}.nb{font-size:.7em;padding:5px 8px}
+  .cd{padding:14px}.cr{flex-direction:column;align-items:flex-start}
+  .step{flex-direction:column;gap:8px}.step-n{align-self:flex-start}
+  .bar-chart{gap:6px}.bar{width:32px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="hd">
+<h1>🧠 Potencial de Membrana en Profundidad</h1>
+<p>Tutoría Complementaria — Nernst, Goldman y el Potencial de Reposo</p>
+<p style="font-size:.82em;color:var(--k);margin-top:4px">Con simulaciones interactivas y explicaciones paso a paso</p>
+</div>
+<div class="pb"><div class="pf" id="pbar"></div></div>
+<div class="pt" id="ptxt">Sección 1 de 10</div>
+<div class="nv" id="nav"></div>
+
+<!-- ==================== SECCIÓN 0: BIENVENIDA ==================== -->
+<div class="s on" id="s-0"><div class="cd">
+<h2>🎯 ¿Qué Aprenderás Aquí?</h2>
+<p>Esta tutoría complementaria se centra <b>exclusivamente</b> en los tres conceptos que más confusión generan:</p>
+
+<div class="ib co"><div class="ibt">🔋 Potencial de Membrana en Reposo</div>
+<p>¿Por qué el interior de la célula es negativo? ¿Quién lo genera? ¿Quién lo mantiene?</p></div>
+
+<div class="ib ky"><div class="ibt">📐 Ecuación de Nernst</div>
+<p>¿Qué significa "potencial de equilibrio"? ¿Cómo se calcula? ¿Para qué sirve?</p></div>
+
+<div class="ib wa"><div class="ibt">📊 Ecuación de Goldman</div>
+<p>¿Por qué Nernst no es suficiente? ¿Cómo Goldman integra todos los iones? ¿Qué determina quién "gana"?</p></div>
+
+<p>Usaremos <b>analogías nuevas, simulaciones animadas, gráficos interactivos</b> y preguntas de razonamiento. El objetivo es que al terminar puedas <b>explicar estos conceptos con tus propias palabras</b>.</p>
+
+<div class="anl"><div class="anl-icon">🗺️</div><h3>Mapa de la Tutoría</h3>
+<p><b>Secciones 1-3:</b> Potencial de reposo — construido desde cero con una analogía nueva.</p>
+<p><b>Secciones 4-5:</b> Nernst — la fórmula entendida pieza por pieza.</p>
+<p><b>Secciones 6-7:</b> Goldman — por qué necesitamos más que Nernst.</p>
+<p><b>Sección 8:</b> Simulación integrada — experimenta cambiando todo en tiempo real.</p>
+<p><b>Sección 9:</b> Evaluación de comprensión.</p>
+</div>
+</div></div>
+
+<!-- ==================== SECCIÓN 1: ANALOGÍA INICIAL ==================== -->
+<div class="s" id="s-1"><div class="cd">
+<h2>🏟️ La Analogía del Estadio</h2>
+<p>Antes de cualquier fórmula, necesitas una <b>imagen mental</b> sólida. Olvida momentáneamente la célula y piensa en esto:</p>
+
+<div class="anl"><div class="anl-icon">🏟️</div><h3>Imagina un estadio con una pared divisoria</h3>
+<p>Hay un estadio dividido en <b>Lado A</b> (interior celular) y <b>Lado B</b> (exterior). La pared tiene puertas.</p>
+<p>Dentro del estadio hay personas con <b>camisetas de diferentes colores</b> (iones), y cada color tiene diferente "carga emocional" (+  o −).</p></div>
+
+<div class="step"><div class="step-n">1</div><div class="step-c">
+<b>El K⁺ es como la hinchada local (camiseta morada):</b> hay <b>140 personas</b> en el Lado A pero solo <b>4</b> en el Lado B. Quieren salir por la presión de estar apiñados (gradiente de concentración).
+</div></div>
+
+<div class="step"><div class="step-n">2</div><div class="step-c">
+<b>El Na⁺ es la hinchada visitante (camiseta naranja):</b> hay <b>145 personas</b> en el Lado B pero solo <b>12</b> en el Lado A. Quieren entrar.
+</div></div>
+
+<div class="step"><div class="step-n">3</div><div class="step-c">
+<b>Las puertas (canales leak) están casi todas diseñadas para camiseta morada (K⁺).</b> Hay ~25 puertas para K⁺ por cada 1 puerta para Na⁺. Las personas con camiseta naranja quieren entrar pero casi no tienen puertas.
+</div></div>
+
+<div class="step"><div class="step-n">4</div><div class="step-c">
+<b>Cada persona que sale lleva carga positiva (+) consigo.</b> El Lado A pierde cargas positivas → se vuelve <b>negativo</b>.
+</div></div>
+
+<div class="ib su"><div class="ibt">💡 Resultado</div>
+<p>Como K⁺ tiene muchas más puertas y sale masivamente, el interior (Lado A) se vuelve <b>negativo</b>. Ese déficit de cargas positivas adentro es el <b>potencial de membrana en reposo</b>.</p></div>
+
+<div class="ib ky"><div class="ibt">🔑 Concepto clave #1</div>
+<p><b>El potencial de reposo existe porque la membrana es mucho más permeable a K⁺ que a Na⁺.</b> No es porque haya "más iones negativos adentro" — es porque los iones positivos (K⁺) escapan y dejan atrás un déficit de cargas positivas.</p></div>
+
+<div class="qq">❓ ¿Por qué el interior celular es negativo en reposo?</div>
+<div class="qo" id="q1"><button class="qb" onclick="ck('q1',this,0)">A) Porque hay muchos Cl⁻ adentro</button>
+<button class="qb" onclick="ck('q1',this,1)">B) Porque K⁺ sale a través de canales leak, removiendo cargas positivas del interior</button>
+<button class="qb" onclick="ck('q1',this,0)">C) Porque la bomba Na⁺/K⁺ genera directamente −70 mV</button>
+<button class="qb" onclick="ck('q1',this,0)">D) Porque Na⁺ empuja cargas negativas hacia adentro</button>
+</div><div class="qf" id="q1f"></div>
+</div></div>
+
+<!-- ==================== SECCIÓN 2: SIMULACIÓN DE REPOSO ==================== -->
+<div class="s" id="s-2"><div class="cd">
+<h2>🔬 Simulación: ¿Cómo se Forma el Vm?</h2>
+<p>Observa paso a paso cómo se establece el potencial de reposo. Presiona <b>"Iniciar"</b> para ver la animación.</p>
+
+<div class="sim">
+<canvas id="cvMembrane" width="800" height="420"></canvas>
+<div class="sim-ctrls">
+<button class="btn" onclick="startMemSim()" id="memBtn">▶ Iniciar Simulación</button>
+<button class="btn btn-na" onclick="resetMemSim()">↺ Reiniciar</button>
+<span class="sim-label" id="memStatus" style="color:var(--ion)">Listo para iniciar</span>
+</div>
+</div>
+
+<div id="memNarration" style="min-height:80px">
+<div class="ib co"><div class="ibt">📝 Narración</div>
+<p id="memText">Presiona "Iniciar" para ver cómo los iones de K⁺ (morado) salen a través de los canales leak, dejando el interior negativo. Observa cómo el voltímetro cambia.</p></div>
+</div>
+
+<h3 style="margin-top:16px">¿Qué acabas de ver?</h3>
+<div class="step"><div class="step-n">1</div><div class="step-c">
+<b>Inicio (0 mV):</b> Se abren los canales. El K⁺ comienza a salir impulsado por el gradiente de concentración (muchos adentro → pocos afuera).
+</div></div>
+<div class="step"><div class="step-n">2</div><div class="step-c">
+<b>K⁺ sale → interior se negativiza:</b> Cada K⁺ que sale lleva una carga +. El interior se vuelve gradualmente negativo.
+</div></div>
+<div class="step"><div class="step-n">3</div><div class="step-c">
+<b>El campo eléctrico se opone:</b> Conforme el interior se negativiza, atrae de vuelta al K⁺ (positivo atraído por negativo). Es una fuerza eléctrica que <b>frena</b> la salida.
+</div></div>
+<div class="step"><div class="step-n">4</div><div class="step-c">
+<b>Equilibrio (~−90 mV para K⁺):</b> Cuando la fuerza eléctrica (jalando K⁺ de vuelta) iguala la fuerza química (empujando K⁺ afuera), el flujo neto = 0. Esto es el <b>E<sub>K</sub> de Nernst</b>.
+</div></div>
+<div class="step"><div class="step-n">5</div><div class="step-c">
+<b>Pero el Vm real ≈ −70 mV:</b> Porque hay una pequeña filtración de Na⁺ hacia adentro que "tira" el voltaje un poco hacia el lado positivo. El Na⁺ entra y compensa parcialmente.
+</div></div>
+
+<div class="ib cl"><div class="ibt">⚠️ Error común</div>
+<p>"El K⁺ sale hasta agotarse." <b>¡NO!</b> Solo sale una cantidad minúscula (~1 de cada 100,000 iones K⁺). Es suficiente para generar el voltaje, pero las concentraciones bulk prácticamente no cambian.</p></div>
+</div></div>
+
+<!-- ==================== SECCIÓN 3: QUIÉN GENERA VS. QUIÉN MANTIENE ==================== -->
+<div class="s" id="s-3"><div class="cd">
+<h2>⚡ Generar vs. Mantener: La Confusión #1</h2>
+<p>Muchos estudiantes confunden <b>quién genera</b> el potencial con <b>quién lo mantiene</b>. Vamos a resolverlo definitivamente.</p>
+
+<div class="anl"><div class="anl-icon">🚰</div><h3>Analogía: La Bañera</h3>
+<p>Imagina una bañera con un <b>desagüe lento</b> (canales leak K⁺) y un <b>grifo abierto</b> (bomba Na⁺/K⁺).</p>
+<p>• El <b>desagüe</b> determina el nivel del agua (= canales leak K⁺ GENERAN el Vm).</p>
+<p>• El <b>grifo</b> repone el agua que se va para que el nivel no baje a cero (= bomba Na⁺/K⁺ MANTIENE los gradientes).</p>
+<p>Si cierras el grifo (inhibes la bomba con ouabaína), el agua baja gradualmente. No se vacía de golpe.</p></div>
+
+<table class="t"><thead><tr><th></th><th>GENERA el Vm</th><th>MANTIENE el Vm</th></tr></thead><tbody>
+<tr><td><b>¿Quién?</b></td><td>Canales leak de K⁺</td><td>Bomba Na⁺/K⁺ ATPasa</td></tr>
+<tr><td><b>¿Cómo?</b></td><td>K⁺ sale → interior negativo</td><td>Saca 3 Na⁺, mete 2 K⁺ → repone gradientes</td></tr>
+<tr><td><b>¿Usa ATP?</b></td><td>NO (transporte pasivo)</td><td>SÍ (1 ATP por ciclo)</td></tr>
+<tr><td><b>Si se bloquea</b></td><td>Vm → 0 inmediatamente</td><td>Vm se disipa gradualmente (minutos-horas)</td></tr>
+<tr><td><b>Contribución directa al Vm</b></td><td>~−65 a −90 mV (dominante)</td><td>Solo −3 a −5 mV (electrogénica, menor)</td></tr>
+</tbody></table>
+
+<div class="ib su"><div class="ibt">🎯 Regla para recordar</div>
+<p><b>Canales leak K⁺ = GENERADORES</b> (son los que causan la diferencia de voltaje).</p>
+<p><b>Bomba Na⁺/K⁺ = MANTENIMIENTO</b> (repone lo que los leak gastan).</p>
+<p><b>Contribución directa de la bomba = MUY PEQUEÑA</b> (solo −3 a −5 mV de los −70 mV totales).</p></div>
+
+<h3>Experimento Mental</h3>
+<div class="ib wa"><div class="ibt">🧪 ¿Qué pasaría si bloqueas la bomba Na⁺/K⁺ con ouabaína?</div>
+<p><b>Inmediatamente:</b> Casi nada cambia. Los gradientes existentes siguen generando Vm por los canales leak.</p>
+<p><b>Después de minutos-horas:</b> Na⁺ se acumula adentro, K⁺ se acumula afuera. Los gradientes se disipan. Vm se acerca gradualmente a 0.</p>
+<p><b>Conclusión:</b> La bomba no "genera" los −70 mV. La bomba mantiene las condiciones para que los canales leak puedan generarlos.</p></div>
+
+<div class="qq">❓ Un estudiante dice: "La bomba Na⁺/K⁺ genera los −70 mV porque saca 3 Na⁺ y mete solo 2 K⁺." ¿Qué le responderías?</div>
+<div class="qo" id="q3"><button class="qb" onclick="ck('q3',this,0)">A) Tiene razón, la bomba genera todo el voltaje</button>
+<button class="qb" onclick="ck('q3',this,0)">B) Tiene razón, pero solo parcialmente: genera −35 mV</button>
+<button class="qb" onclick="ck('q3',this,1)">C) La contribución directa de la bomba es solo −3 a −5 mV; los canales leak K⁺ generan la mayor parte del Vm</button>
+<button class="qb" onclick="ck('q3',this,0)">D) La bomba no tiene nada que ver con el Vm</button>
+</div><div class="qf" id="q3f"></div>
+</div></div>
+
+<!-- ==================== SECCIÓN 4: NERNST INTUITIVO ==================== -->
+<div class="s" id="s-4"><div class="cd">
+<h2>📐 Nernst: Entendiendo la Ecuación sin Miedo</h2>
+<p>La ecuación de Nernst responde UNA pregunta simple:</p>
+
+<div class="ib ky" style="text-align:center;font-size:1.1em">
+<div class="ibt">LA PREGUNTA DE NERNST</div>
+<p>"¿A qué voltaje deja de moverse un ión específico?"</p>
+<p style="font-size:.85em;color:var(--mu)">Es decir: ¿cuál es el voltaje donde la fuerza eléctrica compensa exactamente la fuerza química para ese ión?</p>
+</div>
+
+<div class="anl"><div class="anl-icon">⚖️</div><h3>Analogía: La Balanza de Fuerzas</h3>
+<p>Imagina una balanza. En un lado está la <b>fuerza química</b> (la concentración empuja al ión de donde hay muchos a donde hay pocos). En el otro lado está la <b>fuerza eléctrica</b> (el voltaje de la membrana atrae o repele al ión según su carga).</p>
+<p>El <b>potencial de Nernst (E<sub>ion</sub>)</b> es el voltaje exacto donde la balanza queda en equilibrio: <b>flujo neto = 0</b>.</p></div>
+
+<h3>Desarmemos la ecuación pieza por pieza</h3>
+<div class="eq">E<sub>ion</sub> = (RT / zF) × ln([ion]<sub>ext</sub> / [ion]<sub>int</sub>)</div>
+
+<div class="step"><div class="step-n">R</div><div class="step-c">
+<b>R = 8.314 J/(mol·K)</b> — Constante universal de los gases. Mide "cuánta energía tiene el movimiento aleatorio de las partículas". A mayor R, más empuje químico.
+</div></div>
+<div class="step"><div class="step-n">T</div><div class="step-c">
+<b>T = 310 K (37°C)</b> — Temperatura corporal. A mayor temperatura, las partículas se mueven más → mayor fuerza química.
+</div></div>
+<div class="step"><div class="step-n">z</div><div class="step-c">
+<b>z = valencia del ión</b> (+1 para K⁺ y Na⁺, +2 para Ca²⁺, −1 para Cl⁻). A mayor carga, se necesita MENOS voltaje para frenar al ión. Por eso Ca²⁺ (z=2) necesita la mitad de voltaje por unidad de concentración que K⁺ (z=1).
+</div></div>
+<div class="step"><div class="step-n">F</div><div class="step-c">
+<b>F = 96,485 C/mol</b> — Constante de Faraday. Cuánta carga eléctrica lleva un mol de cargas elementales. Traduce entre "mundo químico" y "mundo eléctrico".
+</div></div>
+<div class="step"><div class="step-n">ln</div><div class="step-c">
+<b>ln([ext]/[int])</b> — Logaritmo natural del cociente de concentraciones. Este es el corazón: si hay 100× más afuera que adentro, el gradiente es enorme. Si son iguales (cociente=1), ln=0, no hay gradiente → E=0.
+</div></div>
+
+<div class="ib co"><div class="ibt">📝 Versión simplificada a 37°C</div>
+<p>Como RT/F a 37°C siempre da lo mismo, podemos simplificar:</p>
+</div>
+<div class="eq">E<sub>ion</sub> = (61.5 mV / z) × log₁₀([ext] / [int])</div>
+<p style="text-align:center;color:var(--mu);font-size:.88em">Solo necesitas: la valencia (z) y las concentraciones intra/extracelular.</p>
+
+<div class="qq">❓ Si [K⁺]ext = [K⁺]int (iguales), ¿cuánto vale E<sub>K</sub>?</div>
+<div class="qo" id="q4"><button class="qb" onclick="ck('q4',this,0)">A) −90 mV</button>
+<button class="qb" onclick="ck('q4',this,1)">B) 0 mV, porque log(1) = 0, no hay gradiente</button>
+<button class="qb" onclick="ck('q4',this,0)">C) +67 mV</button>
+<button class="qb" onclick="ck('q4',this,0)">D) Depende de la temperatura</button>
+</div><div class="qf" id="q4f"></div>
+</div></div>
+
+<!-- ==================== SECCIÓN 5: NERNST CALCULADORA + VISUALIZACIÓN ==================== -->
+<div class="s" id="s-5"><div class="cd">
+<h2>🧮 Nernst: Calculadora Visual</h2>
+<p>Usa la calculadora para ver cómo cambia E<sub>ion</sub> al modificar las concentraciones. Observa la <b>línea de voltaje</b> debajo.</p>
+
+<div class="clc">
+<div class="cr"><span class="cla">Ion:</span>
+<select class="ci" id="ni" onchange="pn()" style="width:160px"><option value="">Personalizado</option><option value="K">K⁺</option><option value="Na">Na⁺</option><option value="Ca">Ca²⁺</option><option value="Cl">Cl⁻</option></select></div>
+<div class="cr"><span class="cla">Valencia (z):</span><input type="number" class="ci" id="nz" value="1"></div>
+<div class="cr"><span class="cla">[Ion] Extracelular (mM):</span><input type="number" class="ci" id="ne" value="4" step="0.1"></div>
+<div class="cr"><span class="cla">[Ion] Intracelular (mM):</span><input type="number" class="ci" id="nn" value="140" step="0.1"></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+<button class="btn" onclick="cn()">Calcular E<sub>ion</sub></button>
+</div>
+<div class="res" id="nr"></div>
+</div>
+
+<!-- Voltage line visualization -->
+<h3 style="margin-top:18px">📊 ¿Dónde queda E<sub>ion</sub> en la escala de voltaje?</h3>
+<div class="sim" style="padding:12px">
+<canvas id="cvVoltLine" width="800" height="180"></canvas>
+</div>
+<p style="font-size:.82em;color:var(--mu);text-align:center">La escala muestra de −150 mV a +150 mV. Los valores de referencia se marcan con líneas punteadas.</p>
+
+<h3 style="margin-top:16px">📋 Tabla de Referencia Rápida</h3>
+<table class="t"><thead><tr><th>Ion</th><th>z</th><th>[Ext] mM</th><th>[Int] mM</th><th>E<sub>ion</sub></th><th>Interpretación</th></tr></thead><tbody>
+<tr><td><span class="ion ik">K⁺</span></td><td>+1</td><td>4</td><td>140</td><td><b>−94 mV</b></td><td>Muy negativo: K⁺ "quiere" salir</td></tr>
+<tr><td><span class="ion ina">Na⁺</span></td><td>+1</td><td>145</td><td>12</td><td><b>+67 mV</b></td><td>Muy positivo: Na⁺ "quiere" entrar</td></tr>
+<tr><td><span class="ion icl">Cl⁻</span></td><td>−1</td><td>120</td><td>4</td><td><b>−90 mV</b></td><td>Cerca de E<sub>K</sub>: casi en equilibrio en reposo</td></tr>
+<tr><td><span class="ion ica">Ca²⁺</span></td><td>+2</td><td>2.5</td><td>0.0001</td><td><b>+136 mV</b></td><td>Enorme driving force hacia adentro</td></tr>
+</tbody></table>
+
+<div class="ib co"><div class="ibt">🧠 Patrón para recordar</div>
+<p><b>Si hay más afuera que adentro</b> y es catión → E es positivo (quiere entrar).</p>
+<p><b>Si hay más adentro que afuera</b> y es catión → E es negativo (quiere salir).</p>
+<p>Para <b>aniones es al revés</b> porque z es negativo.</p></div>
+
+<div class="qq">❓ Un paciente tiene [K⁺] extracelular de 7.5 mM (normal: 4). ¿Qué pasa con E<sub>K</sub>?</div>
+<div class="qo" id="q5"><button class="qb" onclick="ck('q5',this,1)">A) Se hace MENOS negativo (ej: de −94 a −78 mV) porque el gradiente disminuye</button>
+<button class="qb" onclick="ck('q5',this,0)">B) Se hace MÁS negativo (ej: de −94 a −120 mV)</button>
+<button class="qb" onclick="ck('q5',this,0)">C) No cambia, E<sub>K</sub> es fijo</button>
+<button class="qb" onclick="ck('q5',this,0)">D) Se vuelve positivo</button>
+</div><div class="qf" id="q5f"></div>
+</div></div>
+
+<!-- ==================== SECCIÓN 6: DE NERNST A GOLDMAN ==================== -->
+<div class="s" id="s-6"><div class="cd">
+<h2>📊 ¿Por Qué Nernst No Es Suficiente?</h2>
+<p>Nernst es brillante pero tiene una <b>limitación fatal</b>:</p>
+
+<div class="ib cl"><div class="ibt">❌ Nernst solo considera UN ión a la vez</div>
+<p>Nernst te dice el equilibrio para K⁺ (−94 mV) O para Na⁺ (+67 mV), pero la membrana real es permeable a AMBOS simultáneamente. ¿Cómo decides el Vm real?</p></div>
+
+<div class="anl"><div class="anl-icon">📻</div><h3>Analogía: La Radio con Dos Estaciones</h3>
+<p>Imagina una radio sintonizando dos estaciones al mismo tiempo. La <b>Estación K⁺</b> (a −94 MHz) y la <b>Estación Na⁺</b> (a +67 MHz).</p>
+<p>Si la antena K⁺ es <b>25 veces más potente</b> que la de Na⁺ (P<sub>K</sub> >> P<sub>Na</sub>), lo que escuchas es <b>mayormente Estación K⁺</b> con un poquito de Estación Na⁺ de fondo.</p>
+<p>El "sonido" resultante (~−70 MHz) está <b>cerca de K⁺ pero no exactamente en −94</b>, porque Na⁺ tira un poco hacia el lado positivo.</p>
+<p><b>Goldman = la fórmula que calcula la "mezcla" final.</b></p></div>
+
+<h3>La Regla de Oro</h3>
+<div class="ib su" style="text-align:center;font-size:1.05em"><div class="ibt">🏆 El ión con mayor permeabilidad DOMINA el Vm</div>
+<p>Si P<sub>K</sub> >> P<sub>Na</sub> → Vm ≈ E<sub>K</sub> (reposo)</p>
+<p>Si P<sub>Na</sub> >> P<sub>K</sub> → Vm ≈ E<sub>Na</sub> (pico del potencial de acción)</p>
+<p>El Vm siempre queda <b>entre E<sub>K</sub> y E<sub>Na</sub></b> — es un "promedio ponderado" por permeabilidades.</p></div>
+
+<h3>Goldman: La Ecuación</h3>
+<div class="eq" style="font-size:.92em">Vm = 61.5 × log<sub>10</sub>( (P<sub>K</sub>[K⁺]<sub>e</sub> + P<sub>Na</sub>[Na⁺]<sub>e</sub> + P<sub>Cl</sub>[Cl⁻]<sub>i</sub>) / (P<sub>K</sub>[K⁺]<sub>i</sub> + P<sub>Na</sub>[Na⁺]<sub>i</sub> + P<sub>Cl</sub>[Cl⁻]<sub>e</sub>) )</div>
+
+<div class="ib ky"><div class="ibt">🔗 Nernst es un caso particular de Goldman</div>
+<p>Si pones P<sub>Na</sub> = 0 y P<sub>Cl</sub> = 0, Goldman se simplifica a:</p>
+<p style="text-align:center;font-family:monospace">Vm = 61.5 × log([K⁺]<sub>e</sub> / [K⁺]<sub>i</sub>)</p>
+<p>¡Que es exactamente Nernst para K⁺! Goldman no contradice a Nernst — <b>lo generaliza</b>.</p></div>
+
+<div class="ib wa"><div class="ibt">⚠️ Nota sobre Cl⁻</div>
+<p>Fíjate que Cl⁻ aparece <b>invertido</b> en la ecuación: [Cl⁻]<sub>int</sub> está arriba y [Cl⁻]<sub>ext</sub> está abajo. Esto es porque su carga es negativa (z = −1). La inversión compensa el signo negativo.</p></div>
+
+<div class="qq">❓ ¿Qué necesitas para que Goldman se reduzca exactamente a Nernst para K⁺?</div>
+<div class="qo" id="q6"><button class="qb" onclick="ck('q6',this,0)">A) Que las concentraciones de K⁺ sean iguales adentro y afuera</button>
+<button class="qb" onclick="ck('q6',this,1)">B) Que las permeabilidades de Na⁺ y Cl⁻ sean cero</button>
+<button class="qb" onclick="ck('q6',this,0)">C) Que la temperatura sea exactamente 37°C</button>
+<button class="qb" onclick="ck('q6',this,0)">D) Que la bomba esté activa</button>
+</div><div class="qf" id="q6f"></div>
+</div></div>
+
+<!-- ==================== SECCIÓN 7: GOLDMAN CALCULADORA VISUAL ==================== -->
+<div class="s" id="s-7"><div class="cd">
+<h2>🎛️ Goldman Interactivo: Experimenta</h2>
+<p>Cambia las permeabilidades y concentraciones para ver cómo cambia el Vm. Usa los <b>presets</b> para ver condiciones fisiológicas reales.</p>
+
+<div class="clc">
+<div class="cr"><span class="cla"><span class="ion ik">K⁺</span> ext / int:</span>
+<input type="number" class="ci" id="gke" value="4"><span>/</span><input type="number" class="ci" id="gki" value="140">
+<span class="cla" style="min-width:auto">P<sub>K</sub>:</span><input type="number" class="ci" id="gpk" value="1" step="0.1" style="width:75px"></div>
+<div class="cr"><span class="cla"><span class="ion ina">Na⁺</span> ext / int:</span>
+<input type="number" class="ci" id="gne" value="145"><span>/</span><input type="number" class="ci" id="gni" value="12">
+<span class="cla" style="min-width:auto">P<sub>Na</sub>:</span><input type="number" class="ci" id="gpn" value="0.04" step="0.01" style="width:75px"></div>
+<div class="cr"><span class="cla"><span class="ion icl">Cl⁻</span> ext / int:</span>
+<input type="number" class="ci" id="gce" value="120"><span>/</span><input type="number" class="ci" id="gci" value="4">
+<span class="cla" style="min-width:auto">P<sub>Cl</sub>:</span><input type="number" class="ci" id="gpc" value="0.45" step="0.01" style="width:75px"></div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
+<button class="btn" onclick="cg()">Calcular Vm</button>
+<button class="btn btn-k" onclick="pg('r')">🟢 Reposo</button>
+<button class="btn btn-na" onclick="pg('d')">🔴 Pico PA</button>
+<button class="btn btn-ok" onclick="pg('h')">🔵 Repolarización</button>
+</div>
+<div class="res" id="gr"></div>
+</div>
+
+<!-- Goldman visual: permeability bars -->
+<h3 style="margin-top:18px">📊 Visualización: ¿Quién Domina?</h3>
+<div class="sim" style="padding:12px">
+<canvas id="cvGoldman" width="800" height="280"></canvas>
+</div>
+<p style="font-size:.82em;color:var(--mu);text-align:center">El gráfico muestra la contribución relativa de cada ión al Vm final. El ión con mayor barra "gana".</p>
+
+<h3 style="margin-top:16px">🧪 Tres Escenarios para Probar</h3>
+<div class="ch" onclick="tg(this)">🟢 Reposo: P<sub>K</sub>=1 : P<sub>Na</sub>=0.04 : P<sub>Cl</sub>=0.45 <span class="ar">▼</span></div>
+<div class="cc"><p>K⁺ domina abrumadoramente → Vm ≈ −70 mV, cerca de E<sub>K</sub> (−94). Na⁺ contribuye poco pero alcanza para despolarizar ligeramente desde −94 hasta −70.</p></div>
+<div class="ch" onclick="tg(this)">🔴 Pico PA: P<sub>K</sub>=1 : P<sub>Na</sub>=20 : P<sub>Cl</sub>=0.45 <span class="ar">▼</span></div>
+<div class="cc"><p>Na⁺ domina masivamente (canales Nav abiertos) → Vm ≈ +40 a +50 mV, acercándose a E<sub>Na</sub> (+67). La membrana se "toma de la Estación Na⁺".</p></div>
+<div class="ch" onclick="tg(this)">🔵 Repolarización: P<sub>K</sub>=10 : P<sub>Na</sub>=0.04 : P<sub>Cl</sub>=0.45 <span class="ar">▼</span></div>
+<div class="cc"><p>K⁺ domina aún más que en reposo (canales Kv abiertos) → Vm baja hacia E<sub>K</sub>. Si P<sub>K</sub> es muy alto, puede hiperpolarizar más allá de −70 (undershoot).</p></div>
+
+<div class="qq">❓ Durante el pico del potencial de acción, se abren masivamente los canales Nav. ¿Hacia qué valor se acerca Vm?</div>
+<div class="qo" id="q7"><button class="qb" onclick="ck('q7',this,0)">A) E<sub>K</sub> ≈ −94 mV</button>
+<button class="qb" onclick="ck('q7',this,1)">B) E<sub>Na</sub> ≈ +67 mV</button>
+<button class="qb" onclick="ck('q7',this,0)">C) 0 mV</button>
+<button class="qb" onclick="ck('q7',this,0)">D) E<sub>Cl</sub> ≈ −90 mV</button>
+</div><div class="qf" id="q7f"></div>
+</div></div>
+
+<!-- ==================== SECCIÓN 8: SIMULACIÓN INTEGRADA ==================== -->
+<div class="s" id="s-8"><div class="cd">
+<h2>🎮 Simulación Integrada: El Laboratorio Virtual</h2>
+<p>Usa los deslizadores para modificar condiciones y observa en <b>tiempo real</b> cómo cambia el potencial de membrana.</p>
+
+<div class="sim">
+<canvas id="cvLab" width="800" height="340"></canvas>
+<div class="sim-ctrls" style="flex-direction:column;gap:12px;padding:16px">
+
+<div style="display:flex;align-items:center;gap:12px;width:100%;flex-wrap:wrap">
+<span class="sim-label" style="min-width:130px"><span class="ion ik">K⁺</span> extracelular:</span>
+<input type="range" id="slK" min="1" max="40" value="4" oninput="updLab()">
+<span class="sim-label" id="slKv" style="min-width:60px;color:var(--k)">4 mM</span>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;width:100%;flex-wrap:wrap">
+<span class="sim-label" style="min-width:130px"><span class="ion ina">Na⁺</span> extracelular:</span>
+<input type="range" id="slNa" min="50" max="200" value="145" oninput="updLab()">
+<span class="sim-label" id="slNav" style="min-width:60px;color:var(--na)">145 mM</span>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;width:100%;flex-wrap:wrap">
+<span class="sim-label" style="min-width:130px">Ratio P<sub>Na</sub>/P<sub>K</sub>:</span>
+<input type="range" id="slP" min="1" max="100" value="4" oninput="updLab()">
+<span class="sim-label" id="slPv" style="min-width:60px;color:var(--ion)">0.04</span>
+</div>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn btn-k" onclick="labPreset('rest')">🟢 Reposo Normal</button>
+<button class="btn btn-na" onclick="labPreset('ap')">🔴 Potencial de Acción</button>
+<button class="btn" onclick="labPreset('hyper')">⚠️ Hiperkalemia (K⁺=7.5)</button>
+<button class="btn btn-ok" onclick="labPreset('hypo')">💧 Hipokalemia (K⁺=2.5)</button>
+</div>
+</div>
+</div>
+
+<div id="labInterpret">
+<div class="ib co"><div class="ibt">🔍 Interpretación</div>
+<p id="labText">Mueve los deslizadores o presiona un preset para ver los cambios.</p></div>
+</div>
+
+<h3 style="margin-top:16px">🧪 Experimentos Sugeridos</h3>
+<div class="step"><div class="step-n">1</div><div class="step-c">
+<b>Sube [K⁺] extracelular gradualmente.</b> Observa cómo E<sub>K</sub> se hace menos negativo y arrastra al Vm hacia la despolarización. Esto es lo que pasa en hiperkalemia.
+</div></div>
+<div class="step"><div class="step-n">2</div><div class="step-c">
+<b>Sube el ratio P<sub>Na</sub>/P<sub>K</sub> hasta 20.</b> Simulas la apertura de canales Nav durante un potencial de acción. El Vm salta hacia E<sub>Na</sub>.
+</div></div>
+<div class="step"><div class="step-n">3</div><div class="step-c">
+<b>Pon [K⁺] ext muy alto (>30 mM).</b> E<sub>K</sub> se acerca a 0 → Vm pierde su negatividad → la célula está completamente despolarizada (muerte celular).
+</div></div>
+
+<div class="qq">❓ En hiperkalemia (K⁺ ext = 7.5 mM), ¿por qué hay riesgo de arritmia cardíaca?</div>
+<div class="qo" id="q8"><button class="qb" onclick="ck('q8',this,0)">A) Porque se abren canales de Ca²⁺</button>
+<button class="qb" onclick="ck('q8',this,0)">B) Porque la bomba Na⁺/K⁺ se detiene</button>
+<button class="qb" onclick="ck('q8',this,1)">C) Porque E<sub>K</sub> se hace menos negativo → Vm en reposo se despolariza → se acerca al umbral → hiperexcitabilidad y luego inactivación de Nav</button>
+<button class="qb" onclick="ck('q8',this,0)">D) Porque Na⁺ deja de entrar a la célula</button>
+</div><div class="qf" id="q8f"></div>
+</div></div>
+
+<!-- ==================== SECCIÓN 9: EVALUACIÓN ==================== -->
+<div class="s" id="s-9"><div class="cd">
+<h2>✅ Evaluación de Comprensión</h2>
+<p>Responde estas preguntas para verificar que comprendiste los conceptos. Intenta razonar cada respuesta antes de elegir.</p>
+
+<div class="qq">1. ¿Cuál de estos genera el potencial de membrana en reposo?</div>
+<div class="qo" id="f1"><button class="qb" onclick="ck('f1',this,0)">A) La bomba Na⁺/K⁺ ATPasa directamente</button>
+<button class="qb" onclick="ck('f1',this,1)">B) La salida pasiva de K⁺ por canales leak</button>
+<button class="qb" onclick="ck('f1',this,0)">C) La entrada de Cl⁻ por canales regulados</button>
+<button class="qb" onclick="ck('f1',this,0)">D) La entrada de Ca²⁺ por canales voltaje-dependientes</button>
+</div><div class="qf" id="f1f"></div>
+
+<div class="qq" style="margin-top:16px">2. La ecuación de Nernst responde: "¿A qué voltaje…"</div>
+<div class="qo" id="f2"><button class="qb" onclick="ck('f2',this,0)">A) …se mueven todos los iones a máxima velocidad?</button>
+<button class="qb" onclick="ck('f2',this,0)">B) …se activa la bomba Na⁺/K⁺?</button>
+<button class="qb" onclick="ck('f2',this,1)">C) …el flujo neto de un ión específico es cero (equilibrio)?</button>
+<button class="qb" onclick="ck('f2',this,0)">D) …se abren los canales de Na⁺ voltaje-dependientes?</button>
+</div><div class="qf" id="f2f"></div>
+
+<div class="qq" style="margin-top:16px">3. Si E<sub>K</sub> = −90 mV y Vm = −70 mV, la "driving force" para K⁺ es:</div>
+<div class="qo" id="f3"><button class="qb" onclick="ck('f3',this,1)">A) +20 mV → K⁺ SALE de la célula</button>
+<button class="qb" onclick="ck('f3',this,0)">B) −20 mV → K⁺ ENTRA a la célula</button>
+<button class="qb" onclick="ck('f3',this,0)">C) 0 mV → K⁺ en equilibrio</button>
+<button class="qb" onclick="ck('f3',this,0)">D) −160 mV → K⁺ sale explosivamente</button>
+</div><div class="qf" id="f3f"></div>
+
+<div class="qq" style="margin-top:16px">4. Goldman es necesario porque:</div>
+<div class="qo" id="f4"><button class="qb" onclick="ck('f4',this,0)">A) Nernst no funciona a 37°C</button>
+<button class="qb" onclick="ck('f4',this,1)">B) La membrana es permeable a múltiples iones simultáneamente y Nernst solo considera uno</button>
+<button class="qb" onclick="ck('f4',this,0)">C) Nernst no incluye la constante de Faraday</button>
+<button class="qb" onclick="ck('f4',this,0)">D) Goldman calcula la velocidad de la bomba</button>
+</div><div class="qf" id="f4f"></div>
+
+<div class="qq" style="margin-top:16px">5. Durante el pico del potencial de acción:</div>
+<div class="qo" id="f5"><button class="qb" onclick="ck('f5',this,0)">A) P<sub>K</sub> aumenta masivamente → Vm ≈ E<sub>K</sub></button>
+<button class="qb" onclick="ck('f5',this,1)">B) P<sub>Na</sub> aumenta masivamente → Vm se acerca a E<sub>Na</sub></button>
+<button class="qb" onclick="ck('f5',this,0)">C) La bomba bombea más rápido → Vm = −90</button>
+<button class="qb" onclick="ck('f5',this,0)">D) Todos los canales se cierran → Vm = 0</button>
+</div><div class="qf" id="f5f"></div>
+
+<div class="qq" style="margin-top:16px">6. Un paciente con K⁺ plasmático de 7.5 mEq/L tendrá un E<sub>K</sub>:</div>
+<div class="qo" id="f6"><button class="qb" onclick="ck('f6',this,1)">A) Menos negativo que lo normal (despolarización relativa)</button>
+<button class="qb" onclick="ck('f6',this,0)">B) Más negativo que lo normal (hiperpolarización)</button>
+<button class="qb" onclick="ck('f6',this,0)">C) Igual al normal, porque la bomba compensa</button>
+<button class="qb" onclick="ck('f6',this,0)">D) Positivo (+30 mV)</button>
+</div><div class="qf" id="f6f"></div>
+
+<div class="qq" style="margin-top:16px">7. Si inhibes la bomba Na⁺/K⁺ con ouabaína, el Vm:</div>
+<div class="qo" id="f7"><button class="qb" onclick="ck('f7',this,0)">A) Cae a 0 mV inmediatamente</button>
+<button class="qb" onclick="ck('f7',this,1)">B) Se despolariza gradualmente conforme los gradientes se disipan</button>
+<button class="qb" onclick="ck('f7',this,0)">C) Se hiperpolariza a −120 mV</button>
+<button class="qb" onclick="ck('f7',this,0)">D) No cambia nunca</button>
+</div><div class="qf" id="f7f"></div>
+
+<div style="text-align:center;margin-top:22px">
+<button class="btn" onclick="fs()" style="font-size:1.05em;padding:13px 40px">Ver Resultado Final</button></div>
+<div id="fsd" style="display:none;margin-top:20px;text-align:center">
+<p style="color:var(--mu)">Tu puntuación</p>
+<div class="sn" id="fsn">0/7</div>
+<p id="fmsg" style="margin-top:10px"></p></div>
+</div></div>
+
+</div><!-- end .app -->
+
+<script>
+/* ==== NAVIGATION ==== */
+var S=[
+  {id:'0',t:'🎯 Inicio'},{id:'1',t:'🏟️ Analogía'},{id:'2',t:'🔬 Simulación'},{id:'3',t:'⚡ Generar vs Mantener'},
+  {id:'4',t:'📐 Nernst Intuitivo'},{id:'5',t:'🧮 Nernst Calc.'},{id:'6',t:'📊 Goldman Concepto'},
+  {id:'7',t:'🎛️ Goldman Calc.'},{id:'8',t:'🎮 Laboratorio'},{id:'9',t:'✅ Evaluación'}
+];
+var cur=0,done=new Set(),sc={};
+
+function bn(){
+  var n=document.getElementById('nav');n.innerHTML='';
+  S.forEach(function(s,i){
+    var b=document.createElement('button');b.className='nb'+(i===cur?' a':'')+(done.has(i)?' d':'');
+    b.textContent=s.t;b.onclick=function(){go(i)};n.appendChild(b);
+  });
+}
+function go(i){
+  done.add(cur);cur=i;
+  document.querySelectorAll('.s').forEach(function(e){e.classList.remove('on')});
+  var t=document.getElementById('s-'+S[i].id);if(t)t.classList.add('on');
+  var p=Math.round(done.size/S.length*100);
+  document.getElementById('pbar').style.width=p+'%';
+  document.getElementById('ptxt').textContent='Sección '+(i+1)+' de '+S.length+' — '+p+'%';
+  bn();window.scrollTo({top:0,behavior:'smooth'});
+  // Redraw canvases if needed
+  if(i===5) drawVoltLine();
+  if(i===7) drawGoldmanChart();
+  if(i===8) updLab();
+}
+function tg(h){h.classList.toggle('op');h.nextElementSibling.classList.toggle('op');}
+
+/* ==== QUIZ ==== */
+function ck(id,btn,ok){
+  var c=document.getElementById(id);
+  c.querySelectorAll('.qb').forEach(function(b){b.disabled=true;b.style.pointerEvents='none'});
+  var f=document.getElementById(id+'f');
+  if(ok){btn.classList.add('ok');f.className='qf sh gf';f.innerHTML='✅ <b>¡Correcto!</b>';sc[id]=1;}
+  else{btn.classList.add('no');f.className='qf sh bf';f.innerHTML='❌ <b>Incorrecto.</b> Revisa la explicación en esta sección.';sc[id]=0;
+  c.querySelectorAll('.qb').forEach(function(b){if(b.getAttribute('onclick').indexOf(',1)')>-1)b.classList.add('ok')});}
+}
+
+function fs(){
+  var ids=['f1','f2','f3','f4','f5','f6','f7'],c=0;
+  ids.forEach(function(id){if(sc[id]===1)c++});
+  document.getElementById('fsd').style.display='block';
+  document.getElementById('fsn').textContent=c+'/7';
+  var p=c/7*100,m='';
+  if(p===100)m='🌟 ¡PERFECTO! Dominas Nernst, Goldman y el potencial de reposo.';
+  else if(p>=85)m='🎉 Excelente. Revisa solo lo que fallaste.';
+  else if(p>=70)m='👍 Buen trabajo. Repasa las secciones con dudas.';
+  else if(p>=50)m='📚 Necesitas repasar. Vuelve a las analogías y simulaciones.';
+  else m='⚠️ Repasa toda la tutoría desde el inicio. ¡Las analogías te ayudarán!';
+  document.getElementById('fmsg').textContent=m;
+  done.add(cur);document.getElementById('pbar').style.width='100%';
+  document.getElementById('ptxt').textContent='¡Tutoría completada! — 100%';bn();
+  document.getElementById('fsd').scrollIntoView({behavior:'smooth'});
+}
+
+/* ==== NERNST CALCULATOR ==== */
+function pn(){
+  var v=document.getElementById('ni').value;
+  var p={K:{z:1,e:4,i:140},Na:{z:1,e:145,i:12},Ca:{z:2,e:2.5,i:0.0001},Cl:{z:-1,e:120,i:4}};
+  if(p[v]){document.getElementById('nz').value=p[v].z;document.getElementById('ne').value=p[v].e;document.getElementById('nn').value=p[v].i;}
+}
+var lastNernstVal = null;
+function cn(){
+  var z=+document.getElementById('nz').value,e=+document.getElementById('ne').value,i=+document.getElementById('nn').value;
+  if(!z||e<=0||i<=0){alert('Valores inválidos');return;}
+  var E=((8.314*310)/(z*96485))*Math.log(e/i)*1000;
+  lastNernstVal=E;
+  var r=document.getElementById('nr');r.className='res sh';
+  r.innerHTML='E<sub>ion</sub> = <b style="font-size:1.4em;color:var(--ion)">'+E.toFixed(1)+' mV</b><br><span style="font-size:.85em;color:var(--mu)">(61.5/'+z+') × log₁₀('+e+'/'+i+') = '+E.toFixed(1)+' mV</span>';
+  drawVoltLine(E);
+}
+
+/* ==== VOLTAGE LINE VISUALIZATION ==== */
+function drawVoltLine(Eion){
+  var cv=document.getElementById('cvVoltLine');if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);
+
+  var pad=60,lineY=H/2;
+  var minV=-150,maxV=150;
+  function vToX(v){return pad+(v-minV)/(maxV-minV)*(W-2*pad);}
+
+  // Background gradient
+  var grd=ctx.createLinearGradient(pad,0,W-pad,0);
+  grd.addColorStop(0,'rgba(168,85,247,.1)');grd.addColorStop(0.5,'rgba(30,30,50,.1)');grd.addColorStop(1,'rgba(245,158,11,.1)');
+  ctx.fillStyle=grd;ctx.fillRect(pad,10,W-2*pad,H-20);
+
+  // Main line
+  ctx.strokeStyle='#334';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(pad,lineY);ctx.lineTo(W-pad,lineY);ctx.stroke();
+
+  // Tick marks
+  ctx.fillStyle='#667';ctx.font='11px Nunito';ctx.textAlign='center';
+  for(var v=-150;v<=150;v+=50){
+    var x=vToX(v);
+    ctx.beginPath();ctx.moveTo(x,lineY-5);ctx.lineTo(x,lineY+5);ctx.stroke();
+    ctx.fillText(v+' mV',x,lineY+20);
+  }
+
+  // Reference values
+  var refs=[{v:-94,label:'E_K',color:'#a855f7'},{v:67,label:'E_Na',color:'#f59e0b'},{v:-90,label:'E_Cl',color:'#22c55e'},{v:-70,label:'Vm reposo',color:'#00e5ff'}];
+  refs.forEach(function(r){
+    var x=vToX(r.v);
+    ctx.strokeStyle=r.color;ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+    ctx.beginPath();ctx.moveTo(x,20);ctx.lineTo(x,lineY-8);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle=r.color;ctx.font='bold 11px Nunito';
+    ctx.fillText(r.label,x,14);
+  });
+
+  // Current Eion marker
+  if(typeof Eion==='number'){
+    var x=vToX(Math.max(minV,Math.min(maxV,Eion)));
+    ctx.fillStyle='#fff';ctx.strokeStyle='#00e5ff';ctx.lineWidth=3;
+    ctx.beginPath();ctx.arc(x,lineY,10,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#00e5ff';ctx.font='bold 13px Nunito';
+    ctx.fillText(Eion.toFixed(1)+' mV',x,lineY+38);
+    ctx.fillText('◆ Tu cálculo',x,lineY-18);
+  }
+}
+
+/* ==== GOLDMAN CALCULATOR ==== */
+function pg(m){
+  var p={r:{pk:1,pn:0.04,pc:0.45},d:{pk:1,pn:20,pc:0.45},h:{pk:10,pn:0.04,pc:0.45}};
+  document.getElementById('gpk').value=p[m].pk;document.getElementById('gpn').value=p[m].pn;document.getElementById('gpc').value=p[m].pc;
+  document.getElementById('gke').value=4;document.getElementById('gki').value=140;
+  document.getElementById('gne').value=145;document.getElementById('gni').value=12;
+  document.getElementById('gce').value=120;document.getElementById('gci').value=4;cg();
+}
+function cg(){
+  var Pk=+document.getElementById('gpk').value,Pn=+document.getElementById('gpn').value,Pc=+document.getElementById('gpc').value;
+  var Ke=+document.getElementById('gke').value,Ki=+document.getElementById('gki').value;
+  var Ne=+document.getElementById('gne').value,Ni=+document.getElementById('gni').value;
+  var Ce=+document.getElementById('gce').value,Ci=+document.getElementById('gci').value;
+  var num=Pk*Ke+Pn*Ne+Pc*Ci,den=Pk*Ki+Pn*Ni+Pc*Ce;
+  if(num<=0||den<=0){alert('Valores inválidos');return;}
+  var Vm=((8.314*310)/96485)*Math.log(num/den)*1000;
+  var r=document.getElementById('gr');r.className='res sh';
+  var st=Vm<-80?'🟣 Hiperpolarizado':Vm<-50?'🟢 Reposo':Vm<-20?'🟡 Despolarizándose':'🔴 Despolarizado';
+  r.innerHTML='Vm = <b style="font-size:1.4em;color:var(--ion)">'+Vm.toFixed(1)+' mV</b><br>'+st+'<br><span style="font-size:.82em;color:var(--mu)">P_K : P_Na : P_Cl = '+Pk+' : '+Pn+' : '+Pc+'</span>';
+  drawGoldmanChart(Pk,Pn,Pc,Ke,Ki,Ne,Ni,Ce,Ci,Vm);
+}
+
+/* ==== GOLDMAN CHART ==== */
+function drawGoldmanChart(Pk,Pn,Pc,Ke,Ki,Ne,Ni,Ce,Ci,Vm){
+  var cv=document.getElementById('cvGoldman');if(!cv)return;
+  var ctx=cv.getContext('2d');var W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);
+  if(typeof Pk==='undefined') return;
+
+  // Calculate contributions
+  var kContrib=Pk*Ke, naContrib=Pn*Ne, clContrib=Pc*Ci;
+  var total=kContrib+naContrib+clContrib;
+  var kPct=kContrib/total*100,naPct=naContrib/total*100,clPct=clContrib/total*100;
+
+  var barW=100,gap=80,baseY=H-50,maxH=170;
+  var startX=(W-3*barW-2*gap)/2;
+
+  var bars=[
+    {pct:kPct,label:'K⁺',sublabel:'P×[ext]',color:'#a855f7',val:kContrib.toFixed(1)},
+    {pct:naPct,label:'Na⁺',sublabel:'P×[ext]',color:'#f59e0b',val:naContrib.toFixed(1)},
+    {pct:clPct,label:'Cl⁻',sublabel:'P×[int]',color:'#22c55e',val:clContrib.toFixed(1)}
+  ];
+
+  bars.forEach(function(b,i){
+    var x=startX+i*(barW+gap);
+    var h=Math.max(8,b.pct/100*maxH);
+
+    // Bar
+    var grd=ctx.createLinearGradient(x,baseY-h,x,baseY);
+    grd.addColorStop(0,b.color);grd.addColorStop(1,b.color+'40');
+    ctx.fillStyle=grd;
+    ctx.beginPath();ctx.roundRect(x,baseY-h,barW,h,6);ctx.fill();
+
+    // Percentage
+    ctx.fillStyle='#fff';ctx.font='bold 16px Nunito';ctx.textAlign='center';
+    ctx.fillText(b.pct.toFixed(1)+'%',x+barW/2,baseY-h-8);
+
+    // Label
+    ctx.fillStyle=b.color;ctx.font='bold 14px Nunito';
+    ctx.fillText(b.label,x+barW/2,baseY+18);
+    ctx.fillStyle='#667';ctx.font='11px Nunito';
+    ctx.fillText(b.sublabel+' = '+b.val,x+barW/2,baseY+34);
+  });
+
+  // Vm result
+  ctx.fillStyle='#00e5ff';ctx.font='bold 18px Nunito';ctx.textAlign='center';
+  ctx.fillText('Vm = '+Vm.toFixed(1)+' mV',W/2,25);
+  ctx.fillStyle='#8899b3';ctx.font='13px Nunito';
+  ctx.fillText('El ión con la barra más alta tiene mayor influencia sobre el Vm',W/2,46);
+}
+
+/* ==== MEMBRANE SIMULATION ==== */
+var memAnim=null,memPhase=0,memVm=0;
+var memIons=[];
+
+function initMemIons(){
+  memIons=[];
+  // K+ inside (left side) - purple
+  for(var i=0;i<40;i++) memIons.push({x:50+Math.random()*280,y:30+Math.random()*360,type:'K',side:'in',vx:(Math.random()-.5)*1.5,vy:(Math.random()-.5)*1.5});
+  // K+ outside - fewer
+  for(var i=0;i<5;i++) memIons.push({x:470+Math.random()*280,y:30+Math.random()*360,type:'K',side:'out',vx:(Math.random()-.5)*1.5,vy:(Math.random()-.5)*1.5});
+  // Na+ outside - orange
+  for(var i=0;i<35;i++) memIons.push({x:470+Math.random()*280,y:30+Math.random()*360,type:'Na',side:'out',vx:(Math.random()-.5)*1.5,vy:(Math.random()-.5)*1.5});
+  // Na+ inside - fewer
+  for(var i=0;i<4;i++) memIons.push({x:50+Math.random()*280,y:30+Math.random()*360,type:'Na',side:'in',vx:(Math.random()-.5)*1.5,vy:(Math.random()-.5)*1.5});
+}
+
+function drawMembrane(){
+  var cv=document.getElementById('cvMembrane');if(!cv)return;
+  var ctx=cv.getContext('2d');var W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);
+
+  // Background
+  ctx.fillStyle='#0a0e18';ctx.fillRect(0,0,W,H);
+
+  // Membrane
+  var mx=370,mw=60;
+  var grd=ctx.createLinearGradient(mx,0,mx+mw,0);
+  grd.addColorStop(0,'rgba(245,158,11,.15)');grd.addColorStop(0.5,'rgba(245,158,11,.25)');grd.addColorStop(1,'rgba(245,158,11,.15)');
+  ctx.fillStyle=grd;ctx.fillRect(mx,0,mw,H);
+
+  // Membrane label
+  ctx.save();ctx.translate(mx+mw/2,H/2);ctx.rotate(-Math.PI/2);
+  ctx.fillStyle='rgba(245,158,11,.6)';ctx.font='bold 12px Nunito';ctx.textAlign='center';
+  ctx.fillText('MEMBRANA',0,4);ctx.restore();
+
+  // Channel pores (K+ channels - more)
+  ctx.strokeStyle='rgba(168,85,247,.5)';ctx.lineWidth=2;
+  var chY=[60,140,220,300,370];
+  chY.forEach(function(y){
+    ctx.beginPath();ctx.moveTo(mx,y);ctx.lineTo(mx+mw,y);ctx.stroke();
+    ctx.fillStyle='rgba(168,85,247,.15)';ctx.fillRect(mx,y-6,mw,12);
+    ctx.fillStyle='rgba(168,85,247,.8)';ctx.font='9px Nunito';ctx.textAlign='center';
+    ctx.fillText('K⁺',mx+mw/2,y+3);
+  });
+  // Na channel - fewer
+  ctx.strokeStyle='rgba(245,158,11,.5)';
+  ctx.beginPath();ctx.moveTo(mx,185);ctx.lineTo(mx+mw,185);ctx.stroke();
+  ctx.fillStyle='rgba(245,158,11,.15)';ctx.fillRect(mx,179,mw,12);
+  ctx.fillStyle='rgba(245,158,11,.8)';ctx.font='9px Nunito';
+  ctx.fillText('Na⁺',mx+mw/2,188);
+
+  // Labels
+  ctx.font='bold 16px Nunito';ctx.textAlign='center';
+  ctx.fillStyle='#a855f7';ctx.fillText('INTRACELULAR',190,25);
+  ctx.fillStyle='#f59e0b';ctx.fillText('EXTRACELULAR',620,25);
+
+  // Draw ions
+  memIons.forEach(function(ion){
+    // Move
+    ion.x+=ion.vx;ion.y+=ion.vy;
+    // Bounce
+    if(ion.side==='in'){
+      if(ion.x<20)ion.vx=Math.abs(ion.vx);
+      if(ion.x>mx-10)ion.vx=-Math.abs(ion.vx);
+    } else {
+      if(ion.x<mx+mw+10)ion.vx=Math.abs(ion.vx);
+      if(ion.x>W-20)ion.vx=-Math.abs(ion.vx);
+    }
+    if(ion.y<20)ion.vy=Math.abs(ion.vy);
+    if(ion.y>H-20)ion.vy=-Math.abs(ion.vy);
+
+    ctx.beginPath();ctx.arc(ion.x,ion.y,7,0,Math.PI*2);
+    ctx.fillStyle=ion.type==='K'?'rgba(168,85,247,.85)':'rgba(245,158,11,.85)';
+    ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 7px Nunito';ctx.textAlign='center';
+    ctx.fillText(ion.type==='K'?'K⁺':'Na⁺',ion.x,ion.y+2.5);
+  });
+
+  // Voltmeter
+  ctx.fillStyle='rgba(0,229,255,.08)';
+  ctx.beginPath();ctx.roundRect(10,H-80,160,70,8);ctx.fill();
+  ctx.strokeStyle='rgba(0,229,255,.3)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.roundRect(10,H-80,160,70,8);ctx.stroke();
+  ctx.fillStyle='#00e5ff';ctx.font='bold 11px Nunito';ctx.textAlign='left';
+  ctx.fillText('⚡ Voltímetro',20,H-62);
+  ctx.font='bold 26px Courier New';
+  ctx.fillText(memVm.toFixed(0)+' mV',20,H-30);
+
+  // Phase indicator
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='11px Nunito';ctx.textAlign='right';
+  var phases=['Esperando...','K⁺ saliendo...','Equilibrando...','Na⁺ filtrándose...','Vm estable ≈ −70 mV'];
+  ctx.fillText(phases[memPhase]||'',W-15,H-10);
+}
+
+function startMemSim(){
+  if(memAnim) return;
+  initMemIons();memPhase=1;memVm=0;
+  var frame=0;
+  var narr=document.getElementById('memText');
+  function animate(){
+    frame++;
+    // Phase logic
+    if(frame<120){
+      memPhase=1;memVm=Math.max(-90,memVm-0.75);
+      if(frame%30===0&&memIons.length>10){
+        // Move a K+ from in to out
+        for(var j=0;j<memIons.length;j++){
+          if(memIons[j].type==='K'&&memIons[j].side==='in'){
+            memIons[j].side='out';memIons[j].x=440+Math.random()*280;break;
+          }
+        }
+      }
+      narr.innerHTML='<b>Fase 1:</b> K⁺ sale por canales leak. El interior pierde cargas (+) y se hace negativo. Vm = '+memVm.toFixed(0)+' mV';
+    } else if(frame<200){
+      memPhase=2;memVm=memVm+((-90-memVm)*0.03);
+      narr.innerHTML='<b>Fase 2:</b> La fuerza eléctrica (interior negativo atrae K⁺ de vuelta) se equilibra con la fuerza química. Vm → E<sub>K</sub> ≈ −90 mV';
+    } else if(frame<320){
+      memPhase=3;memVm=memVm+((-70-memVm)*0.02);
+      if(frame%40===0){
+        // Na leaks in
+        for(var j=0;j<memIons.length;j++){
+          if(memIons[j].type==='Na'&&memIons[j].side==='out'){
+            memIons[j].side='in';memIons[j].x=50+Math.random()*280;break;
+          }
+        }
+      }
+      narr.innerHTML='<b>Fase 3:</b> Pequeña filtración de Na⁺ hacia adentro (pocas puertas Na⁺). Esto "tira" el Vm ligeramente hacia el lado positivo. Vm → ≈ −70 mV';
+    } else {
+      memPhase=4;memVm=-70;
+      narr.innerHTML='<b>Estado estable:</b> Vm ≈ −70 mV. K⁺ domina (más puertas) → interior negativo. Na⁺ filtra un poco → no llega a −90. La <b>bomba Na⁺/K⁺</b> mantiene los gradientes a largo plazo.';
+      drawMembrane();
+      document.getElementById('memStatus').textContent='✓ Simulación completa';
+      document.getElementById('memStatus').style.color='var(--ok)';
+      memAnim=null;return;
+    }
+    drawMembrane();
+    memAnim=requestAnimationFrame(animate);
+  }
+  document.getElementById('memStatus').textContent='Simulando...';
+  document.getElementById('memStatus').style.color='var(--na)';
+  animate();
+}
+function resetMemSim(){
+  if(memAnim){cancelAnimationFrame(memAnim);memAnim=null;}
+  memPhase=0;memVm=0;initMemIons();drawMembrane();
+  document.getElementById('memStatus').textContent='Listo para iniciar';
+  document.getElementById('memStatus').style.color='var(--ion)';
+  document.getElementById('memText').textContent='Presiona "Iniciar" para ver cómo los iones de K⁺ (morado) salen a través de los canales leak, dejando el interior negativo.';
+}
+
+/* ==== LAB SIMULATION ==== */
+function updLab(){
+  var Ke=+document.getElementById('slK').value;
+  var Ne=+document.getElementById('slNa').value;
+  var pRatio=+document.getElementById('slP').value/100;
+
+  document.getElementById('slKv').textContent=Ke+' mM';
+  document.getElementById('slNav').textContent=Ne+' mM';
+  document.getElementById('slPv').textContent=pRatio.toFixed(2);
+
+  var Ki=140,Ni=12,Ci=4,Ce=120;
+  var Pk=1,Pn=pRatio,Pc=0.45;
+
+  var Ek=((8.314*310)/(1*96485))*Math.log(Ke/Ki)*1000;
+  var Ena=((8.314*310)/(1*96485))*Math.log(Ne/Ni)*1000;
+
+  var num=Pk*Ke+Pn*Ne+Pc*Ci;
+  var den=Pk*Ki+Pn*Ni+Pc*Ce;
+  var Vm=((8.314*310)/96485)*Math.log(num/den)*1000;
+
+  drawLabCanvas(Ek,Ena,Vm,Ke,Ne,pRatio);
+
+  // Interpretation
+  var txt='';
+  if(Ke<=5&&pRatio<0.1) txt='<b>Condiciones cercanas al reposo normal.</b> Vm ≈ '+Vm.toFixed(0)+' mV. K⁺ domina → interior negativo.';
+  else if(Ke>6) txt='<b>⚠️ Hiperkalemia:</b> [K⁺]ext='+Ke+' mM. E<sub>K</sub>='+Ek.toFixed(0)+' mV (menos negativo). Vm se despolariza a '+Vm.toFixed(0)+' mV → riesgo de arritmia.';
+  else if(pRatio>0.5) txt='<b>🔴 Alta permeabilidad a Na⁺</b> (ratio='+pRatio.toFixed(2)+'). Na⁺ domina → Vm='+Vm.toFixed(0)+' mV, acercándose a E<sub>Na</sub>='+Ena.toFixed(0)+' mV.';
+  else txt='Vm = '+Vm.toFixed(0)+' mV. E<sub>K</sub>='+Ek.toFixed(0)+' mV, E<sub>Na</sub>='+Ena.toFixed(0)+' mV.';
+  document.getElementById('labText').innerHTML=txt;
+}
+
+function drawLabCanvas(Ek,Ena,Vm,Ke,Ne,pRatio){
+  var cv=document.getElementById('cvLab');if(!cv)return;
+  var ctx=cv.getContext('2d');var W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);
+
+  var pad=70,lineY=H/2+20;
+  var minV=-150,maxV=100;
+  function vToX(v){return pad+(Math.max(minV,Math.min(maxV,v))-minV)/(maxV-minV)*(W-2*pad);}
+
+  // Background
+  ctx.fillStyle='#0a0e18';ctx.fillRect(0,0,W,H);
+
+  // Title
+  ctx.fillStyle='#e2e8f0';ctx.font='bold 16px Nunito';ctx.textAlign='center';
+  ctx.fillText('Escala de Potencial (mV)',W/2,24);
+
+  // Gradient background for scale
+  var grd=ctx.createLinearGradient(pad,0,W-pad,0);
+  grd.addColorStop(0,'rgba(168,85,247,.08)');grd.addColorStop(0.6,'rgba(20,20,40,.05)');grd.addColorStop(1,'rgba(245,158,11,.08)');
+  ctx.fillStyle=grd;ctx.fillRect(pad,lineY-60,W-2*pad,120);
+
+  // Main scale line
+  ctx.strokeStyle='#445';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(pad,lineY);ctx.lineTo(W-pad,lineY);ctx.stroke();
+
+  // Ticks
+  ctx.fillStyle='#667';ctx.font='10px Nunito';ctx.textAlign='center';
+  for(var v=-150;v<=100;v+=25){
+    var x=vToX(v);
+    ctx.beginPath();ctx.moveTo(x,lineY-4);ctx.lineTo(x,lineY+4);ctx.stroke();
+    if(v%50===0) ctx.fillText(v,x,lineY+18);
+  }
+
+  // Zero line
+  var x0=vToX(0);ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(x0,lineY-50);ctx.lineTo(x0,lineY+50);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#667';ctx.fillText('0',x0,lineY-55);
+
+  // Markers
+  function drawMarker(v,label,color,yOff){
+    var x=vToX(v);
+    // Line
+    ctx.strokeStyle=color;ctx.lineWidth=2;ctx.setLineDash([5,3]);
+    ctx.beginPath();ctx.moveTo(x,lineY-40+yOff);ctx.lineTo(x,lineY);ctx.stroke();ctx.setLineDash([]);
+    // Circle
+    ctx.beginPath();ctx.arc(x,lineY,6,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();
+    // Label
+    ctx.fillStyle=color;ctx.font='bold 12px Nunito';ctx.textAlign='center';
+    ctx.fillText(label+' = '+v.toFixed(0)+' mV',x,lineY-46+yOff);
+  }
+
+  drawMarker(Ek,'E_K','#a855f7',0);
+  drawMarker(Ena,'E_Na','#f59e0b',-16);
+
+  // Vm - bigger marker
+  var xVm=vToX(Vm);
+  ctx.beginPath();ctx.arc(xVm,lineY,12,0,Math.PI*2);
+  ctx.fillStyle='#00e5ff';ctx.fill();
+  ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='bold 9px Nunito';ctx.textAlign='center';
+  ctx.fillText('Vm',xVm,lineY+3.5);
+  ctx.fillStyle='#00e5ff';ctx.font='bold 14px Nunito';
+  ctx.fillText('Vm = '+Vm.toFixed(1)+' mV',xVm,lineY+38);
+
+  // Info boxes at top
+  ctx.fillStyle='rgba(168,85,247,.12)';ctx.beginPath();ctx.roundRect(20,H-60,180,50,6);ctx.fill();
+  ctx.fillStyle='#a855f7';ctx.font='bold 11px Nunito';ctx.textAlign='left';
+  ctx.fillText('K⁺ ext: '+Ke+' mM | int: 140 mM',30,H-40);
+  ctx.fillText('E_K = '+Ek.toFixed(1)+' mV',30,H-22);
+
+  ctx.fillStyle='rgba(245,158,11,.12)';ctx.beginPath();ctx.roundRect(220,H-60,180,50,6);ctx.fill();
+  ctx.fillStyle='#f59e0b';ctx.font='bold 11px Nunito';
+  ctx.fillText('Na⁺ ext: '+Ne+' mM | int: 12 mM',230,H-40);
+  ctx.fillText('E_Na = '+Ena.toFixed(1)+' mV',230,H-22);
+
+  ctx.fillStyle='rgba(0,229,255,.12)';ctx.beginPath();ctx.roundRect(420,H-60,220,50,6);ctx.fill();
+  ctx.fillStyle='#00e5ff';ctx.font='bold 11px Nunito';
+  ctx.fillText('P_Na/P_K = '+pRatio.toFixed(2),430,H-40);
+  ctx.fillText('→ Vm = '+Vm.toFixed(1)+' mV',430,H-22);
+}
+
+function labPreset(mode){
+  if(mode==='rest'){document.getElementById('slK').value=4;document.getElementById('slNa').value=145;document.getElementById('slP').value=4;}
+  else if(mode==='ap'){document.getElementById('slK').value=4;document.getElementById('slNa').value=145;document.getElementById('slP').value=95;}
+  else if(mode==='hyper'){document.getElementById('slK').value=7.5;document.getElementById('slNa').value=145;document.getElementById('slP').value=4;}
+  else if(mode==='hypo'){document.getElementById('slK').value=2.5;document.getElementById('slNa').value=145;document.getElementById('slP').value=4;}
+  updLab();
+}
+
+/* ==== INIT ==== */
+bn();
+initMemIons();
+
+// roundRect polyfill
+if(!CanvasRenderingContext2D.prototype.roundRect){
+  CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){
+    if(typeof r==='number') r={tl:r,tr:r,br:r,bl:r};
+    this.moveTo(x+r.tl,y);this.lineTo(x+w-r.tr,y);this.quadraticCurveTo(x+w,y,x+w,y+r.tr);
+    this.lineTo(x+w,y+h-r.br);this.quadraticCurveTo(x+w,y+h,x+w-r.br,y+h);
+    this.lineTo(x+r.bl,y+h);this.quadraticCurveTo(x,y+h,x,y+h-r.bl);
+    this.lineTo(x,y+r.tl);this.quadraticCurveTo(x,y,x+r.tl,y);this.closePath();return this;
+  };
+}
+</script>
+</body>
+</html>
