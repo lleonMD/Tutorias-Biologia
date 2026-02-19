@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría: Señalización Celular — Parte 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080c16;--c1:#0f1628;--c2:#161d33;--sig:#00e5ff;--rec:#a855f7;--lig:#f59e0b;--eff:#22c55e;--ca:#ef4444;--tx:#e2e8f0;--mu:#8899b3;--bd:#1c2744;--ok:#22c55e;--er:#ef4444}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 25%,rgba(168,85,247,.06),transparent 55%),radial-gradient(ellipse at 80% 75%,rgba(0,229,255,.05),transparent 55%);pointer-events:none;z-index:0}
+h1,h2,h3{font-family:'Playfair Display',serif}
+.app{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:16px}
+.hd{text-align:center;padding:28px 16px 20px;border-bottom:1px solid var(--bd);margin-bottom:16px}
+.hd h1{font-size:2em;font-weight:900;background:linear-gradient(135deg,var(--sig),var(--rec),var(--lig));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.25}
+.hd p{color:var(--mu);margin-top:6px;font-size:.95em}
+.pb{background:var(--bd);border-radius:20px;height:6px;margin:10px 0;overflow:hidden}
+.pf{height:100%;border-radius:20px;transition:width .5s;background:linear-gradient(90deg,var(--sig),var(--rec),var(--lig))}
+.pt{text-align:center;font-size:.8em;color:var(--mu);margin-bottom:12px}
+.nv{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:10px;background:var(--c1);border-radius:12px;margin-bottom:18px;border:1px solid var(--bd)}
+.nb{padding:7px 13px;border-radius:8px;border:1px solid transparent;background:0;color:var(--mu);cursor:pointer;font-family:inherit;font-size:.76em;font-weight:700;transition:.3s}
+.nb:hover{background:rgba(0,229,255,.1);color:var(--tx)}
+.nb.a{background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(168,85,247,.15));color:var(--sig);border-color:rgba(0,229,255,.3)}
+.nb.d{color:var(--ok)}.nb.d::after{content:' ✓'}
+.s{display:none;animation:fi .4s}.s.on{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.cd{background:var(--c1);border:1px solid var(--bd);border-radius:16px;padding:22px;margin-bottom:16px;position:relative;overflow:hidden}
+.cd::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sig),var(--rec),var(--lig));opacity:.6}
+.cd h2{font-size:1.45em;margin-bottom:12px;color:var(--sig)}.cd h3{font-size:1.1em;margin-bottom:8px;color:var(--rec)}
+.cd p{line-height:1.75;margin-bottom:8px}
+.ib{padding:16px 18px;border-radius:12px;margin:14px 0;border-left:4px solid}
+.ib.co{background:rgba(0,229,255,.06);border-color:var(--sig)}.ib.cl{background:rgba(239,68,68,.06);border-color:var(--ca)}.ib.ky{background:rgba(168,85,247,.06);border-color:var(--rec)}.ib.su{background:rgba(34,197,94,.06);border-color:var(--ok)}.ib.wa{background:rgba(245,158,11,.06);border-color:var(--lig)}
+.ibt{font-weight:800;margin-bottom:6px;font-size:.93em}
+table.t{width:100%;border-collapse:collapse;margin:14px 0;border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.t th{background:rgba(0,229,255,.08);padding:10px 12px;text-align:left;font-weight:700;font-size:.84em;color:var(--sig);border-bottom:1px solid var(--bd)}
+.t td{padding:9px 12px;font-size:.84em;line-height:1.5;border-bottom:1px solid var(--bd);vertical-align:top}
+.t tr:hover td{background:rgba(0,229,255,.03)}
+.qq{font-weight:700;font-size:1em;margin-bottom:12px;padding:12px 16px;background:rgba(168,85,247,.08);border-radius:10px;border:1px solid rgba(168,85,247,.15)}
+.qo{display:flex;flex-direction:column;gap:6px}
+.qb{padding:11px 16px;border-radius:9px;cursor:pointer;border:2px solid var(--bd);background:var(--c2);font-family:inherit;font-size:.88em;color:var(--tx);text-align:left;transition:.2s;font-weight:600}
+.qb:hover{border-color:var(--sig);background:rgba(0,229,255,.05)}
+.qb.ok{border-color:var(--ok)!important;background:rgba(34,197,94,.1)!important;color:var(--ok)!important}
+.qb.no{border-color:var(--er)!important;background:rgba(239,68,68,.06)!important;color:var(--er)!important;opacity:.7}
+.qf{margin-top:10px;padding:14px 16px;border-radius:10px;font-size:.9em;line-height:1.7;display:none}
+.qf.sh{display:block;animation:fi .3s}.qf.gf{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2)}.qf.bf{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2)}
+.anl{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(168,85,247,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:20px;margin:16px 0}
+.anl h3{color:var(--lig);margin-bottom:8px}.anl-icon{font-size:2.5em;text-align:center;margin-bottom:8px}
+.step{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.step-n{min-width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--sig),var(--rec));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;color:#fff;flex-shrink:0}
+.step-c{flex:1}
+.sim{background:var(--c2);border-radius:14px;padding:4px;margin:16px 0;border:1px solid var(--bd);overflow:hidden}
+.sim canvas{display:block;width:100%;border-radius:10px}
+.sim-ctrls{display:flex;flex-wrap:wrap;gap:8px;padding:12px;align-items:center;justify-content:center}
+.btn{padding:10px 22px;border-radius:9px;border:0;cursor:pointer;background:linear-gradient(135deg,var(--sig),var(--rec));color:#fff;font-family:inherit;font-weight:700;font-size:.9em;transition:.2s}
+.btn:hover{transform:scale(1.03);box-shadow:0 4px 20px rgba(0,229,255,.2)}
+.btn-na{background:linear-gradient(135deg,var(--lig),var(--ca))}
+.btn-ok{background:linear-gradient(135deg,var(--ok),#06b6d4)}
+/* Visual flow diagram */
+.vflow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;padding:18px;margin:14px 0}
+.vf-box{padding:10px 16px;border-radius:10px;font-weight:800;font-size:.85em;text-align:center;min-width:80px;position:relative}
+.vf-arr{color:var(--sig);font-size:1.3em;font-weight:900}
+/* Card grid */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.gc{background:var(--c2);border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center;transition:.3s}
+.gc:hover{border-color:var(--sig);transform:translateY(-2px)}
+.gc-icon{font-size:2.2em;margin-bottom:6px}
+.gc-title{font-weight:800;font-size:.92em;margin-bottom:4px}
+.gc-desc{font-size:.82em;color:var(--mu);line-height:1.5}
+/* Badge */
+.badge{display:inline-block;padding:3px 10px;border-radius:16px;font-weight:800;font-size:.82em}
+.b-sig{background:rgba(0,229,255,.18);color:var(--sig)}.b-rec{background:rgba(168,85,247,.18);color:var(--rec)}.b-lig{background:rgba(245,158,11,.18);color:var(--lig)}.b-eff{background:rgba(34,197,94,.18);color:var(--eff)}.b-ca{background:rgba(239,68,68,.18);color:var(--ca)}
+/* Interactive receptor demo */
+.receptor-demo{position:relative;min-height:300px;margin:16px 0}
+/* Compare columns */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.cmp-col{background:var(--c2);border:1px solid var(--bd);border-radius:12px;padding:16px}
+.cmp-col h3{font-size:1em;margin-bottom:8px;text-align:center}
+@media(max-width:700px){.hd h1{font-size:1.4em}.nb{font-size:.7em;padding:5px 8px}.cd{padding:14px}.step{flex-direction:column;gap:8px}.step-n{align-self:flex-start}.cgrid{grid-template-columns:1fr}.cmp{grid-template-columns:1fr}.vflow{font-size:.8em}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="hd">
+<h1>📡 Señalización Celular — Parte 1</h1>
+<p>Fundamentos, Tipos de Señalización, Receptores y Transducción</p>
+<p style="font-size:.82em;color:var(--rec);margin-top:4px">RA 1–13 • Interactivo con diagramas animados y correlaciones clínicas</p>
+</div>
+<div class="pb"><div class="pf" id="pbar"></div></div>
+<div class="pt" id="ptxt"></div>
+<div class="nv" id="nav"></div>
+
+<!-- S0 -->
+<div class="s on" id="s-0"><div class="cd">
+<h2>🎯 Mapa de la Tutoría</h2>
+<div class="cgrid">
+<div class="gc"><div class="gc-icon">📡</div><div class="gc-title">Sección 1-2</div><div class="gc-desc">Definiciones fundamentales y tipos de señalización intercelular</div></div>
+<div class="gc"><div class="gc-icon">🧬</div><div class="gc-title">Sección 3-5</div><div class="gc-desc">Respuestas diferenciales, cascadas, cross-talk y scaffold</div></div>
+<div class="gc"><div class="gc-icon">🧪</div><div class="gc-title">Sección 6-7</div><div class="gc-desc">Tipos de ligandos y morfógenos</div></div>
+<div class="gc"><div class="gc-icon">🔬</div><div class="gc-title">Sección 8-10</div><div class="gc-desc">Receptores, agonistas/antagonistas, transducción</div></div>
+<div class="gc"><div class="gc-icon">⚡</div><div class="gc-title">Sección 11-13</div><div class="gc-desc">RTKs, GPCRs y receptores nucleares en detalle</div></div>
+</div>
+</div></div>
+
+<!-- S1: DEFINICIONES -->
+<div class="s" id="s-1"><div class="cd">
+<h2>📡 Definiciones Fundamentales</h2>
+<p>La señalización celular es el lenguaje de las células. Toda vía sigue un flujo central:</p>
+<div class="sim"><canvas id="cvFlow" width="900" height="200"></canvas></div>
+<p style="text-align:center;font-size:.82em;color:var(--mu)">Haz clic en cada caja para ver su definición ▲</p>
+<div class="ib co" id="flowInfo"><div class="ibt">👆 Selecciona un componente arriba</div><p>Haz clic en las cajas del diagrama para explorar cada término.</p></div>
+<div class="ib cl"><div class="ibt">🏥 Correlación Clínica</div><p>Los <b>β-bloqueadores</b> (propranolol) son <b>antagonistas</b> del receptor β-adrenérgico: bloquean la señal de adrenalina en el corazón → reducen frecuencia cardíaca. Comprender estos componentes es la base de la farmacología.</p></div>
+<div class="qq">❓ ¿Qué es la transducción de señales?</div>
+<div class="qo" id="q1"><button class="qb" onclick="ck('q1',this,0)">A) Síntesis de un ligando</button><button class="qb" onclick="ck('q1',this,1)">B) Conversión de la interacción receptor-ligando en cambios intracelulares con amplificación</button><button class="qb" onclick="ck('q1',this,0)">C) Transporte del ligando por la sangre</button><button class="qb" onclick="ck('q1',this,0)">D) Destrucción del receptor post-señalización</button></div><div class="qf" id="q1f"></div>
+</div></div>
+
+<!-- S2: TIPOS SEÑALIZACIÓN -->
+<div class="s" id="s-2"><div class="cd">
+<h2>🔄 Tipos de Señalización Intercelular</h2>
+<div class="sim"><canvas id="cvTypes" width="900" height="400"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="showType(0)">Contacto</button><button class="btn" onclick="showType(1)">Paracrina</button><button class="btn" onclick="showType(2)">Autocrina</button><button class="btn btn-na" onclick="showType(3)">Sináptica</button><button class="btn btn-ok" onclick="showType(4)">Endocrina</button><button class="btn" style="background:linear-gradient(135deg,var(--rec),#6366f1)" onclick="showType(5)">Gap Junction</button></div>
+</div>
+<div class="ib co" id="typeInfo"><div class="ibt">👆 Selecciona un tipo arriba para ver la animación</div><p>Cada tipo difiere en distancia, velocidad y mecanismo.</p></div>
+<div class="ib cl"><div class="ibt">🏥 Señalización Autocrina en Cáncer</div><p>Las células tumorales producen sus propios factores de crecimiento (autocrina) → loop proliferativo. Es uno de los "hallmarks of cancer".</p></div>
+<div class="qq">❓ Un tumor produce sus propios factores de crecimiento. ¿Tipo de señalización?</div>
+<div class="qo" id="q2"><button class="qb" onclick="ck('q2',this,0)">A) Endocrina</button><button class="qb" onclick="ck('q2',this,0)">B) Paracrina</button><button class="qb" onclick="ck('q2',this,1)">C) Autocrina</button><button class="qb" onclick="ck('q2',this,0)">D) Sináptica</button></div><div class="qf" id="q2f"></div>
+</div></div>
+
+<!-- S3: RESPUESTA DIFERENCIAL -->
+<div class="s" id="s-3"><div class="cd">
+<h2>🧬 Misma Señal, Diferente Respuesta</h2>
+<p>La <b>acetilcolina</b> (ACh) produce efectos completamente distintos según la célula:</p>
+<div class="sim"><canvas id="cvACh" width="900" height="340"></canvas></div>
+<div class="ib ky"><div class="ibt">🔑 ¿De qué depende?</div>
+<div class="cgrid" style="margin-top:8px">
+<div class="gc"><div class="gc-icon">📡</div><div class="gc-title">Receptores</div><div class="gc-desc">Nicotínico vs Muscarínico</div></div>
+<div class="gc"><div class="gc-icon">⚙️</div><div class="gc-title">Maquinaria IC</div><div class="gc-desc">Proteínas señalizadoras disponibles</div></div>
+<div class="gc"><div class="gc-icon">🎯</div><div class="gc-title">Efectores</div><div class="gc-desc">PKA fosforila sustratos diferentes</div></div>
+<div class="gc"><div class="gc-icon">🧬</div><div class="gc-title">Genes activos</div><div class="gc-desc">Programa genético del tipo celular</div></div>
+</div></div>
+<div class="qq">❓ La adrenalina causa glucogenólisis en hígado pero lipólisis en adipocitos. ¿Por qué?</div>
+<div class="qo" id="q3"><button class="qb" onclick="ck('q3',this,0)">A) La adrenalina se modifica en cada tejido</button><button class="qb" onclick="ck('q3',this,1)">B) Aunque receptor y AMPc son similares, las proteínas diana de PKA difieren en cada célula</button><button class="qb" onclick="ck('q3',this,0)">C) Receptores completamente diferentes</button><button class="qb" onclick="ck('q3',this,0)">D) El hígado no tiene receptores β-adrenérgicos</button></div><div class="qf" id="q3f"></div>
+</div></div>
+
+<!-- S4: CASCADA -->
+<div class="s" id="s-4"><div class="cd">
+<h2>⚡ Cascada de Señalización</h2>
+<p>Una sola molécula de ligando puede generar millones de respuestas. Presiona <b>Iniciar</b> para ver la amplificación:</p>
+<div class="sim"><canvas id="cvCascade" width="900" height="360"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="startCascade()">▶ Iniciar Amplificación</button><button class="btn btn-na" onclick="resetCascade()">↺ Reiniciar</button><span style="font-size:.85em;color:var(--sig);font-weight:700" id="cascCount">1 molécula</span></div></div>
+<div class="cmp">
+<div class="cmp-col"><h3 style="color:var(--sig)">⚡ Switches: Fosforilación</h3><p style="font-size:.85em"><b>Kinasa</b> agrega P (enciende)<br><b>Fosfatasa</b> remueve P (apaga)</p></div>
+<div class="cmp-col"><h3 style="color:var(--lig)">⚡ Switches: GTPasas</h3><p style="font-size:.85em"><b>GEF</b> → GDP→GTP (enciende)<br><b>GAP</b> → GTP→GDP (apaga)</p></div>
+</div>
+<div class="ib cl"><div class="ibt">🏥 Ras mutado (~30% cánceres)</div><p>Ras queda permanentemente ON (no hidroliza GTP) → proliferación descontrolada.</p></div>
+<div class="qq">❓ ¿Función de las GAPs?</div>
+<div class="qo" id="q4"><button class="qb" onclick="ck('q4',this,0)">A) Activar GTPasas (GDP→GTP)</button><button class="qb" onclick="ck('q4',this,1)">B) Inactivar GTPasas (estimulan hidrólisis GTP→GDP)</button><button class="qb" onclick="ck('q4',this,0)">C) Fosforilar tirosinas</button><button class="qb" onclick="ck('q4',this,0)">D) Generar AMPc</button></div><div class="qf" id="q4f"></div>
+</div></div>
+
+<!-- S5: CROSS-TALK y SCAFFOLD -->
+<div class="s" id="s-5"><div class="cd">
+<h2>🔀 Cross-Talk y Proteínas Scaffold</h2>
+<div class="sim"><canvas id="cvScaffold" width="900" height="360"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="drawScaff(0)">❌ Sin Scaffold (cross-talk)</button><button class="btn btn-ok" onclick="drawScaff(1)">✅ Con Scaffold (organizado)</button></div></div>
+<div class="ib su"><div class="ibt">💡 Scaffold = organizador</div><p>Mantiene proteínas juntas → señal rápida, eficiente, específica. Impide interferencia entre vías.</p></div>
+<div class="qq">❓ ¿Función principal de las proteínas scaffold?</div>
+<div class="qo" id="q5"><button class="qb" onclick="ck('q5',this,0)">A) Amplificar generando más 2dos mensajeros</button><button class="qb" onclick="ck('q5',this,1)">B) Organizar componentes de señalización, manteniendo especificidad y eficiencia</button><button class="qb" onclick="ck('q5',this,0)">C) Destruir ligandos</button><button class="qb" onclick="ck('q5',this,0)">D) Transportar hormonas por sangre</button></div><div class="qf" id="q5f"></div>
+</div></div>
+
+<!-- S6: LIGANDOS -->
+<div class="s" id="s-6"><div class="cd">
+<h2>🧪 Tipos de Ligandos</h2>
+<div class="sim"><canvas id="cvLigands" width="900" height="380"></canvas></div>
+<div class="ib ky"><div class="ibt">🔑 Regla: ¿Dónde está el receptor?</div>
+<div class="cgrid" style="margin-top:8px">
+<div class="gc" style="border-color:var(--sig)"><div class="gc-icon">💧</div><div class="gc-title">Hidrofílicos</div><div class="gc-desc">No cruzan membrana → receptor de <b>superficie</b><br>Proteínas, péptidos, catecolaminas</div></div>
+<div class="gc" style="border-color:var(--lig)"><div class="gc-icon">🛢️</div><div class="gc-title">Hidrofóbicos</div><div class="gc-desc">Cruzan membrana → receptor <b>nuclear</b><br>Esteroides, retinoides, tiroideas</div></div>
+<div class="gc" style="border-color:var(--eff)"><div class="gc-icon">💨</div><div class="gc-title">Gases</div><div class="gc-desc">Difunden libre → enzima <b>intracelular</b><br>NO, CO</div></div>
+</div></div>
+<div class="qq">❓ El cortisol actúa sobre receptores nucleares porque:</div>
+<div class="qo" id="q6"><button class="qb" onclick="ck('q6',this,0)">A) Es una proteína pequeña</button><button class="qb" onclick="ck('q6',this,1)">B) Es hidrofóbico (esteroide) → difunde a través de la membrana</button><button class="qb" onclick="ck('q6',this,0)">C) Tiene señal de localización nuclear</button><button class="qb" onclick="ck('q6',this,0)">D) Es transportado por vesículas al núcleo</button></div><div class="qf" id="q6f"></div>
+</div></div>
+
+<!-- S7: MORFÓGENOS -->
+<div class="s" id="s-7"><div class="cd">
+<h2>🦎 Morfógenos</h2>
+<div class="sim"><canvas id="cvMorpho" width="900" height="300"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="animMorpho()">▶ Ver Gradiente</button></div></div>
+<div class="ib su"><div class="ibt">📐 Definición</div><p>Molécula que forma un <b>gradiente de concentración</b> desde una fuente. Células a diferentes distancias toman destinos distintos según la dosis.</p></div>
+<div class="ib cl"><div class="ibt">🏥 Holoprosencefalia</div><p>Mutaciones en Sonic Hedgehog alteran el gradiente → cerebro anterior no se divide en hemisferios.</p></div>
+<div class="qq">❓ ¿Qué define a un morfógeno?</div>
+<div class="qo" id="q7"><button class="qb" onclick="ck('q7',this,0)">A) Solo actúa por contacto directo</button><button class="qb" onclick="ck('q7',this,1)">B) Forma gradiente de concentración → dirige destinos celulares según la dosis</button><button class="qb" onclick="ck('q7',this,0)">C) Es un receptor que cambia forma</button><button class="qb" onclick="ck('q7',this,0)">D) Enzima que degrada membrana</button></div><div class="qf" id="q7f"></div>
+</div></div>
+
+<!-- S8: RECEPTORES MEMBRANA -->
+<div class="s" id="s-8"><div class="cd">
+<h2>📡 Receptores de Membrana</h2>
+<div class="sim"><canvas id="cvReceptors" width="900" height="380"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="showRec(0)">Canal Iónico</button><button class="btn btn-na" onclick="showRec(1)">GPCR</button><button class="btn btn-ok" onclick="showRec(2)">RTK (Enzima)</button></div></div>
+<div class="ib co" id="recInfo"><div class="ibt">👆 Selecciona un tipo de receptor</div><p>Verás la estructura y mecanismo de cada uno.</p></div>
+<div class="ib su"><div class="ibt">💡 >50% de fármacos actúan sobre GPCRs</div><p>~700 GPCRs en humanos. El blanco farmacológico más importante.</p></div>
+<div class="qq">❓ ¿Receptor más rápido?</div>
+<div class="qo" id="q8"><button class="qb" onclick="ck('q8',this,1)">A) Canales iónicos — milisegundos, sin intermediarios</button><button class="qb" onclick="ck('q8',this,0)">B) GPCRs</button><button class="qb" onclick="ck('q8',this,0)">C) RTKs</button><button class="qb" onclick="ck('q8',this,0)">D) Receptores nucleares</button></div><div class="qf" id="q8f"></div>
+</div></div>
+
+<!-- S9: AGONISTAS/ANTAGONISTAS -->
+<div class="s" id="s-9"><div class="cd">
+<h2>💊 Agonistas y Antagonistas</h2>
+<div class="sim"><canvas id="cvAgonist" width="900" height="300"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="showAg(0)">🔑 Ligando natural</button><button class="btn btn-ok" onclick="showAg(1)">✅ Agonista</button><button class="btn btn-na" onclick="showAg(2)">🚫 Antagonista</button></div></div>
+<div class="ib cl"><div class="ibt">🏥 Naloxona: Salvavidas</div><p>Antagonista opioide que revierte sobredosis de heroína/fentanilo en minutos, desplazando al opioide del receptor.</p></div>
+<div class="qq">❓ Paciente con asma recibe salbutamol. ¿Clasificación?</div>
+<div class="qo" id="q9"><button class="qb" onclick="ck('q9',this,1)">A) Agonista β₂-adrenérgico</button><button class="qb" onclick="ck('q9',this,0)">B) Antagonista muscarínico</button><button class="qb" onclick="ck('q9',this,0)">C) Agonista α₁</button><button class="qb" onclick="ck('q9',this,0)">D) Antagonista nicotínico</button></div><div class="qf" id="q9f"></div>
+</div></div>
+
+<!-- S10: TRANSDUCCIÓN -->
+<div class="s" id="s-10"><div class="cd">
+<h2>🔄 Tipos de Transducción</h2>
+<div class="sim"><canvas id="cvTransd" width="900" height="400"></canvas></div>
+<p style="text-align:center;color:var(--mu);font-size:.82em">Velocidad de respuesta: de milisegundos (canales) a horas (nuclear)</p>
+<div class="ib su"><div class="ibt">💡 Velocidad ∝ tipo de respuesta</div><p><b>ms:</b> canales iónicos. <b>seg:</b> fosforilaciones. <b>min:</b> MAPK, metabolismo. <b>hrs:</b> expresión génica.</p></div>
+<div class="qq">❓ ¿Vía más rápida?</div>
+<div class="qo" id="q10"><button class="qb" onclick="ck('q10',this,1)">A) Canal iónico — transducción directa, sin intermediarios enzimáticos</button><button class="qb" onclick="ck('q10',this,0)">B) Ras-MAPK</button><button class="qb" onclick="ck('q10',this,0)">C) Receptor nuclear</button><button class="qb" onclick="ck('q10',this,0)">D) JAK-STAT</button></div><div class="qf" id="q10f"></div>
+</div></div>
+
+<!-- S11: RTKs -->
+<div class="s" id="s-11"><div class="cd">
+<h2>🧬 Receptores Tirosina Cinasa (RTKs)</h2>
+<div class="sim"><canvas id="cvRTK" width="900" height="380"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="animRTK()">▶ Activar RTK</button><button class="btn btn-na" onclick="resetRTK()">↺ Reset</button></div></div>
+<div class="ib ky"><div class="ibt">🔑 Dominios de interacción</div>
+<div class="cgrid" style="margin-top:8px">
+<div class="gc"><div class="gc-title" style="color:var(--sig)">SH2</div><div class="gc-desc">Se une a fosfotirosinas</div></div>
+<div class="gc"><div class="gc-title" style="color:var(--lig)">SH3</div><div class="gc-desc">Se une a prolinas</div></div>
+<div class="gc"><div class="gc-title" style="color:var(--eff)">PH</div><div class="gc-desc">Se une a fosfolípidos</div></div>
+<div class="gc"><div class="gc-title" style="color:var(--ca)">PTB</div><div class="gc-desc">Se une a fosfotirosinas (distinto a SH2)</div></div>
+</div></div>
+<div class="ib cl"><div class="ibt">🏥 Imatinib (Gleevec®) y Trastuzumab (Herceptin®)</div><p>Imatinib inhibe BCR-ABL (leucemia mieloide crónica). Trastuzumab bloquea HER2 (~20% cáncer mama). Terapia dirigida a RTKs.</p></div>
+<div class="qq">❓ ¿Qué ocurre cuando un ligando se une a un RTK?</div>
+<div class="qo" id="q11"><button class="qb" onclick="ck('q11',this,0)">A) Activa una proteína G</button><button class="qb" onclick="ck('q11',this,1)">B) Dimeriza, se transfosforila en tirosinas, crea sitios de acoplamiento SH2</button><button class="qb" onclick="ck('q11',this,0)">C) Abre un canal iónico</button><button class="qb" onclick="ck('q11',this,0)">D) Migra al núcleo</button></div><div class="qf" id="q11f"></div>
+</div></div>
+
+<!-- S12: GPCRs -->
+<div class="s" id="s-12"><div class="cd">
+<h2>🔄 GPCRs</h2>
+<div class="sim"><canvas id="cvGPCR" width="900" height="400"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="animGPCR()">▶ Activar GPCR</button><button class="btn btn-na" onclick="resetGPCR()">↺ Reset</button></div></div>
+<table class="t"><thead><tr><th>Proteína G</th><th>Efector</th><th>Resultado</th></tr></thead><tbody>
+<tr><td><b>Gs</b></td><td>↑ Adenilil ciclasa</td><td>↑ AMPc → PKA</td></tr>
+<tr><td><b>Gi</b></td><td>↓ Adenilil ciclasa</td><td>↓ AMPc</td></tr>
+<tr><td><b>Gq</b></td><td>↑ PLC-β</td><td>IP₃ + DAG → Ca²⁺ + PKC</td></tr>
+</tbody></table>
+<div class="ib cl"><div class="ibt">🏥 Cólera vs Tos Ferina</div>
+<div class="cmp"><div class="cmp-col" style="border-color:var(--ca)"><h3 style="color:var(--ca)">Cólera</h3><p style="font-size:.85em">Gsα ADP-ribosilada → NO hidroliza GTP → <b>Gs ON permanente</b> → ↑↑AMPc → diarrea</p></div>
+<div class="cmp-col" style="border-color:var(--rec)"><h3 style="color:var(--rec)">Tos Ferina</h3><p style="font-size:.85em">Giα ADP-ribosilada → NO interactúa con receptor → <b>Gi OFF permanente</b> → pierde regulación</p></div></div></div>
+<div class="qq">❓ La toxina del cólera causa diarrea porque:</div>
+<div class="qo" id="q12"><button class="qb" onclick="ck('q12',this,0)">A) Destruye GPCRs</button><button class="qb" onclick="ck('q12',this,1)">B) ADP-ribosila Gsα → no hidroliza GTP → adenilil ciclasa permanente → ↑↑AMPc → eflujo Cl⁻/agua</button><button class="qb" onclick="ck('q12',this,0)">C) Activa PLC directamente</button><button class="qb" onclick="ck('q12',this,0)">D) Inhibe bomba Na⁺/K⁺</button></div><div class="qf" id="q12f"></div>
+</div></div>
+
+<!-- S13: NUCLEARES -->
+<div class="s" id="s-13"><div class="cd">
+<h2>🧬 Receptores Nucleares</h2>
+<div class="sim"><canvas id="cvNuclear" width="900" height="360"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="animNuc(0)">Tipo I (Citoplasmático)</button><button class="btn btn-na" onclick="animNuc(1)">Tipo II (Nuclear)</button></div></div>
+<div class="ib su"><div class="ibt">💡 Son receptor + efector</div><p>Al unir ligando → se unen directamente al ADN → factores de transcripción activados por ligando. Sin intermediarios.</p></div>
+<div class="ib cl"><div class="ibt">🏥 Tamoxifeno (SERM)</div><p>Antagonista selectivo de receptor de estrógeno en mama → inhibe proliferación en cáncer ER+.</p></div>
+<div class="qq">❓ ¿Por qué los receptores nucleares son efectores directos?</div>
+<div class="qo" id="q13"><button class="qb" onclick="ck('q13',this,0)">A) Activan proteínas G</button><button class="qb" onclick="ck('q13',this,1)">B) Al unir ligando, se unen al ADN y regulan transcripción directamente</button><button class="qb" onclick="ck('q13',this,0)">C) Abren canales nucleares</button><button class="qb" onclick="ck('q13',this,0)">D) Son tirosina cinasas</button></div><div class="qf" id="q13f"></div>
+<div style="margin-top:24px;padding:20px;background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(168,85,247,.08));border-radius:14px;border:1px solid rgba(0,229,255,.2);text-align:center">
+<h3 style="color:var(--sig)">🎯 Fin de Parte 1 — Continúa en Parte 2</h3>
+<p>Parte 2: PKA, PLC, Calcio, Calmodulina, NO, Ras, mTOR, MAPK, JAK-STAT</p>
+</div>
+</div></div>
+
+</div>
+<script>
+/* NAV & QUIZ */
+var SEC=['Mapa','Definiciones','Señalización IC','Resp. Diferencial','Cascada','Cross-talk','Ligandos','Morfógenos','Receptores','Agonista/Antag.','Transducción','RTKs','GPCRs','R. Nucleares'];
+var N=SEC.length,cur=0,done=new Set();
+var fb={q1:['La transducción convierte la interacción receptor-ligando en cambios intracelulares con amplificación.','¡Correcto! Transducción = traducir señal EC→IC con amplificación.'],q2:['Autocrina = la célula produce señales que actúan sobre sí misma.','¡Correcto! Señalización autocrina — hallmark of cancer.'],q3:['PKA fosforila sustratos diferentes en cada tipo celular, produciendo efectos distintos.','¡Correcto! Misma PKA, diferentes sustratos en cada célula.'],q4:['Las GAPs inactivan GTPasas estimulando hidrólisis de GTP→GDP.','¡Correcto! GAPs = OFF. GEFs = ON.'],q5:['Scaffold organiza componentes, mantiene especificidad y eficiencia.','¡Correcto! Scaffold = organizador de complejos de señalización.'],q6:['Cortisol es esteroide hidrofóbico → cruza membrana → receptor nuclear.','¡Correcto! Hidrofóbico = cruza membrana.'],q7:['Morfógeno = gradiente de concentración → destinos celulares según dosis.','¡Correcto! Ej: Sonic Hedgehog en tubo neural.'],q8:['Canales iónicos ligando-dependientes responden en milisegundos.','¡Correcto! Sin intermediarios enzimáticos = más rápido.'],q9:['Salbutamol es agonista β₂ selectivo → broncodilatación en asma.','¡Correcto! Agonista β₂.'],q10:['Canal iónico = transducción directa, milisegundos.','¡Correcto! Canal = la más rápida.'],q11:['RTK dimeriza, se transfosforila en Tyr, crea sitios SH2.','¡Correcto! Dimerización → transfosforilación → acoplamiento.'],q12:['Cólera ADP-ribosila Gsα → no hidroliza GTP → AC permanente → ↑↑AMPc.','¡Correcto! Gsα atascada en ON → AMPc → diarrea.'],q13:['Receptores nucleares = factores de transcripción activados por ligando.','¡Correcto! Son receptor Y efector.']};
+function bn(){var nv=document.getElementById('nav');nv.innerHTML='';for(var i=0;i<N;i++){var b=document.createElement('button');b.className='nb'+(i===cur?' a':'')+(done.has(i)?' d':'');b.textContent=i+'. '+SEC[i];b.onclick=(function(x){return function(){go(x)}})(i);nv.appendChild(b)}}
+function go(i){document.querySelectorAll('.s').forEach(function(s){s.classList.remove('on')});document.getElementById('s-'+i).classList.add('on');cur=i;done.add(i);bn();document.getElementById('pbar').style.width=((done.size/N)*100)+'%';document.getElementById('ptxt').textContent='Sección '+(i+1)+' de '+N;window.scrollTo({top:0,behavior:'smooth'});initSection(i)}
+function ck(qid,btn,ok){var btns=document.getElementById(qid).querySelectorAll('.qb');btns.forEach(function(b){b.disabled=true;b.style.pointerEvents='none'});if(ok){btn.classList.add('ok');var f=document.getElementById(qid+'f');f.className='qf sh gf';f.innerHTML='✅ '+fb[qid][1]}else{btn.classList.add('no');var f=document.getElementById(qid+'f');f.className='qf sh bf';f.innerHTML='❌ '+fb[qid][0]}}
+function initSection(i){if(i===1)drawFlow();if(i===2)showType(0);if(i===3)drawACh();if(i===4)resetCascade();if(i===5)drawScaff(0);if(i===6)drawLigands();if(i===7)drawMorphoStatic();if(i===8)showRec(0);if(i===9)showAg(0);if(i===10)drawTransd();if(i===11)resetRTK();if(i===12)resetGPCR();if(i===13)animNuc(0)}
+bn();
+
+/* HELPERS */
+function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath()}
+function arr(ctx,x1,y1,x2,y2,c){ctx.strokeStyle=c||'#00e5ff';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();var a=Math.atan2(y2-y1,x2-x1),hl=10;ctx.fillStyle=c||'#00e5ff';ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-hl*Math.cos(a-Math.PI/6),y2-hl*Math.sin(a-Math.PI/6));ctx.lineTo(x2-hl*Math.cos(a+Math.PI/6),y2-hl*Math.sin(a+Math.PI/6));ctx.fill()}
+function pill(ctx,x,y,w,h,col,txt,txtCol){rr(ctx,x-w/2,y-h/2,w,h,h/2);ctx.fillStyle=col;ctx.fill();ctx.fillStyle=txtCol||'#fff';ctx.font='bold 13px Nunito';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(txt,x,y)}
+function bg(ctx,W,H){ctx.fillStyle='#0a0e18';ctx.fillRect(0,0,W,H)}
+
+/* S1: FLOW DIAGRAM */
+function drawFlow(){var cv=document.getElementById('cvFlow');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);
+var boxes=[{x:80,label:'LIGANDO',sub:'1er mensajero',col:'#f59e0b'},{x:260,label:'RECEPTOR',sub:'Membrana/IC',col:'#a855f7'},{x:440,label:'TRANSDUCCIÓN',sub:'Amplificación',col:'#00e5ff'},{x:620,label:'EFECTORES',sub:'Enzimas/FT',col:'#22c55e'},{x:800,label:'RESPUESTA',sub:'Cel. cambio',col:'#ef4444'}];
+boxes.forEach(function(b,i){rr(ctx,b.x-70,H/2-30,140,60,12);ctx.fillStyle=b.col+'33';ctx.fill();ctx.strokeStyle=b.col;ctx.lineWidth=2;ctx.stroke();ctx.fillStyle=b.col;ctx.font='bold 14px Nunito';ctx.textAlign='center';ctx.fillText(b.label,b.x,H/2-4);ctx.fillStyle='#8899b3';ctx.font='11px Nunito';ctx.fillText(b.sub,b.x,H/2+16);if(i<boxes.length-1)arr(ctx,b.x+72,H/2,boxes[i+1].x-72,H/2,b.col)});
+cv.onclick=function(e){var r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)*(W/r.width);var info=document.getElementById('flowInfo');var defs=[{t:'📬 Ligando',d:'Molécula señalizadora extracelular (1er mensajero). Puede ser proteína, péptido, esteroide, gas. Se une con alta afinidad al receptor.'},{t:'📡 Receptor',d:'Proteína que reconoce al ligando. Transductor: convierte señal EC→IC. Puede estar en membrana, citoplasma o núcleo.'},{t:'⚡ Transducción',d:'Proceso de traducir la unión receptor-ligando en cambios IC. Incluye amplificación mediante cascadas de señalización.'},{t:'🎯 Efectores',d:'Proteínas que ejecutan la respuesta: enzimas metabólicas, factores de transcripción, canales iónicos, citoesqueleto.'},{t:'✅ Respuesta',d:'El resultado: crecimiento, división, diferenciación, secreción, contracción, apoptosis... depende del tipo celular.'}];
+for(var i=0;i<boxes.length;i++){if(mx>boxes[i].x-70&&mx<boxes[i].x+70){info.innerHTML='<div class="ibt">'+defs[i].t+'</div><p>'+defs[i].d+'</p>';break}}}}
+
+/* S2: SIGNALING TYPES */
+var typeAnim=null;
+function showType(t){if(typeAnim)cancelAnimationFrame(typeAnim);var cv=document.getElementById('cvTypes');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+var data=[{name:'Contacto Directo',desc:'Membrana-membrana. Ej: Notch-Delta en desarrollo.',speed:'Rápida',dist:'Contacto'},{name:'Paracrina',desc:'Mediadores locales a vecinas. Ej: Histamina.',speed:'Rápida',dist:'Corta'},{name:'Autocrina',desc:'Señal a sí misma. Ej: Células cancerosas.',speed:'Variable',dist:'Propia'},{name:'Sináptica',desc:'Neurotransmisor en sinapsis. Ej: ACh.',speed:'Muy rápida (ms)',dist:'Sinapsis'},{name:'Endocrina',desc:'Hormonas por sangre. Ej: Insulina.',speed:'Lenta (min-h)',dist:'Sistémica'},{name:'Gap Junction',desc:'Puentes citoplasmáticos. Ej: Músculo cardíaco.',speed:'Muy rápida',dist:'Contacto'}];
+var d=data[t],frame=0;
+function draw(){bg(ctx,W,H);ctx.fillStyle='#e2e8f0';ctx.font='bold 20px Playfair Display';ctx.textAlign='center';ctx.fillText(d.name,W/2,36);
+// Draw cells
+var colors=['#a855f7','#00e5ff','#22c55e','#f59e0b'];
+function cell(cx,cy,r,c,label){ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);var g=ctx.createRadialGradient(cx,cy,r*0.2,cx,cy,r);g.addColorStop(0,c+'44');g.addColorStop(1,c+'11');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=3;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,r*0.3,0,Math.PI*2);ctx.fillStyle=c+'66';ctx.fill();if(label){ctx.fillStyle='#e2e8f0';ctx.font='bold 12px Nunito';ctx.textAlign='center';ctx.fillText(label,cx,cy+r+18)}}
+var p=Math.min(frame/60,1);
+if(t===0){cell(300,200,60,'#a855f7','Célula A');cell(460,200,60,'#00e5ff','Célula B');ctx.strokeStyle='#f59e0b';ctx.lineWidth=4;ctx.setLineDash([]);var contact=300+60+(460-300-120)*p;ctx.beginPath();ctx.arc(contact,200,8,0,Math.PI*2);ctx.fillStyle='#f59e0b';ctx.fill();ctx.fillStyle='#8899b3';ctx.font='12px Nunito';ctx.fillText('Ligando de superficie',380,150)}
+else if(t===1){cell(250,200,60,'#a855f7','Emisora');cell(550,200,50,'#00e5ff','Receptora 1');cell(550,310,50,'#22c55e','Receptora 2');for(var i=0;i<8;i++){var angle=(i/8)*Math.PI*2+frame*0.02;var dist=80+p*120;var px=250+Math.cos(angle)*dist,py=200+Math.sin(angle)*dist*0.6;ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fillStyle='#f59e0b'+(Math.max(0,1-dist/250)*255|0).toString(16).padStart(2,'0');ctx.fill()}}
+else if(t===2){cell(400,220,70,'#a855f7','Célula tumoral');for(var i=0;i<6;i++){var angle=(i/6)*Math.PI*2+frame*0.03;var dist=70+20*Math.sin(frame*0.05+i);var px=400+Math.cos(angle)*dist,py=220+Math.sin(angle)*dist;ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fillStyle='#ef4444';ctx.fill()}ctx.fillStyle='#ef4444';ctx.font='bold 12px Nunito';ctx.fillText('Loop autocrina',400,140)}
+else if(t===3){cell(150,220,50,'#a855f7','Neurona pre');cell(650,220,50,'#00e5ff','Neurona post');ctx.strokeStyle='#a855f7';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(200,220);ctx.lineTo(560,220);ctx.stroke();ctx.fillStyle='#161d33';ctx.fillRect(558,190,24,60);ctx.strokeStyle='#1c2744';ctx.strokeRect(558,190,24,60);ctx.fillStyle='#8899b3';ctx.font='10px Nunito';ctx.fillText('sinapsis',570,260);for(var i=0;i<5;i++){var bx=200+p*350+i*15;if(bx<560&&bx>200){ctx.beginPath();ctx.arc(bx,220,4,0,Math.PI*2);ctx.fillStyle='#f59e0b';ctx.fill()}}}
+else if(t===4){cell(150,200,50,'#a855f7','Endocrina');cell(700,200,50,'#00e5ff','Diana');ctx.strokeStyle='#ef444466';ctx.lineWidth=20;ctx.beginPath();ctx.moveTo(220,200);ctx.lineTo(650,200);ctx.stroke();ctx.fillStyle='#ef4444';ctx.font='11px Nunito';ctx.fillText('torrente sanguíneo',430,200);var hx=220+p*420;ctx.beginPath();ctx.arc(hx,200,7,0,Math.PI*2);ctx.fillStyle='#f59e0b';ctx.fill()}
+else if(t===5){cell(300,200,55,'#a855f7','Célula 1');cell(460,200,55,'#00e5ff','Célula 2');for(var i=0;i<4;i++){var gy=180+i*12;ctx.fillStyle='#22c55e';ctx.fillRect(353,gy,54,4);ctx.beginPath();ctx.arc(353+27,gy+2,3,0,Math.PI*2);ctx.fill()}ctx.fillStyle='#22c55e';ctx.font='bold 11px Nunito';ctx.fillText('Gap Junctions',380,150);if(p>0.3){for(var i=0;i<3;i++){var ix=320+p*120;ctx.beginPath();ctx.arc(ix,185+i*12,3,0,Math.PI*2);ctx.fillStyle='#f59e0b';ctx.fill()}}}
+frame++;typeAnim=requestAnimationFrame(draw)}
+draw();
+var info=document.getElementById('typeInfo');info.innerHTML='<div class="ibt">'+d.name+'</div><p>'+d.desc+'</p><p><span class="badge b-sig">'+d.speed+'</span> <span class="badge b-lig">'+d.dist+'</span></p>'}
+
+/* S3: ACh differential */
+function drawACh(){var cv=document.getElementById('cvACh');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);
+ctx.fillStyle='#f59e0b';ctx.font='bold 16px Nunito';ctx.textAlign='center';ctx.fillText('Acetilcolina (ACh) — Misma molécula, 3 destinos',W/2,30);
+var cells=[{x:150,label:'Músculo\nesquelético',rec:'Nicotínico',resp:'CONTRACCIÓN',col:'#00e5ff',icon:'💪'},{x:450,label:'Corazón\n(nodo SA)',rec:'Muscarínico M2',resp:'↓ FRECUENCIA',col:'#a855f7',icon:'❤️'},{x:750,label:'Glándula\nsalival',rec:'Muscarínico M3',resp:'SECRECIÓN',col:'#22c55e',icon:'💧'}];
+cells.forEach(function(c){
+ctx.beginPath();ctx.arc(c.x,180,55,0,Math.PI*2);var g=ctx.createRadialGradient(c.x,180,10,c.x,180,55);g.addColorStop(0,c.col+'44');g.addColorStop(1,c.col+'11');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=c.col;ctx.lineWidth=2;ctx.stroke();
+ctx.font='28px serif';ctx.fillText(c.icon,c.x,185);
+ctx.fillStyle=c.col;ctx.font='bold 12px Nunito';var lines=c.label.split('\n');lines.forEach(function(l,i){ctx.fillText(l,c.x,250+i*15)});
+rr(ctx,c.x-55,285,110,24,12);ctx.fillStyle=c.col+'33';ctx.fill();ctx.strokeStyle=c.col;ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=c.col;ctx.font='bold 10px Nunito';ctx.fillText(c.rec,c.x,300);
+rr(ctx,c.x-55,316,110,28,14);ctx.fillStyle=c.col+'22';ctx.fill();ctx.fillStyle='#fff';ctx.font='bold 13px Nunito';ctx.fillText(c.resp,c.x,333)});
+// ACh arrows from top
+pill(ctx,W/2,70,140,30,'#f59e0b','ACh (ligando)');
+cells.forEach(function(c){arr(ctx,W/2,85,c.x,125,'#f59e0b66')})}
+
+/* S4: CASCADE ANIMATION */
+var cascFrame=0,cascRunning=false,cascAnim=null;
+function startCascade(){if(cascRunning)return;cascRunning=true;cascFrame=0;drawCascadeFrame()}
+function resetCascade(){cascRunning=false;if(cascAnim)cancelAnimationFrame(cascAnim);cascFrame=0;var cv=document.getElementById('cvCascade');if(!cv)return;var ctx=cv.getContext('2d');bg(ctx,cv.width,cv.height);drawCascadeStatic(ctx,cv.width,cv.height,0);document.getElementById('cascCount').textContent='1 molécula'}
+function drawCascadeFrame(){var cv=document.getElementById('cvCascade');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);var p=Math.min(cascFrame/180,1);drawCascadeStatic(ctx,W,H,p);var counts=[1,1,10,100,1000];var ci=Math.min(4,Math.floor(p*5));document.getElementById('cascCount').textContent='~'+counts[ci]+' moléculas activas';cascFrame++;if(cascFrame<200)cascAnim=requestAnimationFrame(drawCascadeFrame);else cascRunning=false}
+function drawCascadeStatic(ctx,W,H,p){
+var levels=[{y:40,n:1,col:'#f59e0b',label:'Ligando'},{y:110,n:1,col:'#a855f7',label:'Receptor'},{y:180,n:Math.ceil(p*10>1?p*10:1),col:'#00e5ff',label:'Proteína G'},{y:250,n:Math.ceil(p*20>1?p*20:1),col:'#22c55e',label:'2do mensajero'},{y:320,n:Math.ceil(p*30>1?p*30:1),col:'#ef4444',label:'Fosforilaciones'}];
+levels.forEach(function(lv,li){
+var shown=Math.min(lv.n,30);var totalW=Math.min(shown*24,W-100);var startX=W/2-totalW/2;
+ctx.fillStyle=lv.col;ctx.font='bold 11px Nunito';ctx.textAlign='left';ctx.fillText(lv.label,30,lv.y+8);
+ctx.font='bold 11px Nunito';ctx.textAlign='right';ctx.fillText('×'+lv.n,W-30,lv.y+8);
+for(var i=0;i<shown;i++){var cx=startX+i*24+12;ctx.beginPath();ctx.arc(cx,lv.y,8,0,Math.PI*2);ctx.fillStyle=lv.col+(li<=Math.floor(p*5)?'cc':'33');ctx.fill()}
+if(li<levels.length-1&&p>(li+1)*0.2){var ny=levels[li+1].y;arr(ctx,W/2,lv.y+12,W/2,ny-12,lv.col+'66')}})}
+
+/* S5: SCAFFOLD */
+function drawScaff(mode){var cv=document.getElementById('cvScaffold');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);
+if(mode===0){ctx.fillStyle='#e2e8f0';ctx.font='bold 16px Nunito';ctx.textAlign='center';ctx.fillText('Sin Scaffold — Cross-talk caótico',W/2,30);
+var proteins=[];for(var i=0;i<20;i++)proteins.push({x:100+Math.random()*(W-200),y:60+Math.random()*260,col:['#00e5ff','#a855f7','#f59e0b','#22c55e','#ef4444'][i%5]});
+proteins.forEach(function(p){ctx.beginPath();ctx.arc(p.x,p.y,12,0,Math.PI*2);ctx.fillStyle=p.col+'66';ctx.fill();ctx.strokeStyle=p.col;ctx.lineWidth=1;ctx.stroke()});
+for(var i=0;i<15;i++){var a=proteins[Math.floor(Math.random()*20)],b=proteins[Math.floor(Math.random()*20)];ctx.strokeStyle='#ffffff11';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.setLineDash([])}
+ctx.fillStyle='#ef444488';ctx.font='bold 14px Nunito';ctx.fillText('⚠️ Señales mezcladas — sin especificidad',W/2,340)}
+else{ctx.fillStyle='#e2e8f0';ctx.font='bold 16px Nunito';ctx.textAlign='center';ctx.fillText('Con Scaffold — Organizado y específico',W/2,30);
+// Pathway A
+rr(ctx,80,60,350,120,14);ctx.fillStyle='#00e5ff11';ctx.fill();ctx.strokeStyle='#00e5ff44';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#00e5ff';ctx.font='bold 11px Nunito';ctx.textAlign='left';ctx.fillText('VÍA A (scaffold)',90,80);
+var ax=[140,220,300,380];ax.forEach(function(x,i){pill(ctx,x,120,50,28,'#00e5ff33','A'+(i+1),'#00e5ff');if(i<ax.length-1)arr(ctx,x+28,120,ax[i+1]-28,120,'#00e5ff')});
+// Pathway B
+rr(ctx,80,210,350,120,14);ctx.fillStyle='#a855f711';ctx.fill();ctx.strokeStyle='#a855f744';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#a855f7';ctx.font='bold 11px Nunito';ctx.textAlign='left';ctx.fillText('VÍA B (scaffold)',90,230);
+ax.forEach(function(x,i){pill(ctx,x,270,50,28,'#a855f733','B'+(i+1),'#a855f7');if(i<ax.length-1)arr(ctx,x+28,270,ax[i+1]-28,270,'#a855f7')});
+// Scaffold protein
+rr(ctx,500,90,180,220,14);ctx.fillStyle='#f59e0b11';ctx.fill();ctx.strokeStyle='#f59e0b';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#f59e0b';ctx.font='bold 13px Nunito';ctx.textAlign='center';ctx.fillText('SCAFFOLD',590,115);ctx.fillStyle='#8899b3';ctx.font='11px Nunito';ctx.fillText('Mantiene proteínas',590,160);ctx.fillText('juntas → rápido,',590,178);ctx.fillText('eficiente, específico',590,196);ctx.fillText('No cross-talk',590,224);
+ctx.fillStyle='#22c55e88';ctx.font='bold 14px Nunito';ctx.fillText('✅ Señales separadas y específicas',W/2,340)}}
+
+/* S6: LIGANDS */
+function drawLigands(){var cv=document.getElementById('cvLigands');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);
+ctx.fillStyle='#e2e8f0';ctx.font='bold 16px Nunito';ctx.textAlign='center';ctx.fillText('Tipos de Ligandos y Localización de Receptores',W/2,28);
+// Membrane
+ctx.fillStyle='#a855f722';ctx.fillRect(0,140,W,30);ctx.fillStyle='#a855f7';ctx.font='bold 11px Nunito';ctx.fillText('═══ MEMBRANA PLASMÁTICA ═══',W/2,160);
+ctx.fillStyle='#8899b3';ctx.font='10px Nunito';ctx.textAlign='left';ctx.fillText('EXTRACELULAR',20,135);ctx.fillText('INTRACELULAR',20,185);
+// Hydrophilic
+var hyd=[{name:'Insulina\n(proteína)',x:100},{name:'Adrenalina\n(catecolamina)',x:260},{name:'Histamina\n(amina)',x:420}];
+hyd.forEach(function(h){ctx.beginPath();ctx.arc(h.x,80,22,0,Math.PI*2);ctx.fillStyle='#00e5ff33';ctx.fill();ctx.strokeStyle='#00e5ff';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#00e5ff';ctx.font='bold 9px Nunito';ctx.textAlign='center';h.name.split('\n').forEach(function(l,i){ctx.fillText(l,h.x,78+i*12)});
+pill(ctx,h.x,155,40,18,'#a855f7','R','#fff');
+ctx.fillStyle='#00e5ff';ctx.font='bold 9px Nunito';ctx.fillText('→ Receptor SUPERFICIE',h.x,205)});
+// Hydrophobic
+var lip=[{name:'Cortisol\n(esteroide)',x:600},{name:'Ác. Retinoico\n(retinoide)',x:740}];
+lip.forEach(function(h){ctx.beginPath();ctx.arc(h.x,80,22,0,Math.PI*2);ctx.fillStyle='#f59e0b33';ctx.fill();ctx.strokeStyle='#f59e0b';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#f59e0b';ctx.font='bold 9px Nunito';ctx.textAlign='center';h.name.split('\n').forEach(function(l,i){ctx.fillText(l,h.x,78+i*12)});
+ctx.setLineDash([4,4]);ctx.strokeStyle='#f59e0b66';ctx.beginPath();ctx.moveTo(h.x,102);ctx.lineTo(h.x,250);ctx.stroke();ctx.setLineDash([]);
+// nucleus
+rr(ctx,h.x-30,255,60,40,8);ctx.fillStyle='#f59e0b22';ctx.fill();ctx.strokeStyle='#f59e0b';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='#f59e0b';ctx.font='bold 9px Nunito';ctx.fillText('Núcleo R',h.x,278);ctx.fillText('→ Receptor NUCLEAR',h.x,310)});
+// Gas
+ctx.beginPath();ctx.arc(450,320,18,0,Math.PI*2);ctx.fillStyle='#22c55e33';ctx.fill();ctx.strokeStyle='#22c55e';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#22c55e';ctx.font='bold 9px Nunito';ctx.textAlign='center';ctx.fillText('NO',450,318);ctx.fillText('(gas)',450,334);ctx.fillText('→ Enzima IC (guanilil ciclasa)',450,360)}
+
+/* S7: MORPHOGEN */
+var morphAnim=null;
+function drawMorphoStatic(){var cv=document.getElementById('cvMorpho');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);drawMorphoFrame(ctx,W,H,0)}
+function animMorpho(){if(morphAnim)cancelAnimationFrame(morphAnim);var cv=document.getElementById('cvMorpho');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;var f=0;function d(){bg(ctx,W,H);drawMorphoFrame(ctx,W,H,Math.min(f/120,1));f++;if(f<150)morphAnim=requestAnimationFrame(d)}d()}
+function drawMorphoFrame(ctx,W,H,p){
+ctx.fillStyle='#e2e8f0';ctx.font='bold 14px Nunito';ctx.textAlign='center';ctx.fillText('Gradiente de Morfógeno (ej: Sonic Hedgehog)',W/2,24);
+// Source
+rr(ctx,30,60,80,180,12);ctx.fillStyle='#f59e0b33';ctx.fill();ctx.strokeStyle='#f59e0b';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#f59e0b';ctx.font='bold 12px Nunito';ctx.fillText('FUENTE',70,155);
+// Gradient
+for(var x=120;x<W-40;x+=2){var intensity=Math.max(0,1-(x-120)/(W-160));var alpha=Math.floor(intensity*p*180);ctx.fillStyle='rgba(245,158,11,'+(alpha/255).toFixed(2)+')';ctx.fillRect(x,80,3,140)}
+// Cells
+var cells=[{x:200,dest:'Destino A',col:'#ef4444'},{x:380,dest:'Destino B',col:'#a855f7'},{x:560,dest:'Destino C',col:'#00e5ff'},{x:740,dest:'Destino D',col:'#22c55e'}];
+cells.forEach(function(c){ctx.beginPath();ctx.arc(c.x,250,20,0,Math.PI*2);ctx.fillStyle=p>0.5?c.col+'66':'#ffffff11';ctx.fill();ctx.strokeStyle=p>0.5?c.col:'#334';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle=p>0.5?c.col:'#556';ctx.font='bold 10px Nunito';ctx.fillText(c.dest,c.x,285)});
+// Concentration bars
+pill(ctx,200,60,60,20,'#f59e0b','ALTA','#000');pill(ctx,560,60,60,20,'#f59e0b55','BAJA','#fff')}
+
+/* S8: RECEPTORS */
+function showRec(t){var cv=document.getElementById('cvReceptors');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);
+var memY=180;ctx.fillStyle='#a855f722';ctx.fillRect(0,memY-15,W,30);ctx.fillStyle='#a855f7';ctx.font='bold 10px Nunito';ctx.textAlign='center';ctx.fillText('MEMBRANA',W/2,memY+3);
+if(t===0){ctx.fillStyle='#e2e8f0';ctx.font='bold 18px Nunito';ctx.fillText('Canal Iónico Ligando-Dependiente',W/2,36);
+// Channel closed
+rr(ctx,160,130,130,100,4);ctx.fillStyle='#00e5ff22';ctx.fill();ctx.strokeStyle='#00e5ff';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#1c2744';ctx.fillRect(210,140,30,80);ctx.fillStyle='#00e5ff';ctx.font='bold 11px Nunito';ctx.fillText('CERRADO',225,285);
+// Channel open
+rr(ctx,460,130,130,100,4);ctx.fillStyle='#00e5ff44';ctx.fill();ctx.strokeStyle='#00e5ff';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#161d33';ctx.fillRect(510,150,30,60);ctx.fillStyle='#00e5ff';ctx.fillText('ABIERTO',525,285);
+pill(ctx,525,110,60,24,'#f59e0b','Ligando','#000');
+for(var i=0;i<4;i++){ctx.beginPath();ctx.arc(525,170+i*12,4,0,Math.PI*2);ctx.fillStyle='#22c55e';ctx.fill()}
+ctx.fillStyle='#22c55e';ctx.fillText('Iones fluyen →',525,305);
+pill(ctx,W/2,340,200,30,'#00e5ff33','⏱️ Milisegundos','#00e5ff');
+var info=document.getElementById('recInfo');info.innerHTML='<div class="ibt">📡 Canal Iónico</div><p>El ligando abre/cierra directamente el canal. Flujo de iones cambia potencial de membrana. Sin intermediarios → <b>la más rápida (ms)</b>. Ej: Receptor nicotínico de ACh, GABA-A.</p>'}
+else if(t===1){ctx.fillStyle='#e2e8f0';ctx.font='bold 18px Nunito';ctx.fillText('GPCR — 7 dominios transmembrana',W/2,36);
+// 7TM
+for(var i=0;i<7;i++){var x=300+i*45;ctx.fillStyle='#a855f766';rr(ctx,x,135,20,90,4);ctx.fill();ctx.strokeStyle='#a855f7';ctx.lineWidth=1;ctx.stroke()}
+pill(ctx,W/2,100,80,24,'#f59e0b','Ligando','#000');
+// G protein
+rr(ctx,300,260,250,70,14);ctx.fillStyle='#22c55e22';ctx.fill();ctx.strokeStyle='#22c55e';ctx.lineWidth=2;ctx.stroke();
+pill(ctx,370,295,40,24,'#22c55e88','Gα','#fff');pill(ctx,430,295,40,24,'#00e5ff88','Gβγ','#fff');
+ctx.fillStyle='#8899b3';ctx.font='11px Nunito';ctx.fillText('GDP',370,320);
+arr(ctx,500,295,620,295,'#22c55e');ctx.fillStyle='#22c55e';ctx.fillText('→ Efectores',650,300);
+pill(ctx,W/2,360,200,30,'#a855f733','⏱️ Segundos-minutos','#a855f7');
+var info=document.getElementById('recInfo');info.innerHTML='<div class="ibt">📡 GPCR</div><p>7 dominios transmembrana. Activa proteínas G triméricas (Gα+Gβγ). >700 en humanos. >50% de fármacos. Ej: β-adrenérgico, muscarínico, olfativo.</p>'}
+else{ctx.fillStyle='#e2e8f0';ctx.font='bold 18px Nunito';ctx.fillText('RTK — Receptor Tirosina Cinasa',W/2,36);
+// Two monomers
+rr(ctx,250,130,40,100,4);ctx.fillStyle='#ef444433';ctx.fill();ctx.strokeStyle='#ef4444';ctx.lineWidth=2;ctx.stroke();
+rr(ctx,360,130,40,100,4);ctx.fillStyle='#ef444433';ctx.fill();ctx.strokeStyle='#ef4444';ctx.lineWidth=2;ctx.stroke();
+pill(ctx,325,108,80,24,'#f59e0b','Ligando','#000');
+ctx.fillStyle='#ef4444';ctx.font='bold 10px Nunito';ctx.fillText('P-Tyr',260,260);ctx.fillText('P-Tyr',390,260);
+for(var i=0;i<3;i++){ctx.beginPath();ctx.arc(270,270+i*20,5,0,Math.PI*2);ctx.fillStyle='#ef4444';ctx.fill();ctx.beginPath();ctx.arc(380,270+i*20,5,0,Math.PI*2);ctx.fill()}
+pill(ctx,550,280,80,24,'#00e5ff44','SH2','#00e5ff');pill(ctx,550,310,80,24,'#22c55e44','Grb2','#22c55e');
+arr(ctx,410,290,510,280,'#ef444488');arr(ctx,410,310,510,310,'#ef444488');
+pill(ctx,W/2,360,200,30,'#ef444433','⏱️ Minutos-horas','#ef4444');
+var info=document.getElementById('recInfo');info.innerHTML='<div class="ibt">📡 RTK</div><p>Dimerización → transfosforilación en Tyr → sitios de acoplamiento para SH2/PTB. Crecimiento, proliferación. Ej: Receptor de insulina, EGF, VEGF.</p>'}}
+
+/* S9: AGONIST */
+function showAg(t){var cv=document.getElementById('cvAgonist');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);
+var memY=150;ctx.fillStyle='#a855f722';ctx.fillRect(200,memY-15,400,30);
+// Receptor
+rr(ctx,380,memY-40,60,80,8);ctx.fillStyle='#a855f744';ctx.fill();ctx.strokeStyle='#a855f7';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#a855f7';ctx.font='bold 11px Nunito';ctx.textAlign='center';ctx.fillText('Receptor',410,memY+60);
+// Binding pocket
+ctx.beginPath();ctx.arc(410,memY-30,15,0,Math.PI,true);ctx.strokeStyle='#a855f7';ctx.lineWidth=2;ctx.stroke();
+if(t===0){pill(ctx,410,memY-55,70,24,'#22c55e','Ligando','#fff');ctx.fillStyle='#22c55e';ctx.font='bold 14px Nunito';ctx.fillText('✅ Se une → Activa → Respuesta normal',W/2,250);ctx.fillStyle='#8899b3';ctx.font='12px Nunito';ctx.fillText('Llave original que abre la cerradura',W/2,275)}
+else if(t===1){pill(ctx,410,memY-55,70,24,'#00e5ff','Agonista','#fff');ctx.fillStyle='#00e5ff';ctx.font='bold 14px Nunito';ctx.fillText('✅ Se une → ACTIVA → Mimetiza la respuesta',W/2,250);ctx.fillStyle='#8899b3';ctx.font='12px Nunito';ctx.fillText('Copia de la llave que también abre. Ej: Salbutamol (agonista β₂)',W/2,275)}
+else{pill(ctx,410,memY-55,70,24,'#ef4444','Antagon.','#fff');ctx.fillStyle='#ef4444';ctx.font='bold 14px Nunito';ctx.fillText('🚫 Se une → BLOQUEA → No hay respuesta',W/2,250);ctx.fillStyle='#8899b3';ctx.font='12px Nunito';ctx.fillText('Llave que entra pero NO gira. Ej: Propranolol, Naloxona',W/2,275)}}
+
+/* S10: TRANSDUCTION TYPES */
+function drawTransd(){var cv=document.getElementById('cvTransd');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);
+ctx.fillStyle='#e2e8f0';ctx.font='bold 14px Nunito';ctx.textAlign='center';ctx.fillText('Velocidad de Transducción',W/2,24);
+var types=[{name:'Canal iónico',time:'ms',w:60,col:'#00e5ff'},{name:'GPCR→AMPc',time:'seg',w:120,col:'#a855f7'},{name:'GPCR→PLC/Ca²⁺',time:'seg',w:140,col:'#f59e0b'},{name:'RTK→MAPK',time:'min',w:250,col:'#22c55e'},{name:'RTK→PI3K/Akt',time:'min',w:270,col:'#ef4444'},{name:'JAK-STAT',time:'min-h',w:350,col:'#06b6d4'},{name:'Nuclear (esteroide)',time:'horas',w:500,col:'#ec4899'},{name:'NO→GMPc',time:'seg',w:100,col:'#84cc16'}];
+types.forEach(function(t,i){var y=52+i*42;rr(ctx,140,y,t.w,28,14);ctx.fillStyle=t.col+'44';ctx.fill();ctx.strokeStyle=t.col;ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=t.col;ctx.font='bold 11px Nunito';ctx.textAlign='left';ctx.fillText(t.name,20,y+18);ctx.textAlign='center';ctx.fillStyle='#e2e8f0';ctx.font='bold 10px Nunito';ctx.fillText(t.time,140+t.w/2,y+18)});
+ctx.fillStyle='#8899b3';ctx.font='10px Nunito';ctx.textAlign='left';ctx.fillText('RÁPIDO ←',140,392);ctx.textAlign='right';ctx.fillText('→ LENTO',W-40,392);
+arr(ctx,140,386,W-40,386,'#ffffff22')}
+
+/* S11: RTK ANIMATION */
+var rtkState=0;
+function resetRTK(){rtkState=0;drawRTKState()}
+function animRTK(){rtkState=1;drawRTKState();setTimeout(function(){rtkState=2;drawRTKState()},1500)}
+function drawRTKState(){var cv=document.getElementById('cvRTK');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);
+var memY=180;ctx.fillStyle='#a855f722';ctx.fillRect(0,memY-12,W,24);
+if(rtkState===0){ctx.fillStyle='#e2e8f0';ctx.font='bold 14px Nunito';ctx.textAlign='center';ctx.fillText('RTK Inactivo — Monómeros separados',W/2,30);
+rr(ctx,250,110,30,140,4);ctx.fillStyle='#ef444433';ctx.fill();ctx.strokeStyle='#ef4444';ctx.lineWidth=2;ctx.stroke();
+rr(ctx,520,110,30,140,4);ctx.fillStyle='#ef444433';ctx.fill();ctx.strokeStyle='#ef4444';ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle='#8899b3';ctx.font='11px Nunito';ctx.fillText('Sin ligando → sin dimerización',W/2,300)}
+else if(rtkState===1){ctx.fillStyle='#f59e0b';ctx.font='bold 14px Nunito';ctx.textAlign='center';ctx.fillText('Ligando se une → Dimerización',W/2,30);
+pill(ctx,400,90,80,28,'#f59e0b','EGF','#000');
+rr(ctx,360,110,30,140,4);ctx.fillStyle='#ef444466';ctx.fill();ctx.strokeStyle='#ef4444';ctx.lineWidth=2;ctx.stroke();
+rr(ctx,410,110,30,140,4);ctx.fillStyle='#ef444466';ctx.fill();ctx.strokeStyle='#ef4444';ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle='#f59e0b';ctx.font='11px Nunito';ctx.fillText('¡Ligando acerca los monómeros!',W/2,300)}
+else{ctx.fillStyle='#22c55e';ctx.font='bold 14px Nunito';ctx.textAlign='center';ctx.fillText('Transfosforilación → Sitios de acoplamiento',W/2,30);
+pill(ctx,400,90,80,28,'#f59e0b','EGF','#000');
+rr(ctx,370,110,60,140,4);ctx.fillStyle='#ef444466';ctx.fill();ctx.strokeStyle='#ef4444';ctx.lineWidth=2;ctx.stroke();
+for(var i=0;i<3;i++){var py=260+i*22;ctx.beginPath();ctx.arc(385,py,6,0,Math.PI*2);ctx.fillStyle='#22c55e';ctx.fill();ctx.fillStyle='#22c55e';ctx.font='bold 8px Nunito';ctx.fillText('P',385,py+3);ctx.beginPath();ctx.arc(415,py,6,0,Math.PI*2);ctx.fillStyle='#22c55e';ctx.fill();ctx.fillText('P',415,py+3)}
+pill(ctx,550,270,70,24,'#00e5ff44','SH2','#00e5ff');pill(ctx,550,300,70,24,'#a855f744','Grb2','#a855f7');pill(ctx,550,330,70,24,'#22c55e44','PI3K','#22c55e');
+arr(ctx,430,270,515,270,'#00e5ff66');arr(ctx,430,300,515,300,'#a855f766');arr(ctx,430,330,515,330,'#22c55e66');
+ctx.fillStyle='#22c55e';ctx.font='11px Nunito';ctx.fillText('P-Tyr crean sitios de acoplamiento para SH2, PTB, etc.',W/2,370)}}
+
+/* S12: GPCR */
+var gpcrState=0;
+function resetGPCR(){gpcrState=0;drawGPCRState()}
+function animGPCR(){gpcrState=1;drawGPCRState();setTimeout(function(){gpcrState=2;drawGPCRState()},1200);setTimeout(function(){gpcrState=3;drawGPCRState()},2400)}
+function drawGPCRState(){var cv=document.getElementById('cvGPCR');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);
+var memY=160;ctx.fillStyle='#a855f722';ctx.fillRect(100,memY-12,600,24);
+var titles=['GPCR Inactivo: Gα-GDP + Gβγ','Ligando se une → GPCR actúa como GEF','Gα-GTP se disocia → activa efector','Gα hidroliza GTP → se re-asocia'];
+ctx.fillStyle='#e2e8f0';ctx.font='bold 14px Nunito';ctx.textAlign='center';ctx.fillText(titles[gpcrState],W/2,30);
+// 7TM receptor
+for(var i=0;i<7;i++){rr(ctx,280+i*20,memY-30,12,60,3);ctx.fillStyle='#a855f7'+(gpcrState>=1?'88':'44');ctx.fill()}
+if(gpcrState>=1)pill(ctx,340,memY-50,70,24,'#f59e0b','Ligando','#000');
+if(gpcrState===0||gpcrState===3){rr(ctx,260,memY+50,200,60,12);ctx.fillStyle='#22c55e22';ctx.fill();ctx.strokeStyle='#22c55e';ctx.lineWidth=1;ctx.stroke();pill(ctx,320,memY+80,50,24,'#22c55e66','Gα','#22c55e');pill(ctx,380,memY+80,50,24,'#00e5ff66','Gβγ','#00e5ff');ctx.fillStyle='#ef4444';ctx.font='bold 10px Nunito';ctx.fillText('GDP',320,memY+105)}
+else if(gpcrState===1){rr(ctx,260,memY+50,200,60,12);ctx.fillStyle='#22c55e33';ctx.fill();ctx.strokeStyle='#22c55e';ctx.lineWidth=2;ctx.stroke();pill(ctx,320,memY+80,50,24,'#22c55e88','Gα','#fff');pill(ctx,380,memY+80,50,24,'#00e5ff66','Gβγ','#00e5ff');ctx.fillStyle='#22c55e';ctx.font='bold 10px Nunito';ctx.fillText('GDP→GTP!',320,memY+105)}
+else if(gpcrState===2){pill(ctx,250,memY+80,50,24,'#22c55e','Gα','#fff');ctx.fillStyle='#22c55e';ctx.font='bold 10px Nunito';ctx.fillText('GTP',250,memY+105);pill(ctx,420,memY+80,50,24,'#00e5ff','Gβγ','#fff');
+arr(ctx,210,memY+80,130,memY+80,'#22c55e');pill(ctx,80,memY+80,90,28,'#ef444444','Efector','#ef4444');
+arr(ctx,460,memY+80,540,memY+80,'#00e5ff');pill(ctx,600,memY+80,90,28,'#a855f744','Efector 2','#a855f7');
+ctx.fillStyle='#22c55e';ctx.font='bold 11px Nunito';ctx.fillText('Ambos activan efectores downstream',W/2,memY+140)}
+ctx.fillStyle='#8899b3';ctx.font='11px Nunito';ctx.fillText('Paso '+(gpcrState+1)+' de 4',W/2,H-20)}
+
+/* S13: NUCLEAR */
+function animNuc(t){var cv=document.getElementById('cvNuclear');if(!cv)return;var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;bg(ctx,W,H);
+ctx.fillStyle='#e2e8f0';ctx.font='bold 16px Nunito';ctx.textAlign='center';
+if(t===0){ctx.fillText('Tipo I: Receptor Citoplasmático (ej: Glucocorticoides)',W/2,30);
+// Cell outline
+ctx.strokeStyle='#1c2744';ctx.lineWidth=2;rr(ctx,50,50,W-100,H-70,20);ctx.stroke();
+// Membrane top
+ctx.fillStyle='#a855f722';ctx.fillRect(50,50,W-100,20);ctx.fillStyle='#a855f7';ctx.font='10px Nunito';ctx.fillText('membrana',W/2,64);
+// Ligand outside
+pill(ctx,400,40,70,20,'#f59e0b','Cortisol','#000');
+// Arrow through membrane
+ctx.setLineDash([4,4]);ctx.strokeStyle='#f59e0b';ctx.beginPath();ctx.moveTo(400,52);ctx.lineTo(400,120);ctx.stroke();ctx.setLineDash([]);
+// Receptor+HSP90
+rr(ctx,340,120,120,50,10);ctx.fillStyle='#ef444422';ctx.fill();ctx.strokeStyle='#ef4444';ctx.lineWidth=1;ctx.stroke();pill(ctx,380,145,50,24,'#a855f766','R','#a855f7');ctx.fillStyle='#ef4444';ctx.font='bold 9px Nunito';ctx.fillText('HSP90',420,150);
+// After binding
+arr(ctx,400,175,400,210,'#f59e0b');
+pill(ctx,400,230,90,28,'#22c55e44','R+Cortisol','#22c55e');
+// Nucleus
+rr(ctx,300,260,200,60,12);ctx.fillStyle='#00e5ff11';ctx.fill();ctx.strokeStyle='#00e5ff';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#00e5ff';ctx.font='bold 11px Nunito';ctx.fillText('NÚCLEO',400,275);ctx.font='10px Nunito';ctx.fillText('Se une al ADN → activa/reprime genes',400,295);
+arr(ctx,400,248,400,260,'#22c55e')}
+else{ctx.fillText('Tipo II: Receptor Nuclear (ej: Hormona Tiroidea)',W/2,30);
+ctx.strokeStyle='#1c2744';ctx.lineWidth=2;rr(ctx,50,50,W-100,H-70,20);ctx.stroke();
+ctx.fillStyle='#a855f722';ctx.fillRect(50,50,W-100,20);
+pill(ctx,200,40,60,20,'#f59e0b','T3/T4','#000');
+ctx.setLineDash([4,4]);ctx.strokeStyle='#f59e0b';ctx.beginPath();ctx.moveTo(200,52);ctx.lineTo(200,160);ctx.stroke();ctx.setLineDash([]);
+// Nucleus with receptor already there
+rr(ctx,150,170,500,120,14);ctx.fillStyle='#00e5ff11';ctx.fill();ctx.strokeStyle='#00e5ff';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#00e5ff';ctx.font='bold 12px Nunito';ctx.fillText('NÚCLEO',400,190);
+// Receptor on DNA
+ctx.strokeStyle='#8899b3';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(180,250);ctx.lineTo(620,250);ctx.stroke();ctx.fillStyle='#8899b3';ctx.font='9px Nunito';ctx.fillText('ADN',190,268);
+pill(ctx,350,240,60,24,'#a855f766','R','#a855f7');ctx.fillStyle='#a855f7';ctx.font='9px Nunito';ctx.fillText('ya en ADN',350,210);
+arr(ctx,200,170,340,230,'#f59e0b66');
+pill(ctx,500,230,80,24,'#22c55e44','Coactivador','#22c55e');arr(ctx,390,240,460,235,'#a855f766');
+ctx.fillStyle='#22c55e';ctx.font='bold 11px Nunito';ctx.fillText('Ligando llega → recluta coactivador → transcripción',400,300)}}
+
+/* INIT */
+bn();drawFlow();
+</script>
+</body>
+</html>

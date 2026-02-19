@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría: Señalización Celular — Parte 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080c16;--c1:#0f1628;--c2:#161d33;--sig:#00e5ff;--rec:#a855f7;--lig:#f59e0b;--eff:#22c55e;--ca:#ef4444;--tx:#e2e8f0;--mu:#8899b3;--bd:#1c2744;--ok:#22c55e;--er:#ef4444}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 25%,rgba(168,85,247,.06),transparent 55%),radial-gradient(ellipse at 80% 75%,rgba(0,229,255,.05),transparent 55%);pointer-events:none;z-index:0}
+h1,h2,h3{font-family:'Playfair Display',serif}
+.app{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:16px}
+.hd{text-align:center;padding:28px 16px 20px;border-bottom:1px solid var(--bd);margin-bottom:16px}
+.hd h1{font-size:2em;font-weight:900;background:linear-gradient(135deg,var(--sig),var(--rec),var(--lig));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.25}
+.hd p{color:var(--mu);margin-top:6px;font-size:.95em}
+.pb{background:var(--bd);border-radius:20px;height:6px;margin:10px 0;overflow:hidden}.pf{height:100%;border-radius:20px;transition:width .5s;background:linear-gradient(90deg,var(--sig),var(--rec),var(--lig))}
+.pt{text-align:center;font-size:.8em;color:var(--mu);margin-bottom:12px}
+.nv{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:10px;background:var(--c1);border-radius:12px;margin-bottom:18px;border:1px solid var(--bd)}
+.nb{padding:7px 13px;border-radius:8px;border:1px solid transparent;background:0;color:var(--mu);cursor:pointer;font-family:inherit;font-size:.76em;font-weight:700;transition:.3s}
+.nb:hover{background:rgba(0,229,255,.1);color:var(--tx)}.nb.a{background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(168,85,247,.15));color:var(--sig);border-color:rgba(0,229,255,.3)}.nb.d{color:var(--ok)}.nb.d::after{content:' ✓'}
+.s{display:none;animation:fi .4s}.s.on{display:block}@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.cd{background:var(--c1);border:1px solid var(--bd);border-radius:16px;padding:22px;margin-bottom:16px;position:relative;overflow:hidden}
+.cd::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sig),var(--rec),var(--lig));opacity:.6}
+.cd h2{font-size:1.45em;margin-bottom:12px;color:var(--sig)}.cd h3{font-size:1.1em;margin-bottom:8px;color:var(--rec)}.cd p{line-height:1.75;margin-bottom:8px}
+.ib{padding:16px 18px;border-radius:12px;margin:14px 0;border-left:4px solid}.ib.co{background:rgba(0,229,255,.06);border-color:var(--sig)}.ib.cl{background:rgba(239,68,68,.06);border-color:var(--ca)}.ib.ky{background:rgba(168,85,247,.06);border-color:var(--rec)}.ib.su{background:rgba(34,197,94,.06);border-color:var(--ok)}.ib.wa{background:rgba(245,158,11,.06);border-color:var(--lig)}
+.ibt{font-weight:800;margin-bottom:6px;font-size:.93em}
+.qq{font-weight:700;font-size:1em;margin-bottom:12px;padding:12px 16px;background:rgba(168,85,247,.08);border-radius:10px;border:1px solid rgba(168,85,247,.15)}
+.qo{display:flex;flex-direction:column;gap:6px}
+.qb{padding:11px 16px;border-radius:9px;cursor:pointer;border:2px solid var(--bd);background:var(--c2);font-family:inherit;font-size:.88em;color:var(--tx);text-align:left;transition:.2s;font-weight:600}
+.qb:hover{border-color:var(--sig);background:rgba(0,229,255,.05)}.qb.ok{border-color:var(--ok)!important;background:rgba(34,197,94,.1)!important;color:var(--ok)!important}.qb.no{border-color:var(--er)!important;background:rgba(239,68,68,.06)!important;color:var(--er)!important;opacity:.7}
+.qf{margin-top:10px;padding:14px 16px;border-radius:10px;font-size:.9em;line-height:1.7;display:none}.qf.sh{display:block;animation:fi .3s}.qf.gf{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2)}.qf.bf{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2)}
+.sim{background:var(--c2);border-radius:14px;padding:4px;margin:16px 0;border:1px solid var(--bd);overflow:hidden}.sim canvas{display:block;width:100%;border-radius:10px}
+.sim-ctrls{display:flex;flex-wrap:wrap;gap:8px;padding:12px;align-items:center;justify-content:center}
+.btn{padding:10px 22px;border-radius:9px;border:0;cursor:pointer;background:linear-gradient(135deg,var(--sig),var(--rec));color:#fff;font-family:inherit;font-weight:700;font-size:.9em;transition:.2s}.btn:hover{transform:scale(1.03)}.btn-na{background:linear-gradient(135deg,var(--lig),var(--ca))}.btn-ok{background:linear-gradient(135deg,var(--ok),#06b6d4)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.gc{background:var(--c2);border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center;transition:.3s}.gc:hover{border-color:var(--sig);transform:translateY(-2px)}.gc-icon{font-size:2.2em;margin-bottom:6px}.gc-title{font-weight:800;font-size:.92em;margin-bottom:4px}.gc-desc{font-size:.82em;color:var(--mu);line-height:1.5}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}.cmp-col{background:var(--c2);border:1px solid var(--bd);border-radius:12px;padding:16px}.cmp-col h3{font-size:1em;margin-bottom:8px;text-align:center}
+@media(max-width:700px){.hd h1{font-size:1.4em}.nb{font-size:.7em;padding:5px 8px}.cd{padding:14px}.cgrid{grid-template-columns:1fr}.cmp{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="hd">
+<h1>📡 Señalización Celular — Parte 2</h1>
+<p>Vías Específicas, Mecanismos Efectores y Evaluación Integradora</p>
+<p style="font-size:.82em;color:var(--rec);margin-top:4px">RA 14–26 • Diagramas interactivos y correlaciones clínicas</p>
+</div>
+<div class="pb"><div class="pf" id="pbar"></div></div>
+<div class="pt" id="ptxt"></div>
+<div class="nv" id="nav"></div>
+
+<!-- S0 --><div class="s on" id="s-0"><div class="cd"><h2>🎯 Mapa Parte 2</h2>
+<div class="cgrid">
+<div class="gc"><div class="gc-icon">🧩</div><div class="gc-title">1-3</div><div class="gc-desc">Componentes, Adaptación, Retroalimentación</div></div>
+<div class="gc"><div class="gc-icon">🔄</div><div class="gc-title">4-5</div><div class="gc-desc">GTPasas Ras/Rab, Óxido Nítrico</div></div>
+<div class="gc"><div class="gc-icon">⚡</div><div class="gc-title">6-8</div><div class="gc-desc">PKA, PLC, Ca²⁺/Calmodulina, PI3K</div></div>
+<div class="gc"><div class="gc-icon">🧬</div><div class="gc-title">9-10</div><div class="gc-desc">mTOR, MAPK, JAK-STAT + Evaluación</div></div>
+</div></div></div>
+
+<!-- S1 --><div class="s" id="s-1"><div class="cd"><h2>🧩 Componentes de una Vía</h2>
+<div class="sim"><canvas id="cv1" width="900" height="220"></canvas></div>
+<div class="ib su"><div class="ibt">La señal debe: reconocerse → internalizarse → ejecutarse → DESACTIVARSE ⚠️</div><p>Sin desactivación = patología (ej: Ras mutada → cáncer).</p></div>
+<div class="qq">❓ ¿Cuál es un segundo mensajero?</div>
+<div class="qo" id="q1"><button class="qb" onclick="ck('q1',this,0)">A) Insulina (1er mensajero)</button><button class="qb" onclick="ck('q1',this,1)">B) AMPc</button><button class="qb" onclick="ck('q1',this,0)">C) Receptor β-adrenérgico</button><button class="qb" onclick="ck('q1',this,0)">D) Proteína Ras</button></div><div class="qf" id="q1f"></div>
+</div></div>
+
+<!-- S2 --><div class="s" id="s-2"><div class="cd"><h2>📉 Adaptación / Desensibilización</h2>
+<div class="sim"><canvas id="cv2" width="900" height="280"></canvas></div>
+<div class="ib ky"><div class="ibt">📐 Adaptación permite detectar CAMBIOS, no niveles absolutos</div><p>Mecanismos: GRK→Arrestina (seg), endocitosis (min), degradación lisosomal (hrs).</p></div>
+<div class="ib cl"><div class="ibt">🏥 Tolerancia a opioides</div><p>Down-regulation crónica de receptores μ → necesitas más dosis.</p></div>
+<div class="qq">❓ Paciente necesita más descongestionante tras semanas:</div>
+<div class="qo" id="q2"><button class="qb" onclick="ck('q2',this,1)">A) Desensibilización y down-regulation</button><button class="qb" onclick="ck('q2',this,0)">B) Aumento de receptores</button><button class="qb" onclick="ck('q2',this,0)">C) Mutación</button><button class="qb" onclick="ck('q2',this,0)">D) Metabolismo hepático</button></div><div class="qf" id="q2f"></div>
+</div></div>
+
+<!-- S3 --><div class="s" id="s-3"><div class="cd"><h2>🔁 Retroalimentación</h2>
+<div class="sim"><canvas id="cv3" width="900" height="300"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="drawFB(0)">➖ Negativa (corta)</button><button class="btn btn-na" onclick="drawFB(1)">〰️ Neg. (larga=oscilaciones)</button><button class="btn btn-ok" onclick="drawFB(2)">➕ Positiva (switch)</button></div></div>
+<div class="ib cl"><div class="ibt">🏥 Coagulación = retroalimentación positiva</div><p>Trombina amplifica su propia producción. Sin freno (antitrombina III) → trombosis.</p></div>
+<div class="qq">❓ Retroalimentación negativa con retardo largo produce:</div>
+<div class="qo" id="q3"><button class="qb" onclick="ck('q3',this,0)">A) Switch irreversible</button><button class="qb" onclick="ck('q3',this,1)">B) Oscilaciones sostenidas (ej: Ca²⁺, insulina)</button><button class="qb" onclick="ck('q3',this,0)">C) Silenciamiento</button><button class="qb" onclick="ck('q3',this,0)">D) Amplificación sin control</button></div><div class="qf" id="q3f"></div>
+</div></div>
+
+<!-- S4 --><div class="s" id="s-4"><div class="cd"><h2>🔄 GTPasas Ras y Familia</h2>
+<div class="sim"><canvas id="cv4" width="900" height="340"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="drawGTP(0)">Activación Ras</button><button class="btn btn-na" onclick="drawGTP(1)">Superfamilia</button></div></div>
+<div class="ib cl"><div class="ibt">🏥 K-Ras: ~30% de tumores</div><p>Mutación codón 12 → no hidroliza GTP → ON permanente. Páncreas ~90%. Sotorasib (2021): primer inhibidor directo.</p></div>
+<div class="qq">❓ ¿Por qué Ras sin GTPasa es oncogénica?</div>
+<div class="qo" id="q4"><button class="qb" onclick="ck('q4',this,1)">A) Permanentemente activa → señales proliferativas sin estímulo</button><button class="qb" onclick="ck('q4',this,0)">B) Queda inactiva</button><button class="qb" onclick="ck('q4',this,0)">C) GDP tóxico</button><button class="qb" onclick="ck('q4',this,0)">D) Destruye receptor</button></div><div class="qf" id="q4f"></div>
+</div></div>
+
+<!-- S5 --><div class="s" id="s-5"><div class="cd"><h2>💨 Óxido Nítrico (NO)</h2>
+<div class="sim"><canvas id="cv5" width="900" height="340"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="animNO()">▶ Ver Vía del NO</button></div></div>
+<div class="cmp">
+<div class="cmp-col" style="border-color:var(--ca)"><h3 style="color:var(--ca)">💊 Nitroglicerina</h3><p style="font-size:.85em">→ NO → relaja coronarios → alivia angina</p></div>
+<div class="cmp-col" style="border-color:var(--rec)"><h3 style="color:var(--rec)">💊 Sildenafil</h3><p style="font-size:.85em">Inhibe PDE5 → ↑GMPc → vasodilatación sostenida</p></div>
+</div>
+<div class="qq">❓ ¿Sustrato de la NO sintasa?</div>
+<div class="qo" id="q5"><button class="qb" onclick="ck('q5',this,0)">A) Glutamina</button><button class="qb" onclick="ck('q5',this,1)">B) Arginina</button><button class="qb" onclick="ck('q5',this,0)">C) Tirosina</button><button class="qb" onclick="ck('q5',this,0)">D) Ác. Araquidónico</button></div><div class="qf" id="q5f"></div>
+</div></div>
+
+<!-- S6 --><div class="s" id="s-6"><div class="cd"><h2>🔑 PKA (Proteína Kinasa A)</h2>
+<div class="sim"><canvas id="cv6" width="900" height="320"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="animPKA()">▶ Activar PKA</button><button class="btn btn-na" onclick="resetPKA()">↺ Reset</button></div></div>
+<div class="ib su"><div class="ibt">💡 Misma PKA, diferente respuesta según célula</div><p>Hígado=glucogenólisis. Adipocito=lipólisis. Intestino=relajación. Diferente sustrato.</p></div>
+<div class="ib wa"><div class="ibt">☕ Cafeína inhibe fosfodiesterasas → ↑AMPc → potencia señales</div></div>
+<div class="qq">❓ ¿Qué hace PKA en el núcleo?</div>
+<div class="qo" id="q6"><button class="qb" onclick="ck('q6',this,0)">A) Se une al ADN directamente</button><button class="qb" onclick="ck('q6',this,1)">B) Fosforila CREB → recluta CBP → transcripción CRE</button><button class="qb" onclick="ck('q6',this,0)">C) Degrada AMPc</button><button class="qb" onclick="ck('q6',this,0)">D) Activa RNA pol</button></div><div class="qf" id="q6f"></div>
+</div></div>
+
+<!-- S7 --><div class="s" id="s-7"><div class="cd"><h2>🔀 PLC, Calcio y Calmodulina</h2>
+<div class="sim"><canvas id="cv7" width="900" height="380"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="animPLC()">▶ Activar PLC</button></div></div>
+<div class="cgrid">
+<div class="gc" style="border-color:var(--ca)"><div class="gc-icon">🧬</div><div class="gc-title">Calmodulina</div><div class="gc-desc">Une 4 Ca²⁺ → activa kinasas, fosfatasas, bombas</div></div>
+<div class="gc" style="border-color:var(--rec)"><div class="gc-icon">🧠</div><div class="gc-title">CaM Kinasa II</div><div class="gc-desc">Autofosforilación → ON sin Ca²⁺ = <b>memoria molecular</b></div></div>
+</div>
+<div class="ib cl"><div class="ibt">🏥 CaM Kinasa II → LTP → Memoria</div><p>Esencial para potenciación a largo plazo en hipocampo.</p></div>
+<div class="qq">❓ ¿Qué hace especial a CaM kinasa II?</div>
+<div class="qo" id="q7"><button class="qb" onclick="ck('q7',this,0)">A) Se une al ADN</button><button class="qb" onclick="ck('q7',this,1)">B) Se autofosforila → ON sostenido tras disociación Ca²⁺/CaM</button><button class="qb" onclick="ck('q7',this,0)">C) Genera Ca²⁺</button><button class="qb" onclick="ck('q7',this,0)">D) No necesita activador</button></div><div class="qf" id="q7f"></div>
+</div></div>
+
+<!-- S8 --><div class="s" id="s-8"><div class="cd"><h2>🧬 PI3K/Akt — Supervivencia</h2>
+<div class="sim"><canvas id="cv8" width="900" height="300"></canvas></div>
+<div class="ib cl"><div class="ibt">🏥 PTEN: supresor tumoral clave</div><p>Desfosforila PIP₃→PIP₂ → apaga Akt. Uno de los genes más mutados en cáncer.</p></div>
+<div class="qq">❓ ¿Rol de PTEN?</div>
+<div class="qo" id="q8"><button class="qb" onclick="ck('q8',this,0)">A) Activa PI3K</button><button class="qb" onclick="ck('q8',this,1)">B) Desfosforila PIP₃ → apaga Akt → supresor tumoral</button><button class="qb" onclick="ck('q8',this,0)">C) Fosforila Akt</button><button class="qb" onclick="ck('q8',this,0)">D) Activa mTOR</button></div><div class="qf" id="q8f"></div>
+</div></div>
+
+<!-- S9 --><div class="s" id="s-9"><div class="cd"><h2>🧬 mTOR, MAPK y JAK-STAT</h2>
+<div class="sim"><canvas id="cv9" width="900" height="420"></canvas>
+<div class="sim-ctrls"><button class="btn" onclick="drawPW(0)">mTOR</button><button class="btn btn-na" onclick="drawPW(1)">MAP Kinasa</button><button class="btn btn-ok" onclick="drawPW(2)">JAK-STAT</button></div></div>
+<div class="ib cl"><div class="ibt">🏥 Fármacos clave</div>
+<div class="cgrid">
+<div class="gc" style="border-color:var(--sig)"><div class="gc-title" style="color:var(--sig)">Rapamicina</div><div class="gc-desc">Inhibe mTORC1</div></div>
+<div class="gc" style="border-color:var(--lig)"><div class="gc-title" style="color:var(--lig)">Vemurafenib</div><div class="gc-desc">Inhibe BRAF V600E</div></div>
+<div class="gc" style="border-color:var(--eff)"><div class="gc-title" style="color:var(--eff)">Tofacitinib</div><div class="gc-desc">Inhibidor JAK</div></div>
+</div></div>
+<div class="qq">❓ ¿Orden del módulo MAPK?</div>
+<div class="qo" id="q9"><button class="qb" onclick="ck('q9',this,0)">A) ERK→MEK→Raf</button><button class="qb" onclick="ck('q9',this,1)">B) Ras→Raf(MAPKKK)→MEK(MAPKK)→ERK(MAPK)</button><button class="qb" onclick="ck('q9',this,0)">C) MEK→Ras→ERK</button><button class="qb" onclick="ck('q9',this,0)">D) JAK→STAT→Ras</button></div><div class="qf" id="q9f"></div>
+</div></div>
+
+<!-- S10 --><div class="s" id="s-10"><div class="cd"><h2>🏆 Evaluación Integradora Final</h2>
+<div class="qq">❓ K-Ras G12V en páncreas. ¿Vías constitutivamente activas?</div>
+<div class="qo" id="qA"><button class="qb" onclick="ck('qA',this,0)">A) Solo JAK-STAT</button><button class="qb" onclick="ck('qA',this,1)">B) MAPK Y PI3K/Akt — ambas downstream de Ras</button><button class="qb" onclick="ck('qA',this,0)">C) Solo AMPc/PKA</button><button class="qb" onclick="ck('qA',this,0)">D) Solo PLC/Ca²⁺</button></div><div class="qf" id="qAf"></div>
+<div class="qq">❓ Cólera y Ras mutado comparten:</div>
+<div class="qo" id="qB"><button class="qb" onclick="ck('qB',this,1)">A) GTPasa bloqueada en ON (no hidroliza GTP)</button><button class="qb" onclick="ck('qB',this,0)">B) Activan PKC</button><button class="qb" onclick="ck('qB',this,0)">C) Destruyen receptores</button><button class="qb" onclick="ck('qB',this,0)">D) Inhiben fosfodiesterasa</button></div><div class="qf" id="qBf"></div>
+<div class="qq">❓ PKA en núcleo vs STATs en núcleo:</div>
+<div class="qo" id="qC"><button class="qb" onclick="ck('qC',this,0)">A) PKA es FT directo</button><button class="qb" onclick="ck('qC',this,1)">B) PKA fosforila CREB (otro FT); STATs SON los FT directos</button><button class="qb" onclick="ck('qC',this,0)">C) Solo STATs entran al núcleo</button><button class="qb" onclick="ck('qC',this,0)">D) No hay diferencia</button></div><div class="qf" id="qCf"></div>
+<div class="qq">❓ Bloqueas calmodulina en hipocampo:</div>
+<div class="qo" id="qD"><button class="qb" onclick="ck('qD',this,0)">A) Más memoria</button><button class="qb" onclick="ck('qD',this,1)">B) Déficit en LTP y memoria (no activa CaM kinasa II)</button><button class="qb" onclick="ck('qD',this,0)">C) ↑ PKA</button><button class="qb" onclick="ck('qD',this,0)">D) ↑ insulina</button></div><div class="qf" id="qDf"></div>
+<div style="margin-top:24px;padding:20px;background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(168,85,247,.08));border-radius:14px;border:1px solid rgba(0,229,255,.2);text-align:center">
+<h3 style="color:var(--sig)">🎯 ¡Tutoría Completa! 26 RA cubiertos.</h3>
+<p>Revisa correlaciones clínicas para el examen.</p>
+</div>
+</div></div>
+
+</div>
+<script>
+var SEC=['Mapa','Componentes','Adaptación','Retroaliment.','Ras/Rab','NO','PKA','PLC/Ca²⁺/CaM','PI3K/Akt','mTOR/MAPK/JAK','Evaluación'];
+var N=SEC.length,cur=0,done=new Set();
+var fb={q1:['AMPc es 2do mensajero.','\u2705 AMPc = 2do mensajero cl\u00e1sico.'],q2:['Desensibilizaci\u00f3n por exposici\u00f3n prolongada.','\u2705 Down-regulation.'],q3:['Retardo largo = oscilaciones.','\u2705 Ej: Ca\u00b2\u207a, insulina.'],q4:['Ras-GTP permanente = proliferaci\u00f3n.','\u2705 ~30% tumores.'],q5:['NOS usa arginina.','\u2705 Arginina \u2192 NO + citrulina.'],q6:['PKA fosforila CREB.','\u2705 CREB-P recluta CBP.'],q7:['CaM kinasa II se autofosforila.','\u2705 Memoria molecular.'],q8:['PTEN desfosforila PIP\u2083.','\u2705 Supresor tumoral.'],q9:['Ras\u2192Raf\u2192MEK\u2192ERK.','\u2705 Triple cascada.'],qA:['Ras activa MAPK y PI3K/Akt.','\u2705 Ambas downstream de Ras.'],qB:['GTPasa bloqueada en ON.','\u2705 Mismo principio.'],qC:['PKA fosforila CREB. STATs SON FT directos.','\u2705 Diferencia clave.'],qD:['Sin calmodulina = sin CaM kinasa II = sin LTP.','\u2705 Sin memoria.']};
+function bn(){var nv=document.getElementById('nav');nv.innerHTML='';for(var i=0;i<N;i++){var b=document.createElement('button');b.className='nb'+(i===cur?' a':'')+(done.has(i)?' d':'');b.textContent=i+'. '+SEC[i];b.onclick=(function(x){return function(){go(x)}})(i);nv.appendChild(b)}}
+function go(i){document.querySelectorAll('.s').forEach(function(s){s.classList.remove('on')});document.getElementById('s-'+i).classList.add('on');cur=i;done.add(i);bn();document.getElementById('pbar').style.width=((done.size/N)*100)+'%';document.getElementById('ptxt').textContent='Secci\u00f3n '+(i+1)+' de '+N;window.scrollTo({top:0,behavior:'smooth'});initS(i)}
+function ck(qid,btn,ok){var btns=document.getElementById(qid).querySelectorAll('.qb');btns.forEach(function(b){b.disabled=true;b.style.pointerEvents='none'});if(ok){btn.classList.add('ok');document.getElementById(qid+'f').className='qf sh gf';document.getElementById(qid+'f').innerHTML=fb[qid][1]}else{btn.classList.add('no');document.getElementById(qid+'f').className='qf sh bf';document.getElementById(qid+'f').innerHTML=fb[qid][0]}}
+function initS(i){var fns=[null,drawComp,drawAdapt,function(){drawFB(0)},function(){drawGTP(0)},drawNOstatic,resetPKA,drawPLCstatic,drawPI3K,function(){drawPW(0)},null];if(fns[i])fns[i]()}
+bn();
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.quadraticCurveTo(x+w,y,x+w,y+r);c.lineTo(x+w,y+h-r);c.quadraticCurveTo(x+w,y+h,x+w-r,y+h);c.lineTo(x+r,y+h);c.quadraticCurveTo(x,y+h,x,y+h-r);c.lineTo(x,y+r);c.quadraticCurveTo(x,y,x+r,y);c.closePath()}
+function bg(c,W,H){c.fillStyle='#0a0e18';c.fillRect(0,0,W,H)}
+function pill(c,x,y,w,h,col,txt,tc){rr(c,x-w/2,y-h/2,w,h,h/2);c.fillStyle=col;c.fill();c.fillStyle=tc||'#fff';c.font='bold 12px Nunito';c.textAlign='center';c.textBaseline='middle';c.fillText(txt,x,y);c.textBaseline='alphabetic'}
+function arr(c,x1,y1,x2,y2,col){c.strokeStyle=col||'#00e5ff';c.lineWidth=2.5;c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();var a=Math.atan2(y2-y1,x2-x1);c.fillStyle=col||'#00e5ff';c.beginPath();c.moveTo(x2,y2);c.lineTo(x2-9*Math.cos(a-.5),y2-9*Math.sin(a-.5));c.lineTo(x2-9*Math.cos(a+.5),y2-9*Math.sin(a+.5));c.fill()}
+function drawComp(){var cv=document.getElementById('cv1');if(!cv)return;var c=cv.getContext('2d');bg(c,900,220);var b=[{x:90,l:'LIGANDO',col:'#f59e0b'},{x:250,l:'RECEPTOR',col:'#a855f7'},{x:420,l:'TRANSDUCTOR',col:'#00e5ff'},{x:590,l:'2dos MENS.',col:'#ef4444'},{x:770,l:'EFECTORES',col:'#22c55e'}];b.forEach(function(v,i){pill(c,v.x,110,130,50,v.col+'33',v.l,v.col);if(i<b.length-1)arr(c,v.x+68,110,b[i+1].x-68,110,v.col+'88')})}
+function drawAdapt(){var cv=document.getElementById('cv2');if(!cv)return;var c=cv.getContext('2d');bg(c,900,280);c.fillStyle='#e2e8f0';c.font='bold 14px Nunito';c.textAlign='center';c.fillText('Respuesta disminuye con est\u00edmulo constante',450,24);c.strokeStyle='#f59e0b';c.lineWidth=3;c.beginPath();c.moveTo(80,80);c.lineTo(80,180);c.lineTo(800,180);c.stroke();c.fillStyle='#f59e0b';c.font='10px Nunito';c.fillText('Se\u00f1al ON',440,200);c.strokeStyle='#00e5ff';c.lineWidth=3;c.beginPath();for(var x=80;x<800;x++){var t=(x-80)/720;c.lineTo(x,180-100*Math.exp(-t*3)*(1-t*0.8))}c.stroke();c.fillStyle='#00e5ff';c.font='bold 11px Nunito';c.fillText('Respuesta',130,70);pill(c,200,250,110,22,'#a855f733','GRK\u2192Arrestina','#a855f7');pill(c,400,250,100,22,'#ef444433','Endocitosis','#ef4444');pill(c,600,250,100,22,'#22c55e33','Degradaci\u00f3n','#22c55e')}
+function drawFB(m){var cv=document.getElementById('cv3');if(!cv)return;var c=cv.getContext('2d');bg(c,900,300);var t=['Retroalim. Negativa (corta)','Retroalim. Negativa (larga \u2192 oscilaciones)','Retroalim. Positiva (switch ON)'];c.fillStyle='#e2e8f0';c.font='bold 14px Nunito';c.textAlign='center';c.fillText(t[m],450,24);c.strokeStyle=m===2?'#22c55e':'#00e5ff';c.lineWidth=3;c.beginPath();for(var x=100;x<750;x++){var p=(x-100)/650;var y;if(m===0)y=250-140*Math.exp(-p*4)*(0.3+0.7*Math.exp(-p*2));else if(m===1)y=250-80-55*Math.sin(p*20)*Math.exp(-p*0.5);else y=p<0.15?250:85;c.lineTo(x,Math.max(50,Math.min(260,y)))}c.stroke();var lb=['Respuesta fuerte \u2192 se aten\u00faa','Oscilaciones sostenidas','Switch: se\u00f1al breve \u2192 ON permanente'];c.fillStyle=m===2?'#22c55e':'#00e5ff';c.font='bold 11px Nunito';c.fillText(lb[m],450,50)}
+function drawGTP(m){var cv=document.getElementById('cv4');if(!cv)return;var c=cv.getContext('2d');bg(c,900,340);if(m===0){c.fillStyle='#e2e8f0';c.font='bold 14px Nunito';c.textAlign='center';c.fillText('Activaci\u00f3n de Ras v\u00eda RTK',450,24);pill(c,100,80,70,28,'#ef444444','RTK-P','#ef4444');arr(c,138,80,182,80,'#ef444488');pill(c,230,80,70,28,'#00e5ff44','Grb2','#00e5ff');arr(c,268,80,322,80,'#00e5ff88');pill(c,370,80,60,28,'#a855f744','Sos','#a855f7');arr(c,404,80,456,80,'#a855f788');pill(c,520,80,90,30,'#22c55e','Ras-GTP \u2713','#fff');arr(c,520,100,350,170,'#22c55e88');arr(c,520,100,520,170,'#22c55e88');arr(c,520,100,700,170,'#22c55e88');pill(c,350,190,90,28,'#ef444444','Raf\u2192MAPK','#ef4444');pill(c,520,190,90,28,'#00e5ff44','PI3K/Akt','#00e5ff');pill(c,700,190,80,28,'#a855f744','RalGDS','#a855f7');pill(c,520,260,90,28,'#8899b344','Ras-GDP \u2717','#8899b3');arr(c,520,210,520,245,'#8899b366');c.fillStyle='#8899b3';c.font='10px Nunito';c.fillText('GAP: GTP\u2192GDP',520,290);pill(c,350,320,260,22,'#ef444433','Mutaci\u00f3n Ras: ON permanente \u2192 C\u00c1NCER','#ef4444')}else{c.fillStyle='#e2e8f0';c.font='bold 14px Nunito';c.textAlign='center';c.fillText('Superfamilia GTPasas Monom\u00e9ricas',450,24);var f=[{n:'Ras',fn:'Proliferaci\u00f3n',c:'#ef4444',y:75},{n:'Rab',fn:'Tr\u00e1fico vesicular (~60)',c:'#00e5ff',y:135},{n:'Rho',fn:'Citoesqueleto actina',c:'#a855f7',y:195},{n:'Ran',fn:'Transporte nuclear',c:'#22c55e',y:255}];f.forEach(function(v){pill(c,180,v.y,90,30,v.c,v.n,'#fff');c.fillStyle=v.c;c.font='12px Nunito';c.textAlign='left';c.fillText(v.fn,260,v.y+4);pill(c,560,v.y,55,22,'#22c55e44','GEF','#22c55e');pill(c,680,v.y,55,22,'#ef444444','GAP','#ef4444');arr(c,590,v.y,648,v.y,'#8899b366')});c.fillStyle='#8899b3';c.font='bold 11px Nunito';c.textAlign='center';c.fillText('Todas: GTP=ON, GDP=OFF. GEF enciende, GAP apaga.',450,310)}}
+var noA=null;
+function drawNOstatic(){var cv=document.getElementById('cv5');if(!cv)return;var c=cv.getContext('2d');bg(c,900,340);drawNOf(c,1)}
+function animNO(){if(noA)cancelAnimationFrame(noA);var cv=document.getElementById('cv5');if(!cv)return;var c=cv.getContext('2d');var f=0;function d(){bg(c,900,340);drawNOf(c,Math.min(f/100,1));f++;if(f<120)noA=requestAnimationFrame(d)}d()}
+function drawNOf(c,p){c.fillStyle='#e2e8f0';c.font='bold 14px Nunito';c.textAlign='center';c.fillText('V\u00eda del \u00d3xido N\u00edtrico',450,24);rr(c,50,50,350,120,14);c.fillStyle='#00e5ff11';c.fill();c.strokeStyle='#00e5ff';c.lineWidth=2;c.stroke();c.fillStyle='#00e5ff';c.font='bold 11px Nunito';c.fillText('C\u00e9lula Endotelial',225,70);if(p>0)pill(c,120,110,50,22,'#f59e0b','ACh','#000');if(p>.15){arr(c,148,110,188,110,'#f59e0b88');pill(c,230,110,55,22,'#a855f744','GPCR','#a855f7')}if(p>.3){arr(c,260,110,290,110,'#a855f788');pill(c,340,110,65,22,'#ef444444','\u2191Ca\u00b2\u207a','#ef4444')}if(p>.45){arr(c,340,125,340,148,'#ef444488');pill(c,340,162,80,22,'#22c55e44','NOS+Arg','#22c55e')}if(p>.6){for(var i=0;i<8;i++){var nx=340+i*30*(p-.5)*3,ny=200+Math.sin(i+p*10)*20;c.beginPath();c.arc(nx,ny,5,0,Math.PI*2);c.fillStyle='#22c55e88';c.fill()}c.fillStyle='#22c55e';c.font='bold 12px Nunito';c.fillText('NO (gas) difunde \u2192',500,200)}rr(c,500,230,350,90,14);c.fillStyle='#ef444411';c.fill();c.strokeStyle='#ef4444';c.lineWidth=2;c.stroke();c.fillStyle='#ef4444';c.font='bold 11px Nunito';c.fillText('M\u00fasculo Liso',675,250);if(p>.75){pill(c,580,280,80,22,'#a855f744','Guan.C.','#a855f7');arr(c,624,280,662,280,'#a855f788');pill(c,720,280,55,22,'#00e5ff44','GMPc','#00e5ff')}if(p>.9)pill(c,810,280,70,22,'#22c55e','RELAJA','#fff')}
+var pkaS=0;
+function resetPKA(){pkaS=0;dPKA()}
+function animPKA(){pkaS=1;dPKA();setTimeout(function(){pkaS=2;dPKA()},1200)}
+function dPKA(){var cv=document.getElementById('cv6');if(!cv)return;var c=cv.getContext('2d');bg(c,900,320);if(pkaS===0){c.fillStyle='#e2e8f0';c.font='bold 14px Nunito';c.textAlign='center';c.fillText('PKA Inactiva: R\u2082C\u2082',450,24);rr(c,300,60,300,100,14);c.fillStyle='#a855f722';c.fill();c.strokeStyle='#a855f7';c.lineWidth=2;c.stroke();pill(c,380,95,50,28,'#a855f7','R','#fff');pill(c,440,95,50,28,'#a855f7','R','#fff');pill(c,380,130,50,28,'#00e5ff44','C','#00e5ff');pill(c,440,130,50,28,'#00e5ff44','C','#00e5ff');c.fillStyle='#8899b3';c.font='11px Nunito';c.fillText('R inhibe C. Sin AMPc = inactiva.',450,200)}else if(pkaS===1){c.fillStyle='#f59e0b';c.font='bold 14px Nunito';c.textAlign='center';c.fillText('AMPc se une a R \u2192 C se libera',450,24);pill(c,200,100,50,28,'#a855f7','R','#fff');pill(c,260,100,50,28,'#a855f7','R','#fff');for(var i=0;i<4;i++){c.beginPath();c.arc(190+i*25,80,6,0,Math.PI*2);c.fillStyle='#f59e0b';c.fill()}pill(c,500,100,50,28,'#00e5ff','C \u2713','#fff');pill(c,570,100,50,28,'#00e5ff','C \u2713','#fff');arr(c,290,100,460,100,'#f59e0b88');c.fillStyle='#00e5ff';c.font='bold 11px Nunito';c.fillText('\u00a1C libres y activas!',535,140)}else{c.fillStyle='#22c55e';c.font='bold 14px Nunito';c.textAlign='center';c.fillText('PKA activa: fosforila + migra al n\u00facleo',450,24);pill(c,150,80,55,26,'#00e5ff','C','#fff');arr(c,180,80,270,80,'#00e5ff88');pill(c,330,80,90,26,'#22c55e44','Ser/Thr-P','#22c55e');arr(c,150,96,150,165,'#00e5ff66');rr(c,80,175,140,75,12);c.fillStyle='#a855f711';c.fill();c.strokeStyle='#a855f7';c.lineWidth=1;c.stroke();c.fillStyle='#a855f7';c.font='bold 10px Nunito';c.fillText('N\u00daCLEO',150,195);pill(c,150,225,55,20,'#ef444444','CREB','#ef4444');arr(c,180,225,225,225,'#ef444488');pill(c,275,225,50,20,'#22c55e44','CBP','#22c55e');arr(c,305,225,365,225,'#22c55e88');pill(c,430,225,80,20,'#f59e0b44','Genes CRE','#f59e0b');pill(c,600,80,80,24,'#ef444433','H\u00edgado','#ef4444');c.fillStyle='#ef4444';c.font='10px Nunito';c.fillText('Glucogen\u00f3lisis',600,110);pill(c,740,80,80,24,'#f59e0b33','Adipocito','#f59e0b');c.fillText('Lip\u00f3lisis',740,110);pill(c,670,155,80,24,'#22c55e33','M. liso','#22c55e');c.fillStyle='#22c55e';c.fillText('Relajaci\u00f3n',670,185)}}
+function drawPLCstatic(){var cv=document.getElementById('cv7');if(!cv)return;var c=cv.getContext('2d');bg(c,900,380);drawPLCf(c,1)}
+function animPLC(){var cv=document.getElementById('cv7');if(!cv)return;var c=cv.getContext('2d');var f=0;function d(){bg(c,900,380);drawPLCf(c,Math.min(f/100,1));f++;if(f<120)requestAnimationFrame(d)}d()}
+function drawPLCf(c,p){c.fillStyle='#e2e8f0';c.font='bold 14px Nunito';c.textAlign='center';c.fillText('PLC \u2192 IP\u2083 + DAG \u2192 Ca\u00b2\u207a + PKC',450,24);c.fillStyle='#a855f722';c.fillRect(0,90,900,20);pill(c,150,80,55,20,'#f59e0b','Ligando','#000');pill(c,150,100,50,18,'#a855f7','GPCR','#fff');if(p>.1){arr(c,178,100,228,100,'#a855f788');pill(c,275,100,40,18,'#22c55e44','Gq','#22c55e')}if(p>.2){arr(c,298,100,348,100,'#22c55e88');pill(c,400,100,60,18,'#00e5ff44','PLC-\u03b2','#00e5ff')}if(p>.3){pill(c,400,80,50,16,'#8899b344','PIP\u2082','#8899b3');arr(c,400,115,400,145,'#00e5ff88')}if(p>.4){arr(c,400,150,270,200,'#ef444488');arr(c,400,150,550,170,'#f59e0b88');pill(c,220,215,55,24,'#ef4444','IP\u2083','#fff');pill(c,580,185,55,24,'#f59e0b','DAG','#000')}if(p>.55){arr(c,220,230,220,268,'#ef444488');rr(c,165,273,110,45,10);c.fillStyle='#a855f711';c.fill();c.strokeStyle='#a855f7';c.lineWidth=1;c.stroke();c.fillStyle='#a855f7';c.font='10px Nunito';c.fillText('RE',220,297);arr(c,220,320,220,345,'#ef444488');pill(c,220,358,70,22,'#ef4444','\u2191\u2191 Ca\u00b2\u207a','#fff')}if(p>.6){pill(c,580,225,60,22,'#f59e0b44','+ Ca\u00b2\u207a','#f59e0b');arr(c,580,240,580,268,'#f59e0b88');pill(c,580,285,55,22,'#22c55e','PKC \u2713','#fff')}if(p>.75){arr(c,258,358,348,358,'#ef444488');pill(c,410,358,80,22,'#a855f7','Calmodulina','#fff');c.fillStyle='#a855f7';c.font='9px Nunito';c.fillText('+4 Ca\u00b2\u207a',410,340);arr(c,454,358,525,358,'#a855f788');pill(c,600,358,85,22,'#00e5ff','CaM Kinasa','#fff')}}
+function drawPI3K(){var cv=document.getElementById('cv8');if(!cv)return;var c=cv.getContext('2d');bg(c,900,300);c.fillStyle='#e2e8f0';c.font='bold 14px Nunito';c.textAlign='center';c.fillText('PI3K \u2192 Akt \u2192 Supervivencia',450,24);pill(c,100,80,65,26,'#ef444444','RTK','#ef4444');arr(c,135,80,175,80,'#ef444488');pill(c,225,80,55,26,'#00e5ff44','PI3K','#00e5ff');arr(c,255,80,295,80,'#00e5ff88');pill(c,350,80,55,26,'#a855f744','PIP\u2083','#a855f7');arr(c,380,80,425,80,'#a855f788');pill(c,490,80,65,28,'#22c55e','Akt \u2713','#fff');arr(c,490,98,380,158,'#22c55e88');arr(c,490,98,490,158,'#22c55e88');arr(c,490,98,600,158,'#22c55e88');pill(c,380,175,70,22,'#22c55e44','Bad-P','#22c55e');pill(c,490,175,70,22,'#22c55e44','mTOR','#22c55e');pill(c,600,175,70,22,'#22c55e44','Metab.','#22c55e');c.fillStyle='#22c55e';c.font='bold 11px Nunito';c.fillText('\u2192 Supervivencia celular',490,210);pill(c,350,245,55,22,'#ef4444','PTEN','#fff');arr(c,350,232,350,100,'#ef444488');c.fillStyle='#ef4444';c.font='10px Nunito';c.fillText('Desfosforila PIP\u2083 \u2192 Supresor tumoral',350,275)}
+function drawPW(m){var cv=document.getElementById('cv9');if(!cv)return;var c=cv.getContext('2d');bg(c,900,420);
+if(m===0){c.fillStyle='#e2e8f0';c.font='bold 16px Nunito';c.textAlign='center';c.fillText('V\u00eda mTOR',450,28);pill(c,200,70,90,28,'#22c55e44','PI3K/Akt','#22c55e');arr(c,248,70,345,70,'#22c55e88');pill(c,450,70,90,30,'#00e5ff','mTOR','#fff');arr(c,450,90,300,150,'#00e5ff88');arr(c,450,90,600,150,'#00e5ff88');rr(c,220,160,160,95,12);c.fillStyle='#00e5ff22';c.fill();c.strokeStyle='#00e5ff';c.lineWidth=1;c.stroke();c.fillStyle='#00e5ff';c.font='bold 12px Nunito';c.fillText('mTORC1',300,185);c.font='10px Nunito';c.fillText('+ Raptor',300,205);c.fillText('\u2191 s\u00edntesis, \u2191 ribosomas',300,225);c.fillText('\u2193 degradaci\u00f3n',300,243);pill(c,300,275,85,20,'#ef444433','Rapamicina \u2717','#ef4444');rr(c,520,160,160,95,12);c.fillStyle='#a855f722';c.fill();c.strokeStyle='#a855f7';c.lineWidth=1;c.stroke();c.fillStyle='#a855f7';c.font='bold 12px Nunito';c.fillText('mTORC2',600,185);c.font='10px Nunito';c.fillText('+ Rictor',600,205);c.fillText('Activa Akt',600,225);c.fillText('Citoesqueleto',600,243);c.fillStyle='#8899b3';c.font='bold 11px Nunito';c.fillText('Rapamicina solo inhibe mTORC1.',450,340)}
+else if(m===1){c.fillStyle='#e2e8f0';c.font='bold 16px Nunito';c.textAlign='center';c.fillText('V\u00eda MAP Kinasa (Ras\u2192Raf\u2192MEK\u2192ERK)',450,28);var s=[{x:90,l:'RTK',c:'#ef4444'},{x:210,l:'Grb2/Sos',c:'#a855f7'},{x:350,l:'Ras-GTP',c:'#22c55e'},{x:490,l:'Raf',c:'#f59e0b'},{x:620,l:'MEK',c:'#00e5ff'},{x:750,l:'ERK',c:'#ef4444'}];s.forEach(function(v,i){pill(c,v.x,100,95,28,v.c,v.l,'#fff');if(i<s.length-1)arr(c,v.x+50,100,s[i+1].x-50,100,v.c+'88')});c.fillStyle='#f59e0b';c.font='bold 11px Nunito';c.fillText('\u00d71',90,75);c.fillText('\u00d710',490,75);c.fillText('\u00d7100',620,75);c.fillText('\u00d71000',750,75);arr(c,750,118,600,178,'#ef444488');arr(c,750,118,750,178,'#ef444488');pill(c,600,195,80,22,'#a855f744','FT nucleares','#a855f7');pill(c,750,195,75,22,'#00e5ff44','Ciclinas','#00e5ff');rr(c,250,250,400,70,12);c.fillStyle='#ef444411';c.fill();c.strokeStyle='#ef4444';c.lineWidth=1;c.stroke();c.fillStyle='#ef4444';c.font='bold 11px Nunito';c.fillText('\ud83c\udfe5 BRAF V600E: melanoma ~50%',450,280);c.font='10px Nunito';c.fillText('Vemurafenib y dabrafenib',450,300)}
+else{c.fillStyle='#e2e8f0';c.font='bold 16px Nunito';c.textAlign='center';c.fillText('V\u00eda JAK-STAT',450,28);c.fillStyle='#a855f722';c.fillRect(300,55,30,80);c.fillRect(420,55,30,80);c.strokeStyle='#a855f7';c.lineWidth=2;c.strokeRect(300,55,30,80);c.strokeRect(420,55,30,80);pill(c,375,48,65,20,'#f59e0b','Citocina','#000');pill(c,315,155,40,20,'#22c55e','JAK','#fff');pill(c,435,155,40,20,'#22c55e','JAK','#fff');c.fillStyle='#22c55e';c.font='9px Nunito';c.fillText('transfosforilan',375,180);arr(c,315,168,315,198,'#22c55e88');arr(c,435,168,435,198,'#22c55e88');c.fillStyle='#ef4444';c.font='bold 10px Nunito';c.fillText('P',308,210);c.fillText('P',428,210);arr(c,315,218,250,248,'#ef444488');arr(c,435,218,500,248,'#ef444488');pill(c,250,262,55,22,'#00e5ff','STAT','#fff');pill(c,500,262,55,22,'#00e5ff','STAT','#fff');arr(c,278,262,360,305,'#00e5ff88');arr(c,472,262,390,305,'#00e5ff88');pill(c,375,320,90,26,'#00e5ff','STAT-STAT','#fff');c.fillStyle='#00e5ff';c.font='9px Nunito';c.fillText('dimerizan v\u00eda SH2',375,348);arr(c,375,336,375,362,'#00e5ff88');rr(c,310,366,130,28,8);c.fillStyle='#a855f711';c.fill();c.strokeStyle='#a855f7';c.lineWidth=1;c.stroke();c.fillStyle='#a855f7';c.font='bold 10px Nunito';c.fillText('N\u00daCLEO \u2192 Transcripci\u00f3n',375,384);rr(c,600,70,250,110,12);c.fillStyle='#22c55e11';c.fill();c.strokeStyle='#22c55e';c.lineWidth=1;c.stroke();c.fillStyle='#22c55e';c.font='bold 11px Nunito';c.fillText('STATs = FT LATENTES',725,95);c.font='10px Nunito';c.fillStyle='#8899b3';c.fillText('"Dormidos" en citosol.',725,118);c.fillText('Activan \u2192 dimerizan \u2192 n\u00facleo.',725,136);c.fillText('V\u00eda directa membrana\u2192n\u00facleo.',725,154);rr(c,600,200,250,75,12);c.fillStyle='#ef444411';c.fill();c.strokeStyle='#ef4444';c.lineWidth=1;c.stroke();c.fillStyle='#ef4444';c.font='bold 11px Nunito';c.fillText('\ud83c\udfe5 Inhibidores JAK',725,225);c.font='10px Nunito';c.fillText('Tofacitinib: artritis, colitis',725,248);c.fillText('Ruxolitinib: mielofibrosis',725,264)}}
+initS(0);bn();
+</script>
+</body>
+</html>
