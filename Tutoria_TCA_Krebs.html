@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Interactiva: Ciclo de Ácidos Tricarboxílicos (TCA)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 24px}.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}.nb{font-family:'DM Serif Display',serif;font-size:1.1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.nl{display:flex;gap:3px;flex-wrap:wrap}.nl button{padding:5px 12px;border-radius:20px;border:none;background:0;color:var(--t2);font-size:.76rem;font-family:inherit;cursor:pointer;transition:.3s}.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}.pb{position:fixed;top:58px;left:0;right:0;z-index:99;height:3px;background:rgba(0,212,170,.1)}.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}.mc{max-width:960px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1}.sec{display:none;animation:fi .5s}.sec.a{display:block}@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.hero{text-align:center;padding:50px 0 36px}.hi{width:90px;height:90px;margin:0 auto 20px;background:var(--grad);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}.hero h1{font-family:'DM Serif Display',serif;font-size:2.8rem;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hs{font-size:1.1rem;color:var(--t2);max-width:650px;margin:0 auto 28px}.og{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0}.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px 16px;display:flex;align-items:flex-start;gap:10px;transition:.3s}.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}.on{min-width:26px;height:26px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;color:#0B1622}.ot{font-size:.85rem;color:var(--t2);line-height:1.5}.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;box-shadow:var(--sh);transition:.3s}.cd:hover{border-color:rgba(0,212,170,.25)}.ch{font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:14px}.ch .ac{color:var(--g)}.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:18px 22px;margin:18px 0;background:rgba(0,212,170,.06)}.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}.ibt{font-weight:700;margin-bottom:5px;font-size:.93rem}.cg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin:18px 0}.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px}.cc h4{font-family:'DM Serif Display',serif;margin-bottom:10px;font-size:1.05rem}.dc{background:rgba(0,0,0,.2);border-radius:var(--r16);padding:24px;margin:20px 0;text-align:center;border:1px solid var(--bdr)}.et{width:100%;border-collapse:separate;border-spacing:0;margin:18px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}.et th{background:rgba(0,212,170,.12);padding:12px 16px;text-align:left;font-weight:600;font-size:.85rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}.et td{padding:11px 16px;border-top:1px solid var(--bdr);font-size:.9rem;color:var(--t2)}.et tr:hover td{background:var(--card2)}.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:18px}.qt{font-weight:600;font-size:1rem;margin-bottom:16px}.qo{display:flex;flex-direction:column;gap:9px}.qb{padding:12px 18px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.93rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}.qb.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}.qb.dis{pointer-events:none;opacity:.7}.ol{min-width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem}.qf{margin-top:14px;padding:16px;border-radius:var(--r10);font-size:.9rem;line-height:1.6;display:none}.qf.sh{display:block}.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}.cl{background:linear-gradient(135deg,rgba(255,107,107,.06),rgba(255,217,61,.04));border:1px solid rgba(255,107,107,.2);border-radius:var(--r16);padding:28px;margin:20px 0}.clb{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,107,.15);color:var(--r);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600;margin-bottom:14px;text-transform:uppercase;letter-spacing:.03em}.clt{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:12px}.clp{color:var(--t2);margin-bottom:14px;font-size:.93rem;line-height:1.7}.btn{padding:11px 24px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.93rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}.bp:hover{transform:translateY(-2px)}.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}.bs:hover{background:rgba(0,212,170,.2)}.tb{display:flex;gap:5px;margin-bottom:20px;border-bottom:1px solid var(--bdr)}.tbtn{padding:9px 18px;border:none;background:0;color:var(--t3);font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:.3s;border-radius:7px 7px 0 0}.tbtn:hover{color:var(--t2)}.tbtn.a{color:var(--g);border-bottom-color:var(--g);background:rgba(0,212,170,.06)}.tc{display:none;animation:fi .4s}.tc.a{display:block}.sn{display:flex;justify-content:space-between;margin-top:36px;padding-top:20px;border-top:1px solid var(--bdr)}.pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.76rem;font-weight:600;margin:2px 3px}.pg{background:rgba(0,212,170,.15);color:var(--g)}.pb2{background:rgba(0,163,255,.12);color:var(--b)}.pw{background:rgba(255,107,107,.12);color:var(--r)}.py{background:rgba(255,217,61,.12);color:var(--y)}.pp{background:rgba(167,139,250,.12);color:var(--p)}.ppk{background:rgba(236,72,153,.12);color:var(--pk)}.por{background:rgba(249,115,22,.12);color:var(--o)}.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:20px 0}.fc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px;cursor:pointer;transition:.4s;min-height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.fc:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:var(--glow)}.ft{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--g)}.fd{display:none;font-size:.88rem;color:var(--t2);line-height:1.6;margin-top:7px}.fc.fl .ft{display:none}.fc.fl .fd{display:block}.fh{font-size:.73rem;color:var(--t3);margin-top:8px}.fc.fl .fh{display:none}.sd{text-align:center;padding:36px;margin:20px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}.snm{font-family:'DM Serif Display',serif;font-size:3.5rem;margin-bottom:6px}.sbl{color:var(--t2)}.sbr{width:100%;max-width:380px;height:11px;background:rgba(255,255,255,.06);border-radius:6px;margin:18px auto;overflow:hidden}.sbf{height:100%;border-radius:6px;transition:width 1s}.sb2{display:inline-block;padding:8px 22px;border-radius:var(--r10);font-weight:700;font-size:1.1rem}.step-diagram{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:18px 0}.step-box{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:12px 16px;text-align:center;min-width:110px;transition:.3s;cursor:default}.step-box:hover{border-color:var(--g);transform:translateY(-2px)}.step-arrow{color:var(--g);font-size:1.4rem;font-weight:700}.bal-box{background:var(--card);border:2px solid var(--g);border-radius:var(--r16);padding:24px;margin:20px 0;text-align:center}.bal-box h3{font-family:'DM Serif Display',serif;color:var(--g);margin-bottom:14px;font-size:1.3rem}.bal-row{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0}.bal-item{background:var(--card2);border-radius:var(--r10);padding:10px 18px;font-weight:600;font-size:.95rem}.bal-plus{color:var(--g);font-size:1.3rem;font-weight:700}.bal-eq{color:var(--y);font-size:1.3rem;font-weight:700}.cycle-svg{margin:20px auto;display:block;max-width:100%}@media(max-width:768px){.og,.cg{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.hero h1{font-size:2rem}.step-diagram{flex-direction:column}.step-arrow{transform:rotate(90deg)}.nl{gap:1px}.nl button{padding:4px 8px;font-size:.7rem}}::-webkit-scrollbar{width:7px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">🔄 Ciclo TCA & Mitocondria</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button><button data-s="mitocondria">Mitocondria</button><button data-s="adnmt">ADN mt</button><button data-s="ubicacion">Ubicación</button><button data-s="vision">Visión General</button><button data-s="reacciones">Reacciones</button><button data-s="balance">Balance</button><button data-s="rendimiento">Rendimiento Total</button><button data-s="clinica">Clínica</button><button data-s="glosario">Glosario</button><button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ===== INICIO ===== -->
+<div class="sec a" id="sec-inicio"><div class="hero"><div class="hi">🔄</div><h1>Ciclo de Ácidos Tricarboxílicos (TCA)</h1><p class="hs">La vía central del metabolismo energético aeróbico: oxidación completa del acetil-CoA para generar acarreadores de electrones y ATP.</p></div>
+<div class="cd"><div class="ch">🎯 Resultados de <span class="ac">Aprendizaje</span></div><div class="og">
+<div class="oi"><div class="on">1</div><div class="ot">Describir, de manera general, la oxidación del acetil-CoA por medio del ciclo de ácidos tricarboxílicos, TCA.</div></div>
+<div class="oi"><div class="on">2</div><div class="ot">Relacionar el ADN mitocondrial con algunas enfermedades en humanos.</div></div>
+<div class="oi"><div class="on">3</div><div class="ot">Describir dónde se realiza el TCA.</div></div>
+<div class="oi"><div class="on">4</div><div class="ot">Identificar las moléculas de energía producidas en cada vuelta del TCA.</div></div>
+<div class="oi"><div class="on">5</div><div class="ot">Identificar el número de moléculas de agua y/o carbono que entran y/o salen de cada vuelta del TCA.</div></div>
+<div class="oi"><div class="on">6</div><div class="ot">Identificar los acarreadores energéticos rendidos por cada vuelta al TCA.</div></div>
+<div class="oi"><div class="on">7</div><div class="ot">Calcular el rendimiento energético de la oxidación del acetil-CoA y otros intermediarios de cada vuelta del TCA y por cada molécula de glucosa.</div></div>
+<div class="oi"><div class="on">8</div><div class="ot">Calcular el rendimiento energético total desde la glucólisis hasta el TCA.</div></div>
+</div></div>
+<div style="text-align:center;margin-top:22px"><button class="btn bp" onclick="go('mitocondria')">Comenzar la tutoría →</button></div></div>
+
+<!-- ===== MITOCONDRIA ===== -->
+<div class="sec" id="sec-mitocondria">
+<div class="cd"><div class="ch">🏭 La <span class="ac">Mitocondria</span> <span class="pill pg">RA 3</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div><p style="color:var(--t2)">La <strong>mitocondria</strong> es el organelo donde ocurren la oxidación del piruvato, el ciclo de Krebs y la cadena de transporte de electrones. Se le conoce como la <strong>«planta de energía»</strong> de la célula. Su número varía según el tipo celular y la demanda energética.</p></div>
+
+<div class="ib n"><div class="ibt">📍 Estructura</div><p style="color:var(--t2)">La mitocondria posee <strong>dos membranas</strong> que definen cuatro compartimentos funcionales:</p></div>
+
+<div class="cg">
+<div class="cc" style="border-top:3px solid var(--g)"><h4 style="color:var(--g)">Membrana Externa</h4><p style="color:var(--t2);font-size:.88rem">Contiene <strong>porinas (VDAC)</strong> que permiten el paso de moléculas de hasta 5,000 Da. No genera gradiente electroquímico.</p></div>
+<div class="cc" style="border-top:3px solid var(--b)"><h4 style="color:var(--b)">Espacio Intermembrana</h4><p style="color:var(--t2);font-size:.88rem">Composición iónica similar al citosol, pero con enzimas específicas. Se acumulan <strong>protones (H⁺)</strong> durante la CTE.</p></div>
+<div class="cc" style="border-top:3px solid var(--p)"><h4 style="color:var(--p)">Membrana Interna</h4><p style="color:var(--t2);font-size:.88rem">Altamente plegada en <strong>crestas (cristae)</strong>. Contiene los complejos de la CTE. Hasta <strong>75% proteínas</strong> por peso. Muy selectiva al paso de solutos.</p></div>
+<div class="cc" style="border-top:3px solid var(--y)"><h4 style="color:var(--y)">Matriz Mitocondrial</h4><p style="color:var(--t2);font-size:.88rem">Contiene las enzimas del <strong>TCA</strong>, el complejo <strong>PDH</strong>, el <strong>ADN mitocondrial</strong> y los ribosomas mitocondriales. <strong>Aquí ocurre el ciclo de Krebs.</strong></p></div>
+</div>
+
+<div class="ib go"><div class="ibt">💡 Concepto clave</div><p style="color:var(--t2)">Las mitocondrias no son organelos ovalados individuales como aparecen en los libros de texto clásicos — forman una <strong>red dinámica interconectada</strong> que constantemente se fusiona y se fisiona según las necesidades celulares.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q01"><div class="qt">¿Qué compartimento mitocondrial alberga las enzimas del ciclo de Krebs?</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>Espacio intermembrana</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">B</div>Membrana interna</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">C</div>Matriz mitocondrial</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>Membrana externa</button>
+</div><div class="qf" id="fb-q01"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('adnmt')">ADN Mitocondrial →</button></div></div>
+
+<!-- ===== ADN MITOCONDRIAL ===== -->
+<div class="sec" id="sec-adnmt">
+<div class="cd"><div class="ch">🧬 ADN <span class="ac">Mitocondrial</span> <span class="pill pg">RA 2</span></div>
+<div class="ib"><div class="ibt">🔑 Características del ADNmt</div><p style="color:var(--t2)">El ADN mitocondrial es una molécula <strong>circular de ~16,500 pares de bases</strong>, altamente conservada. Codifica para <strong>13 proteínas</strong> de la cadena de transporte de electrones, <strong>22 ARNt</strong> y <strong>2 ARNr</strong>. El resto de las proteínas mitocondriales (~1,500) son codificadas por el ADN nuclear e importadas.</p></div>
+
+<div class="ib w"><div class="ibt">⚠️ Mutaciones frecuentes</div><p style="color:var(--t2)">El ADNmt tiene <strong>mayor tasa de mutación</strong> que el ADN nuclear por: baja fidelidad en la replicación, pocos mecanismos de reparación, y exposición constante a especies reactivas de oxígeno (ROS) generadas en la cadena de transporte de electrones.</p></div>
+
+<div class="cg">
+<div class="cc" style="border-top:3px solid var(--pk)"><h4 style="color:var(--pk)">Herencia Materna</h4><p style="color:var(--t2);font-size:.88rem">La herencia mitocondrial es <strong>uniparental materna</strong>. El oocito aporta ~200,000 mitocondrias. El espermatozoide degrada su ADNmt al madurar, y el oocito elimina las mitocondrias paternas restantes.</p></div>
+<div class="cc" style="border-top:3px solid var(--o)"><h4 style="color:var(--o)">Heteroplasmia</h4><p style="color:var(--t2);font-size:.88rem"><strong>Heteroplasmia</strong> = coexistencia de 2 o más poblaciones de ADNmt diferentes en un mismo individuo, célula, o mitocondria. Todos podríamos tener heteroplasmia a niveles bajos, no detectables.</p></div>
+</div>
+
+<div class="ib or"><div class="ibt">🏥 Enfermedades Mitocondriales</div><p style="color:var(--t2)">Si durante la segregación al azar de mitocondrias en la mitosis, algún tejido hereda una proporción alta de ADNmt mutado, pueden manifestarse enfermedades. Ejemplos comunes:</p></div>
+
+<table class="et"><thead><tr><th>Enfermedad</th><th>Características</th><th>Mutación</th></tr></thead><tbody>
+<tr><td style="color:var(--g)"><strong>MELAS</strong></td><td>Encefalopatía mitocondrial, acidosis láctica, episodios tipo ACV</td><td>ARNt Leu (A3243G)</td></tr>
+<tr><td style="color:var(--g)"><strong>Síndrome de Leigh</strong></td><td>Encefalopatía necrotizante subaguda infantil</td><td>Múltiples genes mt/nucleares</td></tr>
+<tr><td style="color:var(--g)"><strong>MERRF</strong></td><td>Epilepsia mioclónica con fibras rojas rasgadas</td><td>ARNt Lys (A8344G)</td></tr>
+<tr><td style="color:var(--g)"><strong>Neuropatía de Leber (LHON)</strong></td><td>Pérdida bilateral de visión central en adultos jóvenes</td><td>Complejo I (G11778A)</td></tr>
+<tr><td style="color:var(--g)"><strong>Síndrome de Alpers</strong></td><td>Encefalopatía progresiva infantil, convulsiones, falla hepática</td><td>ADN polimerasa γ (POLG)</td></tr>
+</tbody></table>
+
+<div class="ib n"><div class="ibt">🏠 Analogía clínica</div><p style="color:var(--t2)">Piensa en la heteroplasmia como una <strong>baraja mezclada</strong>: una madre portadora tiene cartas normales y mutadas. Cada hijo recibe un mazo al azar. Si le tocan muchas cartas mutadas en un tejido como el cerebro o el músculo (alta demanda energética), se manifiesta la enfermedad.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q02"><div class="qt">¿Qué es la heteroplasmia?</div><div class="qo">
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">A</div>La herencia biparental de mitocondrias</button>
+<button class="qb" onclick="cq('q02',this,1)"><div class="ol">B</div>Coexistencia de dos o más poblaciones de ADNmt diferentes en un mismo individuo</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">C</div>La ausencia total de ADN mitocondrial</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">D</div>Mutación exclusiva del ADN nuclear</button>
+</div><div class="qf" id="fb-q02"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('mitocondria')">← Mitocondria</button><button class="btn bp" onclick="go('ubicacion')">Ubicación del TCA →</button></div></div>
+
+<!-- ===== UBICACIÓN ===== -->
+<div class="sec" id="sec-ubicacion">
+<div class="cd"><div class="ch">📍 ¿Dónde se realiza <span class="ac">el TCA</span>? <span class="pill pg">RA 3</span></div>
+<div class="ib"><div class="ibt">🔑 Localización</div><p style="color:var(--t2)">El ciclo de ácidos tricarboxílicos se realiza en la <strong>matriz mitocondrial</strong>. La única excepción es la <strong>succinato deshidrogenasa</strong>, que está embebida en la membrana interna mitocondrial (es el <strong>Complejo II</strong> de la cadena de transporte de electrones).</p></div>
+
+<div class="ib n"><div class="ibt">🚚 Transporte del piruvato</div><p style="color:var(--t2)">Para llegar a la matriz mitocondrial: el <strong>piruvato</strong> cruza la membrana externa por <strong>porinas (VDAC)</strong> y la membrana interna mediante el <strong>transportador de piruvato mitocondrial (MPC)</strong>, un simporte que acopla el transporte de piruvato con un protón (H⁺).</p></div>
+
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--y)"><strong style="color:var(--y)">Piruvato</strong><br><span style="font-size:.78rem;color:var(--t3)">Citosol</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--t2)">Porinas</strong><br><span style="font-size:.78rem;color:var(--t3)">Membr. Externa</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">MPC</strong><br><span style="font-size:.78rem;color:var(--t3)">Membr. Interna</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--g)"><strong style="color:var(--g)">PDH → Acetil-CoA</strong><br><span style="font-size:.78rem;color:var(--t3)">Matriz mitocondrial</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--g);border-width:2px"><strong style="color:var(--g)">🔄 TCA</strong><br><span style="font-size:.78rem;color:var(--t3)">Matriz mitocondrial</span></div>
+</div>
+
+<div class="ib go"><div class="ibt">💡 PDH: puente entre glucólisis y TCA</div><p style="color:var(--t2)">El <strong>complejo piruvato deshidrogenasa (PDH)</strong> cataliza la descarboxilación oxidativa del piruvato a <strong>Acetil-CoA + CO₂ + NADH</strong>. Consiste en 3 enzimas, 5 coenzimas (TPP, ácido lipoico, CoA, FAD, NAD⁺) y 2 proteínas reguladoras. La Coenzima A tiene un grupo <strong>tiol (-SH)</strong> que forma un enlace <strong>tioéster</strong> con el acetato, un enlace de alta energía.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q03"><div class="qt">¿Cuál enzima del TCA se localiza en la membrana interna mitocondrial y no en la matriz?</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">A</div>Citrato sintasa</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">B</div>Isocitrato deshidrogenasa</button>
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">C</div>Succinato deshidrogenasa (Complejo II)</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>Malato deshidrogenasa</button>
+</div><div class="qf" id="fb-q03"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('adnmt')">← ADN mt</button><button class="btn bp" onclick="go('vision')">Visión General →</button></div></div>
+
+<!-- ===== VISIÓN GENERAL ===== -->
+<div class="sec" id="sec-vision">
+<div class="cd"><div class="ch">🔄 Visión General del <span class="ac">Ciclo TCA</span> <span class="pill pg">RA 1</span></div>
+<div class="ib"><div class="ibt">🔑 ¿Qué es el ciclo del ácido cítrico?</div><p style="color:var(--t2)">El <strong>ciclo de ácidos tricarboxílicos (TCA)</strong>, también llamado <strong>ciclo de Krebs</strong> o <strong>ciclo del ácido cítrico</strong>, es una vía metabólica cíclica central que oxida completamente el grupo acetilo (2C) del <strong>Acetil-CoA</strong> a <strong>2 CO₂</strong>, generando acarreadores de electrones reducidos (NADH y FADH₂) y una molécula de GTP/ATP.</p></div>
+
+<div class="ib n"><div class="ibt">📖 ¿Por qué estos nombres?</div><p style="color:var(--t2)"><strong>Ciclo del ácido cítrico:</strong> porque el primer intermediario formado es el <strong>citrato</strong>. <strong>Ciclo de ácidos tricarboxílicos (TCA):</strong> porque el citrato posee <strong>tres grupos carboxilo</strong>. <strong>Ciclo de Krebs:</strong> en honor a Sir Hans Krebs, quien lo describió en 1937.</p></div>
+
+<div class="ib go"><div class="ibt">⚡ Concepto central</div><p style="color:var(--t2)">En presencia de oxígeno, el piruvato se oxida completamente a CO₂. La energía liberada se captura principalmente en forma de <strong>acarreadores de electrones reducidos (NADH, FADH₂)</strong>, que luego cederán sus electrones a la cadena de transporte de electrones para la síntesis masiva de ATP.</p></div>
+
+<div class="ib w"><div class="ibt">⚠️ Balance de carbonos</div><p style="color:var(--t2)">Por cada vuelta del ciclo: <strong>2 carbonos entran</strong> (como acetilo del Acetil-CoA) y <strong>2 carbonos salen</strong> como CO₂. <strong>Importante:</strong> los 2 carbonos que salen como CO₂ <strong>NO son los mismos 2 carbonos que entraron</strong> en esa vuelta.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🗺️ Resumen <span class="ac">Visual</span> del Ciclo</div>
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--g);min-width:130px"><strong style="color:var(--g)">Acetil-CoA</strong><br><span style="font-size:.78rem;color:var(--t3)">2C entra</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--b);min-width:120px"><strong style="color:var(--b)">Citrato</strong><br><span style="font-size:.78rem;color:var(--t3)">6C</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--p)">Isocitrato</strong><br><span style="font-size:.78rem;color:var(--t3)">6C</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--o)"><strong style="color:var(--o)">α-cetoglutarato</strong><br><span style="font-size:.78rem;color:var(--r)">5C · CO₂↑ · NADH</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--o)"><strong style="color:var(--o)">Succinil-CoA</strong><br><span style="font-size:.78rem;color:var(--r)">4C · CO₂↑ · NADH</span></div>
+</div>
+<div class="step-diagram">
+<div class="step-box"><strong style="color:var(--y)">Succinato</strong><br><span style="font-size:.78rem;color:var(--g)">4C · GTP</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--pk)">Fumarato</strong><br><span style="font-size:.78rem;color:var(--pk)">4C · FADH₂</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">Malato</strong><br><span style="font-size:.78rem;color:var(--t3)">4C · +H₂O</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--g)"><strong style="color:var(--g)">Oxaloacetato</strong><br><span style="font-size:.78rem;color:var(--p)">4C · NADH</span></div>
+<div class="step-arrow">↩</div>
+<div class="step-box" style="border-color:var(--g);border-width:2px"><strong style="color:var(--g)">🔄 Reinicio</strong></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q04"><div class="qt">¿Cuántos carbonos entran y cuántos salen como CO₂ por vuelta del TCA?</div><div class="qo">
+<button class="qb" onclick="cq('q04',this,1)"><div class="ol">A</div>2 carbonos entran (acetilo) y 2 salen como CO₂</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">B</div>6 carbonos entran y 6 salen como CO₂</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">C</div>4 carbonos entran y 4 salen</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">D</div>3 carbonos entran y 3 salen</button>
+</div><div class="qf" id="fb-q04"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('ubicacion')">← Ubicación</button><button class="btn bp" onclick="go('reacciones')">Reacciones →</button></div></div>
+
+<!-- ===== REACCIONES ===== -->
+<div class="sec" id="sec-reacciones">
+<div class="cd"><div class="ch">⚗️ Las 8 Reacciones del <span class="ac">TCA</span> <span class="pill pg">RA 4, 5, 6</span></div>
+<p style="color:var(--t2);margin-bottom:14px">El ciclo consta de <strong>8 reacciones enzimáticas</strong>. Revisemos cada una con detalle:</p>
+
+<div class="tb"><button class="tbtn a" onclick="st(this,'tr1')">Pasos 1-4</button><button class="tbtn" onclick="st(this,'tr2')">Pasos 5-8</button><button class="tbtn" onclick="st(this,'tr3')">Tabla Completa</button></div>
+
+<div class="tc a" id="tr1">
+<div class="ib" style="border-left-color:var(--b)"><div class="ibt">1️⃣ Citrato Sintasa — Condensación</div><p style="color:var(--t2)"><strong>Acetil-CoA (2C) + Oxaloacetato (4C) → Citrato (6C) + CoA-SH</strong><br>La energía del enlace tioéster del Acetil-CoA impulsa la condensación. Primera reacción del ciclo. <span class="pill pg">Irreversible</span></p></div>
+
+<div class="ib" style="border-left-color:var(--p)"><div class="ibt">2️⃣ Aconitasa — Isomerización</div><p style="color:var(--t2)"><strong>Citrato (6C) → Isocitrato (6C)</strong><br>Isomerización: se reposiciona el grupo hidroxilo para facilitar la oxidación en el paso siguiente. Reacción reversible.</p></div>
+
+<div class="ib" style="border-left-color:var(--o)"><div class="ibt">3️⃣ Isocitrato Deshidrogenasa — 1ª descarboxilación oxidativa</div><p style="color:var(--t2)"><strong>Isocitrato (6C) → α-cetoglutarato (5C) + CO₂ + NADH</strong><br>Primera oxidación y primera descarboxilación del ciclo. NAD⁺ es el aceptor de electrones. El intermediario oxalosuccinato es altamente inestable. <span class="pill pw">1er CO₂</span> <span class="pill pp">1er NADH</span></p></div>
+
+<div class="ib" style="border-left-color:var(--r)"><div class="ibt">4️⃣ α-cetoglutarato Deshidrogenasa — 2ª descarboxilación oxidativa</div><p style="color:var(--t2)"><strong>α-cetoglutarato (5C) → Succinil-CoA (4C) + CO₂ + NADH</strong><br>Mecanismo idéntico a PDH (ambos son α-cetoácidos). Genera enlace tioéster de alta energía. NAD⁺ es aceptor. <span class="pill pw">2do CO₂</span> <span class="pill pp">2do NADH</span></p></div>
+
+<div class="ib go"><div class="ibt">✅ Balance parcial (pasos 1-4)</div><p style="color:var(--t2)">Al llegar a succinil-CoA: <strong>2 carbonos entraron</strong> como acetilo, <strong>2 carbonos salieron</strong> como CO₂. Se generaron <strong>2 NADH</strong>. El enlace tioéster del succinil-CoA conserva energía utilizable.</p></div>
+</div>
+
+<div class="tc" id="tr2">
+<div class="ib" style="border-left-color:var(--y)"><div class="ibt">5️⃣ Succinil-CoA Sintetasa — Fosforilación a nivel de sustrato</div><p style="color:var(--t2)"><strong>Succinil-CoA (4C) → Succinato (4C) + CoA-SH + GTP</strong><br>La energía del enlace tioéster genera <strong>GTP</strong> (en animales) o ATP (en plantas/bacterias). GTP y ATP son energéticamente equivalentes. La nucleósido difosfoquinasa convierte GTP → ATP. <span class="pill pg">1 GTP (≈1 ATP)</span></p></div>
+
+<div class="ib" style="border-left-color:var(--pk)"><div class="ibt">6️⃣ Succinato Deshidrogenasa — Oxidación C-C (Complejo II)</div><p style="color:var(--t2)"><strong>Succinato (4C) → Fumarato (4C) + FADH₂</strong><br>Única enzima embebida en la membrana interna (= <strong>Complejo II de la CTE</strong>). Se oxida un enlace <strong>C–C a C=C</strong>. Esta oxidación libera <strong>menos energía</strong> que las anteriores (C–O), insuficiente para reducir NAD⁺, por lo que el aceptor es <strong>FAD</strong>. <span class="pill ppk">1 FADH₂</span></p></div>
+
+<div class="ib" style="border-left-color:var(--b)"><div class="ibt">7️⃣ Fumarasa — Hidratación</div><p style="color:var(--t2)"><strong>Fumarato (4C) + H₂O → Malato (4C)</strong><br>Se hidrata el doble enlace del fumarato. El fumarato es simétrico, por lo que el -OH puede agregarse a cualquiera de los dos carbonos internos. <span class="pill pb2">+1 H₂O entra</span></p></div>
+
+<div class="ib" style="border-left-color:var(--g)"><div class="ibt">8️⃣ Malato Deshidrogenasa — Oxidación final</div><p style="color:var(--t2)"><strong>Malato (4C) → Oxaloacetato (4C) + NADH</strong><br>Última oxidación del ciclo. Se genera un doble enlace C=O. NAD⁺ es el aceptor de electrones. Se regenera el <strong>oxaloacetato</strong>, completando el ciclo. <span class="pill pp">3er NADH</span></p></div>
+
+<div class="ib go"><div class="ibt">✅ Balance parcial (pasos 5-8)</div><p style="color:var(--t2)">Se producen: <strong>1 GTP</strong> (≈1 ATP), <strong>1 FADH₂</strong>, <strong>1 NADH</strong>. Entra <strong>1 H₂O</strong> (en la hidratación del fumarato). El oxaloacetato se regenera.</p></div>
+</div>
+
+<div class="tc" id="tr3">
+<table class="et"><thead><tr><th>#</th><th>Reacción</th><th>Enzima</th><th>Tipo</th><th>Productos energéticos</th></tr></thead><tbody>
+<tr><td><strong>1</strong></td><td>Acetil-CoA + OAA → Citrato</td><td style="color:var(--g)"><strong>Citrato sintasa</strong></td><td>Condensación</td><td>—</td></tr>
+<tr><td><strong>2</strong></td><td>Citrato → Isocitrato</td><td>Aconitasa</td><td>Isomerización</td><td>—</td></tr>
+<tr><td><strong>3</strong></td><td>Isocitrato → α-cetoglutarato</td><td style="color:var(--g)"><strong>Isocitrato DH</strong></td><td>Descarbox. oxidativa</td><td style="color:var(--p)"><strong>NADH + CO₂</strong></td></tr>
+<tr><td><strong>4</strong></td><td>α-cetoglutarato → Succinil-CoA</td><td style="color:var(--g)"><strong>α-cetoglutarato DH</strong></td><td>Descarbox. oxidativa</td><td style="color:var(--p)"><strong>NADH + CO₂</strong></td></tr>
+<tr><td><strong>5</strong></td><td>Succinil-CoA → Succinato</td><td>Succinil-CoA sintetasa</td><td>Fosforilación sustrato</td><td style="color:var(--g)"><strong>GTP (≈ATP)</strong></td></tr>
+<tr><td><strong>6</strong></td><td>Succinato → Fumarato</td><td style="color:var(--g)"><strong>Succinato DH</strong></td><td>Oxidación</td><td style="color:var(--pk)"><strong>FADH₂</strong></td></tr>
+<tr><td><strong>7</strong></td><td>Fumarato + H₂O → Malato</td><td>Fumarasa</td><td>Hidratación</td><td>—</td></tr>
+<tr><td><strong>8</strong></td><td>Malato → Oxaloacetato</td><td>Malato DH</td><td>Oxidación</td><td style="color:var(--p)"><strong>NADH</strong></td></tr>
+</tbody></table>
+<p style="color:var(--t3);font-size:.82rem;margin-top:8px">DH = Deshidrogenasa · OAA = Oxaloacetato · 4 reacciones de oxidación: pasos 3, 4, 6 y 8</p>
+</div>
+</div>
+
+<div class="cd"><div class="ch">💧 Moléculas de <span class="ac">Agua y Carbono</span> <span class="pill pg">RA 5</span></div>
+<div class="cg">
+<div class="cc" style="border-top:3px solid var(--b)"><h4 style="color:var(--b)">Entradas por vuelta</h4><p style="color:var(--t2);font-size:.88rem">
+<strong>2 C</strong> entran (como acetilo)<br>
+<strong>3 H₂O</strong> entran (1 en paso 1 hidrólisis CoA, 1 en paso 5 hidrólisis CoA, 1 en paso 7 hidratación fumarato)</p></div>
+<div class="cc" style="border-top:3px solid var(--r)"><h4 style="color:var(--r)">Salidas por vuelta</h4><p style="color:var(--t2);font-size:.88rem">
+<strong>2 C</strong> salen como CO₂ (pasos 3 y 4)<br>
+<strong>2 CO₂</strong> (1 por descarboxilación)</p></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q05"><div class="qt">¿Cuál es el aceptor de electrones en la reacción de la succinato deshidrogenasa y por qué?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">A</div>NAD⁺, porque la oxidación libera mucha energía</button>
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">B</div>FAD, porque la oxidación C–C libera menos energía que la requerida para reducir NAD⁺</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">C</div>NADP⁺, porque es una reacción anabólica</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>Coenzima Q, porque es parte del Complejo I</button>
+</div><div class="qf" id="fb-q05"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('vision')">← Visión General</button><button class="btn bp" onclick="go('balance')">Balance →</button></div></div>
+
+<!-- ===== BALANCE ===== -->
+<div class="sec" id="sec-balance">
+<div class="cd"><div class="ch">⚡ Balance Energético por <span class="ac">Vuelta del TCA</span> <span class="pill pg">RA 4, 6, 7</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Productos energéticos generados por <strong>cada Acetil-CoA</strong> que completa una vuelta del ciclo:</p>
+
+<div class="bal-box">
+<h3>Una Vuelta del TCA (1 Acetil-CoA)</h3>
+<div class="bal-row"><div class="bal-item" style="color:var(--p)">3 NADH<br><span style="font-size:.78rem;font-weight:400">pasos 3, 4, 8</span></div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--pk)">1 FADH₂<br><span style="font-size:.78rem;font-weight:400">paso 6</span></div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--g)">1 GTP<br><span style="font-size:.78rem;font-weight:400">paso 5 (≈1 ATP)</span></div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--r)">2 CO₂<br><span style="font-size:.78rem;font-weight:400">pasos 3, 4</span></div></div>
+</div>
+
+<div class="ib go"><div class="ibt">💡 Equivalentes de ATP por acarreador</div><p style="color:var(--t2)">En la cadena de transporte de electrones, cada <strong>NADH</strong> genera aproximadamente <strong>~2.5 ATP</strong> y cada <strong>FADH₂</strong> genera aproximadamente <strong>~1.5 ATP</strong>. GTP es directamente equivalente a 1 ATP.</p></div>
+
+<div class="bal-box" style="border-color:var(--b)">
+<h3 style="color:var(--b)">ATP equivalentes por Acetil-CoA</h3>
+<div class="bal-row"><div class="bal-item" style="color:var(--p)">3 NADH × 2.5<br><span style="font-size:.78rem;font-weight:400">= 7.5 ATP</span></div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--pk)">1 FADH₂ × 1.5<br><span style="font-size:.78rem;font-weight:400">= 1.5 ATP</span></div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--g)">1 GTP<br><span style="font-size:.78rem;font-weight:400">= 1 ATP</span></div><div class="bal-eq">=</div><div class="bal-item" style="border:2px solid var(--y);color:var(--y)">~10 ATP<br><span style="font-size:.78rem;font-weight:400">por Acetil-CoA</span></div></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🔢 Por Molécula de <span class="ac">Glucosa</span> <span class="pill pg">RA 7</span></div>
+<div class="ib w"><div class="ibt">⚠️ Recuerda</div><p style="color:var(--t2)">Una molécula de glucosa produce <strong>2 piruvatos</strong> en la glucólisis, y cada piruvato genera <strong>1 Acetil-CoA</strong>. Por lo tanto, por glucosa el TCA gira <strong>2 veces</strong>.</p></div>
+
+<div class="bal-box" style="border-color:var(--pk)">
+<h3 style="color:var(--pk)">TCA × 2 (por glucosa)</h3>
+<div class="bal-row"><div class="bal-item" style="color:var(--p)">6 NADH<br><span style="font-size:.78rem;font-weight:400">3 × 2</span></div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--pk)">2 FADH₂<br><span style="font-size:.78rem;font-weight:400">1 × 2</span></div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--g)">2 GTP<br><span style="font-size:.78rem;font-weight:400">1 × 2</span></div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--r)">4 CO₂<br><span style="font-size:.78rem;font-weight:400">2 × 2</span></div></div>
+<div class="bal-row" style="margin-top:14px"><div class="bal-eq">=</div><div class="bal-item" style="border:2px solid var(--y);color:var(--y);font-size:1.1rem">~20 ATP equivalentes<br><span style="font-size:.78rem;font-weight:400">solo del TCA por glucosa</span></div></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q06"><div class="qt">¿Cuántos NADH y FADH₂ se producen en total del TCA por cada molécula de glucosa?</div><div class="qo">
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">A</div>3 NADH + 1 FADH₂</button>
+<button class="qb" onclick="cq('q06',this,1)"><div class="ol">B</div>6 NADH + 2 FADH₂</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">C</div>8 NADH + 2 FADH₂</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">D</div>4 NADH + 4 FADH₂</button>
+</div><div class="qf" id="fb-q06"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('reacciones')">← Reacciones</button><button class="btn bp" onclick="go('rendimiento')">Rendimiento Total →</button></div></div>
+
+<!-- ===== RENDIMIENTO TOTAL ===== -->
+<div class="sec" id="sec-rendimiento">
+<div class="cd"><div class="ch">🏆 Rendimiento Energético <span class="ac">Total</span> <span class="pill pg">RA 7, 8</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Sumemos todos los productos desde la glucólisis hasta completar el TCA, <strong>por molécula de glucosa</strong>:</p>
+
+<table class="et"><thead><tr><th>Etapa</th><th>ATP directo</th><th>NADH</th><th>FADH₂</th><th>CO₂</th></tr></thead><tbody>
+<tr><td style="color:var(--g)"><strong>Glucólisis</strong></td><td>2 ATP (netos)</td><td style="color:var(--p)">2 NADH</td><td>—</td><td>—</td></tr>
+<tr><td style="color:var(--o)"><strong>Oxidación piruvato (×2)</strong></td><td>—</td><td style="color:var(--p)">2 NADH</td><td>—</td><td>2 CO₂</td></tr>
+<tr><td style="color:var(--b)"><strong>TCA (×2 vueltas)</strong></td><td>2 GTP (≈2 ATP)</td><td style="color:var(--p)">6 NADH</td><td style="color:var(--pk)">2 FADH₂</td><td>4 CO₂</td></tr>
+<tr style="background:rgba(0,212,170,.08)"><td style="color:var(--y)"><strong>TOTAL</strong></td><td style="color:var(--y)"><strong>4 ATP</strong></td><td style="color:var(--y)"><strong>10 NADH</strong></td><td style="color:var(--y)"><strong>2 FADH₂</strong></td><td style="color:var(--y)"><strong>6 CO₂</strong></td></tr>
+</tbody></table>
+
+<div class="ib go"><div class="ibt">💡 Conversión a ATP equivalentes totales</div><p style="color:var(--t2)">
+<strong>4 ATP directos</strong> (2 de glucólisis + 2 GTP del TCA)<br>
+<strong>10 NADH × 2.5</strong> = 25 ATP<br>
+<strong>2 FADH₂ × 1.5</strong> = 3 ATP<br>
+<strong>Total ≈ 30-32 ATP</strong> por molécula de glucosa<br><br>
+<em>Nota: el rango 30-32 depende de la lanzadera usada para transportar los 2 NADH citosólicos de la glucólisis: la lanzadera malato-aspartato rinde ~2.5 ATP/NADH, mientras que la glicerol-3-fosfato rinde ~1.5 ATP/NADH.</em></p></div>
+
+<div class="bal-box" style="border-color:var(--y)">
+<h3 style="color:var(--y)">Rendimiento Energético Total por Glucosa</h3>
+<div class="bal-row">
+<div class="bal-item" style="color:var(--g)">Glucólisis<br><span style="font-size:.78rem;font-weight:400">2 ATP + 2 NADH</span></div>
+<div class="bal-plus">+</div>
+<div class="bal-item" style="color:var(--o)">Oxid. Piruvato<br><span style="font-size:.78rem;font-weight:400">2 NADH + 2 CO₂</span></div>
+<div class="bal-plus">+</div>
+<div class="bal-item" style="color:var(--b)">TCA ×2<br><span style="font-size:.78rem;font-weight:400">2 GTP + 6 NADH + 2 FADH₂</span></div>
+</div>
+<div class="bal-row" style="margin-top:14px"><div class="bal-eq">=</div><div class="bal-item" style="border:3px solid var(--y);color:var(--y);font-size:1.2rem">~30-32 ATP<br><span style="font-size:.82rem;font-weight:400">oxidación total de 1 glucosa</span></div></div>
+</div>
+
+<div class="ib w"><div class="ibt">⚠️ Concepto clave</div><p style="color:var(--t2)">La producción <strong>directa</strong> de ATP entre glucólisis y TCA es baja (solo <strong>4 moléculas</strong>). Lo que es alto es la producción de <strong>acarreadores de electrones reducidos</strong> (10 NADH + 2 FADH₂), los cuales alimentarán la cadena de transporte de electrones para la síntesis masiva de ATP vía fosforilación oxidativa.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q07"><div class="qt">¿Cuál es el rendimiento total aproximado de ATP por molécula de glucosa (glucólisis + oxidación piruvato + TCA + CTE)?</div><div class="qo">
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">A</div>4 ATP</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">B</div>12 ATP</button>
+<button class="qb" onclick="cq('q07',this,1)"><div class="ol">C</div>30-32 ATP</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">D</div>38-40 ATP</button>
+</div><div class="qf" id="fb-q07"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('balance')">← Balance</button><button class="btn bp" onclick="go('clinica')">Clínica →</button></div></div>
+
+<!-- ===== CLÍNICA ===== -->
+<div class="sec" id="sec-clinica"><div class="cd"><div class="ch">🏥 Correlaciones <span class="ac">Clínicas</span></div><p style="color:var(--t2)">El ciclo TCA y la función mitocondrial tienen implicaciones clínicas directas en múltiples enfermedades.</p></div>
+
+<div class="cl"><div class="clb">🏥 Caso 1</div><div class="clt">Intoxicación por Arsénico</div>
+<div class="clp">Paciente masculino de 45 años, trabajador agrícola, presenta náuseas, vómitos, diarrea profusa, hipotensión, y confusión. Laboratorio: <strong>acidosis metabólica</strong> con lactato elevado, piruvato normal. Sospecha: <strong>intoxicación por arsénico</strong>.<br><br><strong>Fisiopatología:</strong> El arsénico (como arsenito) inhibe enzimas que requieren <strong>ácido lipoico</strong> como cofactor, incluyendo el <strong>complejo PDH</strong> y la <strong>α-cetoglutarato deshidrogenasa</strong>. Se bloquea la producción de Acetil-CoA y el flujo del TCA, causando acumulación de piruvato, acidosis láctica y falla multiorgánica.<br><br><strong>Tratamiento:</strong> Agentes quelantes (dimercaprol, succímero) que se unen al arsénico y facilitan su excreción.</div>
+<div class="qq" id="qk1" style="background:0;border:0;padding:0"><div class="qt">¿Por qué el arsénico bloquea el TCA?</div><div class="qo">
+<button class="qb" onclick="ck('qk1',this,0)"><div class="ol">A</div>Inhibe directamente la citrato sintasa</button>
+<button class="qb" onclick="ck('qk1',this,1)"><div class="ol">B</div>Inhibe enzimas que usan ácido lipoico (PDH, α-cetoglutarato DH), bloqueando el flujo del ciclo</button>
+<button class="qb" onclick="ck('qk1',this,0)"><div class="ol">C</div>Destruye la membrana mitocondrial</button>
+<button class="qb" onclick="ck('qk1',this,0)"><div class="ol">D</div>Inhibe la ATP sintasa</button>
+</div><div class="qf" id="fb-qk1"></div></div></div>
+
+<div class="cl"><div class="clb">🏥 Caso 2</div><div class="clt">MELAS (Enfermedad Mitocondrial)</div>
+<div class="clp">Adolescente de 16 años presenta <strong>episodios tipo ACV</strong> recurrentes, cefaleas migrañosas, convulsiones, acidosis láctica y sordera neurosensorial. Biopsia muscular: <strong>fibras rojo rasgadas</strong>. Genética: mutación <strong>A3243G en ARNt Leu</strong> del ADNmt.<br><br><strong>Fisiopatología:</strong> La mutación afecta la síntesis de proteínas mitocondriales, reduciendo la función de los complejos de la CTE. La disminución de la fosforilación oxidativa obliga a mayor dependencia de glucólisis, con acumulación de <strong>lactato</strong>. Los tejidos con mayor demanda energética (cerebro, músculo, retina) son los más afectados.<br><br><strong>Herencia:</strong> Materna (ADNmt). La severidad depende del grado de <strong>heteroplasmia</strong> en cada tejido. <strong>Tratamiento:</strong> Suplementos de CoQ10, L-arginina (para episodios tipo ACV), idebenona, manejo sintomático.</div>
+<div class="qq" id="qk2" style="background:0;border:0;padding:0"><div class="qt">¿Por qué MELAS produce acidosis láctica?</div><div class="qo">
+<button class="qb" onclick="ck('qk2',this,0)"><div class="ol">A</div>Porque la glucólisis está inhibida</button>
+<button class="qb" onclick="ck('qk2',this,1)"><div class="ol">B</div>Porque la CTE deficiente reduce la capacidad oxidativa, desviando el metabolismo a glucólisis con producción de lactato</button>
+<button class="qb" onclick="ck('qk2',this,0)"><div class="ol">C</div>Porque hay exceso de NAD⁺ en la célula</button>
+<button class="qb" onclick="ck('qk2',this,0)"><div class="ol">D</div>Porque el TCA funciona aceleradamente</button>
+</div><div class="qf" id="fb-qk2"></div></div></div>
+
+<div class="cl"><div class="clb">🏥 Caso 3</div><div class="clt">Deficiencia de Tiamina y TCA</div>
+<div class="clp">Hombre de 58 años, alcohólico crónico, presenta <strong>confusión aguda, ataxia y oftalmoplejía</strong> (tríada de Wernicke). RM cerebral: lesiones en cuerpos mamilares y tálamo. <strong>Diagnóstico: encefalopatía de Wernicke</strong>.<br><br><strong>Fisiopatología:</strong> El alcoholismo crónico causa deficiencia de <strong>tiamina (B₁)</strong>, cuya forma activa <strong>TPP</strong> es cofactor de: el complejo <strong>PDH</strong> (piruvato → Acetil-CoA), la <strong>α-cetoglutarato deshidrogenasa</strong> (TCA, paso 4), y la <strong>transcetolasa</strong> (vía de las pentosas). Sin TPP, dos puntos del metabolismo oxidativo se bloquean (entrada al TCA y paso 4), causando déficit energético severo en el SNC.<br><br><strong>Tratamiento:</strong> <strong>Tiamina IV ANTES de glucosa</strong> (la glucosa sin tiamina aumenta la demanda de TPP y empeora los síntomas).</div>
+<div class="qq" id="qk3" style="background:0;border:0;padding:0"><div class="qt">¿Cuántas enzimas del eje piruvato→TCA dependen directamente de tiamina (TPP)?</div><div class="qo">
+<button class="qb" onclick="ck('qk3',this,0)"><div class="ol">A</div>Solo 1 (PDH)</button>
+<button class="qb" onclick="ck('qk3',this,1)"><div class="ol">B</div>2: PDH y α-cetoglutarato deshidrogenasa</button>
+<button class="qb" onclick="ck('qk3',this,0)"><div class="ol">C</div>Todas las enzimas del TCA</button>
+<button class="qb" onclick="ck('qk3',this,0)"><div class="ol">D</div>Ninguna, la tiamina solo afecta la glucólisis</button>
+</div><div class="qf" id="fb-qk3"></div></div></div>
+
+<div class="cl"><div class="clb">🏥 Caso 4</div><div class="clt">Intoxicación por Fluoroacetato</div>
+<div class="clp">Niño de 6 años presenta convulsiones y arritmia cardíaca tras ingestión accidental de rodenticida (<strong>compuesto 1080</strong>). Laboratorio: <strong>citrato sérico marcadamente elevado</strong>, hipocalcemia, acidosis metabólica.<br><br><strong>Fisiopatología:</strong> El fluoroacetato se convierte en <strong>fluorocitrato</strong>, un potente inhibidor de la <strong>aconitasa</strong> (paso 2 del TCA). Se bloquea la conversión de citrato a isocitrato, causando <strong>acumulación masiva de citrato</strong>. El citrato quela calcio (Ca²⁺) → hipocalcemia → arritmias y convulsiones. El bloqueo del TCA causa falla energética celular.<br><br><strong>Tratamiento:</strong> Soporte (no hay antídoto específico), corrección de hipocalcemia, acetamida (experimental).</div>
+<div class="qq" id="qk4" style="background:0;border:0;padding:0"><div class="qt">¿Por qué la intoxicación por fluoroacetato causa hipocalcemia?</div><div class="qo">
+<button class="qb" onclick="ck('qk4',this,1)"><div class="ol">A</div>Porque el citrato acumulado quela calcio, reduciendo el Ca²⁺ libre</button>
+<button class="qb" onclick="ck('qk4',this,0)"><div class="ol">B</div>Porque se destruyen las glándulas paratiroides</button>
+<button class="qb" onclick="ck('qk4',this,0)"><div class="ol">C</div>Porque el fluoroacetato inhibe la absorción intestinal de calcio</button>
+<button class="qb" onclick="ck('qk4',this,0)"><div class="ol">D</div>Porque se activa excesivamente la calcitonina</button>
+</div><div class="qf" id="fb-qk4"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('rendimiento')">← Rendimiento Total</button><button class="btn bp" onclick="go('glosario')">Glosario →</button></div></div>
+
+<!-- ===== GLOSARIO ===== -->
+<div class="sec" id="sec-glosario"><div class="cd"><div class="ch">📖 Glosario <span class="ac">Interactivo</span></div><p style="color:var(--t2)">Clic para ver definición:</p></div><div class="fg" id="fg"></div>
+<div class="sn"><button class="btn bs" onclick="go('clinica')">← Clínica</button><button class="btn bp" onclick="go('evaluacion')">Evaluación →</button></div></div>
+
+<!-- ===== EVALUACIÓN ===== -->
+<div class="sec" id="sec-evaluacion"><div class="cd"><div class="ch">✅ Evaluación <span class="ac">Final</span></div><p style="color:var(--t2)">8 preguntas — una por cada Resultado de Aprendizaje.</p></div>
+<div id="eq"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn bp" id="seb" onclick="se()" style="display:none">Calcular puntuación →</button></div>
+<div class="sd" id="sdd" style="display:none"><div class="snm" id="sn2" style="color:var(--g)">--</div><div class="sbl">Puntuación</div><div class="sbr"><div class="sbf" id="sbf2" style="width:0%;background:var(--grad)"></div></div><p style="color:var(--t2);margin-top:14px" id="sm2"></p><button class="btn bs" onclick="go('inicio')" style="margin-top:16px">↩ Volver al inicio</button></div>
+<div class="sn"><button class="btn bs" onclick="go('glosario')">← Glosario</button></div></div>
+
+</div>
+<script>
+var secs=['inicio','mitocondria','adnmt','ubicacion','vision','reacciones','balance','rendimiento','clinica','glosario','evaluacion'];
+var cs='inicio';
+function go(id){document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('a')});var t=document.getElementById('sec-'+id);if(t)t.classList.add('a');document.querySelectorAll('.nl button').forEach(function(b){b.classList.toggle('a',b.getAttribute('data-s')===id)});cs=id;up();window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.nl button').forEach(function(b){b.addEventListener('click',function(){go(this.getAttribute('data-s'))});});
+function up(){var i=secs.indexOf(cs);document.getElementById('pf').style.width=(i/(secs.length-1)*100)+'%';}
+function st(btn,tid){var p=btn.closest('.cd');p.querySelectorAll('.tbtn').forEach(function(t){t.classList.remove('a')});p.querySelectorAll('.tc').forEach(function(c){c.classList.remove('a')});btn.classList.add('a');document.getElementById(tid).classList.add('a');}
+function cq(qid,btn,ci){var c=document.getElementById(qid),os=c.querySelectorAll('.qb'),done=false;os.forEach(function(o){if(o.classList.contains('ok')||o.classList.contains('no'))done=true;});if(done)return;os.forEach(function(o){o.classList.add('dis');});btn.classList.add(ci?'ok':'no');var fb=document.getElementById('fb-'+qid);fb.classList.add('sh');fb.classList.add(ci?'cf':'if');fb.textContent=ci?'\u2705 \u00a1Correcto! Excelente comprensi\u00f3n.':'\u274c Incorrecto. Revisa el material de esta secci\u00f3n.';}
+var cfb={qk1:{c:1,ok:'\u2705 Correcto. El ars\u00e9nico (arsenito) inhibe enzimas que utilizan \u00e1cido lipoico como cofactor, como PDH y \u03b1-cetoglutarato DH, bloqueando el flujo del TCA.',no:'\u274c Incorrecto. El ars\u00e9nico inhibe enzimas con \u00e1cido lipoico (PDH, \u03b1-cetoglutarato DH), no la citrato sintasa.'},qk2:{c:1,ok:'\u2705 Correcto. La CTE deficiente reduce la reoxidaci\u00f3n de NADH, limitando el TCA y forzando al metabolismo a depender de glucolisis con producci\u00f3n de lactato.',no:'\u274c Incorrecto. La acidosis l\u00e1ctica se debe a que la CTE deficiente obliga a mayor dependencia de glucolisis y producci\u00f3n de lactato.'},qk3:{c:1,ok:'\u2705 Correcto. TPP es cofactor esencial de PDH (piruvato \u2192 Acetil-CoA) y \u03b1-cetoglutarato DH (paso 4 del TCA). Ambas son descarboxilaciones oxidativas de \u03b1-ceto\u00e1cidos.',no:'\u274c Incorrecto. Dos enzimas del eje piruvato\u2192TCA dependen de TPP: PDH y \u03b1-cetoglutarato deshidrogenasa.'},qk4:{c:0,ok:'\u2705 Correcto. El fluorocitrato bloquea la aconitasa, acumulando citrato. El citrato es un quelante de Ca\u00b2\u207a, produciendo hipocalcemia, arritmias y convulsiones.',no:'\u274c Incorrecto. La hipocalcemia se debe a que el citrato acumulado quela (secuestra) calcio libre.'}};
+function ck(qid,btn,oi){var c=document.getElementById(qid),os=c.querySelectorAll('.qb'),done=false;os.forEach(function(o){if(o.classList.contains('ok')||o.classList.contains('no'))done=true;});if(done)return;var d=cfb[qid],ic=oi===d.c;os.forEach(function(o){o.classList.add('dis');});btn.classList.add(ic?'ok':'no');var fb=document.getElementById('fb-'+qid);fb.classList.add('sh');fb.classList.add(ic?'cf':'if');fb.innerHTML=ic?d.ok:d.no;}
+var gt=[{t:'Ciclo TCA',d:'V\u00eda metab\u00f3lica c\u00edclica de 8 reacciones que oxida acetil-CoA a 2 CO\u2082 + 3 NADH + 1 FADH\u2082 + 1 GTP. Ocurre en la matriz mitocondrial.'},{t:'Acetil-CoA',d:'Mol\u00e9cula de 2 carbonos unida a Coenzima A por enlace tio\u00e9ster. Producto de la oxidaci\u00f3n del piruvato por PDH. Entra al TCA.'},{t:'Oxaloacetato (OAA)',d:'Mol\u00e9cula de 4 carbonos que inicia y finaliza el TCA. Se condensa con acetil-CoA para formar citrato.'},{t:'Citrato',d:'\u00c1cido tric\u00e1rboxilico de 6 carbonos. Primer intermediario del TCA. Nombre alterno del ciclo.'},{t:'NAD\u207a / NADH',d:'Acarreador de electrones. Se reduce a NADH en pasos 3, 4 y 8 del TCA. Cada NADH \u2248 2.5 ATP en la CTE.'},{t:'FAD / FADH\u2082',d:'Acarreador de electrones con riboflavina (B\u2082). Se reduce en paso 6 (succinato DH). Cada FADH\u2082 \u2248 1.5 ATP.'},{t:'GTP',d:'Guanos\u00edn trifosfato. Producido en paso 5 del TCA. Energ\u00e9ticamente equivalente a ATP.'},{t:'Coenzima A (CoA)',d:'Coenzima derivada de \u00e1cido pantot\u00e9nico (B\u2085). Su grupo tiol (-SH) forma enlaces tio\u00e9ster de alta energ\u00eda.'},{t:'Citrato Sintasa',d:'Enzima del paso 1 del TCA. Condensa acetil-CoA + OAA \u2192 citrato. Irreversible.'},{t:'Aconitasa',d:'Enzima del paso 2. Isomeriza citrato a isocitrato. Inhibida por fluorocitrato (intoxicaci\u00f3n por fluoroacetato).'},{t:'\u03b1-cetoglutarato DH',d:'Enzima del paso 4. Mecanismo similar a PDH. Cofactores: TPP, \u00e1cido lipoico, CoA, FAD, NAD\u207a. Inhibida por ars\u00e9nico.'},{t:'Succinato DH',d:'Paso 6 del TCA = Complejo II de la CTE. \u00danica enzima del TCA en membrana interna. Usa FAD como aceptor.'},{t:'Complejo PDH',d:'Piruvato deshidrogenasa. Convierte piruvato \u2192 Acetil-CoA + CO\u2082 + NADH. 3 enzimas, 5 cofactores.'},{t:'Heteroplasmia',d:'Coexistencia de 2+ poblaciones de ADNmt en un individuo. Determina severidad de enfermedades mitocondriales.'},{t:'MELAS',d:'Encefalopat\u00eda mitocondrial, acidosis l\u00e1ctica, episodios tipo ACV. Mutaci\u00f3n A3243G en ARNt Leu del ADNmt.'},{t:'Tiamina (B\u2081)',d:'Vitamina cuya forma activa TPP es cofactor de PDH y \u03b1-cetoglutarato DH. Deficiencia: Wernicke-Korsakoff.'},{t:'Fluoroacetato',d:'T\u00f3xico que se convierte en fluorocitrato e inhibe la aconitasa, bloqueando el TCA en paso 2.'},{t:'Fosforilaci\u00f3n oxidativa',d:'S\u00edntesis de ATP acoplada a la CTE. Los 10 NADH + 2 FADH\u2082 de la oxidaci\u00f3n de glucosa generan \u223c26-28 ATP.'},{t:'Porinas (VDAC)',d:'Canales en membrana externa mitocondrial que permiten paso de mol\u00e9culas <5000 Da.'},{t:'MPC',d:'Carrier de piruvato mitocondrial. Simporte piruvato/H\u207a a trav\u00e9s de membrana interna mitocondrial.'}];
+function ifc(){var g=document.getElementById('fg');g.innerHTML='';gt.forEach(function(it){var c=document.createElement('div');c.className='fc';c.onclick=function(){this.classList.toggle('fl');};c.innerHTML='<div class="ft">'+it.t+'</div><div class="fd">'+it.d+'</div><div class="fh">Clic para ver</div>';g.appendChild(c);});}
+var evq=[
+{q:'\u00bfCu\u00e1l es la funci\u00f3n principal del ciclo TCA?',o:['Sintetizar glucosa a partir de amino\u00e1cidos','Oxidar el acetil-CoA a 2 CO\u2082 generando NADH, FADH\u2082 y GTP','Producir ox\u00edgeno para la c\u00e9lula','Degradar \u00e1cidos grasos a acetil-CoA'],c:1,f:'El TCA oxida el grupo acetilo (2C) del acetil-CoA a 2 CO\u2082, generando 3 NADH, 1 FADH\u2082 y 1 GTP por vuelta. [RA 1]'},
+{q:'\u00bfQu\u00e9 enfermedad mitocondrial se caracteriza por episodios tipo ACV, acidosis l\u00e1ctica y herencia materna?',o:['S\u00edndrome de Down','MELAS (encefalopat\u00eda mitocondrial con acidosis l\u00e1ctica y episodios tipo ACV)','Enfermedad de Huntington','Fibrosis qu\u00edstica'],c:1,f:'MELAS es causada por mutaci\u00f3n A3243G en ARNt Leu del ADNmt. La herencia es materna y la severidad depende de la heteroplasmia. [RA 2]'},
+{q:'\u00bfD\u00f3nde se localiza el ciclo TCA?',o:['Citoplasma','Membrana interna mitocondrial','Matriz mitocondrial','Espacio intermembrana'],c:2,f:'Las enzimas del TCA se localizan en la matriz mitocondrial, excepto la succinato DH (Complejo II) que est\u00e1 en la membrana interna. [RA 3]'},
+{q:'\u00bfCu\u00e1les son las mol\u00e9culas de energ\u00eda producidas en una vuelta del TCA?',o:['2 ATP + 2 NADH','3 NADH + 1 FADH\u2082 + 1 GTP + 2 CO\u2082','4 NADH + 2 FADH\u2082','1 NADH + 1 FADH\u2082 + 1 ATP'],c:1,f:'Por cada vuelta: 3 NADH (pasos 3,4,8) + 1 FADH\u2082 (paso 6) + 1 GTP (paso 5) + 2 CO\u2082 (pasos 3,4). [RA 4]'},
+{q:'\u00bfCu\u00e1ntos carbonos entran y salen como CO\u2082 por vuelta del TCA?',o:['6 C entran, 6 C salen','2 C entran como acetilo, 2 C salen como CO\u2082','4 C entran, 2 C salen','3 C entran, 3 C salen'],c:1,f:'2 C entran como acetilo (Acetil-CoA) y 2 C salen como CO\u2082 (descarboxilaciones en pasos 3 y 4). Los C que salen NO son los mismos que entraron. [RA 5]'},
+{q:'\u00bfPor qu\u00e9 la succinato deshidrogenasa usa FAD en vez de NAD\u207a como aceptor?',o:['Porque est\u00e1 en la membrana externa','Porque la oxidaci\u00f3n C\u2013C libera menos energ\u00eda que la necesaria para reducir NAD\u207a, pero s\u00ed para FAD','Porque NAD\u207a no existe en la mitocondria','Porque FAD es m\u00e1s barato energ\u00e9ticamente de producir'],c:1,f:'La oxidaci\u00f3n de un enlace C-C (succinato \u2192 fumarato) libera menos energ\u00eda que la de C-O. Insuficiente para NAD\u207a, pero FAD puede aceptar esos electrones. [RA 6]'},
+{q:'\u00bfCu\u00e1ntos ATP equivalentes rinde la oxidaci\u00f3n completa de 1 Acetil-CoA en el TCA + CTE?',o:['\u223c5 ATP','\u223c10 ATP','\u223c20 ATP','\u223c15 ATP'],c:1,f:'3 NADH \u00d7 2.5 = 7.5 + 1 FADH\u2082 \u00d7 1.5 = 1.5 + 1 GTP = 1. Total \u2248 10 ATP equivalentes por Acetil-CoA. [RA 7]'},
+{q:'\u00bfCu\u00e1l es el rendimiento total aproximado de la oxidaci\u00f3n de 1 glucosa (glucolisis + oxidaci\u00f3n piruvato + TCA + CTE)?',o:['\u223c10-12 ATP','\u223c20 ATP','\u223c30-32 ATP','\u223c40-42 ATP'],c:2,f:'Glucolisis: 2 ATP + 2 NADH. Ox. piruvato: 2 NADH. TCA \u00d72: 2 GTP + 6 NADH + 2 FADH\u2082. Total \u2248 30-32 ATP. [RA 8]'}
+];
+var eva={},evs=false;
+function iev(){var c=document.getElementById('eq');c.innerHTML='';eva={};evs=false;document.getElementById('sdd').style.display='none';document.getElementById('seb').style.display='none';var lt=['A','B','C','D'];evq.forEach(function(q,qi){var d=document.createElement('div');d.className='qq';d.id='ev-'+qi;var h='<div class="qt"><span style="color:var(--g);font-family:JetBrains Mono;font-size:.83rem">'+(qi+1)+'/8</span> '+q.q+'</div><div class="qo">';q.o.forEach(function(opt,oi){h+='<button class="qb" data-qi="'+qi+'" data-oi="'+oi+'" onclick="seo(this,'+qi+','+oi+')"><div class="ol">'+lt[oi]+'</div>'+opt+'</button>';});h+='</div><div class="qf" id="fb-ev-'+qi+'"></div>';d.innerHTML=h;c.appendChild(d);});}
+function seo(btn,qi,oi){if(evs)return;var c=document.getElementById('ev-'+qi);c.querySelectorAll('.qb').forEach(function(o){o.classList.remove('sel');});btn.classList.add('sel');eva[qi]=oi;if(Object.keys(eva).length===evq.length)document.getElementById('seb').style.display='inline-flex';}
+function se(){evs=true;var sc=0;evq.forEach(function(q,qi){var c=document.getElementById('ev-'+qi),os=c.querySelectorAll('.qb');var ua=eva[qi];os.forEach(function(o,oi){o.classList.add('dis');if(oi===q.c)o.classList.add('ok');if(oi===ua&&oi!==q.c)o.classList.add('no');});if(ua===q.c)sc++;var fb=document.getElementById('fb-ev-'+qi);fb.classList.add('sh');fb.classList.add(ua===q.c?'cf':'if');fb.textContent=(ua===q.c?'\u2705 ':'\u274c ')+q.f;});document.getElementById('seb').style.display='none';var pct=Math.round(sc/evq.length*100);var dd=document.getElementById('sdd');dd.style.display='block';document.getElementById('sn2').textContent=sc+'/'+evq.length;document.getElementById('sbf2').style.width=pct+'%';var msg='';if(pct>=90){msg='\ud83c\udf1f \u00a1Excelente! Dominas el ciclo TCA y sus correlaciones.';document.getElementById('sn2').style.color='var(--g)';}else if(pct>=70){msg='\ud83d\udc4f \u00a1Buen trabajo! Revisa los errores marcados.';document.getElementById('sn2').style.color='var(--b)';}else if(pct>=50){msg='\ud83d\udcda Repasa algunos conceptos clave.';document.getElementById('sn2').style.color='var(--y)';}else{msg='\ud83d\udcaa Necesitas repasar toda la tutor\u00eda.';document.getElementById('sn2').style.color='var(--r)';document.getElementById('sbf2').style.background='linear-gradient(135deg,#FF6B6B,#FFD93D)';}document.getElementById('sm2').textContent=msg;dd.scrollIntoView({behavior:'smooth',block:'center'});}
+ifc();iev();up();
+</script>
+</body></html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Interactiva: Glucólisis y Descarboxilación del Piruvato</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 24px}.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}.nb{font-family:'DM Serif Display',serif;font-size:1.1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.nl{display:flex;gap:3px;flex-wrap:wrap}.nl button{padding:5px 12px;border-radius:20px;border:none;background:0;color:var(--t2);font-size:.76rem;font-family:inherit;cursor:pointer;transition:.3s}.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}.pb{position:fixed;top:58px;left:0;right:0;z-index:99;height:3px;background:rgba(0,212,170,.1)}.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}.mc{max-width:960px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1}.sec{display:none;animation:fi .5s}.sec.a{display:block}@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.hero{text-align:center;padding:50px 0 36px}.hi{width:90px;height:90px;margin:0 auto 20px;background:var(--grad);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}.hero h1{font-family:'DM Serif Display',serif;font-size:2.8rem;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hs{font-size:1.1rem;color:var(--t2);max-width:650px;margin:0 auto 28px}.og{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0}.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px 16px;display:flex;align-items:flex-start;gap:10px;transition:.3s}.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}.on{min-width:26px;height:26px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;color:#0B1622}.ot{font-size:.85rem;color:var(--t2);line-height:1.5}.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;box-shadow:var(--sh);transition:.3s}.cd:hover{border-color:rgba(0,212,170,.25)}.ch{font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:14px}.ch .ac{color:var(--g)}.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:18px 22px;margin:18px 0;background:rgba(0,212,170,.06)}.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}.ibt{font-weight:700;margin-bottom:5px;font-size:.93rem}.cg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin:18px 0}.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px}.cc h4{font-family:'DM Serif Display',serif;margin-bottom:10px;font-size:1.05rem}.dc{background:rgba(0,0,0,.2);border-radius:var(--r16);padding:24px;margin:20px 0;text-align:center;border:1px solid var(--bdr)}.et{width:100%;border-collapse:separate;border-spacing:0;margin:18px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}.et th{background:rgba(0,212,170,.12);padding:12px 16px;text-align:left;font-weight:600;font-size:.85rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}.et td{padding:11px 16px;border-top:1px solid var(--bdr);font-size:.9rem;color:var(--t2)}.et tr:hover td{background:var(--card2)}.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:18px}.qt{font-weight:600;font-size:1rem;margin-bottom:16px}.qo{display:flex;flex-direction:column;gap:9px}.qb{padding:12px 18px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.93rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}.qb.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}.qb.dis{pointer-events:none;opacity:.7}.ol{min-width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem}.qf{margin-top:14px;padding:16px;border-radius:var(--r10);font-size:.9rem;line-height:1.6;display:none}.qf.sh{display:block}.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}.cl{background:linear-gradient(135deg,rgba(255,107,107,.06),rgba(255,217,61,.04));border:1px solid rgba(255,107,107,.2);border-radius:var(--r16);padding:28px;margin:20px 0}.clb{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,107,.15);color:var(--r);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600;margin-bottom:14px;text-transform:uppercase;letter-spacing:.03em}.clt{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:12px}.clp{color:var(--t2);margin-bottom:14px;font-size:.93rem;line-height:1.7}.btn{padding:11px 24px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.93rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}.bp:hover{transform:translateY(-2px)}.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}.bs:hover{background:rgba(0,212,170,.2)}.tb{display:flex;gap:5px;margin-bottom:20px;border-bottom:1px solid var(--bdr)}.tbtn{padding:9px 18px;border:none;background:0;color:var(--t3);font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:.3s;border-radius:7px 7px 0 0}.tbtn:hover{color:var(--t2)}.tbtn.a{color:var(--g);border-bottom-color:var(--g);background:rgba(0,212,170,.06)}.tc{display:none;animation:fi .4s}.tc.a{display:block}.sn{display:flex;justify-content:space-between;margin-top:36px;padding-top:20px;border-top:1px solid var(--bdr)}.pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.76rem;font-weight:600;margin:2px 3px}.pg{background:rgba(0,212,170,.15);color:var(--g)}.pb2{background:rgba(0,163,255,.12);color:var(--b)}.pw{background:rgba(255,107,107,.12);color:var(--r)}.py{background:rgba(255,217,61,.12);color:var(--y)}.pp{background:rgba(167,139,250,.12);color:var(--p)}.ppk{background:rgba(236,72,153,.12);color:var(--pk)}.por{background:rgba(249,115,22,.12);color:var(--o)}.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:20px 0}.fc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px;cursor:pointer;transition:.4s;min-height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.fc:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:var(--glow)}.ft{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--g)}.fd{display:none;font-size:.88rem;color:var(--t2);line-height:1.6;margin-top:7px}.fc.fl .ft{display:none}.fc.fl .fd{display:block}.fh{font-size:.73rem;color:var(--t3);margin-top:8px}.fc.fl .fh{display:none}.sd{text-align:center;padding:36px;margin:20px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}.snm{font-family:'DM Serif Display',serif;font-size:3.5rem;margin-bottom:6px}.sbl{color:var(--t2)}.sbr{width:100%;max-width:380px;height:11px;background:rgba(255,255,255,.06);border-radius:6px;margin:18px auto;overflow:hidden}.sbf{height:100%;border-radius:6px;transition:width 1s}.sb2{display:inline-block;padding:8px 22px;border-radius:var(--r10);font-weight:700;font-size:1.1rem}.step-diagram{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:18px 0}.step-box{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:12px 16px;text-align:center;min-width:110px;transition:.3s;cursor:default}.step-box:hover{border-color:var(--g);transform:translateY(-2px)}.step-arrow{color:var(--g);font-size:1.4rem;font-weight:700}.bal-box{background:var(--card);border:2px solid var(--g);border-radius:var(--r16);padding:24px;margin:20px 0;text-align:center}.bal-box h3{font-family:'DM Serif Display',serif;color:var(--g);margin-bottom:14px;font-size:1.3rem}.bal-row{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0}.bal-item{background:var(--card2);border-radius:var(--r10);padding:10px 18px;font-weight:600;font-size:.95rem}.bal-plus{color:var(--g);font-size:1.3rem;font-weight:700}.bal-eq{color:var(--y);font-size:1.3rem;font-weight:700}@media(max-width:768px){.og,.cg{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.hero h1{font-size:2rem}.step-diagram{flex-direction:column}.step-arrow{transform:rotate(90deg)}}::-webkit-scrollbar{width:7px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">⚡ Glucólisis & Piruvato</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button><button data-s="respiracion">Respiración</button><button data-s="glucolisis">Glucólisis</button><button data-s="fases">Fases</button><button data-s="rendimiento">Rendimiento</button><button data-s="fermentacion">Fermentación</button><button data-s="piruvato">Piruvato</button><button data-s="balance">Balance</button><button data-s="clinica">Clínica</button><button data-s="glosario">Glosario</button><button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ===== INICIO ===== -->
+<div class="sec a" id="sec-inicio"><div class="hero"><div class="hi">⚡</div><h1>Glucólisis y Descarboxilación del Piruvato</h1><p class="hs">La primera etapa de la respiración celular: de glucosa a energía utilizable.</p></div>
+<div class="cd"><div class="ch">🎯 Resultados de <span class="ac">Aprendizaje</span></div><div class="og">
+<div class="oi"><div class="on">1</div><div class="ot">Definir respiración celular.</div></div>
+<div class="oi"><div class="on">2</div><div class="ot">Describir la respiración celular.</div></div>
+<div class="oi"><div class="on">3</div><div class="ot">Definir glucólisis.</div></div>
+<div class="oi"><div class="on">4</div><div class="ot">Definir y describir el proceso de glucólisis de manera introductoria.</div></div>
+<div class="oi"><div class="on">5</div><div class="ot">Identificar el sitio celular donde se lleva a cabo la glucólisis.</div></div>
+<div class="oi"><div class="on">6</div><div class="ot">Distinguir entre los rendimientos energéticos de glucólisis y fermentación.</div></div>
+<div class="oi"><div class="on">7</div><div class="ot">Identificar las moléculas acarreadoras de la glucólisis.</div></div>
+<div class="oi"><div class="on">8</div><div class="ot">Distinguir entre la fermentación láctica y la alcohólica.</div></div>
+<div class="oi"><div class="on">9</div><div class="ot">Describir la oxidación descarboxilativa del piruvato.</div></div>
+<div class="oi"><div class="on">10</div><div class="ot">Describir el transporte del piruvato por las membranas mitocondriales.</div></div>
+<div class="oi"><div class="on">11</div><div class="ot">Localizar el sitio celular de la oxidación del piruvato.</div></div>
+<div class="oi"><div class="on">12</div><div class="ot">Identificar el rendimiento energético de la oxidación del piruvato.</div></div>
+<div class="oi"><div class="on">13</div><div class="ot">Sumar el rendimiento energético (ATP total) de glucólisis + oxidación del piruvato.</div></div>
+</div></div>
+<div style="text-align:center;margin-top:22px"><button class="btn bp" onclick="go('respiracion')">Comenzar la tutoría →</button></div></div>
+
+<!-- ===== RESPIRACIÓN CELULAR ===== -->
+<div class="sec" id="sec-respiracion">
+<div class="cd"><div class="ch">🌬️ ¿Qué es la <span class="ac">Respiración Celular</span>? <span class="pill pg">RA 1</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div><p style="color:var(--t2)">La <strong>respiración celular</strong> es el conjunto de reacciones metabólicas mediante las cuales la célula degrada moléculas orgánicas (principalmente glucosa) para obtener <strong>energía en forma de ATP</strong>, utilizando oxígeno como aceptor final de electrones en condiciones aeróbicas.</p></div>
+<div class="ib n"><div class="ibt">🏠 Analogía</div><p style="color:var(--t2)">Piensa en la célula como una <strong>planta de energía</strong>: la glucosa es el combustible, el oxígeno alimenta la "combustión" controlada, y el ATP es la electricidad que alimenta todas las funciones celulares.</p></div></div>
+
+<div class="cd"><div class="ch">📋 Descripción de la <span class="ac">Respiración Celular</span> <span class="pill pg">RA 2</span></div>
+<p style="color:var(--t2);margin-bottom:14px">La respiración celular consta de <strong>cuatro etapas</strong> principales que ocurren en secuencia:</p>
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--g)"><div style="font-size:1.5rem">1️⃣</div><strong style="color:var(--g)">Glucólisis</strong><br><span style="color:var(--t3);font-size:.82rem">Citoplasma</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--o)"><div style="font-size:1.5rem">2️⃣</div><strong style="color:var(--o)">Oxidación del Piruvato</strong><br><span style="color:var(--t3);font-size:.82rem">Matriz mitocondrial</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--b)"><div style="font-size:1.5rem">3️⃣</div><strong style="color:var(--b)">Ciclo de Krebs</strong><br><span style="color:var(--t3);font-size:.82rem">Matriz mitocondrial</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--pk)"><div style="font-size:1.5rem">4️⃣</div><strong style="color:var(--pk)">Cadena de Transporte de e⁻</strong><br><span style="color:var(--t3);font-size:.82rem">Membrana int. mitocondrial</span></div>
+</div>
+
+<div class="ib go"><div class="ibt">⚡ Ecuación global (aeróbica)</div><p style="color:var(--t2);font-family:'JetBrains Mono',monospace;font-size:.9rem">C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + <strong style="color:var(--y)">~30-32 ATP</strong></p></div>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--g)">🟢 Aeróbica</h4><p style="color:var(--t2);font-size:.88rem">Con O₂. Rendimiento máximo: <strong>~30-32 ATP</strong> por glucosa. Las 4 etapas completas.</p></div>
+<div class="cc"><h4 style="color:var(--r)">🔴 Anaeróbica</h4><p style="color:var(--t2);font-size:.88rem">Sin O₂. Solo glucólisis + fermentación. Rendimiento: <strong>2 ATP netos</strong>.</p></div></div>
+
+<div class="ib w"><div class="ibt">⚠️ Concepto clave</div><p style="color:var(--t2)">La respiración celular es un proceso <strong>catabólico y exergónico</strong>: descompone moléculas grandes (glucosa) en moléculas pequeñas (CO₂, H₂O) y <strong>libera energía</strong> que se almacena en ATP.</p></div></div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q01"><div class="qt">¿Cuál es el propósito principal de la respiración celular?</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>Sintetizar glucosa a partir de CO₂</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">B</div>Degradar glucosa para obtener ATP</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">C</div>Producir oxígeno para la célula</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>Almacenar energía en forma de glucógeno</button>
+</div><div class="qf" id="fb-q01"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('glucolisis')">Glucólisis →</button></div></div>
+
+<!-- ===== GLUCÓLISIS ===== -->
+<div class="sec" id="sec-glucolisis">
+<div class="cd"><div class="ch">🔥 ¿Qué es la <span class="ac">Glucólisis</span>? <span class="pill pg">RA 3, 4, 5</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div><p style="color:var(--t2)">La <strong>glucólisis</strong> (del griego <em>glykys</em> = dulce, <em>lysis</em> = ruptura) es la <strong>vía metabólica</strong> que convierte una molécula de <strong>glucosa</strong> (6 carbonos) en dos moléculas de <strong>piruvato</strong> (3 carbonos cada uno), con producción neta de <strong>2 ATP</strong> y <strong>2 NADH</strong>.</p></div>
+
+<div class="ib n"><div class="ibt">📍 Sitio celular <span class="pill pb2">RA 5</span></div><p style="color:var(--t2)">La glucólisis ocurre en el <strong>citoplasma (citosol)</strong> de <strong>todas las células</strong> del organismo. Es una vía <strong>universal</strong>, presente en prácticamente todos los seres vivos. No requiere organelos.</p></div>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--g)">✅ Características</h4><p style="color:var(--t2);font-size:.88rem">
+• Ocurre en el <strong>citosol</strong><br>
+• <strong>10 reacciones</strong> enzimáticas<br>
+• <strong>NO requiere O₂</strong><br>
+• Presente en <strong>todas</strong> las células<br>
+• Vía más antigua evolutivamente</p></div>
+<div class="cc"><h4 style="color:var(--b)">📊 Balance neto</h4><p style="color:var(--t2);font-size:.88rem;font-family:'JetBrains Mono',monospace">
+Glucosa (6C)<br>
+→ 2 Piruvato (3C)<br>
++ <strong style="color:var(--g)">2 ATP</strong> (netos)<br>
++ <strong style="color:var(--p)">2 NADH</strong><br>
++ 2 H₂O</p></div></div>
+
+<div class="ib go"><div class="ibt">💡 ¿Por qué es importante?</div><p style="color:var(--t2)">La glucólisis es la <strong>primera etapa obligatoria</strong> del catabolismo de la glucosa, tanto en condiciones aeróbicas como anaeróbicas. Sin ella, la célula no puede extraer energía de la glucosa. Es especialmente vital para <strong>eritrocitos</strong> (carecen de mitocondrias) y <strong>células cerebrales</strong> (alta demanda energética).</p></div></div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q02"><div class="qt">¿En qué compartimiento celular ocurre la glucólisis?</div><div class="qo">
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">A</div>Matriz mitocondrial</button>
+<button class="qb" onclick="cq('q02',this,1)"><div class="ol">B</div>Citoplasma (citosol)</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">C</div>Membrana interna mitocondrial</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">D</div>Retículo endoplásmico</button>
+</div><div class="qf" id="fb-q02"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('respiracion')">← Respiración</button><button class="btn bp" onclick="go('fases')">Fases →</button></div></div>
+
+<!-- ===== FASES DE GLUCÓLISIS ===== -->
+<div class="sec" id="sec-fases">
+<div class="cd"><div class="ch">📐 Fases de la <span class="ac">Glucólisis</span> <span class="pill pg">RA 4</span></div>
+<p style="color:var(--t2);margin-bottom:14px">La glucólisis se divide en dos fases con <strong>10 reacciones enzimáticas</strong> en total:</p>
+
+<div class="tb"><button class="tbtn a" onclick="st(this,'tf1')">Fase de Inversión</button><button class="tbtn" onclick="st(this,'tf2')">Fase de Ganancia</button><button class="tbtn" onclick="st(this,'tf3')">Resumen 10 pasos</button></div>
+
+<div class="tc a" id="tf1">
+<div class="ib w"><div class="ibt">🔴 Fase de Inversión de Energía (Pasos 1-5)</div><p style="color:var(--t2)">También llamada <strong>"fase preparatoria"</strong>. Se <strong>gastan 2 ATP</strong> para activar (fosforilar) la glucosa. La glucosa (6C) se rompe en <strong>2 moléculas de gliceraldehído-3-fosfato (G3P)</strong>, un azúcar de 3 carbonos.</p></div>
+<div class="step-diagram">
+<div class="step-box"><strong style="color:var(--y)">Glucosa</strong><br><span style="font-size:.78rem;color:var(--t3)">6C</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">G-6-P</strong><br><span style="font-size:.78rem;color:var(--r)">-1 ATP</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">F-6-P</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">F-1,6-BP</strong><br><span style="font-size:.78rem;color:var(--r)">-1 ATP</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--g)">2× G3P</strong><br><span style="font-size:.78rem;color:var(--t3)">3C c/u</span></div>
+</div>
+<div class="ib or"><div class="ibt">🔑 Enzimas reguladoras (irreversibles)</div><p style="color:var(--t2)"><strong>Hexoquinasa</strong> (paso 1): atrapa glucosa en la célula. <strong>Fosfofructoquinasa-1 (PFK-1)</strong> (paso 3): principal punto de control, comprometida e irreversible, regulada alostéricamente.</p></div>
+</div>
+
+<div class="tc" id="tf2">
+<div class="ib"><div class="ibt">🟢 Fase de Ganancia de Energía (Pasos 6-10)</div><p style="color:var(--t2)">Cada G3P (3C) se oxida y genera energía. Como hay <strong>2 moléculas de G3P</strong>, todo se multiplica ×2. Se producen <strong>4 ATP</strong> y <strong>2 NADH</strong> en total.</p></div>
+<div class="step-diagram">
+<div class="step-box"><strong style="color:var(--g)">G3P</strong><br><span style="font-size:.78rem;color:var(--t3)">×2</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--p)">1,3-BPG</strong><br><span style="font-size:.78rem;color:var(--p)">+2 NADH</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">3-PG</strong><br><span style="font-size:.78rem;color:var(--g)">+2 ATP</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">PEP</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--y)">2× Piruvato</strong><br><span style="font-size:.78rem;color:var(--g)">+2 ATP</span></div>
+</div>
+<div class="ib go"><div class="ibt">💡 Fosforilación a nivel de sustrato</div><p style="color:var(--t2)">El ATP en glucólisis se produce por <strong>fosforilación a nivel de sustrato</strong>: un grupo fosfato se transfiere directamente del sustrato al ADP, sin cadena de transporte de electrones. Enzimas: <strong>fosfoglicerato quinasa</strong> (paso 7) y <strong>piruvato quinasa</strong> (paso 10).</p></div>
+</div>
+
+<div class="tc" id="tf3">
+<table class="et"><thead><tr><th>#</th><th>Reacción</th><th>Enzima</th><th>Energía</th></tr></thead><tbody>
+<tr><td><strong>1</strong></td><td>Glucosa → G-6-P</td><td style="color:var(--g)"><strong>Hexoquinasa*</strong></td><td style="color:var(--r)">-1 ATP</td></tr>
+<tr><td><strong>2</strong></td><td>G-6-P → F-6-P</td><td>Fosfoglucosa isomerasa</td><td>—</td></tr>
+<tr><td><strong>3</strong></td><td>F-6-P → F-1,6-BP</td><td style="color:var(--g)"><strong>PFK-1*</strong></td><td style="color:var(--r)">-1 ATP</td></tr>
+<tr><td><strong>4</strong></td><td>F-1,6-BP → DHAP + G3P</td><td>Aldolasa</td><td>—</td></tr>
+<tr><td><strong>5</strong></td><td>DHAP ⇌ G3P</td><td>Triosa fosfato isomerasa</td><td>—</td></tr>
+<tr><td><strong>6</strong></td><td>G3P → 1,3-BPG</td><td>G3P deshidrogenasa</td><td style="color:var(--p)">+2 NADH</td></tr>
+<tr><td><strong>7</strong></td><td>1,3-BPG → 3-PG</td><td>Fosfoglicerato quinasa</td><td style="color:var(--g)">+2 ATP</td></tr>
+<tr><td><strong>8</strong></td><td>3-PG → 2-PG</td><td>Fosfoglicerato mutasa</td><td>—</td></tr>
+<tr><td><strong>9</strong></td><td>2-PG → PEP</td><td>Enolasa</td><td>—</td></tr>
+<tr><td><strong>10</strong></td><td>PEP → Piruvato</td><td style="color:var(--g)"><strong>Piruvato quinasa*</strong></td><td style="color:var(--g)">+2 ATP</td></tr>
+</tbody></table>
+<p style="color:var(--t3);font-size:.82rem;margin-top:8px">* Reacciones irreversibles (puntos de regulación)</p>
+</div></div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q03"><div class="qt">¿Cuántas moléculas de ATP se invierten en la fase preparatoria de la glucólisis?</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">A</div>1 ATP</button>
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">B</div>2 ATP</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">C</div>4 ATP</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>0 ATP</button>
+</div><div class="qf" id="fb-q03"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('glucolisis')">← Glucólisis</button><button class="btn bp" onclick="go('rendimiento')">Rendimiento →</button></div></div>
+
+<!-- ===== RENDIMIENTO Y ACARREADORES ===== -->
+<div class="sec" id="sec-rendimiento">
+<div class="cd"><div class="ch">⚡ Rendimiento <span class="ac">Energético</span> <span class="pill pg">RA 6, 7</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Balance energético neto de la glucólisis por cada molécula de glucosa:</p>
+
+<div class="bal-box">
+<h3>Balance de Glucólisis</h3>
+<div class="bal-row"><div class="bal-item" style="color:var(--r)">-2 ATP<br><span style="font-size:.78rem;font-weight:400">invertidos</span></div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--g)">+4 ATP<br><span style="font-size:.78rem;font-weight:400">producidos</span></div><div class="bal-eq">=</div><div class="bal-item" style="border:2px solid var(--g);color:var(--g)">2 ATP NETOS<br><span style="font-size:.78rem;font-weight:400">ganancia real</span></div></div>
+<div class="bal-row" style="margin-top:12px"><div class="bal-item" style="color:var(--p)">+2 NADH<br><span style="font-size:.78rem;font-weight:400">acarreadores reducidos</span></div></div>
+</div></div>
+
+<div class="cd"><div class="ch">🔋 Moléculas <span class="ac">Acarreadoras</span> <span class="pill pg">RA 7</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Las moléculas acarreadoras transportan electrones de alta energía y los entregan a la cadena de transporte de electrones:</p>
+<div class="cg">
+<div class="cc" style="border-top:3px solid var(--p)"><h4 style="color:var(--p)">NAD⁺ / NADH</h4><p style="color:var(--t2);font-size:.88rem"><strong>NAD⁺</strong> (nicotinamida adenina dinucleótido) se <strong>reduce</strong> a <strong>NADH</strong> al aceptar 2 electrones y 1 H⁺. Es el principal acarreador de electrones en la glucólisis.<br><br><strong>En glucólisis:</strong> Se producen <strong>2 NADH</strong> (paso 6, por G3P deshidrogenasa).</p></div>
+<div class="cc" style="border-top:3px solid var(--g)"><h4 style="color:var(--g)">ATP / ADP</h4><p style="color:var(--t2);font-size:.88rem"><strong>ATP</strong> (adenosín trifosfato) es la moneda energética universal. En glucólisis se produce por <strong>fosforilación a nivel de sustrato</strong>.<br><br><strong>En glucólisis:</strong> Se producen <strong>2 ATP netos</strong> (4 producidos - 2 invertidos).</p></div></div>
+
+<div class="ib go"><div class="ibt">💡 Destino del NADH glucolítico</div><p style="color:var(--t2)"><strong>Con O₂ (aeróbico):</strong> NADH dona electrones a la cadena de transporte → genera ~1.5-2.5 ATP adicionales por cada NADH (dependiendo de la lanzadera utilizada: malato-aspartato o glicerol-3-fosfato).<br><strong>Sin O₂ (anaeróbico):</strong> NADH se reoxida en la fermentación (láctica o alcohólica) para regenerar NAD⁺ y mantener la glucólisis funcionando.</p></div></div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q04"><div class="qt">¿Cuál es la molécula acarreadora de electrones producida en la glucólisis?</div><div class="qo">
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">A</div>FADH₂</button>
+<button class="qb" onclick="cq('q04',this,1)"><div class="ol">B</div>NADH</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">C</div>NADPH</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">D</div>Coenzima Q</button>
+</div><div class="qf" id="fb-q04"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('fases')">← Fases</button><button class="btn bp" onclick="go('fermentacion')">Fermentación →</button></div></div>
+
+<!-- ===== FERMENTACIÓN ===== -->
+<div class="sec" id="sec-fermentacion">
+<div class="cd"><div class="ch">🧪 <span class="ac">Fermentación</span> <span class="pill pg">RA 6, 8</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Cuando <strong>no hay oxígeno</strong>, la célula no puede usar la cadena de transporte de electrones. El NADH se acumularía y la glucólisis se detendría. La <strong>fermentación</strong> resuelve esto reoxidando NADH → NAD⁺.</p>
+
+<div class="ib w"><div class="ibt">⚠️ Concepto fundamental</div><p style="color:var(--t2)">La fermentación <strong>NO produce ATP adicional</strong>. Su único propósito es <strong>regenerar NAD⁺</strong> para que la glucólisis pueda continuar. El rendimiento energético en fermentación es de solo <strong>2 ATP netos</strong> (los mismos de la glucólisis).</p></div></div>
+
+<div class="cd"><div class="ch">🔄 Tipos de <span class="ac">Fermentación</span> <span class="pill pg">RA 8</span></div>
+<div class="tb"><button class="tbtn a" onclick="st(this,'tfer1')">Láctica</button><button class="tbtn" onclick="st(this,'tfer2')">Alcohólica</button><button class="tbtn" onclick="st(this,'tfer3')">Comparación</button></div>
+
+<div class="tc a" id="tfer1">
+<div class="ib pk"><div class="ibt">🔴 Fermentación Láctica</div><p style="color:var(--t2)"><strong>Piruvato → Lactato</strong><br>Enzima: <strong>Lactato deshidrogenasa (LDH)</strong><br><br>El piruvato acepta los electrones del NADH y se reduce a <strong>lactato</strong>. Se regenera NAD⁺.<br><br><strong>¿Dónde ocurre?</strong><br>• <strong>Músculo esquelético</strong> durante ejercicio intenso (deuda de O₂)<br>• <strong>Eritrocitos</strong> (siempre, por carecer de mitocondrias)<br>• <strong>Células cancerosas</strong> (efecto Warburg: glucólisis aeróbica)<br>• Bacterias del género <em>Lactobacillus</em> (yogur, queso)</p></div>
+</div>
+
+<div class="tc" id="tfer2">
+<div class="ib n"><div class="ibt">🍺 Fermentación Alcohólica</div><p style="color:var(--t2)"><strong>Piruvato → Acetaldehído → Etanol + CO₂</strong><br>Enzimas: <strong>Piruvato descarboxilasa</strong> + <strong>Alcohol deshidrogenasa</strong><br><br>Primero se libera CO₂ (descarboxilación), luego el acetaldehído se reduce a <strong>etanol</strong> y se regenera NAD⁺.<br><br><strong>¿Dónde ocurre?</strong><br>• <strong>Levaduras</strong> (<em>Saccharomyces cerevisiae</em>)<br>• Algunas bacterias y plantas en anaerobiosis<br>• <strong>NO ocurre en humanos</strong> (carecemos de piruvato descarboxilasa)</p></div>
+</div>
+
+<div class="tc" id="tfer3">
+<table class="et"><thead><tr><th>Característica</th><th>Láctica</th><th>Alcohólica</th></tr></thead><tbody>
+<tr><td><strong>Producto final</strong></td><td style="color:var(--pk)">Lactato</td><td style="color:var(--b)">Etanol + CO₂</td></tr>
+<tr><td><strong>CO₂ liberado</strong></td><td>No</td><td style="color:var(--g)">Sí</td></tr>
+<tr><td><strong>Enzima clave</strong></td><td>LDH</td><td>Piruvato descarboxilasa</td></tr>
+<tr><td><strong>Organismos</strong></td><td>Humanos, bacterias lácticas</td><td>Levaduras, algunas plantas</td></tr>
+<tr><td><strong>ATP producido</strong></td><td style="color:var(--y)">2 netos (de glucólisis)</td><td style="color:var(--y)">2 netos (de glucólisis)</td></tr>
+<tr><td><strong>Propósito</strong></td><td colspan="2" style="color:var(--g);text-align:center"><strong>Regenerar NAD⁺</strong></td></tr>
+<tr><td><strong>Reversible</strong></td><td style="color:var(--g)">Sí (Ciclo de Cori)</td><td style="color:var(--r)">No</td></tr>
+</tbody></table>
+</div></div>
+
+<div class="cd"><div class="ch">📊 Rendimiento: Glucólisis vs Fermentación <span class="pill pg">RA 6</span></div>
+<div class="cg">
+<div class="cc" style="border:2px solid var(--g);text-align:center"><h4 style="color:var(--g)">Glucólisis Aeróbica</h4><p style="color:var(--t2);font-size:2rem;font-weight:700;margin:10px 0">2 ATP + 2 NADH</p><p style="color:var(--t2);font-size:.85rem">NADH → cadena de transporte → <strong>más ATP</strong></p><p style="color:var(--g);font-weight:600;margin-top:6px">~7 ATP equivalentes totales*</p></div>
+<div class="cc" style="border:2px solid var(--r);text-align:center"><h4 style="color:var(--r)">Glucólisis + Fermentación</h4><p style="color:var(--t2);font-size:2rem;font-weight:700;margin:10px 0">Solo 2 ATP</p><p style="color:var(--t2);font-size:.85rem">NADH se usa para regenerar NAD⁺</p><p style="color:var(--r);font-weight:600;margin-top:6px">Sin ganancia extra de ATP</p></div></div>
+<p style="color:var(--t3);font-size:.82rem">*Aproximado: 2 ATP directos + ~3-5 ATP del NADH (según lanzadera usada)</p></div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q05"><div class="qt">¿Cuál es la diferencia principal entre fermentación láctica y alcohólica?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">A</div>La alcohólica produce más ATP</button>
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">B</div>La alcohólica libera CO₂ y produce etanol; la láctica produce lactato sin liberar CO₂</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">C</div>La láctica ocurre solo en bacterias</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>La láctica no regenera NAD⁺</button>
+</div><div class="qf" id="fb-q05"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('rendimiento')">← Rendimiento</button><button class="btn bp" onclick="go('piruvato')">Piruvato →</button></div></div>
+
+<!-- ===== PIRUVATO ===== -->
+<div class="sec" id="sec-piruvato">
+<div class="cd"><div class="ch">🔬 Oxidación <span class="ac">Descarboxilativa</span> del Piruvato <span class="pill pg">RA 9, 10, 11, 12</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Cuando hay <strong>oxígeno disponible</strong>, el piruvato no se fermenta, sino que entra a la mitocondria para ser oxidado. Esta reacción es el <strong>puente</strong> entre la glucólisis y el Ciclo de Krebs.</p>
+
+<div class="ib"><div class="ibt">🔑 Definición <span class="pill pg">RA 9</span></div><p style="color:var(--t2)">La <strong>oxidación descarboxilativa del piruvato</strong> (también llamada descarboxilación oxidativa) es la reacción catalizada por el <strong>complejo piruvato deshidrogenasa (PDH)</strong> en la que el piruvato (3C) pierde un carbono como <strong>CO₂</strong> (descarboxilación), se oxida (transfiriendo electrones al NAD⁺ → NADH) y se une a la <strong>Coenzima A (CoA)</strong> para formar <strong>Acetil-CoA</strong> (2C).</p></div>
+
+<div class="ib go"><div class="ibt">⚡ La reacción</div><p style="color:var(--t2);font-family:'JetBrains Mono',monospace;font-size:.9rem"><strong>Piruvato</strong> + NAD⁺ + CoA-SH → <strong style="color:var(--g)">Acetil-CoA</strong> + <strong style="color:var(--p)">NADH</strong> + <strong style="color:var(--r)">CO₂</strong></p><p style="color:var(--t2);margin-top:8px">⚠️ Esta reacción es <strong>IRREVERSIBLE</strong>. Los humanos <strong>no podemos</strong> convertir Acetil-CoA de nuevo en piruvato (por eso no podemos convertir ácidos grasos en glucosa).</p></div></div>
+
+<div class="cd"><div class="ch">🚚 Transporte del <span class="ac">Piruvato</span> <span class="pill pg">RA 10</span></div>
+<p style="color:var(--t2);margin-bottom:14px">El piruvato debe cruzar <strong>dos membranas mitocondriales</strong> para llegar a la matriz:</p>
+<div class="cg">
+<div class="cc" style="border-top:3px solid var(--b)"><h4 style="color:var(--b)">Membrana Externa</h4><p style="color:var(--t2);font-size:.88rem">Permeable a moléculas pequeñas por la presencia de <strong>porinas (VDAC)</strong>. El piruvato la cruza libremente.</p></div>
+<div class="cc" style="border-top:3px solid var(--pk)"><h4 style="color:var(--pk)">Membrana Interna</h4><p style="color:var(--t2);font-size:.88rem">Muy selectiva. El piruvato entra por un <strong>transportador específico</strong>: el <strong>carrier de piruvato mitocondrial (MPC)</strong>, un simporte con H⁺.</p></div></div>
+<div class="ib n"><div class="ibt">📍 Ruta completa</div><p style="color:var(--t2)"><strong>Citosol</strong> → porinas (membrana ext.) → espacio intermembranoso → <strong>MPC</strong> (membrana int.) → <strong>Matriz mitocondrial</strong> (donde actúa el complejo PDH).</p></div></div>
+
+<div class="cd"><div class="ch">📍 Sitio Celular <span class="pill pg">RA 11</span></div>
+<div class="ib pk"><div class="ibt">🎯 Localización</div><p style="color:var(--t2)">La oxidación del piruvato ocurre en la <strong>matriz mitocondrial</strong>. El complejo piruvato deshidrogenasa (PDH) es un enorme complejo multienzimático anclado en la matriz. Requiere <strong>5 cofactores</strong>: tiamina pirofosfato (TPP/B₁), FAD (B₂), NAD⁺ (B₃), CoA (B₅), ácido lipoico.</p></div></div>
+
+<div class="cd"><div class="ch">📊 Rendimiento de la Oxidación del Piruvato <span class="pill pg">RA 12</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Por <strong>cada molécula de piruvato</strong>:</p>
+<div class="cg3">
+<div class="cc" style="text-align:center"><div style="font-size:2rem">🔄</div><h4 style="color:var(--g)">Acetil-CoA</h4><p style="color:var(--t2);font-size:.88rem"><strong>1</strong> molécula</p></div>
+<div class="cc" style="text-align:center"><div style="font-size:2rem">⚡</div><h4 style="color:var(--p)">NADH</h4><p style="color:var(--t2);font-size:.88rem"><strong>1</strong> molécula</p></div>
+<div class="cc" style="text-align:center"><div style="font-size:2rem">💨</div><h4 style="color:var(--r)">CO₂</h4><p style="color:var(--t2);font-size:.88rem"><strong>1</strong> molécula</p></div></div>
+
+<div class="ib w"><div class="ibt">⚠️ Recuerda: hay 2 piruvatos por glucosa</div><p style="color:var(--t2)">Como la glucólisis produce <strong>2 piruvatos</strong> por glucosa, la oxidación total genera: <strong>2 Acetil-CoA</strong> + <strong style="color:var(--p)">2 NADH</strong> + <strong>2 CO₂</strong>. Cada NADH mitocondrial equivale a <strong>~2.5 ATP</strong> en la cadena de transporte de electrones.</p></div></div>
+
+<div class="cd"><div class="ch">🧬 Complejo Piruvato <span class="ac">Deshidrogenasa</span></div>
+<table class="et"><thead><tr><th>Componente</th><th>Enzima</th><th>Cofactor</th><th>Función</th></tr></thead><tbody>
+<tr><td><strong>E1</strong></td><td>Piruvato deshidrogenasa</td><td style="color:var(--y)">TPP (Vit B₁)</td><td>Descarboxilación</td></tr>
+<tr><td><strong>E2</strong></td><td>Dihidrolipoil transacetilasa</td><td style="color:var(--g)">Ác. lipoico, CoA (B₅)</td><td>Transferencia de acetilo</td></tr>
+<tr><td><strong>E3</strong></td><td>Dihidrolipoil deshidrogenasa</td><td style="color:var(--p)">FAD (B₂), NAD⁺ (B₃)</td><td>Regeneración</td></tr>
+</tbody></table>
+<div class="ib or"><div class="ibt">🔑 Importancia clínica de los cofactores</div><p style="color:var(--t2)">El complejo PDH requiere <strong>5 vitaminas B</strong> como cofactores. La deficiencia de <strong>tiamina (B₁)</strong> afecta directamente este complejo, causando enfermedades como <strong>beriberi</strong> y <strong>encefalopatía de Wernicke-Korsakoff</strong> (frecuente en alcoholismo crónico).</p></div></div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q06"><div class="qt">¿Dónde ocurre la oxidación descarboxilativa del piruvato?</div><div class="qo">
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">A</div>Citoplasma</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">B</div>Membrana interna mitocondrial</button>
+<button class="qb" onclick="cq('q06',this,1)"><div class="ol">C</div>Matriz mitocondrial</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">D</div>Espacio intermembranoso</button>
+</div><div class="qf" id="fb-q06"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('fermentacion')">← Fermentación</button><button class="btn bp" onclick="go('balance')">Balance →</button></div></div>
+
+<!-- ===== BALANCE TOTAL ===== -->
+<div class="sec" id="sec-balance">
+<div class="cd"><div class="ch">🧮 Balance <span class="ac">Energético Total</span> <span class="pill pg">RA 13</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Sumamos el rendimiento energético de la <strong>glucólisis</strong> + la <strong>oxidación del piruvato</strong> por cada molécula de glucosa:</p>
+
+<table class="et"><thead><tr><th>Etapa</th><th>ATP directo</th><th>NADH</th><th>FADH₂</th><th>CO₂</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Glucólisis</strong></td><td style="color:var(--g)"><strong>2 ATP</strong> (netos)</td><td style="color:var(--p)"><strong>2 NADH</strong></td><td>—</td><td>—</td></tr>
+<tr><td><strong style="color:var(--o)">Oxidación Piruvato (×2)</strong></td><td>—</td><td style="color:var(--p)"><strong>2 NADH</strong></td><td>—</td><td>2 CO₂</td></tr>
+<tr style="background:rgba(0,212,170,.08)"><td><strong style="color:var(--g)">TOTAL</strong></td><td style="color:var(--g)"><strong>2 ATP</strong></td><td style="color:var(--p)"><strong>4 NADH</strong></td><td>—</td><td><strong>2 CO₂</strong></td></tr>
+</tbody></table></div>
+
+<div class="cd"><div class="ch">⚡ Equivalentes de <span class="ac">ATP</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Convirtiendo los NADH a ATP (mediante la cadena de transporte de electrones):</p>
+
+<div class="bal-box">
+<h3>ATP Total: Glucólisis + Oxidación del Piruvato</h3>
+<div class="bal-row">
+<div class="bal-item" style="color:var(--g)">2 ATP<br><span style="font-size:.78rem;font-weight:400">glucólisis directos</span></div>
+<div class="bal-plus">+</div>
+<div class="bal-item" style="color:var(--p)">2 NADH citosólicos<br><span style="font-size:.78rem;font-weight:400">≈ 3-5 ATP*</span></div>
+<div class="bal-plus">+</div>
+<div class="bal-item" style="color:var(--p)">2 NADH mitocondriales<br><span style="font-size:.78rem;font-weight:400">≈ 5 ATP</span></div>
+</div>
+<div style="margin-top:16px;padding:16px;background:rgba(0,212,170,.12);border-radius:var(--r10);display:inline-block">
+<span style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--g)">≈ 10-12 ATP equivalentes</span>
+</div>
+<p style="color:var(--t3);font-size:.82rem;margin-top:12px">*Los 2 NADH citosólicos generan ~1.5-2.5 ATP cada uno, dependiendo de la lanzadera usada (malato-aspartato: 2.5; glicerol-3-fosfato: 1.5)</p>
+</div></div>
+
+<div class="cd"><div class="ch">📊 Resumen <span class="ac">Visual</span></div>
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--y);min-width:130px"><strong style="color:var(--y)">Glucosa</strong><br><span style="font-size:.78rem;color:var(--t3)">6 carbonos</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--g);min-width:150px"><strong style="color:var(--g)">GLUCÓLISIS</strong><br><span style="font-size:.78rem;color:var(--g)">+2 ATP, +2 NADH</span><br><span style="font-size:.78rem;color:var(--t3)">Citosol</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--pk);min-width:100px"><strong style="color:var(--pk)">2 Piruvato</strong><br><span style="font-size:.78rem;color:var(--t3)">3C c/u</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--o);min-width:150px"><strong style="color:var(--o)">OXIDACIÓN</strong><br><span style="font-size:.78rem;color:var(--p)">+2 NADH, 2 CO₂</span><br><span style="font-size:.78rem;color:var(--t3)">Matriz mitocondrial</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--b);min-width:130px"><strong style="color:var(--b)">2 Acetil-CoA</strong><br><span style="font-size:.78rem;color:var(--t3)">2C c/u</span><br><span style="font-size:.78rem;color:var(--t3)">→ Ciclo de Krebs</span></div>
+</div></div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q07"><div class="qt">¿Cuántos ATP directos y NADH totales se generan en glucólisis + oxidación del piruvato (por glucosa)?</div><div class="qo">
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">A</div>4 ATP + 2 NADH</button>
+<button class="qb" onclick="cq('q07',this,1)"><div class="ol">B</div>2 ATP + 4 NADH</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">C</div>2 ATP + 2 NADH</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">D</div>4 ATP + 4 NADH</button>
+</div><div class="qf" id="fb-q07"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('piruvato')">← Piruvato</button><button class="btn bp" onclick="go('clinica')">Clínica →</button></div></div>
+
+<!-- ===== CLÍNICA ===== -->
+<div class="sec" id="sec-clinica"><div class="cd"><div class="ch">🏥 Correlaciones <span class="ac">Clínicas</span></div><p style="color:var(--t2)">La glucólisis y la oxidación del piruvato tienen relevancia clínica directa en múltiples enfermedades.</p></div>
+
+<div class="cl"><div class="clb">🏥 Caso 1</div><div class="clt">Deficiencia de Piruvato Deshidrogenasa (PDH)</div>
+<div class="clp">Neonato masculino con <strong>acidosis láctica</strong> severa, hipotonía, convulsiones, y retraso del desarrollo. RM cerebral muestra agenesia del cuerpo calloso. Laboratorio: lactato y piruvato séricos elevados. <strong>Diagnóstico: deficiencia del complejo PDH</strong>, ligada al X (gen PDHA1, subunidad E1α).<br><br><strong>Fisiopatología:</strong> Al no poder convertir piruvato en Acetil-CoA, el piruvato se acumula y se desvía a lactato (vía LDH), produciendo acidosis láctica. El cerebro depende del metabolismo aeróbico de glucosa, por lo que es el órgano más afectado.<br><br><strong>Tratamiento:</strong> Dieta cetogénica (aporta ácidos grasos que generan Acetil-CoA sin necesidad de PDH), tiamina (cofactor del complejo), dicloroacetato (inhibe la PDH quinasa).</div>
+<div class="qq" id="qk1" style="background:0;border:0;padding:0"><div class="qt">¿Por qué se acumula lactato en la deficiencia de PDH?</div><div class="qo">
+<button class="qb" onclick="ck('qk1',this,0)"><div class="ol">A</div>Porque la LDH está sobreexpresada</button>
+<button class="qb" onclick="ck('qk1',this,1)"><div class="ol">B</div>Porque el piruvato no puede convertirse en Acetil-CoA y se desvía a lactato</button>
+<button class="qb" onclick="ck('qk1',this,0)"><div class="ol">C</div>Porque hay exceso de NAD⁺</button>
+<button class="qb" onclick="ck('qk1',this,0)"><div class="ol">D</div>Porque la glucólisis está inhibida</button>
+</div><div class="qf" id="fb-qk1"></div></div></div>
+
+<div class="cl"><div class="clb">🏥 Caso 2</div><div class="clt">Efecto Warburg en Cáncer</div>
+<div class="clp">Paciente de 62 años con masa pulmonar. Se realiza <strong>PET-CT con ¹⁸F-FDG</strong> que muestra captación intensa de glucosa por el tumor. Diagnóstico: carcinoma pulmonar.<br><br><strong>Fisiopatología (Efecto Warburg):</strong> Las células tumorales realizan glucólisis acelerada y producen lactato <strong>aun en presencia de oxígeno</strong> (glucólisis aeróbica). Esto les permite generar intermediarios biosintéticos rápidamente para proliferación celular.<br><br><strong>Aplicación clínica:</strong> El PET-CT aprovecha esta captación aumentada de glucosa: la ¹⁸F-FDG (análogo de glucosa radiomarcado) es captada por las células con alta actividad glucolítica, permitiendo detectar tumores y metástasis.</div>
+<div class="qq" id="qk2" style="background:0;border:0;padding:0"><div class="qt">¿En qué se basa el PET-CT para detectar tumores?</div><div class="qo">
+<button class="qb" onclick="ck('qk2',this,1)"><div class="ol">A</div>En la captación aumentada de glucosa por las células tumorales (efecto Warburg)</button>
+<button class="qb" onclick="ck('qk2',this,0)"><div class="ol">B</div>En la producción excesiva de ATP por las mitocondrias tumorales</button>
+<button class="qb" onclick="ck('qk2',this,0)"><div class="ol">C</div>En la ausencia de glucólisis en células cancerosas</button>
+<button class="qb" onclick="ck('qk2',this,0)"><div class="ol">D</div>En la alta producción de oxígeno por los tumores</button>
+</div><div class="qf" id="fb-qk2"></div></div></div>
+
+<div class="cl"><div class="clb">🏥 Caso 3</div><div class="clt">Encefalopatía de Wernicke-Korsakoff</div>
+<div class="clp">Hombre de 54 años, alcohólico crónico, presenta confusión, ataxia, oftalmoplejía y nistagmo. <strong>Diagnóstico: encefalopatía de Wernicke</strong>.<br><br><strong>Fisiopatología:</strong> El alcoholismo crónico produce deficiencia de <strong>tiamina (vitamina B₁)</strong>. La tiamina, en su forma activa <strong>TPP</strong>, es cofactor esencial del complejo PDH (E1), α-cetoglutarato deshidrogenasa, y transcetolasa. Su deficiencia reduce la producción de Acetil-CoA y la actividad del ciclo de Krebs, causando daño neurológico severo.<br><br><strong>Tratamiento urgente:</strong> Administración IV de tiamina <strong>ANTES</strong> de glucosa (la glucosa sin tiamina aumenta la demanda de TPP y puede empeorar los síntomas).</div>
+<div class="qq" id="qk3" style="background:0;border:0;padding:0"><div class="qt">¿Por qué se debe dar tiamina ANTES de glucosa en sospecha de Wernicke?</div><div class="qo">
+<button class="qb" onclick="ck('qk3',this,0)"><div class="ol">A</div>Porque la glucosa inhibe la absorción de tiamina</button>
+<button class="qb" onclick="ck('qk3',this,1)"><div class="ol">B</div>Porque la glucosa aumenta la demanda de TPP (cofactor de PDH) y agrava la deficiencia</button>
+<button class="qb" onclick="ck('qk3',this,0)"><div class="ol">C</div>Porque la tiamina necesita glucosa como sustrato</button>
+<button class="qb" onclick="ck('qk3',this,0)"><div class="ol">D</div>Porque la glucosa es tóxica sin tiamina</button>
+</div><div class="qf" id="fb-qk3"></div></div></div>
+
+<div class="cl"><div class="clb">🏥 Caso 4</div><div class="clt">Deficiencia de Piruvato Quinasa (PK)</div>
+<div class="clp">Niño de 4 años con <strong>anemia hemolítica crónica</strong>, esplenomegalia e ictericia. Frotis: equinocitos. Estudio enzimático eritrocitario: <strong>deficiencia de piruvato quinasa</strong>.<br><br><strong>Fisiopatología:</strong> Los eritrocitos dependen <strong>exclusivamente</strong> de la glucólisis (no tienen mitocondrias). La PK cataliza el último paso (PEP → piruvato + ATP). Su deficiencia reduce la producción de ATP eritrocitario, causando inestabilidad de membrana y hemólisis.<br><br><strong>Tratamiento:</strong> Esplenectomía (reduce hemólisis extravascular), transfusiones, y recientemente el activador alostérico de PK <strong>mitapivat</strong> (aprobado FDA 2022).</div>
+<div class="qq" id="qk4" style="background:0;border:0;padding:0"><div class="qt">¿Por qué los eritrocitos son especialmente vulnerables a defectos glucolíticos?</div><div class="qo">
+<button class="qb" onclick="ck('qk4',this,1)"><div class="ol">A</div>Porque carecen de mitocondrias y dependen exclusivamente de la glucólisis para ATP</button>
+<button class="qb" onclick="ck('qk4',this,0)"><div class="ol">B</div>Porque tienen exceso de mitocondrias</button>
+<button class="qb" onclick="ck('qk4',this,0)"><div class="ol">C</div>Porque no realizan glucólisis</button>
+<button class="qb" onclick="ck('qk4',this,0)"><div class="ol">D</div>Porque producen ATP por fosforilación oxidativa</button>
+</div><div class="qf" id="fb-qk4"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('balance')">← Balance</button><button class="btn bp" onclick="go('glosario')">Glosario →</button></div></div>
+
+<!-- ===== GLOSARIO ===== -->
+<div class="sec" id="sec-glosario"><div class="cd"><div class="ch">📖 Glosario <span class="ac">Interactivo</span></div><p style="color:var(--t2)">Clic para ver definición:</p></div><div class="fg" id="fg"></div>
+<div class="sn"><button class="btn bs" onclick="go('clinica')">← Clínica</button><button class="btn bp" onclick="go('evaluacion')">Evaluación →</button></div></div>
+
+<!-- ===== EVALUACIÓN ===== -->
+<div class="sec" id="sec-evaluacion"><div class="cd"><div class="ch">✅ Evaluación <span class="ac">Final</span></div><p style="color:var(--t2)">13 preguntas — una por cada Resultado de Aprendizaje.</p></div>
+<div id="eq"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn bp" id="seb" onclick="se()" style="display:none">Calcular puntuación →</button></div>
+<div class="sd" id="sdd" style="display:none"><div class="snm" id="sn2" style="color:var(--g)">--</div><div class="sbl">Puntuación</div><div class="sbr"><div class="sbf" id="sbf2" style="width:0%;background:var(--grad)"></div></div><p style="color:var(--t2);margin-top:14px" id="sm2"></p><button class="btn bs" onclick="go('inicio')" style="margin-top:16px">↩ Volver al inicio</button></div>
+<div class="sn"><button class="btn bs" onclick="go('glosario')">← Glosario</button></div></div>
+
+</div>
+<script>
+var secs=['inicio','respiracion','glucolisis','fases','rendimiento','fermentacion','piruvato','balance','clinica','glosario','evaluacion'];
+var cs='inicio';
+function go(id){document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('a')});var t=document.getElementById('sec-'+id);if(t)t.classList.add('a');document.querySelectorAll('.nl button').forEach(function(b){b.classList.toggle('a',b.getAttribute('data-s')===id)});cs=id;up();window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.nl button').forEach(function(b){b.addEventListener('click',function(){go(this.getAttribute('data-s'))})});
+function up(){var i=secs.indexOf(cs);document.getElementById('pf').style.width=(i/(secs.length-1)*100)+'%';}
+function st(btn,tid){var p=btn.closest('.cd');p.querySelectorAll('.tbtn').forEach(function(t){t.classList.remove('a')});p.querySelectorAll('.tc').forEach(function(c){c.classList.remove('a')});btn.classList.add('a');document.getElementById(tid).classList.add('a');}
+function cq(qid,btn,ci){var c=document.getElementById(qid),os=c.querySelectorAll('.qb'),done=false;os.forEach(function(o){if(o.classList.contains('ok')||o.classList.contains('no'))done=true});if(done)return;os.forEach(function(o){o.classList.add('dis')});btn.classList.add(ci?'ok':'no');var fb=document.getElementById('fb-'+qid);fb.classList.add('sh');fb.classList.add(ci?'cf':'if');fb.textContent=ci?'\u2705 \u00a1Correcto! Excelente comprensi\u00f3n.':'\u274c Incorrecto. Revisa el material de esta secci\u00f3n.';}
+var cfb={qk1:{c:1,ok:'\u2705 Correcto. Sin PDH funcional, el piruvato no puede entrar al ciclo de Krebs y se desv\u00eda a lactato por LDH, acumul\u00e1ndose.',no:'\u274c Incorrecto. La acumulaci\u00f3n de lactato se debe a que el piruvato no puede convertirse en Acetil-CoA y toma la v\u00eda alternativa.'},qk2:{c:0,ok:'\u2705 Correcto. El efecto Warburg (glucolisis aer\u00f3bica aumentada) permite que las c\u00e9lulas tumorales capten m\u00e1s glucosa, lo cual detecta el PET-CT con FDG.',no:'\u274c Incorrecto. El PET-CT detecta la mayor captaci\u00f3n de glucosa por c\u00e9lulas tumorales.'},qk3:{c:1,ok:'\u2705 Correcto. Administrar glucosa sin tiamina aumenta la demanda de TPP para la reacci\u00f3n de PDH, agravando el d\u00e9ficit y empeorando los s\u00edntomas neurol\u00f3gicos.',no:'\u274c Incorrecto. La glucosa aumenta la demanda de TPP (cofactor de PDH), lo que agrava la deficiencia de tiamina.'},qk4:{c:0,ok:'\u2705 Correcto. Los eritrocitos maduros carecen de mitocondrias y dependen exclusivamente de la glucolisis para producir ATP. Defectos enzim\u00e1ticos glucol\u00edticos causan hemolisis.',no:'\u274c Incorrecto. Los eritrocitos no tienen mitocondrias y dependen solo de la glucolisis para ATP.'}};
+function ck(qid,btn,oi){var c=document.getElementById(qid),os=c.querySelectorAll('.qb'),done=false;os.forEach(function(o){if(o.classList.contains('ok')||o.classList.contains('no'))done=true});if(done)return;var d=cfb[qid],ic=oi===d.c;os.forEach(function(o){o.classList.add('dis')});btn.classList.add(ic?'ok':'no');var fb=document.getElementById('fb-'+qid);fb.classList.add('sh');fb.classList.add(ic?'cf':'if');fb.innerHTML=ic?d.ok:d.no;}
+var gt=[{t:'Respiraci\u00f3n Celular',d:'Conjunto de reacciones catab\u00f3licas que degradan glucosa para obtener ATP, usando O\u2082 como aceptor final de electrones.'},{t:'Glucolisis',d:'V\u00eda metab\u00f3lica de 10 reacciones que convierte glucosa (6C) en 2 piruvatos (3C) con producci\u00f3n neta de 2 ATP y 2 NADH. Ocurre en citosol.'},{t:'Piruvato',d:'Mol\u00e9cula de 3 carbonos, producto final de la glucolisis. Destino: oxidaci\u00f3n (aerobio), fermentaci\u00f3n l\u00e1ctica o alcoh\u00f3lica (anaerobio).'},{t:'Fosforilaci\u00f3n a nivel de sustrato',d:'Transferencia directa de un grupo fosfato de un sustrato al ADP para formar ATP, sin cadena de transporte de electrones.'},{t:'NAD\u207a / NADH',d:'Acarreador de electrones. NAD\u207a se reduce a NADH al aceptar 2e\u207b + H\u207a. En glucolisis: 2 NADH producidos (paso 6).'},{t:'ATP',d:'Adenos\u00edn trifosfato. Moneda energ\u00e9tica universal de la c\u00e9lula. En glucolisis se producen 2 ATP netos.'},{t:'Hexoquinasa',d:'Enzima del paso 1 de glucolisis. Fosforila glucosa a G-6-P. Irreversible. Atrapa glucosa en la c\u00e9lula.'},{t:'PFK-1',d:'Fosfofructoquinasa-1. Paso 3, principal punto de regulaci\u00f3n de glucolisis. Irreversible. Activada por AMP/F-2,6-BP; inhibida por ATP/citrato.'},{t:'Piruvato quinasa',d:'\u00daltimo paso de glucolisis (paso 10). PEP \u2192 Piruvato + ATP. Irreversible. Deficiencia causa anemia hemol\u00edtica.'},{t:'Fermentaci\u00f3n l\u00e1ctica',d:'Piruvato \u2192 Lactato por LDH. Regenera NAD\u207a sin O\u2082. Ocurre en m\u00fasculo, eritrocitos, tumores.'},{t:'Fermentaci\u00f3n alcoh\u00f3lica',d:'Piruvato \u2192 Etanol + CO\u2082. En levaduras. No ocurre en humanos. Regenera NAD\u207a.'},{t:'Complejo PDH',d:'Piruvato deshidrogenasa. Convierte piruvato en Acetil-CoA + CO\u2082 + NADH. En matriz mitocondrial. 5 cofactores: TPP, ác. lipoico, CoA, FAD, NAD\u207a.'},{t:'Acetil-CoA',d:'Producto de la oxidaci\u00f3n del piruvato. 2 carbonos unidos a Coenzima A. Entra al Ciclo de Krebs.'},{t:'MPC',d:'Carrier de piruvato mitocondrial. Transporta piruvato a trav\u00e9s de la membrana interna mitocondrial (simporte con H\u207a).'},{t:'Tiamina (B\u2081)',d:'Vitamina cuya forma activa es TPP, cofactor de PDH (E1). Deficiencia: beriberi, Wernicke-Korsakoff.'},{t:'Efecto Warburg',d:'Glucolisis aeróbica aumentada en células tumorales, aun con O\u2082 disponible. Base del PET-CT con FDG.'},{t:'Ciclo de Cori',d:'Ciclo metab\u00f3lico: lactato del m\u00fasculo \u2192 h\u00edgado \u2192 gluconeog\u00e9nesis \u2192 glucosa \u2192 m\u00fasculo.'},{t:'Porinas (VDAC)',d:'Canales en la membrana externa mitocondrial que permiten paso de mol\u00e9culas peque\u00f1as como piruvato.'}];
+function ifc(){var g=document.getElementById('fg');g.innerHTML='';gt.forEach(function(it){var c=document.createElement('div');c.className='fc';c.onclick=function(){this.classList.toggle('fl')};c.innerHTML='<div class="ft">'+it.t+'</div><div class="fd">'+it.d+'</div><div class="fh">Clic para ver</div>';g.appendChild(c)});}
+var evq=[
+{q:'\u00bfQu\u00e9 es la respiraci\u00f3n celular?',o:['S\u00edntesis de glucosa a partir de CO\u2082','Degradaci\u00f3n de glucosa para obtener ATP usando O\u2082 como aceptor final','Producci\u00f3n de oxígeno en la mitocondria','Transporte de electrones sin producci\u00f3n de energía'],c:1,f:'Conjunto de reacciones catabólicas que degradan glucosa para obtener ATP. [RA 1]'},
+{q:'\u00bfCu\u00e1les son las 4 etapas de la respiraci\u00f3n celular en orden?',o:['Krebs \u2192 Glucolisis \u2192 CTE \u2192 Oxidaci\u00f3n piruvato','Glucolisis \u2192 Oxidaci\u00f3n piruvato \u2192 Ciclo de Krebs \u2192 Cadena transporte e\u207b','Fermentaci\u00f3n \u2192 Glucolisis \u2192 Krebs \u2192 CTE','Glucolisis \u2192 Krebs \u2192 Fermentaci\u00f3n \u2192 CTE'],c:1,f:'Glucolisis \u2192 Oxidación del piruvato \u2192 Ciclo de Krebs \u2192 Cadena de transporte de electrones. [RA 2]'},
+{q:'La glucolisis se define como:',o:['Conversi\u00f3n de piruvato en glucosa','Oxidaci\u00f3n de \u00e1cidos grasos','Conversi\u00f3n de glucosa (6C) en 2 piruvatos (3C) con 2 ATP y 2 NADH netos','S\u00edntesis de glucosa a partir de amino\u00e1cidos'],c:2,f:'Glucolisis = glucosa (6C) → 2 piruvatos (3C) + 2 ATP + 2 NADH. [RA 3]'},
+{q:'\u00bfCu\u00e1ntas reacciones enzim\u00e1ticas tiene la glucolisis y en qu\u00e9 fases se divide?',o:['5 reacciones en 1 fase','8 reacciones en 3 fases','10 reacciones: fase de inversión (1-5) y fase de ganancia (6-10)','12 reacciones en 2 fases'],c:2,f:'10 reacciones: fase de inversi\u00f3n de energ\u00eda (pasos 1-5, gastan 2 ATP) y fase de ganancia (pasos 6-10, generan 4 ATP + 2 NADH). [RA 4]'},
+{q:'\u00bfD\u00f3nde ocurre la glucolisis?',o:['Matriz mitocondrial','Membrana interna mitocondrial','Citoplasma (citosol)','Ret\u00edculo endopl\u00e1smico'],c:2,f:'La glucolisis ocurre en el citoplasma (citosol) de todas las c\u00e9lulas. [RA 5]'},
+{q:'El rendimiento energ\u00e9tico de la fermentaci\u00f3n es:',o:['30-32 ATP','10 ATP','2 ATP netos (mismos de la glucolisis)','0 ATP'],c:2,f:'La fermentaci\u00f3n no produce ATP adicional; solo regenera NAD\u207a. El rendimiento es 2 ATP netos (de glucolisis). [RA 6]'},
+{q:'La mol\u00e9cula acarreadora de electrones producida en glucolisis es:',o:['FADH\u2082','NADPH','NADH','Coenzima Q'],c:2,f:'NADH: NAD\u207a se reduce en paso 6 (G3P deshidrogenasa). Se producen 2 NADH por glucosa. [RA 7]'},
+{q:'Diferencia principal entre fermentaci\u00f3n l\u00e1ctica y alcoh\u00f3lica:',o:['La l\u00e1ctica produce m\u00e1s ATP','La alcoh\u00f3lica produce etanol + CO\u2082; la l\u00e1ctica produce lactato sin CO\u2082','La l\u00e1ctica solo ocurre en levaduras','Ambas producen etanol'],c:1,f:'L\u00e1ctica: piruvato \u2192 lactato (sin CO\u2082). Alcoh\u00f3lica: piruvato \u2192 etanol + CO\u2082. [RA 8]'},
+{q:'La oxidaci\u00f3n descarboxilativa del piruvato produce:',o:['Glucosa + ATP','Acetil-CoA + NADH + CO\u2082','Lactato + NAD\u207a','Etanol + CO\u2082'],c:1,f:'Piruvato + NAD\u207a + CoA \u2192 Acetil-CoA + NADH + CO\u2082. Catalizada por complejo PDH. [RA 9]'},
+{q:'El piruvato cruza la membrana interna mitocondrial mediante:',o:['Difusi\u00f3n simple','Porinas (VDAC)','Carrier de piruvato mitocondrial (MPC)','Translocasa de nucle\u00f3tidos de adenina'],c:2,f:'MPC (simporte con H\u207a) transporta piruvato a trav\u00e9s de membrana interna. La externa se cruza por porinas. [RA 10]'},
+{q:'\u00bfD\u00f3nde se localiza la oxidaci\u00f3n del piruvato?',o:['Citosol','Espacio intermembranoso','Membrana interna mitocondrial','Matriz mitocondrial'],c:3,f:'El complejo PDH se localiza en la matriz mitocondrial. [RA 11]'},
+{q:'Por cada piruvato oxidado se producen:',o:['1 ATP + 1 FADH\u2082','1 Acetil-CoA + 1 NADH + 1 CO\u2082','2 ATP + 1 NADH','1 Acetil-CoA + 1 FADH\u2082 + 1 CO\u2082'],c:1,f:'Por cada piruvato: 1 Acetil-CoA + 1 NADH + 1 CO\u2082. Por glucosa (×2): 2 Acetil-CoA + 2 NADH + 2 CO\u2082. [RA 12]'},
+{q:'El rendimiento total (ATP directos + NADH) de glucolisis + oxidaci\u00f3n piruvato por glucosa es:',o:['4 ATP + 2 NADH','2 ATP + 2 NADH','2 ATP + 4 NADH + 2 CO\u2082','4 ATP + 4 NADH + 2 CO\u2082'],c:2,f:'Glucolisis: 2 ATP + 2 NADH. Oxidaci\u00f3n piruvato (×2): 2 NADH + 2 CO\u2082. Total: 2 ATP + 4 NADH + 2 CO\u2082. (\u224810-12 ATP equivalentes). [RA 13]'}
+];
+var eva={},evs=false;
+function iev(){var c=document.getElementById('eq');c.innerHTML='';eva={};evs=false;document.getElementById('sdd').style.display='none';document.getElementById('seb').style.display='none';var lt=['A','B','C','D'];evq.forEach(function(q,qi){var d=document.createElement('div');d.className='qq';d.id='ev-'+qi;var h='<div class="qt"><span style="color:var(--g);font-family:JetBrains Mono;font-size:.83rem">'+(qi+1)+'/13</span> '+q.q+'</div><div class="qo">';q.o.forEach(function(opt,oi){h+='<button class="qb" data-qi="'+qi+'" data-oi="'+oi+'" onclick="seo(this,'+qi+','+oi+')"><div class="ol">'+lt[oi]+'</div>'+opt+'</button>';});h+='</div><div class="qf" id="fb-ev-'+qi+'"></div>';d.innerHTML=h;c.appendChild(d);});}
+function seo(btn,qi,oi){if(evs)return;var c=document.getElementById('ev-'+qi);c.querySelectorAll('.qb').forEach(function(o){o.classList.remove('sel')});btn.classList.add('sel');eva[qi]=oi;if(Object.keys(eva).length===evq.length)document.getElementById('seb').style.display='inline-flex';}
+function se(){evs=true;var sc=0;evq.forEach(function(q,qi){var c=document.getElementById('ev-'+qi),os=c.querySelectorAll('.qb');var ua=eva[qi];os.forEach(function(o,oi){o.classList.add('dis');if(oi===q.c)o.classList.add('ok');if(oi===ua&&oi!==q.c)o.classList.add('no');});if(ua===q.c)sc++;var fb=document.getElementById('fb-ev-'+qi);fb.classList.add('sh');fb.classList.add(ua===q.c?'cf':'if');fb.textContent=(ua===q.c?'\u2705 ':'\u274c ')+q.f;});document.getElementById('seb').style.display='none';var pct=Math.round(sc/evq.length*100);var dd=document.getElementById('sdd');dd.style.display='block';document.getElementById('sn2').textContent=sc+'/'+evq.length;document.getElementById('sbf2').style.width=pct+'%';var msg='';if(pct>=90){msg='\ud83c\udf1f \u00a1Excelente! Dominas la glucolisis y la oxidación del piruvato.';document.getElementById('sn2').style.color='var(--g)';}else if(pct>=70){msg='\ud83d\udc4f \u00a1Buen trabajo! Revisa los errores marcados.';document.getElementById('sn2').style.color='var(--b)';}else if(pct>=50){msg='\ud83d\udcda Repasa algunos conceptos clave.';document.getElementById('sn2').style.color='var(--y)';}else{msg='\ud83d\udcaa Necesitas repasar toda la tutoría.';document.getElementById('sn2').style.color='var(--r)';document.getElementById('sbf2').style.background='linear-gradient(135deg,#FF6B6B,#FFD93D)';}document.getElementById('sm2').textContent=msg;dd.scrollIntoView({behavior:'smooth',block:'center'});}
+ifc();iev();up();
+</script>
+</body></html>
