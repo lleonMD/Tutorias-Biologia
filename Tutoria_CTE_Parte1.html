@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Interactiva: Cadena de Transporte de Electrones (Parte 1)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 24px}.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}.nb{font-family:'DM Serif Display',serif;font-size:1.1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.nl{display:flex;gap:3px;flex-wrap:wrap}.nl button{padding:5px 12px;border-radius:20px;border:none;background:0;color:var(--t2);font-size:.76rem;font-family:inherit;cursor:pointer;transition:.3s}.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}.pb{position:fixed;top:58px;left:0;right:0;z-index:99;height:3px;background:rgba(0,212,170,.1)}.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}.mc{max-width:960px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1}.sec{display:none;animation:fi .5s}.sec.a{display:block}@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.hero{text-align:center;padding:50px 0 36px}.hi{width:90px;height:90px;margin:0 auto 20px;background:var(--grad);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}.hero h1{font-family:'DM Serif Display',serif;font-size:2.8rem;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hs{font-size:1.1rem;color:var(--t2);max-width:650px;margin:0 auto 28px}.og{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0}.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px 16px;display:flex;align-items:flex-start;gap:10px;transition:.3s}.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}.on{min-width:26px;height:26px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;color:#0B1622}.ot{font-size:.85rem;color:var(--t2);line-height:1.5}.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;box-shadow:var(--sh);transition:.3s}.cd:hover{border-color:rgba(0,212,170,.25)}.ch{font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:14px}.ch .ac{color:var(--g)}.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:18px 22px;margin:18px 0;background:rgba(0,212,170,.06)}.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}.ibt{font-weight:700;margin-bottom:5px;font-size:.93rem}.cg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin:18px 0}.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px}.cc h4{font-family:'DM Serif Display',serif;margin-bottom:10px;font-size:1.05rem}.dc{background:rgba(0,0,0,.2);border-radius:var(--r16);padding:24px;margin:20px 0;text-align:center;border:1px solid var(--bdr)}.et{width:100%;border-collapse:separate;border-spacing:0;margin:18px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}.et th{background:rgba(0,212,170,.12);padding:12px 16px;text-align:left;font-weight:600;font-size:.85rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}.et td{padding:11px 16px;border-top:1px solid var(--bdr);font-size:.9rem;color:var(--t2)}.et tr:hover td{background:var(--card2)}.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:18px}.qt{font-weight:600;font-size:1rem;margin-bottom:16px}.qo{display:flex;flex-direction:column;gap:9px}.qb{padding:12px 18px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.93rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}.qb.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}.qb.dis{pointer-events:none;opacity:.7}.ol{min-width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem}.qf{margin-top:14px;padding:16px;border-radius:var(--r10);font-size:.9rem;line-height:1.6;display:none}.qf.sh{display:block}.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}.cl{background:linear-gradient(135deg,rgba(255,107,107,.06),rgba(255,217,61,.04));border:1px solid rgba(255,107,107,.2);border-radius:var(--r16);padding:28px;margin:20px 0}.clb{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,107,.15);color:var(--r);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600;margin-bottom:14px;text-transform:uppercase;letter-spacing:.03em}.clt{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:12px}.clp{color:var(--t2);margin-bottom:14px;font-size:.93rem;line-height:1.7}.btn{padding:11px 24px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.93rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}.bp:hover{transform:translateY(-2px)}.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}.bs:hover{background:rgba(0,212,170,.2)}.tb{display:flex;gap:5px;margin-bottom:20px;border-bottom:1px solid var(--bdr)}.tbtn{padding:9px 18px;border:none;background:0;color:var(--t3);font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:.3s;border-radius:7px 7px 0 0}.tbtn:hover{color:var(--t2)}.tbtn.a{color:var(--g);border-bottom-color:var(--g);background:rgba(0,212,170,.06)}.tc{display:none;animation:fi .4s}.tc.a{display:block}.sn{display:flex;justify-content:space-between;margin-top:36px;padding-top:20px;border-top:1px solid var(--bdr)}.pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.76rem;font-weight:600;margin:2px 3px}.pg{background:rgba(0,212,170,.15);color:var(--g)}.pb2{background:rgba(0,163,255,.12);color:var(--b)}.pw{background:rgba(255,107,107,.12);color:var(--r)}.py{background:rgba(255,217,61,.12);color:var(--y)}.pp{background:rgba(167,139,250,.12);color:var(--p)}.ppk{background:rgba(236,72,153,.12);color:var(--pk)}.por{background:rgba(249,115,22,.12);color:var(--o)}.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:20px 0}.fc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px;cursor:pointer;transition:.4s;min-height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.fc:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:var(--glow)}.ft{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--g)}.fd{display:none;font-size:.88rem;color:var(--t2);line-height:1.6;margin-top:7px}.fc.fl .ft{display:none}.fc.fl .fd{display:block}.fh{font-size:.73rem;color:var(--t3);margin-top:8px}.fc.fl .fh{display:none}.sd{text-align:center;padding:36px;margin:20px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}.snm{font-family:'DM Serif Display',serif;font-size:3.5rem;margin-bottom:6px}.sbl{color:var(--t2)}.sbr{width:100%;max-width:380px;height:11px;background:rgba(255,255,255,.06);border-radius:6px;margin:18px auto;overflow:hidden}.sbf{height:100%;border-radius:6px;transition:width 1s}.sb2{display:inline-block;padding:8px 22px;border-radius:var(--r10);font-weight:700;font-size:1.1rem}.step-diagram{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:18px 0}.step-box{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:12px 16px;text-align:center;min-width:110px;transition:.3s;cursor:default}.step-box:hover{border-color:var(--g);transform:translateY(-2px)}.step-arrow{color:var(--g);font-size:1.4rem;font-weight:700}.bal-box{background:var(--card);border:2px solid var(--g);border-radius:var(--r16);padding:24px;margin:20px 0;text-align:center}.bal-box h3{font-family:'DM Serif Display',serif;color:var(--g);margin-bottom:14px;font-size:1.3rem}.bal-row{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0}.bal-item{background:var(--card2);border-radius:var(--r10);padding:10px 18px;font-weight:600;font-size:.95rem}.bal-plus{color:var(--g);font-size:1.3rem;font-weight:700}.bal-eq{color:var(--y);font-size:1.3rem;font-weight:700}.cycle-svg{margin:20px auto;display:block;max-width:100%}@media(max-width:768px){.og,.cg{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.hero h1{font-size:2rem}.step-diagram{flex-direction:column}.step-arrow{transform:rotate(90deg)}.nl{gap:1px}.nl button{padding:4px 8px;font-size:.7rem}}::-webkit-scrollbar{width:7px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">⚡ CTE & Fosforilación Oxidativa — Parte 1</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button><button data-s="definicion">Definición CTE</button><button data-s="acarreadores">Acarreadores</button><button data-s="potencial">Potencial Redox</button><button data-s="complejos">Complejos</button><button data-s="cicloq">Ciclo Q</button><button data-s="rendimiento">Rendimiento ATP</button><button data-s="agua">Rendimiento H₂O</button><button data-s="clinica">Clínica</button><button data-s="glosario">Glosario</button><button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ===== INICIO ===== -->
+<div class="sec a" id="sec-inicio"><div class="hero"><div class="hi">⚡</div><h1>Cadena de Transporte de Electrones</h1><p class="hs">El sistema que transfiere electrones desde coenzimas reducidas (NADH, FADH₂) hasta el O₂, generando el gradiente de protones que impulsa la síntesis de ATP.</p></div>
+<div class="cd"><div class="ch">🎯 Resultados de <span class="ac">Aprendizaje</span> — Parte 1 (RA 1–9)</div><div class="og">
+<div class="oi"><div class="on">1</div><div class="ot">Definir el sistema de transporte de electrones desde coenzimas reducidas al oxígeno.</div></div>
+<div class="oi"><div class="on">2</div><div class="ot">Describir cada tipo de acarreador de electrones en la CTE.</div></div>
+<div class="oi"><div class="on">3</div><div class="ot">Definir el potencial estándar de reducción y su importancia.</div></div>
+<div class="oi"><div class="on">4</div><div class="ot">Definir par redox.</div></div>
+<div class="oi"><div class="on">5</div><div class="ot">Describir con ejemplos la transferencia de electrones entre pares redox.</div></div>
+<div class="oi"><div class="on">6</div><div class="ot">Describir los complejos respiratorios, su localización y los respirosomas.</div></div>
+<div class="oi"><div class="on">7</div><div class="ot">Describir el Ciclo Q y su importancia en el rendimiento de ATPs.</div></div>
+<div class="oi"><div class="on">8</div><div class="ot">Calcular el rendimiento de ATPs por NADH y FADH₂.</div></div>
+<div class="oi"><div class="on">9</div><div class="ot">Calcular el rendimiento de moléculas de agua en la CTE.</div></div>
+</div></div>
+<div class="ib n"><div class="ibt">📌 Nota</div><p style="color:var(--t2)">Esta tutoría cubre los <strong>RA 1–9</strong> (Cadena de Transporte de Electrones). La <strong>Parte 2</strong> cubre los <strong>RA 10–20</strong> (Fosforilación Oxidativa, lanzaderas, desacopladores y correlación clínica avanzada).</p></div>
+<div style="text-align:center;margin-top:22px"><button class="btn bp" onclick="go('definicion')">Comenzar la tutoría →</button></div></div>
+
+<!-- ===== DEFINICIÓN CTE ===== -->
+<div class="sec" id="sec-definicion">
+<div class="cd"><div class="ch">⚡ Definición de la <span class="ac">CTE</span> <span class="pill pg">RA 1</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div><p style="color:var(--t2)">La <strong>Cadena de Transporte de Electrones (CTE)</strong> es un sistema de múltiples acarreadores ordenados secuencialmente, la mayoría embebidos en la <strong>membrana mitocondrial interna</strong>, que transfieren electrones desde las <strong>coenzimas reducidas (NADH y FADH₂)</strong> hasta el <strong>oxígeno molecular (O₂)</strong>, el aceptor final.</p></div>
+
+<div class="ib n"><div class="ibt">📊 Contexto energético</div><p style="color:var(--t2)">La oxidación completa de 1 glucosa a CO₂ (glucólisis + oxidación del piruvato + TCA) produce solo <strong>4 ATP</strong> por fosforilación a nivel de sustrato, pero genera <strong>10 NADH + 2 FADH₂</strong>. Estas coenzimas almacenan ~<strong>90% de la energía libre</strong> de la glucosa (~686 kcal/mol). La CTE libera esta energía de forma escalonada.</p></div>
+
+<div class="bal-box"><h3>Ecuación Global del Catabolismo de Glucosa</h3>
+<div class="bal-row"><div class="bal-item" style="color:var(--y)">Glucosa</div><div class="bal-plus">+</div><div class="bal-item">10 NAD⁺</div><div class="bal-plus">+</div><div class="bal-item">2 FAD</div><div class="bal-plus">+</div><div class="bal-item">4 ADP + 4 Pi</div></div>
+<div class="bal-row"><div class="bal-eq">⟶</div></div>
+<div class="bal-row"><div class="bal-item" style="color:var(--r)">6 CO₂</div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--g)">10 NADH</div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--b)">2 FADH₂</div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--p)">4 ATP</div></div>
+</div>
+
+<div class="ib go"><div class="ibt">💡 Concepto clave</div><p style="color:var(--t2)">La CTE no sintetiza ATP directamente. Su función es crear un <strong>gradiente electroquímico de protones (H⁺)</strong> a través de la membrana interna mitocondrial. Este gradiente impulsa la síntesis de ATP por la ATP sintasa (fosforilación oxidativa). La CTE + FO permite obtener <strong>~15 veces más ATP</strong> que la glucólisis sola.</p></div>
+
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--g)"><strong style="color:var(--g)">NADH / FADH₂</strong><br><span style="font-size:.78rem;color:var(--t3)">Donadores de e⁻</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">Complejos I–IV</strong><br><span style="font-size:.78rem;color:var(--t3)">Acarreadores</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--p)">Gradiente H⁺</strong><br><span style="font-size:.78rem;color:var(--t3)">Energía almacenada</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--r)"><strong style="color:var(--r)">O₂ → H₂O</strong><br><span style="font-size:.78rem;color:var(--t3)">Aceptor final</span></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q01"><div class="qt">¿Cuál es el aceptor final de electrones en la CTE?</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>NAD⁺</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">B</div>FAD</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">C</div>Oxígeno molecular (O₂)</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>Coenzima Q</button>
+</div><div class="qf" id="fb-q01"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('acarreadores')">Acarreadores →</button></div></div>
+
+<!-- ===== ACARREADORES ===== -->
+<div class="sec" id="sec-acarreadores">
+<div class="cd"><div class="ch">🔗 Tipos de <span class="ac">Acarreadores</span> de Electrones <span class="pill pg">RA 2</span></div>
+<div class="ib"><div class="ibt">🔑 Principio general</div><p style="color:var(--t2)">Todos los componentes de la CTE son <strong>proteínas</strong>, con excepción de la <strong>Coenzima Q (ubiquinona)</strong>. Todos poseen grupos capaces de ser <strong>oxidados y reducidos reversiblemente</strong>. Algunos transfieren electrones y protones, otros solo electrones.</p></div>
+
+<div class="cg">
+<div class="cc" style="border-top:3px solid var(--g)"><h4 style="color:var(--g)">1. Flavoproteínas</h4><p style="color:var(--t2);font-size:.88rem">Proteínas que utilizan <strong>FAD o FMN</strong> como grupos prostéticos. Transfieren <strong>electrones y protones</strong>.<br><br><strong>Ejemplos:</strong><br>• NADH deshidrogenasa (Complejo I): <strong>FMN</strong> acepta e⁻ del NADH<br>• Succinato deshidrogenasa (Complejo II): <strong>FAD</strong> acepta e⁻ del succinato</p></div>
+<div class="cc" style="border-top:3px solid var(--b)"><h4 style="color:var(--b)">2. Proteínas Hierro-Azufre (Fe-S)</h4><p style="color:var(--t2);font-size:.88rem">Proteínas férricas <strong>sin grupo hemo</strong>. Poseen centros Fe-S (átomos de Fe y S asociados a cisteínas). Hay ~12 en la CTE.<br><br>El átomo de <strong>hierro</strong> alterna entre <strong>Fe³⁺ (oxidado)</strong> y <strong>Fe²⁺ (reducido)</strong>.<br><br>Transfieren <strong>solo electrones</strong>, no protones.</p></div>
+</div>
+
+<div class="cg">
+<div class="cc" style="border-top:3px solid var(--p)"><h4 style="color:var(--p)">3. Citocromos (b, c₁, c, a, a₃)</h4><p style="color:var(--t2);font-size:.88rem">Contienen un átomo de <strong>hierro en un grupo hemo</strong>. Transfieren electrones cambiando el estado de oxidación del Fe, <strong>de uno en uno</strong>.<br><br>• <strong>Cit. b, c₁, a, a₃</strong>: proteínas integrales (dentro de complejos)<br>• <strong>Cit. c</strong>: proteína periférica, hidrosoluble, <strong>difunde entre Complejo III y IV</strong></p></div>
+<div class="cc" style="border-top:3px solid var(--pk)"><h4 style="color:var(--pk)">4. Citocromo a₃ (con Cobre)</h4><p style="color:var(--t2);font-size:.88rem">El <strong>citocromo a₃</strong> posee un átomo de <strong>cobre</strong> asociado al grupo hemo, formando un <strong>centro bimetálico Fe-Cu</strong>.<br><br>Este centro mantiene al <strong>Complejo IV (citocromo c oxidasa)</strong> unido al <strong>O₂</strong> para la reducción final a agua.<br><br>Transfieren <strong>solo electrones</strong>.</p></div>
+</div>
+
+<div class="cc" style="border-top:3px solid var(--y);margin-top:18px"><h4 style="color:var(--y)">5. Coenzima Q (Ubiquinona)</h4><p style="color:var(--t2);font-size:.88rem">Es el <strong>único acarreador no proteico</strong> de la CTE. Es un lípido liposoluble (de ahí «ubiquinona» = ubicuo). <strong>No forma parte de ningún complejo fijo</strong>, se mueve libremente en la membrana.<br><br>Sirve como <strong>punto de colecta</strong> de electrones procedentes de Complejos I y II. Transfiere <strong>electrones Y protones</strong>. Se reduce en dos pasos sucesivos: ubiquinona → semiquinona (QH•) → ubiquinol (QH₂). <strong>Por cada electrón que acepta, toma un H⁺ de la matriz</strong>.</p></div>
+
+<table class="et"><thead><tr><th>Acarreador</th><th>Grupo prostético</th><th>Transfiere</th><th>Localización</th></tr></thead><tbody>
+<tr><td style="color:var(--g)"><strong>Flavoproteínas</strong></td><td>FMN o FAD</td><td>e⁻ + H⁺</td><td>Complejos I y II</td></tr>
+<tr><td style="color:var(--b)"><strong>Proteínas Fe-S</strong></td><td>Centros Fe-S</td><td>Solo e⁻</td><td>Complejos I, II, III</td></tr>
+<tr><td style="color:var(--p)"><strong>Citocromos</strong></td><td>Grupo hemo (Fe)</td><td>Solo e⁻ (uno en uno)</td><td>Complejos III, IV; Cit. c libre</td></tr>
+<tr><td style="color:var(--pk)"><strong>Cit. a₃ (Cu)</strong></td><td>Hemo + Cu</td><td>Solo e⁻</td><td>Complejo IV</td></tr>
+<tr><td style="color:var(--y)"><strong>Coenzima Q</strong></td><td>Quinona (no proteico)</td><td>e⁻ + H⁺</td><td>Libre en membrana</td></tr>
+</tbody></table>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q02"><div class="qt">¿Cuál es el único acarreador de la CTE que NO es una proteína?</div><div class="qo">
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">A</div>Citocromo c</button>
+<button class="qb" onclick="cq('q02',this,1)"><div class="ol">B</div>Coenzima Q (ubiquinona)</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">C</div>Proteínas Fe-S</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">D</div>FMN</button>
+</div><div class="qf" id="fb-q02"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('definicion')">← Definición CTE</button><button class="btn bp" onclick="go('potencial')">Potencial Redox →</button></div></div>
+
+<!-- ===== POTENCIAL REDOX ===== -->
+<div class="sec" id="sec-potencial">
+<div class="cd"><div class="ch">⚖️ Potencial Estándar de <span class="ac">Reducción</span> <span class="pill pg">RA 3</span> <span class="pill pb2">RA 4</span> <span class="pill py">RA 5</span></div>
+<div class="ib"><div class="ibt">🔑 Definición: Potencial Estándar de Reducción (E°')</div><p style="color:var(--t2)">Es la <strong>medida en voltios (V)</strong> de la afinidad que un compuesto tiene por electrones. Describe la <strong>facilidad con la que un compuesto gana electrones y se reduce</strong>. Los potenciales de reducción se determinan experimentalmente para cada par redox.</p></div>
+
+<div class="ib n"><div class="ibt">🔑 Definición: Par Redox</div><p style="color:var(--t2)">Un <strong>par redox</strong> son dos moléculas o iones que son <strong>interconvertibles</strong> mediante la ganancia o pérdida de electrones. Ejemplo: <strong>NAD⁺/NADH</strong> (E°' = −0.32 V) y <strong>O₂/H₂O</strong> (E°' = +0.82 V).</p></div>
+
+<div class="cg">
+<div class="cc" style="border-top:3px solid var(--r)"><h4 style="color:var(--r)">E°' Negativo</h4><p style="color:var(--t2);font-size:.88rem">La forma <strong>reducida</strong> del par tiene <strong>baja afinidad</strong> por sus electrones → es un <strong>buen donador</strong> de electrones.<br><br>Ejemplo: <strong>NAD⁺/NADH</strong> (E°' = −0.32 V)<br>NADH tiende a <strong>ceder</strong> electrones.</p></div>
+<div class="cc" style="border-top:3px solid var(--g)"><h4 style="color:var(--g)">E°' Positivo</h4><p style="color:var(--t2);font-size:.88rem">La forma <strong>oxidada</strong> del par tiene <strong>alta afinidad</strong> por electrones → es un <strong>buen aceptor</strong> de electrones.<br><br>Ejemplo: <strong>O₂/H₂O</strong> (E°' = +0.82 V)<br>O₂ tiende a <strong>captar</strong> electrones.</p></div>
+</div>
+
+<div class="ib go"><div class="ibt">💡 ¿Por qué importa la diferencia de E°'?</div><p style="color:var(--t2)">La diferencia entre el E°' del NADH (−0.32 V) y del O₂ (+0.82 V) es de <strong>ΔE°' = +1.14 V</strong>. Esta diferencia es la <strong>fuerza impulsora termodinámica</strong> de la CTE. La transferencia de electrones desde NADH hasta O₂ es <strong>espontánea y exergónica</strong> (ΔG°' = −220 kJ/mol por par de electrones).</p></div>
+
+<div class="cd" style="border-color:var(--p)"><div class="ch">🔄 ¿Por qué <span class="ac">múltiples pasos</span>? <span class="pill py">RA 5</span></div>
+<div class="ib or"><div class="ibt">⚠️ Pregunta clave</div><p style="color:var(--t2)">Si la transferencia de NADH → O₂ es espontánea, ¿por qué no ocurre en un solo paso?</p></div>
+<p style="color:var(--t2);margin:14px 0">Si los electrones pasaran <strong>directamente</strong> de NADH a O₂, se liberarían ~220 kJ/mol de golpe — demasiada energía para ser capturada eficientemente. La célula la perdería como <strong>calor</strong>.</p>
+<p style="color:var(--t2);margin:14px 0">En cambio, la CTE usa <strong>múltiples pares redox intermediarios</strong> con E°' crecientes. Cada paso libera una <strong>pequeña cantidad de energía</strong>, y en tres de esos pasos (Complejos I, III, IV) la energía es suficiente para <strong>bombear H⁺</strong> a través de la membrana.</p>
+
+<table class="et"><thead><tr><th>Par Redox</th><th>E°' (V)</th><th>Rol</th></tr></thead><tbody>
+<tr><td style="color:var(--r)"><strong>NAD⁺/NADH</strong></td><td>−0.32</td><td>Donador primario de e⁻</td></tr>
+<tr><td><strong>FMN/FMNH₂</strong></td><td>−0.30</td><td>Aceptor en Complejo I</td></tr>
+<tr><td><strong>Fe-S (oxidado/reducido)</strong></td><td>−0.27 a +0.28</td><td>Transferencia interna en complejos</td></tr>
+<tr><td style="color:var(--y)"><strong>CoQ/CoQH₂</strong></td><td>+0.04</td><td>Colector móvil</td></tr>
+<tr><td style="color:var(--p)"><strong>Cit. b (Fe³⁺/Fe²⁺)</strong></td><td>+0.07</td><td>Complejo III</td></tr>
+<tr><td style="color:var(--p)"><strong>Cit. c₁ (Fe³⁺/Fe²⁺)</strong></td><td>+0.22</td><td>Complejo III</td></tr>
+<tr><td style="color:var(--b)"><strong>Cit. c (Fe³⁺/Fe²⁺)</strong></td><td>+0.25</td><td>Acarreador móvil</td></tr>
+<tr><td style="color:var(--pk)"><strong>Cit. a (Fe³⁺/Fe²⁺)</strong></td><td>+0.29</td><td>Complejo IV</td></tr>
+<tr><td style="color:var(--pk)"><strong>Cit. a₃ (Fe³⁺/Fe²⁺)</strong></td><td>+0.55</td><td>Complejo IV (centro bimetálico)</td></tr>
+<tr><td style="color:var(--g)"><strong>O₂/H₂O</strong></td><td>+0.82</td><td>Aceptor final</td></tr>
+</tbody></table>
+
+<div class="ib"><div class="ibt">🏠 Analogía</div><p style="color:var(--t2)">Imagina una <strong>escalera energética</strong>: NADH está arriba (E°' negativo, mucha energía), O₂ está abajo (E°' positivo, baja energía). Los electrones «bajan» la escalera paso a paso. En cada escalón, una pequeña cantidad de energía se usa para <strong>bombear protones cuesta arriba</strong> a través de la membrana.</p></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q03"><div class="qt">¿Qué indica un potencial de reducción estándar (E°') muy negativo?</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">A</div>Que la forma reducida es un buen donador de electrones</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">B</div>Que la forma oxidada es un buen aceptor de electrones</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">C</div>Que la reacción requiere ATP</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>Que el compuesto no participa en reacciones redox</button>
+</div><div class="qf" id="fb-q03"></div></div>
+
+<div class="qq" id="q04"><div class="qt">¿Por qué la CTE usa múltiples pares redox en vez de transferir electrones directamente de NADH a O₂?</div><div class="qo">
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">A</div>Porque NADH no puede reaccionar con O₂</button>
+<button class="qb" onclick="cq('q04',this,1)"><div class="ol">B</div>Para liberar energía en pasos pequeños y capturarla eficientemente como gradiente de H⁺</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">C</div>Porque el O₂ es tóxico si acepta electrones directamente</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">D</div>Porque NADH y O₂ están en compartimentos diferentes</button>
+</div><div class="qf" id="fb-q04"></div></div>
+</div>
+<div class="sn"><button class="btn bs" onclick="go('acarreadores')">← Acarreadores</button><button class="btn bp" onclick="go('complejos')">Complejos →</button></div></div>
+
+<!-- ===== COMPLEJOS ===== -->
+<div class="sec" id="sec-complejos">
+<div class="cd"><div class="ch">🏗️ Complejos <span class="ac">Respiratorios</span> <span class="pill pg">RA 6</span></div>
+<div class="ib"><div class="ibt">🔑 Organización</div><p style="color:var(--t2)">Los acarreadores de la CTE se organizan en <strong>4 complejos multiproteicos</strong> embebidos en la membrana mitocondrial interna, más dos acarreadores móviles (CoQ y citocromo c). Los <strong>complejos I, III y IV</strong> bombean protones; el Complejo II no.</p></div>
+
+<div class="cd" style="border-color:var(--g)"><div class="ch">I. <span class="ac">NADH-CoQ Oxidorreductasa</span> (NADH deshidrogenasa)</div>
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--g)"><strong style="color:var(--g)">NADH</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--t2)">FMN</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">Fe-S</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--y)"><strong style="color:var(--y)">CoQ</strong></div>
+</div>
+<p style="color:var(--t2);font-size:.9rem">• Es el complejo más grande (~45 subunidades en mamíferos)<br>• Acepta electrones de NADH → los transfiere a CoQ<br>• <strong>Bombea 4 H⁺ por cada par de electrones</strong> (2 H⁺/e⁻)<br>• Usa FMN como grupo prostético y múltiples centros Fe-S</p></div>
+
+<div class="cd" style="border-color:var(--o)"><div class="ch">II. <span class="ac">Succinato-CoQ Deshidrogenasa</span> (Succinato DH)</div>
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--o)"><strong style="color:var(--o)">Succinato</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--t2)">FAD</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">Fe-S</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--y)"><strong style="color:var(--y)">CoQ</strong></div>
+</div>
+<p style="color:var(--t2);font-size:.9rem">• Es la <strong>misma enzima</strong> que el paso 6 del TCA (succinato → fumarato)<br>• Acepta electrones del succinato vía FAD → los transfiere a CoQ<br>• <strong>NO bombea protones</strong> (ΔE°' insuficiente)<br>• No se considera parte integral de la CTE por algunos autores</p></div>
+
+<div class="cd" style="border-color:var(--p)"><div class="ch">III. <span class="ac">CoQ-Citocromo c Oxidorreductasa</span></div>
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--y)"><strong style="color:var(--y)">CoQH₂</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--p)">Cit. b</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--p)">Cit. c₁</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--b)"><strong style="color:var(--b)">Cit. c</strong></div>
+</div>
+<p style="color:var(--t2);font-size:.9rem">• Acepta electrones de CoQH₂ → los transfiere a citocromo c<br>• Contiene centros Fe-S y citocromos b y c₁<br>• <strong>Bombea ~4 H⁺ por par de electrones</strong> (mediante el Ciclo Q)<br>• Transporta electrones de uno en uno</p></div>
+
+<div class="cd" style="border-color:var(--pk)"><div class="ch">IV. <span class="ac">Citocromo c Oxidasa</span></div>
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--b)"><strong style="color:var(--b)">Cit. c</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--pk)">Cit. a</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--pk)">Cit. a₃-Cu</strong></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--r)"><strong style="color:var(--r)">O₂ → H₂O</strong></div>
+</div>
+<p style="color:var(--t2);font-size:.9rem">• Transfiere electrones del citocromo c al <strong>O₂</strong> (aceptor final)<br>• Contiene el centro bimetálico <strong>Fe-Cu</strong> que une O₂<br>• <strong>Bombea 2 H⁺ por par de electrones</strong> (1 H⁺/e⁻)<br>• Consume ~90% del O₂ celular<br>• 4 e⁻ + 4 H⁺ + O₂ → 2 H₂O</p></div>
+
+<table class="et"><thead><tr><th>Complejo</th><th>Nombre</th><th>H⁺ bombeados / par e⁻</th><th>Función</th></tr></thead><tbody>
+<tr><td style="color:var(--g)"><strong>I</strong></td><td>NADH-CoQ oxidorreductasa</td><td><strong>4</strong></td><td>NADH → CoQ</td></tr>
+<tr><td style="color:var(--o)"><strong>II</strong></td><td>Succinato-CoQ DH</td><td><strong>0</strong></td><td>Succinato → CoQ</td></tr>
+<tr><td style="color:var(--p)"><strong>III</strong></td><td>CoQ-Cit. c oxidorreductasa</td><td><strong>4</strong> (Ciclo Q)</td><td>CoQ → Cit. c</td></tr>
+<tr><td style="color:var(--pk)"><strong>IV</strong></td><td>Citocromo c oxidasa</td><td><strong>2</strong></td><td>Cit. c → O₂</td></tr>
+</tbody></table>
+
+<div class="ib go"><div class="ibt">🧬 Respirosomas (Supercomplejos)</div><p style="color:var(--t2)">Los <strong>Complejos I, III y IV</strong> se organizan en <strong>supercomplejos</strong> llamados <strong>respirosomas</strong> en la membrana de las crestas. Su formación depende de la <strong>cardiolipina</strong>, un fosfolípido exclusivo de la membrana mitocondrial interna que actúa como «pegamento» entre las estructuras proteicas. Los respirosomas aumentan la <strong>eficiencia</strong> del transporte de electrones al minimizar la distancia de difusión de CoQ y citocromo c.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q05"><div class="qt">¿Cuál complejo respiratorio NO bombea protones?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">A</div>Complejo I</button>
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">B</div>Complejo II</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">C</div>Complejo III</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>Complejo IV</button>
+</div><div class="qf" id="fb-q05"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('potencial')">← Potencial Redox</button><button class="btn bp" onclick="go('cicloq')">Ciclo Q →</button></div></div>
+
+<!-- ===== CICLO Q ===== -->
+<div class="sec" id="sec-cicloq">
+<div class="cd"><div class="ch">🔄 El <span class="ac">Ciclo Q</span> <span class="pill pg">RA 7</span></div>
+<div class="ib"><div class="ibt">🔑 ¿Qué es el Ciclo Q?</div><p style="color:var(--t2)">El <strong>Ciclo Q</strong> es un mecanismo del <strong>Complejo III</strong> que permite <strong>maximizar el bombeo de protones</strong> por cada par de electrones transferido desde CoQH₂ hasta citocromo c.</p></div>
+
+<div class="ib n"><div class="ibt">📊 El problema</div><p style="color:var(--t2)">CoQH₂ (ubiquinol) llega al Complejo III cargando <strong>2 electrones</strong>. Pero el citocromo c solo acepta <strong>1 electrón</strong> a la vez. ¿Qué pasa con el segundo electrón?</p></div>
+
+<div class="ib go"><div class="ibt">💡 La solución: Ciclo Q</div><p style="color:var(--t2)">Cuando CoQH₂ dona sus 2 electrones al Complejo III:<br><br>
+<strong>1er electrón →</strong> sigue la ruta normal: pasa por centro Fe-S → citocromo c₁ → <strong>citocromo c</strong><br><br>
+<strong>2do electrón →</strong> es <strong>reciclado</strong> al <strong>pool de ubiquinona</strong> vía citocromo b, reduciendo una molécula de CoQ a <strong>semiquinona (QH•)</strong>.<br><br>
+En un <strong>segundo ciclo</strong>, otra CoQH₂ dona sus electrones: uno va al citocromo c y el otro completa la reducción de la semiquinona a <strong>CoQH₂</strong>.<br><br>
+<strong>Resultado neto:</strong> Por cada 2 CoQH₂ oxidadas, se transfieren 2 e⁻ al citocromo c, se regenera 1 CoQH₂, y se bombean <strong>4 H⁺ netos</strong> al espacio intermembrana.</p></div>
+
+<div class="bal-box"><h3>Balance Neto del Ciclo Q (por par de e⁻ al Cit. c)</h3>
+<div class="bal-row"><div class="bal-item" style="color:var(--y)">1 CoQH₂ oxidada neta</div><div class="bal-plus">→</div><div class="bal-item" style="color:var(--b)">1 Cit. c reducido</div><div class="bal-plus">+</div><div class="bal-item" style="color:var(--g)">4 H⁺ al EIM</div></div>
+</div>
+
+<div class="ib w"><div class="ibt">⚠️ ¿Por qué importa para el rendimiento de ATP?</div><p style="color:var(--t2)">Sin el Ciclo Q, el Complejo III solo bombearía <strong>2 H⁺</strong> por par de electrones. Con el Ciclo Q, bombea <strong>4 H⁺</strong>. Esto significa <strong>más protones en el gradiente → más ATP</strong> sintetizado por la ATP sintasa. El Ciclo Q es responsable de ~<strong>33% adicional</strong> del bombeo de H⁺ total de la CTE partiendo de NADH.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q06"><div class="qt">¿Cuál es el propósito principal del Ciclo Q?</div><div class="qo">
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">A</div>Producir NADH adicional</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">B</div>Transferir electrones directamente al O₂</button>
+<button class="qb" onclick="cq('q06',this,1)"><div class="ol">C</div>Maximizar el bombeo de H⁺ reciclando un electrón al pool de CoQ</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">D</div>Sintetizar CoQ nueva</button>
+</div><div class="qf" id="fb-q06"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('complejos')">← Complejos</button><button class="btn bp" onclick="go('rendimiento')">Rendimiento ATP →</button></div></div>
+
+<!-- ===== RENDIMIENTO ATP ===== -->
+<div class="sec" id="sec-rendimiento">
+<div class="cd"><div class="ch">🔢 Rendimiento de <span class="ac">ATP</span> <span class="pill pg">RA 8</span></div>
+<div class="ib"><div class="ibt">🔑 Cálculo de H⁺ bombeados</div><p style="color:var(--t2)">Se necesitan aproximadamente <strong>3–4 H⁺</strong> que regresen a la matriz por la ATP sintasa para sintetizar <strong>1 ATP</strong>. Con ~3.3 H⁺/ATP como promedio moderno:</p></div>
+
+<div class="cd" style="border-color:var(--g)"><div class="ch">NADH → <span class="ac">~2.5 ATP</span></div>
+<table class="et"><thead><tr><th>Paso</th><th>H⁺ bombeados</th></tr></thead><tbody>
+<tr><td>Complejo I (NADH → CoQ)</td><td><strong>4 H⁺</strong></td></tr>
+<tr><td>Complejo III (CoQ → Cit. c) con Ciclo Q</td><td><strong>4 H⁺</strong></td></tr>
+<tr><td>Complejo IV (Cit. c → O₂)</td><td><strong>2 H⁺</strong></td></tr>
+<tr style="background:rgba(0,212,170,.08)"><td><strong>Total H⁺ bombeados</strong></td><td><strong>10 H⁺</strong></td></tr>
+<tr style="background:rgba(0,212,170,.12)"><td><strong>ATP sintetizados (10 ÷ ~4*)</strong></td><td><strong>~2.5 ATP</strong></td></tr>
+</tbody></table>
+<p style="color:var(--t3);font-size:.8rem;margin-top:8px">*Se usa ~4 H⁺/ATP considerando el costo del transporte de ATP, ADP y Pi a través de la membrana. Valores clásicos: 3 ATP/NADH.</p>
+</div>
+
+<div class="cd" style="border-color:var(--o)"><div class="ch">FADH₂ → <span class="ac">~1.5 ATP</span></div>
+<table class="et"><thead><tr><th>Paso</th><th>H⁺ bombeados</th></tr></thead><tbody>
+<tr><td>Complejo II (Succinato → CoQ)</td><td><strong>0 H⁺</strong> (no bombea)</td></tr>
+<tr><td>Complejo III (CoQ → Cit. c) con Ciclo Q</td><td><strong>4 H⁺</strong></td></tr>
+<tr><td>Complejo IV (Cit. c → O₂)</td><td><strong>2 H⁺</strong></td></tr>
+<tr style="background:rgba(249,115,22,.08)"><td><strong>Total H⁺ bombeados</strong></td><td><strong>6 H⁺</strong></td></tr>
+<tr style="background:rgba(249,115,22,.12)"><td><strong>ATP sintetizados (6 ÷ ~4)</strong></td><td><strong>~1.5 ATP</strong></td></tr>
+</tbody></table>
+</div>
+
+<div class="ib w"><div class="ibt">⚠️ ¿Por qué FADH₂ rinde menos que NADH?</div><p style="color:var(--t2)">FADH₂ dona sus electrones al <strong>Complejo II</strong>, que <strong>no bombea protones</strong>. Los electrones entran a la CTE «más abajo», saltándose el Complejo I. Por eso se bombean solo 6 H⁺ en vez de 10, y el rendimiento es <strong>~1.5 ATP</strong> en lugar de ~2.5 ATP.</p></div>
+
+<div class="bal-box"><h3>Resumen Comparativo</h3>
+<div class="bal-row"><div class="bal-item" style="color:var(--g)">1 NADH → 10 H⁺ → ~2.5 ATP</div></div>
+<div class="bal-row"><div class="bal-item" style="color:var(--o)">1 FADH₂ → 6 H⁺ → ~1.5 ATP</div></div>
+</div>
+
+<div class="ib n"><div class="ibt">📊 Valores clásicos vs. modernos</div><p style="color:var(--t2)">Los textos clásicos reportan <strong>3 ATP/NADH</strong> y <strong>2 ATP/FADH₂</strong>. Los valores modernos (~2.5 y ~1.5) consideran el costo energético de transportar ATP/ADP/Pi y la estequiometría real de la ATP sintasa (que requiere ~10 subunidades c para una vuelta completa que produce 3 ATP). Ambos valores son aceptados.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q07"><div class="qt">¿Cuántos H⁺ se bombean al espacio intermembrana por cada NADH oxidado?</div><div class="qo">
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">A</div>4 H⁺</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">B</div>6 H⁺</button>
+<button class="qb" onclick="cq('q07',this,1)"><div class="ol">C</div>10 H⁺</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">D</div>12 H⁺</button>
+</div><div class="qf" id="fb-q07"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('cicloq')">← Ciclo Q</button><button class="btn bp" onclick="go('agua')">Rendimiento H₂O →</button></div></div>
+
+<!-- ===== AGUA ===== -->
+<div class="sec" id="sec-agua">
+<div class="cd"><div class="ch">💧 Rendimiento de <span class="ac">Agua</span> en la CTE <span class="pill pg">RA 9</span></div>
+<div class="ib"><div class="ibt">🔑 Formación de agua</div><p style="color:var(--t2)">El agua es el <strong>producto final</strong> de la CTE. Se forma en el <strong>Complejo IV</strong> cuando el O₂ acepta los electrones y se combina con H⁺ de la matriz.</p></div>
+
+<div class="ib n"><div class="ibt">📊 Reacción en Complejo IV</div><p style="color:var(--t2)">La reacción global del Complejo IV es:<br><br><strong>4 e⁻ + 4 H⁺ (matriz) + O₂ → 2 H₂O</strong><br><br>Es decir, se necesitan <strong>4 electrones</strong> (provenientes de 4 citocromo c reducidos) para reducir completamente <strong>1 molécula de O₂</strong> a <strong>2 moléculas de H₂O</strong>.</p></div>
+
+<div class="cd" style="border-color:var(--g)"><div class="ch">Cálculo: <span class="ac">1 NADH</span></div>
+<p style="color:var(--t2)">Cada NADH dona <strong>2 electrones</strong> a la CTE.</p>
+<p style="color:var(--t2)">2 electrones reducen <strong>½ O₂</strong> → producen <strong>1 H₂O</strong></p>
+<div class="bal-box"><h3>1 NADH → 1 H₂O</h3></div>
+</div>
+
+<div class="cd" style="border-color:var(--o)"><div class="ch">Cálculo: <span class="ac">1 FADH₂</span></div>
+<p style="color:var(--t2)">Cada FADH₂ también dona <strong>2 electrones</strong> a la CTE (vía Complejo II → CoQ).</p>
+<p style="color:var(--t2)">2 electrones reducen <strong>½ O₂</strong> → producen <strong>1 H₂O</strong></p>
+<div class="bal-box"><h3>1 FADH₂ → 1 H₂O</h3></div>
+</div>
+
+<div class="cd" style="border-color:var(--p)"><div class="ch">Cálculo: Oxidación completa de <span class="ac">1 Glucosa</span></div>
+<p style="color:var(--t2)">La oxidación completa de 1 glucosa genera 10 NADH + 2 FADH₂:</p>
+<table class="et"><thead><tr><th>Coenzima</th><th>Cantidad</th><th>H₂O producidas</th></tr></thead><tbody>
+<tr><td style="color:var(--g)"><strong>NADH</strong></td><td>10</td><td>10 × 1 = <strong>10 H₂O</strong></td></tr>
+<tr><td style="color:var(--o)"><strong>FADH₂</strong></td><td>2</td><td>2 × 1 = <strong>2 H₂O</strong></td></tr>
+<tr style="background:rgba(167,139,250,.08)"><td><strong>Total</strong></td><td><strong>12 coenzimas</strong></td><td><strong>12 H₂O</strong></td></tr>
+</tbody></table>
+<div class="ib go"><div class="ibt">💡 Dato clínico: Agua metabólica</div><p style="color:var(--t2)">El agua producida en la CTE se llama <strong>agua metabólica</strong>. Es especialmente importante en animales del desierto (como el camello o la rata canguro) que dependen de la oxidación de grasas almacenadas para obtener agua. En humanos, la oxidación completa de nutrientes genera ~<strong>300-400 mL/día</strong> de agua metabólica.</p></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div><div class="qq" id="q08"><div class="qt">¿Cuántas moléculas de H₂O se producen en la CTE con 2 NADH y 2 FADH₂?</div><div class="qo">
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">A</div>2 H₂O</button>
+<button class="qb" onclick="cq('q08',this,1)"><div class="ol">B</div>4 H₂O</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">C</div>6 H₂O</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">D</div>8 H₂O</button>
+</div><div class="qf" id="fb-q08"></div></div></div>
+<div class="sn"><button class="btn bs" onclick="go('rendimiento')">← Rendimiento ATP</button><button class="btn bp" onclick="go('clinica')">Clínica →</button></div></div>
+
+<!-- ===== CLÍNICA ===== -->
+<div class="sec" id="sec-clinica">
+<div class="cd"><div class="ch">🏥 Correlación <span class="ac">Clínica</span></div>
+<p style="color:var(--t2)">Casos clínicos que integran los conceptos de la CTE.</p></div>
+
+<div class="cl"><div class="clb">🏥 Caso 1</div><div class="clt">Intoxicación por Cianuro</div>
+<div class="clp">Trabajador de 45 años en planta de galvanoplastia presenta <strong>disnea aguda, cefalea, confusión, acidosis láctica severa</strong> y coloración rojo cereza de la piel. Saturación de O₂ por pulsioximetría: 98% (falsa normalidad). pH arterial: 7.1.<br><br><strong>Fisiopatología:</strong> El cianuro (CN⁻) se une al <strong>hierro férrico (Fe³⁺) del citocromo a₃</strong> en el Complejo IV, bloqueando la transferencia final de electrones al O₂. Toda la CTE se detiene. Las células no pueden utilizar O₂ (histotoxia) → la respiración aeróbica cesa → dependencia total de glucólisis → <strong>acidosis láctica masiva</strong>. La sangre venosa permanece oxigenada (las células no consumen O₂), dando la coloración rojo cereza.<br><br><strong>Tratamiento:</strong> Kit antídoto de cianuro: <strong>hidroxocobalamina</strong> (quelante directo) o nitrito de amilo + nitrito de sodio (generan metahemoglobina que compite por el CN⁻) + tiosulfato de sodio (convierte CN⁻ en tiocianato excretable).</div>
+<div class="qq" id="qk1" style="background:0;border:0;padding:0"><div class="qt">¿En qué complejo actúa el cianuro como inhibidor?</div><div class="qo">
+<button class="qb" onclick="ck('qk1',this,0)"><div class="ol">A</div>Complejo I</button>
+<button class="qb" onclick="ck('qk1',this,0)"><div class="ol">B</div>Complejo II</button>
+<button class="qb" onclick="ck('qk1',this,0)"><div class="ol">C</div>Complejo III</button>
+<button class="qb" onclick="ck('qk1',this,1)"><div class="ol">D</div>Complejo IV (citocromo a₃)</button>
+</div><div class="qf" id="fb-qk1"></div></div></div>
+
+<div class="cl"><div class="clb">🏥 Caso 2</div><div class="clt">Intoxicación por Rotenona</div>
+<div class="clp">Agricultor de 52 años presenta <strong>vómitos, temblor, bradicardia</strong> tras exposición a pesticida orgánico (rotenona). Desarrolla <strong>acidosis láctica</strong> y depresión respiratoria.<br><br><strong>Fisiopatología:</strong> La <strong>rotenona</strong> inhibe el <strong>Complejo I</strong> (NADH-CoQ oxidorreductasa), bloqueando la transferencia de electrones desde las proteínas Fe-S a CoQ. Esto detiene la oxidación de NADH mitocondrial. NADH se acumula, el TCA se inhibe (por falta de NAD⁺), y la célula recurre a glucólisis anaerobia → lactato.<br><br><strong>Nota epidemiológica:</strong> Estudios han asociado la exposición crónica a rotenona con <strong>mayor riesgo de enfermedad de Parkinson</strong>, por daño oxidativo selectivo a neuronas dopaminérgicas de la sustancia negra.</div>
+<div class="qq" id="qk2" style="background:0;border:0;padding:0"><div class="qt">¿Por qué la inhibición del Complejo I causa acidosis láctica?</div><div class="qo">
+<button class="qb" onclick="ck('qk2',this,0)"><div class="ol">A</div>Porque el Complejo I produce lactato directamente</button>
+<button class="qb" onclick="ck('qk2',this,1)"><div class="ol">B</div>Porque al bloquearse la CTE, la célula depende de glucólisis anaerobia con producción de lactato</button>
+<button class="qb" onclick="ck('qk2',this,0)"><div class="ol">C</div>Porque la rotenona activa la lactato deshidrogenasa</button>
+<button class="qb" onclick="ck('qk2',this,0)"><div class="ol">D</div>Porque el Complejo I normalmente degrada lactato</button>
+</div><div class="qf" id="fb-qk2"></div></div></div>
+
+<div class="cl"><div class="clb">🏥 Caso 3</div><div class="clt">Neuropatía Óptica Hereditaria de Leber (LHON)</div>
+<div class="clp">Hombre de 22 años presenta <strong>pérdida bilateral progresiva de la visión central</strong> en semanas. Fondo de ojo: microangiopatía peripapilar y pseudoedema de disco. Antecedente: tío materno con ceguera. Análisis genético: mutación <strong>G11778A</strong> en ADNmt.<br><br><strong>Fisiopatología:</strong> La mutación afecta la subunidad <strong>ND4 del Complejo I</strong>, reduciendo la eficiencia del transporte de electrones. Las <strong>células ganglionares de la retina</strong> son particularmente vulnerables por su alta demanda energética y largo axón no mielinizado. La disfunción del Complejo I también aumenta la producción de <strong>ROS (especies reactivas de oxígeno)</strong>, causando daño oxidativo.<br><br><strong>Herencia materna:</strong> Solo la madre transmite ADNmt. La penetrancia es variable por heteroplasmia. Los varones son más afectados (posible efecto protector de estrógenos).<br><br><strong>Tratamiento:</strong> <strong>Idebenona</strong> (análogo sintético de CoQ) es el único fármaco aprobado en algunas jurisdicciones. Terapia génica intravítrea en investigación.</div>
+<div class="qq" id="qk3" style="background:0;border:0;padding:0"><div class="qt">¿Por qué las células ganglionares de la retina son especialmente vulnerables en LHON?</div><div class="qo">
+<button class="qb" onclick="ck('qk3',this,1)"><div class="ol">A</div>Por su alta demanda energética y susceptibilidad al daño por ROS ante disfunción del Complejo I</button>
+<button class="qb" onclick="ck('qk3',this,0)"><div class="ol">B</div>Porque carecen de mitocondrias</button>
+<button class="qb" onclick="ck('qk3',this,0)"><div class="ol">C</div>Porque dependen exclusivamente de glucólisis</button>
+<button class="qb" onclick="ck('qk3',this,0)"><div class="ol">D</div>Porque el citocromo c no se expresa en la retina</button>
+</div><div class="qf" id="fb-qk3"></div></div></div>
+
+<div class="cl"><div class="clb">🏥 Caso 4</div><div class="clt">Síndrome de Barth</div>
+<div class="clp">Lactante masculino de 6 meses con <strong>miocardiopatía dilatada, neutropenia cíclica y retraso del crecimiento</strong>. Biopsia muscular: mitocondrias con crestas anormales. Análisis lipidómico: niveles reducidos de <strong>cardiolipina</strong>.<br><br><strong>Fisiopatología:</strong> Mutación en el gen <strong>TAZ</strong> (tafazzina), enzima que remodelan la cardiolipina en la membrana mitocondrial interna. Sin cardiolipina funcional, los <strong>respirosomas (supercomplejos I-III-IV)</strong> no se ensamblan correctamente → transporte de electrones ineficiente → déficit energético en tejidos de alta demanda (corazón, músculo, neutrófilos).<br><br><strong>Herencia:</strong> Ligada al X (predomina en varones).</div>
+<div class="qq" id="qk4" style="background:0;border:0;padding:0"><div class="qt">¿Cuál es la función de la cardiolipina en relación a la CTE?</div><div class="qo">
+<button class="qb" onclick="ck('qk4',this,0)"><div class="ol">A</div>Transportar electrones del Complejo I al III</button>
+<button class="qb" onclick="ck('qk4',this,0)"><div class="ol">B</div>Sintetizar CoQ</button>
+<button class="qb" onclick="ck('qk4',this,1)"><div class="ol">C</div>Actuar como «pegamento» para el ensamblaje de respirosomas (supercomplejos)</button>
+<button class="qb" onclick="ck('qk4',this,0)"><div class="ol">D</div>Servir de aceptor de protones en el Complejo IV</button>
+</div><div class="qf" id="fb-qk4"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('agua')">← Rendimiento H₂O</button><button class="btn bp" onclick="go('glosario')">Glosario →</button></div></div>
+
+<!-- ===== GLOSARIO ===== -->
+<div class="sec" id="sec-glosario"><div class="cd"><div class="ch">📖 Glosario <span class="ac">Interactivo</span></div><p style="color:var(--t2)">Clic para ver definición:</p></div><div class="fg" id="fg"></div>
+<div class="sn"><button class="btn bs" onclick="go('clinica')">← Clínica</button><button class="btn bp" onclick="go('evaluacion')">Evaluación →</button></div></div>
+
+<!-- ===== EVALUACIÓN ===== -->
+<div class="sec" id="sec-evaluacion"><div class="cd"><div class="ch">✅ Evaluación <span class="ac">Final</span> — Parte 1</div><p style="color:var(--t2)">9 preguntas — una por cada Resultado de Aprendizaje (RA 1–9).</p></div>
+<div id="eq"></div>
+<div style="text-align:center;margin-top:20px"><button class="btn bp" id="seb" onclick="se()" style="display:none">Calcular puntuación →</button></div>
+<div class="sd" id="sdd" style="display:none"><div class="snm" id="sn2"></div><div class="sbl" id="sm2"></div><div class="sbr"><div class="sbf" id="sbf2" style="width:0%;background:var(--grad)"></div></div>
+<div style="margin-top:16px"><button class="btn bs" onclick="iev()">🔄 Reintentar</button></div></div>
+<div class="sn"><button class="btn bs" onclick="go('glosario')">← Glosario</button><span style="color:var(--t3);font-size:.85rem">Continúa en Parte 2: Fosforilación Oxidativa →</span></div></div>
+
+</div><!-- end mc -->
+
+<script>
+var secs=['inicio','definicion','acarreadores','potencial','complejos','cicloq','rendimiento','agua','clinica','glosario','evaluacion'];
+var cs='inicio';
+function go(id){document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('a')});var t=document.getElementById('sec-'+id);if(t)t.classList.add('a');document.querySelectorAll('.nl button').forEach(function(b){b.classList.toggle('a',b.getAttribute('data-s')===id)});cs=id;up();window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.nl button').forEach(function(b){b.addEventListener('click',function(){go(this.getAttribute('data-s'))});});
+function up(){var i=secs.indexOf(cs);document.getElementById('pf').style.width=(i/(secs.length-1)*100)+'%';}
+function cq(qid,btn,ci){var c=document.getElementById(qid),os=c.querySelectorAll('.qb'),done=false;os.forEach(function(o){if(o.classList.contains('ok')||o.classList.contains('no'))done=true;});if(done)return;os.forEach(function(o){o.classList.add('dis');});btn.classList.add(ci?'ok':'no');var fb=document.getElementById('fb-'+qid);fb.classList.add('sh');fb.classList.add(ci?'cf':'if');fb.textContent=ci?'\u2705 \u00a1Correcto! Excelente comprensi\u00f3n.':'\u274c Incorrecto. Revisa el material de esta secci\u00f3n.';}
+
+var cfb={
+qk1:{c:3,ok:'\u2705 Correcto. El cianuro se une al Fe\u00b3\u207a del citocromo a\u2083 en el Complejo IV, bloqueando la reducci\u00f3n del O\u2082 a H\u2082O.',no:'\u274c Incorrecto. El cianuro act\u00faa espec\u00edficamente en el Complejo IV (citocromo a\u2083), donde el centro bimet\u00e1lico Fe-Cu reduce O\u2082.'},
+qk2:{c:1,ok:'\u2705 Correcto. Al bloquearse la CTE, no se reoxida NADH, el TCA se detiene, y la c\u00e9lula recurre a glucolisis anaerobia produciendo lactato.',no:'\u274c Incorrecto. La acidosis l\u00e1ctica se produce porque la c\u00e9lula, sin CTE funcional, depende de glucolisis anaerobia.'},
+qk3:{c:0,ok:'\u2705 Correcto. Las c\u00e9lulas ganglionares retinianas tienen alta demanda energ\u00e9tica y sus largos axones no mielinizados las hacen vulnerables al d\u00e9ficit del Complejo I y al da\u00f1o por ROS.',no:'\u274c Incorrecto. La vulnerabilidad se debe a la alta demanda energ\u00e9tica y susceptibilidad al estr\u00e9s oxidativo.'},
+qk4:{c:2,ok:'\u2705 Correcto. La cardiolipina es esencial para el ensamblaje de respirosomas (supercomplejos I-III-IV), aumentando la eficiencia de la CTE.',no:'\u274c Incorrecto. La cardiolipina act\u00faa como pegamento molecular para ensamblar los respirosomas.'}
+};
+function ck(qid,btn,oi){var c=document.getElementById(qid),os=c.querySelectorAll('.qb'),done=false;os.forEach(function(o){if(o.classList.contains('ok')||o.classList.contains('no'))done=true;});if(done)return;var d=cfb[qid],ic=oi===d.c;os.forEach(function(o){o.classList.add('dis');});btn.classList.add(ic?'ok':'no');var fb=document.getElementById('fb-'+qid);fb.classList.add('sh');fb.classList.add(ic?'cf':'if');fb.innerHTML=ic?d.ok:d.no;}
+
+var gt=[
+{t:'CTE',d:'Cadena de Transporte de Electrones. Serie de acarreadores en la membrana mitocondrial interna que transfieren e\u207b desde NADH/FADH\u2082 hasta O\u2082.'},
+{t:'NADH',d:'Nicotinamida adenina dinucle\u00f3tido reducido. Principal donador de electrones a la CTE. Cada NADH \u2248 2.5 ATP.'},
+{t:'FADH\u2082',d:'Flav\u00edn adenina dinucle\u00f3tido reducido. Dona e\u207b al Complejo II. Cada FADH\u2082 \u2248 1.5 ATP.'},
+{t:'Flavoprote\u00ednas',d:'Prote\u00ednas con FMN o FAD como grupo prost\u00e9tico. Transfieren e\u207b y H\u207a. Presentes en Complejos I y II.'},
+{t:'Prote\u00ednas Fe-S',d:'Prote\u00ednas f\u00e9rricas sin hemo. El Fe alterna entre Fe\u00b3\u207a/Fe\u00b2\u207a. Solo transfieren e\u207b.'},
+{t:'Citocromos',d:'Prote\u00ednas con grupo hemo (Fe). Transfieren e\u207b de uno en uno. Tipos: b, c\u2081, c, a, a\u2083.'},
+{t:'Citocromo c',d:'Prote\u00edna perif\u00e9rica hidrosoluble. Difunde entre Complejo III y IV. Acarreador m\u00f3vil.'},
+{t:'Coenzima Q',d:'\u00danico acarreador no prote\u00edco. L\u00edpido m\u00f3vil en la membrana. Colecta e\u207b de Complejos I y II. Transfiere e\u207b y H\u207a.'},
+{t:'Par Redox',d:'Dos formas de un compuesto interconvertibles por ganancia/p\u00e9rdida de e\u207b. Ej: NAD\u207a/NADH, O\u2082/H\u2082O.'},
+{t:'E\u00b0\u2019 (Potencial de Reducci\u00f3n)',d:'Medida en voltios de la afinidad por e\u207b. Valor negativo = buen donador; positivo = buen aceptor.'},
+{t:'Complejo I',d:'NADH-CoQ oxidorreductasa. Acepta e\u207b de NADH, los transfiere a CoQ. Bombea 4 H\u207a/par e\u207b.'},
+{t:'Complejo II',d:'Succinato-CoQ DH. Misma enzima que TCA paso 6. NO bombea H\u207a.'},
+{t:'Complejo III',d:'CoQ-Cit. c oxidorreductasa. Incluye Ciclo Q. Bombea 4 H\u207a/par e\u207b.'},
+{t:'Complejo IV',d:'Citocromo c oxidasa. Centro bimet\u00e1lico Fe-Cu. Reduce O\u2082 a H\u2082O. Bombea 2 H\u207a/par e\u207b.'},
+{t:'Ciclo Q',d:'Mecanismo en Complejo III que recicla 1 e\u207b al pool de CoQ, maximizando el bombeo de H\u207a.'},
+{t:'Respirosomas',d:'Supercomplejos de Complejos I+III+IV. Ensamblados por cardiolipina. Aumentan eficiencia.'},
+{t:'Cardiolipina',d:'Fosfol\u00edpido exclusivo de membrana mitocondrial interna. Esencial para ensamblaje de respirosomas.'},
+{t:'Agua Metab\u00f3lica',d:'H\u2082O producida en la CTE. 1 NADH o 1 FADH\u2082 = 1 H\u2082O. \u223c12 H\u2082O por glucosa.'},
+{t:'Cianuro',d:'Inhibidor del Complejo IV. Se une al Fe\u00b3\u207a del cit. a\u2083, bloqueando la reducci\u00f3n de O\u2082.'},
+{t:'Rotenona',d:'Inhibidor del Complejo I. Bloquea transferencia de e\u207b de Fe-S a CoQ. Pesticida asociado a Parkinson.'}
+];
+function ifc(){var g=document.getElementById('fg');g.innerHTML='';gt.forEach(function(it){var c=document.createElement('div');c.className='fc';c.onclick=function(){this.classList.toggle('fl');};c.innerHTML='<div class="ft">'+it.t+'</div><div class="fd">'+it.d+'</div><div class="fh">Clic para ver</div>';g.appendChild(c);});}
+
+var evq=[
+{q:'\u00bfQu\u00e9 define a la Cadena de Transporte de Electrones?',o:['S\u00edntesis directa de ATP a partir de NADH','Transferencia escalonada de e\u207b desde NADH/FADH\u2082 hasta O\u2082 a trav\u00e9s de acarreadores en la membrana interna','Degradaci\u00f3n de glucosa a CO\u2082','Transporte de O\u2082 desde los pulmones a los tejidos'],c:1,f:'La CTE es la transferencia secuencial de electrones desde coenzimas reducidas hasta O\u2082, mediante acarreadores en la membrana mitocondrial interna. [RA 1]'},
+{q:'\u00bfCu\u00e1l acarreador transfiere electrones Y protones, y no es una prote\u00edna?',o:['Citocromo c','Prote\u00ednas Fe-S','FMN','Coenzima Q (ubiquinona)'],c:3,f:'La CoQ es el \u00fanico acarreador no proteico. Es un l\u00edpido m\u00f3vil que transfiere tanto e\u207b como H\u207a. [RA 2]'},
+{q:'\u00bfQu\u00e9 representa el potencial est\u00e1ndar de reducci\u00f3n (E\u00b0\')?',o:['La velocidad de una reacci\u00f3n','La afinidad de un compuesto por electrones, medida en voltios','La cantidad de ATP producida','La temperatura \u00f3ptima de una enzima'],c:1,f:'E\u00b0\' mide la tendencia de un par redox a ganar electrones. Valores negativos = buen donador; positivos = buen aceptor. [RA 3]'},
+{q:'\u00bfQu\u00e9 es un par redox?',o:['Dos enzimas que trabajan juntas','Dos formas de un compuesto interconvertibles por ganancia o p\u00e9rdida de electrones','Un complejo de dos prote\u00ednas','Dos mol\u00e9culas de ATP'],c:1,f:'Un par redox son la forma oxidada y reducida de un compuesto, interconvertibles por transferencia de e\u207b. Ej: NAD\u207a/NADH. [RA 4]'},
+{q:'\u00bfPor qu\u00e9 la CTE necesita m\u00faltiples pasos redox intermediarios?',o:['Porque NADH no puede reaccionar con O\u2082','Para liberar la energ\u00eda en peque\u00f1as cantidades capturables como gradiente de H\u207a','Porque cada complejo necesita un cofactor diferente','Porque el O\u2082 es inestable'],c:1,f:'M\u00faltiples pasos permiten liberar energ\u00eda gradualmente. En 3 de esos pasos (I, III, IV), la energ\u00eda se captura bombeando H\u207a. [RA 5]'},
+{q:'\u00bfQu\u00e9 lípido es esencial para el ensamblaje de respirosomas?',o:['Colesterol','Fosfatidilcolina','Cardiolipina','Esfingomielina'],c:2,f:'La cardiolipina, fosfol\u00edpido exclusivo de la membrana mitocondrial interna, act\u00faa como pegamento para los supercomplejos I-III-IV. [RA 6]'},
+{q:'\u00bfCu\u00e1l es la funci\u00f3n principal del Ciclo Q?',o:['Sintetizar CoQ','Maximizar el bombeo de H\u207a reciclando un e\u207b al pool de CoQ','Producir FADH\u2082','Transferir e\u207b al O\u2082'],c:1,f:'El Ciclo Q recicla un e\u207b al pool de ubiquinona, duplicando el bombeo de H\u207a en el Complejo III (4 H\u207a vs 2 sin ciclo Q). [RA 7]'},
+{q:'\u00bfCu\u00e1ntos ATP produce aproximadamente 1 NADH vs 1 FADH\u2082 en la CTE?',o:['NADH = 1.5 ATP; FADH\u2082 = 2.5 ATP','NADH = 2.5 ATP; FADH\u2082 = 1.5 ATP','Ambos = 2 ATP','NADH = 3 ATP; FADH\u2082 = 3 ATP'],c:1,f:'NADH dona e\u207b al Complejo I (10 H\u207a bombeados \u2248 2.5 ATP). FADH\u2082 entra por Complejo II que no bombea H\u207a (6 H\u207a \u2248 1.5 ATP). [RA 8]'},
+{q:'\u00bfCu\u00e1ntas mol\u00e9culas de H\u2082O se producen por 1 NADH en la CTE?',o:['0.5 H\u2082O','1 H\u2082O','2 H\u2082O','3 H\u2082O'],c:1,f:'1 NADH dona 2 e\u207b. 2 e\u207b + 2 H\u207a + \u00bdO\u2082 \u2192 1 H\u2082O. [RA 9]'}
+];
+var eva={},evs=false;
+function iev(){var c=document.getElementById('eq');c.innerHTML='';eva={};evs=false;document.getElementById('sdd').style.display='none';document.getElementById('seb').style.display='none';var lt=['A','B','C','D'];evq.forEach(function(q,qi){var d=document.createElement('div');d.className='qq';d.id='ev-'+qi;var h='<div class="qt"><span style="color:var(--g);font-family:JetBrains Mono;font-size:.83rem">'+(qi+1)+'/'+evq.length+'</span> '+q.q+'</div><div class="qo">';q.o.forEach(function(opt,oi){h+='<button class="qb" data-qi="'+qi+'" data-oi="'+oi+'" onclick="seo(this,'+qi+','+oi+')"><div class="ol">'+lt[oi]+'</div>'+opt+'</button>';});h+='</div><div class="qf" id="fb-ev-'+qi+'"></div>';d.innerHTML=h;c.appendChild(d);});}
+function seo(btn,qi,oi){if(evs)return;var c=document.getElementById('ev-'+qi);c.querySelectorAll('.qb').forEach(function(o){o.classList.remove('sel');});btn.classList.add('sel');eva[qi]=oi;if(Object.keys(eva).length===evq.length)document.getElementById('seb').style.display='inline-flex';}
+function se(){evs=true;var sc=0;evq.forEach(function(q,qi){var c=document.getElementById('ev-'+qi),os=c.querySelectorAll('.qb');var ua=eva[qi];os.forEach(function(o,oi){o.classList.add('dis');if(oi===q.c)o.classList.add('ok');if(oi===ua&&oi!==q.c)o.classList.add('no');});if(ua===q.c)sc++;var fb=document.getElementById('fb-ev-'+qi);fb.classList.add('sh');fb.classList.add(ua===q.c?'cf':'if');fb.textContent=(ua===q.c?'\u2705 ':'\u274c ')+q.f;});document.getElementById('seb').style.display='none';var pct=Math.round(sc/evq.length*100);var dd=document.getElementById('sdd');dd.style.display='block';document.getElementById('sn2').textContent=sc+'/'+evq.length;document.getElementById('sbf2').style.width=pct+'%';var msg='';if(pct>=90){msg='\ud83c\udf1f \u00a1Excelente! Dominas la CTE.';document.getElementById('sn2').style.color='var(--g)';}else if(pct>=70){msg='\ud83d\udc4f \u00a1Buen trabajo! Revisa los errores.';document.getElementById('sn2').style.color='var(--b)';}else if(pct>=50){msg='\ud83d\udcda Repasa algunos conceptos clave.';document.getElementById('sn2').style.color='var(--y)';}else{msg='\ud83d\udcaa Necesitas repasar la tutor\u00eda.';document.getElementById('sn2').style.color='var(--r)';document.getElementById('sbf2').style.background='linear-gradient(135deg,#FF6B6B,#FFD93D)';}document.getElementById('sm2').textContent=msg;dd.scrollIntoView({behavior:'smooth',block:'center'});}
+ifc();iev();up();
+</script>
+</body></html>
