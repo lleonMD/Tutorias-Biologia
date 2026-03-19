@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Interactiva: Meiosis — División, Recombinación y Variabilidad Genética</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 24px}.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}.nb{font-family:'DM Serif Display',serif;font-size:1.1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.nl{display:flex;gap:3px;flex-wrap:wrap}.nl button{padding:5px 12px;border-radius:20px;border:none;background:0;color:var(--t2);font-size:.76rem;font-family:inherit;cursor:pointer;transition:.3s}.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}.pb{position:fixed;top:58px;left:0;right:0;z-index:99;height:3px;background:rgba(0,212,170,.1)}.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}.mc{max-width:960px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1}.sec{display:none;animation:fi .5s}.sec.a{display:block}@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.hero{text-align:center;padding:50px 0 36px}.hi{width:90px;height:90px;margin:0 auto 20px;background:var(--grad);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}.hero h1{font-family:'DM Serif Display',serif;font-size:2.8rem;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hs{font-size:1.1rem;color:var(--t2);max-width:650px;margin:0 auto 28px}.og{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0}.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px 16px;display:flex;align-items:flex-start;gap:10px;transition:.3s}.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}.on{min-width:26px;height:26px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;color:#0B1622}.ot{font-size:.85rem;color:var(--t2);line-height:1.5}.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;box-shadow:var(--sh);transition:.3s}.cd:hover{border-color:rgba(0,212,170,.25)}.ch{font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:14px}.ch .ac{color:var(--g)}.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:18px 22px;margin:18px 0;background:rgba(0,212,170,.06)}.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}.ib.pp{background:rgba(167,139,250,.06);border-left-color:var(--p)}.ibt{font-weight:700;margin-bottom:5px;font-size:.93rem}.cg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin:18px 0}.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px}.cc h4{font-family:'DM Serif Display',serif;margin-bottom:10px;font-size:1.05rem}.et{width:100%;border-collapse:separate;border-spacing:0;margin:18px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}.et th{background:rgba(0,212,170,.12);padding:12px 16px;text-align:left;font-weight:600;font-size:.85rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}.et td{padding:11px 16px;border-top:1px solid var(--bdr);font-size:.9rem;color:var(--t2)}.et tr:hover td{background:var(--card2)}.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:18px}.qt{font-weight:600;font-size:1rem;margin-bottom:16px}.qo{display:flex;flex-direction:column;gap:9px}.qb{padding:12px 18px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.93rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}.qb.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}.qb.dis{pointer-events:none;opacity:.7}.ol{min-width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem}.qf{margin-top:14px;padding:16px;border-radius:var(--r10);font-size:.9rem;line-height:1.6;display:none}.qf.sh{display:block}.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}.btn{padding:11px 24px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.93rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}.bp:hover{transform:translateY(-2px)}.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}.bs:hover{background:rgba(0,212,170,.2)}.sn{display:flex;justify-content:space-between;margin-top:36px;padding-top:20px;border-top:1px solid var(--bdr)}.pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.76rem;font-weight:600;margin:2px 3px}.pg{background:rgba(0,212,170,.15);color:var(--g)}.pb2{background:rgba(0,163,255,.12);color:var(--b)}.pw{background:rgba(255,107,107,.12);color:var(--r)}.py{background:rgba(255,217,61,.12);color:var(--y)}.pp{background:rgba(167,139,250,.12);color:var(--p)}.ppk{background:rgba(236,72,153,.12);color:var(--pk)}.por{background:rgba(249,115,22,.12);color:var(--o)}.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:20px 0}.fc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px;cursor:pointer;transition:.4s;min-height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.fc:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:var(--glow)}.ft{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--g)}.fd{display:none;font-size:.88rem;color:var(--t2);line-height:1.6;margin-top:7px}.fc.fl .ft{display:none}.fc.fl .fd{display:block}.fh{font-size:.73rem;color:var(--t3);margin-top:8px}.fc.fl .fh{display:none}.sd{text-align:center;padding:36px;margin:20px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}.snm{font-family:'DM Serif Display',serif;font-size:3.5rem;margin-bottom:6px}.sbl{color:var(--t2)}.sbr{width:100%;max-width:380px;height:11px;background:rgba(255,255,255,.06);border-radius:6px;margin:18px auto;overflow:hidden}.sbf{height:100%;border-radius:6px;transition:width 1s}.step-diagram{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:18px 0}.step-box{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:12px 16px;text-align:center;min-width:110px;transition:.3s;cursor:default}.step-box:hover{border-color:var(--g);transform:translateY(-2px)}.step-arrow{color:var(--g);font-size:1.4rem;font-weight:700}.svg-wrap{background:rgba(0,0,0,.25);border-radius:var(--r16);padding:20px;margin:20px 0;border:1px solid var(--bdr);overflow-x:auto}.svg-wrap svg{width:100%;height:auto;display:block}.match-game{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:18px 0}.match-col{display:flex;flex-direction:column;gap:8px}.match-col h4{text-align:center;margin-bottom:8px;font-family:'DM Serif Display',serif}.match-item{padding:12px 16px;border-radius:var(--r10);border:2px solid var(--bdr);background:var(--card2);color:var(--t2);cursor:pointer;transition:.3s;font-size:.88rem;text-align:center;user-select:none}.match-item:hover{border-color:var(--b);transform:scale(1.02)}.match-item.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}.match-item.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important;pointer-events:none}.match-item.no{border-color:var(--r)!important;animation:shake .4s}@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}.match-score{text-align:center;margin-top:12px;font-weight:600;color:var(--g)}.analogy{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(0,163,255,.06));border:1px solid rgba(167,139,250,.2);border-radius:var(--r16);padding:24px;margin:18px 0}.analogy .analogy-icon{font-size:2rem;margin-bottom:8px}.analogy h4{font-family:'DM Serif Display',serif;color:var(--p);margin-bottom:8px}.analogy p{color:var(--t2);font-size:.92rem}.timeline{position:relative;padding-left:30px;margin:18px 0}.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--g),var(--b),var(--p),var(--pk),var(--o))}.timeline-item{position:relative;margin-bottom:18px;padding:16px;background:var(--card2);border-radius:var(--r10);border:1px solid var(--bdr)}.timeline-item::before{content:'';position:absolute;left:-24px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--g);border:2px solid var(--bg)}.timeline-item:nth-child(2)::before{background:var(--b)}.timeline-item:nth-child(3)::before{background:var(--p)}.timeline-item:nth-child(4)::before{background:var(--pk)}.timeline-item:nth-child(5)::before{background:var(--o)}.sim-box{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin:20px 0;text-align:center}.sim-controls{display:flex;gap:10px;justify-content:center;margin:16px 0;flex-wrap:wrap}.sim-btn{padding:8px 20px;border-radius:8px;border:2px solid var(--g);background:0;color:var(--g);font-family:inherit;font-weight:600;font-size:.88rem;cursor:pointer;transition:.3s}.sim-btn:hover{background:rgba(0,212,170,.15)}.sim-btn.active{background:var(--g);color:#0B1622}.sim-btn:disabled{opacity:.4;cursor:default}.sim-narration{background:rgba(0,212,170,.06);border:1px solid var(--bdr);border-radius:var(--r10);padding:16px;margin-top:14px;color:var(--t2);font-size:.92rem;line-height:1.6;min-height:70px;text-align:left}.sim-step-ind{display:flex;gap:6px;justify-content:center;margin:10px 0}.sim-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.1);transition:.3s}.sim-dot.act{background:var(--g);box-shadow:0 0 8px rgba(0,212,170,.5)}.sim-dot.done{background:rgba(0,212,170,.3)}.cl{background:linear-gradient(135deg,rgba(255,107,107,.06),rgba(255,217,61,.04));border:1px solid rgba(255,107,107,.2);border-radius:var(--r16);padding:28px;margin:20px 0}.clb{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,107,.15);color:var(--r);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600;margin-bottom:14px;text-transform:uppercase;letter-spacing:.03em}.clt{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:12px}.clp{color:var(--t2);margin-bottom:14px;font-size:.93rem;line-height:1.7}.tb{display:flex;gap:5px;margin-bottom:20px;border-bottom:1px solid var(--bdr)}.tbtn{padding:9px 18px;border:none;background:0;color:var(--t3);font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:.3s;border-radius:7px 7px 0 0}.tbtn:hover{color:var(--t2)}.tbtn.a{color:var(--g);border-bottom-color:var(--g);background:rgba(0,212,170,.06)}.tc{display:none;animation:fi .4s}.tc.a{display:block}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}.proc-card{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:18px;margin:10px 0;transition:.3s;cursor:pointer}.proc-card:hover{border-color:var(--g);transform:translateX(4px)}.proc-card .proc-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--grad);color:#0B1622;font-weight:700;font-size:.8rem;margin-right:10px}.proc-card .proc-text{color:var(--t2);font-size:.9rem;margin-top:6px}@media(max-width:768px){.og,.cg,.match-game{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.hero h1{font-size:2rem}.step-diagram{flex-direction:column}.step-arrow{transform:rotate(90deg)}.ni{flex-direction:column;height:auto;padding:10px 0}.nl{justify-content:center}}::-webkit-scrollbar{width:7px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">🧬 Meiosis — Tutoría Interactiva</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button><button data-s="contexto">Contexto</button><button data-s="meiosisI">Meiosis I</button><button data-s="profaseI">Profase I</button><button data-s="metaAnaTelo">Meta-Ana-Telo I</button><button data-s="meiosisII">Meiosis II</button><button data-s="vsMitosis">vs Mitosis</button><button data-s="recombinacion">Recombinación</button><button data-s="holliday">Holliday</button><button data-s="nodisyuncion">No Disyunción</button><button data-s="glosario">Glosario</button><button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ===== INICIO ===== -->
+<div class="sec a" id="sec-inicio"><div class="hero"><div class="hi">🧬</div><h1>Meiosis: División, Recombinación y Variabilidad</h1><p class="hs">Cómo las células diploides generan gametos haploides únicos mediante dos divisiones sucesivas y recombinación genética.</p></div>
+<div class="cd"><div class="ch">🎯 Resultados de <span class="ac">Aprendizaje</span></div>
+<p style="color:var(--t2);margin-bottom:10px;font-weight:600">Módulo I — Meiosis I y II</p>
+<div class="og">
+<div class="oi"><div class="on">1</div><div class="ot">Define meiosis</div></div>
+<div class="oi"><div class="on">2</div><div class="ot">Describe las consecuencias de la meiosis I y II</div></div>
+<div class="oi"><div class="on">3</div><div class="ot">Distingue entre meiosis y mitosis</div></div>
+<div class="oi"><div class="on">4</div><div class="ot">Define complejo sinaptonémico, entrecruzamiento, heterodúplex, conversión génica, shugoshina</div></div>
+<div class="oi"><div class="on">5</div><div class="ot">Identifica las etapas de Profase I (leptoteno, cigoteno, paquiteno, diploteno, diacinesis)</div></div>
+<div class="oi"><div class="on">6</div><div class="ot">Describe la Meiosis II</div></div>
+</div>
+<p style="color:var(--t2);margin-bottom:10px;margin-top:16px;font-weight:600">Módulo II — Recombinación y Errores</p>
+<div class="og">
+<div class="oi"><div class="on">7</div><div class="ot">Describe la recombinación homóloga</div></div>
+<div class="oi"><div class="on">8</div><div class="ot">Define Holliday Junctions</div></div>
+<div class="oi"><div class="on">9</div><div class="ot">Describe por qué pasa la no disyunción</div></div>
+</div></div>
+<div style="text-align:center;margin-top:22px"><button class="btn bp" onclick="go('contexto')">Comenzar la tutoría →</button></div></div>
+
+<!-- ===== CONTEXTO ===== -->
+<div class="sec" id="sec-contexto">
+<div class="cd"><div class="ch">🌍 Meiosis en <span class="ac">Contexto</span>: Reproducción Sexual <span class="pill pg">RA 1</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div><p style="color:var(--t2)">La <strong>meiosis</strong> es un tipo de división celular que convierte una célula diploide (2n) en cuatro células haploides (1n). Es esencial para la reproducción sexual, ya que produce gametos (espermatozoides y óvulos) con la mitad del número de cromosomas.</p></div>
+
+<p style="color:var(--t2);margin:14px 0">La reproducción sexual combina información genética de dos individuos, permitiendo <strong>variabilidad genética</strong>. Cada individuo posee dos copias de cada cromosoma — uno materno y uno paterno — llamados <strong>cromosomas homólogos</strong>.</p>
+
+<div class="analogy"><div class="analogy-icon">🃏</div><h4>Analogía: Barajar cartas</h4><p>Imagina que tus cromosomas son dos mazos de cartas — uno de tu madre y otro de tu padre. La meiosis es el proceso de barajar ambos mazos, intercambiar algunas cartas entre ellos y repartir la mitad a cada gameto. Así, cada gameto recibe una combinación única de cartas, garantizando que cada hijo sea genéticamente distinto.</p></div>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--g)">📊 Ploidía</h4>
+<p style="color:var(--t2);font-size:.9rem"><strong>Haploide (n):</strong> 1 set de cromosomas (23 en humanos)<br><strong>Diploide (2n):</strong> 2 sets de cromosomas (46 en humanos)<br><strong>Alelo:</strong> Variante de un gen — se hereda 1 de cada progenitor</p></div>
+<div class="cc"><h4 style="color:var(--b)">📐 Valor C</h4>
+<p style="color:var(--t2);font-size:.9rem"><strong>C</strong> = cantidad de ADN en un set haploide<br>Antes de fase S: <strong>2n, 2C</strong><br>Después de replicación: <strong>2n, 4C</strong><br>Después de Meiosis I: <strong>1n, 2C</strong><br>Después de Meiosis II: <strong>1n, 1C</strong></p></div>
+</div>
+
+<!-- SVG: Valor C diagram -->
+<div class="svg-wrap">
+<svg viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="ag" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00D4AA"/></marker></defs>
+<rect x="10" y="30" width="180" height="140" rx="14" fill="rgba(0,212,170,.08)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="100" y="55" text-anchor="middle" fill="#00D4AA" font-size="13" font-weight="700">Antes de Fase S</text>
+<text x="100" y="80" text-anchor="middle" fill="#8BA4BE" font-size="11">Cromosomas: 2n</text>
+<text x="100" y="100" text-anchor="middle" fill="#8BA4BE" font-size="11">ADN: 2C</text>
+<text x="100" y="130" text-anchor="middle" fill="#FFD93D" font-size="28">🧬🧬</text>
+<text x="100" y="160" text-anchor="middle" fill="#5A7A96" font-size="10">2 cromosomas simples</text>
+
+<line x1="195" y1="100" x2="230" y2="100" stroke="#00D4AA" stroke-width="1.5" marker-end="url(#ag)"/>
+<text x="213" y="90" text-anchor="middle" fill="#FFD93D" font-size="9" font-weight="600">Fase S</text>
+
+<rect x="235" y="30" width="180" height="140" rx="14" fill="rgba(0,163,255,.08)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="325" y="55" text-anchor="middle" fill="#00A3FF" font-size="13" font-weight="700">Post-Replicación</text>
+<text x="325" y="80" text-anchor="middle" fill="#8BA4BE" font-size="11">Cromosomas: 2n</text>
+<text x="325" y="100" text-anchor="middle" fill="#8BA4BE" font-size="11">ADN: 4C</text>
+<text x="325" y="130" text-anchor="middle" fill="#FFD93D" font-size="28">🧬🧬🧬🧬</text>
+<text x="325" y="160" text-anchor="middle" fill="#5A7A96" font-size="10">Cromátides hermanas</text>
+
+<line x1="420" y1="100" x2="455" y2="100" stroke="#00D4AA" stroke-width="1.5" marker-end="url(#ag)"/>
+<text x="438" y="90" text-anchor="middle" fill="#EC4899" font-size="9" font-weight="600">Meiosis I</text>
+
+<rect x="460" y="30" width="180" height="140" rx="14" fill="rgba(167,139,250,.08)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="550" y="55" text-anchor="middle" fill="#A78BFA" font-size="13" font-weight="700">Post-Meiosis I</text>
+<text x="550" y="80" text-anchor="middle" fill="#8BA4BE" font-size="11">Cromosomas: 1n</text>
+<text x="550" y="100" text-anchor="middle" fill="#8BA4BE" font-size="11">ADN: 2C</text>
+<text x="550" y="130" text-anchor="middle" fill="#FFD93D" font-size="28">🧬🧬</text>
+<text x="550" y="160" text-anchor="middle" fill="#5A7A96" font-size="10">Cromátides hermanas</text>
+
+<line x1="645" y1="100" x2="680" y2="100" stroke="#00D4AA" stroke-width="1.5" marker-end="url(#ag)"/>
+<text x="663" y="90" text-anchor="middle" fill="#F97316" font-size="9" font-weight="600">Meiosis II</text>
+
+<rect x="685" y="30" width="160" height="140" rx="14" fill="rgba(249,115,22,.08)" stroke="#F97316" stroke-width="1.5"/>
+<text x="765" y="55" text-anchor="middle" fill="#F97316" font-size="13" font-weight="700">Post-Meiosis II</text>
+<text x="765" y="80" text-anchor="middle" fill="#8BA4BE" font-size="11">Cromosomas: 1n</text>
+<text x="765" y="100" text-anchor="middle" fill="#8BA4BE" font-size="11">ADN: 1C</text>
+<text x="765" y="130" text-anchor="middle" fill="#FFD93D" font-size="28">🧬</text>
+<text x="765" y="160" text-anchor="middle" fill="#5A7A96" font-size="10">Gameto haploide</text>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ Cambios en ploidía y contenido de ADN (Valor C) durante la meiosis</p>
+
+<div class="ib n"><div class="ibt">📌 ¿Por qué no mitosis?</div><p style="color:var(--t2)">Los gametos <strong>no pueden producirse por mitosis</strong>, ya que serían diploides (2n) y al fusionarse el individuo sería tetraploide (4n). Con cada generación, el número de cromosomas se duplicaría. La meiosis mantiene constante el número cromosómico.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q01"><div class="qt">¿Cuál es el resultado final de la meiosis completa?</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>2 células diploides genéticamente idénticas</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">B</div>4 células haploides genéticamente distintas</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">C</div>4 células diploides genéticamente idénticas</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>2 células haploides genéticamente idénticas</button>
+</div><div class="qf" id="q01-fb"></div></div>
+</div>
+
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('meiosisI')">Meiosis I →</button></div></div>
+
+<!-- ===== MEIOSIS I ===== -->
+<div class="sec" id="sec-meiosisI">
+<div class="cd"><div class="ch">🔬 <span class="ac">Meiosis I</span> — Reducción Divisional <span class="pill pg">RA 2</span></div>
+<div class="ib"><div class="ibt">🔑 Propósito de Meiosis I</div><p style="color:var(--t2)"><strong>Segregar los cromosomas homólogos.</strong> Es una "reducción divisional" porque reduce el número de cromosomas de diploide (2n) a haploide (1n). Está precedida por una sola ronda de replicación del ADN.</p></div>
+
+<p style="color:var(--t2);margin:14px 0">La Meiosis I involucra <strong>una ronda de replicación</strong> del ADN seguida de <strong>dos divisiones nucleares</strong> sucesivas. Los cromosomas homólogos se encuentran unidos entre sí y luego se segregan a polos opuestos.</p>
+
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--g)"><strong style="color:var(--g)">Replicación</strong><br><span style="color:var(--t2);font-size:.82rem">2n → 2n, 4C</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--b)"><strong style="color:var(--b)">Profase I</strong><br><span style="color:var(--t2);font-size:.82rem">La más larga y compleja</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--p)"><strong style="color:var(--p)">Metafase I</strong><br><span style="color:var(--t2);font-size:.82rem">Bivalentes al ecuador</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--pk)"><strong style="color:var(--pk)">Anafase I</strong><br><span style="color:var(--t2);font-size:.82rem">Homólogos se separan</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--o)"><strong style="color:var(--o)">Telofase I</strong><br><span style="color:var(--t2);font-size:.82rem">2 células 1n, 2C</span></div>
+</div>
+
+<div class="ib go"><div class="ibt">⚡ Resultado de Meiosis I</div><p style="color:var(--t2)">Genera <strong>2 células haploides</strong>, cuyos cromosomas consisten en cromátidas hermanas unidas por cohesinas en el área centromérica. Entre Meiosis I y II puede haber una interfase, <strong>pero sin síntesis de ADN</strong>.</p></div>
+</div>
+
+<div class="sn"><button class="btn bs" onclick="go('contexto')">← Contexto</button><button class="btn bp" onclick="go('profaseI')">Profase I →</button></div></div>
+
+<!-- ===== PROFASE I ===== -->
+<div class="sec" id="sec-profaseI">
+<div class="cd"><div class="ch">🔎 <span class="ac">Profase I</span> — Etapas <span class="pill pg">RA 4, 5</span></div>
+<div class="ib"><div class="ibt">🔑 La fase más larga y crítica</div><p style="color:var(--t2)">La Profase I es la etapa más prolongada de la meiosis. Aquí ocurre la <strong>sinapsis</strong> entre cromosomas homólogos, la formación del <strong>complejo sinaptonémico</strong> y el <strong>entrecruzamiento</strong> (crossing over) que genera diversidad genética.</p></div>
+
+<!-- Timeline of Profase I -->
+<div class="timeline">
+<div class="timeline-item">
+<h4 style="color:var(--g);font-family:'DM Serif Display',serif;margin-bottom:6px">1. Leptoteno <span class="pill pg">Inicio</span></h4>
+<p style="color:var(--t2);font-size:.9rem">Los cromosomas comienzan a <strong>condensarse</strong>. Se inicia el <strong>entrecruzamiento</strong> y la <strong>sinapsis</strong>. Se comienzan a formar los <strong>elementos laterales</strong> del complejo sinaptonémico.</p>
+</div>
+<div class="timeline-item">
+<h4 style="color:var(--b);font-family:'DM Serif Display',serif;margin-bottom:6px">2. Cigoteno <span class="pill pb2">Sinapsis</span></h4>
+<p style="color:var(--t2);font-size:.9rem">Mayor condensación. Los cromosomas se hacen distinguibles. Se forman los <strong>elementos centrales</strong> del complejo sinaptonémico. Los cromosomas homólogos se unen formando <strong>bivalentes</strong> (tétradas) por el proceso de sinapsis.</p>
+</div>
+<div class="timeline-item">
+<h4 style="color:var(--p);font-family:'DM Serif Display',serif;margin-bottom:6px">3. Paquiteno <span class="pill pp">Entrecruzamiento</span></h4>
+<p style="color:var(--t2);font-size:.9rem">El complejo sinaptonémico está <strong>totalmente desarrollado</strong>. La compactación reduce los cromosomas hasta 1/4 de su tamaño previo. Se da el <strong>entrecruzamiento</strong> y se completa la <strong>recombinación homóloga/genética</strong>.</p>
+</div>
+<div class="timeline-item">
+<h4 style="color:var(--pk);font-family:'DM Serif Display',serif;margin-bottom:6px">4. Diploteno <span class="pill ppk">Quiasmata</span></h4>
+<p style="color:var(--t2);font-size:.9rem">Se <strong>desensambla el complejo sinaptonémico</strong>. Los cromosomas homólogos comienzan a separarse, especialmente en regiones centroméricas, pero permanecen unidos por <strong>quiasmata</strong> — evidencia visible del entrecruzamiento. Los cromosomas se descondensan, hay transcripción y la célula crece.</p>
+<div class="ib pk" style="margin-top:10px"><div class="ibt">🔬 Nota clínica: Meiosis femenina</div><p style="color:var(--t2)">En la meiosis femenina hay un <strong>receso de varios años</strong> después del diploteno. La Meiosis I se completa en la ovulación y la Meiosis II se completa con la fertilización.</p></div>
+</div>
+<div class="timeline-item">
+<h4 style="color:var(--o);font-family:'DM Serif Display',serif;margin-bottom:6px">5. Diacinesis <span class="pill por">Fin Profase I</span></h4>
+<p style="color:var(--t2);font-size:.9rem"><strong>Compactación máxima</strong> de cromosomas. Los centrómeros se separan más. Los cromosomas solo están unidos por quiasmata. Desaparece el nucleolo, se forma el huso y se fragmenta el envoltorio nuclear. <strong>FIN DE PROFASE I.</strong></p>
+</div>
+</div>
+</div>
+
+<!-- Complejo Sinaptonémico -->
+<div class="cd"><div class="ch">🔗 Complejo <span class="ac">Sinaptonémico</span> <span class="pill pg">RA 4</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Es una <strong>estructura proteica</strong> que une a los cromosomas homólogos entre sí. Su formación está altamente relacionada con el entrecruzamiento y solo se forma si se ha establecido homología entre los cromosomas.</p>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+<!-- Homolog 1 -->
+<rect x="50" y="30" width="600" height="30" rx="6" fill="rgba(0,163,255,.15)" stroke="#00A3FF" stroke-width="1.5"/>
+<rect x="50" y="65" width="600" height="30" rx="6" fill="rgba(0,163,255,.25)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="30" y="60" text-anchor="end" fill="#00A3FF" font-size="10" font-weight="600" transform="rotate(-90,30,60)">Homólogo 1</text>
+<!-- Lateral elements -->
+<rect x="50" y="96" width="600" height="8" rx="3" fill="rgba(0,212,170,.4)" stroke="#00D4AA" stroke-width="1"/>
+<text x="680" y="103" fill="#00D4AA" font-size="9" font-weight="600">Elem. Lateral</text>
+<!-- Central element -->
+<line x1="50" y1="112" x2="650" y2="112" stroke="#FFD93D" stroke-width="2" stroke-dasharray="8,4"/>
+<text x="680" y="115" fill="#FFD93D" font-size="9" font-weight="600">Elem. Central</text>
+<!-- Transverse filaments -->
+<g stroke="#A78BFA" stroke-width="1" opacity="0.6">
+<line x1="80" y1="104" x2="80" y2="120"/><line x1="120" y1="104" x2="120" y2="120"/>
+<line x1="160" y1="104" x2="160" y2="120"/><line x1="200" y1="104" x2="200" y2="120"/>
+<line x1="240" y1="104" x2="240" y2="120"/><line x1="280" y1="104" x2="280" y2="120"/>
+<line x1="320" y1="104" x2="320" y2="120"/><line x1="360" y1="104" x2="360" y2="120"/>
+<line x1="400" y1="104" x2="400" y2="120"/><line x1="440" y1="104" x2="440" y2="120"/>
+<line x1="480" y1="104" x2="480" y2="120"/><line x1="520" y1="104" x2="520" y2="120"/>
+<line x1="560" y1="104" x2="560" y2="120"/><line x1="600" y1="104" x2="600" y2="120"/>
+</g>
+<text x="680" y="128" fill="#A78BFA" font-size="9" font-weight="600">Filam. Transv.</text>
+<!-- Lateral elements 2 -->
+<rect x="50" y="120" width="600" height="8" rx="3" fill="rgba(0,212,170,.4)" stroke="#00D4AA" stroke-width="1"/>
+<!-- Homolog 2 -->
+<rect x="50" y="130" width="600" height="30" rx="6" fill="rgba(236,72,153,.15)" stroke="#EC4899" stroke-width="1.5"/>
+<rect x="50" y="165" width="600" height="30" rx="6" fill="rgba(236,72,153,.25)" stroke="#EC4899" stroke-width="1.5"/>
+<text x="30" y="165" text-anchor="end" fill="#EC4899" font-size="10" font-weight="600" transform="rotate(-90,30,165)">Homólogo 2</text>
+<!-- Crossover point -->
+<circle cx="350" cy="112" r="10" fill="rgba(255,217,61,.3)" stroke="#FFD93D" stroke-width="2"/>
+<text x="350" y="115" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="700">✕</text>
+<text x="350" y="210" text-anchor="middle" fill="#FFD93D" font-size="11" font-weight="600">Sitio de Entrecruzamiento</text>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ Esquema del complejo sinaptonémico con elementos laterales, centrales y filamentos transversales</p>
+</div>
+
+<!-- Definiciones clave -->
+<div class="cd"><div class="ch">📖 Definiciones <span class="ac">Clave</span> <span class="pill pg">RA 4</span></div>
+<div class="fg">
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Entrecruzamiento</div><div class="fd">Intercambio de material genético entre cromosomas homólogos durante la Profase I. Se evidencia por los <strong>quiasmata</strong>. Ocurre en paquiteno.</div><div class="fh">clic para definición</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Heterodúplex</div><div class="fd">Región donde una hebra de ADN de un dúplex se complementa con una hebra de otro dúplex diferente. Se forma durante la invasión de hebra en la recombinación.</div><div class="fh">clic para definición</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Conversión Génica</div><div class="fd">Cuando la reparación por homología <strong>cambia la secuencia de un gen</strong>, reemplazándola por otra del cromosoma homólogo. Ocurre cuando no hay cromátides hermanas disponibles (G1) o cuando las secuencias alineadas no son idénticas.</div><div class="fh">clic para definición</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Shugoshina</div><div class="fd">"Espíritu guardián" (japonés). Proteína que <strong>protege las cohesinas centroméricas</strong> de la separasa en Meiosis I. Recluta fosfatasas para desfosforilar cohesinas, impidiendo su degradación. Se inactiva después de Meiosis I.</div><div class="fh">clic para definición</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Quiasmata</div><div class="fd">Conexiones visibles entre cromosomas homólogos, situadas en regiones donde se intercambió material genético. Son la <strong>evidencia citológica</strong> del entrecruzamiento.</div><div class="fh">clic para definición</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Bivalente / Tétrada</div><div class="fd">Par de cromosomas homólogos apareados durante la sinapsis. Cada bivalente contiene <strong>4 cromátidas</strong> (por eso también se llama tétrada).</div><div class="fh">clic para definición</div></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q02"><div class="qt">¿En qué etapa de la Profase I está completamente desarrollado el complejo sinaptonémico?</div><div class="qo">
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">A</div>Leptoteno</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">B</div>Cigoteno</button>
+<button class="qb" onclick="cq('q02',this,1)"><div class="ol">C</div>Paquiteno</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">D</div>Diacinesis</button>
+</div><div class="qf" id="q02-fb"></div></div>
+
+<div class="qq" id="q03"><div class="qt">¿Cuál es la función de la shugoshina durante la Meiosis I?</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">A</div>Formar el complejo sinaptonémico</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">B</div>Degradar las cohesinas centroméricas</button>
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">C</div>Proteger las cohesinas centroméricas de la separasa</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>Catalizar el entrecruzamiento</button>
+</div><div class="qf" id="q03-fb"></div></div>
+</div>
+
+<div class="sn"><button class="btn bs" onclick="go('meiosisI')">← Meiosis I</button><button class="btn bp" onclick="go('metaAnaTelo')">Meta-Ana-Telo I →</button></div></div>
+
+<!-- ===== METAFASE, ANAFASE, TELOFASE I ===== -->
+<div class="sec" id="sec-metaAnaTelo">
+<div class="cd"><div class="ch">⚡ Metafase, Anafase y <span class="ac">Telofase I</span> <span class="pill pg">RA 2, 4</span></div>
+
+<div class="proc-card"><span class="proc-num">M</span><strong style="color:var(--g)">Metafase I</strong>
+<div class="proc-text">Los <strong>bivalentes</strong> migran al plano ecuatorial. Se unen por sus cinetocoros a los microtúbulos del huso, dispuestos al azar. Los 4 cinetocoros se orientan para que un homólogo se una a microtúbulos de un polo y el otro homólogo al polo opuesto. Aún unidos por quiasmata y cohesinas.<br><br>📌 <strong>Diferencia con mitosis:</strong> En Metafase I encontramos <strong>cromosomas homólogos apareados</strong> en el ecuador (no cromosomas individuales).</div></div>
+
+<div class="proc-card"><span class="proc-num">A</span><strong style="color:var(--pk)">Anafase I</strong>
+<div class="proc-text">Se disuelven las <strong>cohesinas en los brazos</strong> (no en el área centromérica). Esto permite la resolución final de los entrecruzamientos. Los cromosomas homólogos migran hacia polos opuestos del huso. Cada polo recibe un set haploide de cromosomas.<br><br>📌 <strong>Diferencia clave con mitosis:</strong> En mitosis se separan cromátidas hermanas. En Meiosis I se separan <strong>cromosomas homólogos</strong> — las cromátidas hermanas se mantienen unidas.</div></div>
+
+<div class="ib pp"><div class="ibt">🛡️ Shugoshina: La Guardiana</div><p style="color:var(--t2)">¿Por qué las cromátidas hermanas no se separan en Meiosis I? La <strong>shugoshina</strong> protege las cohesinas centroméricas de la degradación por separasa. Para que las separasas actúen, las cohesinas deben estar fosforiladas. La shugoshina recluta <strong>fosfatasas</strong> que desfosforilan las cohesinas, impidiendo su corte. Se inactiva después de Meiosis I.</p></div>
+
+<div class="proc-card"><span class="proc-num">T</span><strong style="color:var(--o)">Telofase I / Citocinesis I</strong>
+<div class="proc-text">Un set haploide de cromosomas llega a cada polo. No hay descondensación antes de Meiosis II. A veces se envuelven por el envoltorio nuclear antes de la citocinesis. Puede haber una interfase entre Meiosis I y II, <strong>pero sin síntesis de ADN</strong>.</div></div>
+
+<div class="ib"><div class="ibt">🎯 Mención Especial: Cinetocoros</div><p style="color:var(--t2)">Los cinetocoros de las cromátidas hermanas se hallan <strong>fusionados</strong> y funcionan como una unidad durante Meiosis I (mediados por complejos de proteínas del cinetocoro). Después de Meiosis I, son removidas estas conexiones.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q04"><div class="qt">¿Qué se separa durante la Anafase I?</div><div class="qo">
+<button class="qb" onclick="cq('q04',this,1)"><div class="ol">A</div>Cromosomas homólogos</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">B</div>Cromátidas hermanas</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">C</div>Centrómeros</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">D</div>Nucleosomas</button>
+</div><div class="qf" id="q04-fb"></div></div>
+</div>
+
+<div class="sn"><button class="btn bs" onclick="go('profaseI')">← Profase I</button><button class="btn bp" onclick="go('meiosisII')">Meiosis II →</button></div></div>
+
+<!-- ===== MEIOSIS II ===== -->
+<div class="sec" id="sec-meiosisII">
+<div class="cd"><div class="ch">🧬 <span class="ac">Meiosis II</span> — División por Separación <span class="pill pg">RA 6</span></div>
+<div class="ib"><div class="ibt">🔑 Propósito de Meiosis II</div><p style="color:var(--t2)">Separar las <strong>cromátidas hermanas</strong> creadas por la replicación (antes de MI) en dos nuevas células haploides. Es muy similar a la mitosis, pero con la mitad de cromosomas.</p></div>
+
+<div class="step-diagram">
+<div class="step-box" style="border-color:var(--g)"><strong style="color:var(--g)">Profase II</strong><br><span style="color:var(--t2);font-size:.82rem">Similar a mitosis, rápida</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--b)"><strong style="color:var(--b)">Metafase II</strong><br><span style="color:var(--t2);font-size:.82rem">½ cromosomas en ecuador</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--pk)"><strong style="color:var(--pk)">Anafase II</strong><br><span style="color:var(--t2);font-size:.82rem">Cromátidas hermanas se separan</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box" style="border-color:var(--o)"><strong style="color:var(--o)">Telofase II</strong><br><span style="color:var(--t2);font-size:.82rem">4 células haploides</span></div>
+</div>
+
+<div class="ib go"><div class="ibt">📊 Resultado Final</div><p style="color:var(--t2)"><strong>4 células haploides (1n, 1C)</strong>, cada una genéticamente diferente. La Meiosis II es básicamente una mitosis en una célula haploide — separación de cromátidas hermanas.</p></div>
+
+<!-- SVG: Overview Meiosis -->
+<div class="svg-wrap">
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="ar2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00D4AA"/></marker></defs>
+<!-- Starting cell -->
+<rect x="320" y="10" width="160" height="60" rx="12" fill="rgba(0,212,170,.1)" stroke="#00D4AA" stroke-width="2"/>
+<text x="400" y="35" text-anchor="middle" fill="#00D4AA" font-size="13" font-weight="700">Célula Diploide</text>
+<text x="400" y="55" text-anchor="middle" fill="#8BA4BE" font-size="11">2n, 4C (post-replicación)</text>
+<!-- Arrow down -->
+<line x1="400" y1="70" x2="400" y2="100" stroke="#00D4AA" stroke-width="2" marker-end="url(#ar2)"/>
+<text x="440" y="90" fill="#EC4899" font-size="10" font-weight="600">MEIOSIS I</text>
+<!-- Two cells -->
+<rect x="160" y="105" width="160" height="55" rx="12" fill="rgba(0,163,255,.1)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="240" y="128" text-anchor="middle" fill="#00A3FF" font-size="12" font-weight="700">Célula 1</text>
+<text x="240" y="148" text-anchor="middle" fill="#8BA4BE" font-size="10">1n, 2C</text>
+<rect x="480" y="105" width="160" height="55" rx="12" fill="rgba(0,163,255,.1)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="560" y="128" text-anchor="middle" fill="#00A3FF" font-size="12" font-weight="700">Célula 2</text>
+<text x="560" y="148" text-anchor="middle" fill="#8BA4BE" font-size="10">1n, 2C</text>
+<!-- Lines from parent -->
+<line x1="360" y1="70" x2="240" y2="105" stroke="#00A3FF" stroke-width="1.5"/>
+<line x1="440" y1="70" x2="560" y2="105" stroke="#00A3FF" stroke-width="1.5"/>
+<!-- Arrows down -->
+<line x1="240" y1="160" x2="240" y2="190" stroke="#00D4AA" stroke-width="1.5" marker-end="url(#ar2)"/>
+<line x1="560" y1="160" x2="560" y2="190" stroke="#00D4AA" stroke-width="1.5" marker-end="url(#ar2)"/>
+<text x="280" y="182" fill="#F97316" font-size="10" font-weight="600">MEIOSIS II</text>
+<text x="600" y="182" fill="#F97316" font-size="10" font-weight="600">MEIOSIS II</text>
+<!-- Four cells -->
+<rect x="70" y="195" width="120" height="50" rx="10" fill="rgba(167,139,250,.1)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="130" y="218" text-anchor="middle" fill="#A78BFA" font-size="11" font-weight="600">Gameto 1</text>
+<text x="130" y="235" text-anchor="middle" fill="#8BA4BE" font-size="10">1n, 1C</text>
+<rect x="210" y="195" width="120" height="50" rx="10" fill="rgba(167,139,250,.1)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="270" y="218" text-anchor="middle" fill="#A78BFA" font-size="11" font-weight="600">Gameto 2</text>
+<text x="270" y="235" text-anchor="middle" fill="#8BA4BE" font-size="10">1n, 1C</text>
+<rect x="410" y="195" width="120" height="50" rx="10" fill="rgba(249,115,22,.1)" stroke="#F97316" stroke-width="1.5"/>
+<text x="470" y="218" text-anchor="middle" fill="#F97316" font-size="11" font-weight="600">Gameto 3</text>
+<text x="470" y="235" text-anchor="middle" fill="#8BA4BE" font-size="10">1n, 1C</text>
+<rect x="550" y="195" width="120" height="50" rx="10" fill="rgba(249,115,22,.1)" stroke="#F97316" stroke-width="1.5"/>
+<text x="610" y="218" text-anchor="middle" fill="#F97316" font-size="11" font-weight="600">Gameto 4</text>
+<text x="610" y="235" text-anchor="middle" fill="#8BA4BE" font-size="10">1n, 1C</text>
+<!-- Lines -->
+<line x1="200" y1="160" x2="130" y2="195" stroke="#A78BFA" stroke-width="1"/>
+<line x1="280" y1="160" x2="270" y2="195" stroke="#A78BFA" stroke-width="1"/>
+<line x1="520" y1="160" x2="470" y2="195" stroke="#F97316" stroke-width="1"/>
+<line x1="600" y1="160" x2="610" y2="195" stroke="#F97316" stroke-width="1"/>
+<!-- Label -->
+<rect x="280" y="270" width="240" height="40" rx="10" fill="rgba(255,217,61,.1)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="400" y="295" text-anchor="middle" fill="#FFD93D" font-size="13" font-weight="700">4 gametos haploides únicos</text>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ Panorama general: de 1 célula diploide a 4 gametos haploides</p>
+</div>
+
+<div class="sn"><button class="btn bs" onclick="go('metaAnaTelo')">← Meta-Ana-Telo I</button><button class="btn bp" onclick="go('vsMitosis')">vs Mitosis →</button></div></div>
+
+<!-- ===== VS MITOSIS ===== -->
+<div class="sec" id="sec-vsMitosis">
+<div class="cd"><div class="ch">⚖️ Meiosis <span class="ac">vs Mitosis</span> <span class="pill pg">RA 3</span></div>
+<div class="ib"><div class="ibt">🔑 Diferencia Fundamental</div><p style="color:var(--t2)">La <strong>mitosis</strong> produce 2 células diploides genéticamente idénticas (reproducción asexual). La <strong>meiosis</strong> produce 4 células haploides genéticamente distintas (reproducción sexual).</p></div>
+
+<table class="et"><thead><tr><th>Característica</th><th style="color:var(--b)">Mitosis</th><th style="color:var(--g)">Meiosis</th></tr></thead><tbody>
+<tr><td><strong>Divisiones</strong></td><td>1 división</td><td>2 divisiones sucesivas</td></tr>
+<tr><td><strong>Resultado</strong></td><td>2 células <strong>diploides</strong> (2n)</td><td>4 células <strong>haploides</strong> (1n)</td></tr>
+<tr><td><strong>Diversidad genética</strong></td><td>Células idénticas</td><td>Células genéticamente distintas</td></tr>
+<tr><td><strong>Sinapsis</strong></td><td>No hay</td><td>Sinapsis de homólogos en Profase I</td></tr>
+<tr><td><strong>Entrecruzamiento</strong></td><td>No</td><td>Sí (Profase I — Paquiteno)</td></tr>
+<tr><td><strong>Metafase</strong></td><td>Cromosomas individuales en el ecuador</td><td>MI: Bivalentes en el ecuador</td></tr>
+<tr><td><strong>Anafase</strong></td><td>Se separan cromátidas hermanas</td><td>AI: Se separan homólogos<br>AII: Se separan cromátidas hermanas</td></tr>
+<tr><td><strong>Función</strong></td><td>Crecimiento, reparación</td><td>Producción de gametos</td></tr>
+<tr><td><strong>Ploidía resultante</strong></td><td>2n → 2n</td><td>2n → 1n</td></tr>
+</tbody></table>
+</div>
+
+<!-- Match game: Meiosis vs Mitosis -->
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">¿Meiosis o Mitosis?</span></div>
+<p style="color:var(--t2);margin-bottom:14px">Empareja cada característica con el tipo de división correcta:</p>
+<div class="match-game" id="mg1">
+<div class="match-col"><h4 style="color:var(--g)">Característica</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg1',this)">Se forman bivalentes</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg1',this)">2 células diploides idénticas</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg1',this)">Shugoshina protege cohesinas</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg1',this)">Crecimiento y reparación</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">División</h4>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg1',this)">Mitosis</div>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg1',this)">Meiosis I</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg1',this)">Meiosis — Profase I</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg1',this)">Mitosis — Resultado</div>
+</div></div>
+<div class="match-score" id="mg1-score"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('meiosisII')">← Meiosis II</button><button class="btn bp" onclick="go('recombinacion')">Recombinación →</button></div></div>
+
+<!-- ===== RECOMBINACIÓN HOMÓLOGA ===== -->
+<div class="sec" id="sec-recombinacion">
+<div class="cd"><div class="ch">🔀 Recombinación <span class="ac">Homóloga</span> <span class="pill pg">RA 7</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div><p style="color:var(--t2)">La recombinación homóloga es un proceso <strong>programado y altamente regulado</strong> (no por daño) que intercambia literalmente segmentos de ADN entre cromosomas homólogos. Requiere al menos 1 entrecruzamiento por brazo. Permite la recombinación y el aumento de la variabilidad genética.</p></div>
+
+<p style="color:var(--t2);margin:14px 0">Las proteínas de la <strong>reparación por homología</strong> se han adaptado para mediar el apareamiento entre cromosomas homólogos durante la meiosis. El proceso siempre inicia con una <strong>ruptura de doble hélice</strong> (DSB) programada.</p>
+
+<div class="ib n"><div class="ibt">📋 Reparación por Homología vs Recombinación Meiótica</div><p style="color:var(--t2)">Ambos procesos comparten maquinaria similar, pero la reparación somática usa la cromátida hermana como molde (SDSA: el heterodúplex no permanece), mientras que la recombinación meiótica entre homólogos forma <strong>Holliday Junctions</strong> permanentes.</p></div>
+
+<!-- Steps of homologous recombination -->
+<h4 style="font-family:'DM Serif Display',serif;color:var(--t1);margin:20px 0 14px">Pasos de la Recombinación Homóloga Meiótica</h4>
+
+<div class="proc-card"><span class="proc-num">1</span><strong style="color:var(--g)">Ruptura de doble hélice (DSB)</strong>
+<div class="proc-text">La recombinación siempre inicia con una ruptura programada de la doble hélice, catalizada por la endonucleasa <strong>Spo11</strong>.</div></div>
+
+<div class="proc-card"><span class="proc-num">2</span><strong style="color:var(--b)">Resección de extremos — Colas 3' monocatenarias</strong>
+<div class="proc-text">Helicasas y exonucleasas procesan los extremos para generar <strong>colas 3' de una hebra</strong> (aprox. 50 nucleótidos). El complejo <strong>MRN</strong> se une al sitio de ruptura para dirigir reparación por homología.</div></div>
+
+<div class="proc-card"><span class="proc-num">3</span><strong style="color:var(--p)">Invasión de hebra — Formación del heterodúplex</strong>
+<div class="proc-text">El extremo 3' de una hebra localiza y se une a la región homóloga del otro dúplex, formando un <strong>heterodúplex</strong>. La hebra desplazada forma un <strong>D-loop</strong> (Displacement Loop). La recombinasa <strong>Rad51</strong> cataliza este evento (sinapsis).</div></div>
+
+<div class="proc-card"><span class="proc-num">4</span><strong style="color:var(--pk)">Síntesis de ADN desde el extremo 3'</strong>
+<div class="proc-text">El extremo 3' actúa como <strong>primer</strong>. A diferencia de SDSA, en la recombinación meiótica el D-loop continúa por síntesis de ADN en lugar de separarse.</div></div>
+
+<div class="proc-card"><span class="proc-num">5</span><strong style="color:var(--o)">Captura de la hebra desplazada</strong>
+<div class="proc-text">Conforme avanza la síntesis, se desplaza la hebra complementaria que se aparea con la hebra desplazada del dúplex invasor. Ambas hebras tienen un molde disponible para reparación.</div></div>
+
+<div class="proc-card"><span class="proc-num">6</span><strong style="color:var(--y)">Formación de dos Holliday Junctions</strong>
+<div class="proc-text">El resultado son dos moléculas de ADN intactas unidas por <strong>dos Uniones Holliday</strong>. La resolución de estas junctions determinará si hay o no entrecruzamiento.</div></div>
+</div>
+
+<div class="cd"><div class="ch">🛡️ BRCA1 y <span class="ac">BRCA2</span> <span class="pill pw">Clínica</span></div>
+<div class="cl"><div class="clb">⚠️ Relevancia Clínica</div>
+<div class="clt">Cáncer de Mama Hereditario</div>
+<p class="clp"><strong>BRCA1</strong> es necesario para los primeros pasos de la reparación por homología. Sin él, los extremos rotos se procesan mal y se recurre a NHEJ (con mutaciones).</p>
+<p class="clp"><strong>BRCA2</strong> se une a Rad51 y lo dirige a la hebra sencilla rota. Sin BRCA2, Rad51 no puede realizar la búsqueda por homología ni la invasión de hebra.</p>
+<p class="clp">80–90% de los cánceres de mama hereditarios son causados por mutaciones en estos genes. BRCA1 confiere un riesgo de 50–87% y BRCA2 de 15–44%.</p>
+</div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('vsMitosis')">← vs Mitosis</button><button class="btn bp" onclick="go('holliday')">Holliday Junctions →</button></div></div>
+
+<!-- ===== HOLLIDAY JUNCTIONS ===== -->
+<div class="sec" id="sec-holliday">
+<div class="cd"><div class="ch">✂️ <span class="ac">Holliday Junctions</span> <span class="pill pg">RA 8</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div><p style="color:var(--t2)">Las Holliday Junctions son estructuras <strong>centrales para el intercambio de material genético</strong> entre cromosomas. Se forman por el intercambio recíproco de hebras de ADN de dos dúplexes, creando regiones de ADN heterodúplex.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+<!-- Left duplex -->
+<line x1="50" y1="60" x2="280" y2="60" stroke="#00A3FF" stroke-width="3" stroke-linecap="round"/>
+<line x1="50" y1="80" x2="280" y2="80" stroke="#00D4AA" stroke-width="3" stroke-linecap="round"/>
+<!-- Right duplex -->
+<line x1="420" y1="60" x2="650" y2="60" stroke="#EC4899" stroke-width="3" stroke-linecap="round"/>
+<line x1="420" y1="80" x2="650" y2="80" stroke="#F97316" stroke-width="3" stroke-linecap="round"/>
+<!-- Cross-over strands -->
+<path d="M 280 60 C 320 60, 340 80, 350 100 C 360 120, 380 80, 420 80" fill="none" stroke="#00A3FF" stroke-width="3" stroke-linecap="round"/>
+<path d="M 280 80 C 320 80, 340 60, 350 40 C 360 20, 380 60, 420 60" fill="none" stroke="#00D4AA" stroke-width="3" stroke-linecap="round"/>
+<!-- Junction point -->
+<circle cx="350" cy="70" r="14" fill="rgba(255,217,61,.2)" stroke="#FFD93D" stroke-width="2"/>
+<text x="350" y="74" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="700">HJ</text>
+<!-- Labels -->
+<text x="150" y="50" text-anchor="middle" fill="#00A3FF" font-size="11" font-weight="600">Hebra 1</text>
+<text x="150" y="100" text-anchor="middle" fill="#00D4AA" font-size="11" font-weight="600">Hebra 2</text>
+<text x="535" y="50" text-anchor="middle" fill="#EC4899" font-size="11" font-weight="600">Hebra 3</text>
+<text x="535" y="100" text-anchor="middle" fill="#F97316" font-size="11" font-weight="600">Hebra 4</text>
+<text x="350" y="30" text-anchor="middle" fill="#FFD93D" font-size="12" font-weight="700">Holliday Junction</text>
+<!-- Resolution arrows -->
+<text x="350" y="140" text-anchor="middle" fill="#t2" font-size="11" font-weight="600" style="fill:var(--t2)">↓ Resolución por Resolvasas ↓</text>
+<!-- Resolution option 1 -->
+<rect x="70" y="160" width="250" height="90" rx="10" fill="rgba(0,212,170,.06)" stroke="#00D4AA" stroke-width="1"/>
+<text x="195" y="182" text-anchor="middle" fill="#00D4AA" font-size="11" font-weight="700">Corte Horizontal</text>
+<text x="195" y="200" text-anchor="middle" fill="#8BA4BE" font-size="10">→ SIN entrecruzamiento</text>
+<text x="195" y="218" text-anchor="middle" fill="#8BA4BE" font-size="10">(gene conversion solamente)</text>
+<line x1="100" y1="232" x2="290" y2="232" stroke="#00A3FF" stroke-width="2"/><line x1="100" y1="240" x2="290" y2="240" stroke="#00D4AA" stroke-width="2"/>
+<!-- Resolution option 2 -->
+<rect x="380" y="160" width="250" height="90" rx="10" fill="rgba(236,72,153,.06)" stroke="#EC4899" stroke-width="1"/>
+<text x="505" y="182" text-anchor="middle" fill="#EC4899" font-size="11" font-weight="700">Corte Vertical</text>
+<text x="505" y="200" text-anchor="middle" fill="#8BA4BE" font-size="10">→ CON entrecruzamiento</text>
+<text x="505" y="218" text-anchor="middle" fill="#8BA4BE" font-size="10">(intercambio de brazos)</text>
+<line x1="410" y1="232" x2="600" y2="232" stroke="#00A3FF" stroke-width="2"/><line x1="410" y1="240" x2="510" y2="240" stroke="#00D4AA" stroke-width="2"/><line x1="510" y1="240" x2="600" y2="240" stroke="#F97316" stroke-width="2"/>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ Holliday Junction y sus dos modos de resolución</p>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--g)">Sin Entrecruzamiento</h4><p style="color:var(--t2);font-size:.9rem">Cuando la resolución corta en un plano, los brazos de los cromosomas mantienen su configuración original. Solo ocurre conversión génica en la zona del heterodúplex.</p></div>
+<div class="cc"><h4 style="color:var(--pk)">Con Entrecruzamiento</h4><p style="color:var(--t2);font-size:.9rem">Cuando la resolución corta en el plano perpendicular, se intercambian los brazos distales. Esto genera <strong>diferentes combinaciones de alelos</strong> y contribuye a la diversidad genética.</p></div>
+</div>
+
+<div class="ib go"><div class="ibt">⚡ Consecuencias de la Recombinación Homóloga</div><p style="color:var(--t2)">Mantiene unidos a los cromosomas homólogos desde el diploteno (Profase I) hasta la Metafase I. Contribuye con la diversidad genética al generar diferentes combinaciones de alelos. Se asegura que cada cromosoma lleve <strong>al menos un entrecruzamiento</strong> por cada meiosis.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q05"><div class="qt">¿Qué determina si habrá o no entrecruzamiento en una Holliday Junction?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">A</div>La cantidad de ADN sintetizado</button>
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">B</div>El plano de resolución de la Holliday Junction</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">C</div>La acción de la shugoshina</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>El complejo sinaptonémico</button>
+</div><div class="qf" id="q05-fb"></div></div>
+</div>
+
+<div class="sn"><button class="btn bs" onclick="go('recombinacion')">← Recombinación</button><button class="btn bp" onclick="go('nodisyuncion')">No Disyunción →</button></div></div>
+
+<!-- ===== NO DISYUNCIÓN ===== -->
+<div class="sec" id="sec-nodisyuncion">
+<div class="cd"><div class="ch">⚠️ <span class="ac">No Disyunción</span> — Errores en la Meiosis <span class="pill pw">RA 9</span></div>
+<div class="ib w"><div class="ibt">🚨 Concepto</div><p style="color:var(--t2)">La <strong>no disyunción</strong> es un error en la separación de cromosomas durante la meiosis (en Anafase I o Anafase II). Resulta en gametos con un número anormal de cromosomas — uno de más (trisomía) o uno de menos (monosomía).</p></div>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--r)">No Disyunción en Anafase I</h4>
+<p style="color:var(--t2);font-size:.9rem">Los cromosomas <strong>homólogos no se separan</strong>. Ambos homólogos van al mismo polo. Resultado: 2 gametos con un cromosoma extra (n+1) y 2 gametos con uno menos (n-1). <strong>Todos los gametos son anormales.</strong></p></div>
+<div class="cc"><h4 style="color:var(--o)">No Disyunción en Anafase II</h4>
+<p style="color:var(--t2);font-size:.9rem">Las <strong>cromátidas hermanas no se separan</strong>. Resultado: 1 gameto n+1, 1 gameto n-1, y 2 gametos normales (n). Solo <strong>la mitad de los gametos son anormales</strong>.</p></div>
+</div>
+
+<!-- SVG: Non-disjunction -->
+<div class="svg-wrap">
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="ar3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#FF6B6B"/></marker></defs>
+<!-- Normal -->
+<text x="200" y="25" text-anchor="middle" fill="#00D4AA" font-size="14" font-weight="700">Normal</text>
+<rect x="140" y="35" width="120" height="35" rx="8" fill="rgba(0,212,170,.1)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="200" y="57" text-anchor="middle" fill="#8BA4BE" font-size="10">2n → Meiosis I</text>
+<line x1="170" y1="70" x2="130" y2="95" stroke="#00D4AA" stroke-width="1"/><line x1="230" y1="70" x2="270" y2="95" stroke="#00D4AA" stroke-width="1"/>
+<rect x="90" y="95" width="80" height="30" rx="6" fill="rgba(0,212,170,.08)" stroke="#00D4AA" stroke-width="1"/>
+<text x="130" y="114" text-anchor="middle" fill="#8BA4BE" font-size="9">n</text>
+<rect x="230" y="95" width="80" height="30" rx="6" fill="rgba(0,212,170,.08)" stroke="#00D4AA" stroke-width="1"/>
+<text x="270" y="114" text-anchor="middle" fill="#8BA4BE" font-size="9">n</text>
+<text x="200" y="150" text-anchor="middle" fill="#8BA4BE" font-size="9">Meiosis II ↓</text>
+<rect x="50" y="160" width="60" height="25" rx="5" fill="rgba(0,212,170,.12)" stroke="#00D4AA" stroke-width="1"/>
+<text x="80" y="176" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">n</text>
+<rect x="120" y="160" width="60" height="25" rx="5" fill="rgba(0,212,170,.12)" stroke="#00D4AA" stroke-width="1"/>
+<text x="150" y="176" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">n</text>
+<rect x="220" y="160" width="60" height="25" rx="5" fill="rgba(0,212,170,.12)" stroke="#00D4AA" stroke-width="1"/>
+<text x="250" y="176" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">n</text>
+<rect x="290" y="160" width="60" height="25" rx="5" fill="rgba(0,212,170,.12)" stroke="#00D4AA" stroke-width="1"/>
+<text x="320" y="176" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">n</text>
+<text x="200" y="205" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="600">✓ 4 gametos normales</text>
+
+<!-- Non-disjunction in MI -->
+<text x="570" y="25" text-anchor="middle" fill="#FF6B6B" font-size="14" font-weight="700">No Disyunción (Anafase I)</text>
+<rect x="510" y="35" width="120" height="35" rx="8" fill="rgba(255,107,107,.1)" stroke="#FF6B6B" stroke-width="1.5"/>
+<text x="570" y="57" text-anchor="middle" fill="#8BA4BE" font-size="10">2n → ERROR MI</text>
+<line x1="540" y1="70" x2="490" y2="95" stroke="#FF6B6B" stroke-width="1"/><line x1="600" y1="70" x2="650" y2="95" stroke="#FF6B6B" stroke-width="1"/>
+<rect x="450" y="95" width="80" height="30" rx="6" fill="rgba(255,107,107,.08)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="490" y="114" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">n+1</text>
+<rect x="610" y="95" width="80" height="30" rx="6" fill="rgba(255,107,107,.08)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="650" y="114" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">n-1</text>
+<text x="570" y="150" text-anchor="middle" fill="#8BA4BE" font-size="9">Meiosis II ↓</text>
+<rect x="420" y="160" width="60" height="25" rx="5" fill="rgba(255,107,107,.12)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="450" y="176" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">n+1</text>
+<rect x="490" y="160" width="60" height="25" rx="5" fill="rgba(255,107,107,.12)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="520" y="176" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">n+1</text>
+<rect x="610" y="160" width="60" height="25" rx="5" fill="rgba(255,107,107,.12)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="640" y="176" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">n-1</text>
+<rect x="680" y="160" width="60" height="25" rx="5" fill="rgba(255,107,107,.12)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="710" y="176" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">n-1</text>
+<text x="570" y="205" text-anchor="middle" fill="#FF6B6B" font-size="10" font-weight="600">✗ 4 gametos anormales</text>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ Comparación: meiosis normal vs no disyunción en Anafase I</p>
+
+<div class="ib w"><div class="ibt">🩺 Consecuencias Clínicas</div><p style="color:var(--t2)">La no disyunción produce gametos con cromosomas extras o faltantes. Si estos gametos se fertilizan, pueden resultar en condiciones como <strong>Trisomía 21</strong> (Síndrome de Down), Trisomía 18 (Edwards), Trisomía 13 (Patau) y aneuploidías de cromosomas sexuales (Turner 45,X; Klinefelter 47,XXY).</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q06"><div class="qt">Si ocurre no disyunción en Anafase II, ¿cuántos gametos anormales se producen?</div><div class="qo">
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">A</div>4 gametos anormales</button>
+<button class="qb" onclick="cq('q06',this,1)"><div class="ol">B</div>2 gametos anormales y 2 normales</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">C</div>1 gameto anormal y 3 normales</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">D</div>3 gametos anormales y 1 normal</button>
+</div><div class="qf" id="q06-fb"></div></div>
+</div>
+
+<div class="sn"><button class="btn bs" onclick="go('holliday')">← Holliday</button><button class="btn bp" onclick="go('glosario')">Glosario →</button></div></div>
+
+<!-- ===== GLOSARIO ===== -->
+<div class="sec" id="sec-glosario">
+<div class="cd"><div class="ch">📚 <span class="ac">Glosario</span> Interactivo</div>
+<p style="color:var(--t2);margin-bottom:16px">Haz clic en cada tarjeta para revelar la definición:</p>
+<div class="fg">
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Meiosis</div><div class="fd">División celular que convierte una célula diploide (2n) en cuatro células haploides (1n) mediante dos divisiones sucesivas. Produce gametos.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Complejo Sinaptonémico</div><div class="fd">Estructura proteica que une cromosomas homólogos entre sí. Su formación requiere homología establecida y está relacionada con el entrecruzamiento.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Entrecruzamiento</div><div class="fd">Intercambio recíproco de material genético entre cromosomas homólogos durante la Profase I (paquiteno). Evidenciado por los quiasmata.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Heterodúplex</div><div class="fd">Región de ADN donde una hebra proviene de un dúplex y la otra del dúplex homólogo. Se forma durante la invasión de hebra.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Conversión Génica</div><div class="fd">Cambio en la secuencia de un gen por reemplazo con la secuencia del homólogo durante la reparación por homología.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Shugoshina</div><div class="fd">"Espíritu guardián" (japonés). Protege cohesinas centroméricas de la separasa en Meiosis I reclutando fosfatasas.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Holliday Junction</div><div class="fd">Estructura formada por el intercambio recíproco de hebras entre dos dúplexes. Su resolución determina si hay entrecruzamiento.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Quiasmata</div><div class="fd">Conexiones visibles entre homólogos donde se intercambió material genético. Evidencia citológica del entrecruzamiento.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">No Disyunción</div><div class="fd">Error en la separación de cromosomas durante Anafase I o II. Produce gametos aneuploides (con cromosomas de más o de menos).</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Valor C</div><div class="fd">Cantidad de ADN en un set haploide de cromosomas. Diploide antes de S = 2C, post-replicación = 4C, post-MI = 2C, post-MII = 1C.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Rad51</div><div class="fd">Recombinasa que cataliza la búsqueda de homología e invasión de hebra. Es reclutada por BRCA2 a la hebra sencilla rota.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">D-Loop</div><div class="fd">Displacement Loop: estructura de 3 hebras formada cuando la hebra invasora desplaza una hebra del dúplex intacto durante la recombinación.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Bivalente</div><div class="fd">Par de cromosomas homólogos apareados durante la sinapsis. Contiene 4 cromátidas (tétrada).</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">BRCA1 / BRCA2</div><div class="fd">Genes supresores de tumores esenciales para la reparación por homología. Mutaciones causan 80-90% de cánceres de mama hereditarios.</div><div class="fh">clic para ver</div></div>
+<div class="fc" onclick="this.classList.toggle('fl')"><div class="ft">Separasa</div><div class="fd">Enzima que hidroliza cohesinas fosforiladas para permitir la separación de cromátidas. Activa en anafase mitótica y Anafase II.</div><div class="fh">clic para ver</div></div>
+</div></div>
+<div class="sn"><button class="btn bs" onclick="go('nodisyuncion')">← No Disyunción</button><button class="btn bp" onclick="go('evaluacion')">Evaluación Final →</button></div></div>
+
+<!-- ===== EVALUACIÓN FINAL ===== -->
+<div class="sec" id="sec-evaluacion">
+<div class="cd"><div class="ch">🏆 Evaluación <span class="ac">Final</span></div>
+<p style="color:var(--t2);margin-bottom:20px">Pon a prueba tus conocimientos con estas preguntas integradoras. ¡Buena suerte!</p>
+
+<div class="qq" id="qf1"><div class="qt">1. ¿Cuál es el contenido de ADN (valor C) inmediatamente después de Meiosis I?</div><div class="qo">
+<button class="qb" onclick="cq('qf1',this,0)"><div class="ol">A</div>4C</button>
+<button class="qb" onclick="cq('qf1',this,1)"><div class="ol">B</div>2C</button>
+<button class="qb" onclick="cq('qf1',this,0)"><div class="ol">C</div>1C</button>
+<button class="qb" onclick="cq('qf1',this,0)"><div class="ol">D</div>3C</button>
+</div><div class="qf" id="qf1-fb"></div></div>
+
+<div class="qq" id="qf2"><div class="qt">2. ¿En qué etapa de la Profase I se completa el entrecruzamiento?</div><div class="qo">
+<button class="qb" onclick="cq('qf2',this,0)"><div class="ol">A</div>Leptoteno</button>
+<button class="qb" onclick="cq('qf2',this,0)"><div class="ol">B</div>Cigoteno</button>
+<button class="qb" onclick="cq('qf2',this,1)"><div class="ol">C</div>Paquiteno</button>
+<button class="qb" onclick="cq('qf2',this,0)"><div class="ol">D</div>Diploteno</button>
+</div><div class="qf" id="qf2-fb"></div></div>
+
+<div class="qq" id="qf3"><div class="qt">3. ¿Cuál proteína es responsable de la búsqueda de homología e invasión de hebra?</div><div class="qo">
+<button class="qb" onclick="cq('qf3',this,0)"><div class="ol">A</div>Ku70/Ku80</button>
+<button class="qb" onclick="cq('qf3',this,1)"><div class="ol">B</div>Rad51</button>
+<button class="qb" onclick="cq('qf3',this,0)"><div class="ol">C</div>Shugoshina</button>
+<button class="qb" onclick="cq('qf3',this,0)"><div class="ol">D</div>Separasa</button>
+</div><div class="qf" id="qf3-fb"></div></div>
+
+<div class="qq" id="qf4"><div class="qt">4. ¿Qué diferencia principal hay entre Metafase mitótica y Metafase I?</div><div class="qo">
+<button class="qb" onclick="cq('qf4',this,0)"><div class="ol">A</div>En Metafase I no hay microtúbulos</button>
+<button class="qb" onclick="cq('qf4',this,1)"><div class="ol">B</div>En Metafase I hay bivalentes (homólogos apareados) en el ecuador</button>
+<button class="qb" onclick="cq('qf4',this,0)"><div class="ol">C</div>En Metafase mitótica hay bivalentes en el ecuador</button>
+<button class="qb" onclick="cq('qf4',this,0)"><div class="ol">D</div>No hay diferencia</button>
+</div><div class="qf" id="qf4-fb"></div></div>
+
+<div class="qq" id="qf5"><div class="qt">5. ¿Qué ocurre si hay una mutación en BRCA2?</div><div class="qo">
+<button class="qb" onclick="cq('qf5',this,0)"><div class="ol">A</div>Se activa la shugoshina prematuramente</button>
+<button class="qb" onclick="cq('qf5',this,0)"><div class="ol">B</div>No se forman Holliday Junctions en mitosis</button>
+<button class="qb" onclick="cq('qf5',this,1)"><div class="ol">C</div>Rad51 no puede ser dirigido a la hebra rota, fallando la reparación por homología</button>
+<button class="qb" onclick="cq('qf5',this,0)"><div class="ol">D</div>La no disyunción ocurre siempre</button>
+</div><div class="qf" id="qf5-fb"></div></div>
+
+<div class="qq" id="qf6"><div class="qt">6. ¿Cuál es la principal consecuencia de la no disyunción en Anafase I vs Anafase II?</div><div class="qo">
+<button class="qb" onclick="cq('qf6',this,1)"><div class="ol">A</div>En Anafase I: 4 gametos anormales. En Anafase II: solo 2 anormales.</button>
+<button class="qb" onclick="cq('qf6',this,0)"><div class="ol">B</div>En ambos casos: 4 gametos anormales</button>
+<button class="qb" onclick="cq('qf6',this,0)"><div class="ol">C</div>En Anafase I: 2 anormales. En Anafase II: 4 anormales.</button>
+<button class="qb" onclick="cq('qf6',this,0)"><div class="ol">D</div>La no disyunción solo puede ocurrir en Anafase I</button>
+</div><div class="qf" id="qf6-fb"></div></div>
+
+<div class="qq" id="qf7"><div class="qt">7. ¿Qué estructura mantiene unidos a los homólogos en Diploteno y Metafase I después de desarmarse el complejo sinaptonémico?</div><div class="qo">
+<button class="qb" onclick="cq('qf7',this,0)"><div class="ol">A</div>Elementos laterales</button>
+<button class="qb" onclick="cq('qf7',this,0)"><div class="ol">B</div>Cohesinas centroméricas</button>
+<button class="qb" onclick="cq('qf7',this,1)"><div class="ol">C</div>Quiasmata</button>
+<button class="qb" onclick="cq('qf7',this,0)"><div class="ol">D</div>Microtúbulos del huso</button>
+</div><div class="qf" id="qf7-fb"></div></div>
+
+<div class="qq" id="qf8"><div class="qt">8. La Meiosis II es similar a una mitosis porque:</div><div class="qo">
+<button class="qb" onclick="cq('qf8',this,0)"><div class="ol">A</div>Hay entrecruzamiento</button>
+<button class="qb" onclick="cq('qf8',this,0)"><div class="ol">B</div>Se separan cromosomas homólogos</button>
+<button class="qb" onclick="cq('qf8',this,1)"><div class="ol">C</div>Se separan cromátidas hermanas</button>
+<button class="qb" onclick="cq('qf8',this,0)"><div class="ol">D</div>Produce células diploides</button>
+</div><div class="qf" id="qf8-fb"></div></div>
+
+<!-- Score display -->
+<div class="sd" id="evalScore" style="display:none">
+<div class="snm" id="evalNum" style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">0/8</div>
+<div class="sbl">Respuestas correctas</div>
+<div class="sbr"><div class="sbf" id="evalBar" style="width:0%;background:var(--grad)"></div></div>
+<p id="evalMsg" style="color:var(--t2);margin-top:10px"></p>
+</div>
+<div style="text-align:center;margin-top:20px"><button class="btn bp" onclick="showEvalScore()">Ver mi puntuación →</button></div>
+</div>
+
+<div class="sn"><button class="btn bs" onclick="go('glosario')">← Glosario</button><button class="btn bp" onclick="go('inicio')">🏠 Volver al inicio</button></div></div>
+
+</div><!-- end .mc -->
+
+<script>
+// Navigation
+const secs=['inicio','contexto','meiosisI','profaseI','metaAnaTelo','meiosisII','vsMitosis','recombinacion','holliday','nodisyuncion','glosario','evaluacion'];
+function go(id){
+document.querySelectorAll('.sec').forEach(s=>s.classList.remove('a'));
+document.getElementById('sec-'+id).classList.add('a');
+document.querySelectorAll('#navLinks button').forEach(b=>{b.classList.remove('a');if(b.dataset.s===id)b.classList.add('a')});
+let idx=secs.indexOf(id);
+document.getElementById('pf').style.width=((idx/(secs.length-1))*100)+'%';
+window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('#navLinks button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.s)));
+
+// Quiz
+const fb={
+q01:['✅ ¡Correcto! La meiosis produce 4 células haploides genéticamente distintas, esenciales para la variabilidad genética.','❌ Incorrecto. La meiosis produce 4 células haploides (no diploides) y genéticamente distintas (no idénticas). Revisa la sección de contexto.'],
+q02:['✅ ¡Correcto! El complejo sinaptonémico está totalmente desarrollado en el paquiteno, donde también se completa el entrecruzamiento.','❌ Incorrecto. El complejo sinaptonémico se desarrolla completamente en el paquiteno (etapa 3 de la Profase I).'],
+q03:['✅ ¡Correcto! La shugoshina recluta fosfatasas para desfosforilar las cohesinas centroméricas, protegiéndolas de la separasa.','❌ Incorrecto. La shugoshina protege las cohesinas centroméricas impidiendo que la separasa las degrade en Meiosis I.'],
+q04:['✅ ¡Correcto! En Anafase I se separan los cromosomas homólogos. Las cromátidas hermanas se separan luego, en Anafase II.','❌ Incorrecto. En Anafase I se separan cromosomas homólogos (no cromátidas hermanas — eso ocurre en Anafase II).'],
+q05:['✅ ¡Correcto! El plano de resolución determina si hay intercambio de brazos (entrecruzamiento) o solo conversión génica.','❌ Incorrecto. Lo que determina el resultado es el plano (orientación) en que las resolvasas cortan la Holliday Junction.'],
+q06:['✅ ¡Correcto! En Anafase II, solo 2 de los 4 gametos son anormales porque el error afecta solo a una de las dos células resultantes de Meiosis I.','❌ Incorrecto. La no disyunción en Anafase II produce 2 gametos anormales y 2 normales (a diferencia de Anafase I, donde los 4 son anormales).'],
+qf1:['✅ ¡Correcto! Después de MI: 1n (haploide), 2C (cromátidas hermanas aún unidas).','❌ Incorrecto. Post-Meiosis I = 1n, 2C. Cada cromosoma haploide consiste aún en 2 cromátidas hermanas.'],
+qf2:['✅ ¡Correcto! El entrecruzamiento se completa en paquiteno, donde el complejo sinaptonémico está totalmente desarrollado.','❌ Incorrecto. El entrecruzamiento se completa en paquiteno (Profase I, etapa 3).'],
+qf3:['✅ ¡Correcto! Rad51 es la recombinasa que cataliza la sinapsis, búsqueda de homología e invasión de hebra.','❌ Incorrecto. Rad51 es la recombinasa clave; BRCA2 la dirige al sitio correcto.'],
+qf4:['✅ ¡Correcto! En Metafase I, los cromosomas homólogos están apareados como bivalentes en el plano ecuatorial.','❌ Incorrecto. La diferencia clave es que en Metafase I hay bivalentes (homólogos apareados), no cromosomas individuales.'],
+qf5:['✅ ¡Correcto! BRCA2 se une a Rad51 y lo dirige a la hebra sencilla rota. Sin BRCA2, la reparación por homología falla.','❌ Incorrecto. BRCA2 es esencial para dirigir Rad51 a la hebra sencilla rota para la reparación por homología.'],
+qf6:['✅ ¡Correcto! En Anafase I todos los gametos son anormales; en Anafase II solo la mitad.','❌ Incorrecto. En AI los 4 gametos son anormales, en AII solo 2 son anormales y 2 normales.'],
+qf7:['✅ ¡Correcto! Los quiasmata mantienen unidos a los homólogos tras desarmarse el complejo sinaptonémico, hasta la Anafase I.','❌ Incorrecto. Después de desarmarse el CS, los quiasmata son la conexión que mantiene unidos a los homólogos.'],
+qf8:['✅ ¡Correcto! MII separa cromátidas hermanas, igual que la mitosis, pero en una célula haploide.','❌ Incorrecto. La Meiosis II se parece a la mitosis porque en ambas se separan cromátidas hermanas.']
+};
+
+function cq(qid,btn,correct){
+let q=document.getElementById(qid);
+let btns=q.querySelectorAll('.qb');
+btns.forEach(b=>{b.classList.add('dis');b.classList.remove('sel')});
+if(correct){btn.classList.add('ok');showFb(qid,true)}
+else{btn.classList.add('no');btns.forEach(b=>{if(!b.classList.contains('no')){}});
+let corr=[...btns].find((_,i)=>{let txt=fb[qid];return true});
+btns.forEach((b,i)=>{
+let isCorr=b.getAttribute('onclick').includes(',1)');
+if(isCorr)b.classList.add('ok');
+});
+showFb(qid,false)}
+}
+function showFb(qid,ok){
+let el=document.getElementById(qid+'-fb');
+el.className='qf sh '+(ok?'cf':'if');
+el.textContent=fb[qid][ok?0:1];
+}
+
+// Match game
+let mState={};
+function mp(gid,el){
+if(el.classList.contains('ok'))return;
+let s=el.dataset.side;
+if(!mState[gid])mState[gid]={l:null,r:null,score:0,total:0};
+let st=mState[gid];
+// Remove previous selection on same side
+let g=document.getElementById(gid);
+g.querySelectorAll(`.match-item[data-side="${s}"]`).forEach(i=>{if(!i.classList.contains('ok'))i.classList.remove('sel')});
+el.classList.add('sel');
+st[s]=el;
+if(st.l&&st.r){
+let total=g.querySelectorAll('.match-item[data-side="l"]').length;
+if(!st.total)st.total=total;
+if(st.l.dataset.pair===st.r.dataset.pair){
+st.l.classList.add('ok');st.r.classList.add('ok');st.score++;
+document.getElementById(gid+'-score').textContent='✓ '+st.score+'/'+st.total+' correctas';
+}else{
+st.l.classList.add('no');st.r.classList.add('no');
+setTimeout(()=>{st.l.classList.remove('no','sel');st.r.classList.remove('no','sel')},600);
+}
+st.l=null;st.r=null;
+}
+}
+
+// Eval score
+function showEvalScore(){
+let correct=0;
+let evalQs=['qf1','qf2','qf3','qf4','qf5','qf6','qf7','qf8'];
+evalQs.forEach(qid=>{
+let q=document.getElementById(qid);
+if(q.querySelector('.qb.ok')&&!q.querySelector('.qb.no'))correct++;
+else if(q.querySelector('.qb.ok'))correct++;
+});
+// Recount properly
+correct=0;
+evalQs.forEach(qid=>{
+let q=document.getElementById(qid);
+let btns=q.querySelectorAll('.qb');
+btns.forEach(b=>{
+if(b.classList.contains('ok')&&b.getAttribute('onclick').includes(',1)'))correct++;
+});
+});
+let el=document.getElementById('evalScore');
+el.style.display='block';
+document.getElementById('evalNum').textContent=correct+'/8';
+document.getElementById('evalBar').style.width=(correct/8*100)+'%';
+let msgs=['Necesitas repasar los temas. ¡Vuelve a intentarlo!','Buen intento, pero puedes mejorar.','¡Muy bien! Dominas casi todos los conceptos.','¡Excelente! Dominas la meiosis por completo. 🎉'];
+let mi=correct<=2?0:correct<=4?1:correct<=6?2:3;
+document.getElementById('evalMsg').textContent=msgs[mi];
+el.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body></html>
