@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Integral: Dogma Central de la Biología Molecular — Del ADN a la Proteína Funcional</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 20px}
+.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;min-height:54px;flex-wrap:wrap;gap:6px;padding:6px 0}
+.nb{font-family:'DM Serif Display',serif;font-size:1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
+.nl{display:flex;gap:2px;flex-wrap:wrap}.nl button{padding:4px 10px;border-radius:20px;border:none;background:0;color:var(--t3);font-size:.7rem;font-family:inherit;cursor:pointer;transition:.3s;white-space:nowrap}.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}
+.pb{position:fixed;top:0;left:0;right:0;z-index:200;height:3px;background:rgba(0,212,170,.1)}.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}
+.mc{max-width:960px;margin:0 auto;padding:24px 20px 80px;position:relative;z-index:1}
+.sec{display:none;animation:fi .5s}.sec.a{display:block}@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:40px 0 30px}.hi{width:80px;height:80px;margin:0 auto 16px;background:var(--grad);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:2.4rem;line-height:1.2;margin-bottom:12px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hs{font-size:1.05rem;color:var(--t2);max-width:650px;margin:0 auto 24px}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:12px 14px;display:flex;align-items:flex-start;gap:10px;transition:.3s}.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}.on{min-width:24px;height:24px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;color:#0B1622}.ot{font-size:.83rem;color:var(--t2);line-height:1.5}
+.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:20px;box-shadow:var(--sh);transition:.3s}.cd:hover{border-color:rgba(0,212,170,.25)}.ch{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:12px}.ch .ac{color:var(--g)}
+.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:16px 20px;margin:16px 0;background:rgba(0,212,170,.06)}.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}.ib.pp{background:rgba(167,139,250,.06);border-left-color:var(--p)}.ibt{font-weight:700;margin-bottom:5px;font-size:.9rem}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0}.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:20px}.cc h4{font-family:'DM Serif Display',serif;margin-bottom:8px;font-size:1rem}
+.et{width:100%;border-collapse:separate;border-spacing:0;margin:16px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}.et th{background:rgba(0,212,170,.12);padding:10px 14px;text-align:left;font-weight:600;font-size:.82rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}.et td{padding:10px 14px;border-top:1px solid var(--bdr);font-size:.87rem;color:var(--t2)}.et tr:hover td{background:var(--card2)}
+.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:22px;margin-bottom:16px}.qt{font-weight:600;font-size:.95rem;margin-bottom:14px}.qo{display:flex;flex-direction:column;gap:8px}.qb{padding:11px 16px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.9rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}.qb.dis{pointer-events:none;opacity:.7}.ol{min-width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.qf{margin-top:12px;padding:14px;border-radius:var(--r10);font-size:.87rem;line-height:1.6;display:none}.qf.sh{display:block}.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}
+.cl{background:linear-gradient(135deg,rgba(255,107,107,.06),rgba(255,217,61,.04));border:1px solid rgba(255,107,107,.2);border-radius:var(--r16);padding:24px;margin:18px 0}.clb{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,107,.15);color:var(--r);padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:.03em}.clt{font-family:'DM Serif Display',serif;font-size:1.2rem;margin-bottom:10px}.clp{color:var(--t2);margin-bottom:12px;font-size:.9rem;line-height:1.7}
+.btn{padding:10px 22px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.9rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}.bp:hover{transform:translateY(-2px)}.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}.bs:hover{background:rgba(0,212,170,.2)}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.72rem;font-weight:600;margin:2px 3px}.pg{background:rgba(0,212,170,.15);color:var(--g)}.pb2{background:rgba(0,163,255,.12);color:var(--b)}.pw{background:rgba(255,107,107,.12);color:var(--r)}.py{background:rgba(255,217,61,.12);color:var(--y)}.pp{background:rgba(167,139,250,.12);color:var(--p)}.ppk{background:rgba(236,72,153,.12);color:var(--pk)}.por{background:rgba(249,115,22,.12);color:var(--o)}
+.svg-wrap{background:rgba(0,0,0,.25);border-radius:var(--r16);padding:16px;margin:16px 0;border:1px solid var(--bdr);overflow-x:auto}.svg-wrap svg{width:100%;height:auto;display:block}
+.analogy{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(0,163,255,.06));border:1px solid rgba(167,139,250,.2);border-radius:var(--r16);padding:22px;margin:16px 0}.analogy .analogy-icon{font-size:1.8rem;margin-bottom:6px}.analogy h4{font-family:'DM Serif Display',serif;color:var(--p);margin-bottom:6px}.analogy p{color:var(--t2);font-size:.9rem}
+.sn{display:flex;justify-content:space-between;margin-top:30px;padding-top:18px;border-top:1px solid var(--bdr)}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:18px 0}.fc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:18px;cursor:pointer;transition:.4s;min-height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.fc:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:var(--glow)}.ft{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--g)}.fd{display:none;font-size:.83rem;color:var(--t2);line-height:1.6;margin-top:6px}.fc.fl .ft{display:none}.fc.fl .fd{display:block}.fh{font-size:.7rem;color:var(--t3);margin-top:6px}.fc.fl .fh{display:none}
+.sd{text-align:center;padding:30px;margin:18px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}.snm{font-family:'DM Serif Display',serif;font-size:3rem;margin-bottom:4px}.sbl{color:var(--t2)}.sbr{width:100%;max-width:360px;height:10px;background:rgba(255,255,255,.06);border-radius:6px;margin:16px auto;overflow:hidden}.sbf{height:100%;border-radius:6px;transition:width 1s}
+.sim-box{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:22px;margin:18px 0;text-align:center}.sim-controls{display:flex;gap:8px;justify-content:center;margin:14px 0;flex-wrap:wrap}.sim-btn{padding:7px 18px;border-radius:8px;border:2px solid var(--g);background:0;color:var(--g);font-family:inherit;font-weight:600;font-size:.85rem;cursor:pointer;transition:.3s}.sim-btn:hover{background:rgba(0,212,170,.15)}.sim-btn.active{background:var(--g);color:#0B1622}.sim-btn:disabled{opacity:.4;cursor:default}
+.sim-narration{background:rgba(0,212,170,.06);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px;margin-top:12px;color:var(--t2);font-size:.9rem;line-height:1.6;min-height:60px;text-align:left}.sim-step-ind{display:flex;gap:5px;justify-content:center;margin:8px 0}.sim-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.1);transition:.3s}.sim-dot.act{background:var(--g);box-shadow:0 0 8px rgba(0,212,170,.5)}.sim-dot.done{background:rgba(0,212,170,.3)}
+.match-game{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0}.match-col{display:flex;flex-direction:column;gap:7px}.match-col h4{text-align:center;margin-bottom:6px;font-family:'DM Serif Display',serif}.match-item{padding:10px 14px;border-radius:var(--r10);border:2px solid var(--bdr);background:var(--card2);color:var(--t2);cursor:pointer;transition:.3s;font-size:.85rem;text-align:center;user-select:none}.match-item:hover{border-color:var(--b);transform:scale(1.02)}.match-item.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}.match-item.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important;pointer-events:none}.match-item.no{border-color:var(--r)!important;animation:shake .4s}.match-score{text-align:center;margin-top:10px;font-weight:600;color:var(--g)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
+.proc-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#0B1622;font-weight:700;font-size:.78rem;margin-right:8px}
+.timeline{position:relative;padding-left:28px;margin:16px 0}.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--g),var(--b),var(--p))}.timeline-item{position:relative;margin-bottom:16px;padding:14px;background:var(--card2);border-radius:var(--r10);border:1px solid var(--bdr)}.timeline-item::before{content:'';position:absolute;left:-22px;top:18px;width:10px;height:10px;border-radius:50%;background:var(--g);border:2px solid var(--bg)}
+.tbtn{padding:8px 16px;border:none;background:0;color:var(--t3);font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:.3s;border-radius:7px 7px 0 0}.tbtn:hover{color:var(--t2)}.tbtn.a{color:var(--g);border-bottom-color:var(--g);background:rgba(0,212,170,.06)}.tb{display:flex;gap:4px;margin-bottom:18px;border-bottom:1px solid var(--bdr);flex-wrap:wrap}.tc{display:none;animation:fi .4s}.tc.a{display:block}
+.mnemonic{background:linear-gradient(135deg,rgba(255,217,61,.08),rgba(249,115,22,.05));border:1px solid rgba(255,217,61,.25);border-radius:var(--r16);padding:22px;margin:16px 0;text-align:center}.mnemonic h4{font-family:'DM Serif Display',serif;color:var(--y);margin-bottom:8px}.mnemonic p{color:var(--t2);font-size:.9rem;line-height:1.7}.mnemonic .big{font-size:1.6rem;font-weight:700;letter-spacing:2px;color:var(--y);margin:8px 0}
+.chapter-header{background:linear-gradient(135deg,var(--card),var(--card2));border:2px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;text-align:center;position:relative;overflow:hidden}.chapter-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,212,170,.08),transparent 70%);pointer-events:none}.chapter-header .ch-num{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--g);text-transform:uppercase;letter-spacing:.15em;margin-bottom:6px}.chapter-header h2{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:6px}.chapter-header p{color:var(--t2);font-size:.92rem}.chapter-header .ch-time{display:inline-block;background:rgba(0,212,170,.12);color:var(--g);padding:3px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-top:8px}
+.step-diagram{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;margin:16px 0;padding:14px;background:rgba(0,0,0,.15);border-radius:var(--r10)}.step-box{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 12px;text-align:center;min-width:80px}.step-arrow{color:var(--y);font-size:1.1rem;font-weight:700}
+@media(max-width:768px){.og,.cg,.match-game{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.hero h1{font-size:1.8rem}.ni{flex-direction:column;align-items:flex-start}.step-diagram{gap:2px}.step-box{min-width:60px;padding:6px 8px;font-size:.75rem}}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">🧬 Dogma Central — Biología Molecular</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button><button data-s="nucleo">Núcleo</button><button data-s="empaq">Empaquetam.</button><button data-s="replic">Replicación</button><button data-s="transcr">Transcripción</button><button data-s="procrna">Proc. ARNm</button><button data-s="codigogen">Código Gen.</button><button data-s="traduc">Traducción</button><button data-s="modpost">Mod. Post-Trad</button><button data-s="rer">RER y Destino</button><button data-s="glosario">Glosario</button><button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ===== INICIO ===== -->
+<div class="sec a" id="sec-inicio"><div class="hero"><div class="hi">🧬</div><h1>Dogma Central de la Biología Molecular</h1><p class="hs">Del ADN a la Proteína Funcional: replicación, transcripción, procesamiento, traducción y destino proteico. Enfoque integrado para estudiantes de medicina.</p></div>
+<div class="cd"><div class="ch">🎯 Objetivos de esta <span class="ac">Tutoría Integral</span></div><p style="color:var(--t2);margin-bottom:14px">Sesión de ~2 horas. Integra 9 temas del dogma central con relevancia clínica.</p>
+<div class="og">
+<div class="oi"><div class="on">1</div><div class="ot">Describir la estructura del núcleo, envoltura, CPN y transporte nucleocitoplasmático.</div></div>
+<div class="oi"><div class="on">2</div><div class="ot">Explicar el empaquetamiento del ADN: nucleosoma, cromatina, modificaciones epigenéticas.</div></div>
+<div class="oi"><div class="on">3</div><div class="ot">Describir la replicación semiconservativa, maquinaria del replisoma y telomerasa.</div></div>
+<div class="oi"><div class="on">4</div><div class="ot">Describir la transcripción: promotores, factores generales, CTD, fases.</div></div>
+<div class="oi"><div class="on">5</div><div class="ot">Explicar el procesamiento del pre-ARNm: capping, poliadenilación, splicing.</div></div>
+<div class="oi"><div class="on">6</div><div class="ot">Describir el código genético, estructura del ribosoma y ARNt.</div></div>
+<div class="oi"><div class="on">7</div><div class="ot">Describir la traducción: iniciación (scanning), elongación, terminación, costo energético.</div></div>
+<div class="oi"><div class="on">8</div><div class="ot">Explicar modificaciones post-traduccionales, plegamiento, chaperonas, SRP, RER y ERAD.</div></div>
+</div></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00D4AA"/></marker></defs>
+<text x="450" y="28" text-anchor="middle" fill="#E8F0F8" font-size="16" font-weight="700" font-family="DM Serif Display,serif">El Dogma Central — Flujo de la Información Genética</text>
+<rect x="30" y="100" width="140" height="80" rx="16" fill="rgba(0,163,255,.12)" stroke="#00A3FF" stroke-width="2"/><text x="100" y="130" text-anchor="middle" fill="#00A3FF" font-size="24">🧬</text><text x="100" y="155" text-anchor="middle" fill="#00A3FF" font-size="14" font-weight="700">ADN</text><text x="100" y="170" text-anchor="middle" fill="#5A7A96" font-size="9">Doble hélice · Núcleo</text>
+<path d="M100,100 C100,55 100,55 100,100" stroke="#FFD93D" stroke-width="2" fill="none" marker-end="url(#arG)"/><text x="100" y="58" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="600">Replicación</text><text x="100" y="72" text-anchor="middle" fill="#5A7A96" font-size="8">ADN Pol · Fase S</text>
+<line x1="175" y1="140" x2="250" y2="140" stroke="#00D4AA" stroke-width="2.5" marker-end="url(#arG)"/><text x="212" y="130" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="600">Transcripción</text><text x="212" y="160" text-anchor="middle" fill="#5A7A96" font-size="8">ARN Pol II</text>
+<rect x="255" y="100" width="130" height="80" rx="16" fill="rgba(167,139,250,.1)" stroke="#A78BFA" stroke-width="2"/><text x="320" y="130" text-anchor="middle" fill="#A78BFA" font-size="20">📝</text><text x="320" y="155" text-anchor="middle" fill="#A78BFA" font-size="13" font-weight="700">pre-ARNm</text><text x="320" y="170" text-anchor="middle" fill="#5A7A96" font-size="9">Transcrito primario</text>
+<line x1="390" y1="140" x2="460" y2="140" stroke="#EC4899" stroke-width="2.5" marker-end="url(#arG)"/><text x="425" y="130" text-anchor="middle" fill="#EC4899" font-size="10" font-weight="600">Procesamiento</text><text x="425" y="160" text-anchor="middle" fill="#5A7A96" font-size="8">Cap · PolyA · Splicing</text>
+<rect x="465" y="100" width="130" height="80" rx="16" fill="rgba(0,212,170,.1)" stroke="#00D4AA" stroke-width="2"/><text x="530" y="130" text-anchor="middle" fill="#00D4AA" font-size="20">📜</text><text x="530" y="155" text-anchor="middle" fill="#00D4AA" font-size="13" font-weight="700">ARNm maduro</text><text x="530" y="170" text-anchor="middle" fill="#5A7A96" font-size="9">Cap + CDS + PolyA</text>
+<line x1="600" y1="140" x2="670" y2="140" stroke="#F97316" stroke-width="2.5" marker-end="url(#arG)"/><text x="635" y="130" text-anchor="middle" fill="#F97316" font-size="10" font-weight="600">Traducción</text><text x="635" y="160" text-anchor="middle" fill="#5A7A96" font-size="8">Ribosoma · ARNt</text>
+<rect x="675" y="100" width="140" height="80" rx="16" fill="rgba(249,115,22,.1)" stroke="#F97316" stroke-width="2"/><text x="745" y="130" text-anchor="middle" fill="#F97316" font-size="22">🔧</text><text x="745" y="155" text-anchor="middle" fill="#F97316" font-size="13" font-weight="700">Proteína</text><text x="745" y="170" text-anchor="middle" fill="#5A7A96" font-size="9">Plegamiento · Mod. post-trad</text>
+<rect x="20" y="210" width="585" height="35" rx="10" fill="rgba(0,163,255,.06)" stroke="rgba(0,163,255,.15)" stroke-width="1"/><text x="312" y="232" text-anchor="middle" fill="#00A3FF" font-size="11" font-weight="600">🏛️ NÚCLEO</text>
+<rect x="615" y="210" width="210" height="35" rx="10" fill="rgba(255,217,61,.06)" stroke="rgba(255,217,61,.15)" stroke-width="1"/><text x="720" y="232" text-anchor="middle" fill="#FFD93D" font-size="11" font-weight="600">⚗️ CITOSOL / RER</text>
+<text x="450" y="280" text-anchor="middle" fill="#5A7A96" font-size="10">ADN → ARN → Proteína: flujo unidireccional (Francis Crick, 1958)</text>
+<text x="450" y="298" text-anchor="middle" fill="#5A7A96" font-size="9">Excepción: transcriptasa reversa (retrovirus, telomerasa) — ARN → ADN</text>
+<text x="450" y="320" text-anchor="middle" fill="#5A7A96" font-size="9">Excepción: ARN replicasa (virus ARN) — ARN → ARN</text>
+</svg>
+</div>
+
+<div class="mnemonic"><h4>🧠 Regla Mnemotécnica — Flujo del Dogma Central</h4><div class="big">R → T → P → T → M</div><p><strong>R</strong>eplicación → <strong>T</strong>ranscripción → <strong>P</strong>rocesamiento → <strong>T</strong>raducción → <strong>M</strong>odificación<br>"<em>Repetir Todo Para Tener Moléculas</em>"</p></div>
+<div style="text-align:center;margin-top:20px"><button class="btn bp" onclick="go('nucleo')">Comenzar la tutoría →</button></div>
+</div>
+
+<!-- ====================================================================== -->
+<!-- CAPÍTULO 1: NÚCLEO CELULAR -->
+<!-- ====================================================================== -->
+<div class="sec" id="sec-nucleo">
+<div class="chapter-header"><div class="ch-num">Capítulo 1 de 9</div><h2>🏛️ El Núcleo Celular</h2><p>Estructura, envoltura nuclear, lámina, CPN y transporte nucleocitoplasmático</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">🏗️ Estructura y Organización <span class="ac">Interna</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div><p style="color:var(--t2)">El <strong>núcleo</strong> es el organelo más grande de la célula eucariota (5-10 µm). Es un compartimiento delimitado por una <strong>doble membrana</strong> (envoltura nuclear) que alberga el material genético y la maquinaria de transcripción. La compartimentalización permite la <strong>regulación</strong> del flujo de información genética: el ADN nunca sale del núcleo; se envían <strong>copias</strong> (ARNm) al citosol.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="ng1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(0,212,170,0.08)"/><stop offset="100%" stop-color="rgba(0,212,170,0.02)"/></radialGradient></defs>
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="15" font-weight="700" font-family="DM Serif Display,serif">Organización Interna del Núcleo</text>
+<ellipse cx="450" cy="260" rx="350" ry="200" fill="url(#ng1)" stroke="#00A3FF" stroke-width="2.5" stroke-dasharray="8,4"/>
+<ellipse cx="450" cy="260" rx="340" ry="192" fill="none" stroke="#00D4AA" stroke-width="2" stroke-dasharray="8,4"/>
+<text x="450" y="55" text-anchor="middle" fill="#00A3FF" font-size="11" font-weight="600">Membrana nuclear externa (continua con RER)</text>
+<text x="450" y="70" text-anchor="middle" fill="#00D4AA" font-size="11" font-weight="600">Membrana nuclear interna</text>
+<rect x="130" y="165" width="35" height="14" rx="4" fill="rgba(249,115,22,0.3)" stroke="#F97316" stroke-width="1.5"/><text x="148" y="160" text-anchor="middle" fill="#F97316" font-size="8" font-weight="600">CPN</text>
+<rect x="735" y="280" width="35" height="14" rx="4" fill="rgba(249,115,22,0.3)" stroke="#F97316" stroke-width="1.5"/><text x="753" y="275" text-anchor="middle" fill="#F97316" font-size="8" font-weight="600">CPN</text>
+<rect x="400" y="450" width="35" height="14" rx="4" fill="rgba(249,115,22,0.3)" stroke="#F97316" stroke-width="1.5"/><text x="418" y="445" text-anchor="middle" fill="#F97316" font-size="8" font-weight="600">CPN</text>
+<ellipse cx="450" cy="260" rx="330" ry="184" fill="none" stroke="#FFD93D" stroke-width="2" stroke-dasharray="3,3"/>
+<text x="175" y="225" fill="#FFD93D" font-size="10" font-weight="600">Lámina nuclear (tipo A + B)</text>
+<ellipse cx="360" cy="230" rx="80" ry="60" fill="rgba(236,72,153,0.12)" stroke="#EC4899" stroke-width="2"/>
+<text x="360" y="218" text-anchor="middle" fill="#EC4899" font-size="13" font-weight="700">Nucléolo</text>
+<text x="360" y="236" text-anchor="middle" fill="#EC4899" font-size="9">Centro fibrilar</text>
+<text x="360" y="250" text-anchor="middle" fill="#EC4899" font-size="9">Componente fibrilar denso</text>
+<text x="360" y="264" text-anchor="middle" fill="#EC4899" font-size="9">Componente granular</text>
+<text x="360" y="282" text-anchor="middle" fill="#8BA4BE" font-size="8">(Síntesis de ARNr, ensamblaje ribosomas)</text>
+<ellipse cx="600" cy="170" rx="50" ry="30" fill="rgba(167,139,250,0.2)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="600" y="168" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="600">Heterocromatina</text>
+<text x="600" y="182" text-anchor="middle" fill="#5A7A96" font-size="8">(condensada, inactiva)</text>
+<text x="550" y="320" fill="#00D4AA" font-size="10" font-weight="600">Eucromatina</text>
+<text x="550" y="334" fill="#5A7A96" font-size="8">(dispersa, transcripcionalmente activa)</text>
+<path d="M520,340 C530,355 540,360 560,350 C580,340 590,355 600,360" stroke="#00D4AA" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+<text x="470" y="340" fill="#8BA4BE" font-size="11" font-weight="600">NUCLEOPLASMA</text>
+<text x="770" y="195" fill="#00A3FF" font-size="9">Espacio</text><text x="770" y="207" fill="#00A3FF" font-size="9">perinuclear</text><text x="770" y="219" fill="#5A7A96" font-size="8">(20-40 nm)</text>
+<circle cx="140" cy="130" r="3" fill="#FFD93D" opacity="0.7"/><circle cx="150" cy="125" r="3" fill="#FFD93D" opacity="0.7"/><circle cx="160" cy="122" r="3" fill="#FFD93D" opacity="0.7"/>
+<text x="185" y="125" fill="#FFD93D" font-size="8">Ribosomas (cara citosólica)</text>
+<text x="800" y="420" fill="#5A7A96" font-size="12" font-weight="600">CITOSOL</text>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ Diagrama: Organización interna del núcleo celular</p>
+
+<div class="analogy"><div class="analogy-icon">🏛️</div><h4>Analogía: El núcleo como centro de mando</h4><p>Imagina al núcleo como la <strong>sala de control</strong> de una fábrica. La <strong>envoltura nuclear</strong> es la pared con puertas de seguridad (<strong>poros nucleares</strong>). La <strong>lámina nuclear</strong> es el esqueleto de la sala. Los <strong>planos maestros</strong> (ADN) nunca salen: se hacen <strong>copias</strong> (ARNm) que se envían a la planta de producción (citosol). El <strong>nucléolo</strong> es el taller donde se construyen las piezas de los ribosomas.</p></div>
+
+<table class="et"><thead><tr><th>Componente</th><th>Descripción</th><th>Función principal</th></tr></thead><tbody>
+<tr><td style="color:var(--g)"><strong>Envoltura nuclear</strong></td><td>Doble membrana (MNE continua con RER + MNI con receptores de lámina)</td><td>Barrera selectiva núcleo-citosol</td></tr>
+<tr><td style="color:var(--b)"><strong>Espacio perinuclear</strong></td><td>20-40 nm entre membranas, continuo con lumen del RER</td><td>Compartimiento luminal</td></tr>
+<tr><td style="color:var(--y)"><strong>Lámina nuclear</strong></td><td>Red de filamentos intermedios tipo V (Laminas A, C [LMNA], B1 [LMNB1], B2 [LMNB2])</td><td>Soporte mecánico, anclaje de cromatina y CPN</td></tr>
+<tr><td style="color:var(--o)"><strong>CPN</strong></td><td>~125 MDa, ~30 nucleoporinas, simetría octogonal. FG-Nups = barrera selectiva</td><td>Transporte selectivo bidireccional</td></tr>
+<tr><td style="color:var(--pk)"><strong>Nucléolo</strong></td><td>Sin membrana. 3 regiones: centro fibrilar, componente fibrilar denso, componente granular</td><td>Síntesis de ARNr (Pol I), ensamblaje subunidades ribosomales</td></tr>
+<tr><td style="color:var(--p)"><strong>Cromatina</strong></td><td>ADN + histonas + proteínas no histonas (~misma masa de ADN y proteínas)</td><td>Almacenamiento y regulación de información genética</td></tr>
+<tr><td><strong>Nucleoplasma</strong></td><td>Fase acuosa interna, contiene enzimas y factores</td><td>Medio para transcripción, procesamiento, replicación</td></tr>
+</tbody></table>
+</div>
+
+<div class="cd"><div class="ch">🔒 La Envoltura Nuclear y <span class="ac">Lámina Nuclear</span></div>
+<div class="ib n"><div class="ibt">💡 Lámina Nuclear — Más que soporte mecánico</div><p style="color:var(--t2)">La lámina nuclear es una red de filamentos intermedios tipo V formada por <strong>laminas tipo A</strong> (A y C, gen LMNA, splicing alternativo) y <strong>tipo B</strong> (B1 y B2). Tiene múltiples funciones: soporte mecánico del núcleo, anclaje de cromatina (periférica = silenciada), posicionamiento de los CPN, participación en la regulación de la expresión génica, y papel en la replicación del ADN.</p></div>
+
+<div class="ib go"><div class="ibt">💡 Complejo LINC: conectando núcleo y citoesqueleto</div><p style="color:var(--t2)">El complejo LINC (<strong>Linker of Nucleoskeleton and Cytoskeleton</strong>) conecta la lámina nuclear con el citoesqueleto citoplásmico: <strong>SUN1/SUN2</strong> (MNI) + <strong>Nesprinas</strong> (MNE). Esta conexión es esencial para la mecanotransducción celular, migración y posicionamiento nuclear.</p></div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Laminopatías — Un gen, múltiples enfermedades</div>
+<p class="clp">Mutaciones en <strong>LMNA</strong> causan >15 enfermedades diferentes. ¿Por qué un solo gen causa tantas patologías? Porque las laminas A/C tienen funciones mecánicas Y de regulación de expresión génica que varían según el tejido.</p>
+<table class="et"><thead><tr><th>Enfermedad</th><th>Gen/Proteína</th><th>Manifestación principal</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--r)">Progeria (HGPS)</strong></td><td>LMNA → progerina (farnesilo permanente)</td><td>Envejecimiento acelerado, muerte ~13 años por enfermedad cardiovascular</td></tr>
+<tr><td><strong style="color:var(--o)">Emery-Dreifuss (EDMD)</strong></td><td>LMNA o EMD (emerina)</td><td>Contracturas, debilidad muscular, cardiomiopatía con arritmias</td></tr>
+<tr><td><strong style="color:var(--b)">Cardiomiopatía dilatada</strong></td><td>LMNA</td><td>Dilatación ventricular, insuficiencia cardíaca, arritmias</td></tr>
+<tr><td><strong style="color:var(--p)">Lipodistrofia parcial (FPLD)</strong></td><td>LMNA</td><td>Pérdida de grasa en extremidades, resistencia a insulina, diabetes</td></tr>
+<tr><td><strong style="color:var(--g)">Charcot-Marie-Tooth 2B1</strong></td><td>LMNA</td><td>Neuropatía periférica axonal</td></tr>
+</tbody></table></div>
+
+<div class="cd"><div class="ch">🚪 Complejo de Poro Nuclear <span class="ac">(CPN)</span></div>
+<div class="svg-wrap">
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="15" font-weight="700" font-family="DM Serif Display,serif">Estructura del Complejo de Poro Nuclear (CPN)</text>
+<rect x="50" y="50" width="800" height="45" rx="8" fill="rgba(255,217,61,.06)" stroke="rgba(255,217,61,.15)" stroke-width="1"/><text x="450" y="77" text-anchor="middle" fill="#FFD93D" font-size="11" font-weight="600">CITOSOL</text>
+<rect x="50" y="100" width="800" height="15" rx="2" fill="rgba(0,163,255,.15)" stroke="#00A3FF" stroke-width="1.5"/><text x="880" y="112" fill="#00A3FF" font-size="8">MNE</text>
+<rect x="50" y="120" width="800" height="30" rx="2" fill="rgba(0,163,255,.05)"/><text x="880" y="140" fill="#5A7A96" font-size="7">Espacio perinuclear</text>
+<rect x="50" y="155" width="800" height="15" rx="2" fill="rgba(0,212,170,.15)" stroke="#00D4AA" stroke-width="1.5"/><text x="880" y="167" fill="#00D4AA" font-size="8">MNI</text>
+<rect x="50" y="175" width="800" height="45" rx="8" fill="rgba(0,212,170,.03)"/><text x="450" y="202" text-anchor="middle" fill="#8BA4BE" font-size="11" font-weight="600">NUCLEOPLASMA</text>
+<!-- Pore structure -->
+<rect x="280" y="60" width="40" height="15" rx="4" fill="rgba(249,115,22,.3)" stroke="#F97316" stroke-width="1.5"/>
+<rect x="580" y="60" width="40" height="15" rx="4" fill="rgba(249,115,22,.3)" stroke="#F97316" stroke-width="1.5"/>
+<text x="300" y="55" text-anchor="middle" fill="#F97316" font-size="8" font-weight="600">Anillo cito.</text>
+<text x="600" y="55" text-anchor="middle" fill="#F97316" font-size="8" font-weight="600">Anillo cito.</text>
+<!-- Filaments cytoplasmic -->
+<line x1="300" y1="60" x2="290" y2="40" stroke="#F97316" stroke-width="1.5"/><line x1="300" y1="60" x2="310" y2="40" stroke="#F97316" stroke-width="1.5"/>
+<line x1="600" y1="60" x2="590" y2="40" stroke="#F97316" stroke-width="1.5"/><line x1="600" y1="60" x2="610" y2="40" stroke="#F97316" stroke-width="1.5"/>
+<text x="450" y="47" text-anchor="middle" fill="#F97316" font-size="9">Filamentos citoplásmicos (Nup358/RanBP2 + RanGAP1)</text>
+<!-- Spoke ring -->
+<rect x="280" y="105" width="340" height="65" rx="6" fill="rgba(249,115,22,.06)" stroke="#F97316" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="450" y="125" text-anchor="middle" fill="#F97316" font-size="10" font-weight="600">Anillo radial (Spoke ring)</text>
+<!-- FG-Nups in channel -->
+<text x="450" y="142" text-anchor="middle" fill="#EC4899" font-size="9" font-weight="600">FG-Nups (Nup62, 58, 54, 98)</text>
+<text x="450" y="155" text-anchor="middle" fill="#EC4899" font-size="8">Repeticiones Phe-Gly → barrera selectiva tipo gel</text>
+<!-- Nuclear basket -->
+<line x1="300" y1="170" x2="370" y2="195" stroke="#A78BFA" stroke-width="1.5"/>
+<line x1="600" y1="170" x2="530" y2="195" stroke="#A78BFA" stroke-width="1.5"/>
+<line x1="370" y1="195" x2="530" y2="195" stroke="#A78BFA" stroke-width="1.5"/>
+<ellipse cx="450" cy="195" rx="80" ry="8" fill="none" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="450" y="215" text-anchor="middle" fill="#A78BFA" font-size="9" font-weight="600">Canasta nuclear (Nup153, Tpr)</text>
+<!-- Luminal ring -->
+<rect x="280" y="130" width="15" height="30" rx="3" fill="rgba(0,163,255,.2)" stroke="#00A3FF" stroke-width="1"/>
+<rect x="605" y="130" width="15" height="30" rx="3" fill="rgba(0,163,255,.2)" stroke="#00A3FF" stroke-width="1"/>
+<text x="250" y="150" text-anchor="end" fill="#00A3FF" font-size="7">Anillo luminal (gp210)</text>
+<!-- Transport arrows -->
+<text x="450" y="250" text-anchor="middle" fill="#E8F0F8" font-size="13" font-weight="700" font-family="DM Serif Display,serif">Modos de Transporte</text>
+<rect x="100" y="270" width="300" height="100" rx="12" fill="rgba(0,212,170,.06)" stroke="rgba(0,212,170,.2)" stroke-width="1"/>
+<text x="250" y="295" text-anchor="middle" fill="#00D4AA" font-size="11" font-weight="700">Difusión Pasiva</text>
+<text x="250" y="315" text-anchor="middle" fill="#8BA4BE" font-size="9">Moléculas &lt;40 kDa (~5 nm diámetro)</text>
+<text x="250" y="332" text-anchor="middle" fill="#8BA4BE" font-size="9">Iones, nucleótidos, proteínas pequeñas</text>
+<text x="250" y="349" text-anchor="middle" fill="#8BA4BE" font-size="9">Sin gasto de energía, sin señal</text>
+<rect x="500" y="270" width="300" height="100" rx="12" fill="rgba(249,115,22,.06)" stroke="rgba(249,115,22,.2)" stroke-width="1"/>
+<text x="650" y="295" text-anchor="middle" fill="#F97316" font-size="11" font-weight="700">Transporte Activo (señal-dependiente)</text>
+<text x="650" y="315" text-anchor="middle" fill="#8BA4BE" font-size="9">Proteínas con NLS (importación) o NES (exportación)</text>
+<text x="650" y="332" text-anchor="middle" fill="#8BA4BE" font-size="9">Mediado por importinas/exportinas (carioferinas)</text>
+<text x="650" y="349" text-anchor="middle" fill="#8BA4BE" font-size="9">Requiere gradiente de Ran-GTP</text>
+<!-- Dimensions -->
+<text x="450" y="395" text-anchor="middle" fill="#5A7A96" font-size="9">Diámetro externo ~120 nm · Canal central ~40 nm · ~2000-5000 CPN por núcleo · ~125 MDa</text>
+</svg>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🔄 Transporte: <span class="ac">Ran-GTP</span> como Director</div>
+<div class="ib go"><div class="ibt">🔑 El Gradiente de Ran da direccionalidad</div><p style="color:var(--t2)"><strong>En el núcleo:</strong> RCC1 (RanGEF, en cromatina) convierte Ran-GDP → <strong>Ran-GTP</strong> → concentración alta.<br><strong>En el citosol:</strong> RanGAP1 (asociada a Nup358) + RanBP1 hidrolizan Ran-GTP → <strong>Ran-GDP</strong> → concentración alta.<br><br>Este gradiente asimétrico es el <strong>motor</strong> de la direccionalidad: en la <strong>importación</strong>, Ran-GTP nuclear disocia importina-cargo (libera cargo en núcleo). En la <strong>exportación</strong>, Ran-GTP nuclear estabiliza exportina-cargo (se disocia en citosol al hidrolizar GTP).</p></div>
+
+<!-- Import simulation -->
+<div class="sim-box"><h4 style="font-family:'DM Serif Display',serif;margin-bottom:8px">🔄 Simulación: Importación Nuclear</h4>
+<div class="sim-step-ind" id="imp-dots"></div>
+<div class="sim-narration" id="imp-narration"></div>
+<div class="sim-controls">
+<button class="sim-btn" id="imp-prev" onclick="impStep(-1)">◀ Anterior</button>
+<button class="sim-btn" onclick="impReset()">↺ Reiniciar</button>
+<button class="sim-btn" id="imp-next" onclick="impStep(1)">Siguiente ▶</button>
+</div></div>
+
+<div class="ib n"><div class="ibt">💡 NLS y NES — Las señales de dirección</div><p style="color:var(--t2)"><strong>NLS</strong> (Nuclear Localization Signal): rica en Lys/Arg (aminoácidos básicos). <strong>No se cliva</strong>. Ejemplo clásico: PKKKRKV (antígeno T del SV40). Reconocida por <strong>importina α</strong> (adaptador).<br><strong>NES</strong> (Nuclear Export Signal): rica en leucinas (hidrofóbica). Reconocida directamente por <strong>CRM1/Exportina 1</strong>. Ejemplo: proteínas que lanzadera (shuttle) entre núcleo y citosol.</p></div>
+
+<div class="ib pp"><div class="ibt">🔩 Reciclaje de componentes</div><p style="color:var(--t2)"><strong>NTF2</strong> reimporta Ran-GDP al núcleo (donde RCC1 lo recarga). <strong>CAS/CSE1L</strong> es la exportina dedicada que recicla importina α de vuelta al citosol. Todos los componentes se reusan indefinidamente.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">Emparejar</span> componente con función</div>
+<div class="match-game" id="mg1">
+<div class="match-col"><h4 style="color:var(--g)">Componente</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg1',this)">Importina α</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg1',this)">Importina β</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg1',this)">RCC1 (RanGEF)</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg1',this)">RanGAP1</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">Función</h4>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg1',this)">Genera Ran-GTP en el núcleo (en cromatina)</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg1',this)">Adaptador que reconoce la NLS del cargo</div>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg1',this)">Hidroliza Ran-GTP → Ran-GDP en citosol</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg1',this)">Transportador que interactúa con FG-Nups</div>
+</div></div>
+<div class="match-score" id="mg1-score"></div></div>
+
+<div class="qq" id="q01"><div class="qt">¿Qué ocurre cuando Ran-GTP se une a importina β en el nucleoplasma?</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>Estabiliza la unión importina-cargo para mantenerla en el núcleo</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">B</div>Disocia el complejo y libera el cargo en el núcleo</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">C</div>Exporta el cargo al citosol junto con la importina</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>Fosforila la NLS de la proteína cargo</button>
+</div><div class="qf" id="fb-q01"></div></div>
+
+<div class="qq" id="q02"><div class="qt">Las FG-nucleoporinas del CPN forman:</div><div class="qo">
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">A</div>El anillo luminal del poro</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">B</div>La canasta nuclear</button>
+<button class="qb" onclick="cq('q02',this,1)"><div class="ol">C</div>La barrera selectiva del canal central (gel/cepillo de repeticiones Phe-Gly)</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">D</div>La lámina nuclear</button>
+</div><div class="qf" id="fb-q02"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('empaq')">Empaquetamiento →</button></div>
+</div>
+
+<!-- ====================================================================== -->
+<!-- CAPÍTULO 2: EMPAQUETAMIENTO DEL ADN -->
+<!-- ====================================================================== -->
+<div class="sec" id="sec-empaq">
+<div class="chapter-header"><div class="ch-num">Capítulo 2 de 9</div><h2>📦 Empaquetamiento del ADN</h2><p>De la doble hélice al cromosoma metafásico: nucleosoma, histonas, epigenética</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">🧵 Niveles de <span class="ac">Compactación</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div><p style="color:var(--t2)">El ADN humano (~2 metros/célula) debe comprimirse ~<strong>10,000×</strong> para caber en un núcleo de ~5 µm. El empaquetamiento pasa por <strong>múltiples niveles sucesivos</strong> y es <strong>dinámico</strong>: permite acceso durante replicación, transcripción y reparación. El ADN no funciona aislado: está íntimamente asociado a proteínas (histonas y no histonas) que representan aproximadamente la <strong>misma masa</strong> que el ADN.</p></div>
+
+<!-- Packaging Levels Simulation -->
+<div class="sim-box"><h4 style="font-family:'DM Serif Display',serif;margin-bottom:8px">📐 Simulación: Niveles de Empaquetamiento</h4>
+<div class="sim-step-ind" id="pack-dots"></div>
+<div class="svg-wrap" style="margin:10px 0;background:rgba(0,0,0,.35)" id="pack-svg-wrap"></div>
+<div class="sim-narration" id="pack-narration"></div>
+<div class="sim-controls">
+<button class="sim-btn" id="pack-prev" onclick="packStep(-1)">◀ Anterior</button>
+<button class="sim-btn" onclick="packReset()">↺ Reiniciar</button>
+<button class="sim-btn" id="pack-next" onclick="packStep(1)">Siguiente ▶</button>
+</div></div>
+</div>
+
+<div class="cd"><div class="ch">🔘 El <span class="ac">Nucleosoma</span> — Unidad Fundamental</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="15" font-weight="700" font-family="DM Serif Display,serif">Estructura del Nucleosoma</text>
+<circle cx="350" cy="180" r="70" fill="rgba(0,212,170,0.1)" stroke="#00D4AA" stroke-width="2"/>
+<text x="350" y="168" text-anchor="middle" fill="#E8F0F8" font-size="12" font-weight="700">Octámero</text>
+<text x="350" y="186" text-anchor="middle" fill="#00D4AA" font-size="10">2×(H2A+H2B+H3+H4)</text>
+<path d="M260,140 C270,110 290,100 310,105 C330,110 350,100 370,105 C390,110 410,105 430,115 C440,130 445,145 440,160" stroke="#00A3FF" stroke-width="3" fill="none"/>
+<path d="M260,220 C270,250 290,260 310,255 C330,250 350,260 370,255 C390,250 410,255 430,245 C440,230 445,215 440,200" stroke="#00A3FF" stroke-width="3" fill="none"/>
+<text x="350" y="205" text-anchor="middle" fill="#8BA4BE" font-size="9">~1.7 vueltas</text>
+<text x="350" y="218" text-anchor="middle" fill="#8BA4BE" font-size="9">146 pb de ADN</text>
+<!-- H1 -->
+<circle cx="260" cy="180" r="15" fill="rgba(255,107,107,.2)" stroke="#FF6B6B" stroke-width="2"/>
+<text x="260" y="184" text-anchor="middle" fill="#FF6B6B" font-size="10" font-weight="700">H1</text>
+<text x="260" y="210" text-anchor="middle" fill="#FF6B6B" font-size="8">Histona enlazadora</text>
+<!-- Histone detail -->
+<text x="650" y="80" fill="#E8F0F8" font-size="12" font-weight="700" font-family="DM Serif Display,serif">Histonas del Core</text>
+<rect x="560" y="100" width="120" height="28" rx="6" fill="rgba(0,212,170,.12)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="620" y="118" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="600">H3 + H4 (tetrámero)</text>
+<rect x="560" y="138" width="120" height="28" rx="6" fill="rgba(0,163,255,.12)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="620" y="156" text-anchor="middle" fill="#00A3FF" font-size="10" font-weight="600">H2A + H2B (×2 dímeros)</text>
+<text x="620" y="185" text-anchor="middle" fill="#8BA4BE" font-size="9">Proteínas básicas ricas en Lys/Arg</text>
+<text x="620" y="200" text-anchor="middle" fill="#8BA4BE" font-size="9">~102-135 aa cada una</text>
+<!-- Tails -->
+<text x="650" y="230" fill="#FFD93D" font-size="11" font-weight="700">Colas N-terminales</text>
+<text x="650" y="248" fill="#8BA4BE" font-size="9">Protruyen fuera del nucleosoma</text>
+<text x="650" y="263" fill="#8BA4BE" font-size="9">Diana de modificaciones epigenéticas:</text>
+<text x="650" y="278" fill="#00D4AA" font-size="9">Acetilación, Metilación, Fosforilación</text>
+<text x="650" y="293" fill="#00D4AA" font-size="9">Ubiquitinación, SUMOilación</text>
+<!-- Linker DNA -->
+<text x="350" y="290" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="600">ADN linker (~53 pb entre nucleosomas)</text>
+<text x="350" y="310" text-anchor="middle" fill="#5A7A96" font-size="9">Nucleosoma = 146 pb core + ~54 pb linker ≈ 200 pb total por repetición</text>
+<text x="350" y="328" text-anchor="middle" fill="#5A7A96" font-size="9">El ADN se desenvuelve ~4 veces/seg, expuesto 10-50 ms → acceso dinámico</text>
+</svg>
+</div>
+</div>
+
+<div class="cd"><div class="ch">✏️ Modificaciones <span class="ac">Epigenéticas</span> de Histonas</div>
+<div class="ib"><div class="ibt">🔑 Las colas regulan la expresión génica sin cambiar la secuencia del ADN</div><p style="color:var(--t2)">Las modificaciones covalentes de las colas N-terminales de las histonas constituyen el "<strong>código de histonas</strong>". Regulan la accesibilidad de la cromatina al alterar la carga electrostática (ej: acetilación neutraliza cargas +) o al reclutar proteínas efectoras.</p></div>
+
+<table class="et"><thead><tr><th>Modificación</th><th>Enzima</th><th>Efecto sobre cromatina</th><th>Ejemplo / Marca</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Acetilación</strong></td><td>HAT (acetiltransferasa)</td><td><strong>Abre</strong> → activa transcripción. Neutraliza cargas + de Lys.</td><td>H3K9ac, H4K16ac → eucromatina</td></tr>
+<tr><td><strong style="color:var(--r)">Desacetilación</strong></td><td>HDAC (desacetilasa)</td><td><strong>Condensa</strong> → silencia genes</td><td>Inhibidores de HDAC = fármacos antineoplásicos (vorinostat)</td></tr>
+<tr><td><strong style="color:var(--p)">Metilación (activa)</strong></td><td>HMT (metiltransferasa)</td><td>Activa o reprime según residuo</td><td><strong>H3K4me3</strong> = promotores activos</td></tr>
+<tr><td><strong style="color:var(--p)">Metilación (silencia)</strong></td><td>HMT</td><td>Recluta proteínas represoras</td><td><strong>H3K9me3</strong> + HP1 = heterocromatina constitutiva<br><strong>H3K27me3</strong> + Polycomb = heterocromatina facultativa</td></tr>
+<tr><td><strong style="color:var(--y)">Fosforilación</strong></td><td>Quinasas</td><td>Condensación mitótica; señalización de daño</td><td>H3S10ph (mitosis), <strong>γH2AX</strong> (doble rotura de ADN)</td></tr>
+<tr><td><strong style="color:var(--b)">Ubiquitinación</strong></td><td>E3 ligasas</td><td>Regulación de reparación y transcripción</td><td>H2AK119ub (Polycomb), H2BK120ub (elongación)</td></tr>
+</tbody></table>
+
+<div class="ib n"><div class="ibt">🔑 Eucromatina vs Heterocromatina</div><p style="color:var(--t2)"><strong>Eucromatina:</strong> laxa, transcripcionalmente activa, interior nuclear. Marcas: H3K4me3, acetilación, H3K36me3.<br><strong>Heterocromatina constitutiva:</strong> permanentemente condensada (centrómeros, telómeros). H3K9me3 + HP1. Repeticiones satélite.<br><strong>Heterocromatina facultativa:</strong> condensada según contexto celular. Ejemplo: <strong>corpúsculo de Barr</strong> (X inactivado por ARN Xist). H3K27me3 (Polycomb).</p></div>
+</div>
+
+<div class="qq" id="q03"><div class="qt">¿Qué marca epigenética es característica de la heterocromatina constitutiva?</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">A</div>H3K4me3 + acetilación</button>
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">B</div>H3K9me3 + HP1 (centrómeros, telómeros)</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">C</div>H3K27me3 + Polycomb</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>γH2AX</button>
+</div><div class="qf" id="fb-q03"></div></div>
+
+<div class="qq" id="q04"><div class="qt">El corpúsculo de Barr es un ejemplo de:</div><div class="qo">
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">A</div>Eucromatina</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">B</div>Heterocromatina constitutiva</button>
+<button class="qb" onclick="cq('q04',this,1)"><div class="ol">C</div>Heterocromatina facultativa (X inactivado, ARN Xist, H3K27me3)</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">D</div>Cromatina mitocondrial</button>
+</div><div class="qf" id="fb-q04"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('nucleo')">← Núcleo</button><button class="btn bp" onclick="go('replic')">Replicación →</button></div>
+</div>
+
+<!-- ====================================================================== -->
+<!-- CAPÍTULO 3: REPLICACIÓN -->
+<!-- ====================================================================== -->
+<div class="sec" id="sec-replic">
+<div class="chapter-header"><div class="ch-num">Capítulo 3 de 9</div><h2>🔄 Replicación del ADN</h2><p>Duplicación semiconservativa, horquilla de replicación, replisoma y telomerasa</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">🔬 Modelo <span class="ac">Semiconservativo</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div><p style="color:var(--t2)">Cada molécula hija contiene una <strong>hebra parental (antigua)</strong> y una <strong>hebra nueva</strong>. Demostrado por <strong>Meselson y Stahl (1958)</strong> con centrifugación en gradiente de CsCl e isótopos ¹⁵N/¹⁴N. Ocurre en <strong>fase S</strong> del ciclo celular. Es <strong>bidireccional</strong> (dos horquillas) y <strong>semidiscontinua</strong> (cadena líder continua + retrasada discontinua).</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="gOld" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#00A3FF" stop-opacity="0.9"/><stop offset="100%" stop-color="#00A3FF" stop-opacity="0.6"/></linearGradient><linearGradient id="gNew" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#00D4AA" stop-opacity="0.9"/><stop offset="100%" stop-color="#00D4AA" stop-opacity="0.6"/></linearGradient></defs>
+<text x="450" y="28" text-anchor="middle" fill="#E8F0F8" font-size="15" font-weight="700" font-family="DM Serif Display,serif">Modelo Semiconservativo (Meselson y Stahl, 1958)</text>
+<text x="130" y="65" text-anchor="middle" fill="#5A7A96" font-size="12" font-weight="600">Generación 0</text>
+<rect x="110" y="80" width="12" height="100" rx="4" fill="url(#gOld)"/><rect x="128" y="80" width="12" height="100" rx="4" fill="url(#gOld)"/>
+<text x="130" y="200" text-anchor="middle" fill="#00A3FF" font-size="9">Ambas ¹⁵N</text>
+<text x="240" y="135" fill="#FFD93D" font-size="22">⟹</text>
+<text x="400" y="65" text-anchor="middle" fill="#5A7A96" font-size="12" font-weight="600">Generación 1</text>
+<rect x="350" y="80" width="12" height="100" rx="4" fill="url(#gOld)"/><rect x="368" y="80" width="12" height="100" rx="4" fill="url(#gNew)"/>
+<rect x="410" y="80" width="12" height="100" rx="4" fill="url(#gNew)"/><rect x="428" y="80" width="12" height="100" rx="4" fill="url(#gOld)"/>
+<text x="400" y="200" text-anchor="middle" fill="#8BA4BE" font-size="9">Ambas = <tspan fill="#00A3FF">antigua</tspan> + <tspan fill="#00D4AA">nueva</tspan></text>
+<text x="510" y="135" fill="#FFD93D" font-size="22">⟹</text>
+<text x="700" y="65" text-anchor="middle" fill="#5A7A96" font-size="12" font-weight="600">Generación 2</text>
+<rect x="600" y="80" width="10" height="90" rx="3" fill="url(#gOld)"/><rect x="614" y="80" width="10" height="90" rx="3" fill="url(#gNew)"/>
+<rect x="650" y="80" width="10" height="90" rx="3" fill="url(#gNew)"/><rect x="664" y="80" width="10" height="90" rx="3" fill="url(#gNew)"/>
+<rect x="710" y="80" width="10" height="90" rx="3" fill="url(#gNew)"/><rect x="724" y="80" width="10" height="90" rx="3" fill="url(#gNew)"/>
+<rect x="760" y="80" width="10" height="90" rx="3" fill="url(#gNew)"/><rect x="774" y="80" width="10" height="90" rx="3" fill="url(#gOld)"/>
+<text x="612" y="190" text-anchor="middle" fill="#8BA4BE" font-size="8">Híbrida</text>
+<text x="662" y="190" text-anchor="middle" fill="#00D4AA" font-size="8">Ligera</text>
+<text x="722" y="190" text-anchor="middle" fill="#00D4AA" font-size="8">Ligera</text>
+<text x="772" y="190" text-anchor="middle" fill="#8BA4BE" font-size="8">Híbrida</text>
+<text x="700" y="215" text-anchor="middle" fill="#8BA4BE" font-size="9">2 híbridas + 2 ligeras</text>
+<rect x="280" y="240" width="16" height="16" rx="3" fill="url(#gOld)"/><text x="302" y="253" fill="#00A3FF" font-size="10" font-weight="600">Hebra parental (¹⁵N)</text>
+<rect x="530" y="240" width="16" height="16" rx="3" fill="url(#gNew)"/><text x="552" y="253" fill="#00D4AA" font-size="10" font-weight="600">Hebra nueva (¹⁴N)</text>
+<rect x="150" y="270" width="600" height="25" rx="8" fill="rgba(167,139,250,.06)" stroke="rgba(167,139,250,.2)" stroke-width="1"/>
+<text x="450" y="287" text-anchor="middle" fill="#A78BFA" font-size="9">Gen1 → banda intermedia · Gen2 → 50% intermedia + 50% ligera → descarta conservativo y dispersivo</text>
+</svg>
+</div>
+</div>
+
+<div class="cd"><div class="ch">⚙️ Maquinaria del <span class="ac">Replisoma</span></div>
+<div class="ib"><div class="ibt">🔑 Enzimas y proteínas coordinadas</div><p style="color:var(--t2)">La replicación requiere un complejo multiproteico coordinado: el <strong>replisoma</strong>. Cada componente cumple una función específica e indispensable.</p></div>
+
+<table class="et"><thead><tr><th>Proteína</th><th>Función</th><th>Equivalente eucariota</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--y)">Helicasa (DnaB)</strong></td><td>Desenrolla la doble hélice rompiendo puentes H. Avanza 5'→3' en hebra retrasada.</td><td>MCM2-7 (hexámero)</td></tr>
+<tr><td><strong style="color:var(--p)">SSB / RPA</strong></td><td>Estabiliza hebras simples, evita reapareo y estructuras secundarias</td><td>RPA (Replication Protein A)</td></tr>
+<tr><td><strong style="color:var(--r)">Topoisomerasa I/II</strong></td><td>Alivia superenrollamiento + delante de la horquilla. Girasa (Topo II proc.) introduce superenrollamientos –</td><td>Topo I y II (dianas de quimioterapia)</td></tr>
+<tr><td><strong style="color:var(--pk)">Primasa (DnaG)</strong></td><td>Sintetiza cebadores de ARN (~10 nt). Provee 3'-OH para la polimerasa</td><td>Pol α/primasa</td></tr>
+<tr><td><strong style="color:var(--g)">ADN Pol III</strong></td><td>Polimerasa replicativa principal. 5'→3'. Corrección 3'→5'. Error ~10⁻⁷</td><td>Pol ε (líder), Pol δ (retrasada)</td></tr>
+<tr><td><strong style="color:var(--b)">Pinza deslizante (β-clamp)</strong></td><td>Abraza el ADN, mantiene la pol unida → procesividad ("rosquilla")</td><td>PCNA</td></tr>
+<tr><td><strong style="color:var(--o)">ADN Pol I</strong></td><td>Remueve cebadores (exonucleasa 5'→3') y rellena con ADN</td><td>RNasa H + FEN1 + Pol δ</td></tr>
+<tr><td><strong style="color:var(--r)">ADN Ligasa</strong></td><td>Sella mellas (nicks) uniendo fragmentos de Okazaki. Forma enlace fosfodiéster</td><td>ADN Ligasa I</td></tr>
+<tr><td><strong style="color:var(--g)">Telomerasa (TERT + TERC)</strong></td><td>Extiende telómeros con repeticiones TTAGGG. Transcriptasa reversa con molde ARN propio</td><td>Activa en células madre y ~90% tumores</td></tr>
+</tbody></table>
+
+<div class="step-diagram">
+<div class="step-box"><span style="color:var(--r);font-size:.85rem;font-weight:700">1</span><br><span style="font-size:.78rem;color:var(--t2)">Topoisomerasa<br>alivia tensión</span></div><div class="step-arrow">→</div>
+<div class="step-box"><span style="color:var(--y);font-size:.85rem;font-weight:700">2</span><br><span style="font-size:.78rem;color:var(--t2)">Helicasa<br>abre doble hélice</span></div><div class="step-arrow">→</div>
+<div class="step-box"><span style="color:var(--p);font-size:.85rem;font-weight:700">3</span><br><span style="font-size:.78rem;color:var(--t2)">SSB/RPA<br>estabiliza ssDNA</span></div><div class="step-arrow">→</div>
+<div class="step-box"><span style="color:var(--pk);font-size:.85rem;font-weight:700">4</span><br><span style="font-size:.78rem;color:var(--t2)">Primasa<br>sintetiza primer</span></div><div class="step-arrow">→</div>
+<div class="step-box"><span style="color:var(--g);font-size:.85rem;font-weight:700">5</span><br><span style="font-size:.78rem;color:var(--t2)">ADN Pol<br>sintetiza 5'→3'</span></div><div class="step-arrow">→</div>
+<div class="step-box"><span style="color:var(--o);font-size:.85rem;font-weight:700">6</span><br><span style="font-size:.78rem;color:var(--t2)">Pol I/RNasa H<br>remueve primers</span></div><div class="step-arrow">→</div>
+<div class="step-box"><span style="color:var(--b);font-size:.85rem;font-weight:700">7</span><br><span style="font-size:.78rem;color:var(--t2)">Ligasa<br>sella fragmentos</span></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🔚 Telomerasa y el <span class="ac">Problema Terminal</span></div>
+<div class="ib"><div class="ibt">🔑 ¿Por qué se acortan los telómeros?</div><p style="color:var(--t2)">En cada ronda de replicación, la eliminación del último cebador de ARN de la cadena retrasada deja un segmento de ADN sin replicar en el extremo 5'. No hay manera de rellenarlo → el cromosoma se acorta ~50-200 pb/división. Las <strong>repeticiones teloméricas</strong> (TTAGGG en humanos) sirven como "amortiguador": se sacrifican sin perder información genética.</p></div>
+<div class="ib go"><div class="ibt">🔑 Telomerasa: la solución</div><p style="color:var(--t2)">La <strong>telomerasa</strong> = TERT (subunidad catalítica, transcriptasa reversa) + TERC (molde ARN, ~451 nt en humanos). Alarga el extremo 3' protuberante usando su ARN como molde para añadir repeticiones TTAGGG. Luego la maquinaria replicativa normal completa la hebra complementaria. <strong>Activa en:</strong> células madre, células germinales, ~90% de cánceres. <strong>Silenciada en:</strong> células somáticas adultas → acortamiento progresivo → senescencia.</p></div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Dianas Terapéuticas en Replicación</div>
+<p class="clp"><strong>Topoisomerasas:</strong> Camptotecina/Irinotecan/Topotecan inhiben Topo I; Etopósido/Doxorrubicina inhiben Topo II → roturas de ADN → muerte tumoral.<br><strong>Telomerasa:</strong> activa en ~90% tumores → diana terapéutica emergente (Imetelstat). Mutaciones en TERT/TERC causan <strong>disqueratosis congénita</strong> (telómeros cortos → fallo medular, fibrosis pulmonar, susceptibilidad a cáncer).<br><strong>Nucleósidos análogos:</strong> Aciclovir (herpes), AZT/zidovudina (VIH) actúan como terminadores de cadena al ser incorporados por polimerasas virales.</p></div>
+
+<div class="qq" id="q05"><div class="qt">¿Por qué la cadena retrasada se sintetiza como fragmentos de Okazaki?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">A</div>Porque es más propensa a mutaciones</button>
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">B</div>Porque la ADN Pol solo sintetiza 5'→3', opuesto al avance de la horquilla en esa hebra</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">C</div>Porque carece de primasa propia</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>Porque la topoisomerasa la fragmenta</button>
+</div><div class="qf" id="fb-q05"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('empaq')">← Empaquetamiento</button><button class="btn bp" onclick="go('transcr')">Transcripción →</button></div>
+</div>
+
+<!-- ====================================================================== -->
+<!-- CAPÍTULOS 4-9: Placeholder para mantener navegación -->
+<!-- (Se incluyen los capítulos completos restantes) -->
+<!-- ====================================================================== -->
+
+<!-- CAPÍTULO 4: TRANSCRIPCIÓN -->
+<div class="sec" id="sec-transcr">
+<div class="chapter-header"><div class="ch-num">Capítulo 4 de 9</div><h2>📝 Transcripción del ADN</h2><p>Promotores, ARN polimerasas, PIC, CTD, fases de la transcripción</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">🎯 Promotores y <span class="ac">ARN Polimerasas</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div><p style="color:var(--t2)">La transcripción es la síntesis de ARN a partir de un molde de ADN. La <strong>hebra molde</strong> se lee 3'→5' y el ARN se sintetiza 5'→3'. La <strong>hebra no molde (codificante/con sentido)</strong> tiene la misma secuencia que el ARN (con T en vez de U). La <strong>ARN Pol II</strong> transcribe genes codificantes de proteínas. <strong>No requiere cebador</strong> (a diferencia de la replicación).</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Orientación de Hebras y Dirección de Transcripción</text>
+<!-- DNA strands -->
+<rect x="80" y="80" width="740" height="50" rx="10" fill="rgba(0,163,255,.05)" stroke="rgba(0,163,255,.15)" stroke-width="1"/>
+<text x="100" y="100" fill="#00A3FF" font-size="10" font-weight="600">5'————————————————————————————————————————————3'</text>
+<text x="100" y="118" fill="#00A3FF" font-size="9">Hebra no molde (codificante / con sentido / sense)</text>
+<rect x="80" y="135" width="740" height="50" rx="10" fill="rgba(0,212,170,.05)" stroke="rgba(0,212,170,.15)" stroke-width="1"/>
+<text x="100" y="155" fill="#00D4AA" font-size="10" font-weight="600">3'————————————————————————————————————————————5'</text>
+<text x="100" y="173" fill="#00D4AA" font-size="9">Hebra molde (template / antisense) — LEÍDA por ARN Pol II</text>
+<!-- RNA -->
+<rect x="80" y="200" width="740" height="40" rx="10" fill="rgba(236,72,153,.05)" stroke="rgba(236,72,153,.15)" stroke-width="1"/>
+<text x="100" y="220" fill="#EC4899" font-size="10" font-weight="600">5'————————————————————————————————————————————3'</text>
+<text x="100" y="233" fill="#EC4899" font-size="9">ARNm (misma secuencia que no molde, con U en vez de T)</text>
+<!-- Labels -->
+<text x="450" y="260" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="600">↓ Upstream (5') ← PROMOTOR → Downstream (3') ↓</text>
+<text x="450" y="280" text-anchor="middle" fill="#8BA4BE" font-size="9">"Upstream/downstream" se refiere a la posición relativa al sentido de la transcripción (no a la hebra molde)</text>
+</svg>
+</div>
+
+<table class="et"><thead><tr><th>ARN Polimerasa</th><th>Producto</th><th>Localización</th><th>Sensibilidad</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Pol I</strong></td><td>ARNr 45S → 28S, 18S, 5.8S</td><td>Nucléolo</td><td>Resistente a α-amanitina</td></tr>
+<tr><td><strong style="color:var(--b)">Pol II</strong></td><td>ARNm, snARN (excepto U6), miARN</td><td>Nucleoplasma</td><td>Muy sensible a α-amanitina (hongos Amanita)</td></tr>
+<tr><td><strong style="color:var(--p)">Pol III</strong></td><td>ARNt, ARNr 5S, snARN U6</td><td>Nucleoplasma</td><td>Sensible a altas dosis de α-amanitina</td></tr>
+</tbody></table>
+</div>
+
+<div class="cd"><div class="ch">📋 El Promotor y el <span class="ac">Complejo de Pre-Iniciación</span></div>
+<div class="ib n"><div class="ibt">📋 Elementos del Promotor</div><p style="color:var(--t2)">El promotor es la secuencia de ADN <strong>upstream</strong> del sitio +1 que dirige el inicio de la transcripción. Contiene: <strong>Caja TATA</strong> (~-25 a -30, secuencia TATAAA, reconocida por TBP). No todos los promotores tienen TATA; ~70% de promotores humanos son "<strong>TATA-less</strong>" y son ricos en <strong>islas CpG</strong> (metilación de CpG = silenciamiento). Otros elementos: Inr (Initiator), DPE (Downstream Promoter Element), BRE.</p></div>
+
+<div class="timeline">
+<div class="timeline-item"><strong style="color:var(--y)">Paso 1: TFIID (TBP) → TATA box</strong><p style="color:var(--t2);font-size:.88rem;margin-top:6px">TBP se une al surco menor del TATA box, causando curvatura de ~80° en el ADN. Los TAFs de TFIID reconocen otros elementos (Inr, DPE). Evento nucleante.</p></div>
+<div class="timeline-item"><strong style="color:var(--b)">Paso 2: TFIIA + TFIIB estabilizan</strong><p style="color:var(--t2);font-size:.88rem;margin-top:6px">TFIIB se une a BRE, posiciona el sitio activo de Pol II sobre +1. Crea la plataforma para reclutar Pol II.</p></div>
+<div class="timeline-item"><strong style="color:var(--g)">Paso 3: ARN Pol II + TFIIF llegan al promotor</strong><p style="color:var(--t2);font-size:.88rem;margin-top:6px">TFIIF escolta a Pol II al complejo. Estabiliza interacción Pol II–TFIIB. Previene unión inespecífica al ADN.</p></div>
+<div class="timeline-item"><strong style="color:var(--pk)">Paso 4: TFIIE + TFIIH completan el PIC</strong><p style="color:var(--t2);font-size:.88rem;margin-top:6px">TFIIH tiene dos actividades: <strong>Helicasa</strong> (XPB, abre ~11-15 pb, burbuja de transcripción) y <strong>Quinasa</strong> (CDK7/Ciclina H, fosforila <strong>Ser5 del CTD</strong>).</p></div>
+<div class="timeline-item"><strong style="color:var(--p)">Paso 5: Escape del promotor</strong><p style="color:var(--t2);font-size:.88rem;margin-top:6px">Tras sintetizar ~8-10 nt, Pol II escapa del promotor. Ser5-P del CTD recluta enzimas de <strong>capping</strong>. Algunos GTFs quedan como "scaffold" para re-iniciaciones.</p></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🔄 Elongación, CTD y <span class="ac">Terminación</span></div>
+<div class="ib"><div class="ibt">🔑 CTD — El "código de fosforilación" de Pol II</div><p style="color:var(--t2)">El <strong>Dominio C-Terminal</strong> (CTD) de la subunidad mayor de Pol II contiene <strong>52 repeticiones</strong> del heptapéptido YSPTSPS. Su estado de fosforilación coordina todo el procesamiento del ARNm:</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Código de Fosforilación del CTD</text>
+<!-- Ser5-P phase -->
+<rect x="50" y="55" width="250" height="90" rx="12" fill="rgba(255,217,61,.08)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="175" y="80" text-anchor="middle" fill="#FFD93D" font-size="12" font-weight="700">Ser5-P (TFIIH/CDK7)</text>
+<text x="175" y="100" text-anchor="middle" fill="#8BA4BE" font-size="9">• Escape del promotor</text>
+<text x="175" y="115" text-anchor="middle" fill="#8BA4BE" font-size="9">• Recluta enzimas de CAPPING 5'</text>
+<text x="175" y="130" text-anchor="middle" fill="#8BA4BE" font-size="9">• Recluta factores de splicing</text>
+<text x="330" y="100" fill="#FFD93D" font-size="18">→</text>
+<!-- Ser2-P phase -->
+<rect x="350" y="55" width="250" height="90" rx="12" fill="rgba(0,212,170,.08)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="475" y="80" text-anchor="middle" fill="#00D4AA" font-size="12" font-weight="700">Ser2-P (P-TEFb/CDK9)</text>
+<text x="475" y="100" text-anchor="middle" fill="#8BA4BE" font-size="9">• Elongación productiva</text>
+<text x="475" y="115" text-anchor="middle" fill="#8BA4BE" font-size="9">• Recluta factores de SPLICING</text>
+<text x="475" y="130" text-anchor="middle" fill="#8BA4BE" font-size="9">• Recluta factores de POLIADENILACIÓN</text>
+<text x="630" y="100" fill="#00D4AA" font-size="18">→</text>
+<!-- Desfosforilación -->
+<rect x="650" y="55" width="200" height="90" rx="12" fill="rgba(167,139,250,.08)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="750" y="80" text-anchor="middle" fill="#A78BFA" font-size="12" font-weight="700">Desfosforilación</text>
+<text x="750" y="100" text-anchor="middle" fill="#8BA4BE" font-size="9">• Terminación</text>
+<text x="750" y="115" text-anchor="middle" fill="#8BA4BE" font-size="9">• Reciclaje de Pol II</text>
+<text x="750" y="130" text-anchor="middle" fill="#8BA4BE" font-size="9">• Fosfatasa FCP1/Ssu72</text>
+<!-- Bottom -->
+<text x="450" y="175" text-anchor="middle" fill="#5A7A96" font-size="9">El CTD actúa como "plataforma de ensamblaje" que coordina transcripción con procesamiento del pre-ARNm</text>
+</svg>
+</div>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--o)">🔸 Terminación: Modelo "Torpedo"</h4><p style="color:var(--t2);font-size:.88rem">Pol II transcribe más allá de la señal AAUAAA → CPSF/CstF cortan y poliadenilan el ARNm → la exonucleasa <strong>Xrn2 (Rat1)</strong> degrada el ARN residual 5'→3' → al alcanzar a Pol II, la desestabiliza y <strong>libera</strong> del ADN.</p></div>
+<div class="cc"><h4 style="color:var(--p)">🔹 Modelo "Alostérico"</h4><p style="color:var(--t2);font-size:.88rem">Al transcribir la señal poly(A), Pol II sufre un cambio conformacional → factores anti-terminación se disocian → pierde procesividad → se libera. Ambos modelos probablemente cooperan in vivo.</p></div>
+</div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">α-Amanitina y Enfermedades de la Transcripción</div>
+<p class="clp"><strong>α-Amanitina</strong> (Amanita phalloides): toxina que inhibe ARN Pol II → fallo hepático agudo, letal. <strong>Mutaciones en subunidades de TFIIH</strong> (XPB, XPD): causan xeroderma pigmentoso (defecto en reparación por NER), tricotiodistrofia y síndrome de Cockayne. <strong>Islas CpG hipermetiladas:</strong> silenciamiento de genes supresores tumorales en cáncer (ej: p16/CDKN2A, BRCA1).</p></div>
+
+<div class="qq" id="q06"><div class="qt">¿Qué fosforilación del CTD de Pol II se asocia al reclutamiento de enzimas de capping?</div><div class="qo">
+<button class="qb" onclick="cq('q06',this,1)"><div class="ol">A</div>Ser5-P (por TFIIH/CDK7) — al inicio, recluta capping y splicing</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">B</div>Ser2-P (por P-TEFb/CDK9) — elongación productiva</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">C</div>Desfosforilación completa — reciclaje</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">D</div>Fosforilación de histonas H3S10</button>
+</div><div class="qf" id="fb-q06"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('replic')">← Replicación</button><button class="btn bp" onclick="go('procrna')">Procesamiento ARNm →</button></div>
+</div>
+
+<!-- CAPÍTULO 5: PROCESAMIENTO pre-ARNm -->
+<div class="sec" id="sec-procrna">
+<div class="chapter-header"><div class="ch-num">Capítulo 5 de 9</div><h2>✂️ Procesamiento del pre-ARNm</h2><p>Capping 5', poliadenilación 3', splicing, spliceosoma y splicing alternativo</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">Las Tres Modificaciones <span class="ac">Esenciales</span></div>
+<div class="tb"><button class="tbtn a" onclick="st(this,'tc-cap')">🧢 Capping 5'</button><button class="tbtn" onclick="st(this,'tc-polya')">🔗 Poliadenilación</button><button class="tbtn" onclick="st(this,'tc-splice')">✂️ Splicing</button></div>
+
+<div class="tc a" id="tc-cap">
+<div class="ib"><div class="ibt">🔑 Cap de 7-metilguanosina (m⁷G)</div><p style="color:var(--t2)">Se añade <strong>m⁷G</strong> al extremo 5' mediante enlace <strong>5'-5' trifosfato</strong> (único en bioquímica). Ocurre co-transcripcionalmente cuando el transcrito tiene ~20-30 nt. Enzimas reclutadas por <strong>Ser5-P del CTD</strong>.</p></div>
+<p style="color:var(--t2);font-size:.9rem"><strong>Reacciones:</strong> (1) ARN trifosfatasa remueve γ-fosfato del 5'. (2) Guanililtransferasa añade GMP vía enlace 5'-5'. (3) Metiltransferasa añade grupo metilo al N7 de la guanina → m⁷GpppN.</p>
+<p style="color:var(--t2);font-size:.9rem;margin-top:8px"><strong>Funciones:</strong> protección contra exonucleasas 5'→3' (XRN1), reconocimiento por <strong>eIF4E</strong> (inicio de traducción), facilita splicing del primer intrón, promueve exportación nuclear (CBC = cap-binding complex).</p>
+</div>
+
+<div class="tc" id="tc-polya">
+<div class="ib"><div class="ibt">🔑 Poliadenilación 3'</div><p style="color:var(--t2)">Señal <strong>AAUAAA</strong> reconocida por <strong>CPSF</strong> (Cleavage and Polyadenylation Specificity Factor). Elemento rico en G/U downstream reconocido por <strong>CstF</strong>. Se corta el transcrito ~10-30 nt después de AAUAAA. <strong>Poli(A) Polimerasa (PAP)</strong> añade ~200 adeninas sin molde. <strong>PABP</strong> (Poly-A Binding Protein) estabiliza la cola.</p></div>
+<p style="color:var(--t2);font-size:.9rem"><strong>Funciones:</strong> estabilidad del ARNm (protección 3'), exportación nuclear, eficiencia de traducción (interacción circular con cap vía eIF4G-PABP). La longitud de la cola regula la vida media del ARNm. Desadenilasas (deadenilación) → primer paso de la degradación del ARNm.</p>
+</div>
+
+<div class="tc" id="tc-splice">
+<div class="ib"><div class="ibt">🔑 Splicing: remoción de intrones</div><p style="color:var(--t2)">Los <strong>intrones</strong> son secuencias no codificantes eliminadas del pre-ARNm. Los <strong>exones</strong> son unidos. Catalizado por el <strong>spliceosoma</strong> (~3 MDa): 5 snRNPs (U1, U2, U4, U5, U6) + >150 proteínas. Se ensambla <strong>de novo</strong> en cada intrón.</p></div>
+<div class="ib go"><div class="ibt">⚡ Secuencias consenso del intrón</div><p style="color:var(--t2)"><strong>Sitio donador 5':</strong> GU (reconocido por U1 snRNP)<br><strong>Punto de ramificación (branch point):</strong> Adenina conservada, ~20-50 nt antes de 3'ss (reconocido por U2 snRNP) <br><strong>Tracto de polipirimidinas:</strong> rico en C/U (reconocido por U2AF)<br><strong>Sitio aceptor 3':</strong> AG</p></div>
+<div class="ib n"><div class="ibt">🔑 Dos transesterificaciones</div><p style="color:var(--t2)"><strong>1ª:</strong> 2'-OH de la A del branch point ataca el 5'ss → se forma un lazo (lariat) + exón 1 libre.<br><strong>2ª:</strong> 3'-OH del exón 1 ataca el 3'ss → exones se unen + lariat se libera → degradado.<br>La catálisis es por <strong>ARNsn</strong> (U2 + U6 = ribozima), no proteínas. El <strong>EJC</strong> (Exon Junction Complex) se deposita ~20-24 nt upstream de cada unión exón-exón → marca de splicing exitoso.</p></div>
+
+<table class="et"><thead><tr><th>Complejo</th><th>Composición</th><th>Evento</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--y)">E (Compromiso)</strong></td><td>U1 + SF1 + U2AF</td><td>U1→5'ss; SF1→branch point; U2AF→tracto Py + 3'ss</td></tr>
+<tr><td><strong style="color:var(--p)">A (Pre-spliceosoma)</strong></td><td>U1 + U2</td><td>U2 desplaza SF1 en branch point (ATP); A queda abultada</td></tr>
+<tr><td><strong style="color:var(--b)">B (Pre-catalítico)</strong></td><td>U1+U2+U4/U6·U5</td><td>Tri-snRNP se une; 5 snRNPs presentes; aún inactivo</td></tr>
+<tr><td><strong style="color:var(--g)">B* (Activado)</strong></td><td>U2+U5+U6</td><td>U1 y U4 salen; U6→5'ss; U2+U6 = sitio catalítico</td></tr>
+<tr><td><strong style="color:var(--pk)">C (Catalítico)</strong></td><td>U2+U5+U6</td><td>1ª y 2ª transesterificación → exones ligados</td></tr>
+<tr><td><strong style="color:var(--r)">P (Post-catalítico)</strong></td><td>snRNPs + lariat</td><td>ARNm liberado; lariat degradado; reciclaje de snRNPs</td></tr>
+</tbody></table>
+
+<div class="ib pp"><div class="ibt">🧬 Splicing alternativo — 1 gen, múltiples proteínas</div><p style="color:var(--t2)">~<strong>95%</strong> de genes humanos multi-exónicos sufren splicing alternativo. Un gen puede producir múltiples ARNm al incluir/excluir exones, usar sitios de splicing alternativos, o retener intrones. Regulado por proteínas <strong>SR</strong> (promueven splicing) y <strong>hnRNP</strong> (reprimen). Ejemplo: gen de calcitonina → calcitonina (tiroides) o CGRP (neuronas).</p></div>
+</div></div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Errores de Splicing en Enfermedad</div>
+<p class="clp">~15% de enfermedades genéticas involucran mutaciones en sitios de splicing. <strong>β-talasemia:</strong> mutaciones en sitios de splicing del gen de β-globina → transcritos aberrantes → déficit de hemoglobina. <strong>Atrofia muscular espinal (SMA):</strong> deleción/mutación de SMN1; SMN2 tiene splicing alternativo que excluye exón 7 → proteína truncada e inestable; <strong>Nusinersen (Spinraza)</strong> = oligonucleótido antisentido que corrige el splicing de SMN2, promoviendo inclusión del exón 7. <strong>Retinitis pigmentosa:</strong> mutaciones en PRPF31 y otros componentes del spliceosoma.</p></div>
+
+<div class="qq" id="q07"><div class="qt">¿Cuáles snRNPs forman el centro catalítico activo del spliceosoma?</div><div class="qo">
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">A</div>U1 y U4</button>
+<button class="qb" onclick="cq('q07',this,1)"><div class="ol">B</div>U2 y U6 (forman el sitio catalítico tipo ribozima)</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">C</div>U5 sola</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">D</div>Las proteínas SR y hnRNP</button>
+</div><div class="qf" id="fb-q07"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('transcr')">← Transcripción</button><button class="btn bp" onclick="go('codigogen')">Código Genético →</button></div>
+</div>
+
+<!-- CAPÍTULO 6: CÓDIGO GENÉTICO -->
+<div class="sec" id="sec-codigogen">
+<div class="chapter-header"><div class="ch-num">Capítulo 6 de 9</div><h2>🔢 Código Genético, Ribosomas y ARNt</h2><p>Propiedades del código, ribosoma 80S, sitios A/P/E, ARNt y wobble</p><div class="ch-time">⏱ ~12 min</div></div>
+
+<div class="cd"><div class="ch">📋 Propiedades del <span class="ac">Código Genético</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div><p style="color:var(--t2)">Correspondencia entre <strong>tripletes (codones)</strong> en el ARNm y <strong>aminoácidos</strong>. 64 codones (4³): 61 codifican aa + 3 STOP.</p></div>
+<table class="et"><thead><tr><th>Propiedad</th><th>Significado</th><th>Implicación clínica</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Triplete</strong></td><td>3 nucleótidos = 1 codón</td><td>Mutaciones frameshift cambian todo el mensaje</td></tr>
+<tr><td><strong style="color:var(--b)">Degenerado</strong></td><td>Varios codones → mismo aa (redundancia en 3ª posición)</td><td>Mutaciones silenciosas posibles</td></tr>
+<tr><td><strong style="color:var(--p)">No ambiguo</strong></td><td>1 codón = 1 solo aminoácido</td><td>Garantiza fidelidad de la traducción</td></tr>
+<tr><td><strong style="color:var(--y)">Universal</strong></td><td>Mismo código en casi todos los organismos</td><td>Excepciones: mitocondria, algunos protozoos</td></tr>
+<tr><td><strong style="color:var(--o)">Sin solapamiento</strong></td><td>Cada nt pertenece a un solo codón</td><td>Una mutación afecta un solo codón</td></tr>
+<tr><td><strong style="color:var(--r)">Sin puntuación</strong></td><td>Se lee continuamente desde AUG</td><td>El marco de lectura es crucial</td></tr>
+</tbody></table>
+</div>
+
+<div class="cd"><div class="ch">🔬 Ribosoma <span class="ac">80S</span> Eucariota</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 900 350" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Composición del Ribosoma Eucariota (80S)</text>
+<ellipse cx="250" cy="140" rx="130" ry="65" fill="rgba(255,217,61,.08)" stroke="#FFD93D" stroke-width="2"/>
+<text x="250" y="125" text-anchor="middle" fill="#FFD93D" font-size="16" font-weight="700">40S</text>
+<text x="250" y="145" text-anchor="middle" fill="#8BA4BE" font-size="10">ARNr 18S + 33 proteínas</text>
+<text x="250" y="162" text-anchor="middle" fill="#8BA4BE" font-size="9">Función: DECODIFICACIÓN</text>
+<ellipse cx="600" cy="140" rx="160" ry="80" fill="rgba(0,163,255,.08)" stroke="#00A3FF" stroke-width="2"/>
+<text x="600" y="120" text-anchor="middle" fill="#00A3FF" font-size="16" font-weight="700">60S</text>
+<text x="600" y="140" text-anchor="middle" fill="#8BA4BE" font-size="10">ARNr 28S + 5.8S + 5S + 47 proteínas</text>
+<text x="600" y="157" text-anchor="middle" fill="#EC4899" font-size="9" font-weight="600">28S = peptidil-transferasa (RIBOZIMA)</text>
+<text x="600" y="174" text-anchor="middle" fill="#8BA4BE" font-size="9">Función: FORMACIÓN enlace peptídico</text>
+<!-- Sites -->
+<text x="450" y="240" text-anchor="middle" fill="#E8F0F8" font-size="13" font-weight="700" font-family="DM Serif Display,serif">Los Tres Sitios Funcionales</text>
+<rect x="180" y="260" width="160" height="55" rx="10" fill="rgba(255,107,107,.1)" stroke="#FF6B6B" stroke-width="2"/>
+<text x="260" y="285" text-anchor="middle" fill="#FF6B6B" font-size="13" font-weight="700">Sitio A</text>
+<text x="260" y="303" text-anchor="middle" fill="#8BA4BE" font-size="9">(aminoacil) Entrada del aa-ARNt</text>
+<rect x="370" y="260" width="160" height="55" rx="10" fill="rgba(0,212,170,.1)" stroke="#00D4AA" stroke-width="2"/>
+<text x="450" y="285" text-anchor="middle" fill="#00D4AA" font-size="13" font-weight="700">Sitio P</text>
+<text x="450" y="303" text-anchor="middle" fill="#8BA4BE" font-size="9">(peptidil) Cadena en crecimiento</text>
+<rect x="560" y="260" width="160" height="55" rx="10" fill="rgba(167,139,250,.1)" stroke="#A78BFA" stroke-width="2"/>
+<text x="640" y="285" text-anchor="middle" fill="#A78BFA" font-size="13" font-weight="700">Sitio E</text>
+<text x="640" y="303" text-anchor="middle" fill="#8BA4BE" font-size="9">(exit) Salida del ARNt vacío</text>
+<text x="450" y="340" text-anchor="middle" fill="#8BA4BE" font-size="9">Dirección de los ARNt: A → P → E · Met-ARNt inicia en P</text>
+</svg>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🔗 ARNt y <span class="ac">Wobble</span></div>
+<div class="ib"><div class="ibt">🔑 ARNt — El adaptador molecular</div><p style="color:var(--t2)">Estructura en trébol (2D) / L invertida (3D). <strong>Anticodón</strong> (lee el codón ARNm) + extremo 3' <strong>CCA</strong> (une al aminoácido). Carga por <strong>aminoacil-ARNt sintetasas (aaRS)</strong> — 20 enzimas (una/aa). Reacción: aa + ATP → aa-AMP + PPᵢ → aa-ARNt + AMP. Costo: ATP→AMP = equivale a 2 ATP.</p></div>
+<div class="ib pp"><div class="ibt">🔑 Hipótesis del Bamboleo (Wobble — Crick, 1966)</div><p style="color:var(--t2)">La <strong>3ª posición del codón</strong> (1ª del anticodón) permite apareamiento no estándar (G-U, I-C/U/A). La <strong>inosina (I)</strong> en la 1ª posición del anticodón puede leer 3 codones. Consecuencia: solo se necesitan ~45 ARNt para 61 codones. La degeneración del código se concentra en la 3ª posición.</p></div>
+</div>
+
+<div class="mnemonic"><h4>🧠 Mnemotécnica — Sitios del Ribosoma</h4><div class="big">A · P · E</div><p>"<strong>A</strong>cepta (aminoacil-ARNt) → <strong>P</strong>roduce (enlace peptídico) → <strong>E</strong>xpulsa (ARNt vacío)"</p></div>
+
+<div class="qq" id="q08"><div class="qt">¿Quién cataliza realmente la formación del enlace peptídico?</div><div class="qo">
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">A</div>Las proteínas ribosomales</button>
+<button class="qb" onclick="cq('q08',this,1)"><div class="ol">B</div>El ARNr 28S (23S en procariotas) — es una ribozima</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">C</div>El factor eEF1A</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">D</div>La aminoacil-ARNt sintetasa</button>
+</div><div class="qf" id="fb-q08"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('procrna')">← Procesamiento</button><button class="btn bp" onclick="go('traduc')">Traducción →</button></div>
+</div>
+
+<!-- CAPÍTULO 7: TRADUCCIÓN -->
+<div class="sec" id="sec-traduc">
+<div class="chapter-header"><div class="ch-num">Capítulo 7 de 9</div><h2>🏭 Traducción — Síntesis de Proteínas</h2><p>Iniciación (scanning/Kozak), elongación, terminación, costo energético</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">🚀 Iniciación en <span class="ac">Eucariotas</span></div>
+<div class="ib"><div class="ibt">🔑 Mecanismo de Scanning</div><p style="color:var(--t2)"><span class="proc-num">1</span><strong>eIF4E</strong> reconoce el cap m⁷G. <strong>eIF4G</strong> = scaffold. <strong>eIF4A</strong> = helicasa (desenrolla 5'UTR). eIF4G también une PABP → circularización del ARNm (comunicación cap-polyA).<br>
+<span class="proc-num">2</span>40S + <strong>Met-ARNtᵢ</strong> (iniciador) + eIF2-GTP + eIF1, eIF1A, eIF3, eIF5 → <strong>complejo 43S</strong>.<br>
+<span class="proc-num">3</span>43S se une al cap (vía eIF4G-eIF3) y <strong>escanea</strong> 5'→3' hasta encontrar el <strong>AUG</strong> en contexto <strong>Kozak</strong> óptimo: gcc<strong>A/G</strong>ccAUGG. La posición -3 (A/G purina) y +4 (G) son las más críticas.<br>
+<span class="proc-num">4</span>Reconocimiento del AUG → eIF2 hidroliza GTP → factores se liberan → <strong>60S se une</strong> → ribosoma 80S funcional con Met-ARNtᵢ en sitio P.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🏃 Ciclo de <span class="ac">Elongación</span></div>
+<div class="sim-box"><h4 style="font-family:'DM Serif Display',serif;margin-bottom:8px">🔄 Simulación: Ciclo de Elongación</h4>
+<div class="sim-step-ind" id="elong-dots"></div>
+<div class="sim-narration" id="elong-narration"></div>
+<div class="sim-controls">
+<button class="sim-btn" id="elong-prev" onclick="elongStep(-1)">◀ Anterior</button>
+<button class="sim-btn" onclick="elongReset()">↺ Reiniciar</button>
+<button class="sim-btn" id="elong-next" onclick="elongStep(1)">Siguiente ▶</button>
+</div></div>
+
+<div class="ib go"><div class="ibt">⚡ Costo energético por aminoácido añadido</div><p style="color:var(--t2)">Carga del ARNt: ATP→AMP (<strong>≈2 ATP</strong>). Entrada al sitio A: <strong>1 GTP</strong> (eEF1A). Translocación: <strong>1 GTP</strong> (eEF2). <strong>Total: ~4 enlaces fosfato de alta energía por residuo</strong>. ¡La síntesis de proteínas es uno de los procesos más costosos de la célula!</p></div>
+
+<div class="ib w"><div class="ibt">🛑 Terminación</div><p style="color:var(--t2)">Codón STOP (UAA, UAG, UGA) en sitio A → <strong>eRF1</strong> (mimetiza ARNt, reconoce los 3 codones stop) + <strong>eRF3-GTP</strong> → activa peptidil-transferasa para hidrolizar enlace peptidil-ARNt → proteína se libera → subunidades se disocian (ABCE1/Rli1, ATPasa, separa las subunidades).</p></div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Antibióticos que Inhiben la Traducción</div>
+<table class="et"><thead><tr><th>Antibiótico</th><th>Diana</th><th>Mecanismo</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--y)">Tetraciclinas</strong></td><td>30S (16S ARNr)</td><td>Bloquean entrada del aminoacil-ARNt al sitio A</td></tr>
+<tr><td><strong style="color:var(--r)">Aminoglucósidos</strong> (Gentamicina)</td><td>30S (16S ARNr)</td><td>Causan errores de lectura (misreading) → proteínas aberrantes</td></tr>
+<tr><td><strong style="color:var(--b)">Cloranfenicol</strong></td><td>50S (23S ARNr)</td><td>Inhibe peptidil-transferasa</td></tr>
+<tr><td><strong style="color:var(--pk)">Macrólidos</strong> (Eritromicina)</td><td>50S (23S ARNr)</td><td>Bloquean túnel de salida del péptido</td></tr>
+<tr><td><strong style="color:var(--g)">Linezolid</strong></td><td>50S</td><td>Impide formación del complejo de iniciación 70S</td></tr>
+<tr><td><strong style="color:var(--o)">Toxina diftérica</strong></td><td>eEF2 (eucariota)</td><td>ADP-ribosilación → bloquea translocación → muerte celular</td></tr>
+</tbody></table>
+<p class="clp" style="margin-top:8px">La <strong>selectividad</strong> se basa en diferencias estructurales entre ribosoma 70S bacteriano y 80S humano. Excepciones de toxicidad: cloranfenicol puede afectar ribosomas mitocondriales (70S) → anemia aplásica.</p></div>
+
+<div class="qq" id="q09"><div class="qt">¿Qué secuencia contexto rodea al AUG de inicio en eucariotas?</div><div class="qo">
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">A</div>Secuencia Shine-Dalgarno (procariotas)</button>
+<button class="qb" onclick="cq('q09',this,1)"><div class="ol">B</div>Secuencia Kozak: gcc(A/G)ccAUGG — posiciones -3 y +4 críticas</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">C</div>Cola poli(A)</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">D</div>IRES (Internal Ribosome Entry Site)</button>
+</div><div class="qf" id="fb-q09"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('codigogen')">← Código Genético</button><button class="btn bp" onclick="go('modpost')">Mod. Post-Trad →</button></div>
+</div>
+
+<!-- CAPÍTULO 8: MOD POST-TRAD -->
+<div class="sec" id="sec-modpost">
+<div class="chapter-header"><div class="ch-num">Capítulo 8 de 9</div><h2>🔧 Modificaciones Post-Traduccionales y Plegamiento</h2><p>Fosforilación, ubiquitinación, proteasoma 26S, chaperonas y control de calidad</p><div class="ch-time">⏱ ~12 min</div></div>
+
+<div class="cd"><div class="ch">⚡ Principales <span class="ac">Modificaciones Covalentes</span></div>
+<table class="et"><thead><tr><th>Modificación</th><th>Enzima/Sistema</th><th>Efecto</th><th>Relevancia clínica</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--b)">Fosforilación</strong></td><td>Quinasas (Ser/Thr/Tyr) / Fosfatasas</td><td>Interruptor on/off reversible. La más ubicua.</td><td>Imatinib (BCR-ABL), Trastuzumab (HER2)</td></tr>
+<tr><td><strong style="color:var(--g)">N-Glicosilación</strong></td><td>OST en RER (Asn-X-Ser/Thr)</td><td>Plegamiento, estabilidad, reconocimiento celular</td><td>CDG (defectos congénitos de glicosilación)</td></tr>
+<tr><td><strong style="color:var(--r)">Ubiquitinación</strong></td><td>Cascada E1→E2→E3 ligasa</td><td>PoliUb K48 → proteasoma. MonoUb → endocitosis.</td><td>VHL→HIF-1α; mutación VHL → cáncer renal</td></tr>
+<tr><td><strong style="color:var(--y)">Proteólisis</strong></td><td>Proteasas específicas</td><td>Activación de zimógenos, remoción de señal</td><td>Preproinsulina → proinsulina → insulina + péptido C</td></tr>
+<tr><td><strong style="color:var(--p)">Acetilación</strong></td><td>Acetiltransferasas/HDAC</td><td>Regulación de p53, tubulina, histonas</td><td>Inhibidores de HDAC (vorinostat) en cáncer</td></tr>
+</tbody></table>
+</div>
+
+<div class="cd"><div class="ch">🛡️ Plegamiento, Chaperonas y <span class="ac">Proteasoma</span></div>
+<div class="ib"><div class="ibt">🔑 El plegamiento correcto es esencial para la función</div><p style="color:var(--t2)">El plegamiento es el proceso por el cual la cadena polipeptídica adquiere su <strong>estructura tridimensional nativa</strong>. La información para plegarse está en la <strong>secuencia de aminoácidos</strong> (Anfinsen, 1973). In vivo, las <strong>chaperonas</strong> asisten el proceso, pero NO determinan la estructura final.</p></div>
+
+<div class="cg3">
+<div class="cc"><h4 style="color:var(--g)">Hsp70 (citosol/RE)</h4><p style="color:var(--t2);font-size:.85rem">Se une co-traduccionalmente a segmentos hidrofóbicos. Ciclo ATP→ADP regula unión/liberación. Previene agregación prematura. En el RE: <strong>BiP/GRP78</strong>.</p></div>
+<div class="cc"><h4 style="color:var(--b)">Hsp60/GroEL-GroES</h4><p style="color:var(--t2);font-size:.85rem">"Cámaras de plegamiento" (jaulas de Anfinsen). Proteína entra desplegada → se pliega aislada → sale plegada. Dependiente de ATP.</p></div>
+<div class="cc"><h4 style="color:var(--p)">Hsp90</h4><p style="color:var(--t2);font-size:.85rem">Madura quinasas y receptores nucleares. Estabiliza proteínas en conformaciones "competentes". <strong>Geldanamicina</strong> (inhibidor) = antitumoral experimental.</p></div>
+</div>
+
+<div class="ib w"><div class="ibt">⚠️ Proteasoma 26S: destrucción controlada</div><p style="color:var(--t2)">Proteínas con <strong>≥4 Ub en K48</strong> (poliubiquitinación) → cap 19S reconoce, despliega, desubiquitina → core 20S degrada a péptidos de 7-8 aa. E1 (activadora, 1) → E2 (conjugadora, ~40) → <strong>E3 (ligasa, >600)</strong> confiere especificidad de sustrato. <strong>Bortezomib</strong> (inhibidor del proteasoma) → acumulación de proteínas mal plegadas → estrés RE → apoptosis → tx de mieloma múltiple.</p></div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Enfermedades por Plegamiento Incorrecto (Proteinopatías)</div>
+<p class="clp"><strong>Alzheimer:</strong> β-amiloide (placas) + tau hiperfosforilada (ovillos). <strong>Parkinson:</strong> α-sinucleína → cuerpos de Lewy. <strong>Huntington:</strong> expansión polyQ en huntingtina → agregados nucleares. <strong>Fibrosis quística:</strong> CFTR-ΔF508 mal plegada → ERAD → no llega a membrana apical. <strong>Priones:</strong> PrPˢᶜ convierte PrPᶜ → agregación transmisible (Creutzfeldt-Jakob, Kuru). <strong>Amiloidosis sistémica:</strong> depósito de proteínas amiloides en múltiples órganos.</p></div>
+
+<div class="qq" id="q10"><div class="qt">¿Cuál marca señala una proteína para degradación en el proteasoma 26S?</div><div class="qo">
+<button class="qb" onclick="cq('q10',this,0)"><div class="ol">A</div>Fosforilación en tirosina</button>
+<button class="qb" onclick="cq('q10',this,1)"><div class="ol">B</div>Cadena de poliubiquitina (≥4 Ub enlazadas en K48)</button>
+<button class="qb" onclick="cq('q10',this,0)"><div class="ol">C</div>N-glicosilación con manosa</button>
+<button class="qb" onclick="cq('q10',this,0)"><div class="ol">D</div>Acetilación del extremo N-terminal</button>
+</div><div class="qf" id="fb-q10"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('traduc')">← Traducción</button><button class="btn bp" onclick="go('rer')">RER y Destino →</button></div>
+</div>
+
+<!-- CAPÍTULO 9: RER Y DESTINO -->
+<div class="sec" id="sec-rer">
+<div class="chapter-header"><div class="ch-num">Capítulo 9 de 9</div><h2>📦 RER, Vía Secretora y Control de Calidad</h2><p>SRP, translocón Sec61, N-glicosilación, calnexina/calreticulina, UGGT y ERAD</p><div class="ch-time">⏱ ~12 min</div></div>
+
+<div class="cd"><div class="ch">🚦 Destinos Proteicos según <span class="ac">Señal</span></div>
+<div class="cg3">
+<div class="cc"><h4 style="color:var(--g)">🏠 Citosol</h4><p style="color:var(--t2);font-size:.85rem">Sin señal → permanecen. Ej: enzimas glucolíticas, citoesqueleto, factores de transcripción.</p></div>
+<div class="cc"><h4 style="color:var(--b)">🏭 Organelos</h4><p style="color:var(--t2);font-size:.85rem">Señal post-traduccional: mitocondria (N-terminal anfipático), núcleo (NLS), peroxisoma (SKL/PTS1).</p></div>
+<div class="cc"><h4 style="color:var(--pk)">📬 Vía Secretora (RER)</h4><p style="color:var(--t2);font-size:.85rem">Péptido señal N-terminal hidrofóbico → SRP → translocación co-traduccional → RER→Golgi→ destino.</p></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🔄 SRP y <span class="ac">Translocación</span> al RER</div>
+<div class="sim-box"><h4 style="font-family:'DM Serif Display',serif;margin-bottom:8px">🚢 Simulación: Vía al RER</h4>
+<div class="sim-step-ind" id="srp-dots"></div>
+<div class="sim-narration" id="srp-narration"></div>
+<div class="sim-controls">
+<button class="sim-btn" id="srp-prev" onclick="srpStep(-1)">◀ Anterior</button>
+<button class="sim-btn" onclick="srpReset()">↺ Reiniciar</button>
+<button class="sim-btn" id="srp-next" onclick="srpStep(1)">Siguiente ▶</button>
+</div></div>
+</div>
+
+<div class="cd"><div class="ch">🍬 N-Glicosilación y <span class="ac">Control de Calidad</span></div>
+<div class="ib"><div class="ibt">🔑 N-Glicosilación co-traduccional en el RER</div><p style="color:var(--t2)"><strong>OST</strong> transfiere Glc₃Man₉GlcNAc₂ (14 azúcares) desde dolicol-PP a <strong>Asn</strong> en Asn-X-Ser/Thr (X≠Pro). Función: plegamiento (recluta lectinas), estabilidad, reconocimiento celular, protección contra proteasas.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 350" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Ciclo Calnexina/Calreticulina — Control de Calidad en el RER</text>
+<!-- Step 1 -->
+<rect x="30" y="60" width="170" height="70" rx="10" fill="rgba(255,217,61,.08)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="115" y="85" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="700">Glc₃Man₉GlcNAc₂</text>
+<text x="115" y="102" text-anchor="middle" fill="#8BA4BE" font-size="8">Oligosacárido transferido</text>
+<text x="115" y="118" text-anchor="middle" fill="#8BA4BE" font-size="8">por OST a Asn</text>
+<text x="215" y="95" fill="#FFD93D" font-size="14">→</text>
+<!-- Step 2 -->
+<rect x="235" y="60" width="150" height="70" rx="10" fill="rgba(0,163,255,.08)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="310" y="80" text-anchor="middle" fill="#00A3FF" font-size="10" font-weight="700">Glc₁Man₉GlcNAc₂</text>
+<text x="310" y="98" text-anchor="middle" fill="#8BA4BE" font-size="8">Glucosidasas I y II</text>
+<text x="310" y="112" text-anchor="middle" fill="#8BA4BE" font-size="8">remueven 2 glucosas</text>
+<text x="400" y="95" fill="#00A3FF" font-size="14">→</text>
+<!-- Step 3: CNX/CRT -->
+<rect x="420" y="50" width="180" height="90" rx="12" fill="rgba(0,212,170,.08)" stroke="#00D4AA" stroke-width="2"/>
+<text x="510" y="75" text-anchor="middle" fill="#00D4AA" font-size="11" font-weight="700">Calnexina / Calreticulina</text>
+<text x="510" y="93" text-anchor="middle" fill="#8BA4BE" font-size="9">Retienen proteína monoglucosilada</text>
+<text x="510" y="108" text-anchor="middle" fill="#8BA4BE" font-size="9">ERp57 (PDI) forma puentes S-S</text>
+<text x="510" y="125" text-anchor="middle" fill="#8BA4BE" font-size="9">CNX = membrana · CRT = soluble</text>
+<!-- Step 4: Release -->
+<text x="615" y="95" fill="#00D4AA" font-size="14">→</text>
+<rect x="635" y="60" width="130" height="70" rx="10" fill="rgba(167,139,250,.08)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="700" y="82" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="700">Glucosidasa II</text>
+<text x="700" y="100" text-anchor="middle" fill="#8BA4BE" font-size="8">Remueve última glucosa</text>
+<text x="700" y="116" text-anchor="middle" fill="#8BA4BE" font-size="8">Proteína libre</text>
+<!-- Decision point -->
+<text x="700" y="160" text-anchor="middle" fill="#E8F0F8" font-size="11" font-weight="700">¿Plegada correctamente?</text>
+<!-- YES path -->
+<rect x="550" y="185" width="140" height="50" rx="10" fill="rgba(0,212,170,.12)" stroke="#00D4AA" stroke-width="2"/>
+<text x="620" y="208" text-anchor="middle" fill="#00D4AA" font-size="11" font-weight="700">✅ SÍ → Golgi</text>
+<text x="620" y="223" text-anchor="middle" fill="#8BA4BE" font-size="8">Exporta a RE transicional</text>
+<line x1="650" y1="170" x2="620" y2="185" stroke="#00D4AA" stroke-width="1.5"/>
+<!-- NO path: UGGT -->
+<rect x="750" y="185" width="130" height="70" rx="10" fill="rgba(255,217,61,.08)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="815" y="205" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="700">❌ NO → UGGT</text>
+<text x="815" y="222" text-anchor="middle" fill="#8BA4BE" font-size="8">Re-glucosila → vuelve</text>
+<text x="815" y="237" text-anchor="middle" fill="#8BA4BE" font-size="8">al ciclo CNX/CRT</text>
+<line x1="750" y1="170" x2="815" y2="185" stroke="#FFD93D" stroke-width="1.5"/>
+<!-- Curved arrow back -->
+<path d="M815,255 C815,280 600,290 510,150" stroke="#FFD93D" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#arG)"/>
+<!-- ERAD path -->
+<rect x="200" y="270" width="300" height="60" rx="12" fill="rgba(255,107,107,.08)" stroke="#FF6B6B" stroke-width="2"/>
+<text x="350" y="293" text-anchor="middle" fill="#FF6B6B" font-size="11" font-weight="700">💀 Fallo terminal → ERAD</text>
+<text x="350" y="310" text-anchor="middle" fill="#8BA4BE" font-size="9">Retrotranslocación al citosol → desglicosilación → ubiquitinación → proteasoma 26S</text>
+<text x="350" y="340" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">Si ERAD se satura → UPR (IRE1, PERK, ATF6) → si persiste → APOPTOSIS (CHOP)</text>
+</svg>
+</div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Enfermedades del RER y Glicosilación</div>
+<p class="clp"><strong>Fibrosis quística (CFTR ΔF508):</strong> mutación más común. CFTR mal plegada → retenida en RER → ERAD → no llega a membrana apical → deshidratación de secreciones → enfermedad pulmonar, pancreática. <strong>Lumacaftor</strong> = chaperona farmacológica que ayuda al plegamiento; <strong>Ivacaftor</strong> = potenciador del canal.<br><strong>CDG (defectos congénitos de glicosilación):</strong> >130 tipos. Deficiencias en enzimas de glicosilación → afectación multiorgánica (neurológica, hepática, coagulación). Diagnóstico: IEF de transferrina sérica.<br><strong>Enfermedad de Gaucher tipo II:</strong> glucocerebrosidasa mal plegada → retención en RE → enfermedad lisosomal neuronopática.<br><strong>UPR y cáncer:</strong> las células tumorales con alta secreción proteica activan UPR crónicamente → ventaja de supervivencia. Inhibir IRE1α es estrategia terapéutica experimental.</p></div>
+
+<div class="qq" id="q11"><div class="qt">¿Qué proteína del RER es el «sensor de plegamiento» que re-glucosila proteínas mal plegadas?</div><div class="qo">
+<button class="qb" onclick="cq('q11',this,0)"><div class="ol">A</div>Calnexina</button>
+<button class="qb" onclick="cq('q11',this,0)"><div class="ol">B</div>BiP/GRP78</button>
+<button class="qb" onclick="cq('q11',this,1)"><div class="ol">C</div>UGGT (UDP-glucosa:glicoproteína glucosiltransferasa)</button>
+<button class="qb" onclick="cq('q11',this,0)"><div class="ol">D</div>PDI (proteín disulfuro isomerasa)</button>
+</div><div class="qf" id="fb-q11"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('modpost')">← Mod. Post-Trad</button><button class="btn bp" onclick="go('glosario')">Glosario →</button></div>
+</div>
+
+<!-- GLOSARIO -->
+<div class="sec" id="sec-glosario">
+<div class="chapter-header"><div class="ch-num">Recurso</div><h2>📖 Glosario Integrado</h2><p>Clic en cada término para ver su definición (~40 términos clave)</p></div>
+<div class="fg" id="fg"></div>
+<div class="sn"><button class="btn bs" onclick="go('rer')">← RER</button><button class="btn bp" onclick="go('evaluacion')">Evaluación Final →</button></div>
+</div>
+
+<!-- EVALUACIÓN FINAL -->
+<div class="sec" id="sec-evaluacion">
+<div class="chapter-header"><div class="ch-num">Evaluación</div><h2>🎓 Evaluación Final Integradora</h2><p>25 preguntas que integran los 9 capítulos — selecciona TODAS antes de calificar</p></div>
+<div id="eq"></div>
+<div style="text-align:center;margin:20px 0"><button class="btn bp" id="seb" style="display:none" onclick="se()">📊 Calificar evaluación</button></div>
+<div class="sd" id="sdd" style="display:none"><div class="snm" id="sn2"></div><p class="sbl" id="sm2"></p><div class="sbr"><div class="sbf" id="sbf2" style="width:0%;background:var(--grad)"></div></div><button class="btn bs" onclick="iev()" style="margin-top:12px">↺ Reintentar</button></div>
+<div class="sn"><button class="btn bs" onclick="go('glosario')">← Glosario</button><button class="btn bp" onclick="go('inicio')">🏠 Inicio</button></div>
+</div>
+
+</div>
+
+<script>
+var secs=['inicio','nucleo','empaq','replic','transcr','procrna','codigogen','traduc','modpost','rer','glosario','evaluacion'];
+function go(s){secs.forEach(function(id){document.getElementById('sec-'+id).classList.remove('a')});document.getElementById('sec-'+s).classList.add('a');document.querySelectorAll('.nl button').forEach(function(b){b.classList.remove('a');if(b.dataset.s===s)b.classList.add('a')});window.scrollTo({top:0,behavior:'smooth'});up();}
+document.querySelectorAll('.nl button').forEach(function(b){b.addEventListener('click',function(){go(this.dataset.s)})});
+function up(){var i=secs.indexOf(document.querySelector('.nl button.a')?.dataset.s||'inicio');document.getElementById('pf').style.width=Math.round((i/(secs.length-1))*100)+'%';}
+function cq(id,btn,c){var q=document.getElementById(id);if(q.dataset.done)return;q.dataset.done='1';var bs=q.querySelectorAll('.qb');bs.forEach(function(b){b.classList.add('dis')});if(c===1){btn.classList.add('ok');var fb=document.getElementById('fb-'+id);fb.classList.add('sh','cf');fb.textContent='✅ ¡Correcto!';}else{btn.classList.add('no');bs.forEach(function(b){var oc=b.getAttribute('onclick');if(oc&&oc.indexOf(',1)')>-1)b.classList.add('ok')});var fb=document.getElementById('fb-'+id);fb.classList.add('sh','if');fb.textContent='❌ Incorrecto. Revisa la respuesta correcta (verde).';}}
+function st(btn,tid){var p=btn.parentElement;p.querySelectorAll('.tbtn').forEach(function(b){b.classList.remove('a')});btn.classList.add('a');var cd=p.parentElement;cd.querySelectorAll('.tc').forEach(function(t){t.classList.remove('a')});document.getElementById(tid).classList.add('a');}
+var ms={};
+function mp(gid,el){if(el.classList.contains('ok'))return;var g=ms[gid]||(ms[gid]={l:null,r:null,score:0});var side=el.dataset.side;if(side==='l'){if(g.l)g.l.classList.remove('sel');g.l=el;el.classList.add('sel');}else{if(g.r)g.r.classList.remove('sel');g.r=el;el.classList.add('sel');}if(g.l&&g.r){if(g.l.dataset.pair===g.r.dataset.pair){g.l.classList.remove('sel');g.r.classList.remove('sel');g.l.classList.add('ok');g.r.classList.add('ok');g.score++;g.l=null;g.r=null;}else{g.l.classList.add('no');g.r.classList.add('no');var ll=g.l,rr=g.r;setTimeout(function(){ll.classList.remove('sel','no');rr.classList.remove('sel','no')},500);g.l=null;g.r=null;}document.getElementById(gid+'-score').textContent='Aciertos: '+g.score;}}
+/* Simulations */
+function simInit(prefix,data){var s=0;function render(){document.getElementById(prefix+'-narration').innerHTML=data[s].n||data[s];var d=document.getElementById(prefix+'-dots');d.innerHTML='';for(var i=0;i<data.length;i++){var dot=document.createElement('div');dot.className='sim-dot'+(i<s?' done':'')+(i===s?' act':'');d.appendChild(dot);}document.getElementById(prefix+'-prev').disabled=s===0;document.getElementById(prefix+'-next').disabled=s===data.length-1;}
+render();window[prefix+'Step']=function(dir){s=Math.max(0,Math.min(data.length-1,s+dir));render();};window[prefix+'Reset']=function(){s=0;render();};}
+var impData=[
+{n:'<strong>Paso 1 — Citosol:</strong> La proteína cargo expone su <strong>NLS</strong> (rica en Lys/Arg). <strong>Importina α</strong> reconoce la NLS (adaptador). <strong>Importina β</strong> se une a α (transportador). Se forma el trimero: <strong>cargo–imp α–imp β</strong>.'},
+{n:'<strong>Paso 2 — CPN:</strong> Importina β interactúa con las <strong>FG-nucleoporinas</strong> del canal central. El trimero se transloca por difusión facilitada entre las repeticiones FG hidrofóbicas.'},
+{n:'<strong>Paso 3 — Núcleo:</strong> Al llegar al nucleoplasma (alto Ran-GTP), <strong>Ran-GTP se une a importina β</strong> → cambio conformacional → <strong>disociación</strong> del complejo → <strong>cargo libre</strong> en el núcleo.'},
+{n:'<strong>Paso 4 — Reciclaje:</strong> Imp β + Ran-GTP → exportados al citosol → <strong>RanGAP1</strong> hidroliza GTP→GDP → Imp β libre. <strong>CAS/CSE1L</strong> recicla Imp α. <strong>NTF2</strong> reimporta Ran-GDP al núcleo donde RCC1 lo recarga.'}
+];
+var packData=[
+{n:'<strong>Nivel 0: Doble hélice (2 nm).</strong> ADN desnudo. Una molécula del cromosoma 22 mediría ~1.5 cm extendido.'},
+{n:'<strong>Nivel 1: Collar de perlas (11 nm).</strong> ADN se enrolla ~1.7 vueltas alrededor de octámeros de histonas → <strong>nucleosomas</strong>. 146 pb core + ~54 pb linker. Compactación ~6×.'},
+{n:'<strong>Nivel 2: Fibra 30 nm.</strong> Histona <strong>H1</strong> estabiliza un plegamiento en zig-zag tridimensional. Las colas de H4 contribuyen al contacto internucleosomal. Compactación ~40×.'},
+{n:'<strong>Nivel 3: Dominios de asas (~300 nm).</strong> La fibra 30 nm se organiza en asas (loops) ancladas a un <strong>andamio de proteínas no histonas</strong> (condensinas, cohesinas, topoisomerasa II). Compactación ~700×.'},
+{n:'<strong>Nivel 4: Cromosoma metafásico (~1,400 nm).</strong> Máxima compactación durante mitosis. Los dominios de asas se superenrollan. Compactación total: <strong>~10,000×</strong>. Visible al microscopio óptico.'}
+];
+var elongData=[
+{n:'<strong>Paso 1 — Entrada del aminoacil-ARNt:</strong> <strong>eEF1A-GTP</strong> lleva el aminoacil-ARNt al <strong>sitio A</strong>. Si el anticodón es complementario al codón → hidrólisis de GTP → eEF1A-GDP se libera → ARNt acomodado. Costo: <strong>1 GTP</strong>.'},
+{n:'<strong>Paso 2 — Enlace peptídico:</strong> La <strong>peptidil-transferasa</strong> (ARNr 28S = ribozima) transfiere la cadena del ARNt en <strong>sitio P</strong> al aminoácido del ARNt en <strong>sitio A</strong>. Se forma nuevo enlace peptídico. ARNt del sitio P queda descargado.'},
+{n:'<strong>Paso 3 — Translocación:</strong> <strong>eEF2-GTP</strong> mueve el ribosoma exactamente <strong>3 nt</strong> (5\'→3\'). ARNt descargado pasa P→<strong>E</strong> (y sale). Peptidil-ARNt pasa A→<strong>P</strong>. Sitio A queda libre. Costo: <strong>1 GTP</strong>.'},
+{n:'<strong>Ciclo completo:</strong> Se repite ~3-6 veces/seg. <strong>Costo total por aminoácido: ~4 enlaces de alta energía</strong> (2 ATP para cargar ARNt + 1 GTP para entrada + 1 GTP para translocación). La síntesis proteica consume >50% de la energía celular en células en crecimiento.'}
+];
+var srpData=[
+{n:'<strong>Paso 1 — Reconocimiento:</strong> Ribosoma libre traduce ARNm → emerge <strong>péptido señal</strong> N-terminal (15-30 aa, core hidrofóbico). <strong>SRP</strong> (6 proteínas + ARN 7SL) reconoce el péptido señal vía <strong>SRP54 (dominio M)</strong>. <strong>SRP9/14</strong> causan <strong>pausa traduccional</strong>.'},
+{n:'<strong>Paso 2 — Dirección al RER:</strong> Complejo SRP-GTP + ribosoma-péptido señal → se dirige a la membrana del RER donde SRP se une al <strong>receptor de SRP (SRα/SRβ)</strong>, también con GTP.'},
+{n:'<strong>Paso 3 — Translocación:</strong> Hidrólisis mutua de GTP (SRP y receptor) → SRP se libera (reciclaje). Ribosoma se transfiere al <strong>translocón Sec61</strong> (heterotrimero αβγ). La traducción se reanuda. La cadena naciente pasa al <strong>lumen del RER</strong> co-traduccionalmente.'},
+{n:'<strong>Paso 4 — Procesamiento en lumen:</strong> <strong>Peptidasa señal</strong> corta el péptido señal. <strong>OST</strong> N-glicosila Asn-X-Ser/Thr. <strong>BiP</strong> (Hsp70 del RE) asiste plegamiento. <strong>PDI</strong> forma puentes disulfuro. Proteína entra al ciclo <strong>calnexina/calreticulina</strong> para control de calidad.'}
+];
+simInit('imp',impData);simInit('pack',packData);simInit('elong',elongData);simInit('srp',srpData);
+/* Glossary */
+var gt=[
+{t:'Núcleo',d:'Organelo más grande (5-10 µm). Doble membrana. Almacena ADN, maquinaria de transcripción. Nucléolo = síntesis de ARNr.'},
+{t:'CPN',d:'Complejo de poro nuclear. ~125 MDa, ~30 nucleoporinas. FG-Nups = barrera selectiva. ~2000-5000 por núcleo.'},
+{t:'Ran-GTP',d:'GTPasa que da direccionalidad. Alto en núcleo (RCC1), bajo en citosol (RanGAP1). Disocia importinas; estabiliza exportinas.'},
+{t:'NLS / NES',d:'NLS: rica en Lys/Arg, no se cliva, importación (importina α). NES: rica en Leu, exportación (CRM1/Exportina 1).'},
+{t:'Laminopatía',d:'Enfermedad por mutación en laminas nucleares. >15 enfermedades de LMNA: progeria, EDMD, DCM, lipodistrofia.'},
+{t:'Nucleosoma',d:'146 pb + octámero 2×(H2A,H2B,H3,H4). Fibra 11 nm ("collar de perlas"). H1 = enlazadora.'},
+{t:'Modificaciones de histonas',d:'Acetilación (abre), metilación (abre o cierra según residuo), fosforilación (mitosis/daño). "Código de histonas".'},
+{t:'Eucromatina',d:'Laxa, activa. H3K4me3, acetilación. Interior nuclear.'},
+{t:'Heterocromatina',d:'Condensada. Constitutiva (H3K9me3+HP1, centrómeros). Facultativa (H3K27me3+Polycomb, Barr).'},
+{t:'Replicación semiconservativa',d:'Cada hija = 1 hebra antigua + 1 nueva. Meselson-Stahl 1958. Fase S. Bidireccional, semidiscontinua.'},
+{t:'Helicasa (MCM)',d:'Separa hebras usando ATP. MCM2-7 hexámero en eucariotas.'},
+{t:'ADN Polimerasa',d:'Sintetiza 5\'→3\'. Requiere cebador. Corrección 3\'→5\'. Pol ε (líder), Pol δ (retrasada).'},
+{t:'Fragmentos de Okazaki',d:'100-200 nt en eucariotas. Cadena retrasada. Requieren cebador individual. Unidos por ligasa.'},
+{t:'Telomerasa',d:'TERT + TERC. Transcriptasa reversa. Extiende TTAGGG. Activa en stem cells y ~90% cánceres.'},
+{t:'Topoisomerasas',d:'Alivian superenrollamiento. Topo I (corte ss), Topo II (corte ds). Dianas: camptotecina, etopósido, doxorrubicina.'},
+{t:'ARN Pol II',d:'Transcribe ARNm, snARN, miARN. CTD con 52 repeticiones YSPTSPS. Sensible a α-amanitina.'},
+{t:'Promotor',d:'Upstream del gen. TATA box (-25/-30) + Inr + DPE. TBP/TFIID = evento nucleante. Islas CpG en promotores TATA-less.'},
+{t:'CTD',d:'Dominio C-terminal de Pol II. Ser5-P (capping), Ser2-P (elongación/splicing/polyA). Código de fosforilación.'},
+{t:'TFIIH',d:'Factor general con helicasa (XPB, abre burbuja) + quinasa (CDK7, fosforila Ser5). Mutaciones: xeroderma pigmentoso.'},
+{t:'Cap 5\' (m⁷G)',d:'Enlace 5\'-5\' trifosfato. Protege de exonucleasas, recluta eIF4E, facilita splicing y exportación (CBC).'},
+{t:'Cola poli(A)',d:'~200 A en 3\'. PAP + CPSF/CstF. Señal AAUAAA. Estabilidad, exportación, traducción (PABP).'},
+{t:'Splicing',d:'Remoción de intrones (GU...A...AG). Spliceosoma (U1-U6). 2 transesterificaciones. ~95% genes con splicing alternativo.'},
+{t:'Spliceosoma',d:'~3 MDa. 5 snRNPs + >150 proteínas. Se ensambla de novo. Complejos E→A→B→B*→C→P. U2+U6 = ribozima.'},
+{t:'Código genético',d:'Triplete, degenerado, no ambiguo, universal, sin solapamiento, sin puntuación. 61 sentido + 3 stop.'},
+{t:'Ribosoma 80S',d:'40S (18S + 33 prot) + 60S (28S+5.8S+5S + 47 prot). Peptidil-transferasa = 28S (ribozima). Sitios A, P, E.'},
+{t:'ARNt',d:'Adaptador. Anticodón + CCA-3\'. Cargado por aaRS (20). Wobble en 3ª posición. ~45 ARNt para 61 codones.'},
+{t:'Secuencia Kozak',d:'gcc(A/G)ccAUGG. Contexto óptimo del AUG inicio. -3 (purina) y +4 (G) más críticas.'},
+{t:'eIF4E',d:'Reconoce cap 5\'. Regulado por 4E-BP/mTOR. eIF4G = scaffold. eIF4A = helicasa.'},
+{t:'Fosforilación',d:'Quinasas (Ser/Thr/Tyr) / fosfatasas. Reversible. La más ubicua. Imatinib, trastuzumab.'},
+{t:'Ubiquitinación',d:'E1→E2→E3. PoliUb K48 → proteasoma. MonoUb → endocitosis. >600 E3 ligasas = especificidad.'},
+{t:'Proteasoma 26S',d:'Core 20S + caps 19S. Degrada poliUb K48. Bortezomib (mieloma múltiple).'},
+{t:'Chaperonas',d:'Hsp70 (co-traduccional), Hsp60/GroEL (cámara), Hsp90 (maduración quinasas). No determinan estructura final.'},
+{t:'SRP',d:'6 proteínas + ARN 7SL. SRP54 = reconoce señal. SRP9/14 = pausa. Dirige ribosoma al RER.'},
+{t:'Translocón Sec61',d:'αβγ. α = canal (10 TM helices, plug, lateral gate). Permite paso co-traduccional al lumen del RER.'},
+{t:'N-glicosilación',d:'OST transfiere Glc₃Man₉GlcNAc₂ a Asn-X-Ser/Thr (X≠Pro). En lumen RER. Plegamiento y estabilidad.'},
+{t:'Calnexina/Calreticulina',d:'Lectinas del RER. Retienen glicoproteínas monoglucosiladas. ERp57 forma puentes S-S.'},
+{t:'UGGT',d:'Sensor de plegamiento. Re-glucosila proteínas mal plegadas → vuelven al ciclo CNX/CRT.'},
+{t:'ERAD',d:'Retrotranslocación al citosol → desglicosilación → ubiquitinación → proteasoma. Para proteínas terminalmente mal plegadas.'},
+{t:'UPR',d:'Respuesta a proteínas desplegadas. Sensores: IRE1 (XBP1), PERK (eIF2α), ATF6. Si persiste → CHOP → apoptosis.'}
+];
+function ifc(){var g=document.getElementById('fg');g.innerHTML='';gt.sort(function(a,b){return a.t.localeCompare(b.t)});gt.forEach(function(it){var c=document.createElement('div');c.className='fc';c.onclick=function(){this.classList.toggle('fl')};c.innerHTML='<div class="ft">'+it.t+'</div><div class="fd">'+it.d+'</div><div class="fh">Clic para ver</div>';g.appendChild(c)});}
+/* Final Evaluation */
+var evq=[
+{q:'¿Cuál proteína forma la barrera selectiva del canal central del CPN?',o:['Laminas A/C','FG-nucleoporinas (repeticiones Phe-Gly)','Importina α','Histona H1'],c:1,f:'FG-Nups (Nup62, 58, 54, 98) forman la barrera selectiva tipo gel/cepillo del CPN.'},
+{q:'La progeria de Hutchinson-Gilford es causada por:',o:['Déficit de telomerasa','Mutación en LMNA → progerina con farnesilo permanente','Exceso de Ran-GTP','Mutación en p53'],c:1,f:'Mutación en LMNA produce progerina (lamina A truncada + farnesilo) → núcleos deformados → envejecimiento acelerado.'},
+{q:'¿Cuántas pares de bases se enrollan en el nucleosoma core?',o:['100 pb','146 pb (~1.7 vueltas)','200 pb','1000 pb'],c:1,f:'146 pb dan ~1.7 vueltas alrededor del octámero. Con ADN linker (~54 pb) = ~200 pb por unidad repetitiva.'},
+{q:'La acetilación de histonas por HAT produce:',o:['Condensación (silenciamiento)','Apertura de cromatina (activación transcripcional)','Degradación de histonas','Metilación del ADN'],c:1,f:'La acetilación neutraliza cargas + de lisinas → afloja interacción ADN-histona → eucromatina activa.'},
+{q:'¿Cuál enzima sintetiza los cebadores de ARN en la replicación?',o:['ADN ligasa','Helicasa MCM','Primasa (DnaG / Pol α-primasa)','Topoisomerasa'],c:2,f:'La primasa sintetiza cebadores de ARN (~10 nt) con el 3\'-OH que la ADN polimerasa necesita.'},
+{q:'La replicación del ADN eucariota es:',o:['Conservativa y continua','Semiconservativa, bidireccional y semidiscontinua','Dispersiva y unidireccional','Totalmente discontinua en ambas hebras'],c:1,f:'Semiconservativa (Meselson-Stahl), bidireccional (2 horquillas), semidiscontinua (líder continua + retrasada discontinua).'},
+{q:'La telomerasa está activa en ~90% de tumores malignos porque:',o:['Causa mutaciones','Permite replicación ilimitada al mantener los telómeros','Inhibe la apoptosis directamente','Degrada el ADN dañado'],c:1,f:'La telomerasa (TERT+TERC) compensa el acortamiento telomérico → replicación indefinida → inmortalidad celular.'},
+{q:'¿Cuál ARN polimerasa es inhibida por α-amanitina de Amanita phalloides?',o:['Pol I (ARNr)','Pol II (ARNm) — muy sensible','Pol III (ARNt)','ADN polimerasa δ'],c:1,f:'Pol II es muy sensible a α-amanitina → fallo hepático por incapacidad de transcribir genes.'},
+{q:'¿Qué fosforilación del CTD se asocia a elongación productiva y splicing?',o:['Ser5-P (TFIIH/CDK7)','Ser2-P (P-TEFb/CDK9)','Desfosforilación total','Tyr1-P'],c:1,f:'Ser2-P por P-TEFb (CDK9/Ciclina T) → elongación productiva, recluta factores de splicing y poliadenilación.'},
+{q:'Las secuencias consenso del intrón en sus extremos son:',o:['AU-GC','GU (5\' donador) y AG (3\' aceptor)','TATA-AAUAAA','CCA en ambos extremos'],c:1,f:'Regla GU-AG: 5\' = GU (reconocido por U1), branch A, 3\' = AG. U2+U6 = centro catalítico.'},
+{q:'¿Cuál fármaco corrige el splicing de SMN2 en atrofia muscular espinal?',o:['Imatinib','Bortezomib','Nusinersen (Spinraza)','Aciclovir'],c:2,f:'Nusinersen = oligonucleótido antisentido que promueve inclusión del exón 7 de SMN2 → proteína SMN funcional.'},
+{q:'¿Qué significa que el código genético sea «degenerado pero no ambiguo»?',o:['Varios codones → mismo aa, pero cada codón → solo 1 aa','Cada codón puede dar varios aa','El código tiene errores frecuentes','Solo funciona en bacterias'],c:0,f:'Degenerado = redundancia (ej: 6 codones para Leu). No ambiguo = cada codón específico codifica exactamente un aminoácido.'},
+{q:'El sitio catalítico del ribosoma (peptidil-transferasa) reside en:',o:['Proteínas ribosomales de 40S','ARNr 18S','ARNr 28S de la subunidad 60S — ribozima','ARNt del sitio P'],c:2,f:'El ARNr 28S (23S en procariotas) cataliza la formación del enlace peptídico. El ribosoma es fundamentalmente una ribozima.'},
+{q:'La gentamicina (aminoglucósido) actúa sobre el ribosoma bacteriano causando:',o:['Bloqueo del túnel de salida','Inhibición de la translocación','Errores de lectura (misreading) en la subunidad 30S','Inhibición de la peptidil-transferasa'],c:2,f:'Aminoglucósidos distorsionan el sitio A de 30S → apareamiento incorrecto codón-anticodón → proteínas aberrantes → letal.'},
+{q:'¿Cuántos enlaces fosfato de alta energía se gastan por aminoácido añadido?',o:['1','2','~4 (2 GTP + ATP→AMP ≈ 2)','6'],c:2,f:'Carga: ATP→AMP (≈2). Entrada sitio A: 1 GTP. Translocación: 1 GTP. Total ≈ 4 enlaces de alta energía.'},
+{q:'La toxina diftérica inhibe la traducción eucariota al:',o:['Degradar el ARNm','ADP-ribosilar eEF2 → bloquea translocación','Inhibir eIF4E','Destruir los ribosomas'],c:1,f:'Toxina diftérica ADP-ribosila a eEF2 (diftamida) → bloquea translocación → muerte celular. Vacunación previene.'},
+{q:'La SRP reconoce:',o:['La cola poli(A)','La NLS de la proteína','El péptido señal N-terminal hidrofóbico co-traduccionalmente','El codón de terminación'],c:2,f:'SRP54 (dominio M) reconoce el core hidrofóbico del péptido señal. SRP9/14 causan pausa traduccional.'},
+{q:'El translocón Sec61 del RER es un:',o:['Homotetrámero','Heterotrimero αβγ (α = canal)','Complejo de 30 nucleoporinas','Canal de aquaporina'],c:1,f:'Sec61: α (canal, 10 TM helices, plug luminal, lateral gate), β y γ (accesorias). Permite paso co-traduccional.'},
+{q:'¿Qué reconoce la UGGT para decidir re-glucosilar una proteína?',o:['La secuencia NLS','La presencia de puentes disulfuro incorrectos','Regiones hidrofóbicas expuestas (proteína mal plegada)','El codón de terminación del ARNm'],c:2,f:'UGGT actúa como "sensor de conformación": detecta regiones hidrofóbicas expuestas → re-glucosila → vuelve al ciclo CNX/CRT.'},
+{q:'En la ERAD, ¿qué ocurre con las proteínas terminalmente mal plegadas?',o:['Se exportan al Golgi','Se secretan sin modificar','Se retrotranslocan al citosol → ubiquitinación → proteasoma 26S','Se almacenan permanentemente en el RER'],c:2,f:'ERAD: retrotranslocación al citosol → desglicosilación → ubiquitinación → degradación en proteasoma 26S.'},
+{q:'¿Cuál enfermedad es causada por CFTR mal plegada retenida en el RER?',o:['Enfermedad de Gaucher','Fibrosis quística (mutación ΔF508)','Alzheimer','Progeria'],c:1,f:'CFTR-ΔF508 no pasa el control de calidad del RER → ERAD → no llega a membrana apical → deshidratación de secreciones.'},
+{q:'El bortezomib (tratamiento del mieloma múltiple) actúa inhibiendo:',o:['La telomerasa','El proteasoma 26S','La topoisomerasa II','La ARN Pol II'],c:1,f:'Bortezomib inhibe el core 20S del proteasoma → acumulación de proteínas mal plegadas → estrés RE → apoptosis tumoral.'},
+{q:'¿Cuáles son los tres sensores del UPR (Unfolded Protein Response)?',o:['Hsp70, Hsp60, Hsp90','IRE1, PERK, ATF6','SRP, Sec61, OST','Calnexina, calreticulina, UGGT'],c:1,f:'UPR: IRE1 (splicing XBP1), PERK (fosforila eIF2α → ↓traducción global), ATF6 (factor de transcripción). Si persiste → CHOP → apoptosis.'},
+{q:'La heterocromatina facultativa difiere de la constitutiva en que:',o:['Es permanente e irreversible','Puede activarse según el contexto celular (ej: corpúsculo de Barr, H3K27me3)','Solo existe en bacterias','No contiene histonas'],c:1,f:'Facultativa: puede revertir según contexto (Barr, genes durante desarrollo). H3K27me3 + Polycomb. Constitutiva: permanente (centrómeros, H3K9me3+HP1).'},
+{q:'Los inhibidores de HDAC (ej: vorinostat) tienen potencial antineoplásico porque:',o:['Condensan la cromatina → silencian oncogenes','Mantienen histonas acetiladas → re-expresan genes supresores tumorales silenciados','Inhiben la replicación directamente','Degradan las histonas'],c:1,f:'HDAC remueve acetilos (condensa). Inhibir HDAC → mantiene acetilación → cromatina abierta → re-expresión de genes supresores de tumores (p21, etc.).'}
+];
+var eva={},evs=false;
+function iev(){var c=document.getElementById('eq');c.innerHTML='';eva={};evs=false;document.getElementById('sdd').style.display='none';document.getElementById('seb').style.display='none';var lt=['A','B','C','D'];evq.forEach(function(q,qi){var d=document.createElement('div');d.className='qq';d.id='ev-'+qi;var h='<div class="qt"><span style="color:var(--g);font-family:JetBrains Mono;font-size:.8rem">'+(qi+1)+'/'+evq.length+'</span> '+q.q+'</div><div class="qo">';q.o.forEach(function(opt,oi){h+='<button class="qb" data-qi="'+qi+'" data-oi="'+oi+'" onclick="seo(this,'+qi+','+oi+')"><div class="ol">'+lt[oi]+'</div>'+opt+'</button>'});h+='</div><div class="qf" id="fb-ev-'+qi+'"></div>';d.innerHTML=h;c.appendChild(d)});}
+function seo(btn,qi,oi){if(evs)return;document.getElementById('ev-'+qi).querySelectorAll('.qb').forEach(function(o){o.classList.remove('sel')});btn.classList.add('sel');eva[qi]=oi;if(Object.keys(eva).length===evq.length)document.getElementById('seb').style.display='inline-flex';}
+function se(){evs=true;var sc=0;evq.forEach(function(q,qi){var c=document.getElementById('ev-'+qi),os=c.querySelectorAll('.qb');var ua=eva[qi];os.forEach(function(o,oi){o.classList.add('dis');if(oi===q.c)o.classList.add('ok');if(oi===ua&&oi!==q.c)o.classList.add('no')});if(ua===q.c)sc++;var fb=document.getElementById('fb-ev-'+qi);fb.classList.add('sh');fb.classList.add(ua===q.c?'cf':'if');fb.textContent=(ua===q.c?'✅ ':'❌ ')+q.f});document.getElementById('seb').style.display='none';var pct=Math.round(sc/evq.length*100),dd=document.getElementById('sdd');dd.style.display='block';document.getElementById('sn2').textContent=sc+'/'+evq.length;document.getElementById('sbf2').style.width=pct+'%';var c='var(--g)',bg='var(--grad)',msg='';if(pct>=90){msg='🌟 ¡Excelente! Dominas el dogma central.';}else if(pct>=70){msg='👏 ¡Buen trabajo! Revisa los capítulos donde fallaste.';c='var(--b)';bg='linear-gradient(135deg,#00A3FF,#00D4AA)';}else if(pct>=50){msg='📚 Necesitas repasar varios conceptos.';c='var(--y)';bg='linear-gradient(135deg,#FFD93D,#F97316)';}else{msg='💪 Revisa la tutoría completa nuevamente.';c='var(--r)';bg='linear-gradient(135deg,#FF6B6B,#FFD93D)';}document.getElementById('sn2').style.color=c;document.getElementById('sbf2').style.background=bg;document.getElementById('sm2').textContent=msg;dd.scrollIntoView({behavior:'smooth',block:'center'});}
+ifc();iev();up();
+</script>
+</body></html>
