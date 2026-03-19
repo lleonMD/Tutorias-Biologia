@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Interactiva: Transcripción del ADN</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 24px}
+.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}
+.nb{font-family:'DM Serif Display',serif;font-size:1.1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nl{display:flex;gap:3px;flex-wrap:wrap}
+.nl button{padding:5px 12px;border-radius:20px;border:none;background:0;color:var(--t2);font-size:.76rem;font-family:inherit;cursor:pointer;transition:.3s}
+.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}
+.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}
+.pb{position:fixed;top:58px;left:0;right:0;z-index:99;height:3px;background:rgba(0,212,170,.1)}
+.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}
+.mc{max-width:960px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1}
+.sec{display:none;animation:fi .5s}.sec.a{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:50px 0 36px}
+.hi{width:90px;height:90px;margin:0 auto 20px;background:var(--grad);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:2.8rem;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hs{font-size:1.1rem;color:var(--t2);max-width:650px;margin:0 auto 28px}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0}
+.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px 16px;display:flex;align-items:flex-start;gap:10px;transition:.3s}
+.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}
+.on{min-width:26px;height:26px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;color:#0B1622}
+.ot{font-size:.85rem;color:var(--t2);line-height:1.5}
+.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;box-shadow:var(--sh);transition:.3s}
+.cd:hover{border-color:rgba(0,212,170,.25)}
+.ch{font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:14px}
+.ch .ac{color:var(--g)}
+.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:18px 22px;margin:18px 0;background:rgba(0,212,170,.06)}
+.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}
+.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}
+.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}
+.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}
+.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}
+.ibt{font-weight:700;margin-bottom:5px;font-size:.93rem}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin:18px 0}
+.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px}
+.cc h4{font-family:'DM Serif Display',serif;margin-bottom:10px;font-size:1.05rem}
+.et{width:100%;border-collapse:separate;border-spacing:0;margin:18px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}
+.et th{background:rgba(0,212,170,.12);padding:12px 16px;text-align:left;font-weight:600;font-size:.85rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}
+.et td{padding:11px 16px;border-top:1px solid var(--bdr);font-size:.9rem;color:var(--t2)}
+.et tr:hover td{background:var(--card2)}
+.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:18px}
+.qt{font-weight:600;font-size:1rem;margin-bottom:16px}
+.qo{display:flex;flex-direction:column;gap:9px}
+.qb{padding:12px 18px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.93rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}
+.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}
+.qb.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}
+.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}
+.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}
+.qb.dis{pointer-events:none;opacity:.7}
+.ol{min-width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem}
+.qf{margin-top:14px;padding:16px;border-radius:var(--r10);font-size:.9rem;line-height:1.6;display:none}
+.qf.sh{display:block}
+.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}
+.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}
+.cl{background:linear-gradient(135deg,rgba(255,107,107,.06),rgba(255,217,61,.04));border:1px solid rgba(255,107,107,.2);border-radius:var(--r16);padding:28px;margin:20px 0}
+.btn{padding:11px 24px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.93rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}
+.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}
+.bp:hover{transform:translateY(-2px)}
+.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}
+.bs:hover{background:rgba(0,212,170,.2)}
+.tb{display:flex;gap:5px;margin-bottom:20px;border-bottom:1px solid var(--bdr)}
+.tbtn{padding:9px 18px;border:none;background:0;color:var(--t3);font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:.3s;border-radius:7px 7px 0 0}
+.tbtn:hover{color:var(--t2)}
+.tbtn.a{color:var(--g);border-bottom-color:var(--g);background:rgba(0,212,170,.06)}
+.tc{display:none;animation:fi .4s}.tc.a{display:block}
+.sn{display:flex;justify-content:space-between;margin-top:36px;padding-top:20px;border-top:1px solid var(--bdr)}
+.pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.76rem;font-weight:600;margin:2px 3px}
+.pg{background:rgba(0,212,170,.15);color:var(--g)}
+.pb2{background:rgba(0,163,255,.12);color:var(--b)}
+.pw{background:rgba(255,107,107,.12);color:var(--r)}
+.py{background:rgba(255,217,61,.12);color:var(--y)}
+.pp{background:rgba(167,139,250,.12);color:var(--p)}
+.ppk{background:rgba(236,72,153,.12);color:var(--pk)}
+.por{background:rgba(249,115,22,.12);color:var(--o)}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:20px 0}
+.fc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px;cursor:pointer;transition:.4s;min-height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.fc:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:var(--glow)}
+.ft{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--g)}
+.fd{display:none;font-size:.88rem;color:var(--t2);line-height:1.6;margin-top:7px}
+.fc.fl .ft{display:none}.fc.fl .fd{display:block}
+.fh{font-size:.73rem;color:var(--t3);margin-top:8px}
+.fc.fl .fh{display:none}
+.sd{text-align:center;padding:36px;margin:20px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}
+.snm{font-family:'DM Serif Display',serif;font-size:3.5rem;margin-bottom:6px}
+.sbl{color:var(--t2)}
+.sbr{width:100%;max-width:380px;height:11px;background:rgba(255,255,255,.06);border-radius:6px;margin:18px auto;overflow:hidden}
+.sbf{height:100%;border-radius:6px;transition:width 1s}
+.step-diagram{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:18px 0}
+.step-box{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:12px 16px;text-align:center;min-width:110px;transition:.3s;cursor:default}
+.step-box:hover{border-color:var(--g);transform:translateY(-2px)}
+.step-arrow{color:var(--g);font-size:1.4rem;font-weight:700}
+.svg-wrap{background:rgba(0,0,0,.25);border-radius:var(--r16);padding:20px;margin:20px 0;border:1px solid var(--bdr);overflow-x:auto}
+.svg-wrap svg{width:100%;height:auto;display:block}
+.sim-box{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin:20px 0;text-align:center}
+.sim-controls{display:flex;gap:10px;justify-content:center;margin:16px 0;flex-wrap:wrap}
+.sim-btn{padding:8px 20px;border-radius:8px;border:2px solid var(--g);background:0;color:var(--g);font-family:inherit;font-weight:600;font-size:.88rem;cursor:pointer;transition:.3s}
+.sim-btn:hover{background:rgba(0,212,170,.15)}
+.sim-btn.active{background:var(--g);color:#0B1622}
+.sim-btn:disabled{opacity:.4;cursor:default}
+.sim-narration{background:rgba(0,212,170,.06);border:1px solid var(--bdr);border-radius:var(--r10);padding:16px;margin-top:14px;color:var(--t2);font-size:.92rem;line-height:1.6;min-height:70px;text-align:left}
+.sim-step-ind{display:flex;gap:6px;justify-content:center;margin:10px 0}
+.sim-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.1);transition:.3s}
+.sim-dot.act{background:var(--g);box-shadow:0 0 8px rgba(0,212,170,.5)}
+.sim-dot.done{background:rgba(0,212,170,.3)}
+.match-game{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:18px 0}
+.match-col{display:flex;flex-direction:column;gap:8px}
+.match-col h4{text-align:center;margin-bottom:8px;font-family:'DM Serif Display',serif}
+.match-item{padding:12px 16px;border-radius:var(--r10);border:2px solid var(--bdr);background:var(--card2);color:var(--t2);cursor:pointer;transition:.3s;font-size:.88rem;text-align:center;user-select:none}
+.match-item:hover{border-color:var(--b);transform:scale(1.02)}
+.match-item.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}
+.match-item.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important;pointer-events:none}
+.match-item.no{border-color:var(--r)!important;animation:shake .4s}
+.match-score{text-align:center;margin-top:12px;font-weight:600;color:var(--g)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.analogy{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(0,163,255,.06));border:1px solid rgba(167,139,250,.2);border-radius:var(--r16);padding:24px;margin:18px 0}
+.analogy .analogy-icon{font-size:2rem;margin-bottom:8px}
+.analogy h4{font-family:'DM Serif Display',serif;color:var(--p);margin-bottom:8px}
+.analogy p{color:var(--t2);font-size:.92rem}
+.timeline{position:relative;padding-left:30px;margin:18px 0}
+.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--g),var(--b),var(--p))}
+.timeline-item{position:relative;margin-bottom:18px;padding:16px;background:var(--card2);border-radius:var(--r10);border:1px solid var(--bdr)}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--g);border:2px solid var(--bg)}
+.proc-card{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:18px;margin:10px 0;transition:.3s;cursor:pointer}
+.proc-card:hover{border-color:var(--g);transform:translateX(4px)}
+.proc-card .proc-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--grad);color:#0B1622;font-weight:700;font-size:.8rem;margin-right:10px}
+.proc-card .proc-text{color:var(--t2);font-size:.9rem;margin-top:6px}
+@media(max-width:768px){.og,.cg,.match-game{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.hero h1{font-size:2rem}.step-diagram{flex-direction:column}.step-arrow{transform:rotate(90deg)}}
+::-webkit-scrollbar{width:7px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">🧬 Transcripción del ADN</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button>
+<button data-s="promotor">Promotor</button>
+<button data-s="orientacion">5' y 3'</button>
+<button data-s="cuestaUpDown">Cuesta ↑↓</button>
+<button data-s="promotoresGen">Promotores TATA/DPE</button>
+<button data-s="fases">Fases</button>
+<button data-s="ctd">CTD y Fosforilación</button>
+<button data-s="glosario">Glosario</button>
+<button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ===== INICIO ===== -->
+<div class="sec a" id="sec-inicio">
+<div class="hero"><div class="hi">📜</div>
+<h1>Transcripción del ADN</h1>
+<p class="hs">Promotores, orientación génica, maquinaria transcripcional y regulación por fosforilación del CTD de la ARN Polimerasa II.</p></div>
+<div class="cd"><div class="ch">🎯 Resultados de <span class="ac">Aprendizaje</span></div>
+<div class="og">
+<div class="oi"><div class="on">9</div><div class="ot">Definir el concepto de promotor y su rol en la transcripción.</div></div>
+<div class="oi"><div class="on">10</div><div class="ot">Identificar los extremos 5' y 3' de los genes y del transcrito y su importancia para la transcripción y luego traducción.</div></div>
+<div class="oi"><div class="on">11</div><div class="ot">Definir los términos de cuesta arriba (upstream) versus cuesta abajo (downstream) en cuanto a los genes.</div></div>
+<div class="oi"><div class="on">12</div><div class="ot">Identificar promotores generales de los genes y los promotores núcleo dirigidos por TATA o por DPE.</div></div>
+<div class="oi"><div class="on">13</div><div class="ot">Identificar los pasos de la transcripción, incluyendo iniciación, elongación y terminación.</div></div>
+<div class="oi"><div class="on">14</div><div class="ot">Describir la importancia y consecuencias de las fosforilaciones en serinas particulares del dominio C-terminal (CTD) de la ARN Polimerasa II.</div></div>
+</div></div>
+<div style="text-align:center;margin-top:22px"><button class="btn bp" onclick="go('promotor')">Comenzar la tutoría →</button></div>
+</div>
+
+<!-- ===== PROMOTOR ===== -->
+<div class="sec" id="sec-promotor">
+<div class="cd"><div class="ch">🎯 El <span class="ac">Promotor</span> y su Rol en la Transcripción <span class="pill pg">RA 9</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div>
+<p style="color:var(--t2)">Un <strong>promotor</strong> es una secuencia específica de ADN localizada <strong>inmediatamente antes (upstream)</strong> del sitio de inicio de la transcripción (+1). Su función es servir como <strong>plataforma de reconocimiento y ensamblaje</strong> para la ARN polimerasa y los factores generales de transcripción (GTFs). Sin un promotor funcional, la transcripción <strong>no puede iniciarse</strong>.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arr1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00D4AA"/></marker>
+<marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#FF6B6B"/></marker>
+<marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00A3FF"/></marker>
+</defs>
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="15" font-weight="700" font-family="DM Serif Display,serif">Estructura del Promotor y Sitio +1</text>
+
+<!-- DNA double strand -->
+<rect x="60" y="100" width="780" height="10" rx="3" fill="rgba(0,163,255,0.25)" stroke="#00A3FF" stroke-width="1"/>
+<rect x="60" y="115" width="780" height="10" rx="3" fill="rgba(0,163,255,0.25)" stroke="#00A3FF" stroke-width="1"/>
+<text x="50" y="109" text-anchor="end" fill="#5A7A96" font-size="9">5'</text>
+<text x="850" y="109" fill="#5A7A96" font-size="9">3'</text>
+<text x="50" y="124" text-anchor="end" fill="#5A7A96" font-size="9">3'</text>
+<text x="850" y="124" fill="#5A7A96" font-size="9">5'</text>
+<text x="450" y="96" text-anchor="middle" fill="#00A3FF" font-size="9">Hebra molde (antisentido) 3'→5'</text>
+<text x="450" y="142" text-anchor="middle" fill="#00D4AA" font-size="9">Hebra codificante (sentido) 5'→3'</text>
+
+<!-- Promoter region -->
+<rect x="150" y="55" width="250" height="35" rx="10" fill="rgba(255,217,61,0.12)" stroke="#FFD93D" stroke-width="2"/>
+<text x="275" y="77" text-anchor="middle" fill="#FFD93D" font-size="12" font-weight="700">PROMOTOR</text>
+<text x="275" y="50" text-anchor="middle" fill="#FFD93D" font-size="9">Región reguladora (upstream de +1)</text>
+
+<!-- +1 site -->
+<line x1="420" y1="60" x2="420" y2="130" stroke="#00D4AA" stroke-width="2" stroke-dasharray="4,3"/>
+<circle cx="420" cy="55" r="14" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="2"/>
+<text x="420" y="60" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="700">+1</text>
+<text x="420" y="44" text-anchor="middle" fill="#00D4AA" font-size="8">Inicio de transcripción</text>
+
+<!-- Gene body -->
+<rect x="420" y="60" width="380" height="30" rx="8" fill="rgba(0,212,170,0.08)" stroke="#00D4AA" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="610" y="80" text-anchor="middle" fill="#00D4AA" font-size="11" font-weight="600">GEN (secuencia transcrita)</text>
+
+<!-- RNAP arrow -->
+<rect x="380" y="165" width="120" height="40" rx="12" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="2"/>
+<text x="440" y="183" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="700">ARN Pol II</text>
+<text x="440" y="195" text-anchor="middle" fill="#A78BFA" font-size="8">+ GTFs</text>
+<line x1="440" y1="165" x2="420" y2="130" stroke="#A78BFA" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+<!-- Transcription arrow -->
+<line x1="500" y1="185" x2="700" y2="185" stroke="#00D4AA" stroke-width="2" marker-end="url(#arr1)"/>
+<text x="600" y="178" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">Dirección de transcripción →</text>
+
+<!-- mRNA being synthesized -->
+<path d="M420,210 Q500,230 700,220" stroke="#EC4899" stroke-width="3" fill="none" stroke-linecap="round"/>
+<text x="560" y="245" text-anchor="middle" fill="#EC4899" font-size="10" font-weight="600">ARNm naciente (5'→3')</text>
+
+<!-- Numbers line -->
+<text x="200" y="155" text-anchor="middle" fill="#t3" font-size="9" fill="#5A7A96">-200</text>
+<text x="275" y="155" text-anchor="middle" fill="#t3" font-size="9" fill="#5A7A96">-100</text>
+<text x="350" y="155" text-anchor="middle" fill="#t3" font-size="9" fill="#5A7A96">-30</text>
+<text x="420" y="155" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="700">+1</text>
+<text x="550" y="155" text-anchor="middle" fill="#t3" font-size="9" fill="#5A7A96">+100</text>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ Estructura general de un promotor eucariota y sitio de inicio de transcripción (+1)</p>
+
+<div class="analogy"><div class="analogy-icon">📖</div><h4>Analogía: La pista de aterrizaje</h4>
+<p>Piensa en el promotor como una <strong>pista de aterrizaje</strong> en un aeropuerto. La ARN Polimerasa II es el avión que necesita "aterrizar" en el lugar correcto para iniciar su recorrido (la transcripción). Sin la pista (promotor), el avión no sabe dónde posarse ni en qué dirección avanzar. Los factores de transcripción son como el <strong>control de tráfico aéreo</strong>, que guían al avión hasta la posición exacta de despegue (+1).</p></div>
+
+<div class="ib n"><div class="ibt">📋 Funciones esenciales del promotor</div>
+<p style="color:var(--t2)">• <strong>Posicionamiento:</strong> Determina dónde comienza exactamente la transcripción (sitio +1).<br>
+• <strong>Direccionalidad:</strong> Define en qué dirección avanza la ARN polimerasa (5'→3' en el ARNm).<br>
+• <strong>Ensamblaje del PIC:</strong> Provee la plataforma para el complejo de pre-iniciación (PIC: GTFs + ARN Pol II).<br>
+• <strong>Regulación basal:</strong> El promotor núcleo establece el nivel basal de transcripción.<br>
+• <strong>Especificidad:</strong> Distintos promotores controlan la expresión tejido-específica y temporal.</p></div>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--g)">✅ Componentes del PIC</h4>
+<p style="color:var(--t2);font-size:.9rem"><strong>TFIID</strong> (TBP + TAFs): reconoce TATA box o DPE.<br><strong>TFIIA</strong>: estabiliza unión TBP-ADN.<br><strong>TFIIB</strong>: recluta la ARN Pol II.<br><strong>TFIIF</strong>: acompaña a la Pol II.<br><strong>TFIIE</strong>: recluta TFIIH.<br><strong>TFIIH</strong>: helicasa + quinasa (fosforila CTD).</p></div>
+<div class="cc"><h4 style="color:var(--r)">⚠️ Sin promotor...</h4>
+<p style="color:var(--t2);font-size:.9rem">Sin un promotor funcional:<br>• No se ensambla el PIC.<br>• La ARN Pol II no puede ubicarse en +1.<br>• No hay transcripción del gen.<br>• Mutaciones en el promotor causan <strong>enfermedades genéticas</strong> (ej: β-talasemia por mutación en TATA box del gen de β-globina).</p></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q01"><div class="qt">¿Cuál es la función principal del promotor?</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>Codificar la secuencia de aminoácidos de una proteína</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">B</div>Servir como sitio de reconocimiento y ensamblaje del complejo de pre-iniciación para iniciar la transcripción</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">C</div>Terminar la transcripción cuando se alcanza la señal de poli-A</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>Remover los intrones del ARNm</button>
+</div><div class="qf" id="fb-q01"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('orientacion')">5' y 3' →</button></div>
+</div>
+
+<!-- ===== ORIENTACIÓN 5' y 3' ===== -->
+<div class="sec" id="sec-orientacion">
+<div class="cd"><div class="ch">🧭 Extremos <span class="ac">5' y 3'</span> de Genes y Transcritos <span class="pill pg">RA 10</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div>
+<p style="color:var(--t2)">Todo ácido nucleico tiene polaridad: un extremo <strong>5'</strong> (con grupo fosfato libre) y un extremo <strong>3'</strong> (con grupo hidroxilo libre). La ARN polimerasa sintetiza el ARNm en dirección <strong>5'→3'</strong>, leyendo la hebra molde en dirección <strong>3'→5'</strong>. Esta orientación es crucial tanto para la transcripción como para la traducción.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="15" font-weight="700" font-family="DM Serif Display,serif">Relación entre Hebras del ADN y el ARNm</text>
+
+<!-- Coding strand (sense) -->
+<text x="50" y="65" fill="#00D4AA" font-size="12" font-weight="700">Hebra codificante (sentido)</text>
+<text x="80" y="90" fill="#5A7A96" font-size="10">5'</text>
+<rect x="100" y="78" width="700" height="16" rx="5" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="450" y="91" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">5' — ATG...codones...TAA — 3'</text>
+<text x="810" y="90" fill="#5A7A96" font-size="10">3'</text>
+
+<!-- Template strand (antisense) -->
+<text x="50" y="125" fill="#00A3FF" font-size="12" font-weight="700">Hebra molde (antisentido)</text>
+<text x="80" y="150" fill="#5A7A96" font-size="10">3'</text>
+<rect x="100" y="138" width="700" height="16" rx="5" fill="rgba(0,163,255,0.2)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="450" y="151" text-anchor="middle" fill="#00A3FF" font-size="9" font-weight="600">3' — TAC...anticodones...ATT — 5'</text>
+<text x="810" y="150" fill="#5A7A96" font-size="10">5'</text>
+
+<!-- Arrow: RNAP reads template 3'→5' -->
+<line x1="700" y1="170" x2="200" y2="170" stroke="#A78BFA" stroke-width="2" marker-end="url(#arr3)"/>
+<text x="450" y="185" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="600">← ARN Pol II lee hebra molde 3'→5'</text>
+
+<!-- mRNA produced 5'→3' -->
+<text x="50" y="225" fill="#EC4899" font-size="12" font-weight="700">ARNm producido</text>
+<text x="80" y="250" fill="#5A7A96" font-size="10">5'</text>
+<rect x="100" y="238" width="700" height="16" rx="5" fill="rgba(236,72,153,0.2)" stroke="#EC4899" stroke-width="1.5"/>
+<text x="450" y="251" text-anchor="middle" fill="#EC4899" font-size="9" font-weight="600">5'-Cap — AUG...codones...UAA — AAAA...3' (poli-A)</text>
+<text x="810" y="250" fill="#5A7A96" font-size="10">3'</text>
+
+<!-- 5' cap and poly-A labels -->
+<rect x="100" y="260" width="60" height="18" rx="5" fill="rgba(255,217,61,0.15)" stroke="#FFD93D" stroke-width="1"/>
+<text x="130" y="273" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="600">5' Cap</text>
+<rect x="740" y="260" width="60" height="18" rx="5" fill="rgba(249,115,22,0.15)" stroke="#F97316" stroke-width="1"/>
+<text x="770" y="273" text-anchor="middle" fill="#F97316" font-size="8" font-weight="600">Cola poli-A</text>
+
+<!-- Importance arrows -->
+<text x="130" y="305" text-anchor="middle" fill="#FFD93D" font-size="9">↓ Protege de degradación</text>
+<text x="130" y="318" text-anchor="middle" fill="#FFD93D" font-size="9">↓ Recluta ribosoma</text>
+<text x="770" y="305" text-anchor="middle" fill="#F97316" font-size="9">↓ Estabilidad del ARNm</text>
+<text x="770" y="318" text-anchor="middle" fill="#F97316" font-size="9">↓ Exportación nuclear</text>
+
+<!-- Translation arrow -->
+<line x1="200" y1="350" x2="700" y2="350" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arr2)"/>
+<text x="450" y="345" text-anchor="middle" fill="#FF6B6B" font-size="10" font-weight="600">Dirección de traducción (ribosoma 5'→3') →</text>
+
+<!-- Key rule -->
+<rect x="150" y="375" width="600" height="35" rx="10" fill="rgba(0,212,170,0.08)" stroke="rgba(0,212,170,0.3)" stroke-width="1"/>
+<text x="450" y="392" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="600">REGLA: El ARNm tiene la misma secuencia que la hebra codificante (con U en vez de T)</text>
+<text x="450" y="405" text-anchor="middle" fill="#8BA4BE" font-size="9">Ambos comparten la orientación 5'→3'</text>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ Relación entre hebra codificante, hebra molde y ARNm</p>
+
+<table class="et"><thead><tr><th>Elemento</th><th>Extremo 5'</th><th>Extremo 3'</th><th>Importancia</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Gen (hebra codificante)</strong></td><td>Inicio del gen (upstream)</td><td>Final del gen (downstream)</td><td>Define dirección de lectura</td></tr>
+<tr><td><strong style="color:var(--b)">Hebra molde</strong></td><td>Final del gen (downstream)</td><td>Inicio del gen (upstream) — donde se posiciona la Pol II</td><td>Leída 3'→5' por la Pol II</td></tr>
+<tr><td><strong style="color:var(--pk)">ARNm</strong></td><td>Cap 7-metilguanosina (protección + traducción)</td><td>Cola poli-A (estabilidad + exportación)</td><td>Traducido 5'→3' por los ribosomas</td></tr>
+</tbody></table>
+
+<div class="ib go"><div class="ibt">⚡ ¿Por qué importa para la traducción?</div>
+<p style="color:var(--t2)">El ribosoma se ensambla en el extremo <strong>5'</strong> del ARNm (reconociendo el Cap) y se desplaza hacia el extremo <strong>3'</strong>, leyendo codones en tripletes. Si el 5' Cap está ausente o dañado, el ARNm no se traduce eficientemente. Si la cola poli-A se acorta, el ARNm se degrada más rápido, reduciendo la producción de proteína.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q02"><div class="qt">¿En qué dirección lee la ARN Polimerasa II la hebra molde?</div><div class="qo">
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">A</div>5'→3' (la misma dirección que el ARNm)</button>
+<button class="qb" onclick="cq('q02',this,1)"><div class="ol">B</div>3'→5' (antiparalela al ARNm que sintetiza en 5'→3')</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">C</div>En ambas direcciones simultáneamente</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">D</div>No tiene dirección específica</button>
+</div><div class="qf" id="fb-q02"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('promotor')">← Promotor</button><button class="btn bp" onclick="go('cuestaUpDown')">Cuesta ↑↓ →</button></div>
+</div>
+
+<!-- ===== CUESTA ARRIBA / CUESTA ABAJO ===== -->
+<div class="sec" id="sec-cuestaUpDown">
+<div class="cd"><div class="ch">⬆️⬇️ <span class="ac">Cuesta Arriba</span> vs <span class="ac">Cuesta Abajo</span> <span class="pill pg">RA 11</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div>
+<p style="color:var(--t2)">En biología molecular, la posición de las secuencias se describe relativa al sitio de inicio de transcripción (<strong>+1</strong>):<br><br>
+<strong>Cuesta arriba (upstream):</strong> Secuencias localizadas <strong>antes</strong> del sitio +1, con numeración negativa (−1, −10, −25, −100...). Es la dirección <strong>5'</strong> en la hebra codificante. Aquí se encuentran los promotores y elementos reguladores.<br><br>
+<strong>Cuesta abajo (downstream):</strong> Secuencias localizadas <strong>después</strong> del sitio +1, con numeración positiva (+1, +10, +100...). Es la dirección <strong>3'</strong> en la hebra codificante. Aquí está el gen transcrito.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="15" font-weight="700" font-family="DM Serif Display,serif">Upstream (Cuesta Arriba) vs Downstream (Cuesta Abajo)</text>
+
+<!-- Central line -->
+<line x1="60" y1="130" x2="840" y2="130" stroke="#5A7A96" stroke-width="2"/>
+
+<!-- +1 marker -->
+<line x1="450" y1="80" x2="450" y2="180" stroke="#00D4AA" stroke-width="3"/>
+<circle cx="450" cy="75" r="18" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="2"/>
+<text x="450" y="80" text-anchor="middle" fill="#00D4AA" font-size="12" font-weight="700">+1</text>
+
+<!-- Upstream region -->
+<rect x="80" y="105" width="350" height="50" rx="12" fill="rgba(255,217,61,0.08)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="255" y="125" text-anchor="middle" fill="#FFD93D" font-size="14" font-weight="700">⬆️ CUESTA ARRIBA (Upstream)</text>
+<text x="255" y="145" text-anchor="middle" fill="#FFD93D" font-size="10">Numeración negativa: −1, −10, −25, −100...</text>
+
+<!-- Downstream region -->
+<rect x="470" y="105" width="350" height="50" rx="12" fill="rgba(0,212,170,0.08)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="645" y="125" text-anchor="middle" fill="#00D4AA" font-size="14" font-weight="700">⬇️ CUESTA ABAJO (Downstream)</text>
+<text x="645" y="145" text-anchor="middle" fill="#00D4AA" font-size="10">Numeración positiva: +1, +10, +100...</text>
+
+<!-- What is found in each -->
+<text x="255" y="190" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="600">Contiene:</text>
+<text x="255" y="208" text-anchor="middle" fill="#8BA4BE" font-size="10">• Promotor núcleo (TATA box ~−25 a −30)</text>
+<text x="255" y="224" text-anchor="middle" fill="#8BA4BE" font-size="10">• Elementos reguladores proximales</text>
+<text x="255" y="240" text-anchor="middle" fill="#8BA4BE" font-size="10">• Enhancers / Silencers (pueden estar lejos)</text>
+
+<text x="645" y="190" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="600">Contiene:</text>
+<text x="645" y="208" text-anchor="middle" fill="#8BA4BE" font-size="10">• Secuencia transcrita del gen (exones + intrones)</text>
+<text x="645" y="224" text-anchor="middle" fill="#8BA4BE" font-size="10">• DPE (~+28 a +34) en promotores sin TATA</text>
+<text x="645" y="240" text-anchor="middle" fill="#8BA4BE" font-size="10">• Señal de poliadenilación (AAUAAA)</text>
+
+<!-- Direction arrows -->
+<line x1="430" y1="270" x2="100" y2="270" stroke="#FFD93D" stroke-width="2" marker-end="url(#arr3)"/>
+<text x="265" y="288" text-anchor="middle" fill="#FFD93D" font-size="9">← Dirección 5' (upstream)</text>
+<line x1="470" y1="270" x2="800" y2="270" stroke="#00D4AA" stroke-width="2" marker-end="url(#arr1)"/>
+<text x="635" y="288" text-anchor="middle" fill="#00D4AA" font-size="9">Dirección 3' (downstream) →</text>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ Mapa de posiciones upstream y downstream relativo al sitio +1</p>
+
+<div class="analogy"><div class="analogy-icon">🏔️</div><h4>Analogía: El río y la montaña</h4>
+<p>Imagina que el sitio +1 es una <strong>cascada</strong> en un río. <strong>Cuesta arriba (upstream)</strong> es todo lo que está antes de la cascada — el agua (la ARN polimerasa) aún no ha pasado por ahí. <strong>Cuesta abajo (downstream)</strong> es por donde fluye el agua después de la cascada — es la dirección de avance. Los promotores están "río arriba" preparando el terreno, y el gen transcrito está "río abajo" donde la polimerasa avanza generando el ARNm.</p></div>
+
+<div class="ib w"><div class="ibt">⚠️ Error frecuente</div>
+<p style="color:var(--t2)">Muchos estudiantes confunden upstream/downstream con la orientación de las hebras. Recuerda: upstream y downstream se definen <strong>siempre</strong> respecto a la hebra codificante (sentido) en dirección 5'→3'. Upstream = hacia el 5' de la hebra codificante. Downstream = hacia el 3' de la hebra codificante. Esto <strong>no cambia</strong> según qué hebra estés mirando.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q03"><div class="qt">El TATA box se localiza aproximadamente en la posición −25 a −30. Esto significa que está:</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">A</div>Cuesta arriba (upstream) del sitio +1, dentro del promotor</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">B</div>Cuesta abajo (downstream) del sitio +1, dentro del gen</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">C</div>En el sitio exacto de inicio de la transcripción</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>En la señal de poliadenilación del ARNm</button>
+</div><div class="qf" id="fb-q03"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('orientacion')">← 5' y 3'</button><button class="btn bp" onclick="go('promotoresGen')">Promotores TATA/DPE →</button></div>
+</div>
+
+<!-- ===== PROMOTORES GENERALES TATA / DPE ===== -->
+<div class="sec" id="sec-promotoresGen">
+<div class="cd"><div class="ch">🧩 Promotores Núcleo: <span class="ac">TATA</span> y <span class="ac">DPE</span> <span class="pill pg">RA 12</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div>
+<p style="color:var(--t2)">Los <strong>promotores núcleo</strong> (core promoters) son las secuencias mínimas necesarias para dirigir el inicio exacto de la transcripción por la ARN Pol II. Existen dos tipos principales:<br><br>
+<strong>Promotores dirigidos por TATA box:</strong> Contienen la secuencia consenso <strong>TATAAA</strong> en posición ~−25 a −30. Son reconocidos por <strong>TBP</strong> (TATA-Binding Protein), una subunidad de TFIID.<br><br>
+<strong>Promotores dirigidos por DPE:</strong> Carecen de TATA box y en su lugar poseen un <strong>Downstream Promoter Element (DPE)</strong> en posición ~+28 a +34 (downstream de +1). El DPE es reconocido por <strong>TAFs</strong> (factores asociados a TBP) dentro de TFIID.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="15" font-weight="700" font-family="DM Serif Display,serif">Comparación: Promotor TATA vs Promotor DPE</text>
+
+<!-- TATA-driven promoter -->
+<text x="60" y="65" fill="#FFD93D" font-size="13" font-weight="700">A) Promotor dirigido por TATA box</text>
+<line x1="80" y1="100" x2="820" y2="100" stroke="#5A7A96" stroke-width="2"/>
+
+<!-- TATA box -->
+<rect x="260" y="80" width="90" height="28" rx="8" fill="rgba(255,217,61,0.2)" stroke="#FFD93D" stroke-width="2"/>
+<text x="305" y="98" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="700">TATAAA</text>
+<text x="305" y="75" text-anchor="middle" fill="#FFD93D" font-size="8">~−25 a −30</text>
+
+<!-- Inr -->
+<rect x="390" y="80" width="50" height="28" rx="8" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="415" y="98" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="700">Inr</text>
+<text x="415" y="75" text-anchor="middle" fill="#00D4AA" font-size="8">+1</text>
+
+<!-- BRE -->
+<rect x="200" y="80" width="45" height="28" rx="8" fill="rgba(0,163,255,0.2)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="222" y="98" text-anchor="middle" fill="#00A3FF" font-size="9" font-weight="700">BRE</text>
+<text x="222" y="75" text-anchor="middle" fill="#00A3FF" font-size="8">~−35</text>
+
+<!-- TBP binding -->
+<rect x="250" y="118" width="110" height="30" rx="10" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="305" y="137" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="700">TBP</text>
+<text x="305" y="160" text-anchor="middle" fill="#A78BFA" font-size="8">Reconoce TATAAA</text>
+
+<!-- DPE-driven promoter -->
+<text x="60" y="210" fill="#EC4899" font-size="13" font-weight="700">B) Promotor dirigido por DPE (sin TATA)</text>
+<line x1="80" y1="245" x2="820" y2="245" stroke="#5A7A96" stroke-width="2"/>
+
+<!-- No TATA -->
+<rect x="260" y="225" width="90" height="28" rx="8" fill="rgba(255,107,107,0.1)" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="305" y="243" text-anchor="middle" fill="#FF6B6B" font-size="10">sin TATA</text>
+
+<!-- Inr -->
+<rect x="390" y="225" width="50" height="28" rx="8" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="415" y="243" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="700">Inr</text>
+<text x="415" y="220" text-anchor="middle" fill="#00D4AA" font-size="8">+1</text>
+
+<!-- DPE -->
+<rect x="520" y="225" width="90" height="28" rx="8" fill="rgba(236,72,153,0.2)" stroke="#EC4899" stroke-width="2"/>
+<text x="565" y="243" text-anchor="middle" fill="#EC4899" font-size="10" font-weight="700">DPE</text>
+<text x="565" y="220" text-anchor="middle" fill="#EC4899" font-size="8">~+28 a +34</text>
+
+<!-- TAFs binding -->
+<rect x="480" y="263" width="170" height="30" rx="10" fill="rgba(236,72,153,0.15)" stroke="#EC4899" stroke-width="1.5"/>
+<text x="565" y="282" text-anchor="middle" fill="#EC4899" font-size="10" font-weight="700">TAFs (de TFIID)</text>
+<text x="565" y="305" text-anchor="middle" fill="#EC4899" font-size="8">Reconocen DPE + Inr conjuntamente</text>
+
+<!-- Summary box -->
+<rect x="100" y="330" width="700" height="40" rx="10" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.3)" stroke-width="1"/>
+<text x="450" y="348" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="600">Solo ~10-20% de los promotores humanos tienen TATA box funcional</text>
+<text x="450" y="363" text-anchor="middle" fill="#8BA4BE" font-size="9">La mayoría usan combinaciones de Inr, DPE, MTE y/o islas CpG</text>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ Elementos del promotor núcleo tipo TATA vs tipo DPE</p>
+
+<table class="et"><thead><tr><th>Elemento</th><th>Posición</th><th>Secuencia consenso</th><th>Reconocido por</th><th>Frecuencia</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--y)">TATA box</strong></td><td>−25 a −30</td><td>TATAAA</td><td>TBP (subunidad de TFIID)</td><td>~10-20% de genes humanos</td></tr>
+<tr><td><strong style="color:var(--b)">BRE</strong></td><td>−35 (upstream de TATA)</td><td>G/C-G/C-G/A-C-G-C-C</td><td>TFIIB</td><td>Variable</td></tr>
+<tr><td><strong style="color:var(--g)">Inr (Initiator)</strong></td><td>−2 a +5 (rodea +1)</td><td>Py-Py-A+1-N-T/A-Py-Py</td><td>TAF1/TAF2 de TFIID</td><td>Muy frecuente</td></tr>
+<tr><td><strong style="color:var(--pk)">DPE</strong></td><td>+28 a +34</td><td>A/G-G-A/T-C-G-T-G</td><td>TAF6/TAF9 de TFIID</td><td>Frecuente en genes sin TATA</td></tr>
+<tr><td><strong style="color:var(--p)">MTE</strong></td><td>+18 a +27</td><td>C-S-A-R-C-S-S-A-A-C-G-S</td><td>TFIID (TAFs)</td><td>Complementario a DPE/Inr</td></tr>
+</tbody></table>
+
+<div class="ib n"><div class="ibt">🧪 Dato clave: Islas CpG</div>
+<p style="color:var(--t2)">Muchos promotores de genes "housekeeping" (constitutivos) carecen de TATA box y en su lugar se asocian con <strong>islas CpG</strong> (regiones ricas en dinucleótidos CG no metilados). Estos promotores suelen tener múltiples sitios de inicio de transcripción difusos, a diferencia de los promotores con TATA que tienen un +1 preciso.</p></div>
+</div>
+
+<!-- Match game -->
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">Emparejar</span> elemento con su descripción</div>
+<p style="color:var(--t2);margin-bottom:14px">Selecciona un elemento de cada columna:</p>
+<div class="match-game" id="mg1">
+<div class="match-col"><h4 style="color:var(--g)">Elemento</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg1',this)">TATA box</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg1',this)">DPE</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg1',this)">Inr</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg1',this)">TBP</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">Descripción</h4>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg1',this)">Rodea el +1; reconocido por TAF1/TAF2</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg1',this)">TATAAA en posición ~−25; unido por TBP</div>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg1',this)">Subunidad de TFIID que reconoce la TATA box</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg1',this)">Downstream Promoter Element; ~+28 a +34</div>
+</div></div>
+<div class="match-score" id="mg1-score"></div></div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q04"><div class="qt">¿Qué diferencia principal tiene un promotor DPE comparado con uno TATA?</div><div class="qo">
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">A</div>El DPE está en posición upstream (−25) mientras que TATA está downstream</button>
+<button class="qb" onclick="cq('q04',this,1)"><div class="ol">B</div>El DPE está downstream del +1 (~+28 a +34), mientras que el TATA box está upstream (~−25 a −30)</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">C</div>El DPE es reconocido por TBP y el TATA box por TAFs</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">D</div>No hay ninguna diferencia funcional entre ambos</button>
+</div><div class="qf" id="fb-q04"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('cuestaUpDown')">← Cuesta ↑↓</button><button class="btn bp" onclick="go('fases')">Fases →</button></div>
+</div>
+
+<!-- ===== FASES DE LA TRANSCRIPCIÓN ===== -->
+<div class="sec" id="sec-fases">
+<div class="cd"><div class="ch">🔄 Fases de la <span class="ac">Transcripción</span> <span class="pill pg">RA 13</span></div>
+<div class="ib"><div class="ibt">🔑 Las tres fases</div>
+<p style="color:var(--t2)">La transcripción por la ARN Polimerasa II se divide en tres fases: <strong>Iniciación</strong> (ensamblaje del PIC y apertura del ADN), <strong>Elongación</strong> (síntesis procesiva del ARNm) y <strong>Terminación</strong> (liberación del transcrito y la polimerasa).</p></div>
+
+<!-- Tabs for 3 phases -->
+<div class="tb">
+<button class="tbtn a" onclick="st(this,'tab-inic')">🚀 Iniciación</button>
+<button class="tbtn" onclick="st(this,'tab-elong')">🏃 Elongación</button>
+<button class="tbtn" onclick="st(this,'tab-term')">🛑 Terminación</button>
+</div>
+
+<!-- INICIACIÓN -->
+<div class="tc a" id="tab-inic">
+<div class="ib"><div class="ibt">🚀 Fase 1: Iniciación</div>
+<p style="color:var(--t2)">Es el proceso de ensamblar el <strong>Complejo de Pre-Iniciación (PIC)</strong> en el promotor, abrir la doble hélice y sintetizar los primeros nucleótidos del ARNm.</p></div>
+
+<div class="timeline">
+<div class="timeline-item">
+<strong style="color:var(--y)">Paso 1: TFIID reconoce el promotor</strong>
+<p class="proc-text"><strong>TBP</strong> (parte de TFIID) se une al TATA box, causando una <strong>curvatura de ~80°</strong> en el ADN. En promotores sin TATA, los TAFs reconocen Inr y/o DPE. Este es el evento nucleante.</p>
+</div>
+<div class="timeline-item">
+<strong style="color:var(--b)">Paso 2: TFIIA y TFIIB se unen</strong>
+<p class="proc-text"><strong>TFIIA</strong> estabiliza la unión TBP-ADN. <strong>TFIIB</strong> se une a BRE y contacta tanto a TBP como al ADN, creando la plataforma para reclutar a la ARN Pol II. TFIIB posiciona el sitio activo de la Pol II sobre el +1.</p>
+</div>
+<div class="timeline-item">
+<strong style="color:var(--g)">Paso 3: ARN Pol II + TFIIF llegan al promotor</strong>
+<p class="proc-text">La <strong>ARN Pol II</strong> es escoltada por <strong>TFIIF</strong> al complejo promotor. TFIIF estabiliza la interacción Pol II–TFIIB y ayuda a prevenir la unión inespecífica de la Pol II al ADN.</p>
+</div>
+<div class="timeline-item">
+<strong style="color:var(--pk)">Paso 4: TFIIE y TFIIH completan el PIC</strong>
+<p class="proc-text"><strong>TFIIE</strong> recluta a <strong>TFIIH</strong>. TFIIH tiene dos actividades cruciales: (1) <strong>Helicasa</strong> (subunidad XPB) que abre ~11-15 pb de ADN alrededor de +1 formando la "burbuja de transcripción", usando ATP. (2) <strong>Quinasa</strong> (subunidad CDK7/ciclina H) que fosforila la <strong>Ser5 del CTD</strong> de la Pol II.</p>
+</div>
+<div class="timeline-item">
+<strong style="color:var(--p)">Paso 5: Escape del promotor</strong>
+<p class="proc-text">Tras sintetizar los primeros ~8-10 nucleótidos, la Pol II debe "escapar" del promotor. La fosforilación de <strong>Ser5</strong> del CTD por TFIIH facilita este escape. La Pol II se libera de la mayoría de los GTFs (excepto TFIIF) y entra en la fase de elongación. Algunos factores permanecen en el promotor como "andamio" (scaffold) para facilitar re-iniciaciones.</p>
+</div>
+</div>
+
+<div class="step-diagram">
+<div class="step-box"><span style="color:var(--y);font-size:.85rem;font-weight:700">1</span><br><span style="font-size:.82rem;color:var(--t2)">TFIID→TATA<br>o DPE/Inr</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><span style="color:var(--b);font-size:.85rem;font-weight:700">2</span><br><span style="font-size:.82rem;color:var(--t2)">TFIIA + TFIIB<br>estabilizan</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><span style="color:var(--g);font-size:.85rem;font-weight:700">3</span><br><span style="font-size:.82rem;color:var(--t2)">Pol II + TFIIF<br>se reclutan</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><span style="color:var(--pk);font-size:.85rem;font-weight:700">4</span><br><span style="font-size:.82rem;color:var(--t2)">TFIIE + TFIIH<br>abren ADN</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><span style="color:var(--p);font-size:.85rem;font-weight:700">5</span><br><span style="font-size:.82rem;color:var(--t2)">Ser5-P<br>Escape promotor</span></div>
+</div>
+</div>
+
+<!-- ELONGACIÓN -->
+<div class="tc" id="tab-elong">
+<div class="ib n"><div class="ibt">🏃 Fase 2: Elongación</div>
+<p style="color:var(--t2)">Una vez que la Pol II escapa del promotor, entra en una fase <strong>procesiva</strong> de síntesis de ARNm. La polimerasa avanza a lo largo del gen, desenrollando el ADN por delante y rehibridándolo por detrás, manteniendo una burbuja de transcripción de ~12-14 pb.</p></div>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--g)">📌 Características de la elongación</h4>
+<p style="color:var(--t2);font-size:.9rem">• La Pol II sintetiza ARN <strong>5'→3'</strong> a ~1000-2000 nt/min.<br>
+• El ADN se lee en dirección <strong>3'→5'</strong> (hebra molde).<br>
+• La burbuja de transcripción se desplaza con la polimerasa.<br>
+• El ARNm naciente sale por un canal en la Pol II.<br>
+• Solo ~8-9 pb de híbrido ARN:ADN existen en la burbuja en cada momento.</p></div>
+<div class="cc"><h4 style="color:var(--b)">⚙️ Factores de elongación</h4>
+<p style="color:var(--t2);font-size:.9rem"><strong>P-TEFb</strong> (CDK9/CiclinaT): fosforila <strong>Ser2</strong> del CTD → elongación productiva.<br>
+<strong>TFIIS (SII)</strong>: rescata Pol II de pausas/retrocesos (backtracking).<br>
+<strong>FACT y Spt6</strong>: remodelan nucleosomas para permitir el paso de la Pol II.<br>
+<strong>ELL y Elongina</strong>: aumentan la tasa de elongación.</p></div>
+</div>
+
+<div class="ib go"><div class="ibt">🧬 Procesamiento co-transcripcional</div>
+<p style="color:var(--t2)">Durante la elongación ocurren tres procesos de maduración del ARNm, <strong>acoplados al CTD fosforilado</strong>:<br>
+• <strong>Capping 5'</strong> (adición de 7-metilguanosina): se acopla a la Ser5-P del CTD (~primeros 20-30 nt).<br>
+• <strong>Splicing</strong> (remoción de intrones): el espliceosoma se recluta al CTD fosforilado.<br>
+• <strong>Poliadenilación 3'</strong>: los factores de corte y poli-A se acoplan a la Ser2-P del CTD.</p></div>
+</div>
+
+<!-- TERMINACIÓN -->
+<div class="tc" id="tab-term">
+<div class="ib pk"><div class="ibt">🛑 Fase 3: Terminación</div>
+<p style="color:var(--t2)">La terminación de la transcripción por ARN Pol II está acoplada al procesamiento del extremo 3' del ARNm. Existen dos modelos principales:</p></div>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--o)">🔸 Modelo "Torpedo"</h4>
+<p style="color:var(--t2);font-size:.9rem">1. La Pol II transcribe más allá de la señal de poliadenilación (<strong>AAUAAA</strong>).<br>
+2. Los factores CPSF/CstF reconocen la señal y cortan el ARNm.<br>
+3. Se añade la cola poli-A al ARNm cortado.<br>
+4. La exonucleasa <strong>Xrn2 (Rat1)</strong> degrada el ARN residual que queda unido a la Pol II en dirección <strong>5'→3'</strong>.<br>
+5. Cuando Xrn2 alcanza a la Pol II, la desestabiliza y la <strong>libera</strong> del ADN (como un "torpedo").</p></div>
+<div class="cc"><h4 style="color:var(--p)">🔹 Modelo "Alostérico"</h4>
+<p style="color:var(--t2);font-size:.9rem">1. Al transcribir la señal de poliadenilación, la Pol II sufre un <strong>cambio conformacional</strong>.<br>
+2. Factores anti-terminación se disocian y factores de terminación se asocian.<br>
+3. La Pol II pierde su procesividad.<br>
+4. La polimerasa se <strong>disocia espontáneamente</strong> del ADN.<br><br>
+<em>Nota:</em> Ambos mecanismos probablemente cooperan in vivo.</p></div>
+</div>
+
+<div class="step-diagram">
+<div class="step-box"><span style="font-size:.82rem;color:var(--pk)">Pol II pasa<br>señal poli-A</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><span style="font-size:.82rem;color:var(--o)">CPSF/CstF<br>cortan ARNm</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><span style="font-size:.82rem;color:var(--y)">Cola poli-A<br>se añade</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><span style="font-size:.82rem;color:var(--r)">Xrn2 "torpedo"<br>degrada ARN</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><span style="font-size:.82rem;color:var(--g)">Pol II<br>se libera</span></div>
+</div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q05"><div class="qt">¿Qué actividad de TFIIH es esencial para abrir la doble hélice del ADN y formar la burbuja de transcripción?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">A</div>Quinasa (fosforila Ser5 del CTD)</button>
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">B</div>Helicasa (subunidad XPB, usa ATP para abrir ~11-15 pb)</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">C</div>Exonucleasa (degrada el ARN naciente)</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>Ligasa (sella el ADN después de abrirlo)</button>
+</div><div class="qf" id="fb-q05"></div></div>
+
+<div class="qq" id="q06"><div class="qt">En el modelo "torpedo" de terminación, ¿qué enzima alcanza y desestabiliza a la ARN Pol II?</div><div class="qo">
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">A</div>TFIIH</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">B</div>P-TEFb (CDK9)</button>
+<button class="qb" onclick="cq('q06',this,1)"><div class="ol">C</div>Xrn2 (Rat1), una exonucleasa 5'→3'</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">D</div>Topoisomerasa II</button>
+</div><div class="qf" id="fb-q06"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('promotoresGen')">← Promotores TATA/DPE</button><button class="btn bp" onclick="go('ctd')">CTD y Fosforilación →</button></div>
+</div>
+
+<!-- ===== CTD Y FOSFORILACIÓN ===== -->
+<div class="sec" id="sec-ctd">
+<div class="cd"><div class="ch">🔬 Fosforilación del <span class="ac">CTD</span> de la ARN Pol II <span class="pill pg">RA 14</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div>
+<p style="color:var(--t2)">La subunidad mayor de la ARN Polimerasa II (Rpb1) posee un <strong>Dominio C-Terminal (CTD)</strong> formado por repeticiones del heptapéptido <strong>Tyr<sub>1</sub>-Ser<sub>2</sub>-Pro<sub>3</sub>-Thr<sub>4</sub>-Ser<sub>5</sub>-Pro<sub>6</sub>-Ser<sub>7</sub></strong>. En humanos hay <strong>52 repeticiones</strong>. Las fosforilaciones reversibles de <strong>Ser2, Ser5 y Ser7</strong> actúan como un <strong>"código CTD"</strong> que regula las distintas fases de la transcripción y el procesamiento del ARNm.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="25" text-anchor="middle" fill="#E8F0F8" font-size="15" font-weight="700" font-family="DM Serif Display,serif">El Código CTD: Fosforilación y Función</text>
+
+<!-- Gene representation -->
+<rect x="60" y="55" width="780" height="10" rx="3" fill="rgba(0,163,255,0.15)" stroke="#5A7A96" stroke-width="1"/>
+<text x="60" y="50" fill="#5A7A96" font-size="9">Promotor</text>
+<text x="200" y="50" fill="#00D4AA" font-size="9">+1</text>
+<text x="500" y="50" fill="#5A7A96" font-size="9">Gen (exones + intrones)</text>
+<text x="750" y="50" fill="#5A7A96" font-size="9">poli-A</text>
+<line x1="200" y1="45" x2="200" y2="70" stroke="#00D4AA" stroke-width="1.5"/>
+
+<!-- Phase 1: Initiation - Ser5-P -->
+<rect x="100" y="85" width="200" height="120" rx="14" fill="rgba(255,217,61,0.06)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="200" y="105" text-anchor="middle" fill="#FFD93D" font-size="12" font-weight="700">🚀 INICIACIÓN</text>
+<text x="200" y="125" text-anchor="middle" fill="#FFD93D" font-size="10">CTD: Ser5-P</text>
+<!-- Pol II icon -->
+<ellipse cx="200" cy="155" rx="40" ry="18" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="200" y="159" text-anchor="middle" fill="#A78BFA" font-size="9" font-weight="700">Pol II</text>
+<!-- Ser5 phosphates -->
+<circle cx="170" cy="180" r="6" fill="#FFD93D" stroke="#FFD93D" stroke-width="1"/>
+<text x="170" y="183" text-anchor="middle" fill="#0B1622" font-size="7" font-weight="700">P</text>
+<circle cx="185" cy="185" r="6" fill="#FFD93D" stroke="#FFD93D" stroke-width="1"/>
+<text x="185" y="188" text-anchor="middle" fill="#0B1622" font-size="7" font-weight="700">P</text>
+<circle cx="200" cy="187" r="6" fill="#FFD93D" stroke="#FFD93D" stroke-width="1"/>
+<text x="200" y="190" text-anchor="middle" fill="#0B1622" font-size="7" font-weight="700">P</text>
+<circle cx="215" cy="185" r="6" fill="#FFD93D" stroke="#FFD93D" stroke-width="1"/>
+<text x="215" y="188" text-anchor="middle" fill="#0B1622" font-size="7" font-weight="700">P</text>
+<circle cx="230" cy="180" r="6" fill="#FFD93D" stroke="#FFD93D" stroke-width="1"/>
+<text x="230" y="183" text-anchor="middle" fill="#0B1622" font-size="7" font-weight="700">P</text>
+<text x="200" y="198" text-anchor="middle" fill="#FFD93D" font-size="7">Ser5-P Ser5-P Ser5-P</text>
+
+<!-- Arrow -->
+<line x1="310" y1="145" x2="370" y2="145" stroke="#5A7A96" stroke-width="2" marker-end="url(#arr1)"/>
+
+<!-- Phase 2: Elongation - Ser2-P -->
+<rect x="380" y="85" width="200" height="120" rx="14" fill="rgba(0,163,255,0.06)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="480" y="105" text-anchor="middle" fill="#00A3FF" font-size="12" font-weight="700">🏃 ELONGACIÓN</text>
+<text x="480" y="125" text-anchor="middle" fill="#00A3FF" font-size="10">CTD: Ser2-P (↑) + Ser5-P (↓)</text>
+<ellipse cx="480" cy="155" rx="40" ry="18" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="480" y="159" text-anchor="middle" fill="#A78BFA" font-size="9" font-weight="700">Pol II</text>
+<circle cx="450" cy="180" r="6" fill="#00A3FF" stroke="#00A3FF" stroke-width="1"/>
+<text x="450" y="183" text-anchor="middle" fill="#0B1622" font-size="7" font-weight="700">P</text>
+<circle cx="465" cy="185" r="6" fill="#00A3FF" stroke="#00A3FF" stroke-width="1"/>
+<text x="465" y="188" text-anchor="middle" fill="#0B1622" font-size="7" font-weight="700">P</text>
+<circle cx="480" cy="187" r="6" fill="#00A3FF" stroke="#00A3FF" stroke-width="1"/>
+<text x="480" y="190" text-anchor="middle" fill="#0B1622" font-size="7" font-weight="700">P</text>
+<circle cx="495" cy="185" r="6" fill="#00A3FF" stroke="#00A3FF" stroke-width="1"/>
+<text x="495" y="188" text-anchor="middle" fill="#0B1622" font-size="7" font-weight="700">P</text>
+<circle cx="510" cy="180" r="6" fill="#00A3FF" stroke="#00A3FF" stroke-width="1"/>
+<text x="510" y="183" text-anchor="middle" fill="#0B1622" font-size="7" font-weight="700">P</text>
+<text x="480" y="198" text-anchor="middle" fill="#00A3FF" font-size="7">Ser2-P Ser2-P Ser2-P</text>
+
+<!-- Arrow -->
+<line x1="590" y1="145" x2="650" y2="145" stroke="#5A7A96" stroke-width="2" marker-end="url(#arr1)"/>
+
+<!-- Phase 3: Termination -->
+<rect x="660" y="85" width="200" height="120" rx="14" fill="rgba(255,107,107,0.06)" stroke="#FF6B6B" stroke-width="1.5"/>
+<text x="760" y="105" text-anchor="middle" fill="#FF6B6B" font-size="12" font-weight="700">🛑 TERMINACIÓN</text>
+<text x="760" y="125" text-anchor="middle" fill="#FF6B6B" font-size="10">CTD: Desfosforilado</text>
+<ellipse cx="760" cy="155" rx="40" ry="18" fill="rgba(167,139,250,0.08)" stroke="#A78BFA" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="760" y="159" text-anchor="middle" fill="#A78BFA" font-size="9">Pol II libre</text>
+<text x="760" y="190" text-anchor="middle" fill="#FF6B6B" font-size="9">Fosfatasas (FCP1/Ssu72)</text>
+<text x="760" y="202" text-anchor="middle" fill="#FF6B6B" font-size="9">remueven P → reciclaje</text>
+
+<!-- Detailed table section -->
+<!-- Kinase/Function mapping -->
+<text x="450" y="240" text-anchor="middle" fill="#E8F0F8" font-size="13" font-weight="700" font-family="DM Serif Display,serif">Quinasas, Residuos y Funciones del Código CTD</text>
+
+<!-- Ser5 row -->
+<rect x="60" y="260" width="780" height="60" rx="10" fill="rgba(255,217,61,0.06)" stroke="rgba(255,217,61,0.2)" stroke-width="1"/>
+<text x="80" y="280" fill="#FFD93D" font-size="11" font-weight="700">Ser5-P</text>
+<text x="80" y="298" fill="#8BA4BE" font-size="9">Quinasa: CDK7 (TFIIH)</text>
+<text x="80" y="312" fill="#8BA4BE" font-size="9">Fosfatasa: Ssu72, Rtr1</text>
+<text x="350" y="285" fill="#FFD93D" font-size="10" font-weight="600">Funciones:</text>
+<text x="350" y="300" fill="#8BA4BE" font-size="9">• Escape del promotor • Recluta enzimas de capping 5' (guanililtransferasa)</text>
+<text x="350" y="315" fill="#8BA4BE" font-size="9">• Alta al inicio, disminuye durante elongación • Recluta Set1 (metilación H3K4)</text>
+
+<!-- Ser2 row -->
+<rect x="60" y="330" width="780" height="60" rx="10" fill="rgba(0,163,255,0.06)" stroke="rgba(0,163,255,0.2)" stroke-width="1"/>
+<text x="80" y="350" fill="#00A3FF" font-size="11" font-weight="700">Ser2-P</text>
+<text x="80" y="368" fill="#8BA4BE" font-size="9">Quinasa: CDK9 (P-TEFb)</text>
+<text x="80" y="382" fill="#8BA4BE" font-size="9">Fosfatasa: FCP1</text>
+<text x="350" y="355" fill="#00A3FF" font-size="10" font-weight="600">Funciones:</text>
+<text x="350" y="370" fill="#8BA4BE" font-size="9">• Elongación productiva • Recluta factores de splicing • Recluta factores de poliadenilación 3'</text>
+<text x="350" y="385" fill="#8BA4BE" font-size="9">• Baja al inicio, aumenta durante elongación • Recluta Set2 (metilación H3K36)</text>
+
+<!-- Ser7 row -->
+<rect x="60" y="400" width="780" height="50" rx="10" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.2)" stroke-width="1"/>
+<text x="80" y="420" fill="#A78BFA" font-size="11" font-weight="700">Ser7-P</text>
+<text x="80" y="438" fill="#8BA4BE" font-size="9">Quinasa: CDK7 (TFIIH)</text>
+<text x="350" y="425" fill="#A78BFA" font-size="10" font-weight="600">Funciones:</text>
+<text x="350" y="440" fill="#8BA4BE" font-size="9">• Procesamiento 3' de snRNAs (ARN pequeños nucleares) • Recluta Integrator complex</text>
+
+<!-- Recycling note -->
+<rect x="150" y="465" width="600" height="30" rx="8" fill="rgba(0,212,170,0.08)" stroke="rgba(0,212,170,0.3)" stroke-width="1"/>
+<text x="450" y="485" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="600">Tras la terminación, fosfatasas (FCP1, Ssu72) desfosforilan el CTD → Pol II lista para un nuevo ciclo</text>
+</svg>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:-12px">▲ El código CTD: fosforilación dinámica coordina transcripción y procesamiento del ARNm</p>
+
+<div class="analogy"><div class="analogy-icon">🚦</div><h4>Analogía: El semáforo molecular</h4>
+<p>El CTD funciona como un <strong>semáforo</strong> que cambia de color a lo largo del gen. Al inicio (Ser5-P = amarillo), la señal dice "¡arranca y pon el cap!". Conforme avanza (Ser2-P = azul/verde), la señal cambia a "¡sigue adelante, haz splicing y prepárate para el final!". Al terminar (desfosforilado = rojo), dice "¡para, suelta todo y recíclate!". Cada "color" recluta factores específicos en el momento justo.</p></div>
+
+<table class="et"><thead><tr><th>Residuo CTD</th><th>Quinasa</th><th>Fase principal</th><th>Procesos reclutados</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--y)">Ser5-P</strong></td><td>CDK7 (TFIIH)</td><td>Iniciación / Promotor proximal</td><td>Capping 5', escape del promotor, metilación H3K4</td></tr>
+<tr><td><strong style="color:var(--b)">Ser2-P</strong></td><td>CDK9 (P-TEFb)</td><td>Elongación → Terminación</td><td>Splicing, poliadenilación 3', metilación H3K36</td></tr>
+<tr><td><strong style="color:var(--p)">Ser7-P</strong></td><td>CDK7 (TFIIH)</td><td>Transcripción de snRNAs</td><td>Procesamiento 3' de snRNAs</td></tr>
+<tr><td><strong style="color:var(--r)">Desfosforilado</strong></td><td>Fosfatasas FCP1, Ssu72</td><td>Post-terminación</td><td>Reciclaje de Pol II al promotor</td></tr>
+</tbody></table>
+
+<div class="ib w"><div class="ibt">⚠️ Consecuencias clínicas</div>
+<p style="color:var(--t2)">• <strong>Flavopiridol</strong> (inhibidor de CDK9/P-TEFb) bloquea la Ser2-P, inhibiendo la elongación → efecto antitumoral.<br>
+• <strong>Mutaciones en CDK7</strong> causan trastornos del desarrollo (ej: síndrome de Galloway-Mowat atípico).<br>
+• El virus <strong>VIH</strong> secuestra P-TEFb: la proteína viral Tat recluta P-TEFb al promotor del VIH para activar la transcripción del genoma viral.<br>
+• La <strong>pausa promotor-proximal</strong> (Pol II detenida cerca de +30-60 antes de Ser2-P por P-TEFb) es un mecanismo clave de regulación génica en desarrollo y respuesta a estrés.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q07"><div class="qt">¿Qué quinasa fosforila la Ser5 del CTD y cuál es su consecuencia principal?</div><div class="qo">
+<button class="qb" onclick="cq('q07',this,1)"><div class="ol">A</div>CDK7 (de TFIIH): facilita el escape del promotor y recluta enzimas de capping 5'</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">B</div>CDK9 (P-TEFb): activa la elongación productiva</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">C</div>CDK2 (ciclina E): activa la replicación del ADN</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">D</div>FCP1: desfosforila el CTD para reciclaje</button>
+</div><div class="qf" id="fb-q07"></div></div>
+
+<div class="qq" id="q08"><div class="qt">¿Qué proceso del ARNm se recluta específicamente por la fosforilación de Ser2 del CTD?</div><div class="qo">
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">A</div>Adición del cap 5' (7-metilguanosina)</button>
+<button class="qb" onclick="cq('q08',this,1)"><div class="ol">B</div>Splicing y poliadenilación 3'</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">C</div>Desenrollamiento de la doble hélice por helicasa</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">D</div>Reconocimiento del TATA box por TBP</button>
+</div><div class="qf" id="fb-q08"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('fases')">← Fases</button><button class="btn bp" onclick="go('glosario')">Glosario →</button></div>
+</div>
+
+<!-- ===== GLOSARIO ===== -->
+<div class="sec" id="sec-glosario">
+<div class="cd"><div class="ch">📚 <span class="ac">Glosario</span> — Tarjetas de Estudio</div>
+<p style="color:var(--t2);margin-bottom:16px">Haz clic en cada tarjeta para ver la definición:</p>
+<div class="fg" id="fcards"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('ctd')">← CTD</button><button class="btn bp" onclick="go('evaluacion')">Evaluación Final →</button></div>
+</div>
+
+<!-- ===== EVALUACIÓN ===== -->
+<div class="sec" id="sec-evaluacion">
+<div class="cd"><div class="ch">📝 <span class="ac">Evaluación</span> Final <span class="pill pw">Todos los RA</span></div>
+<p style="color:var(--t2);margin-bottom:10px">Responde las 16 preguntas. Al finalizar, presiona "Calificar" para ver tu resultado.</p>
+<div id="eq"></div>
+<div style="text-align:center;margin:20px 0">
+<button class="btn bp" id="seb" style="display:none" onclick="se()">✅ Calificar Evaluación</button>
+</div>
+<div class="sd" id="sdd" style="display:none">
+<div class="snm" id="sn2"></div>
+<div class="sbr"><div class="sbf" id="sbf2" style="width:0%;background:var(--grad)"></div></div>
+<div class="sbl" id="sm2"></div>
+<br><button class="btn bs" onclick="iev()" style="margin-top:14px">🔄 Reintentar</button>
+</div></div>
+<div class="sn"><button class="btn bs" onclick="go('glosario')">← Glosario</button><button class="btn bp" onclick="go('inicio')">🏠 Inicio</button></div>
+</div>
+
+</div><!-- end mc -->
+
+<script>
+/* === Navigation === */
+var secs=['inicio','promotor','orientacion','cuestaUpDown','promotoresGen','fases','ctd','glosario','evaluacion'];
+function go(s){secs.forEach(function(k){var e=document.getElementById('sec-'+k);if(e)e.classList.remove('a')});document.getElementById('sec-'+s).classList.add('a');document.querySelectorAll('#navLinks button').forEach(function(b){b.classList.remove('a');if(b.getAttribute('data-s')===s)b.classList.add('a')});up();window.scrollTo({top:0,behavior:'smooth'});}
+function up(){var ci=0;secs.forEach(function(k,i){if(document.getElementById('sec-'+k).classList.contains('a'))ci=i});document.getElementById('pf').style.width=Math.round((ci/(secs.length-1))*100)+'%';}
+function st(btn,tid){btn.parentElement.querySelectorAll('.tbtn').forEach(function(b){b.classList.remove('a')});btn.classList.add('a');btn.parentElement.parentElement.querySelectorAll('.tc').forEach(function(t){t.classList.remove('a')});document.getElementById(tid).classList.add('a');}
+
+/* === Quiz logic === */
+var qfb={
+'q01':{ok:'✅ Correcto. El promotor es la plataforma de ensamblaje para el PIC (factores generales + ARN Pol II) que permite iniciar la transcripción en +1. [RA 9]',no:'❌ El promotor no codifica proteínas, no termina la transcripción ni remueve intrones. Su función es servir de plataforma para el ensamblaje del PIC. [RA 9]'},
+'q02':{ok:'✅ Correcto. La Pol II lee la hebra molde 3\'→5\' y sintetiza el ARNm en dirección 5\'→3\' (antiparalela). [RA 10]',no:'❌ La Pol II siempre lee la hebra molde en dirección 3\'→5\', produciendo el ARNm 5\'→3\'. [RA 10]'},
+'q03':{ok:'✅ Correcto. La posición −25 a −30 es upstream (cuesta arriba) del +1, exactamente donde se ubica el TATA box en el promotor núcleo. [RA 11]',no:'❌ Las posiciones negativas siempre indican upstream (cuesta arriba) del sitio de inicio +1. [RA 11]'},
+'q04':{ok:'✅ Correcto. El DPE está downstream (+28 a +34) y el TATA está upstream (−25 a −30). Ambos son reconocidos por subunidades distintas de TFIID. [RA 12]',no:'❌ La diferencia clave es su posición: TATA está upstream (−25 a −30) reconocido por TBP, y DPE está downstream (+28 a +34) reconocido por TAFs. [RA 12]'},
+'q05':{ok:'✅ Correcto. La helicasa XPB de TFIIH usa ATP para desenrollar ~11-15 pb y formar la burbuja de transcripción abierta. [RA 13]',no:'❌ Es la actividad de helicasa (subunidad XPB) de TFIIH la que abre la doble hélice. La quinasa (CDK7) fosforila el CTD, que es otra función. [RA 13]'},
+'q06':{ok:'✅ Correcto. Xrn2 (Rat1 en levaduras) es la exonucleasa 5\'→3\' que actúa como "torpedo" degradando el ARN residual hasta alcanzar y desestabilizar la Pol II. [RA 13]',no:'❌ En el modelo torpedo, Xrn2 (exonucleasa 5\'→3\') degrada el ARN que queda unido a la Pol II tras el corte, causando su liberación. [RA 13]'},
+'q07':{ok:'✅ Correcto. CDK7 (parte de TFIIH) fosforila Ser5, lo que facilita el escape del promotor y recluta las enzimas de capping. [RA 14]',no:'❌ CDK7 (de TFIIH) fosforila Ser5 del CTD; CDK9 (P-TEFb) fosforila Ser2. Son quinasas distintas con funciones diferentes. [RA 14]'},
+'q08':{ok:'✅ Correcto. Ser2-P recluta factores de splicing y factores de poliadenilación 3\' durante la elongación. [RA 14]',no:'❌ La Ser2-P (por P-TEFb/CDK9) recluta factores de splicing y poliadenilación. El capping se asocia con Ser5-P. [RA 14]'}
+};
+function cq(id,btn,c){var q=document.getElementById(id),os=q.querySelectorAll('.qb'),done=false;os.forEach(function(o){if(o.classList.contains('ok')||o.classList.contains('no'))done=true});if(done)return;os.forEach(function(o){o.classList.add('dis')});btn.classList.add(c?'ok':'no');if(!c)os.forEach(function(o){if(!o.classList.contains('no')){var oc=o.getAttribute('onclick');if(oc&&oc.indexOf(',1)')>-1)o.classList.add('ok')}});var fb=document.getElementById('fb-'+id);fb.classList.add('sh');fb.classList.add(c?'cf':'if');fb.textContent=c?qfb[id].ok:qfb[id].no;}
+
+/* === Match Game === */
+var mgs={};
+function mp(gid,el){if(el.classList.contains('ok'))return;var g=document.getElementById(gid);if(!mgs[gid])mgs[gid]={l:null,r:null,score:0,total:0};var s=el.getAttribute('data-side'),p=el.getAttribute('data-pair');if(s==='l'){if(mgs[gid].l)mgs[gid].l.classList.remove('sel');mgs[gid].l=el;el.classList.add('sel');}else{if(mgs[gid].r)mgs[gid].r.classList.remove('sel');mgs[gid].r=el;el.classList.add('sel');}if(mgs[gid].l&&mgs[gid].r){var lp=mgs[gid].l.getAttribute('data-pair'),rp=mgs[gid].r.getAttribute('data-pair');if(!mgs[gid].total)mgs[gid].total=g.querySelectorAll('[data-side="l"]').length;if(lp===rp){mgs[gid].l.classList.remove('sel');mgs[gid].l.classList.add('ok');mgs[gid].r.classList.remove('sel');mgs[gid].r.classList.add('ok');mgs[gid].score++;mgs[gid].l=null;mgs[gid].r=null;document.getElementById(gid+'-score').textContent='\u2705 '+mgs[gid].score+'/'+mgs[gid].total+(mgs[gid].score===mgs[gid].total?' — \u00a1Perfecto!':'');}else{mgs[gid].l.classList.add('no');mgs[gid].r.classList.add('no');var ll=mgs[gid].l,rr=mgs[gid].r;setTimeout(function(){ll.classList.remove('sel','no');rr.classList.remove('sel','no')},600);mgs[gid].l=null;mgs[gid].r=null;}}}
+
+/* === Flashcards === */
+var fcData=[
+{t:'Promotor',d:'Secuencia de ADN upstream del +1 que sirve como plataforma de ensamblaje del PIC (factores generales + ARN Pol II). Sin promotor no hay transcripción.'},
+{t:'TATA box',d:'Secuencia TATAAA en posición ~\u221225 a \u221230. Reconocida por TBP (parte de TFIID). Presente en ~10-20% de promotores humanos.'},
+{t:'DPE',d:'Downstream Promoter Element en posición ~+28 a +34. Reconocido por TAFs de TFIID. Funcional en promotores sin TATA box.'},
+{t:'Inr (Initiator)',d:'Elemento que rodea el +1 (posición \u22122 a +5). Secuencia Py-Py-A-N-T/A-Py-Py. Reconocido por TAF1/TAF2 de TFIID.'},
+{t:'TBP',d:'TATA-Binding Protein. Subunidad de TFIID que reconoce la TATA box. Curva el ADN ~80\u00b0 al unirse.'},
+{t:'TFIIH',d:'Factor general con doble actividad: Helicasa (XPB, abre \u223c11-15 pb) y Quinasa (CDK7, fosforila Ser5 del CTD).'},
+{t:'CTD',d:'Dominio C-Terminal de Rpb1 (Pol II). 52 repeticiones del heptapéptido Y\u2081S\u2082P\u2083T\u2084S\u2085P\u2086S\u2087 en humanos. Código de fosforilación regula transcripción.'},
+{t:'Ser5-P',d:'Fosforilación de Serina 5 del CTD por CDK7 (TFIIH). Asociada a escape del promotor y reclutamiento de enzimas de capping 5\'.'},
+{t:'Ser2-P',d:'Fosforilación de Serina 2 del CTD por CDK9 (P-TEFb). Asociada a elongación productiva, splicing y poliadenilación 3\'.'},
+{t:'P-TEFb',d:'Positive Transcription Elongation Factor b (CDK9/Ciclina T). Fosforila Ser2 del CTD y NELF/DSIF para liberar la pausa promotor-proximal.'},
+{t:'Upstream (Cuesta arriba)',d:'Secuencias antes del +1, con numeración negativa. Dirección 5\' de la hebra codificante. Contiene promotor y elementos reguladores.'},
+{t:'Downstream (Cuesta abajo)',d:'Secuencias después del +1, con numeración positiva. Dirección 3\' de la hebra codificante. Contiene la secuencia transcrita.'},
+{t:'Hebra molde',d:'Hebra antisentido (3\'\u21925\') leída por la ARN Pol II. Complementaria al ARNm producido.'},
+{t:'Hebra codificante',d:'Hebra sentido (5\'\u21923\'). Misma secuencia que el ARNm (con T en vez de U). Define upstream/downstream.'},
+{t:'PIC',d:'Complejo de Pre-Iniciación: TFIID + TFIIA + TFIIB + TFIIF + Pol II + TFIIE + TFIIH. Se ensambla en el promotor.'},
+{t:'Modelo Torpedo',d:'Terminación donde Xrn2 (exonucleasa 5\'\u21923\') degrada el ARN residual post-corte y desestabiliza la Pol II, liberándola del ADN.'},
+{t:'5\' Cap',d:'7-metilguanosina unida al extremo 5\' del ARNm. Protege de degradación y es reconocida por el ribosoma para la traducción.'},
+{t:'Cola poli-A',d:'Secuencia de ~200 adeninas en el extremo 3\' del ARNm. Añadida por PAP tras corte en la señal AAUAAA. Confiere estabilidad y facilita exportación nuclear.'}
+];
+function ifc(){var c=document.getElementById('fcards');c.innerHTML='';fcData.forEach(function(f){var d=document.createElement('div');d.className='fc';d.innerHTML='<div class="ft">'+f.t+'</div><div class="fd">'+f.d+'</div><div class="fh">Clic para ver definici\u00f3n</div>';d.onclick=function(){this.classList.toggle('fl')};c.appendChild(d)});}
+
+/* === Evaluation === */
+var evq=[
+{q:'El promotor de un gen eucariota se localiza:',o:['Dentro de los exones del gen','Upstream (cuesta arriba) del sitio de inicio de transcripción +1','En el extremo 3\' del ARNm','Dentro de los intrones solamente'],c:1,f:'El promotor está upstream (posiciones negativas) del +1, donde se ensambla el PIC. [RA 9]'},
+{q:'¿Qué factor reconoce la TATA box?',o:['TFIIH','ARN Polimerasa II directamente','TBP (subunidad de TFIID)','P-TEFb (CDK9)'],c:2,f:'TBP (TATA-Binding Protein) es la subunidad de TFIID que reconoce y se une a la secuencia TATAAA. [RA 9/12]'},
+{q:'El ARNm se sintetiza en dirección:',o:['3\'→5\'','5\'→3\'','Bidireccional','No tiene dirección'],c:1,f:'La ARN Pol II sintetiza el ARNm en dirección 5\'→3\', leyendo la hebra molde en 3\'→5\'. [RA 10]'},
+{q:'La hebra codificante (sentido) tiene:',o:['La misma secuencia que el ARNm, con T en vez de U','Secuencia complementaria al ARNm','Solo la secuencia del promotor','Secuencia idéntica a la hebra molde'],c:0,f:'La hebra codificante y el ARNm comparten la misma secuencia (5\'→3\'), excepto T→U. [RA 10]'},
+{q:'El término "cuesta arriba" (upstream) se refiere a:',o:['Secuencias después del +1 con numeración positiva','Secuencias antes del +1 con numeración negativa (hacia 5\' de hebra codificante)','El extremo 3\' del ARNm','La cola poli-A'],c:1,f:'Upstream = antes del +1, numeración negativa, dirección 5\' de la hebra codificante. [RA 11]'},
+{q:'La posición del DPE es:',o:['~−25 a −30 (upstream)','~+28 a +34 (downstream)','En el 5\' Cap del ARNm','En la cola poli-A'],c:1,f:'El DPE (Downstream Promoter Element) se encuentra en posición +28 a +34, downstream del +1. [RA 12]'},
+{q:'¿Qué porcentaje aproximado de promotores humanos tiene TATA box funcional?',o:['~90%','~50-60%','~10-20%','~100%'],c:2,f:'Solo ~10-20% de los promotores humanos tienen TATA box. La mayoría usan Inr, DPE, MTE o islas CpG. [RA 12]'},
+{q:'El orden correcto de ensamblaje del PIC es:',o:['Pol II → TFIID → TFIIH → TFIIB','TFIID → TFIIA/TFIIB → Pol II+TFIIF → TFIIE → TFIIH','TFIIH → TFIID → Pol II → TFIIB','Pol II → TFIIH → TFIID → TFIIF'],c:1,f:'TFIID reconoce primero el promotor, luego TFIIA/B, después Pol II con TFIIF, y finalmente TFIIE/TFIIH. [RA 13]'},
+{q:'¿Qué actividad de TFIIH abre la doble hélice para formar la burbuja de transcripción?',o:['Quinasa (CDK7)','Helicasa (subunidad XPB)','Exonucleasa','Primasa'],c:1,f:'XPB (helicasa de TFIIH) usa ATP para abrir ~11-15 pb de ADN alrededor del +1. [RA 13]'},
+{q:'La fosforilación de Ser5 del CTD por CDK7 (TFIIH) facilita:',o:['La elongación productiva y splicing','El escape del promotor y reclutamiento de enzimas de capping 5\'','La terminación y poliadenilación','La desfosforilación del CTD'],c:1,f:'Ser5-P por CDK7 → escape del promotor + reclutamiento de enzimas de capping 5\'. [RA 14]'},
+{q:'¿Qué quinasa fosforila Ser2 del CTD?',o:['CDK7 (TFIIH)','CDK9 (P-TEFb)','CDK2 (Ciclina E)','FCP1'],c:1,f:'CDK9, como parte de P-TEFb (CDK9/Ciclina T), fosforila Ser2 del CTD para la elongación productiva. [RA 14]'},
+{q:'Ser2-P del CTD recluta factores para:',o:['Capping 5\'','Escape del promotor','Splicing y poliadenilación 3\'','Desenrollamiento del ADN'],c:2,f:'Ser2-P recluta factores de splicing y factores de procesamiento 3\'/poliadenilación. [RA 14]'},
+{q:'En el modelo torpedo de terminación, ¿qué degrada el ARN residual unido a la Pol II?',o:['RNasa H','Xrn2 (exonucleasa 5\'→3\')','TFIIS','Topoisomerasa'],c:1,f:'Xrn2 (Rat1 en levaduras) degrada el ARN residual 5\'→3\' como un torpedo hasta desalojar la Pol II. [RA 13]'},
+{q:'¿Qué estructura del extremo 5\' del ARNm es importante para reclutar el ribosoma?',o:['Cola poli-A','7-metilguanosina (5\' Cap)','La secuencia Shine-Dalgarno','El codón de parada'],c:1,f:'El 5\' Cap (7-metilguanosina) es reconocido por eIF4E y recluta el ribosoma para la traducción. [RA 10]'},
+{q:'Tras la terminación, ¿qué le ocurre al CTD de la ARN Pol II?',o:['Permanece fosforilado permanentemente','Es cortado por una proteasa','Es desfosforilado por fosfatasas (FCP1, Ssu72) para ser reciclado','Se degrada por el proteasoma'],c:2,f:'Fosfatasas como FCP1 y Ssu72 desfosforilan el CTD, permitiendo que la Pol II se recicle para un nuevo ciclo. [RA 14]'},
+{q:'El virus VIH secuestra P-TEFb a través de su proteína:',o:['gp120','Rev','Tat','Nef'],c:2,f:'La proteína Tat del VIH recluta P-TEFb (CDK9) al promotor viral (TAR RNA) para activar la elongación de la transcripción del genoma viral. [RA 14]'}
+];
+var eva={},evs=false;
+function iev(){var c=document.getElementById('eq');c.innerHTML='';eva={};evs=false;document.getElementById('sdd').style.display='none';document.getElementById('seb').style.display='none';var lt=['A','B','C','D'];evq.forEach(function(q,qi){var d=document.createElement('div');d.className='qq';d.id='ev-'+qi;var h='<div class="qt"><span style="color:var(--g);font-family:JetBrains Mono;font-size:.83rem">'+(qi+1)+'/'+evq.length+'</span> '+q.q+'</div><div class="qo">';q.o.forEach(function(opt,oi){h+='<button class="qb" data-qi="'+qi+'" data-oi="'+oi+'" onclick="seo(this,'+qi+','+oi+')"><div class="ol">'+lt[oi]+'</div>'+opt+'</button>'});h+='</div><div class="qf" id="fb-ev-'+qi+'"></div>';d.innerHTML=h;c.appendChild(d)});}
+function seo(btn,qi,oi){if(evs)return;document.getElementById('ev-'+qi).querySelectorAll('.qb').forEach(function(o){o.classList.remove('sel')});btn.classList.add('sel');eva[qi]=oi;if(Object.keys(eva).length===evq.length)document.getElementById('seb').style.display='inline-flex';}
+function se(){evs=true;var sc=0;evq.forEach(function(q,qi){var c=document.getElementById('ev-'+qi),os=c.querySelectorAll('.qb');var ua=eva[qi];os.forEach(function(o,oi){o.classList.add('dis');if(oi===q.c)o.classList.add('ok');if(oi===ua&&oi!==q.c)o.classList.add('no')});if(ua===q.c)sc++;var fb=document.getElementById('fb-ev-'+qi);fb.classList.add('sh');fb.classList.add(ua===q.c?'cf':'if');fb.textContent=(ua===q.c?'\u2705 ':'\u274c ')+q.f});document.getElementById('seb').style.display='none';var pct=Math.round(sc/evq.length*100),dd=document.getElementById('sdd');dd.style.display='block';document.getElementById('sn2').textContent=sc+'/'+evq.length;document.getElementById('sbf2').style.width=pct+'%';var msg='';if(pct>=90){msg='\ud83c\udf1f \u00a1Excelente! Dominas la transcripci\u00f3n del ADN.';document.getElementById('sn2').style.color='var(--g)';}else if(pct>=70){msg='\ud83d\udc4f \u00a1Buen trabajo! Revisa los errores marcados.';document.getElementById('sn2').style.color='var(--b)';}else if(pct>=50){msg='\ud83d\udcda Repasa los conceptos clave de la tutor\u00eda.';document.getElementById('sn2').style.color='var(--y)';}else{msg='\ud83d\udcaa Necesitas repasar la tutor\u00eda completa.';document.getElementById('sn2').style.color='var(--r)';document.getElementById('sbf2').style.background='linear-gradient(135deg,#FF6B6B,#FFD93D)';}document.getElementById('sm2').textContent=msg;dd.scrollIntoView({behavior:'smooth',block:'center'});}
+
+/* Init */
+ifc();iev();up();
+document.querySelectorAll('#navLinks button').forEach(function(b){b.addEventListener('click',function(){go(this.getAttribute('data-s'))})});
+</script>
+</body></html>
