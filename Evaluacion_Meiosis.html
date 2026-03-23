@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluación Interactiva: Meiosis</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 24px}
+.ni{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}
+.nb{font-family:'DM Serif Display',serif;font-size:1.1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-status{color:var(--t3);font-size:.85rem}
+.nav-status strong{color:var(--g)}
+.pb{position:fixed;top:58px;left:0;right:0;z-index:99;height:3px;background:rgba(0,212,170,.1)}
+.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}
+.mc{max-width:820px;margin:0 auto;padding:32px 24px 100px;position:relative;z-index:1}
+/* Hero */
+.hero{text-align:center;padding:40px 0 30px}
+.hi{width:80px;height:80px;margin:0 auto 18px;background:var(--grad);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:2.4rem;line-height:1.2;margin-bottom:10px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hs{font-size:1rem;color:var(--t2);max-width:600px;margin:0 auto 10px}
+/* Instructions */
+.instr{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:30px;text-align:center}
+.instr p{color:var(--t2);font-size:.95rem}
+.instr .warn{color:var(--y);font-weight:600;margin-top:8px}
+/* Question cards */
+.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:26px;margin-bottom:20px;box-shadow:var(--sh);transition:.3s}
+.qq:hover{border-color:rgba(0,212,170,.25)}
+.qq.answered{border-color:rgba(0,163,255,.3)}
+.qq.answered .qb.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}
+.qq.correct-shown .qb.sel.is-correct{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}
+.qq.correct-shown .qb.sel:not(.is-correct){border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}
+.qq.correct-shown .qb:not(.sel).is-correct{border-color:var(--g)!important;background:rgba(0,212,170,.06)!important;color:var(--g)!important}
+.qq.correct-shown .qb{pointer-events:none;opacity:.85}
+.qnum{font-family:'DM Serif Display',serif;font-size:1.15rem;margin-bottom:10px;color:var(--g)}
+.pill-ra{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.7rem;font-weight:600;background:rgba(0,163,255,.12);color:var(--b);font-family:'Source Sans 3',sans-serif;vertical-align:middle;margin-left:6px}
+.qt{font-weight:600;font-size:1rem;margin-bottom:16px;color:var(--t1);line-height:1.6}
+.qo{display:flex;flex-direction:column;gap:9px}
+.qb{padding:13px 18px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.92rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px;line-height:1.5}
+.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}
+.qb.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}
+.qb.dis{pointer-events:none;opacity:.7}
+.ol{min-width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0}
+/* Feedback */
+.qf{margin-top:14px;padding:18px;border-radius:var(--r10);font-size:.9rem;line-height:1.7;display:none}
+.qf.sh{display:block;animation:fi .4s}
+.qf.cf{background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.25);color:var(--g)}
+.qf.if{background:rgba(255,107,107,.07);border:1px solid rgba(255,107,107,.2);color:var(--r)}
+.qf .fb-title{font-weight:700;margin-bottom:6px;font-size:.95rem}
+.qf .fb-text{color:var(--t2)}
+.qf .fb-ref{margin-top:10px;font-size:.82rem;color:var(--t3);font-style:italic}
+@keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+/* Submit area */
+.submit-area{text-align:center;margin:36px 0;padding:30px;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16)}
+.submit-area p{color:var(--t2);margin-bottom:16px}
+.btn{padding:13px 30px;border-radius:12px;border:none;font-family:inherit;font-weight:600;font-size:1rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:8px}
+.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}
+.bp:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(0,212,170,.4)}
+.bp:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}
+.bs:hover{background:rgba(0,212,170,.2)}
+/* Score display */
+.sd{text-align:center;padding:40px;margin:30px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr);display:none}
+.sd.vis{display:block;animation:fi .6s}
+.snm{font-family:'DM Serif Display',serif;font-size:4rem;margin-bottom:6px}
+.sbl{color:var(--t2);font-size:1.05rem}
+.sbr{width:100%;max-width:400px;height:14px;background:rgba(255,255,255,.06);border-radius:7px;margin:20px auto;overflow:hidden}
+.sbf{height:100%;border-radius:7px;transition:width 1.2s ease-out}
+.score-msg{color:var(--t2);font-size:1rem;margin-top:12px}
+.score-detail{margin-top:20px;text-align:left;max-width:500px;margin-left:auto;margin-right:auto}
+.score-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:.88rem}
+.score-row .ra-label{color:var(--t2)}
+.score-row .ra-val{font-weight:600}
+.score-row .ra-val.ok{color:var(--g)}
+.score-row .ra-val.no{color:var(--r)}
+/* Unanswered warning */
+.unanswered-warn{color:var(--y);font-weight:600;margin-bottom:14px;display:none}
+.unanswered-warn.vis{display:block;animation:fi .3s}
+/* Summary by RA */
+.ra-summary{margin-top:20px;display:grid;gap:10px}
+.ra-card{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.ra-card .ra-name{color:var(--t2);font-size:.88rem;flex:1}
+.ra-card .ra-score{font-weight:700;font-size:.95rem;padding:3px 12px;border-radius:20px}
+.ra-card .ra-score.perfect{background:rgba(0,212,170,.15);color:var(--g)}
+.ra-card .ra-score.partial{background:rgba(255,217,61,.12);color:var(--y)}
+.ra-card .ra-score.zero{background:rgba(255,107,107,.12);color:var(--r)}
+/* Back link */
+.back-link{text-align:center;margin-top:30px}
+@media(max-width:768px){
+  .hero h1{font-size:1.8rem}
+  .ni{flex-direction:column;height:auto;padding:10px 0;gap:6px}
+  .qq{padding:20px}
+}
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style>
+</head>
+<body>
+<div class="abg"></div>
+<nav><div class="ni">
+  <div class="nb">🧬 Evaluación — Meiosis</div>
+  <div class="nav-status"><span id="answeredCount">0</span> / 15 respondidas &nbsp;|&nbsp; <strong id="navTimer">00:00</strong></div>
+</div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+
+<div class="mc">
+<div class="hero">
+  <div class="hi">📝</div>
+  <h1>Evaluación: Meiosis</h1>
+  <p class="hs">15 preguntas de selección múltiple. Responde todas y presiona "Finalizar evaluación" para ver tus resultados y retroalimentación.</p>
+</div>
+
+<div class="instr">
+  <p>📌 Selecciona <strong>una opción</strong> por pregunta. Puedes cambiar tu respuesta antes de finalizar.</p>
+  <p class="warn">⚠️ La retroalimentación se mostrará solo al finalizar la evaluación.</p>
+</div>
+
+
+<div class="qq" id="qq-1" data-correct="1">
+  <div class="qnum">Pregunta 1 <span class="pill-ra">Define meiosis</span></div>
+  <div class="qt">Una célula diploide humana (2n = 46) entra en meiosis. Después de completar la Meiosis I pero antes de iniciar la Meiosis II, ¿cuál es el número de cromosomas y el contenido de ADN (valor C) en cada célula hija?</div>
+  <div class="qo"><button class="qb" data-qi="1" data-oi="0" onclick="selOpt(1,0,this)">
+<div class="ol">A</div>46 cromosomas y 4C de ADN, ya que la replicación ocurrió antes de la división</button>
+<button class="qb" data-qi="1" data-oi="1" onclick="selOpt(1,1,this)">
+<div class="ol">B</div>23 cromosomas y 2C de ADN, ya que cada cromosoma consiste aún en dos cromátidas hermanas</button>
+<button class="qb" data-qi="1" data-oi="2" onclick="selOpt(1,2,this)">
+<div class="ol">C</div>23 cromosomas y 1C de ADN, ya que ambas divisiones meióticas se completaron</button>
+<button class="qb" data-qi="1" data-oi="3" onclick="selOpt(1,3,this)">
+<div class="ol">D</div>46 cromosomas y 2C de ADN, ya que solo se redujo el contenido de ADN sin separar cromosomas</button>
+</div>
+  <div class="qf" id="qf-1"></div>
+</div>
+
+<div class="qq" id="qq-2" data-correct="1">
+  <div class="qnum">Pregunta 2 <span class="pill-ra">Consecuencias de meiosis I y II</span></div>
+  <div class="qt">La meiosis consta de dos divisiones sucesivas precedidas por una sola ronda de replicación del ADN. ¿Cuál es la consecuencia directa de que no haya síntesis de ADN entre la Meiosis I y la Meiosis II?</div>
+  <div class="qo"><button class="qb" data-qi="2" data-oi="0" onclick="selOpt(2,0,this)">
+<div class="ol">A</div>Las células resultantes conservan el contenido diploide porque no hubo reducción real del material genético</button>
+<button class="qb" data-qi="2" data-oi="1" onclick="selOpt(2,1,this)">
+<div class="ol">B</div>Las células resultantes son haploides con 1C de ADN, ya que las cromátidas hermanas se separan sin replicación previa adicional</button>
+<button class="qb" data-qi="2" data-oi="2" onclick="selOpt(2,2,this)">
+<div class="ol">C</div>Las células resultantes contienen ADN fragmentado porque la falta de replicación impide la reparación del daño</button>
+<button class="qb" data-qi="2" data-oi="3" onclick="selOpt(2,3,this)">
+<div class="ol">D</div>Las células resultantes poseen cromátidas hermanas duplicadas que deberán eliminarse por apoptosis selectiva</button>
+</div>
+  <div class="qf" id="qf-2"></div>
+</div>
+
+<div class="qq" id="qq-3" data-correct="1">
+  <div class="qnum">Pregunta 3 <span class="pill-ra">Define complejo sinaptonémico</span></div>
+  <div class="qt">Durante la Profase I, el complejo sinaptonémico desempeña un papel estructural esencial. ¿Cuál afirmación describe correctamente su función y relación con el entrecruzamiento?</div>
+  <div class="qo"><button class="qb" data-qi="3" data-oi="0" onclick="selOpt(3,0,this)">
+<div class="ol">A</div>Es una estructura de ADN que cataliza directamente el corte y religación de las hebras homólogas durante el entrecruzamiento</button>
+<button class="qb" data-qi="3" data-oi="1" onclick="selOpt(3,1,this)">
+<div class="ol">B</div>Es una estructura proteica que une a los cromosomas homólogos entre sí; solo se forma si se ha establecido homología y está altamente relacionada con el entrecruzamiento</button>
+<button class="qb" data-qi="3" data-oi="2" onclick="selOpt(3,2,this)">
+<div class="ol">C</div>Es un complejo enzimático formado exclusivamente por Rad51 que degrada las cohesinas para permitir la separación de los homólogos</button>
+<button class="qb" data-qi="3" data-oi="3" onclick="selOpt(3,3,this)">
+<div class="ol">D</div>Es una estructura nuclear permanente que persiste durante toda la meiosis y se desensambla solo al final de la Meiosis II</button>
+</div>
+  <div class="qf" id="qf-3"></div>
+</div>
+
+<div class="qq" id="qq-4" data-correct="2">
+  <div class="qnum">Pregunta 4 <span class="pill-ra">Etapas de Profase I</span></div>
+  <div class="qt">En la Profase I, las cinco etapas representan eventos moleculares secuenciales. ¿En cuál etapa se completa el entrecruzamiento y el complejo sinaptonémico alcanza su desarrollo máximo?</div>
+  <div class="qo"><button class="qb" data-qi="4" data-oi="0" onclick="selOpt(4,0,this)">
+<div class="ol">A</div>Leptoteno, ya que es la primera etapa donde inicia la condensación y los eventos de recombinación se completan rápidamente</button>
+<button class="qb" data-qi="4" data-oi="1" onclick="selOpt(4,1,this)">
+<div class="ol">B</div>Cigoteno, ya que los elementos centrales del complejo sinaptonémico se forman y los bivalentes están completamente apareados</button>
+<button class="qb" data-qi="4" data-oi="2" onclick="selOpt(4,2,this)">
+<div class="ol">C</div>Paquiteno, ya que el complejo sinaptonémico está totalmente desarrollado y se completa la recombinación homóloga genética</button>
+<button class="qb" data-qi="4" data-oi="3" onclick="selOpt(4,3,this)">
+<div class="ol">D</div>Diploteno, ya que los quiasmata se hacen visibles indicando que el entrecruzamiento acaba de ocurrir en ese momento</button>
+</div>
+  <div class="qf" id="qf-4"></div>
+</div>
+
+<div class="qq" id="qq-5" data-correct="2">
+  <div class="qnum">Pregunta 5 <span class="pill-ra">Etapas de Profase I</span></div>
+  <div class="qt">Durante el diploteno de la Profase I, los cromosomas homólogos comienzan a separarse pero permanecen unidos por estructuras específicas. ¿Qué mantiene unidos a los homólogos después de desarmarse el complejo sinaptonémico?</div>
+  <div class="qo"><button class="qb" data-qi="5" data-oi="0" onclick="selOpt(5,0,this)">
+<div class="ol">A</div>Los elementos laterales del complejo sinaptonémico que persisten tras el desensamblaje de los elementos centrales</button>
+<button class="qb" data-qi="5" data-oi="1" onclick="selOpt(5,1,this)">
+<div class="ol">B</div>Las cohesinas centroméricas protegidas por la shugoshina que impiden toda separación cromosoma a cromosoma</button>
+<button class="qb" data-qi="5" data-oi="2" onclick="selOpt(5,2,this)">
+<div class="ol">C</div>Los quiasmata, que son conexiones situadas en las regiones donde los homólogos intercambiaron material genético</button>
+<button class="qb" data-qi="5" data-oi="3" onclick="selOpt(5,3,this)">
+<div class="ol">D</div>Los microtúbulos del huso meiótico que se insertan en los cinetocoros y sostienen los bivalentes en tensión</button>
+</div>
+  <div class="qf" id="qf-5"></div>
+</div>
+
+<div class="qq" id="qq-6" data-correct="1">
+  <div class="qnum">Pregunta 6 <span class="pill-ra">Define shugoshina</span></div>
+  <div class="qt">En la Anafase I, las cohesinas de los brazos cromosómicos se disuelven, pero las cohesinas centroméricas se mantienen intactas. ¿Cuál proteína es responsable de proteger las cohesinas centroméricas y cuál es su mecanismo de acción?</div>
+  <div class="qo"><button class="qb" data-qi="6" data-oi="0" onclick="selOpt(6,0,this)">
+<div class="ol">A</div>La separasa, que hidroliza selectivamente las cohesinas de los brazos pero no reconoce las cohesinas centroméricas</button>
+<button class="qb" data-qi="6" data-oi="1" onclick="selOpt(6,1,this)">
+<div class="ol">B</div>La shugoshina, que recluta fosfatasas para desfosforilar las cohesinas centroméricas, impidiendo que la separasa las degrade</button>
+<button class="qb" data-qi="6" data-oi="2" onclick="selOpt(6,2,this)">
+<div class="ol">C</div>La Rad51, que forma filamentos protectores alrededor del centrómero impidiendo el acceso de cualquier proteasa</button>
+<button class="qb" data-qi="6" data-oi="3" onclick="selOpt(6,3,this)">
+<div class="ol">D</div>El complejo sinaptonémico residual, que permanece exclusivamente en la región centromérica después del diploteno</button>
+</div>
+  <div class="qf" id="qf-6"></div>
+</div>
+
+<div class="qq" id="qq-7" data-correct="2">
+  <div class="qnum">Pregunta 7 <span class="pill-ra">Distingue entre meiosis y mitosis</span></div>
+  <div class="qt">Una diferencia fundamental entre la Anafase I meiótica y la anafase mitótica radica en qué estructuras se separan. ¿Cuál afirmación distingue correctamente ambos eventos?</div>
+  <div class="qo"><button class="qb" data-qi="7" data-oi="0" onclick="selOpt(7,0,this)">
+<div class="ol">A</div>En ambas anafases se separan cromátidas hermanas, pero en meiosis la separación ocurre con mayor velocidad debido al huso modificado</button>
+<button class="qb" data-qi="7" data-oi="1" onclick="selOpt(7,1,this)">
+<div class="ol">B</div>En la anafase mitótica se separan cromosomas homólogos y en la Anafase I meiótica se separan las cromátidas hermanas</button>
+<button class="qb" data-qi="7" data-oi="2" onclick="selOpt(7,2,this)">
+<div class="ol">C</div>En la anafase mitótica se separan cromátidas hermanas; en la Anafase I meiótica se separan cromosomas homólogos mientras las cromátidas hermanas permanecen unidas</button>
+<button class="qb" data-qi="7" data-oi="3" onclick="selOpt(7,3,this)">
+<div class="ol">D</div>En la Anafase I meiótica se separan simultáneamente los homólogos y las cromátidas hermanas, reduciendo directamente de 4C a 1C</button>
+</div>
+  <div class="qf" id="qf-7"></div>
+</div>
+
+<div class="qq" id="qq-8" data-correct="1">
+  <div class="qnum">Pregunta 8 <span class="pill-ra">Distingue entre meiosis y mitosis</span></div>
+  <div class="qt">En la Metafase I, los bivalentes se disponen en el plano ecuatorial del huso meiótico. ¿Cuál es la diferencia clave con la metafase mitótica y su consecuencia funcional?</div>
+  <div class="qo"><button class="qb" data-qi="8" data-oi="0" onclick="selOpt(8,0,this)">
+<div class="ol">A</div>En Metafase I los cromosomas se alinean de forma idéntica a la mitosis, pero con el doble de microtúbulos conectados a cada cinetocoro</button>
+<button class="qb" data-qi="8" data-oi="1" onclick="selOpt(8,1,this)">
+<div class="ol">B</div>En Metafase I se alinean cromosomas homólogos apareados (bivalentes) cuya orientación aleatoria genera combinaciones diversas de cromosomas maternos y paternos</button>
+<button class="qb" data-qi="8" data-oi="2" onclick="selOpt(8,2,this)">
+<div class="ol">C</div>En Metafase I solo se alinean los cromosomas de origen materno, mientras los paternos ya migraron a un polo predeterminado</button>
+<button class="qb" data-qi="8" data-oi="3" onclick="selOpt(8,3,this)">
+<div class="ol">D</div>En Metafase I los cromosomas se disponen en dos planos ecuatoriales paralelos, uno para cada set de homólogos</button>
+</div>
+  <div class="qf" id="qf-8"></div>
+</div>
+
+<div class="qq" id="qq-9" data-correct="2">
+  <div class="qnum">Pregunta 9 <span class="pill-ra">Describe la Meiosis II</span></div>
+  <div class="qt">La Meiosis II se describe frecuentemente como &quot;similar a una mitosis&quot;. ¿Cuál característica justifica esta comparación y cuál es la diferencia principal?</div>
+  <div class="qo"><button class="qb" data-qi="9" data-oi="0" onclick="selOpt(9,0,this)">
+<div class="ol">A</div>Es similar porque separa cromosomas homólogos como la mitosis, pero difiere en que parte de células haploides en vez de diploides</button>
+<button class="qb" data-qi="9" data-oi="1" onclick="selOpt(9,1,this)">
+<div class="ol">B</div>Es similar porque incluye sinapsis y entrecruzamiento como la mitosis, pero difiere en que produce células con 1C en vez de 2C</button>
+<button class="qb" data-qi="9" data-oi="2" onclick="selOpt(9,2,this)">
+<div class="ol">C</div>Es similar porque separa cromátidas hermanas como la mitosis, pero difiere en que parte de células haploides y produce gametos con 1n y 1C</button>
+<button class="qb" data-qi="9" data-oi="3" onclick="selOpt(9,3,this)">
+<div class="ol">D</div>Es similar porque tiene una sola división como la mitosis, pero difiere en que requiere replicación de ADN previa entre ambas fases</button>
+</div>
+  <div class="qf" id="qf-9"></div>
+</div>
+
+<div class="qq" id="qq-10" data-correct="1">
+  <div class="qnum">Pregunta 10 <span class="pill-ra">Describe la recombinación homóloga</span></div>
+  <div class="qt">La recombinación homóloga meiótica siempre inicia con una ruptura programada de la doble hélice del ADN. ¿Cuál es la secuencia correcta de los pasos iniciales de este proceso?</div>
+  <div class="qo"><button class="qb" data-qi="10" data-oi="0" onclick="selOpt(10,0,this)">
+<div class="ol">A</div>Formación de Holliday Junctions → invasión de hebra por Rad51 → resección de extremos por el complejo MRN → ruptura de doble hélice</button>
+<button class="qb" data-qi="10" data-oi="1" onclick="selOpt(10,1,this)">
+<div class="ol">B</div>Ruptura de doble hélice → resección de extremos para generar colas 3&#x27; monocatenarias → invasión de hebra y formación de heterodúplex → síntesis de ADN</button>
+<button class="qb" data-qi="10" data-oi="2" onclick="selOpt(10,2,this)">
+<div class="ol">C</div>Síntesis de ADN desde el extremo 3&#x27; → ruptura de doble hélice → formación del D-loop → resección de extremos por helicasas</button>
+<button class="qb" data-qi="10" data-oi="3" onclick="selOpt(10,3,this)">
+<div class="ol">D</div>Activación de autolisinas cromosómicas → degradación del complejo sinaptonémico → ruptura de doble hélice → invasión de hebra</button>
+</div>
+  <div class="qf" id="qf-10"></div>
+</div>
+
+<div class="qq" id="qq-11" data-correct="1">
+  <div class="qnum">Pregunta 11 <span class="pill-ra">Describe la recombinación homóloga</span></div>
+  <div class="qt">Durante la recombinación homóloga, la recombinasa Rad51 cataliza la invasión de hebra. ¿Cuál proteína es esencial para dirigir Rad51 al sustrato correcto y qué consecuencia tiene su ausencia?</div>
+  <div class="qo"><button class="qb" data-qi="11" data-oi="0" onclick="selOpt(11,0,this)">
+<div class="ol">A</div>La shugoshina dirige a Rad51 al centrómero; sin ella, Rad51 cataliza entrecruzamientos en sitios inapropiados del genoma</button>
+<button class="qb" data-qi="11" data-oi="1" onclick="selOpt(11,1,this)">
+<div class="ol">B</div>BRCA2 se une a Rad51 y lo dirige a la hebra sencilla rota; sin BRCA2, la reparación por homología falla y se recurre a NHEJ mutagénico</button>
+<button class="qb" data-qi="11" data-oi="2" onclick="selOpt(11,2,this)">
+<div class="ol">C</div>El complejo sinaptonémico recluta a Rad51 a las regiones de sinapsis; sin él, no hay recombinación pero la meiosis continúa normalmente</button>
+<button class="qb" data-qi="11" data-oi="3" onclick="selOpt(11,3,this)">
+<div class="ol">D</div>La separasa activa a Rad51 mediante proteólisis limitada; sin separasa, Rad51 permanece inactivo y la célula entra en apoptosis</button>
+</div>
+  <div class="qf" id="qf-11"></div>
+</div>
+
+<div class="qq" id="qq-12" data-correct="2">
+  <div class="qnum">Pregunta 12 <span class="pill-ra">Define Holliday Junctions</span></div>
+  <div class="qt">Las Holliday Junctions son intermediarios centrales de la recombinación homóloga. ¿Qué determina si la resolución de una Holliday Junction resulta en entrecruzamiento (crossing over) o solo en conversión génica?</div>
+  <div class="qo"><button class="qb" data-qi="12" data-oi="0" onclick="selOpt(12,0,this)">
+<div class="ol">A</div>La presencia o ausencia del complejo sinaptonémico al momento de la resolución determina el resultado final</button>
+<button class="qb" data-qi="12" data-oi="1" onclick="selOpt(12,1,this)">
+<div class="ol">B</div>El número de nucleótidos sintetizados durante la reparación define si habrá entrecruzamiento o conversión génica</button>
+<button class="qb" data-qi="12" data-oi="2" onclick="selOpt(12,2,this)">
+<div class="ol">C</div>El plano de corte de las resolvasas sobre la Holliday Junction determina si hay intercambio de brazos (entrecruzamiento) o no (conversión génica)</button>
+<button class="qb" data-qi="12" data-oi="3" onclick="selOpt(12,3,this)">
+<div class="ol">D</div>La actividad de la shugoshina sobre las cohesinas centroméricas adyacentes dirige el tipo de resolución de la estructura</button>
+</div>
+  <div class="qf" id="qf-12"></div>
+</div>
+
+<div class="qq" id="qq-13" data-correct="2">
+  <div class="qnum">Pregunta 13 <span class="pill-ra">Describe por qué pasa la no disyunción</span></div>
+  <div class="qt">La no disyunción es un error en la segregación de cromosomas durante la meiosis. ¿Cuál es la diferencia en el resultado según ocurra en Anafase I versus Anafase II?</div>
+  <div class="qo"><button class="qb" data-qi="13" data-oi="0" onclick="selOpt(13,0,this)">
+<div class="ol">A</div>En Anafase I se producen 2 gametos anormales y 2 normales; en Anafase II los 4 gametos son anormales</button>
+<button class="qb" data-qi="13" data-oi="1" onclick="selOpt(13,1,this)">
+<div class="ol">B</div>En ambos casos se producen 4 gametos anormales, pero la gravedad cromosómica es mayor en Anafase I</button>
+<button class="qb" data-qi="13" data-oi="2" onclick="selOpt(13,2,this)">
+<div class="ol">C</div>En Anafase I los 4 gametos resultantes son anormales (todos aneuploides); en Anafase II solo 2 gametos son anormales y 2 son normales</button>
+<button class="qb" data-qi="13" data-oi="3" onclick="selOpt(13,3,this)">
+<div class="ol">D</div>En Anafase I se produce un solo gameto anormal monoploide; en Anafase II se producen tres gametos anormales triploides</button>
+</div>
+  <div class="qf" id="qf-13"></div>
+</div>
+
+<div class="qq" id="qq-14" data-correct="1">
+  <div class="qnum">Pregunta 14 <span class="pill-ra">Describe la recombinación homóloga</span></div>
+  <div class="qt">Durante la recombinación homóloga, la invasión de hebra genera un D-loop (Displacement Loop). ¿Qué ocurre después de la formación del D-loop en la recombinación meiótica, a diferencia del mecanismo SDSA de reparación somática?</div>
+  <div class="qo"><button class="qb" data-qi="14" data-oi="0" onclick="selOpt(14,0,this)">
+<div class="ol">A</div>En ambos casos el D-loop se resuelve inmediatamente sin síntesis de ADN, generando exclusivamente conversión génica</button>
+<button class="qb" data-qi="14" data-oi="1" onclick="selOpt(14,1,this)">
+<div class="ol">B</div>En SDSA, la hebra sintetizada se separa del molde y se reasocia al dúplex original; en meiosis, el D-loop continúa por síntesis de ADN formando dos Holliday Junctions</button>
+<button class="qb" data-qi="14" data-oi="2" onclick="selOpt(14,2,this)">
+<div class="ol">C</div>En SDSA se forman dos Holliday Junctions que se resuelven sin entrecruzamiento; en meiosis solo se forma una Holliday Junction que siempre genera entrecruzamiento</button>
+<button class="qb" data-qi="14" data-oi="3" onclick="selOpt(14,3,this)">
+<div class="ol">D</div>En la recombinación meiótica, la shugoshina desmantela el D-loop prematuramente para evitar entrecruzamientos excesivos por brazo cromosómico</button>
+</div>
+  <div class="qf" id="qf-14"></div>
+</div>
+
+<div class="qq" id="qq-15" data-correct="0">
+  <div class="qnum">Pregunta 15 <span class="pill-ra">Consecuencias de meiosis I y II</span></div>
+  <div class="qt">Los cinetocoros de las cromátidas hermanas se comportan de manera diferente en Meiosis I comparado con la mitosis. ¿Cuál es la diferencia funcional y por qué es importante para la segregación correcta?</div>
+  <div class="qo"><button class="qb" data-qi="15" data-oi="0" onclick="selOpt(15,0,this)">
+<div class="ol">A</div>En Meiosis I los cinetocoros de ambas cromátidas hermanas se fusionan y funcionan como una unidad, orientando ambas cromátidas hacia el mismo polo del huso</button>
+<button class="qb" data-qi="15" data-oi="1" onclick="selOpt(15,1,this)">
+<div class="ol">B</div>En Meiosis I cada cinetocoro se une a microtúbulos de polos opuestos, igual que en mitosis, pero la separasa no se activa por acción de la shugoshina</button>
+<button class="qb" data-qi="15" data-oi="2" onclick="selOpt(15,2,this)">
+<div class="ol">C</div>En Meiosis I los cinetocoros están inactivos y la segregación depende exclusivamente de la tensión generada por los quiasmata entre homólogos</button>
+<button class="qb" data-qi="15" data-oi="3" onclick="selOpt(15,3,this)">
+<div class="ol">D</div>En Meiosis I los cinetocoros se duplican antes de la Metafase I, resultando en ocho cinetocoros por bivalente que dirigen la separación</button>
+</div>
+  <div class="qf" id="qf-15"></div>
+</div>
+
+
+<div class="submit-area" id="submitArea">
+  <div class="unanswered-warn" id="unansweredWarn">⚠️ Aún tienes preguntas sin responder.</div>
+  <p>¿Terminaste todas las preguntas?</p>
+  <button class="btn bp" id="submitBtn" onclick="finalize()">🏁 Finalizar evaluación</button>
+</div>
+
+<div class="sd" id="scoreDisplay">
+  <div class="snm" id="scoreNum" style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">0/15</div>
+  <div class="sbl">Respuestas correctas</div>
+  <div class="sbr"><div class="sbf" id="scoreBar" style="width:0%;background:var(--grad)"></div></div>
+  <div class="score-msg" id="scoreMsg"></div>
+  <div id="timerResult" style="color:var(--t3);font-size:.88rem;margin-top:8px"></div>
+  <div class="ra-summary" id="raSummary"></div>
+</div>
+
+<div class="back-link">
+  <button class="btn bs" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Volver arriba</button>
+</div>
+</div>
+
+<script>
+// ─── Data ───
+const FB = {"1": {"correct": 1, "feedback": "Tras Meiosis I, los cromosomas homólogos se segregaron reduciendo la ploidía a 1n (23 cromosomas). Sin embargo, cada cromosoma aún consiste en dos cromátidas hermanas unidas por cohesinas centroméricas, por lo que el contenido de ADN es 2C. La reducción a 1C ocurre solo al completar Meiosis II.", "fundamento": "PPT Meiosis, Diapositiva 6 (Valor C).", "ra": "Define meiosis"}, "2": {"correct": 1, "feedback": "La ausencia de síntesis de ADN entre ambas divisiones es clave: la replicación ocurrió una sola vez (antes de Meiosis I), por lo que cuando Meiosis II separa las cromátidas hermanas, cada gameto recibe una sola copia del ADN (1n, 1C). Esto permite que la fecundación restaure la ploidía diploide.", "fundamento": "PPT Meiosis, Diapositivas 10 y 30.", "ra": "Consecuencias de meiosis I y II"}, "3": {"correct": 1, "feedback": "El complejo sinaptonémico es una estructura proteica (no de ADN) compuesta por elementos laterales, centrales y filamentos transversales. Une a los cromosomas homólogos y solo se forma cuando se establece homología. Se desensambla durante el diploteno, permitiendo la visualización de los quiasmata.", "fundamento": "PPT Meiosis, Diapositiva 17.", "ra": "Define complejo sinaptonémico"}, "4": {"correct": 2, "feedback": "En paquiteno, el complejo sinaptonémico alcanza su máximo desarrollo y se completa la recombinación homóloga/genética. En leptoteno solo inician la condensación y la sinapsis. En cigoteno se forman los elementos centrales pero el proceso no está completo. En diploteno los quiasmata son visibles porque el entrecruzamiento ya ocurrió previamente en paquiteno.", "fundamento": "PPT Meiosis, Diapositiva 19.", "ra": "Etapas de Profase I"}, "5": {"correct": 2, "feedback": "Los quiasmata son las conexiones físicas entre cromosomas homólogos que persisten tras el desensamblaje del complejo sinaptonémico. Representan la evidencia citológica del entrecruzamiento y mantienen la unión de los homólogos desde el diploteno hasta la Anafase I. La shugoshina protege cohesinas de cromátidas hermanas, no de los homólogos. El huso se forma en diacinesis, no en diploteno.", "fundamento": "PPT Meiosis, Diapositivas 20 y 22.", "ra": "Etapas de Profase I"}, "6": {"correct": 1, "feedback": "La shugoshina (espíritu guardián, en japonés) protege específicamente las cohesinas centroméricas durante la Meiosis I. Su mecanismo consiste en reclutar fosfatasas que desfosforilan las cohesinas: dado que la separasa solo puede cortar cohesinas fosforiladas, las cohesinas desfosforiladas quedan protegidas. La shugoshina se inactiva después de Meiosis I, permitiendo que en Anafase II la separasa separe las cromátidas hermanas.", "fundamento": "PPT Meiosis, Diapositiva 29.", "ra": "Define shugoshina"}, "7": {"correct": 2, "feedback": "En la anafase mitótica, la separasa hidroliza las cohesinas y las cromátidas hermanas migran a polos opuestos. En la Anafase I meiótica, se separan los cromosomas homólogos (no las cromátidas hermanas), gracias a la disolución de las cohesinas en los brazos. Las cromátidas hermanas permanecen unidas por cohesinas centroméricas protegidas por la shugoshina.", "fundamento": "PPT Meiosis, Diapositivas 27–28.", "ra": "Distingue entre meiosis y mitosis"}, "8": {"correct": 1, "feedback": "En Metafase I, los bivalentes (pares de homólogos) se disponen en el ecuador del huso con orientación aleatoria. Para cada bivalente, qué homólogo mira a qué polo es aleatorio. Esto genera el surtido independiente, que produce combinaciones aleatorias de cromosomas maternos y paternos en cada célula hija. En mitosis, cromosomas individuales (no bivalentes) se alinean en el ecuador.", "fundamento": "PPT Meiosis, Diapositivas 25–26.", "ra": "Distingue entre meiosis y mitosis"}, "9": {"correct": 2, "feedback": "La Meiosis II es comparable a la mitosis porque en ambas se separan cromátidas hermanas. La diferencia fundamental es que Meiosis II parte de células ya haploides (1n, 2C) y produce células 1n, 1C. No hay sinapsis, no hay entrecruzamiento y no hay replicación de ADN entre Meiosis I y II. La mitosis parte de células diploides y produce células diploides.", "fundamento": "PPT Meiosis, Diapositivas 32–33.", "ra": "Describe la Meiosis II"}, "10": {"correct": 1, "feedback": "La recombinación homóloga sigue un orden estricto: (1) ruptura programada de doble hélice (por Spo11), (2) resección de extremos por helicasas y exonucleasas (complejo MRN) generando colas 3' monocatenarias de ~50 nucleótidos, (3) invasión de hebra catalizada por Rad51 formando heterodúplex y D-loop, y (4) síntesis de ADN usando el extremo 3' como primer. Las Holliday Junctions se forman al final.", "fundamento": "PPT Meiosis, Diapositivas 46–52, 59–60.", "ra": "Describe la recombinación homóloga"}, "11": {"correct": 1, "feedback": "BRCA2 es esencial para la recombinación homóloga: se une a Rad51 y lo dirige específicamente a la hebra sencilla rota, impidiendo que se una al ADN de doble cadena. Sin BRCA2, Rad51 no puede realizar la búsqueda de homología ni la invasión de hebra, y la célula recurre a unión de extremos no homólogos (NHEJ), que es mutagénico. Mutaciones en BRCA2 causan 15–44% de los cánceres de mama hereditarios.", "fundamento": "PPT Meiosis, Diapositiva 53.", "ra": "Describe la recombinación homóloga"}, "12": {"correct": 2, "feedback": "La resolución de las Holliday Junctions depende del plano en que las resolvasas cortan la estructura. Si cortan en un plano, los brazos distales mantienen su configuración original (solo conversión génica). Si cortan en el plano perpendicular, se intercambian los brazos distales, resultando en entrecruzamiento visible como quiasma.", "fundamento": "PPT Meiosis, Diapositivas 58, 63.", "ra": "Define Holliday Junctions"}, "13": {"correct": 2, "feedback": "Cuando la no disyunción ocurre en Anafase I, ambos homólogos van al mismo polo, afectando ambas células hijas: los 4 gametos son anormales (2 con n+1 y 2 con n−1). Cuando ocurre en Anafase II, solo una de las dos células falla: resultan 2 gametos anormales y 2 normales.", "fundamento": "PPT Meiosis, Diapositivas 35–36.", "ra": "Describe por qué pasa la no disyunción"}, "14": {"correct": 1, "feedback": "En SDSA (reparación somática), la hebra sintetizada se separa del molde y se reasocia con su dúplex original: el heterodúplex no permanece y no hay entrecruzamiento. En meiosis, el D-loop no se deshace: la síntesis de ADN continúa, desplazando la hebra complementaria que luego se aparea con la hebra desplazada del dúplex invasor, formando dos Holliday Junctions.", "fundamento": "PPT Meiosis, Diapositivas 51–52, 60–62.", "ra": "Describe la recombinación homóloga"}, "15": {"correct": 0, "feedback": "En Meiosis I, los cinetocoros de las cromátidas hermanas de cada cromosoma se fusionan y funcionan como una unidad, mediados por complejos de proteínas del cinetocoro. Esto asegura que ambas cromátidas se orienten hacia el mismo polo, permitiendo que los homólogos (no las cromátidas hermanas) se separen. Después de Meiosis I, estas conexiones se remueven para que en Meiosis II los cinetocoros funcionen independientemente.", "fundamento": "PPT Meiosis, Diapositiva 24.", "ra": "Consecuencias de meiosis I y II"}};
+const TOTAL = 15;
+let answers = {};
+let finalized = false;
+let startTime = Date.now();
+
+// Timer
+setInterval(() => {
+  if (finalized) return;
+  let s = Math.floor((Date.now() - startTime) / 1000);
+  let m = Math.floor(s / 60);
+  s = s % 60;
+  document.getElementById('navTimer').textContent =
+    String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+}, 1000);
+
+// ─── Select option ───
+function selOpt(qid, oi, btn) {
+  if (finalized) return;
+  const qq = document.getElementById('qq-' + qid);
+  qq.querySelectorAll('.qb').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  qq.classList.add('answered');
+  answers[qid] = oi;
+  updateProgress();
+}
+
+function updateProgress() {
+  const n = Object.keys(answers).length;
+  document.getElementById('answeredCount').textContent = n;
+  document.getElementById('pf').style.width = ((n / TOTAL) * 100) + '%';
+}
+
+// ─── Finalize ───
+function finalize() {
+  const n = Object.keys(answers).length;
+  if (n < TOTAL) {
+    document.getElementById('unansweredWarn').classList.add('vis');
+    // Scroll to first unanswered
+    for (let i = 1; i <= TOTAL; i++) {
+      if (!(i in answers)) {
+        document.getElementById('qq-' + i).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('qq-' + i).style.boxShadow = '0 0 0 2px var(--y)';
+        setTimeout(() => {
+          document.getElementById('qq-' + i).style.boxShadow = '';
+        }, 2000);
+        return;
+      }
+    }
+    return;
+  }
+
+  finalized = true;
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('submitBtn').textContent = '✓ Evaluación finalizada';
+
+  let correct = 0;
+  let raScores = {};
+
+  for (let i = 1; i <= TOTAL; i++) {
+    const qq = document.getElementById('qq-' + i);
+    const fb = FB[i];
+    const userAns = answers[i];
+    const isCorrect = userAns === fb.correct;
+    if (isCorrect) correct++;
+
+    // Track by RA
+    if (!raScores[fb.ra]) raScores[fb.ra] = { total: 0, correct: 0 };
+    raScores[fb.ra].total++;
+    if (isCorrect) raScores[fb.ra].correct++;
+
+    // Mark correct option
+    qq.classList.add('correct-shown');
+    const btns = qq.querySelectorAll('.qb');
+    btns.forEach((b, idx) => {
+      if (idx === fb.correct) b.classList.add('is-correct');
+    });
+
+    // Show feedback
+    const qf = document.getElementById('qf-' + i);
+    const icon = isCorrect ? '✅' : '❌';
+    const status = isCorrect ? 'Correcto' : 'Incorrecto';
+    qf.className = 'qf sh ' + (isCorrect ? 'cf' : 'if');
+    qf.innerHTML = `<div class="fb-title">${icon} ${status}</div>
+      <div class="fb-text">${fb.feedback}</div>
+      <div class="fb-ref">📖 ${fb.fundamento} — RA: ${fb.ra}</div>`;
+  }
+
+  // Score display
+  const sd = document.getElementById('scoreDisplay');
+  sd.classList.add('vis');
+  document.getElementById('scoreNum').textContent = correct + '/15';
+  setTimeout(() => {
+    document.getElementById('scoreBar').style.width = ((correct / TOTAL) * 100) + '%';
+  }, 200);
+
+  // Timer result
+  let elapsed = Math.floor((Date.now() - startTime) / 1000);
+  let em = Math.floor(elapsed / 60);
+  let es = elapsed % 60;
+  document.getElementById('timerResult').textContent =
+    '⏱️ Tiempo: ' + em + ' min ' + es + ' seg';
+
+  // Message
+  const msgs = [
+    'Necesitas repasar los temas. ¡Revisa la tutoría y vuelve a intentarlo!',
+    'Buen esfuerzo, pero hay conceptos que debes reforzar. Revisa la retroalimentación.',
+    'Buen resultado. Revisa los errores para consolidar tu aprendizaje.',
+    '¡Muy bien! Casi perfecto. Revisa los detalles que fallaste.',
+    '¡Excelente! Dominas la meiosis por completo. 🎉'
+  ];
+  const mi = correct <= 4 ? 0 : correct <= 7 ? 1 : correct <= 10 ? 2 : correct <= 13 ? 3 : 4;
+  document.getElementById('scoreMsg').textContent = msgs[mi];
+
+  // RA summary
+  const raDiv = document.getElementById('raSummary');
+  let raHTML = '<h4 style="font-family:\'DM Serif Display\',serif;color:var(--t1);margin-bottom:8px">Desempeño por Resultado de Aprendizaje</h4>';
+  for (const [ra, data] of Object.entries(raScores)) {
+    const pct = data.correct / data.total;
+    const cls = pct === 1 ? 'perfect' : pct > 0 ? 'partial' : 'zero';
+    raHTML += `<div class="ra-card">
+      <span class="ra-name">${ra}</span>
+      <span class="ra-score ${cls}">${data.correct}/${data.total}</span>
+    </div>`;
+  }
+  raDiv.innerHTML = raHTML;
+
+  sd.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+</body>
+</html>
