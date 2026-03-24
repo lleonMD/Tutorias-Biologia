@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulaciones Visuales: Meiosis y Recombinación</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px;--mat:#4A90D9;--pat:#E06080}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 24px}
+.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}
+.nb{font-family:'DM Serif Display',serif;font-size:1.1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nl{display:flex;gap:3px;flex-wrap:wrap}
+.nl button{padding:5px 12px;border-radius:20px;border:none;background:0;color:var(--t2);font-size:.76rem;font-family:inherit;cursor:pointer;transition:.3s}
+.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}
+.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}
+.mc{max-width:1000px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1}
+.sec{display:none;animation:fi .5s}.sec.a{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:40px 0 30px}
+.hi{width:80px;height:80px;margin:0 auto 18px;background:var(--grad);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:2.4rem;line-height:1.2;margin-bottom:10px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hs{font-size:1rem;color:var(--t2);max-width:650px;margin:0 auto}
+.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:24px;box-shadow:var(--sh)}
+.ch{font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:14px}.ch .ac{color:var(--g)}
+.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:16px 20px;margin:16px 0;background:rgba(0,212,170,.06)}
+.ibt{font-weight:700;margin-bottom:4px;font-size:.93rem}
+.btn{padding:11px 24px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.93rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}
+.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}.bp:hover{transform:translateY(-2px)}
+.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}.bs:hover{background:rgba(0,212,170,.2)}
+.sn{display:flex;justify-content:space-between;margin-top:36px;padding-top:20px;border-top:1px solid var(--bdr)}
+
+/* ═══ SIMULATION PANELS ═══ */
+.sim-panel{background:rgba(0,0,0,.25);border:1px solid var(--bdr);border-radius:var(--r16);overflow:hidden;margin:20px 0}
+.sim-header{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--bdr);background:rgba(0,212,170,.04)}
+.sim-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--g)}
+.sim-controls{display:flex;gap:8px;align-items:center}
+.sim-btn{padding:7px 16px;border-radius:8px;border:2px solid var(--g);background:0;color:var(--g);font-family:inherit;font-weight:600;font-size:.82rem;cursor:pointer;transition:.3s}
+.sim-btn:hover{background:rgba(0,212,170,.15)}
+.sim-btn.active{background:var(--g);color:#0B1622}
+.sim-btn:disabled{opacity:.35;cursor:default}
+.sim-canvas{position:relative;width:100%;min-height:400px;overflow:hidden}
+.sim-canvas svg{width:100%;height:100%;display:block}
+.sim-narration{padding:18px 22px;border-top:1px solid var(--bdr);background:rgba(0,212,170,.03);color:var(--t2);font-size:.92rem;line-height:1.7;min-height:80px}
+.sim-narration strong{color:var(--t1)}
+.sim-step-dots{display:flex;gap:6px;justify-content:center;padding:10px}
+.sim-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.1);transition:.3s;cursor:pointer}
+.sim-dot.act{background:var(--g);box-shadow:0 0 8px rgba(0,212,170,.5)}
+.sim-dot.done{background:rgba(0,212,170,.3)}
+.sim-dot:hover{background:rgba(0,212,170,.5)}
+
+/* Legend */
+.legend{display:flex;gap:20px;justify-content:center;padding:12px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--t3)}
+.legend-dot{width:14px;height:14px;border-radius:4px;flex-shrink:0}
+
+/* Grid cards */
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
+.card-grid .g-card{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:20px;transition:.3s}
+.card-grid .g-card:hover{border-color:var(--g);transform:translateY(-2px)}
+.card-grid .g-card h4{font-family:'DM Serif Display',serif;margin-bottom:8px;font-size:1rem}
+.card-grid .g-card p{color:var(--t2);font-size:.88rem}
+
+/* Index grid */
+.sim-index{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:24px 0}
+.idx-card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px;text-align:center;cursor:pointer;transition:.4s}
+.idx-card:hover{border-color:var(--g);transform:translateY(-4px);box-shadow:var(--glow)}
+.idx-icon{font-size:2.2rem;margin-bottom:8px}
+.idx-title{font-family:'DM Serif Display',serif;color:var(--g);font-size:1.05rem;margin-bottom:4px}
+.idx-desc{color:var(--t3);font-size:.82rem}
+
+/* Chromosome CSS drawings */
+.chrom{position:absolute;transition:all 1.2s cubic-bezier(.4,0,.2,1)}
+.chrom-body{width:16px;border-radius:8px;position:relative}
+.chrom-body.mat{background:linear-gradient(180deg,var(--mat),#3670B0)}
+.chrom-body.pat{background:linear-gradient(180deg,var(--pat),#C04060)}
+.chrom-body.mat-r{background:linear-gradient(180deg,var(--mat) 60%,var(--pat) 60%)}
+.chrom-body.pat-r{background:linear-gradient(180deg,var(--pat) 60%,var(--mat) 60%)}
+.centromere{position:absolute;width:20px;left:-2px;height:6px;background:var(--y);border-radius:3px;top:50%;transform:translateY(-50%)}
+.cohesion{position:absolute;width:6px;left:18px;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 4px,rgba(0,212,170,.4) 4px,rgba(0,212,170,.4) 8px);border-radius:3px}
+
+@keyframes pulse-glow{0%,100%{filter:drop-shadow(0 0 4px rgba(0,212,170,.3))}50%{filter:drop-shadow(0 0 12px rgba(0,212,170,.6))}}
+.glow-anim{animation:pulse-glow 2s ease-in-out infinite}
+
+@media(max-width:768px){
+  .hero h1{font-size:1.8rem}
+  .ni{flex-direction:column;height:auto;padding:10px 0;gap:6px}
+  .card-grid{grid-template-columns:1fr}
+  .sim-index{grid-template-columns:1fr 1fr}
+  .sim-canvas{min-height:300px}
+}
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style>
+</head>
+<body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">🧬 Simulaciones Visuales — Meiosis</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button>
+<button data-s="simMeiosis">Meiosis Completa</button>
+<button data-s="simProfase">Profase I</button>
+<button data-s="simCrossover">Entrecruzamiento</button>
+<button data-s="simHolliday">Holliday Junction</button>
+<button data-s="simVsMitosis">vs Mitosis</button>
+<button data-s="simNondisj">No Disyunción</button>
+</div></div></nav>
+
+<div class="mc">
+
+<!-- ═══════ INICIO ═══════ -->
+<div class="sec a" id="sec-inicio">
+<div class="hero"><div class="hi">🔬</div>
+<h1>Simulaciones Visuales de Meiosis</h1>
+<p class="hs">Animaciones interactivas paso a paso para comprender la meiosis, la recombinación homóloga y los errores de segregación cromosómica.</p>
+</div>
+<div class="cd"><div class="ch">📑 Selecciona una <span class="ac">Simulación</span></div>
+<div class="sim-index">
+<div class="idx-card" onclick="go('simMeiosis')"><div class="idx-icon">🧬</div><div class="idx-title">Meiosis Completa</div><div class="idx-desc">De 1 célula diploide a 4 gametos haploides paso a paso</div></div>
+<div class="idx-card" onclick="go('simProfase')"><div class="idx-icon">🔗</div><div class="idx-title">Profase I</div><div class="idx-desc">Leptoteno → Diacinesis con sinapsis y complejo sinaptonémico</div></div>
+<div class="idx-card" onclick="go('simCrossover')"><div class="idx-icon">✂️</div><div class="idx-title">Entrecruzamiento</div><div class="idx-desc">Recombinación homóloga: de la ruptura al heterodúplex</div></div>
+<div class="idx-card" onclick="go('simHolliday')"><div class="idx-icon">🔀</div><div class="idx-title">Holliday Junction</div><div class="idx-desc">Resolución con y sin entrecruzamiento</div></div>
+<div class="idx-card" onclick="go('simVsMitosis')"><div class="idx-icon">⚖️</div><div class="idx-title">Meiosis vs Mitosis</div><div class="idx-desc">Comparación visual lado a lado animada</div></div>
+<div class="idx-card" onclick="go('simNondisj')"><div class="idx-icon">⚠️</div><div class="idx-title">No Disyunción</div><div class="idx-desc">Normal vs error en Anafase I y Anafase II</div></div>
+</div></div></div>
+
+<!-- ═══════ SIM: MEIOSIS COMPLETA ═══════ -->
+<div class="sec" id="sec-simMeiosis">
+<div class="cd"><div class="ch">🧬 Simulación: <span class="ac">Meiosis Completa</span></div>
+<p style="color:var(--t2);margin-bottom:10px">Observa paso a paso cómo una célula diploide (2n=4) genera 4 gametos haploides (1n=2). Usa los botones para avanzar.</p>
+<div class="legend">
+<div class="legend-item"><div class="legend-dot" style="background:var(--mat)"></div>Cromosoma materno</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--pat)"></div>Cromosoma paterno</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--y)"></div>Centrómero</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--g);opacity:.4"></div>Cohesina</div>
+</div>
+<div class="sim-panel">
+<div class="sim-header">
+<div class="sim-title" id="meiTitle">Interfase — 2n, 4C</div>
+<div class="sim-controls">
+<button class="sim-btn" id="meiPrev" onclick="meiStep(-1)" disabled>◀ Anterior</button>
+<button class="sim-btn active" id="meiNext" onclick="meiStep(1)">Siguiente ▶</button>
+<button class="sim-btn" id="meiAuto" onclick="meiAuto()">▶ Auto</button>
+</div>
+</div>
+<div class="sim-canvas" id="meiCanvas" style="height:420px">
+<svg id="meiSvg" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+<div class="sim-step-dots" id="meiDots"></div>
+<div class="sim-narration" id="meiNarr">Presiona <strong>Siguiente</strong> o <strong>Auto</strong> para iniciar la simulación.</div>
+</div></div>
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('simProfase')">Profase I →</button></div></div>
+
+<!-- ═══════ SIM: PROFASE I ═══════ -->
+<div class="sec" id="sec-simProfase">
+<div class="cd"><div class="ch">🔗 Simulación: <span class="ac">Profase I</span> — Etapas</div>
+<p style="color:var(--t2);margin-bottom:10px">Visualiza las 5 etapas de la Profase I con la formación del complejo sinaptonémico y el entrecruzamiento.</p>
+<div class="sim-panel">
+<div class="sim-header">
+<div class="sim-title" id="profTitle">Leptoteno</div>
+<div class="sim-controls">
+<button class="sim-btn" id="profPrev" onclick="profStep(-1)" disabled>◀</button>
+<button class="sim-btn active" id="profNext" onclick="profStep(1)">▶</button>
+</div>
+</div>
+<div class="sim-canvas" id="profCanvas" style="height:380px">
+<svg id="profSvg" viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+<div class="sim-step-dots" id="profDots"></div>
+<div class="sim-narration" id="profNarr">Presiona <strong>▶</strong> para avanzar por las etapas de la Profase I.</div>
+</div></div>
+<div class="sn"><button class="btn bs" onclick="go('simMeiosis')">← Meiosis</button><button class="btn bp" onclick="go('simCrossover')">Entrecruzamiento →</button></div></div>
+
+<!-- ═══════ SIM: ENTRECRUZAMIENTO ═══════ -->
+<div class="sec" id="sec-simCrossover">
+<div class="cd"><div class="ch">✂️ Simulación: <span class="ac">Entrecruzamiento</span> y Recombinación</div>
+<p style="color:var(--t2);margin-bottom:10px">Sigue el proceso molecular paso a paso: desde la ruptura de doble hélice hasta la formación del heterodúplex.</p>
+<div class="legend">
+<div class="legend-item"><div class="legend-dot" style="background:var(--mat)"></div>Dúplex del homólogo materno</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--pat)"></div>Dúplex del homólogo paterno</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--y)"></div>Zona de ruptura / síntesis</div>
+</div>
+<div class="sim-panel">
+<div class="sim-header">
+<div class="sim-title" id="crTitle">Dúplexes intactos</div>
+<div class="sim-controls">
+<button class="sim-btn" id="crPrev" onclick="crStep(-1)" disabled>◀</button>
+<button class="sim-btn active" id="crNext" onclick="crStep(1)">▶</button>
+</div>
+</div>
+<div class="sim-canvas" id="crCanvas" style="height:360px">
+<svg id="crSvg" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+<div class="sim-step-dots" id="crDots"></div>
+<div class="sim-narration" id="crNarr">Presiona <strong>▶</strong> para avanzar por los pasos de la recombinación homóloga.</div>
+</div></div>
+<div class="sn"><button class="btn bs" onclick="go('simProfase')">← Profase I</button><button class="btn bp" onclick="go('simHolliday')">Holliday Junction →</button></div></div>
+
+<!-- ═══════ SIM: HOLLIDAY JUNCTION ═══════ -->
+<div class="sec" id="sec-simHolliday">
+<div class="cd"><div class="ch">🔀 Simulación: <span class="ac">Holliday Junction</span> — Resolución</div>
+<p style="color:var(--t2);margin-bottom:10px">Elige el plano de corte de las resolvasas y observa si el resultado es <strong>con</strong> o <strong>sin entrecruzamiento</strong>.</p>
+<div class="sim-panel">
+<div class="sim-header">
+<div class="sim-title">Holliday Junction — Elige el plano de resolución</div>
+<div class="sim-controls">
+<button class="sim-btn" id="hjBtnH" onclick="resolveHJ('horiz')">Corte Horizontal</button>
+<button class="sim-btn" id="hjBtnV" onclick="resolveHJ('vert')">Corte Vertical</button>
+<button class="sim-btn" id="hjReset" onclick="resetHJ()" style="display:none">↺ Reiniciar</button>
+</div>
+</div>
+<div class="sim-canvas" id="hjCanvas" style="height:380px">
+<svg id="hjSvg" viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+<div class="sim-narration" id="hjNarr">La Holliday Junction está formada. <strong>Elige un plano de corte</strong> para ver el resultado.</div>
+</div></div>
+<div class="sn"><button class="btn bs" onclick="go('simCrossover')">← Entrecruzamiento</button><button class="btn bp" onclick="go('simVsMitosis')">vs Mitosis →</button></div></div>
+
+<!-- ═══════ SIM: VS MITOSIS ═══════ -->
+<div class="sec" id="sec-simVsMitosis">
+<div class="cd"><div class="ch">⚖️ Comparación: <span class="ac">Meiosis vs Mitosis</span></div>
+<p style="color:var(--t2);margin-bottom:10px">Ambos procesos lado a lado. Avanza para ver las diferencias clave en cada etapa.</p>
+<div class="sim-panel">
+<div class="sim-header">
+<div class="sim-title" id="vsTitle">Inicio — Célula diploide 2n</div>
+<div class="sim-controls">
+<button class="sim-btn" id="vsPrev" onclick="vsStep(-1)" disabled>◀</button>
+<button class="sim-btn active" id="vsNext" onclick="vsStep(1)">▶</button>
+</div>
+</div>
+<div class="sim-canvas" id="vsCanvas" style="height:450px">
+<svg id="vsSvg" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+<div class="sim-step-dots" id="vsDots"></div>
+<div class="sim-narration" id="vsNarr">Presiona <strong>▶</strong> para comparar cada etapa lado a lado.</div>
+</div></div>
+<div class="sn"><button class="btn bs" onclick="go('simHolliday')">← Holliday</button><button class="btn bp" onclick="go('simNondisj')">No Disyunción →</button></div></div>
+
+<!-- ═══════ SIM: NO DISYUNCIÓN ═══════ -->
+<div class="sec" id="sec-simNondisj">
+<div class="cd"><div class="ch">⚠️ Simulación: <span class="ac">No Disyunción</span></div>
+<p style="color:var(--t2);margin-bottom:10px">Compara la segregación normal con los errores en Anafase I y Anafase II. Selecciona el escenario que deseas visualizar.</p>
+<div class="sim-panel">
+<div class="sim-header">
+<div class="sim-title" id="ndTitle">Selecciona un escenario</div>
+<div class="sim-controls">
+<button class="sim-btn active" id="ndNorm" onclick="ndSet('normal')">Normal</button>
+<button class="sim-btn" id="ndAI" onclick="ndSet('ai')">Error Anafase I</button>
+<button class="sim-btn" id="ndAII" onclick="ndSet('aii')">Error Anafase II</button>
+</div>
+</div>
+<div class="sim-canvas" id="ndCanvas" style="height:480px">
+<svg id="ndSvg" viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+<div class="sim-narration" id="ndNarr">Selecciona un escenario para ver cómo se distribuyen los cromosomas.</div>
+</div></div>
+<div class="sn"><button class="btn bs" onclick="go('simVsMitosis')">← vs Mitosis</button><button class="btn bp" onclick="go('inicio')">🏠 Inicio</button></div></div>
+
+</div><!-- end .mc -->
+
+<script>
+// ═══════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════
+const secs=['inicio','simMeiosis','simProfase','simCrossover','simHolliday','simVsMitosis','simNondisj'];
+function go(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('a'));
+  document.getElementById('sec-'+id).classList.add('a');
+  document.querySelectorAll('#navLinks button').forEach(b=>{b.classList.remove('a');if(b.dataset.s===id)b.classList.add('a')});
+  window.scrollTo({top:0,behavior:'smooth'});
+  // Init simulations on first visit
+  if(id==='simMeiosis'&&!meiInited){initMeiosis();meiInited=true}
+  if(id==='simProfase'&&!profInited){initProfase();profInited=true}
+  if(id==='simCrossover'&&!crInited){initCrossover();crInited=true}
+  if(id==='simHolliday'&&!hjInited){initHJ();hjInited=true}
+  if(id==='simVsMitosis'&&!vsInited){initVs();vsInited=true}
+  if(id==='simNondisj'&&!ndInited){initNd();ndInited=true}
+}
+document.querySelectorAll('#navLinks button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.s)));
+
+// ═══════════════════════════════════════
+// HELPER: draw chromosome (SVG)
+// ═══════════════════════════════════════
+function chromSvg(x,y,h,color,sister=false,centY=null,recomb=false,recombPct=0.6){
+  centY=centY||y+h/2;
+  let c1=color==='mat'?'#4A90D9':'#E06080';
+  let c2=color==='mat'?'#3670B0':'#C04060';
+  if(recomb){
+    // Show recombined segment
+    let c1r=color==='mat'?'#E06080':'#4A90D9';
+    let splitY=y+h*recombPct;
+    let svg=`<rect x="${x}" y="${y}" width="14" height="${splitY-y}" rx="7" fill="${c1}" opacity=".9"/>`;
+    svg+=`<rect x="${x}" y="${splitY}" width="14" height="${y+h-splitY}" rx="7" fill="${c1r}" opacity=".9"/>`;
+    svg+=`<rect x="${x}" y="${centY-3}" width="18" height="6" rx="3" fill="${'#FFD93D'}" opacity=".8"/>`;
+    if(sister){
+      svg+=`<rect x="${x+18}" y="${y}" width="14" height="${splitY-y}" rx="7" fill="${c1}" opacity=".7"/>`;
+      svg+=`<rect x="${x+18}" y="${splitY}" width="14" height="${y+h-splitY}" rx="7" fill="${c1r}" opacity=".7"/>`;
+      svg+=`<rect x="${x+18}" y="${centY-3}" width="18" height="6" rx="3" fill="${'#FFD93D'}" opacity=".6"/>`;
+      svg+=`<line x1="${x+14}" y1="${centY-8}" x2="${x+18}" y2="${centY-8}" stroke="#00D4AA" stroke-width="2" opacity=".5"/>`;
+      svg+=`<line x1="${x+14}" y1="${centY+8}" x2="${x+18}" y2="${centY+8}" stroke="#00D4AA" stroke-width="2" opacity=".5"/>`;
+    }
+    return svg;
+  }
+  let svg=`<rect x="${x}" y="${y}" width="14" height="${h}" rx="7" fill="${c1}" opacity=".9"/>`;
+  svg+=`<rect x="${x}" y="${centY-3}" width="18" height="6" rx="3" fill="#FFD93D" opacity=".8"/>`;
+  if(sister){
+    svg+=`<rect x="${x+18}" y="${y}" width="14" height="${h}" rx="7" fill="${c1}" opacity=".7"/>`;
+    svg+=`<rect x="${x+18}" y="${centY-3}" width="18" height="6" rx="3" fill="#FFD93D" opacity=".6"/>`;
+    svg+=`<line x1="${x+14}" y1="${centY-8}" x2="${x+18}" y2="${centY-8}" stroke="#00D4AA" stroke-width="2" opacity=".5"/>`;
+    svg+=`<line x1="${x+14}" y1="${centY+8}" x2="${x+18}" y2="${centY+8}" stroke="#00D4AA" stroke-width="2" opacity=".5"/>`;
+  }
+  return svg;
+}
+function cellCircle(cx,cy,r,label,sub){
+  return `<ellipse cx="${cx}" cy="${cy}" rx="${r}" ry="${r*.85}" fill="none" stroke="#5A7A96" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="${cx}" y="${cy-r*.85-8}" text-anchor="middle" fill="#5A7A96" font-size="11" font-weight="600">${label}</text>
+  ${sub?`<text x="${cx}" y="${cy+r*.85+16}" text-anchor="middle" fill="#5A7A96" font-size="10">${sub}</text>`:''}`;
+}
+function stageLabel(x,y,text,color){
+  return `<rect x="${x-60}" y="${y-12}" width="120" height="24" rx="12" fill="${color}" opacity=".15"/>
+  <text x="${x}" y="${y+4}" text-anchor="middle" fill="${color}" font-size="11" font-weight="700">${text}</text>`;
+}
+
+// ═══════════════════════════════════════
+// SIM 1: MEIOSIS COMPLETA
+// ═══════════════════════════════════════
+let meiInited=false, meiIdx=0;
+const meiSteps=[
+  {title:"Interfase — 2n, 4C (post-replicación)", narr:"La célula diploide <strong>(2n=4)</strong> ha completado la replicación del ADN. Cada cromosoma consiste en <strong>dos cromátidas hermanas</strong> unidas por cohesinas. Hay 2 pares de cromosomas homólogos (materno en azul, paterno en rojo)."},
+  {title:"Profase I — Sinapsis y Entrecruzamiento", narr:"Los cromosomas homólogos se aparean formando <strong>bivalentes</strong>. El <strong>complejo sinaptonémico</strong> los une. Ocurre el <strong>entrecruzamiento</strong>: intercambio de segmentos entre homólogos (notar los colores mezclados). Los quiasmata mantienen la unión."},
+  {title:"Metafase I — Bivalentes en el ecuador", narr:"Los <strong>bivalentes</strong> se alinean en el plano ecuatorial. La orientación de cada bivalente es aleatoria (<strong>surtido independiente</strong>), lo que genera diversidad en las combinaciones de cromosomas maternos y paternos que recibirá cada polo."},
+  {title:"Anafase I — Separación de homólogos", narr:"Las cohesinas de los <strong>brazos</strong> se disuelven. Los <strong>cromosomas homólogos se separan</strong> hacia polos opuestos. Las cromátidas hermanas permanecen unidas (protegidas por <strong>shugoshina</strong>). Cada polo recibe un set haploide (1n)."},
+  {title:"Telofase I / Citocinesis — 2 células 1n, 2C", narr:"Se forman <strong>2 células haploides</strong> (1n), cada una con cromátidas hermanas unidas por cohesinas centroméricas. El contenido de ADN es <strong>2C</strong>. No hay nueva replicación antes de Meiosis II."},
+  {title:"Metafase II — Cromosomas en el ecuador", narr:"En cada célula haploide, los cromosomas (con cromátidas hermanas) se alinean en el plano ecuatorial. Es <strong>similar a la mitosis</strong>, pero con la mitad de cromosomas."},
+  {title:"Anafase II — Separación de cromátidas hermanas", narr:"La <strong>shugoshina ya se inactivó</strong>. La separasa corta las cohesinas centroméricas. Las <strong>cromátidas hermanas se separan</strong> hacia polos opuestos, como en la mitosis."},
+  {title:"4 Gametos — 1n, 1C", narr:"<strong>¡Resultado final!</strong> Se producen <strong>4 células haploides</strong> (1n, 1C), cada una genéticamente única gracias al entrecruzamiento y al surtido independiente. Estos son los gametos que participarán en la fecundación."},
+];
+
+function initMeiosis(){
+  // Build dots
+  let dots='';
+  meiSteps.forEach((_,i)=>{dots+=`<div class="sim-dot${i===0?' act':''}" onclick="meiGo(${i})"></div>`});
+  document.getElementById('meiDots').innerHTML=dots;
+  meiDraw(0);
+}
+function meiGo(i){meiIdx=i;meiDraw(i)}
+function meiStep(d){meiIdx=Math.max(0,Math.min(meiSteps.length-1,meiIdx+d));meiDraw(meiIdx)}
+let meiAutoTimer=null;
+function meiAuto(){
+  if(meiAutoTimer){clearInterval(meiAutoTimer);meiAutoTimer=null;document.getElementById('meiAuto').textContent='▶ Auto';return}
+  document.getElementById('meiAuto').textContent='⏸ Pausa';
+  meiAutoTimer=setInterval(()=>{
+    if(meiIdx>=meiSteps.length-1){clearInterval(meiAutoTimer);meiAutoTimer=null;document.getElementById('meiAuto').textContent='▶ Auto';return}
+    meiStep(1);
+  },3000);
+}
+function meiDraw(idx){
+  const s=meiSteps[idx];
+  document.getElementById('meiTitle').textContent=s.title;
+  document.getElementById('meiNarr').innerHTML=s.narr;
+  document.getElementById('meiPrev').disabled=idx===0;
+  document.getElementById('meiNext').disabled=idx===meiSteps.length-1;
+  document.querySelectorAll('#meiDots .sim-dot').forEach((d,i)=>{d.className='sim-dot'+(i===idx?' act':i<idx?' done':'')});
+  const svg=document.getElementById('meiSvg');
+  let content='';
+  const W=800,H=420;
+  if(idx===0){// Interfase
+    content+=cellCircle(400,210,160,'Célula Diploide — 2n=4','4C (post-replicación)');
+    content+=chromSvg(320,110,80,'mat',true); content+=chromSvg(350,110,80,'pat',true);
+    content+=chromSvg(420,220,90,'mat',true); content+=chromSvg(450,220,90,'pat',true);
+    content+=stageLabel(400,30,'INTERFASE','#00D4AA');
+  } else if(idx===1){// Profase I
+    content+=cellCircle(400,210,160,'Profase I','Sinapsis + Entrecruzamiento');
+    // Bivalent 1: paired
+    content+=chromSvg(340,110,80,'mat',true,null,true); content+=chromSvg(380,110,80,'pat',true,null,true);
+    // Bivalent 2: paired
+    content+=chromSvg(340,230,90,'mat',true,null,true); content+=chromSvg(380,230,90,'pat',true,null,true);
+    // SC line
+    content+=`<line x1="375" y1="115" x2="375" y2="185" stroke="#FFD93D" stroke-width="3" stroke-dasharray="4,3" opacity=".6"/>`;
+    content+=`<line x1="375" y1="235" x2="375" y2="315" stroke="#FFD93D" stroke-width="3" stroke-dasharray="4,3" opacity=".6"/>`;
+    content+=`<text x="375" y="200" text-anchor="middle" fill="#FFD93D" font-size="9" font-weight="600">Complejo Sinaptonémico</text>`;
+    content+=stageLabel(400,30,'PROFASE I','#00A3FF');
+  } else if(idx===2){// Metafase I
+    content+=cellCircle(400,210,170,'Metafase I','Bivalentes en el ecuador');
+    // Equator line
+    content+=`<line x1="240" y1="210" x2="560" y2="210" stroke="#5A7A96" stroke-width="1" stroke-dasharray="4,3"/>`;
+    content+=`<text x="400" y="388" text-anchor="middle" fill="#5A7A96" font-size="9">Plano ecuatorial</text>`;
+    // Bivalent 1 at equator
+    content+=chromSvg(310,170,70,'mat',true,null,true); content+=chromSvg(355,170,70,'pat',true,null,true);
+    // Bivalent 2 at equator
+    content+=chromSvg(440,175,65,'pat',true,null,true); content+=chromSvg(485,175,65,'mat',true,null,true);
+    // Poles
+    content+=`<text x="400" y="70" text-anchor="middle" fill="#A78BFA" font-size="10">⬆ Polo 1</text>`;
+    content+=`<text x="400" y="370" text-anchor="middle" fill="#F97316" font-size="10">⬇ Polo 2</text>`;
+    content+=stageLabel(400,30,'METAFASE I','#A78BFA');
+  } else if(idx===3){// Anafase I
+    content+=cellCircle(400,210,180,'Anafase I','Homólogos se separan');
+    // Top pair (mat1 + pat2 went up)
+    content+=chromSvg(340,60,70,'mat',true,null,true); content+=chromSvg(430,65,60,'pat',true,null,true);
+    // Bottom pair
+    content+=chromSvg(340,300,70,'pat',true,null,true); content+=chromSvg(430,305,60,'mat',true,null,true);
+    // Arrows
+    content+=`<path d="M380,140 L380,100" stroke="#A78BFA" stroke-width="2" marker-end="url(#arUp)"/>`;
+    content+=`<path d="M380,280 L380,320" stroke="#F97316" stroke-width="2" marker-end="url(#arDn)"/>`;
+    content+=`<defs><marker id="arUp" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><polygon points="0,6 4,0 8,6" fill="#A78BFA"/></marker>`;
+    content+=`<marker id="arDn" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><polygon points="0,0 4,6 8,0" fill="#F97316"/></marker></defs>`;
+    content+=stageLabel(400,30,'ANAFASE I','#EC4899');
+  } else if(idx===4){// Telofase I
+    content+=cellCircle(250,210,120,'Célula 1 — 1n, 2C','');
+    content+=cellCircle(550,210,120,'Célula 2 — 1n, 2C','');
+    content+=chromSvg(210,170,70,'mat',true,null,true); content+=chromSvg(260,175,60,'pat',true,null,true);
+    content+=chromSvg(510,170,70,'pat',true,null,true); content+=chromSvg(560,175,60,'mat',true,null,true);
+    content+=stageLabel(400,30,'TELOFASE I','#F97316');
+  } else if(idx===5){// Metafase II
+    content+=cellCircle(220,210,105,'Célula 1','Metafase II');
+    content+=cellCircle(580,210,105,'Célula 2','Metafase II');
+    content+=`<line x1="125" y1="210" x2="315" y2="210" stroke="#5A7A96" stroke-width="1" stroke-dasharray="3,3"/>`;
+    content+=`<line x1="485" y1="210" x2="675" y2="210" stroke="#5A7A96" stroke-width="1" stroke-dasharray="3,3"/>`;
+    content+=chromSvg(190,180,55,'mat',true,null,true); content+=chromSvg(235,185,50,'pat',true,null,true);
+    content+=chromSvg(550,180,55,'pat',true,null,true); content+=chromSvg(595,185,50,'mat',true,null,true);
+    content+=stageLabel(400,30,'METAFASE II','#00A3FF');
+  } else if(idx===6){// Anafase II
+    content+=cellCircle(220,210,115,'Célula 1 — Anafase II','');
+    content+=cellCircle(580,210,115,'Célula 2 — Anafase II','');
+    // Cell 1: sisters separating
+    content+=chromSvg(185,130,45,'mat',false,null,true); content+=chromSvg(230,135,40,'pat',false,null,true);
+    content+=chromSvg(185,270,45,'mat',false,null,false); content+=chromSvg(230,275,40,'pat',false,null,false);
+    // Cell 2
+    content+=chromSvg(545,130,45,'pat',false,null,true); content+=chromSvg(590,135,40,'mat',false,null,true);
+    content+=chromSvg(545,270,45,'pat',false,null,false); content+=chromSvg(590,275,40,'mat',false,null,false);
+    content+=stageLabel(400,30,'ANAFASE II','#EC4899');
+  } else if(idx===7){// 4 gametos
+    const gx=[130,310,490,670], gy=220, gr=70;
+    ['Gameto 1','Gameto 2','Gameto 3','Gameto 4'].forEach((l,i)=>{
+      content+=cellCircle(gx[i],gy,gr,l,'1n, 1C');
+    });
+    content+=chromSvg(110,190,40,'mat',false,null,true); content+=chromSvg(140,195,35,'pat',false,null,true);
+    content+=chromSvg(290,190,40,'mat',false,null,false); content+=chromSvg(320,195,35,'pat',false,null,false);
+    content+=chromSvg(470,190,40,'pat',false,null,true); content+=chromSvg(500,195,35,'mat',false,null,true);
+    content+=chromSvg(650,190,40,'pat',false,null,false); content+=chromSvg(680,195,35,'mat',false,null,false);
+    content+=stageLabel(400,30,'4 GAMETOS HAPLOIDES','#00D4AA');
+    content+=`<text x="400" y="390" text-anchor="middle" fill="#FFD93D" font-size="13" font-weight="700">✨ ¡Todos genéticamente únicos!</text>`;
+  }
+  svg.innerHTML=content;
+}
+
+// ═══════════════════════════════════════
+// SIM 2: PROFASE I
+// ═══════════════════════════════════════
+let profInited=false, profIdx=0;
+const profSteps=[
+  {title:"1. Leptoteno",narr:"Los cromosomas comienzan a <strong>condensarse</strong>. Se inician los <strong>elementos laterales</strong> del complejo sinaptonémico. Los homólogos aún están separados. Se comienzan las rupturas de doble hélice que iniciarán la recombinación.",col:"#00D4AA"},
+  {title:"2. Cigoteno",narr:"Mayor condensación. Se forman los <strong>elementos centrales</strong> del complejo sinaptonémico. Los cromosomas homólogos se aproximan y se forman <strong>bivalentes</strong> (tétradas) por el proceso de <strong>sinapsis</strong>.",col:"#00A3FF"},
+  {title:"3. Paquiteno",narr:"El complejo sinaptonémico está <strong>totalmente desarrollado</strong>. La compactación reduce los cromosomas a 1/4 de su tamaño. Se completa el <strong>entrecruzamiento</strong> y la <strong>recombinación homóloga</strong>.",col:"#A78BFA"},
+  {title:"4. Diploteno",narr:"Se <strong>desensambla el complejo sinaptonémico</strong>. Los homólogos comienzan a separarse, pero permanecen unidos por <strong>quiasmata</strong> — la evidencia visible del entrecruzamiento. Los cromosomas se descondensan parcialmente y hay transcripción.",col:"#EC4899"},
+  {title:"5. Diacinesis",narr:"<strong>Compactación máxima.</strong> Centrómeros se separan más. Los cromosomas solo están unidos por quiasmata. Desaparece el nucleolo, se forma el <strong>huso meiótico</strong> y se fragmenta el envoltorio nuclear. <strong>FIN DE PROFASE I.</strong>",col:"#F97316"},
+];
+
+function initProfase(){
+  let dots='';profSteps.forEach((_,i)=>{dots+=`<div class="sim-dot${i===0?' act':''}" onclick="profGo(${i})"></div>`});
+  document.getElementById('profDots').innerHTML=dots;
+  profDraw(0);
+}
+function profGo(i){profIdx=i;profDraw(i)}
+function profStep(d){profIdx=Math.max(0,Math.min(profSteps.length-1,profIdx+d));profDraw(profIdx)}
+function profDraw(idx){
+  const s=profSteps[idx];
+  document.getElementById('profTitle').textContent=s.title;
+  document.getElementById('profNarr').innerHTML=s.narr;
+  document.getElementById('profPrev').disabled=idx===0;
+  document.getElementById('profNext').disabled=idx===profSteps.length-1;
+  document.querySelectorAll('#profDots .sim-dot').forEach((d,i)=>{d.className='sim-dot'+(i===idx?' act':i<idx?' done':'')});
+  const svg=document.getElementById('profSvg');
+  let c='';
+  const matX=280,patX=480,gapReduce=idx*40;
+  const realPatX=patX-gapReduce;
+  const chromH=200-idx*15;
+  const yOff=90+idx*10;
+  // Chromosomes (each with sister chromatids)
+  c+=chromSvg(matX,yOff,chromH,'mat',true,null,idx>=2);
+  c+=chromSvg(realPatX,yOff,chromH,'pat',true,null,idx>=2);
+  // SC elements
+  if(idx>=1&&idx<=2){
+    const scX1=matX+34, scX2=realPatX;
+    for(let y=yOff+10;y<yOff+chromH-10;y+=12){
+      c+=`<line x1="${scX1}" y1="${y}" x2="${scX2}" y2="${y}" stroke="#FFD93D" stroke-width="1.5" opacity="${idx===2?.7:.4}"/>`;
+    }
+    c+=`<text x="${(scX1+scX2)/2}" y="${yOff-10}" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="600">Complejo Sinaptonémico</text>`;
+  }
+  // Quiasmata in diploteno/diacinesis
+  if(idx>=3){
+    const qy=yOff+chromH*0.6;
+    c+=`<line x1="${matX+34}" y1="${qy}" x2="${realPatX}" y2="${qy}" stroke="#FFD93D" stroke-width="3" opacity=".8"/>`;
+    c+=`<circle cx="${(matX+34+realPatX)/2}" cy="${qy}" r="8" fill="rgba(255,217,61,.2)" stroke="#FFD93D" stroke-width="2"/>`;
+    c+=`<text x="${(matX+34+realPatX)/2}" y="${qy+3}" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="700">✕</text>`;
+    c+=`<text x="${(matX+34+realPatX)/2}" y="${qy+22}" text-anchor="middle" fill="#FFD93D" font-size="9">Quiasma</text>`;
+  }
+  // Nuclear envelope
+  if(idx<4){
+    c+=`<ellipse cx="400" cy="190" rx="220" ry="170" fill="none" stroke="#5A7A96" stroke-width="1.5" stroke-dasharray="8,4"/>`;
+    c+=`<text x="400" y="375" text-anchor="middle" fill="#5A7A96" font-size="9">Envoltorio nuclear</text>`;
+  } else {
+    c+=`<ellipse cx="400" cy="190" rx="220" ry="170" fill="none" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="3,6" opacity=".4"/>`;
+    c+=`<text x="400" y="375" text-anchor="middle" fill="#FF6B6B" font-size="9" opacity=".6">Envoltorio fragmentado</text>`;
+    // Spindle hints
+    c+=`<line x1="400" y1="20" x2="300" y2="190" stroke="#5A7A96" stroke-width="1" opacity=".3"/>`;
+    c+=`<line x1="400" y1="20" x2="500" y2="190" stroke="#5A7A96" stroke-width="1" opacity=".3"/>`;
+    c+=`<line x1="400" y1="370" x2="300" y2="190" stroke="#5A7A96" stroke-width="1" opacity=".3"/>`;
+    c+=`<line x1="400" y1="370" x2="500" y2="190" stroke="#5A7A96" stroke-width="1" opacity=".3"/>`;
+    c+=`<text x="400" y="15" text-anchor="middle" fill="#5A7A96" font-size="9">Huso meiótico</text>`;
+  }
+  c+=stageLabel(400,20,s.title.toUpperCase(),s.col);
+  // Labels
+  c+=`<text x="${matX+16}" y="${yOff+chromH+20}" text-anchor="middle" fill="#4A90D9" font-size="10" font-weight="600">Materno</text>`;
+  c+=`<text x="${realPatX+16}" y="${yOff+chromH+20}" text-anchor="middle" fill="#E06080" font-size="10" font-weight="600">Paterno</text>`;
+  svg.innerHTML=c;
+}
+
+// ═══════════════════════════════════════
+// SIM 3: ENTRECRUZAMIENTO (RECOMBINACIÓN)
+// ═══════════════════════════════════════
+let crInited=false, crIdx=0;
+const crSteps=[
+  {title:"Dúplexes intactos alineados",narr:"Dos dúplexes de ADN homólogos están alineados. El materno (azul) tiene hebras superior e inferior; el paterno (rojo) igualmente. Las secuencias son similares pero no idénticas (homólogos, no hermanas)."},
+  {title:"Paso 1 — Ruptura de doble hélice (DSB)",narr:"La endonucleasa <strong>Spo11</strong> genera una <strong>ruptura programada de doble hélice</strong> en uno de los dúplexes. Esto inicia todo el proceso de recombinación."},
+  {title:"Paso 2 — Resección de extremos (colas 3')",narr:"Helicasas y exonucleasas (complejo <strong>MRN</strong>) procesan los extremos rotos para generar <strong>colas 3' monocatenarias</strong> de ~50 nucleótidos. Estas colas son el sustrato para Rad51."},
+  {title:"Paso 3 — Invasión de hebra y D-loop",narr:"<strong>Rad51</strong> (dirigido por BRCA2) cataliza la <strong>invasión de hebra</strong>: la cola 3' localiza la secuencia homóloga en el otro dúplex y desplaza una hebra, formando un <strong>D-loop</strong> y un <strong>heterodúplex</strong>."},
+  {title:"Paso 4 — Síntesis de ADN",narr:"El extremo 3' invasor actúa como <strong>primer</strong>. La ADN polimerasa sintetiza nueva cadena usando la hebra intacta como molde. El D-loop se extiende conforme avanza la síntesis."},
+  {title:"Paso 5 — Captura y dos Holliday Junctions",narr:"La hebra desplazada se aparea con la hebra complementaria del dúplex roto. Se forman <strong>dos Holliday Junctions</strong>. Ambos dúplexes están ahora conectados por intercambio recíproco de hebras."},
+];
+
+function initCrossover(){
+  let dots='';crSteps.forEach((_,i)=>{dots+=`<div class="sim-dot${i===0?' act':''}" onclick="crGo(${i})"></div>`});
+  document.getElementById('crDots').innerHTML=dots;
+  crDraw(0);
+}
+function crGo(i){crIdx=i;crDraw(i)}
+function crStep(d){crIdx=Math.max(0,Math.min(crSteps.length-1,crIdx+d));crDraw(crIdx)}
+function crDraw(idx){
+  const s=crSteps[idx];
+  document.getElementById('crTitle').textContent=s.title;
+  document.getElementById('crNarr').innerHTML=s.narr;
+  document.getElementById('crPrev').disabled=idx===0;
+  document.getElementById('crNext').disabled=idx===crSteps.length-1;
+  document.querySelectorAll('#crDots .sim-dot').forEach((d,i)=>{d.className='sim-dot'+(i===idx?' act':i<idx?' done':'')});
+  const svg=document.getElementById('crSvg');
+  let c='';
+  const y1=80,y2=100,y3=220,y4=240; // strand Y positions
+  const sw=3;
+  // Materno top strands
+  if(idx===0){
+    c+=`<line x1="80" y1="${y1}" x2="720" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}" stroke-linecap="round"/>`;
+    c+=`<line x1="80" y1="${y2}" x2="720" y2="${y2}" stroke="#6AAAE8" stroke-width="${sw}" stroke-linecap="round"/>`;
+    c+=`<line x1="80" y1="${y3}" x2="720" y2="${y3}" stroke="#E06080" stroke-width="${sw}" stroke-linecap="round"/>`;
+    c+=`<line x1="80" y1="${y4}" x2="720" y2="${y4}" stroke="#F08898" stroke-width="${sw}" stroke-linecap="round"/>`;
+    c+=`<text x="50" y="${(y1+y2)/2+4}" text-anchor="end" fill="#4A90D9" font-size="10" font-weight="600">Mat</text>`;
+    c+=`<text x="50" y="${(y3+y4)/2+4}" text-anchor="end" fill="#E06080" font-size="10" font-weight="600">Pat</text>`;
+  } else if(idx===1){// DSB
+    c+=`<line x1="80" y1="${y1}" x2="350" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}" stroke-linecap="round"/>`;
+    c+=`<line x1="450" y1="${y1}" x2="720" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}" stroke-linecap="round"/>`;
+    c+=`<line x1="80" y1="${y2}" x2="350" y2="${y2}" stroke="#6AAAE8" stroke-width="${sw}" stroke-linecap="round"/>`;
+    c+=`<line x1="450" y1="${y2}" x2="720" y2="${y2}" stroke="#6AAAE8" stroke-width="${sw}" stroke-linecap="round"/>`;
+    c+=`<text x="400" y="${y1-10}" text-anchor="middle" fill="#FFD93D" font-size="12" font-weight="700">⚡ DSB (Spo11)</text>`;
+    c+=`<line x1="80" y1="${y3}" x2="720" y2="${y3}" stroke="#E06080" stroke-width="${sw}" stroke-linecap="round"/>`;
+    c+=`<line x1="80" y1="${y4}" x2="720" y2="${y4}" stroke="#F08898" stroke-width="${sw}" stroke-linecap="round"/>`;
+    c+=`<text x="50" y="${(y1+y2)/2+4}" text-anchor="end" fill="#4A90D9" font-size="10" font-weight="600">Mat</text>`;
+    c+=`<text x="50" y="${(y3+y4)/2+4}" text-anchor="end" fill="#E06080" font-size="10" font-weight="600">Pat</text>`;
+  } else if(idx===2){// Resección
+    c+=`<line x1="80" y1="${y1}" x2="320" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    c+=`<line x1="480" y1="${y1}" x2="720" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    c+=`<line x1="80" y1="${y2}" x2="370" y2="${y2}" stroke="#6AAAE8" stroke-width="${sw}"/>`;
+    c+=`<line x1="430" y1="${y2}" x2="720" y2="${y2}" stroke="#6AAAE8" stroke-width="${sw}"/>`;
+    // 3' tails
+    c+=`<line x1="370" y1="${y2}" x2="370" y2="${y2+30}" stroke="#6AAAE8" stroke-width="2" stroke-dasharray="4,3"/>`;
+    c+=`<line x1="430" y1="${y2}" x2="430" y2="${y2+30}" stroke="#6AAAE8" stroke-width="2" stroke-dasharray="4,3"/>`;
+    c+=`<text x="370" y="${y2+45}" text-anchor="middle" fill="#6AAAE8" font-size="9">3'</text>`;
+    c+=`<text x="430" y="${y2+45}" text-anchor="middle" fill="#6AAAE8" font-size="9">3'</text>`;
+    c+=`<text x="400" y="${y1-12}" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="600">Resección → Colas 3' (MRN)</text>`;
+    c+=`<line x1="80" y1="${y3}" x2="720" y2="${y3}" stroke="#E06080" stroke-width="${sw}"/>`;
+    c+=`<line x1="80" y1="${y4}" x2="720" y2="${y4}" stroke="#F08898" stroke-width="${sw}"/>`;
+    c+=`<text x="50" y="${(y1+y2)/2+4}" text-anchor="end" fill="#4A90D9" font-size="10">Mat</text>`;
+    c+=`<text x="50" y="${(y3+y4)/2+4}" text-anchor="end" fill="#E06080" font-size="10">Pat</text>`;
+  } else if(idx===3){// Invasion + D-loop
+    c+=`<line x1="80" y1="${y1}" x2="320" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    c+=`<line x1="480" y1="${y1}" x2="720" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    c+=`<line x1="80" y1="${y2}" x2="350" y2="${y2}" stroke="#6AAAE8" stroke-width="${sw}"/>`;
+    c+=`<line x1="450" y1="${y2}" x2="720" y2="${y2}" stroke="#6AAAE8" stroke-width="${sw}"/>`;
+    // Invasion strand
+    c+=`<path d="M370,${y2} C380,${y2+20} 390,${y3-10} 400,${y3}" fill="none" stroke="#6AAAE8" stroke-width="2.5" stroke-dasharray="6,3"/>`;
+    c+=`<line x1="400" y1="${y3}" x2="460" y2="${y3}" stroke="#6AAAE8" stroke-width="2.5"/>`;
+    // D-loop displaced
+    c+=`<path d="M380,${y3} Q420,${y3-35} 460,${y3}" fill="none" stroke="#E06080" stroke-width="2" stroke-dasharray="4,3"/>`;
+    c+=`<text x="420" y="${y3-40}" text-anchor="middle" fill="#E06080" font-size="9" font-weight="600">D-loop</text>`;
+    c+=`<line x1="80" y1="${y3}" x2="380" y2="${y3}" stroke="#E06080" stroke-width="${sw}"/>`;
+    c+=`<line x1="460" y1="${y3}" x2="720" y2="${y3}" stroke="#E06080" stroke-width="${sw}"/>`;
+    c+=`<line x1="80" y1="${y4}" x2="720" y2="${y4}" stroke="#F08898" stroke-width="${sw}"/>`;
+    c+=`<text x="440" y="${y2+55}" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">Heterodúplex</text>`;
+    c+=`<text x="400" y="${y1-12}" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="600">Rad51 → Invasión de hebra</text>`;
+    c+=`<text x="50" y="${(y1+y2)/2+4}" text-anchor="end" fill="#4A90D9" font-size="10">Mat</text>`;
+    c+=`<text x="50" y="${(y3+y4)/2+4}" text-anchor="end" fill="#E06080" font-size="10">Pat</text>`;
+  } else if(idx===4){// Synthesis
+    c+=`<line x1="80" y1="${y1}" x2="320" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    c+=`<line x1="480" y1="${y1}" x2="720" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    c+=`<line x1="80" y1="${y2}" x2="350" y2="${y2}" stroke="#6AAAE8" stroke-width="${sw}"/>`;
+    c+=`<line x1="450" y1="${y2}" x2="720" y2="${y2}" stroke="#6AAAE8" stroke-width="${sw}"/>`;
+    c+=`<path d="M370,${y2} C380,${y2+20} 390,${y3-10} 400,${y3}" fill="none" stroke="#6AAAE8" stroke-width="2.5"/>`;
+    c+=`<line x1="400" y1="${y3}" x2="500" y2="${y3}" stroke="#6AAAE8" stroke-width="2.5"/>`;
+    // New synthesis
+    c+=`<line x1="400" y1="${y3}" x2="500" y2="${y3}" stroke="#FFD93D" stroke-width="4" opacity=".5"/>`;
+    c+=`<text x="450" y="${y3-10}" text-anchor="middle" fill="#FFD93D" font-size="9" font-weight="600">Síntesis nueva</text>`;
+    c+=`<path d="M360,${y3} Q430,${y3-45} 500,${y3}" fill="none" stroke="#E06080" stroke-width="2" stroke-dasharray="4,3"/>`;
+    c+=`<line x1="80" y1="${y3}" x2="360" y2="${y3}" stroke="#E06080" stroke-width="${sw}"/>`;
+    c+=`<line x1="500" y1="${y3}" x2="720" y2="${y3}" stroke="#E06080" stroke-width="${sw}"/>`;
+    c+=`<line x1="80" y1="${y4}" x2="720" y2="${y4}" stroke="#F08898" stroke-width="${sw}"/>`;
+    c+=`<text x="400" y="${y1-12}" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="600">Síntesis de ADN (extremo 3' = primer)</text>`;
+    c+=`<text x="50" y="${(y1+y2)/2+4}" text-anchor="end" fill="#4A90D9" font-size="10">Mat</text>`;
+    c+=`<text x="50" y="${(y3+y4)/2+4}" text-anchor="end" fill="#E06080" font-size="10">Pat</text>`;
+  } else if(idx===5){// Double HJ
+    c+=`<line x1="80" y1="${y1}" x2="320" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    c+=`<line x1="480" y1="${y1}" x2="720" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    // Crossed strands at HJ1
+    c+=`<path d="M320,${y1} C340,${y1} 350,${(y1+y3)/2} 360,${y3}" fill="none" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    c+=`<path d="M360,${y3-0} L480,${y3}" fill="none" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    c+=`<path d="M320,${y3} C340,${y3} 350,${(y1+y3)/2} 360,${y1}" fill="none" stroke="#E06080" stroke-width="${sw}"/>`;
+    c+=`<path d="M360,${y1} L480,${y1}" fill="none" stroke="#E06080" stroke-width="${sw}"/>`;
+    // HJ2 cross back
+    c+=`<path d="M480,${y1} C500,${y1} 510,${(y1+y3)/2} 520,${y3}" fill="none" stroke="#E06080" stroke-width="${sw}"/>`;
+    c+=`<line x1="520" y1="${y3}" x2="720" y2="${y3}" stroke="#E06080" stroke-width="${sw}"/>`;
+    c+=`<path d="M480,${y3} C500,${y3} 510,${(y1+y3)/2} 520,${y1}" fill="none" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    c+=`<line x1="520" y1="${y1}" x2="720" y2="${y1}" stroke="#4A90D9" stroke-width="${sw}"/>`;
+    // Lower strands
+    c+=`<line x1="80" y1="${y2}" x2="720" y2="${y2}" stroke="#6AAAE8" stroke-width="${sw}" opacity=".5"/>`;
+    c+=`<line x1="80" y1="${y4}" x2="720" y2="${y4}" stroke="#F08898" stroke-width="${sw}" opacity=".5"/>`;
+    c+=`<line x1="80" y1="${y3}" x2="320" y2="${y3}" stroke="#E06080" stroke-width="${sw}"/>`;
+    // HJ markers
+    c+=`<circle cx="340" cy="${(y1+y3)/2}" r="12" fill="rgba(255,217,61,.2)" stroke="#FFD93D" stroke-width="2"/>`;
+    c+=`<text x="340" y="${(y1+y3)/2+4}" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="700">HJ₁</text>`;
+    c+=`<circle cx="500" cy="${(y1+y3)/2}" r="12" fill="rgba(255,217,61,.2)" stroke="#FFD93D" stroke-width="2"/>`;
+    c+=`<text x="500" y="${(y1+y3)/2+4}" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="700">HJ₂</text>`;
+    c+=`<text x="400" y="${y1-16}" text-anchor="middle" fill="#FFD93D" font-size="11" font-weight="700">Dos Holliday Junctions</text>`;
+    c+=`<text x="400" y="${y4+30}" text-anchor="middle" fill="#5A7A96" font-size="10">La resolución determinará si hay entrecruzamiento o solo conversión génica</text>`;
+    c+=`<text x="50" y="${(y1+y2)/2+4}" text-anchor="end" fill="#4A90D9" font-size="10">Mat</text>`;
+    c+=`<text x="50" y="${(y3+y4)/2+4}" text-anchor="end" fill="#E06080" font-size="10">Pat</text>`;
+  }
+  svg.innerHTML=c;
+}
+
+// ═══════════════════════════════════════
+// SIM 4: HOLLIDAY JUNCTION
+// ═══════════════════════════════════════
+let hjInited=false;
+function initHJ(){drawHJ('initial')}
+function drawHJ(state){
+  const svg=document.getElementById('hjSvg');
+  let c='';
+  const y1=80,y3=260,mid=(y1+y3)/2;
+  if(state==='initial'){
+    // Two duplexes with cross
+    c+=`<line x1="80" y1="${y1}" x2="300" y2="${y1}" stroke="#4A90D9" stroke-width="3"/>`;
+    c+=`<path d="M300,${y1} C340,${y1} 370,${mid} 400,${mid}" fill="none" stroke="#4A90D9" stroke-width="3"/>`;
+    c+=`<path d="M400,${mid} C430,${mid} 460,${y3} 500,${y3}" fill="none" stroke="#4A90D9" stroke-width="3"/>`;
+    c+=`<line x1="500" y1="${y3}" x2="720" y2="${y3}" stroke="#4A90D9" stroke-width="3"/>`;
+    c+=`<line x1="80" y1="${y3}" x2="300" y2="${y3}" stroke="#E06080" stroke-width="3"/>`;
+    c+=`<path d="M300,${y3} C340,${y3} 370,${mid} 400,${mid}" fill="none" stroke="#E06080" stroke-width="3"/>`;
+    c+=`<path d="M400,${mid} C430,${mid} 460,${y1} 500,${y1}" fill="none" stroke="#E06080" stroke-width="3"/>`;
+    c+=`<line x1="500" y1="${y1}" x2="720" y2="${y1}" stroke="#E06080" stroke-width="3"/>`;
+    c+=`<circle cx="400" cy="${mid}" r="16" fill="rgba(255,217,61,.15)" stroke="#FFD93D" stroke-width="2"/>`;
+    c+=`<text x="400" y="${mid+4}" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="700">HJ</text>`;
+    // Cut lines hints
+    c+=`<line x1="360" y1="${mid-40}" x2="440" y2="${mid+40}" stroke="#00D4AA" stroke-width="1.5" stroke-dasharray="6,4" opacity=".5"/>`;
+    c+=`<text x="450" y="${mid+50}" fill="#00D4AA" font-size="9" opacity=".6">Corte Horizontal</text>`;
+    c+=`<line x1="360" y1="${mid+40}" x2="440" y2="${mid-40}" stroke="#EC4899" stroke-width="1.5" stroke-dasharray="6,4" opacity=".5"/>`;
+    c+=`<text x="450" y="${mid-42}" fill="#EC4899" font-size="9" opacity=".6">Corte Vertical</text>`;
+    c+=`<text x="60" y="${y1+4}" fill="#4A90D9" font-size="11" font-weight="600">Mat</text>`;
+    c+=`<text x="60" y="${y3+4}" fill="#E06080" font-size="11" font-weight="600">Pat</text>`;
+  } else if(state==='horiz'){
+    // No crossover: same arms stay together
+    c+=`<line x1="80" y1="${y1}" x2="720" y2="${y1}" stroke="#4A90D9" stroke-width="3"/>`;
+    c+=`<line x1="80" y1="${y3}" x2="720" y2="${y3}" stroke="#E06080" stroke-width="3"/>`;
+    // Small heteroduplex zone
+    c+=`<rect x="350" y="${y1-6}" width="100" height="12" rx="6" fill="rgba(224,96,128,.2)" stroke="#E06080" stroke-width="1" stroke-dasharray="3,2"/>`;
+    c+=`<rect x="350" y="${y3-6}" width="100" height="12" rx="6" fill="rgba(74,144,217,.2)" stroke="#4A90D9" stroke-width="1" stroke-dasharray="3,2"/>`;
+    c+=`<text x="400" y="${y1+30}" text-anchor="middle" fill="#5A7A96" font-size="9">Zona de conversión génica</text>`;
+    c+=stageLabel(400,35,'SIN ENTRECRUZAMIENTO','#00D4AA');
+    c+=`<text x="400" y="${y3+40}" text-anchor="middle" fill="#00D4AA" font-size="12" font-weight="700">✓ Brazos distales mantienen configuración original</text>`;
+    c+=`<text x="60" y="${y1+4}" fill="#4A90D9" font-size="11" font-weight="600">Mat</text>`;
+    c+=`<text x="60" y="${y3+4}" fill="#E06080" font-size="11" font-weight="600">Pat</text>`;
+  } else if(state==='vert'){
+    // Crossover: arms swap
+    c+=`<line x1="80" y1="${y1}" x2="380" y2="${y1}" stroke="#4A90D9" stroke-width="3"/>`;
+    c+=`<line x1="420" y1="${y1}" x2="720" y2="${y1}" stroke="#E06080" stroke-width="3"/>`;
+    c+=`<line x1="80" y1="${y3}" x2="380" y2="${y3}" stroke="#E06080" stroke-width="3"/>`;
+    c+=`<line x1="420" y1="${y3}" x2="720" y2="${y3}" stroke="#4A90D9" stroke-width="3"/>`;
+    c+=`<rect x="380" y="${y1-3}" width="40" height="6" rx="3" fill="#FFD93D" opacity=".6"/>`;
+    c+=`<rect x="380" y="${y3-3}" width="40" height="6" rx="3" fill="#FFD93D" opacity=".6"/>`;
+    c+=stageLabel(400,35,'CON ENTRECRUZAMIENTO','#EC4899');
+    c+=`<text x="400" y="${y3+40}" text-anchor="middle" fill="#EC4899" font-size="12" font-weight="700">✕ Brazos distales intercambiados → Recombinante</text>`;
+    c+=`<text x="60" y="${y1+4}" fill="#4A90D9" font-size="11" font-weight="600">Mat</text>`;
+    c+=`<text x="60" y="${y3+4}" fill="#E06080" font-size="11" font-weight="600">Pat</text>`;
+    c+=`<text x="740" y="${y1+4}" fill="#E06080" font-size="11" font-weight="600">Pat</text>`;
+    c+=`<text x="740" y="${y3+4}" fill="#4A90D9" font-size="11" font-weight="600">Mat</text>`;
+  }
+  svg.innerHTML=c;
+}
+function resolveHJ(mode){
+  drawHJ(mode);
+  document.getElementById('hjBtnH').style.display='none';
+  document.getElementById('hjBtnV').style.display='none';
+  document.getElementById('hjReset').style.display='';
+  const msg=mode==='horiz'?
+    'Corte <strong>horizontal</strong>: las resolvasas cortaron en el mismo plano. Los brazos distales mantienen su configuración original. Solo hay <strong>conversión génica</strong> en la zona del heterodúplex. No hay entrecruzamiento visible.':
+    'Corte <strong>vertical</strong>: las resolvasas cortaron en el plano perpendicular. Los brazos distales se <strong>intercambiaron</strong> entre los dos cromosomas. Esto genera un <strong>entrecruzamiento</strong> (crossing over) visible como quiasma.';
+  document.getElementById('hjNarr').innerHTML=msg;
+}
+function resetHJ(){
+  drawHJ('initial');
+  document.getElementById('hjBtnH').style.display='';
+  document.getElementById('hjBtnV').style.display='';
+  document.getElementById('hjReset').style.display='none';
+  document.getElementById('hjNarr').innerHTML='La Holliday Junction está formada. <strong>Elige un plano de corte</strong> para ver el resultado.';
+}
+
+// ═══════════════════════════════════════
+// SIM 5: VS MITOSIS
+// ═══════════════════════════════════════
+let vsInited=false, vsIdx=0;
+const vsSteps=[
+  {title:"Inicio — Célula diploide 2n",narr:"Ambos procesos inician con una célula diploide (2n) que ha completado la replicación del ADN (4C). Cada cromosoma tiene dos cromátidas hermanas."},
+  {title:"Alineación en el ecuador",narr:"<strong>MITOSIS:</strong> Cromosomas individuales se alinean en el ecuador. Cada cinetocoro se une a microtúbulos de <strong>polos opuestos</strong>.<br><strong>MEIOSIS I:</strong> <strong>Bivalentes</strong> (homólogos apareados) se alinean. Los cinetocoros hermanos se orientan al <strong>mismo polo</strong>."},
+  {title:"Separación (Anafase)",narr:"<strong>MITOSIS:</strong> Se separan <strong>cromátidas hermanas</strong>. Cada polo recibe una copia idéntica.<br><strong>MEIOSIS I:</strong> Se separan <strong>cromosomas homólogos</strong>. Las cromátidas hermanas permanecen unidas (protegidas por shugoshina)."},
+  {title:"Resultado",narr:"<strong>MITOSIS:</strong> <strong>2 células diploides (2n)</strong> genéticamente idénticas a la célula madre. Función: crecimiento y reparación.<br><strong>MEIOSIS:</strong> Tras MII → <strong>4 células haploides (1n)</strong> genéticamente únicas. Función: producción de gametos."},
+];
+
+function initVs(){
+  let dots='';vsSteps.forEach((_,i)=>{dots+=`<div class="sim-dot${i===0?' act':''}" onclick="vsGo(${i})"></div>`});
+  document.getElementById('vsDots').innerHTML=dots;
+  vsDraw(0);
+}
+function vsGo(i){vsIdx=i;vsDraw(i)}
+function vsStep(d){vsIdx=Math.max(0,Math.min(vsSteps.length-1,vsIdx+d));vsDraw(vsIdx)}
+function vsDraw(idx){
+  const s=vsSteps[idx];
+  document.getElementById('vsTitle').textContent=s.title;
+  document.getElementById('vsNarr').innerHTML=s.narr;
+  document.getElementById('vsPrev').disabled=idx===0;
+  document.getElementById('vsNext').disabled=idx===vsSteps.length-1;
+  document.querySelectorAll('#vsDots .sim-dot').forEach((d,i)=>{d.className='sim-dot'+(i===idx?' act':i<idx?' done':'')});
+  const svg=document.getElementById('vsSvg');
+  let c='';
+  // Dividing line
+  c+=`<line x1="400" y1="30" x2="400" y2="430" stroke="#5A7A96" stroke-width="1" stroke-dasharray="4,4"/>`;
+  c+=`<text x="200" y="25" text-anchor="middle" fill="#00A3FF" font-size="14" font-weight="700" font-family="DM Serif Display,serif">MITOSIS</text>`;
+  c+=`<text x="600" y="25" text-anchor="middle" fill="#00D4AA" font-size="14" font-weight="700" font-family="DM Serif Display,serif">MEIOSIS</text>`;
+  if(idx===0){
+    c+=cellCircle(200,230,130,'2n = 4, 4C','');
+    c+=chromSvg(150,170,70,'mat',true); c+=chromSvg(185,175,60,'pat',true);
+    c+=cellCircle(600,230,130,'2n = 4, 4C','');
+    c+=chromSvg(550,170,70,'mat',true); c+=chromSvg(585,175,60,'pat',true);
+    c+=`<text x="400" y="420" text-anchor="middle" fill="#5A7A96" font-size="10">Ambas parten de la misma célula diploide post-replicación</text>`;
+  } else if(idx===1){
+    // Mitosis: individual chromosomes at equator
+    c+=cellCircle(200,230,130,'Metafase','');
+    c+=`<line x1="100" y1="230" x2="300" y2="230" stroke="#5A7A96" stroke-width="1" stroke-dasharray="3,3"/>`;
+    c+=chromSvg(140,200,50,'mat',true); c+=chromSvg(175,205,45,'pat',true);
+    c+=chromSvg(215,200,50,'mat',true); c+=chromSvg(250,205,45,'pat',true);
+    c+=`<text x="200" y="380" text-anchor="middle" fill="#8BA4BE" font-size="9">Cromosomas individuales</text>`;
+    // Meiosis: bivalents at equator
+    c+=cellCircle(600,230,130,'Metafase I','');
+    c+=`<line x1="500" y1="230" x2="700" y2="230" stroke="#5A7A96" stroke-width="1" stroke-dasharray="3,3"/>`;
+    c+=chromSvg(530,200,50,'mat',true); c+=chromSvg(560,200,50,'pat',true);
+    c+=chromSvg(620,205,45,'mat',true); c+=chromSvg(650,205,45,'pat',true);
+    c+=`<text x="600" y="380" text-anchor="middle" fill="#8BA4BE" font-size="9">Bivalentes (homólogos apareados)</text>`;
+  } else if(idx===2){
+    // Mitosis: sisters separate
+    c+=cellCircle(200,230,140,'Anafase','');
+    c+=chromSvg(145,100,45,'mat',false); c+=chromSvg(175,105,40,'pat',false);
+    c+=chromSvg(210,100,45,'mat',false); c+=chromSvg(240,105,40,'pat',false);
+    c+=chromSvg(145,310,45,'mat',false); c+=chromSvg(175,315,40,'pat',false);
+    c+=chromSvg(210,310,45,'mat',false); c+=chromSvg(240,315,40,'pat',false);
+    c+=`<text x="200" y="410" text-anchor="middle" fill="#00A3FF" font-size="9" font-weight="600">Cromátidas hermanas → polos opuestos</text>`;
+    // Meiosis: homologs separate
+    c+=cellCircle(600,230,140,'Anafase I','');
+    c+=chromSvg(555,100,50,'mat',true); c+=chromSvg(620,100,50,'mat',true);
+    c+=chromSvg(555,310,50,'pat',true); c+=chromSvg(620,310,50,'pat',true);
+    c+=`<text x="600" y="410" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">Homólogos → polos opuestos (hermanas unidas)</text>`;
+  } else if(idx===3){
+    // Mitosis result: 2 diploid
+    c+=cellCircle(140,180,70,'2n',''); c+=cellCircle(260,180,70,'2n','');
+    c+=chromSvg(115,155,35,'mat',false); c+=chromSvg(135,158,30,'pat',false);
+    c+=chromSvg(155,155,35,'mat',false); c+=chromSvg(175,158,30,'pat',false);
+    c+=chromSvg(235,155,35,'mat',false); c+=chromSvg(255,158,30,'pat',false);
+    c+=chromSvg(275,155,35,'mat',false); c+=chromSvg(295,158,30,'pat',false);
+    c+=`<text x="200" y="280" text-anchor="middle" fill="#00A3FF" font-size="11" font-weight="700">2 células diploides idénticas</text>`;
+    c+=`<text x="200" y="300" text-anchor="middle" fill="#5A7A96" font-size="9">Crecimiento y reparación</text>`;
+    // Meiosis result: 4 haploid
+    const gx=[490,570,630,710];
+    gx.forEach((x,i)=>{
+      c+=cellCircle(x,180,45,'1n','');
+      c+=chromSvg(x-18,160,28,i<2?'mat':'pat',false,null,i%2===0);
+      c+=chromSvg(x+5,163,25,i<2?'pat':'mat',false,null,i%2===1);
+    });
+    c+=`<text x="600" y="270" text-anchor="middle" fill="#00D4AA" font-size="11" font-weight="700">4 gametos haploides únicos</text>`;
+    c+=`<text x="600" y="290" text-anchor="middle" fill="#5A7A96" font-size="9">Producción de gametos</text>`;
+    c+=`<text x="400" y="380" text-anchor="middle" fill="#FFD93D" font-size="12" font-weight="700">⚖️ Mitosis = identidad &nbsp;&nbsp;|&nbsp;&nbsp; Meiosis = diversidad</text>`;
+  }
+  svg.innerHTML=c;
+}
+
+// ═══════════════════════════════════════
+// SIM 6: NO DISYUNCIÓN
+// ═══════════════════════════════════════
+let ndInited=false;
+function initNd(){ndDraw('normal')}
+function ndSet(mode){
+  ['ndNorm','ndAI','ndAII'].forEach(id=>document.getElementById(id).classList.remove('active'));
+  document.getElementById(mode==='normal'?'ndNorm':mode==='ai'?'ndAI':'ndAII').classList.add('active');
+  ndDraw(mode);
+}
+function ndDraw(mode){
+  const svg=document.getElementById('ndSvg');
+  let c='';
+  const titles={normal:'Segregación Normal',ai:'No Disyunción — Anafase I',aii:'No Disyunción — Anafase II'};
+  document.getElementById('ndTitle').textContent=titles[mode];
+  // Starting cell
+  c+=cellCircle(400,55,40,'2n','');
+  c+=chromSvg(380,38,28,'mat',true); c+=chromSvg(405,40,25,'pat',true);
+  c+=`<text x="400" y="10" text-anchor="middle" fill="#5A7A96" font-size="10" font-weight="600">Célula diploide</text>`;
+  // MI arrows
+  c+=`<line x1="340" y1="95" x2="240" y2="140" stroke="#5A7A96" stroke-width="1.5"/>`;
+  c+=`<line x1="460" y1="95" x2="560" y2="140" stroke="#5A7A96" stroke-width="1.5"/>`;
+  c+=`<text x="400" y="118" text-anchor="middle" fill="#EC4899" font-size="10" font-weight="600">MEIOSIS I</text>`;
+  if(mode==='normal'){
+    // MI produces 2 normal cells
+    c+=cellCircle(220,180,45,'n',''); c+=cellCircle(580,180,45,'n','');
+    c+=chromSvg(205,165,25,'mat',true); c+=chromSvg(565,165,25,'pat',true);
+    // MII
+    c+=`<line x1="180" y1="225" x2="120" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<line x1="260" y1="225" x2="320" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<line x1="540" y1="225" x2="480" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<line x1="620" y1="225" x2="680" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<text x="400" y="265" text-anchor="middle" fill="#F97316" font-size="10" font-weight="600">MEIOSIS II</text>`;
+    // 4 normal gametes
+    const gx=[110,330,470,690];
+    gx.forEach((x,i)=>{
+      c+=cellCircle(x,330,38,'n','');
+      c+=chromSvg(x-8,318,20,i<2?'mat':'pat',false);
+      c+=`<rect x="${x-20}" y="375" width="40" height="18" rx="9" fill="rgba(0,212,170,.15)"/>`;
+      c+=`<text x="${x}" y="388" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">✓ n</text>`;
+    });
+    c+=`<text x="400" y="430" text-anchor="middle" fill="#00D4AA" font-size="12" font-weight="700">✓ 4 gametos normales</text>`;
+    document.getElementById('ndNarr').innerHTML='Segregación <strong>normal</strong>: en Anafase I los homólogos se separan correctamente. En Anafase II las cromátidas hermanas se separan. Resultado: <strong>4 gametos haploides normales</strong> (n).';
+  } else if(mode==='ai'){
+    // MI error: both homologs to one side
+    c+=cellCircle(220,180,45,'n+1',''); c+=cellCircle(580,180,45,'n-1','');
+    c+=chromSvg(195,162,25,'mat',true); c+=chromSvg(220,165,22,'pat',true); // both went left
+    // nothing in right cell
+    c+=`<text x="220" y="160" text-anchor="middle" fill="#FF6B6B" font-size="16">⚠️</text>`;
+    c+=`<text x="580" y="160" text-anchor="middle" fill="#FF6B6B" font-size="16">⚠️</text>`;
+    // MII
+    c+=`<line x1="180" y1="225" x2="120" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<line x1="260" y1="225" x2="320" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<line x1="540" y1="225" x2="480" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<line x1="620" y1="225" x2="680" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<text x="400" y="265" text-anchor="middle" fill="#F97316" font-size="10" font-weight="600">MEIOSIS II</text>`;
+    const gx=[110,330,470,690];
+    const labels=['n+1','n+1','n-1','n-1'];
+    gx.forEach((x,i)=>{
+      c+=cellCircle(x,330,38,'','');
+      if(i<2){c+=chromSvg(x-12,316,20,i===0?'mat':'pat',false)}
+      c+=`<rect x="${x-22}" y="375" width="44" height="18" rx="9" fill="rgba(255,107,107,.15)"/>`;
+      c+=`<text x="${x}" y="388" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">✗ ${labels[i]}</text>`;
+    });
+    c+=`<text x="400" y="430" text-anchor="middle" fill="#FF6B6B" font-size="12" font-weight="700">✗ 4 gametos anormales (todos aneuploides)</text>`;
+    document.getElementById('ndNarr').innerHTML='Error en <strong>Anafase I</strong>: ambos homólogos migran al mismo polo. Las dos células resultantes son anormales. Al completar Meiosis II, los <strong>4 gametos son aneuploides</strong> — 2 con un cromosoma extra (n+1) y 2 con uno faltante (n−1).';
+  } else {
+    // MI normal
+    c+=cellCircle(220,180,45,'n',''); c+=cellCircle(580,180,45,'n','');
+    c+=chromSvg(205,165,25,'mat',true); c+=chromSvg(565,165,25,'pat',true);
+    // MII: error in right cell only
+    c+=`<line x1="180" y1="225" x2="120" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<line x1="260" y1="225" x2="320" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<line x1="540" y1="225" x2="480" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<line x1="620" y1="225" x2="680" y2="280" stroke="#5A7A96" stroke-width="1"/>`;
+    c+=`<text x="220" y="260" text-anchor="middle" fill="#00D4AA" font-size="9">Normal</text>`;
+    c+=`<text x="580" y="260" text-anchor="middle" fill="#FF6B6B" font-size="9">⚠️ Error AII</text>`;
+    const gx=[110,330,470,690];
+    const labels=['n','n','n+1','n-1'];
+    const cols=['#00D4AA','#00D4AA','#FF6B6B','#FF6B6B'];
+    gx.forEach((x,i)=>{
+      c+=cellCircle(x,330,38,'','');
+      if(i<2)c+=chromSvg(x-8,318,20,'mat',false);
+      else if(i===2){c+=chromSvg(x-12,315,20,'pat',false);c+=chromSvg(x+5,318,18,'pat',false)}
+      const bgC=i<2?'rgba(0,212,170,.15)':'rgba(255,107,107,.15)';
+      c+=`<rect x="${x-22}" y="375" width="44" height="18" rx="9" fill="${bgC}"/>`;
+      c+=`<text x="${x}" y="388" text-anchor="middle" fill="${cols[i]}" font-size="9" font-weight="600">${i<2?'✓':'✗'} ${labels[i]}</text>`;
+    });
+    c+=`<text x="400" y="430" text-anchor="middle" fill="#FFD93D" font-size="12" font-weight="700">2 gametos normales + 2 anormales</text>`;
+    document.getElementById('ndNarr').innerHTML='Error en <strong>Anafase II</strong>: Meiosis I fue normal. En una de las dos células, las cromátidas hermanas no se separan. Resultado: <strong>2 gametos normales</strong> (de la célula sin error) y <strong>2 anormales</strong> (n+1 y n−1) de la célula con error.';
+  }
+  svg.innerHTML=c;
+}
+</script>
+</body>
+</html>
