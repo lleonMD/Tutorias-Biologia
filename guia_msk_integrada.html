@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía MSK | Estrategias Integradas de Estudio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bone: #F5F0E8;
+  --bone-dark: #E8DFD0;
+  --marrow: #C43B2E;
+  --marrow-glow: #E05545;
+  --tendon: #2B6B5E;
+  --tendon-light: #3A8F7D;
+  --cartilage: #4A7FB5;
+  --cartilage-light: #6AA0D0;
+  --periosteum: #8B6914;
+  --periosteum-light: #B8920E;
+  --muscle: #7B3F8E;
+  --muscle-light: #9E5FB5;
+  --ink: #1A1A18;
+  --ink-mid: #4A4A45;
+  --ink-light: #7A7A72;
+  --white: #FFFFFF;
+  --shadow: rgba(26,26,24,0.08);
+  --shadow-md: rgba(26,26,24,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bone);
+  color: var(--ink);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+::selection { background: var(--marrow); color: var(--white); }
+
+/* HEADER */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  background: linear-gradient(160deg, #1A1A18 0%, #2B2B28 40%, #3A2A28 70%, #1A1A18 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 20% 30%, rgba(196,59,46,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 80% 70%, rgba(43,107,94,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .4rem 1rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50px;
+  color: rgba(255,255,255,0.6);
+  font-size: .75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(4px);
+  animation: fadeDown .8s ease both;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--marrow);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(196,59,46,.4); }
+  50% { opacity: .8; box-shadow: 0 0 0 8px rgba(196,59,46,0); }
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  color: var(--white);
+  line-height: 1.1;
+  max-width: 800px;
+  animation: fadeUp 1s ease both .2s;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--marrow-glow);
+}
+.hero-sub {
+  color: rgba(255,255,255,0.55);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin-top: 1.5rem;
+  font-weight: 300;
+  animation: fadeUp 1s ease both .4s;
+}
+.hero-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 1s ease both .6s;
+}
+.hero-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .8rem 1.8rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .9rem;
+  transition: all .3s;
+}
+.cta-primary {
+  background: var(--marrow);
+  color: var(--white);
+}
+.cta-primary:hover { background: var(--marrow-glow); transform: translateY(-2px); }
+.cta-secondary {
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8);
+}
+.cta-secondary:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity:0; transform:translateY(-10px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* NAV STICKY */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--bone-dark);
+  padding: .6rem 1rem;
+  overflow-x: auto;
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+}
+.sticky-nav a {
+  white-space: nowrap;
+  padding: .4rem 1rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: .8rem;
+  font-weight: 500;
+  color: var(--ink-mid);
+  border: 1px solid transparent;
+  transition: all .25s;
+}
+.sticky-nav a:hover, .sticky-nav a.active {
+  background: var(--white);
+  border-color: var(--bone-dark);
+  color: var(--ink);
+}
+
+/* SECTIONS */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.section-label .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.section h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  margin-bottom: .5rem;
+}
+.section .lead {
+  font-size: 1.05rem;
+  color: var(--ink-mid);
+  max-width: 700px;
+  margin-bottom: 2rem;
+}
+
+/* EVIDENCE CARDS */
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.ev-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.8rem;
+  border: 1px solid var(--bone-dark);
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+.ev-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px var(--shadow-md);
+}
+.ev-card .ev-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  opacity: .06;
+  font-weight: 400;
+}
+.ev-card .ev-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+.ev-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: .5rem;
+}
+.ev-card p {
+  font-size: .9rem;
+  color: var(--ink-mid);
+  line-height: 1.6;
+}
+.ev-card .ev-source {
+  margin-top: 1rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--bone);
+  font-size: .75rem;
+  color: var(--ink-light);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* COLOR THEMES FOR CARDS */
+.theme-marrow .ev-icon { background: rgba(196,59,46,.1); color: var(--marrow); }
+.theme-tendon .ev-icon { background: rgba(43,107,94,.1); color: var(--tendon); }
+.theme-cartilage .ev-icon { background: rgba(74,127,181,.1); color: var(--cartilage); }
+.theme-periosteum .ev-icon { background: rgba(139,105,20,.1); color: var(--periosteum); }
+.theme-muscle .ev-icon { background: rgba(123,63,142,.1); color: var(--muscle); }
+.theme-ink .ev-icon { background: rgba(26,26,24,.08); color: var(--ink); }
+
+/* TABS SYSTEM */
+.tabs-container {
+  margin-top: 2rem;
+  background: var(--white);
+  border-radius: 20px;
+  border: 1px solid var(--bone-dark);
+  overflow: hidden;
+}
+.tabs-header {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--bone-dark);
+  padding: .5rem .5rem 0;
+  gap: .25rem;
+}
+.tab-btn {
+  padding: .7rem 1.2rem;
+  border: none;
+  background: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--ink-light);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all .25s;
+  border-radius: 8px 8px 0 0;
+}
+.tab-btn:hover { color: var(--ink); background: var(--bone); }
+.tab-btn.active {
+  color: var(--marrow);
+  border-bottom-color: var(--marrow);
+  background: rgba(196,59,46,.04);
+}
+.tab-content { display: none; padding: 2rem; }
+.tab-content.active { display: block; animation: fadeUp .4s ease; }
+.tab-content h4 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  margin-bottom: .8rem;
+}
+.tab-content p, .tab-content li {
+  font-size: .92rem;
+  color: var(--ink-mid);
+  line-height: 1.7;
+}
+.tab-content ul { padding-left: 1.2rem; margin: .8rem 0; }
+.tab-content li { margin-bottom: .5rem; }
+.tab-content li strong { color: var(--ink); }
+
+/* MCQ STRATEGY STEPPER */
+.stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 1.5rem;
+  position: relative;
+}
+.stepper::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  background: var(--bone-dark);
+}
+.step-item {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  padding: 1rem 0;
+  cursor: pointer;
+}
+.step-num {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: .9rem;
+  flex-shrink: 0;
+  background: var(--white);
+  border: 2px solid var(--bone-dark);
+  color: var(--ink-light);
+  transition: all .3s;
+  position: relative;
+  z-index: 1;
+}
+.step-item.open .step-num {
+  background: var(--marrow);
+  border-color: var(--marrow);
+  color: var(--white);
+}
+.step-body { flex: 1; }
+.step-body h4 {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: .3rem;
+  transition: color .3s;
+}
+.step-item.open .step-body h4 { color: var(--marrow); }
+.step-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease, opacity .3s;
+  opacity: 0;
+}
+.step-item.open .step-detail {
+  max-height: 500px;
+  opacity: 1;
+}
+.step-detail p {
+  font-size: .88rem;
+  color: var(--ink-mid);
+  margin-top: .5rem;
+  line-height: 1.7;
+  padding-right: 1rem;
+}
+
+/* INTEGRATION MAP */
+.integration-map {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.int-row {
+  background: var(--white);
+  border-radius: 14px;
+  border: 1px solid var(--bone-dark);
+  overflow: hidden;
+  transition: all .3s;
+}
+.int-row:hover { box-shadow: 0 8px 30px var(--shadow); }
+.int-header {
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: background .2s;
+}
+.int-header:hover { background: var(--bone); }
+.int-emoji { font-size: 1.5rem; }
+.int-title { font-weight: 600; font-size: 1rem; flex:1; }
+.int-arrow {
+  width: 24px; height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .3s;
+  color: var(--ink-light);
+}
+.int-row.open .int-arrow { transform: rotate(180deg); }
+.int-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease;
+}
+.int-row.open .int-detail { max-height: 1200px; }
+.int-detail-inner {
+  padding: 0 1.5rem 1.5rem;
+}
+.int-disc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.int-disc {
+  padding: 1rem;
+  border-radius: 10px;
+  background: var(--bone);
+  border-left: 3px solid;
+}
+.int-disc h5 {
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: .4rem;
+}
+.int-disc p {
+  font-size: .85rem;
+  color: var(--ink-mid);
+  line-height: 1.55;
+}
+
+/* QUIZ */
+.quiz-box {
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--bone-dark);
+  padding: 2rem;
+  margin-top: 1.5rem;
+}
+.quiz-q {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+.quiz-options { display: flex; flex-direction: column; gap: .5rem; }
+.quiz-opt {
+  padding: .8rem 1.2rem;
+  border: 2px solid var(--bone-dark);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: .9rem;
+  transition: all .25s;
+  display: flex;
+  align-items: flex-start;
+  gap: .8rem;
+}
+.quiz-opt:hover { border-color: var(--cartilage); background: rgba(74,127,181,.04); }
+.quiz-opt.correct { border-color: var(--tendon); background: rgba(43,107,94,.08); }
+.quiz-opt.wrong { border-color: var(--marrow); background: rgba(196,59,46,.06); opacity: .6; }
+.quiz-opt .opt-letter {
+  font-weight: 700;
+  font-size: .8rem;
+  color: var(--ink-light);
+  min-width: 24px;
+}
+.quiz-feedback {
+  margin-top: 1rem;
+  padding: 1.2rem;
+  border-radius: 10px;
+  font-size: .88rem;
+  line-height: 1.6;
+  display: none;
+}
+.quiz-feedback.show { display: block; animation: fadeUp .3s ease; }
+.quiz-feedback.correct-fb { background: rgba(43,107,94,.08); border-left: 3px solid var(--tendon); }
+.quiz-feedback.wrong-fb { background: rgba(196,59,46,.06); border-left: 3px solid var(--marrow); }
+.quiz-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.quiz-nav button {
+  padding: .6rem 1.4rem;
+  border-radius: 50px;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: .85rem;
+  cursor: pointer;
+  transition: all .25s;
+}
+.btn-next { background: var(--marrow); color: var(--white); }
+.btn-next:hover { background: var(--marrow-glow); }
+.btn-reset { background: var(--bone); color: var(--ink-mid); }
+.btn-reset:hover { background: var(--bone-dark); }
+.quiz-progress {
+  font-size: .8rem;
+  color: var(--ink-light);
+  font-family: 'JetBrains Mono', monospace;
+}
+.quiz-score {
+  text-align: center;
+  padding: 2rem;
+  display: none;
+}
+.quiz-score.show { display: block; animation: fadeUp .5s ease; }
+.quiz-score .score-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 4rem;
+  color: var(--marrow);
+}
+.quiz-score p { color: var(--ink-mid); margin-top: .5rem; }
+
+/* CHECKLIST */
+.checklist {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: .8rem;
+  padding: .8rem 1rem;
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--bone-dark);
+  cursor: pointer;
+  transition: all .25s;
+}
+.check-item:hover { box-shadow: 0 4px 12px var(--shadow); }
+.check-item.checked { background: rgba(43,107,94,.05); border-color: var(--tendon); }
+.check-box {
+  width: 22px; height: 22px;
+  border: 2px solid var(--bone-dark);
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .25s;
+  margin-top: 1px;
+}
+.check-item.checked .check-box {
+  background: var(--tendon);
+  border-color: var(--tendon);
+  color: var(--white);
+}
+.check-text { font-size: .9rem; }
+.check-text strong { color: var(--ink); }
+
+/* RESOURCES TABLE */
+.res-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  font-size: .88rem;
+}
+.res-table th {
+  text-align: left;
+  padding: .8rem 1rem;
+  background: var(--bone);
+  font-weight: 600;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink-mid);
+  border-bottom: 2px solid var(--bone-dark);
+}
+.res-table td {
+  padding: .8rem 1rem;
+  border-bottom: 1px solid var(--bone);
+  vertical-align: top;
+}
+.res-table tr:hover td { background: rgba(255,255,255,.6); }
+.res-tag {
+  display: inline-block;
+  padding: .15rem .5rem;
+  border-radius: 4px;
+  font-size: .7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.tag-anat { background: rgba(196,59,46,.1); color: var(--marrow); }
+.tag-bio { background: rgba(43,107,94,.1); color: var(--tendon); }
+.tag-histo { background: rgba(74,127,181,.1); color: var(--cartilage); }
+.tag-fisio { background: rgba(139,105,20,.1); color: var(--periosteum); }
+.tag-pato { background: rgba(123,63,142,.1); color: var(--muscle); }
+.tag-farm { background: rgba(26,26,24,.08); color: var(--ink); }
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--ink-light);
+  font-size: .8rem;
+  border-top: 1px solid var(--bone-dark);
+}
+.footer strong { color: var(--ink-mid); }
+
+/* DIVIDER */
+.divider {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.divider hr {
+  border: none;
+  border-top: 1px solid var(--bone-dark);
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .section { padding: 2.5rem 1rem; }
+  .tabs-header { padding: .3rem; }
+  .tab-btn { padding: .5rem .8rem; font-size: .78rem; }
+  .tab-content { padding: 1.2rem; }
+  .int-disc-grid { grid-template-columns: 1fr; }
+  .evidence-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-badge">Basado en evidencia &bull; 2025</div>
+  <h1>Sistema <em>Musculo&shy;esquelético</em></h1>
+  <p class="hero-sub">Guía interactiva de estrategias integradas de estudio para dominar evaluaciones de selección múltiple en segundo año de medicina.</p>
+  <div class="hero-cta">
+    <a href="#evidencia" class="cta-primary">&#9660; Explorar estrategias</a>
+    <a href="#quiz" class="cta-secondary">Practicar MCQ &#8594;</a>
+  </div>
+</section>
+
+<!-- ==================== NAV ==================== -->
+<nav class="sticky-nav" id="nav">
+  <a href="#evidencia">Evidencia</a>
+  <a href="#6pasos">6 Pasos MCQ</a>
+  <a href="#integracion">Mapa de Integración</a>
+  <a href="#msk-tabs">Temas Clave MSK</a>
+  <a href="#quiz">Quiz Integrador</a>
+  <a href="#plan">Plan de Estudio</a>
+  <a href="#recursos">Recursos</a>
+</nav>
+
+<!-- ==================== 1. EVIDENCIA ==================== -->
+<section class="section" id="evidencia">
+  <div class="section-label"><span class="dot" style="background:var(--marrow)"></span> SECCIÓN 01</div>
+  <h2>Estrategias Basadas en Evidencia</h2>
+  <p class="lead">La investigación en ciencias del aprendizaje ha identificado seis estrategias con alto impacto en la retención y aplicación del conocimiento médico. Estas son particularmente valiosas para evaluaciones integradas.</p>
+
+  <div class="evidence-grid">
+    <div class="ev-card theme-marrow">
+      <span class="ev-num">01</span>
+      <div class="ev-icon">&#128257;</div>
+      <h3>Práctica Espaciada</h3>
+      <p>Distribuir el estudio a lo largo del tiempo mejora significativamente la retención comparado con "maratones" de estudio. Para MSK, revisar un tema (ej: plexo braquial) en 3-4 sesiones separadas por días es superior a una sola sesión larga.</p>
+      <div class="ev-source">Blazek et al., Med Teach 2016 &bull; Raman et al., 2010</div>
+    </div>
+    <div class="ev-card theme-tendon">
+      <span class="ev-num">02</span>
+      <div class="ev-icon">&#128260;</div>
+      <h3>Práctica Intercalada</h3>
+      <p>Alternar entre diferentes temas (ej: anatomía del hombro → farmacología de AINEs → histología del cartílago) profundiza la comprensión y mejora la capacidad de distinguir entre conceptos relacionados.</p>
+      <div class="ev-source">PMC 10368606 &bull; Rohrer & Taylor, 2007</div>
+    </div>
+    <div class="ev-card theme-cartilage">
+      <span class="ev-num">03</span>
+      <div class="ev-icon">&#129504;</div>
+      <h3>Práctica de Recuperación</h3>
+      <p>Auto-evaluarse activamente (flashcards, preguntas de práctica) es mucho más efectivo que releer notas. Resolver bancos de preguntas tipo NBME es la estrategia más correlacionada con alto rendimiento en exámenes.</p>
+      <div class="ev-source">Deng et al., Perspectives Med Ed 2015 &bull; Morey et al., Cureus 2024</div>
+    </div>
+    <div class="ev-card theme-periosteum">
+      <span class="ev-num">04</span>
+      <div class="ev-icon">&#128279;</div>
+      <h3>Elaboración</h3>
+      <p>Conectar información nueva con conocimiento previo: "¿Por qué la osteoartritis afecta cartílago articular?" Explicar el mecanismo con tus propias palabras es clave para la retención profunda y la transferencia a nuevos contextos.</p>
+      <div class="ev-source">PMC 10368606 &bull; Dunlosky et al., 2013</div>
+    </div>
+    <div class="ev-card theme-muscle">
+      <span class="ev-num">05</span>
+      <div class="ev-icon">&#127912;</div>
+      <h3>Codificación Dual</h3>
+      <p>Combinar información verbal con representaciones visuales (diagramas, mapas conceptuales, atlas 3D). Para MSK, usar apps de anatomía 3D junto con el texto mejora la retención espacial de estructuras.</p>
+      <div class="ev-source">Anat Sci Ed, 2021 &bull; Arango-Ibanez et al., JMIR 2024</div>
+    </div>
+    <div class="ev-card theme-ink">
+      <span class="ev-num">06</span>
+      <div class="ev-icon">&#128300;</div>
+      <h3>Ejemplos Concretos</h3>
+      <p>Anclar conceptos abstractos en casos clínicos reales: "Paciente con caída de muñeca tras fractura de húmero → lesión del nervio radial." Construir conocimiento desde presentaciones clínicas hacia ciencias básicas es más eficiente.</p>
+      <div class="ev-source">Musculoskeletal Key, 2025 &bull; PMC 11527842</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ==================== 2. ESTRATEGIA MCQ 6 PASOS ==================== -->
+<section class="section" id="6pasos">
+  <div class="section-label"><span class="dot" style="background:var(--tendon)"></span> SECCIÓN 02</div>
+  <h2>Método de 6 Pasos para MCQ Clínicos</h2>
+  <p class="lead">Abordaje estructurado para resolver preguntas de selección múltiple basadas en viñetas clínicas, fundamentado en la teoría del doble procesamiento cognitivo (Jain et al., MedEdPublish, 2024).</p>
+
+  <div class="stepper" id="stepper">
+    <div class="step-item open" onclick="toggleStep(this)">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>Lee la PREGUNTA primero (no la viñeta)</h4>
+        <div class="step-detail">
+          <p>Antes de leer el caso clínico, identifica qué se te pregunta. Esto activa un filtro mental que te permite extraer información relevante de la viñeta y descartar datos distractores. En MSK: si preguntan "¿cuál es el nervio afectado?", tu lectura del caso se enfocará en datos neurológicos específicos.</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-item" onclick="toggleStep(this)">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>Lee la viñeta extrayendo datos clave</h4>
+        <div class="step-detail">
+          <p>Identifica: edad, sexo, síntoma principal, temporalidad, hallazgos físicos y resultados de laboratorio/imagen. En MSK busca: mecanismo de lesión, localización del dolor, rango de movimiento, pruebas especiales positivas (Phalen, Tinel, drawer test), y hallazgos de imagen.</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-item" onclick="toggleStep(this)">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>Formula tu propia respuesta ANTES de ver opciones</h4>
+        <div class="step-detail">
+          <p>Con los datos clave, genera tu diagnóstico o respuesta sin ver las opciones. Esto evita el sesgo de "anclaje" donde una opción atractiva pero incorrecta captura tu atención. Si no puedes formular una respuesta, identifica al menos la categoría diagnóstica (ej: neuropatía por atrapamiento, artritis inflamatoria).</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-item" onclick="toggleStep(this)">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4>Compara tu respuesta con las opciones</h4>
+        <div class="step-detail">
+          <p>Busca la opción que coincida con tu respuesta. Si no hay coincidencia exacta, busca la más cercana. Si tu respuesta no aparece en ninguna forma, <strong>revisa tu razonamiento</strong>: ¿omitiste un dato clave en la viñeta? En MSK, errores comunes incluyen confundir distribuciones de dermatomas o raíces nerviosas.</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-item" onclick="toggleStep(this)">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h4>Elimina distractores activamente</h4>
+        <div class="step-detail">
+          <p>Para cada opción restante, articula POR QUÉ es incorrecta con datos específicos de la viñeta. No basta con "suena mal". Ejemplo: "No es lesión del nervio mediano porque el paciente tiene caída de muñeca, no pérdida de oposición del pulgar." Este proceso de eliminación activa refuerza el aprendizaje incluso durante el examen.</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-item" onclick="toggleStep(this)">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h4>Selecciona y avanza con confianza</h4>
+        <div class="step-detail">
+          <p>Una vez seleccionada tu respuesta, <strong>no cambies a menos que identifiques un error claro</strong>. La evidencia muestra que el primer instinto informado suele ser correcto. Si necesitas marcar la pregunta para revisión, hazlo, pero regresa solo si tienes un fundamento concreto para cambiar. Gestiona tu tiempo: ~90 segundos por pregunta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ==================== 3. MAPA DE INTEGRACIÓN MSK ==================== -->
+<section class="section" id="integracion">
+  <div class="section-label"><span class="dot" style="background:var(--cartilage)"></span> SECCIÓN 03</div>
+  <h2>Mapa de Integración Musculoesquelético</h2>
+  <p class="lead">Cada patología MSK de alto rendimiento conecta con múltiples disciplinas. Expandir cada tema para ver cómo se integran las ciencias básicas y clínicas alrededor de un mismo concepto.</p>
+
+  <div class="integration-map" id="intMap">
+    <!-- OSTEOARTRITIS -->
+    <div class="int-row" onclick="toggleInt(this)">
+      <div class="int-header">
+        <span class="int-emoji">&#129471;</span>
+        <span class="int-title">Osteoartritis</span>
+        <span class="int-arrow">&#9660;</span>
+      </div>
+      <div class="int-detail">
+        <div class="int-detail-inner">
+          <div class="int-disc-grid">
+            <div class="int-disc" style="border-color:var(--marrow)">
+              <h5>Anatomía</h5>
+              <p>Cartílago hialino articular, membrana sinovial, cápsula articular. Articulaciones más afectadas: rodilla, cadera, IFD (nódulos de Heberden), IFP (nódulos de Bouchard), CMC del pulgar.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--tendon)">
+              <h5>Bioquímica</h5>
+              <p>Degradación de colágeno tipo II y proteoglicanos (agrecano). Metaloproteinasas de matriz (MMP-13). Pérdida de condroitín sulfato reduce capacidad de retención de agua del cartílago.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--cartilage)">
+              <h5>Histología</h5>
+              <p>Fibrilación y erosión del cartílago articular. Formación de osteofitos en márgenes articulares. Esclerosis del hueso subcondral. Quistes subcondrales. Cartílago adelgazado con condrocitos en clusters.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--periosteum)">
+              <h5>Fisiología</h5>
+              <p>Desequilibrio entre síntesis y degradación de matriz. Mecano-transducción alterada. Líquido sinovial pierde viscoelasticidad (disminución de ácido hialurónico). Sin inflamación sistémica significativa.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--muscle)">
+              <h5>Patología</h5>
+              <p>Enfermedad degenerativa, NO inflamatoria primaria. Líquido articular: &lt;2000 leucocitos/mm³. Radiografía: disminución del espacio articular, osteofitos, esclerosis subcondral, quistes. Diferenciación clave vs. artritis reumatoide.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--ink)">
+              <h5>Farmacología</h5>
+              <p>1ª línea: acetaminofén, AINEs tópicos. AINEs orales: inhiben COX-1/2 → ↓ prostaglandinas. Efectos adversos: gastropatía, nefrotoxicidad, riesgo CV. Corticosteroides intraarticulares para exacerbaciones.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTRITIS REUMATOIDE -->
+    <div class="int-row" onclick="toggleInt(this)">
+      <div class="int-header">
+        <span class="int-emoji">&#128293;</span>
+        <span class="int-title">Artritis Reumatoide</span>
+        <span class="int-arrow">&#9660;</span>
+      </div>
+      <div class="int-detail">
+        <div class="int-detail-inner">
+          <div class="int-disc-grid">
+            <div class="int-disc" style="border-color:var(--marrow)">
+              <h5>Anatomía</h5>
+              <p>Afecta articulaciones sinoviales simétricamente: MCF, IFP, muñecas, rodillas. NO afecta IFD (diferencia clave vs OA). Desviación cubital, deformidades en cuello de cisne y boutonnière.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--tendon)">
+              <h5>Bioquímica/Inmunología</h5>
+              <p>Factor reumatoide (IgM anti-IgG). Anticuerpos anti-CCP (alta especificidad). Citocinas: TNF-α, IL-1, IL-6. Activación de osteoclastos vía RANKL → erosión ósea. HLA-DR4 asociado.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--cartilage)">
+              <h5>Histología</h5>
+              <p>Hiperplasia sinovial (pannus). Infiltrado linfocitario denso. Neovascularización. Nódulos reumatoides: necrosis fibrinoide central rodeada de macrófagos en empalizada (patognomónico).</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--periosteum)">
+              <h5>Fisiología</h5>
+              <p>Inflamación sistémica: ↑VSG, ↑PCR. Rigidez matutina >60 min (vs <30 min en OA). Manifestaciones extra-articulares: pericarditis, nódulos pulmonares, vasculitis, síndrome de Felty.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--muscle)">
+              <h5>Patología</h5>
+              <p>Enfermedad autoinmune sistémica. Líquido articular: >2000 leucocitos/mm³ (inflamatorio). Pannus destruye cartílago y hueso. Erosiones marginales en radiografía. Osteopenia yuxtaarticular.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--ink)">
+              <h5>Farmacología</h5>
+              <p>DMARDs: metotrexato (1ª línea, inhibe dihidrofolato reductasa). Biológicos: anti-TNF-α (infliximab, adalimumab, etanercept). Anti-IL-6 (tocilizumab). JAK inhibidores (tofacitinib). AINEs solo sintomáticos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOTA -->
+    <div class="int-row" onclick="toggleInt(this)">
+      <div class="int-header">
+        <span class="int-emoji">&#128142;</span>
+        <span class="int-title">Gota</span>
+        <span class="int-arrow">&#9660;</span>
+      </div>
+      <div class="int-detail">
+        <div class="int-detail-inner">
+          <div class="int-disc-grid">
+            <div class="int-disc" style="border-color:var(--marrow)">
+              <h5>Anatomía</h5>
+              <p>Articulación MTF del primer dedo (podagra) es la más clásica. También rodilla, tobillo. Depósitos tofáceos en pabellón auricular, codos, tendón de Aquiles.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--tendon)">
+              <h5>Bioquímica</h5>
+              <p>Hiperuricemia: sobreproducción o subexcreción de ácido úrico. Metabolismo de purinas → hipoxantina → xantina → ác. úrico (xantina oxidasa). Síndrome de Lesch-Nyhan: deficiencia de HGPRT.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--cartilage)">
+              <h5>Histología</h5>
+              <p>Cristales de urato monosódico: birrefringencia negativa bajo luz polarizada (amarillos cuando paralelos). Forma de aguja. Rodeados por células gigantes multinucleadas y macrófagos.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--periosteum)">
+              <h5>Fisiología</h5>
+              <p>Cristales activan inflamasoma NLRP3 → IL-1β → inflamación aguda intensa. Factores precipitantes: alcohol, carnes rojas, tiazidas, inicio de quimioterapia (síndrome de lisis tumoral).</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--muscle)">
+              <h5>Patología</h5>
+              <p>Artritis monoarticular aguda, intensamente dolorosa. Líquido sinovial: cristales en forma de aguja con birrefringencia negativa (vs. pseudogota: cristales de pirofosfato de calcio, birrefringencia positiva).</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--ink)">
+              <h5>Farmacología</h5>
+              <p>Agudo: AINEs (indometacina), colchicina (inhibe polimerización de microtúbulos → ↓ migración neutrofílica), corticosteroides. Crónico: alopurinol/febuxostat (inhiben xantina oxidasa). Probenecid (uricosúrico).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESIONES NERVIOSAS -->
+    <div class="int-row" onclick="toggleInt(this)">
+      <div class="int-header">
+        <span class="int-emoji">&#9889;</span>
+        <span class="int-title">Lesiones de Nervios Periféricos (Miembro Superior)</span>
+        <span class="int-arrow">&#9660;</span>
+      </div>
+      <div class="int-detail">
+        <div class="int-detail-inner">
+          <div class="int-disc-grid">
+            <div class="int-disc" style="border-color:var(--marrow)">
+              <h5>Nervio Radial (C5-T1)</h5>
+              <p>Lesión: fractura de diáfisis humeral, "parálisis del sábado por la noche." Presentación: caída de muñeca (wrist drop), pérdida de extensión de muñeca y dedos. Pérdida sensitiva en tabaquera anatómica.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--tendon)">
+              <h5>Nervio Mediano (C5-T1)</h5>
+              <p>Síndrome del túnel carpiano: compresión bajo retináculo flexor. Parestesias en dedos 1-3 y mitad radial del 4°. Atrofia tenar. Signo de Phalen y Tinel positivos. Asociado: embarazo, hipotiroidismo, acromegalia.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--cartilage)">
+              <h5>Nervio Cubital (C8-T1)</h5>
+              <p>Lesión en epicóndilo medial o canal de Guyon. "Mano en garra" (dedos 4-5). Pérdida de interóseos y lumbricales 3-4. Signo de Froment positivo. Pérdida sensitiva: dedo 5 y mitad cubital del 4°.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--periosteum)">
+              <h5>Nervio Axilar (C5-C6)</h5>
+              <p>Lesión: luxación anterior del hombro, fractura del cuello quirúrgico del húmero. Pérdida de abducción (deltoides). Pérdida sensitiva: parche regimentario (lateral del hombro).</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--muscle)">
+              <h5>Nervio Torácico Largo (C5-C7)</h5>
+              <p>Lesión: disección axilar, cirugía mamaria. Denervación del serrato anterior → escápula alada (scapular winging). No hay déficit sensitivo.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--ink)">
+              <h5>Plexo Braquial</h5>
+              <p>Erb-Duchenne (C5-C6): tracción superior, "propina del mesero." Klumpke (C8-T1): tracción inferior, mano en garra total, posible Horner ipsilateral. Alto rendimiento en exámenes integrados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TUMORES ÓSEOS -->
+    <div class="int-row" onclick="toggleInt(this)">
+      <div class="int-header">
+        <span class="int-emoji">&#129516;</span>
+        <span class="int-title">Tumores Óseos</span>
+        <span class="int-arrow">&#9660;</span>
+      </div>
+      <div class="int-detail">
+        <div class="int-detail-inner">
+          <div class="int-disc-grid">
+            <div class="int-disc" style="border-color:var(--marrow)">
+              <h5>Osteosarcoma</h5>
+              <p>Tumor óseo maligno primario más común en jóvenes. Metáfisis de huesos largos (rodilla). Triángulo de Codman y patrón de "rayos de sol" en Rx. Asociado: mutación Rb, enfermedad de Paget, radiación previa.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--tendon)">
+              <h5>Sarcoma de Ewing</h5>
+              <p>Niños <15 años. Diáfisis de huesos largos. Patrón de "piel de cebolla" en Rx. Células pequeñas, redondas y azules. Translocación t(11;22) → fusión EWS-FLI1. PAS+ (glucógeno). CD99+.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--cartilage)">
+              <h5>Tumor de Células Gigantes</h5>
+              <p>Adultos 20-40 años. Epífisis de huesos largos (rodilla). "Burbuja de jabón" en Rx. Células gigantes multinucleadas tipo osteoclasto. Localmente agresivo, raramente maligna.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--periosteum)">
+              <h5>Metástasis Óseas</h5>
+              <p>Tumor óseo más común en adultos >40. Orígen: próstata (blástico), mama (mixto), pulmón, riñón, tiroides (lítico). Ácido úrico y calcio elevados. Fosfatasa alcalina elevada.</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--muscle)">
+              <h5>Osteocondroma</h5>
+              <p>Tumor óseo benigno más común. Excrecencia ósea con cubierta de cartílago. Médula ósea continua con hueso normal. Transformación maligna rara (&lt;1%), mayor riesgo si es múltiple (osteocondroma hereditaria múltiple).</p>
+            </div>
+            <div class="int-disc" style="border-color:var(--ink)">
+              <h5>Condrosarcoma</h5>
+              <p>Adultos 40-60 años. Pelvis, fémur proximal. Maligno, de cartílago. Crecimiento lento. Resistente a quimioterapia y radioterapia (tratamiento quirúrgico). Puede surgir de un encondroma preexistente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ==================== 4. TABS TEMAS CLAVE ==================== -->
+<section class="section" id="msk-tabs">
+  <div class="section-label"><span class="dot" style="background:var(--periosteum)"></span> SECCIÓN 04</div>
+  <h2>Temas de Alto Rendimiento por Disciplina</h2>
+  <p class="lead">Contenido clave organizado por área disciplinar para el sistema musculoesquelético, con enfoque en los puntos más evaluados.</p>
+
+  <div class="tabs-container">
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="switchTab(event, 'tab-anat')">Anatomía</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-bio')">Bioquímica</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-histo')">Histología</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-fisio')">Fisiología</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-pato')">Patología</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-farm')">Farmacología</button>
+    </div>
+
+    <div class="tab-content active" id="tab-anat">
+      <h4>Anatomía Musculoesquelética: Lo Esencial</h4>
+      <p>La clave en anatomía MSK es estudiar desde las presentaciones clínicas hacia las estructuras, no al revés. Cada lesión nerviosa y cada fractura tiene una presentación clínica característica.</p>
+      <ul>
+        <li><strong>Plexo braquial:</strong> Raíces, troncos, divisiones, fascículos, ramos. Erb-Duchenne (C5-C6) vs Klumpke (C8-T1). Nervios terminales y sus déficits motores/sensitivos.</li>
+        <li><strong>Manguito rotador:</strong> Supraespinoso (abducción 0-15°, más frecuentemente lesionado), infraespinoso (rotación externa), teres menor (rotación externa), subescapular (rotación interna). Mnemónico: SITS.</li>
+        <li><strong>Fracturas clave:</strong> Escafoides (dolor en tabaquera anatómica, riesgo de necrosis avascular), Colles (caída sobre mano extendida), fractura de diáfisis humeral (nervio radial).</li>
+        <li><strong>Compartimentos del muslo:</strong> Anterior (femoral, extensión), medial (obturador, aducción), posterior (ciático, flexión de rodilla).</li>
+        <li><strong>Dermatomas clave:</strong> C6 (pulgar), C7 (dedo medio), C8 (meñique), T4 (pezón), T10 (ombligo), L4 (rodilla medial), L5 (dorso del pie), S1 (planta lateral).</li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="tab-bio">
+      <h4>Bioquímica del Tejido Conectivo</h4>
+      <p>Los conceptos bioquímicos más evaluados en MSK se centran en colágeno, metabolismo óseo y metabolismo de purinas.</p>
+      <ul>
+        <li><strong>Colágeno tipo I:</strong> Hueso, tendones, piel, dentina. Defecto: Osteogénesis imperfecta (huesos frágiles, escleras azules, sordera). Síntesis: prolina/lisina → hidroxilación (vitamina C) → glucosilación → triple hélice → reticulación.</li>
+        <li><strong>Colágeno tipo II:</strong> Cartílago, humor vítreo. Componente principal del cartílago hialino articular.</li>
+        <li><strong>Metabolismo de purinas:</strong> Adenina/Guanina → hipoxantina → xantina → ácido úrico (xantina oxidasa). HGPRT: vía de rescate de purinas. Deficiencia = Lesch-Nyhan.</li>
+        <li><strong>Metabolismo óseo:</strong> Osteoblastos (formación, fosfatasa alcalina), osteoclastos (resorción, TRAP+, activados por RANKL, inhibidos por OPG). Vitamina D: ↑Ca²⁺ y PO₄³⁻ absorción intestinal. PTH: ↑Ca²⁺, ↓PO₄³⁻.</li>
+        <li><strong>Escorbuto:</strong> Déficit de vitamina C → hidroxilación defectuosa de colágeno → sangrado gingival, petequias, mala cicatrización, anemia.</li>
+        <li><strong>Ehlers-Danlos:</strong> Defectos en colágeno tipo III o V. Hiperlaxitud articular, piel hiperelástica, fragilidad vascular.</li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="tab-histo">
+      <h4>Histología de Tejidos MSK</h4>
+      <p>La capacidad de reconocer los tipos de tejido conectivo y sus componentes celulares es fundamental para integrar la comprensión del sistema.</p>
+      <ul>
+        <li><strong>Cartílago hialino:</strong> Condrocitos en lagunas, matriz basófila (proteoglicanos), NO tiene vasos (nutrición por difusión). Localización: superficies articulares, anillos traqueales, placa de crecimiento.</li>
+        <li><strong>Cartílago fibroso:</strong> Colágeno tipo I denso + condrocitos. Localización: discos intervertebrales, meniscos, sínfisis púbica. Resiste fuerzas de compresión y tensión.</li>
+        <li><strong>Cartílago elástico:</strong> Fibras elásticas + condrocitos. Localización: pabellón auricular, epiglotis, trompa de Eustaquio.</li>
+        <li><strong>Hueso compacto vs esponjoso:</strong> Osteonas (sistema de Havers), laminillas concéntricas, conductos de Havers y Volkmann. Hueso esponjoso: trabéculas con médula entre ellas.</li>
+        <li><strong>Músculo esquelético:</strong> Células multinucleadas, estriadas, núcleos periféricos. Banda A (oscura, miosina), banda I (clara, actina), línea Z, zona H, línea M. Sarcómero se acorta: bandas I y zona H se reducen.</li>
+        <li><strong>Placa de crecimiento (fisis):</strong> Zonas de proliferación, maduración, hipertrofia, calcificación, osificación. Raquitismo/osteomalacia: expansión de zona de hipertrofia por mineralización defectuosa.</li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="tab-fisio">
+      <h4>Fisiología Muscular y Ósea</h4>
+      <p>Comprender los mecanismos contráctiles y el metabolismo del calcio es esencial para integrar con la farmacología y la patología.</p>
+      <ul>
+        <li><strong>Acoplamiento excitación-contracción:</strong> Potencial de acción → túbulos T → liberación de Ca²⁺ del retículo sarcoplásmico (receptor de rianodina) → Ca²⁺ se une a troponina C → movimiento de tropomiosina → exposición de sitio de unión actina-miosina → ciclo de puentes cruzados (ATP).</li>
+        <li><strong>Tipos de fibras musculares:</strong> Tipo I (rojas, oxidativas, lentas, resistencia) vs Tipo II (blancas, glucolíticas, rápidas, fuerza). Tipo I predomina en músculos posturales.</li>
+        <li><strong>Remodelado óseo:</strong> Osteoblastos (formación) secretan osteoide → mineralización. Osteoclastos (resorción) generan ambiente ácido (H⁺-ATPasa). Equilibrado por PTH, calcitonina, vitamina D, estrógenos.</li>
+        <li><strong>Unión neuromuscular:</strong> ACh liberada → receptores nicotínicos en placa motora → despolarización del sarcolema. Bloqueo: miastenia gravis (Ac anti-receptor ACh), botulismo (inhibe liberación ACh), curare (antagonista nicotínico competitivo).</li>
+        <li><strong>Homeostasis del calcio:</strong> PTH: ↑Ca²⁺ (resorción ósea, reabsorción renal, activa 1-α-hidroxilasa). Vitamina D activa: ↑absorción intestinal Ca²⁺/PO₄. Calcitonina: ↓Ca²⁺ (inhibe osteoclastos).</li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="tab-pato">
+      <h4>Patología Musculoesquelética</h4>
+      <p>Las patologías MSK más evaluadas requieren integración con bioquímica (metabolismo óseo), inmunología (enfermedades autoinmunes) e histología (identificación de cristales y tumores).</p>
+      <ul>
+        <li><strong>Osteoporosis:</strong> ↓Densidad ósea. Tipo I: posmenopáusica (vértebras), Tipo II: senil (cadera). Fracturas de compresión vertebral, Colles, cuello femoral. T-score ≤ −2.5. Tx: bifosfonatos (inhiben osteoclastos).</li>
+        <li><strong>Osteomalacia/Raquitismo:</strong> Defecto de mineralización de osteoide. ↓Vitamina D, ↓Ca²⁺, ↓PO₄, ↑PTH, ↑FA. Niños: piernas arqueadas, rosario raquítico, cráneo tabes. Adultos: dolor óseo, fracturas, debilidad muscular proximal.</li>
+        <li><strong>Enfermedad de Paget:</strong> Remodelado óseo excesivo desordenado: lítico → mixto → blástico → esclerótico. ↑↑Fosfatasa alcalina, Ca²⁺ y PO₄ normales. Complicaciones: deformidad, sordera, insuficiencia cardíaca de alto gasto, osteosarcoma (&lt;1%).</li>
+        <li><strong>Miopatías inflamatorias:</strong> Polimiositis (↑CK, debilidad proximal), dermatomiositis (+erupción heliotropa, pápulas de Gottron, riesgo de malignidad). Anticuerpos anti-Jo-1, anti-Mi-2.</li>
+        <li><strong>Distrofias musculares:</strong> Duchenne (distrofina ausente, X-linked, inicio <5 años, signo de Gower, CK muy ↑) vs Becker (distrofina parcial, inicio tardío, más leve).</li>
+        <li><strong>Fibromialgia:</strong> Dolor musculoesquelético crónico generalizado, fatiga, trastorno del sueño. Diagnóstico clínico: puntos sensibles. Labs normales. Sin inflamación. Tx: duloxetina, pregabalina, ejercicio.</li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="tab-farm">
+      <h4>Farmacología Musculoesquelética</h4>
+      <p>Los fármacos MSK se evalúan frecuentemente en contexto de viñetas clínicas que requieren seleccionar el tratamiento más apropiado según la condición.</p>
+      <ul>
+        <li><strong>AINEs:</strong> Inhiben COX-1 y COX-2 reversiblemente (excepto aspirina: irreversible). ↓Prostaglandinas → analgesia, antiinflamatorio, antipirético. Adversos: úlcera gástrica (COX-1), lesión renal (↓PGE2 → vasoconstricción aferente), riesgo CV (COX-2 selectivos).</li>
+        <li><strong>Colchicina:</strong> Inhibe polimerización de microtúbulos → ↓migración neutrofílica. Uso: gota aguda. Adverso: diarrea (dosis-limitante).</li>
+        <li><strong>Alopurinol:</strong> Inhibidor de xantina oxidasa → ↓producción de ácido úrico. Profilaxis de gota. NO usar en ataques agudos (puede empeorar). Ajustar en insuficiencia renal.</li>
+        <li><strong>Metotrexato:</strong> Inhibidor de dihidrofolato reductasa → ↓síntesis de purinas. 1ª línea para AR. Adversos: hepatotoxicidad, supresión medular, neumonitis. Rescate con leucovorina. Contraindicado en embarazo.</li>
+        <li><strong>Biológicos anti-TNF:</strong> Infliximab (quimérico), adalimumab (humano), etanercept (receptor soluble). Uso: AR refractaria, espondiloartropatías. Riesgo: reactivación de TB latente (PPD antes de iniciar).</li>
+        <li><strong>Bifosfonatos:</strong> Alendronato, risedronato. Inhiben farnesilación en osteoclastos → apoptosis. 1ª línea osteoporosis. Tomar en ayunas con agua, no acostarse 30 min. Adversos: osteonecrosis mandibular, fracturas femorales atípicas, esofagitis.</li>
+        <li><strong>Relajantes musculares:</strong> Dantroleno (bloquea receptor de rianodina → ↓liberación de Ca²⁺ del RS; uso: hipertermia maligna, síndrome neuroléptico maligno). Baclofeno (agonista GABA-B; uso: espasticidad). Ciclobenzaprina (acción central; dolor muscular agudo).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ==================== 5. QUIZ INTEGRADOR ==================== -->
+<section class="section" id="quiz">
+  <div class="section-label"><span class="dot" style="background:var(--muscle)"></span> SECCIÓN 05</div>
+  <h2>Quiz Integrador MSK</h2>
+  <p class="lead">Preguntas estilo viñeta clínica que integran múltiples disciplinas. Practica aplicando el método de 6 pasos.</p>
+
+  <div class="quiz-box" id="quizBox">
+    <div id="quizContent">
+      <!-- Populated by JS -->
+    </div>
+    <div class="quiz-score" id="quizScore">
+      <div class="score-num" id="scoreNum"></div>
+      <p id="scoreMsg"></p>
+      <br>
+      <button class="btn-next" onclick="resetQuiz()">Reiniciar Quiz</button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ==================== 6. PLAN DE ESTUDIO ==================== -->
+<section class="section" id="plan">
+  <div class="section-label"><span class="dot" style="background:var(--periosteum)"></span> SECCIÓN 06</div>
+  <h2>Plan de Acción Semanal</h2>
+  <p class="lead">Checklist interactivo para implementar las estrategias basadas en evidencia. Marca las actividades que completes cada semana.</p>
+
+  <div class="checklist" id="checklist">
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">&#10003;</div>
+      <div class="check-text"><strong>Lunes-Martes:</strong> Estudio con codificación dual — Revisar anatomía MSK con atlas 3D + crear esquemas propios de nervios/vasos por región.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">&#10003;</div>
+      <div class="check-text"><strong>Miércoles:</strong> Práctica intercalada — Alternar entre bioquímica del colágeno, histología del cartílago y fisiología del calcio en bloques de 25 min (Pomodoro).</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">&#10003;</div>
+      <div class="check-text"><strong>Jueves:</strong> Elaboración activa — Construir "mapas de integración" para 2 patologías: escribir con tus propias palabras cómo conectan las 6 disciplinas.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">&#10003;</div>
+      <div class="check-text"><strong>Viernes:</strong> Práctica de recuperación — Resolver 30-40 MCQs de banco de preguntas MSK. Revisar CADA respuesta (correctas e incorrectas) con explicación.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">&#10003;</div>
+      <div class="check-text"><strong>Sábado:</strong> Creación de MCQs — Escribir 5 preguntas propias estilo viñeta clínica que integren al menos 2 disciplinas. Intercambiar con compañeros.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">&#10003;</div>
+      <div class="check-text"><strong>Domingo:</strong> Repaso espaciado — Revisión de flashcards Anki de temas vistos en semanas anteriores + simulacro de examen con tiempo (1.5 min/pregunta).</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">&#10003;</div>
+      <div class="check-text"><strong>Diario (10 min):</strong> Antes de dormir, anotar 3 conceptos del día en formato "pregunta → respuesta" sin consultar notas (recuperación libre).</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">&#10003;</div>
+      <div class="check-text"><strong>Semanal:</strong> Autoevaluación metacognitiva — "¿Qué temas puedo explicar con confianza? ¿Cuáles necesito revisar?" Ajustar plan de la próxima semana según gaps.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ==================== 7. RECURSOS ==================== -->
+<section class="section" id="recursos">
+  <div class="section-label"><span class="dot" style="background:var(--ink)"></span> SECCIÓN 07</div>
+  <h2>Recursos Recomendados</h2>
+  <p class="lead">Basados en la evidencia disponible y la experiencia de estudiantes con alto rendimiento en exámenes integrados.</p>
+
+  <table class="res-table">
+    <thead>
+      <tr>
+        <th>Recurso</th>
+        <th>Uso principal</th>
+        <th>Disciplinas</th>
+        <th>Estrategia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Anki</strong> (flashcards)</td>
+        <td>Repetición espaciada + recuperación activa diaria</td>
+        <td><span class="res-tag tag-anat">Todas</span></td>
+        <td>Espaciada + Recuperación</td>
+      </tr>
+      <tr>
+        <td><strong>Banco de preguntas</strong> (UWorld/Amboss/Lecturio)</td>
+        <td>Práctica de MCQ con explicaciones detalladas</td>
+        <td><span class="res-tag tag-pato">Pato</span> <span class="res-tag tag-farm">Farm</span></td>
+        <td>Recuperación + Intercalado</td>
+      </tr>
+      <tr>
+        <td><strong>Pathoma</strong></td>
+        <td>Patología de alto rendimiento con videos concisos</td>
+        <td><span class="res-tag tag-pato">Pato</span> <span class="res-tag tag-histo">Histo</span></td>
+        <td>Ejemplos concretos</td>
+      </tr>
+      <tr>
+        <td><strong>Atlas 3D</strong> (Complete Anatomy / Essential Anatomy)</td>
+        <td>Visualización espacial de estructuras MSK</td>
+        <td><span class="res-tag tag-anat">Anat</span></td>
+        <td>Codificación dual</td>
+      </tr>
+      <tr>
+        <td><strong>Boards &amp; Beyond</strong></td>
+        <td>Videos integrados por sistema con enfoque en NBME/USMLE</td>
+        <td><span class="res-tag tag-fisio">Fisio</span> <span class="res-tag tag-bio">Bio</span></td>
+        <td>Elaboración</td>
+      </tr>
+      <tr>
+        <td><strong>Sketchy Medical</strong></td>
+        <td>Mnemónicos visuales para farmacología y microbiología</td>
+        <td><span class="res-tag tag-farm">Farm</span></td>
+        <td>Codificación dual</td>
+      </tr>
+      <tr>
+        <td><strong>Creación propia de MCQs</strong></td>
+        <td>Escribir viñetas clínicas integradoras como método de estudio activo</td>
+        <td><span class="res-tag tag-anat">Todas</span></td>
+        <td>Elaboración + Recuperación</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <p><strong>Guía Interactiva MSK</strong> &mdash; Estrategias basadas en evidencia para evaluaciones integradas de medicina</p>
+  <p style="margin-top:.3rem">Fuentes: PMC 10368606, Cureus 2024, JMIR Med Educ 2024, PMC 11809150, PMC 8368391, PMC 11527842, Anat Sci Ed 2021</p>
+  <p style="margin-top:.3rem">Creado como recurso educativo &bull; Marzo 2026</p>
+</footer>
+
+<script>
+// ===== TABS =====
+function switchTab(e, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// ===== STEPPER =====
+function toggleStep(el) {
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.step-item').forEach(s => s.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
+
+// ===== INTEGRATION MAP =====
+function toggleInt(el) {
+  el.classList.toggle('open');
+}
+
+// ===== CHECKLIST =====
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+// ===== QUIZ =====
+const quizData = [
+  {
+    q: "Mujer de 55 años presenta dolor y rigidez en ambas rodillas que empeora al final del día y mejora con reposo. Al examen físico hay crepitación y leve derrame. Radiografía muestra disminución del espacio articular y osteofitos. Si se analiza el líquido sinovial, ¿qué hallazgo se espera?",
+    opts: [
+      "Cristales con birrefringencia negativa",
+      "Menos de 2,000 leucocitos/mm³",
+      "Más de 50,000 leucocitos/mm³ con predominio de PMN",
+      "Cristales romboidales con birrefringencia positiva"
+    ],
+    correct: 1,
+    explanation: "La presentación es clásica de osteoartritis: dolor mecánico que empeora con uso, crepitación, osteofitos. El líquido sinovial en OA es NO inflamatorio (<2,000 leucocitos/mm³). Los cristales de birrefringencia negativa (A) corresponden a gota, los romboidales con birrefringencia positiva (D) a pseudogota, y >50,000 leucocitos (C) sugiere artritis séptica."
+  },
+  {
+    q: "Hombre de 28 años sufre fractura de la diáfisis del húmero en accidente de motocicleta. Al examen muestra incapacidad para extender la muñeca y pérdida de sensibilidad en el dorso de la mano entre el primer y segundo metacarpianos. ¿Qué nervio está lesionado?",
+    opts: [
+      "Nervio mediano",
+      "Nervio musculocutáneo",
+      "Nervio radial",
+      "Nervio cubital"
+    ],
+    correct: 2,
+    explanation: "La fractura de diáfisis humeral lesiona clásicamente el nervio radial en el surco espiral. La caída de muñeca (wrist drop = pérdida de extensión) y la pérdida sensitiva en la tabaquera anatómica/dorso de la mano son patognomónicos. El nervio mediano causa pérdida de oposición del pulgar; el cubital causa mano en garra."
+  },
+  {
+    q: "Hombre de 45 años con antecedente de consumo elevado de alcohol y dieta rica en carnes rojas presenta dolor intenso, edema y eritema en la primera articulación metatarsofalángica del pie derecho de inicio súbito. ¿Cuál es el mecanismo de acción del fármaco de elección para la PROFILAXIS a largo plazo?",
+    opts: [
+      "Inhibición de la polimerización de microtúbulos",
+      "Inhibición de la ciclooxigenasa 1 y 2",
+      "Inhibición de la xantina oxidasa",
+      "Bloqueo del receptor de IL-1"
+    ],
+    correct: 2,
+    explanation: "La presentación es gota aguda (podagra). Para PROFILAXIS a largo plazo, el fármaco de elección es alopurinol, que inhibe la xantina oxidasa reduciendo la producción de ácido úrico. La colchicina (A) se usa en ataques agudos/profilaxis a corto plazo. Los AINEs (B) son para manejo agudo. El bloqueo de IL-1 (D, anakinra) es para gota refractaria."
+  },
+  {
+    q: "Niña de 3 años es traída por sus padres porque presenta múltiples fracturas con traumatismos mínimos. Al examen físico se observan escleras azuladas. ¿Cuál es el defecto bioquímico subyacente?",
+    opts: [
+      "Deficiencia de fibrilina-1",
+      "Síntesis defectuosa de colágeno tipo I",
+      "Deficiencia de hidroxilación de lisina y prolina",
+      "Defecto en colágeno tipo III"
+    ],
+    correct: 1,
+    explanation: "Fracturas patológicas + escleras azules = osteogénesis imperfecta, causada por síntesis defectuosa de colágeno tipo I (el más abundante en hueso). La deficiencia de fibrilina-1 (A) es síndrome de Marfan. La deficiencia de hidroxilación (C) ocurre en escorbuto (vitamina C). El defecto en colágeno tipo III (D) corresponde a Ehlers-Danlos vascular."
+  },
+  {
+    q: "Hombre de 14 años presenta dolor y tumefacción en la diáfisis del fémur. Radiografía muestra lesión lítica con patrón de 'piel de cebolla' perióstico. La biopsia revela células pequeñas, redondas y azules que son PAS-positivas. ¿Cuál es la alteración genética más probable?",
+    opts: [
+      "Mutación del gen Rb",
+      "Translocación t(11;22)",
+      "Mutación de p53",
+      "Trisomía 12"
+    ],
+    correct: 1,
+    explanation: "Adolescente + diáfisis + patrón en piel de cebolla + células pequeñas redondas azules + PAS+ = sarcoma de Ewing. La translocación característica es t(11;22) que genera la fusión EWS-FLI1. La mutación de Rb (A) se asocia a osteosarcoma. La mutación de p53 (C) se asocia a Li-Fraumeni. La trisomía 12 (D) se asocia a LLC."
+  },
+  {
+    q: "Mujer de 65 años en tratamiento crónico con prednisona por artritis reumatoide sufre fractura de compresión vertebral al levantar una bolsa de compras. La densitometría ósea muestra T-score de -3.0. ¿Cuál es el mecanismo de acción del tratamiento de primera línea para prevenir futuras fracturas?",
+    opts: [
+      "Estimulación directa de osteoblastos",
+      "Inhibición de la resorción ósea por osteoclastos mediante inhibición de farnesil pirofosfato sintasa",
+      "Suplementación de calcio y vitamina D",
+      "Bloqueo del receptor RANKL"
+    ],
+    correct: 1,
+    explanation: "Osteoporosis (T-score ≤ -2.5) por corticosteroides. El tratamiento de primera línea son los bifosfonatos (alendronato, risedronato), que se incorporan al hueso e inhiben la farnesil pirofosfato sintasa en osteoclastos, causando su apoptosis. El denosumab (D) bloquea RANKL pero es segunda línea. La teriparatida (A) estimula osteoblastos, para casos graves. El Ca²⁺/VitD (C) es coadyuvante, no suficiente como monoterapia."
+  }
+];
+
+let currentQ = 0;
+let score = 0;
+let answered = false;
+
+function renderQuiz() {
+  const box = document.getElementById('quizContent');
+  const q = quizData[currentQ];
+  let optsHTML = q.opts.map((o, i) => 
+    `<div class="quiz-opt" data-idx="${i}" onclick="selectAnswer(${i})">
+      <span class="opt-letter">${String.fromCharCode(65+i)}.</span>
+      <span>${o}</span>
+    </div>`
+  ).join('');
+
+  box.innerHTML = `
+    <div class="quiz-progress">Pregunta ${currentQ+1} de ${quizData.length}</div>
+    <div class="quiz-q">${q.q}</div>
+    <div class="quiz-options">${optsHTML}</div>
+    <div class="quiz-feedback" id="feedback"></div>
+    <div class="quiz-nav">
+      <button class="btn-reset" onclick="resetQuiz()">Reiniciar</button>
+      <button class="btn-next" id="nextBtn" onclick="nextQuestion()" style="display:none">Siguiente &#8594;</button>
+    </div>
+  `;
+  answered = false;
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = quizData[currentQ];
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach((o, i) => {
+    if (i === q.correct) o.classList.add('correct');
+    else if (i === idx && idx !== q.correct) o.classList.add('wrong');
+    o.style.pointerEvents = 'none';
+  });
+  if (idx === q.correct) score++;
+  const fb = document.getElementById('feedback');
+  fb.className = `quiz-feedback show ${idx === q.correct ? 'correct-fb' : 'wrong-fb'}`;
+  fb.innerHTML = `<strong>${idx === q.correct ? '¡Correcto!' : 'Incorrecto.'}</strong> ${q.explanation}`;
+  if (currentQ < quizData.length - 1) {
+    document.getElementById('nextBtn').style.display = 'inline-block';
+  } else {
+    setTimeout(showScore, 800);
+  }
+}
+
+function nextQuestion() {
+  currentQ++;
+  renderQuiz();
+}
+
+function showScore() {
+  document.getElementById('quizContent').style.display = 'none';
+  const sc = document.getElementById('quizScore');
+  sc.classList.add('show');
+  document.getElementById('scoreNum').textContent = `${score}/${quizData.length}`;
+  const pct = Math.round(score/quizData.length*100);
+  let msg = pct >= 80 ? "¡Excelente integración de conceptos! Sigue practicando con bancos de preguntas." : 
+            pct >= 50 ? "Buen esfuerzo. Revisa las explicaciones y trabaja en las áreas donde tuviste dificultad." :
+            "Hay oportunidad de mejorar. Revisa el mapa de integración y vuelve a intentarlo.";
+  document.getElementById('scoreMsg').textContent = msg;
+}
+
+function resetQuiz() {
+  currentQ = 0; score = 0;
+  document.getElementById('quizContent').style.display = 'block';
+  document.getElementById('quizScore').classList.remove('show');
+  renderQuiz();
+}
+
+// INIT
+renderQuiz();
+
+// Smooth scroll nav highlight
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.sticky-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
