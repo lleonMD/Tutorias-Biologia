@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría: Daño y Reparación del ADN</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 20px}
+.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;min-height:54px;flex-wrap:wrap;gap:6px;padding:6px 0}
+.nb{font-family:'DM Serif Display',serif;font-size:1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
+.nl{display:flex;gap:2px;flex-wrap:wrap}.nl button{padding:4px 10px;border-radius:20px;border:none;background:0;color:var(--t3);font-size:.7rem;font-family:inherit;cursor:pointer;transition:.3s;white-space:nowrap}.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}
+.pb{position:fixed;top:0;left:0;right:0;z-index:200;height:3px;background:rgba(0,212,170,.1)}.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}
+.mc{max-width:960px;margin:0 auto;padding:24px 20px 80px;position:relative;z-index:1}
+.sec{display:none;animation:fi .5s}.sec.a{display:block}@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:40px 0 30px}.hi{width:80px;height:80px;margin:0 auto 16px;background:var(--grad);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:2.4rem;line-height:1.2;margin-bottom:12px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hs{font-size:1.05rem;color:var(--t2);max-width:650px;margin:0 auto 24px}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:12px 14px;display:flex;align-items:flex-start;gap:10px;transition:.3s}.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}.on{min-width:24px;height:24px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;color:#0B1622}.ot{font-size:.83rem;color:var(--t2);line-height:1.5}
+.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:20px;box-shadow:var(--sh);transition:.3s}.cd:hover{border-color:rgba(0,212,170,.25)}.ch{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:12px}.ch .ac{color:var(--g)}
+.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:16px 20px;margin:16px 0;background:rgba(0,212,170,.06)}.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}.ib.pp{background:rgba(167,139,250,.06);border-left-color:var(--p)}.ibt{font-weight:700;margin-bottom:5px;font-size:.9rem}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0}.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:20px}.cc h4{font-family:'DM Serif Display',serif;margin-bottom:8px;font-size:1rem}
+.et{width:100%;border-collapse:separate;border-spacing:0;margin:16px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}.et th{background:rgba(0,212,170,.12);padding:10px 14px;text-align:left;font-weight:600;font-size:.82rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}.et td{padding:10px 14px;border-top:1px solid var(--bdr);font-size:.87rem;color:var(--t2)}.et tr:hover td{background:var(--card2)}
+.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:22px;margin-bottom:16px}.qt{font-weight:600;font-size:.95rem;margin-bottom:14px}.qo{display:flex;flex-direction:column;gap:8px}.qb{padding:11px 16px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.9rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}.qb.dis{pointer-events:none;opacity:.7}.ol{min-width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.qf{margin-top:12px;padding:14px;border-radius:var(--r10);font-size:.87rem;line-height:1.6;display:none}.qf.sh{display:block}.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}
+.cl{background:linear-gradient(135deg,rgba(255,107,107,.06),rgba(255,217,61,.04));border:1px solid rgba(255,107,107,.2);border-radius:var(--r16);padding:24px;margin:18px 0}.clb{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,107,.15);color:var(--r);padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:.03em}.clt{font-family:'DM Serif Display',serif;font-size:1.2rem;margin-bottom:10px}.clp{color:var(--t2);margin-bottom:12px;font-size:.9rem;line-height:1.7}
+.btn{padding:10px 22px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.9rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}.bp:hover{transform:translateY(-2px)}.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}.bs:hover{background:rgba(0,212,170,.2)}
+.svg-wrap{background:rgba(0,0,0,.25);border-radius:var(--r16);padding:16px;margin:16px 0;border:1px solid var(--bdr);overflow-x:auto}.svg-wrap svg{width:100%;height:auto;display:block}
+.analogy{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(0,163,255,.06));border:1px solid rgba(167,139,250,.2);border-radius:var(--r16);padding:22px;margin:16px 0}.analogy h4{font-family:'DM Serif Display',serif;color:var(--p);margin-bottom:6px}.analogy p{color:var(--t2);font-size:.9rem}
+.sn{display:flex;justify-content:space-between;margin-top:30px;padding-top:18px;border-top:1px solid var(--bdr)}
+.mnemonic{background:linear-gradient(135deg,rgba(255,217,61,.08),rgba(249,115,22,.05));border:1px solid rgba(255,217,61,.25);border-radius:var(--r16);padding:22px;margin:16px 0;text-align:center}.mnemonic h4{font-family:'DM Serif Display',serif;color:var(--y);margin-bottom:8px}.mnemonic p{color:var(--t2);font-size:.9rem;line-height:1.7}.mnemonic .big{font-size:1.6rem;font-weight:700;letter-spacing:2px;color:var(--y);margin:8px 0}
+.chapter-header{background:linear-gradient(135deg,var(--card),var(--card2));border:2px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;text-align:center;position:relative;overflow:hidden}.chapter-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,212,170,.08),transparent 70%);pointer-events:none}.chapter-header .ch-num{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--g);text-transform:uppercase;letter-spacing:.15em;margin-bottom:6px}.chapter-header h2{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:6px}.chapter-header p{color:var(--t2);font-size:.92rem}.chapter-header .ch-time{display:inline-block;background:rgba(0,212,170,.12);color:var(--g);padding:3px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-top:8px}
+.match-game{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0}.match-col{display:flex;flex-direction:column;gap:7px}.match-col h4{text-align:center;margin-bottom:6px;font-family:'DM Serif Display',serif}.match-item{padding:10px 14px;border-radius:var(--r10);border:2px solid var(--bdr);background:var(--card2);color:var(--t2);cursor:pointer;transition:.3s;font-size:.85rem;text-align:center;user-select:none}.match-item:hover{border-color:var(--b);transform:scale(1.02)}.match-item.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}.match-item.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important;pointer-events:none}.match-item.no{border-color:var(--r)!important;animation:shake .4s}.match-score{text-align:center;margin-top:10px;font-weight:600;color:var(--g)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
+.step-diagram{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;margin:16px 0;padding:14px;background:rgba(0,0,0,.15);border-radius:var(--r10)}.step-box{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 12px;text-align:center;min-width:80px}.step-arrow{color:var(--y);font-size:1.1rem;font-weight:700}
+.sim{background:var(--card2);border-radius:14px;padding:4px;margin:16px 0;border:1px solid var(--bdr);position:relative;overflow:hidden}
+.sim canvas{display:block;width:100%;border-radius:10px;background:#080d16}
+.sim-ctrls{display:flex;flex-wrap:wrap;gap:8px;padding:12px;align-items:center;justify-content:center}
+.sim-label{font-size:.82em;font-weight:700;color:var(--g)}
+.sim-narr{background:rgba(0,212,170,.06);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px;margin-top:12px;color:var(--t2);font-size:.9rem;line-height:1.6;min-height:60px}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:18px 0}.fc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:18px;cursor:pointer;transition:.4s;min-height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.fc:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:var(--glow)}.ft{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--g)}.fd{display:none;font-size:.83rem;color:var(--t2);line-height:1.6;margin-top:6px}.fc.fl .ft{display:none}.fc.fl .fd{display:block}.fh{font-size:.7rem;color:var(--t3);margin-top:6px}.fc.fl .fh{display:none}
+.sd{text-align:center;padding:30px;margin:18px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}.snm{font-family:'DM Serif Display',serif;font-size:3rem;margin-bottom:4px}.sbl{color:var(--t2)}.sbr{width:100%;max-width:360px;height:10px;background:rgba(255,255,255,.06);border-radius:6px;margin:16px auto;overflow:hidden}.sbf{height:100%;border-radius:6px;transition:width 1s}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.72rem;font-weight:600;margin:2px 3px}
+@media(max-width:768px){.og,.cg,.match-game{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.hero h1{font-size:1.8rem}.ni{flex-direction:column;align-items:flex-start}.step-diagram{gap:2px}.step-box{min-width:60px;padding:6px 8px;font-size:.75rem}}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">🧬 Daño y Reparación del ADN</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button><button data-s="mutaciones">Mutaciones</button><button data-s="puntuales">Punt./Frameshift</button><button data-s="cromosomicas">Cromosómicas</button><button data-s="espontaneo">Daño Espont.</button><button data-s="exogeno">Daño Exógeno</button><button data-s="rep1">Reparación I</button><button data-s="rep2">Reparación II</button><button data-s="glosario">Glosario</button><button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ===== INICIO ===== -->
+<div class="sec a" id="sec-inicio"><div class="hero"><div class="hi">🧬</div><h1>Daño y Reparación del ADN</h1><p class="hs">Mutaciones, agentes mutagénicos, tipos de daño al ADN y los mecanismos de reparación que mantienen la integridad genómica. Enfoque integrado con correlatos clínicos.</p></div>
+<div class="cd"><div class="ch">🎯 Resultados de <span class="ac">Aprendizaje</span></div><p style="color:var(--t2);margin-bottom:14px">Sesión interactiva. Integra 8 módulos con relevancia clínica.</p>
+<div class="og">
+<div class="oi"><div class="on">1</div><div class="ot">Definir mutación, agentes mutagénicos, mutaciones inducidas vs. espontáneas.</div></div>
+<div class="oi"><div class="on">2</div><div class="ot">Describir mutaciones puntuales: silent, missense, nonsense y frameshift.</div></div>
+<div class="oi"><div class="on">3</div><div class="ot">Describir mutaciones cromosómicas: deleciones, translocaciones, duplicaciones, inversiones.</div></div>
+<div class="oi"><div class="on">4</div><div class="ot">Identificar daño espontáneo: depurinaciones, deaminaciones. Timina vs Uracilo.</div></div>
+<div class="oi"><div class="on">5</div><div class="ot">Describir daños exógenos: radiación UV, ionizante, análogos de bases, intercalantes.</div></div>
+<div class="oi"><div class="on">6</div><div class="ot">Describir BER, NER y reversión directa.</div></div>
+<div class="oi"><div class="on">7</div><div class="ot">Describir MMR, TC-NER, síntesis translesional y NHEJ.</div></div>
+<div class="oi"><div class="on">8</div><div class="ot">Integrar correlatos clínicos: XP, Lynch, Cockayne, anemia falciforme.</div></div>
+</div></div>
+
+<div class="sim">
+<canvas id="cvOverview" width="900" height="300"></canvas>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:4px">▲ Visualización interactiva: ~10,000-100,000 lesiones al ADN por célula por día</p>
+
+<div class="mnemonic"><h4>🧠 Dato Clave</h4><div class="big">10,000 – 100,000</div><p>lesiones al ADN por célula por día. Sin los mecanismos de reparación, la vida no sería posible.</p></div>
+<div style="text-align:center;margin-top:20px"><button class="btn bp" onclick="go('mutaciones')">Comenzar la tutoría →</button></div>
+</div>
+
+
+<div class="sec" id="sec-mutaciones">
+<div class="chapter-header"><div class="ch-num">Capítulo 1 de 8</div><h2>🔬 Mutaciones — Conceptos Fundamentales</h2><p>Definiciones, clasificación general, mutaciones inducidas vs. espontáneas</p><div class="ch-time">⏱ ~12 min</div></div>
+
+<div class="cd"><div class="ch">📖 ¿Qué es una <span class="ac">Mutación</span>?</div>
+<div class="ib"><div class="ibt">🔑 Definición</div><p style="color:var(--t2)">Una <strong>mutación</strong> es un cambio permanente en la secuencia de nucleótidos del ADN. A diferencia de los daños transitorios (que pueden repararse), una mutación ya se ha incorporado al genoma. Las mutaciones en <strong>células germinales</strong> son heredables; las de <strong>células somáticas</strong> no.</p></div>
+<div class="ib n"><div class="ibt">💡 Mutágeno</div><p style="color:var(--t2)">Un <strong>mutágeno</strong> es cualquier agente físico, químico o biológico capaz de aumentar la tasa de mutación. Ejemplos: radiación UV, benzopireno (humo de tabaco), aflatoxinas.</p></div>
+<div class="cg">
+<div class="cc"><h4 style="color:var(--g)">✨ Espontáneas</h4><p style="color:var(--t2);font-size:.85rem">Errores de ADN polimerasa (~1/10⁹-10¹⁰ bp), hidrólisis espontánea (depurinaciones, deaminaciones), daño oxidativo por ROS, deslizamiento de la polimerasa.</p></div>
+<div class="cc"><h4 style="color:var(--r)">⚡ Inducidas</h4><p style="color:var(--t2);font-size:.85rem">Radiación UV/ionizante, análogos de bases, agentes alquilantes, intercalantes, deaminantes. Aumentan significativamente la frecuencia de mutación.</p></div>
+</div>
+</div>
+
+<div class="sim">
+<canvas id="cvClassif" width="900" height="380"></canvas>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center">▲ Clasificación visual interactiva de las mutaciones</p>
+
+<div class="analogy"><div style="font-size:1.8rem;margin-bottom:6px">📖</div><h4>Analogía: El libro y los errores de imprenta</h4><p>El ADN es un <strong>libro de instrucciones</strong>. Una mutación <strong>puntual</strong> es como cambiar una letra. Un <strong>frameshift</strong> es eliminar un espacio: todo lo que sigue queda sin sentido. Una mutación <strong>cromosómica</strong> es arrancar, copiar o invertir páginas enteras.</p></div>
+
+<div class="qq" id="q01"><div class="qt">¿Cuál es la diferencia fundamental entre un daño al ADN y una mutación?</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>No hay diferencia</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">B</div>El daño es reparable; la mutación es un cambio permanente incorporado al genoma</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">C</div>Las mutaciones solo ocurren en células germinales</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>El daño solo lo causan agentes exógenos</button>
+</div><div class="qf" id="fb-q01"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('puntuales')">Mut. Puntuales →</button></div>
+</div>
+
+
+<div class="sec" id="sec-puntuales">
+<div class="chapter-header"><div class="ch-num">Capítulo 2 de 8</div><h2>🎯 Mutaciones Puntuales y Frameshift</h2><p>Silent, missense, nonsense y cambio del marco de lectura</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">🔤 Tipos de Mutaciones <span class="ac">Puntuales</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto</div><p style="color:var(--t2)">Cambio de un solo par de bases. Por la degeneración del código genético, no todas causan efecto. El impacto depende de si altera el aminoácido resultante.</p></div>
+<table class="et"><thead><tr><th>Tipo</th><th>Efecto</th><th>Ejemplo Clínico</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Silent</strong></td><td>Mismo aminoácido (3ª posición wobble)</td><td>Frecuente, sin patología</td></tr>
+<tr><td><strong style="color:var(--y)">Missense</strong></td><td>Aminoácido diferente</td><td>Anemia falciforme: Glu→Val en β-globina</td></tr>
+<tr><td><strong style="color:var(--r)">Nonsense</strong></td><td>Codón STOP prematuro → proteína truncada</td><td>Duchenne, β-talasemia, fibrosis quística</td></tr>
+</tbody></table>
+</div>
+
+<div class="cd"><div class="ch">🧪 Simulación Visual: <span class="ac">Tipos de Mutaciones Puntuales</span></div>
+<div class="sim">
+<canvas id="cvPointMut" width="900" height="350"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" onclick="setPointMut(0)">Normal</button>
+<button class="btn bs" onclick="setPointMut(1)">Silent</button>
+<button class="btn bs" onclick="setPointMut(2)" style="border-color:var(--y);color:var(--y)">Missense</button>
+<button class="btn bs" onclick="setPointMut(3)" style="border-color:var(--r);color:var(--r)">Nonsense</button>
+<span class="sim-label" id="pmLabel">Secuencia normal</span>
+</div></div>
+<div class="sim-narr" id="pmNarr">Presiona cada botón para visualizar cómo cada tipo de mutación puntual afecta la secuencia de ADN, el ARNm resultante y la proteína. Observa cómo cambian los codones y aminoácidos.</div>
+</div>
+
+<div class="cd"><div class="ch">📐 Simulación Visual: <span class="ac">Mutación Frameshift</span></div>
+<div class="ib w"><div class="ibt">⚠️ La más devastadora</div><p style="color:var(--t2)">Inserciones o deleciones de nucleótidos (NO múltiplo de 3) desplazan el marco de lectura, cambiando TODOS los codones subsiguientes.</p></div>
+<div class="sim">
+<canvas id="cvFrameshift" width="900" height="380"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" id="fsBtn" onclick="startFrameshiftAnim()">▶ Insertar una C</button>
+<button class="btn bs" onclick="resetFrameshift()">↺ Reiniciar</button>
+<span class="sim-label" id="fsStatus">Listo</span>
+</div></div>
+<div class="sim-narr" id="fsNarr">Presiona "Insertar una C" para ver cómo la inserción de un solo nucleótido destruye completamente el marco de lectura. Observa cómo TODOS los codones y aminoácidos cambian después del punto de inserción.</div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Anemia Falciforme — Una mutación missense</div>
+<p class="clp"><strong>GAG→GTG</strong> cambia <strong>Glu (polar) → Val (hidrofóbica)</strong> en posición 6 de β-globina. HbS polimeriza en baja O₂ → eritrocitos en hoz → oclusión vascular. Heterocigotos (HbAS) resisten malaria por <em>P. falciparum</em>.</p></div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Duchenne vs Becker — La regla del marco de lectura</div>
+<p class="clp">Mutaciones <strong>frameshift/nonsense</strong> en distrofina → pérdida total → <strong>Duchenne</strong> (severa). Deleciones <strong>in-frame</strong> (múltiplo de 3) → distrofina parcial → <strong>Becker</strong> (leve).</p></div>
+
+<div class="qq" id="q03"><div class="qt">La anemia falciforme es una mutación de tipo:</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">A</div>Silent</button>
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">B</div>Missense (Glu→Val en β-globina)</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">C</div>Nonsense</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>Frameshift</button>
+</div><div class="qf" id="fb-q03"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('mutaciones')">← Mutaciones</button><button class="btn bp" onclick="go('cromosomicas')">Cromosómicas →</button></div>
+</div>
+
+
+<div class="sec" id="sec-cromosomicas">
+<div class="chapter-header"><div class="ch-num">Capítulo 3 de 8</div><h2>🔀 Mutaciones Cromosómicas</h2><p>Deleciones, translocaciones, duplicaciones e inversiones a gran escala</p><div class="ch-time">⏱ ~12 min</div></div>
+
+<div class="cd"><div class="ch">🗺️ Simulación: <span class="ac">Reordenamientos Cromosómicos</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto</div><p style="color:var(--t2)">Afectan regiones enteras del cromosoma (miles a millones de pb). Detectables por cariotipo, FISH o array CGH.</p></div>
+<div class="sim">
+<canvas id="cvChromo" width="900" height="400"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" onclick="setChromo(0)">Normal</button>
+<button class="btn bs" onclick="setChromo(1)" style="border-color:var(--o);color:var(--o)">Deleción</button>
+<button class="btn bs" onclick="setChromo(2)" style="border-color:var(--b);color:var(--b)">Duplicación</button>
+<button class="btn bs" onclick="setChromo(3)" style="border-color:var(--p);color:var(--p)">Inversión</button>
+<button class="btn bs" onclick="setChromo(4)" style="border-color:var(--pk);color:var(--pk)">Translocación</button>
+</div></div>
+<div class="sim-narr" id="chromoNarr">Presiona cada botón para visualizar cada tipo de mutación cromosómica. Observa cómo se reorganizan los segmentos del cromosoma.</div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Translocaciones en Cáncer</div>
+<p class="clp"><strong>Philadelphia t(9;22):</strong> BCR-ABL → tirosina quinasa constitutiva → LMC. Tx: <strong>Imatinib</strong>. <strong>Burkitt t(8;14):</strong> MYC bajo promotor de Ig → proliferación. <strong>Cri du Chat (5p-):</strong> Deleción → llanto agudo, discapacidad intelectual.</p></div>
+
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">Emparejar</span></div>
+<div class="match-game" id="mg1">
+<div class="match-col"><h4 style="color:var(--g)">Tipo</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg1',this)">Deleción</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg1',this)">Translocación</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg1',this)">Inversión</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg1',this)">Duplicación</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">Descripción</h4>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg1',this)">Segmento gira 180° dentro del mismo cromosoma</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg1',this)">Pérdida de un segmento (ej. Cri du Chat)</div>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg1',this)">Una región se copia y aparece repetida</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg1',this)">Intercambio entre cromosomas no homólogos (ej. Philadelphia)</div>
+</div></div>
+<div class="match-score" id="mg1-score"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('puntuales')">← Puntuales</button><button class="btn bp" onclick="go('espontaneo')">Daño Espontáneo →</button></div>
+</div>
+
+
+<div class="sec" id="sec-espontaneo">
+<div class="chapter-header"><div class="ch-num">Capítulo 4 de 8</div><h2>💧 Daño Espontáneo al ADN</h2><p>Depurinaciones, deaminaciones y por qué el ADN usa timina</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">🧪 Simulación: <span class="ac">Depurinación y Deaminación</span></div>
+<div class="sim">
+<canvas id="cvSpontaneous" width="900" height="400"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" onclick="setSpontan(0)">ADN Normal</button>
+<button class="btn bs" onclick="setSpontan(1)" style="border-color:var(--o);color:var(--o)">Depurinación</button>
+<button class="btn bs" onclick="setSpontan(2)" style="border-color:var(--pk);color:var(--pk)">Deaminación C→U</button>
+<button class="btn bs" onclick="setSpontan(3)" style="border-color:var(--y);color:var(--y)">5mC → T</button>
+</div></div>
+<div class="sim-narr" id="spontNarr">Presiona cada botón para visualizar cómo ocurren los daños espontáneos al ADN. Observa las consecuencias de cada tipo de lesión si no se repara.</div>
+</div>
+
+<div class="cd"><div class="ch">🤔 ¿Por qué <span class="ac">Timina</span> y NO Uracilo?</div>
+<div class="ib go"><div class="ibt">💡 Seguridad Genética</div><p style="color:var(--t2)">La <strong>timina = 5-metiluracilo</strong>. La deaminación de citosina produce <strong>uracilo</strong>. Si el ADN usara uracilo, la célula NO podría distinguir U legítimo de U por deaminación. Con <strong>timina</strong>, cualquier uracilo en ADN = <strong>dañado</strong> → eliminado por uracil-ADN glicosilasa.</p></div>
+<div class="ib pp"><div class="ibt">🧬 5-Metilcitosina → Timina</div><p style="color:var(--t2)">~3% de C están metiladas (5mC) en secuencias CpG. Su deaminación produce <strong>T</strong> (no U) → mismatch T:G más difícil de detectar. Los CpG son <strong>hotspots mutacionales</strong>. Glicosilasa especial TDG/MBD4.</p></div>
+<div class="mnemonic"><h4>🧠 Mnemotécnica</h4><div class="big">T = U + CH₃ = SEGURIDAD</div><p>Timina protege al ADN permitiendo detectar Uracilos fraudulentos.</p></div>
+</div>
+
+<div class="qq" id="q05"><div class="qt">¿Por qué el ADN usa timina y no uracilo?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">A</div>La timina es más económica</button>
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">B</div>Para detectar uracilos por deaminación de C como daño</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">C</div>La timina forma más puentes de H</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>El uracilo es tóxico</button>
+</div><div class="qf" id="fb-q05"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('cromosomicas')">← Cromosómicas</button><button class="btn bp" onclick="go('exogeno')">Daño Exógeno →</button></div>
+</div>
+
+
+<div class="sec" id="sec-exogeno">
+<div class="chapter-header"><div class="ch-num">Capítulo 5 de 8</div><h2>⚡ Daño Exógeno al ADN</h2><p>Radiación UV/ionizante, análogos de bases, modificadores, intercalantes</p><div class="ch-time">⏱ ~12 min</div></div>
+
+<div class="cd"><div class="ch">☀️ Simulación: <span class="ac">Agentes Mutagénicos Exógenos</span></div>
+<div class="sim">
+<canvas id="cvExogenous" width="900" height="380"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" onclick="setExo(0)">ADN Normal</button>
+<button class="btn bs" onclick="setExo(1)" style="border-color:var(--y);color:var(--y)">☀️ UV (dímero T=T)</button>
+<button class="btn bs" onclick="setExo(2)" style="border-color:var(--r);color:var(--r)">⚡ Rad. Ionizante</button>
+<button class="btn bs" onclick="setExo(3)" style="border-color:var(--pk);color:var(--pk)">📎 Intercalante</button>
+</div></div>
+<div class="sim-narr" id="exoNarr">Presiona cada botón para visualizar cómo los diferentes agentes mutagénicos dañan la doble hélice del ADN. Observa la distorsión estructural que cada tipo de daño produce.</div>
+</div>
+
+<div class="cg3">
+<div class="cc"><h4 style="color:var(--o)">🔄 Análogos de Bases</h4><p style="color:var(--t2);font-size:.85rem">Similares a bases normales, se incorporan durante replicación con reglas de apareamiento diferentes. Ej: 5-bromouracilo, 2-aminopurina.</p></div>
+<div class="cc"><h4 style="color:var(--b)">✏️ Modificadores</h4><p style="color:var(--t2);font-size:.85rem">Alquilantes (EMS, nitrosaminas), deaminantes (HNO₂), oxidantes/hidroxilantes. Modifican bases in situ.</p></div>
+<div class="cc"><h4 style="color:var(--pk)">📎 Intercalantes</h4><p style="color:var(--t2);font-size:.85rem">Bromuro de etidio, acridina, benzo[a]pireno. Se insertan entre bases → estiran ADN → frameshift.</p></div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Xeroderma Pigmentoso</div>
+<p class="clp">Defecto en <strong>NER</strong> (XPA-XPG). No reparan dímeros UV. Fotosensibilidad extrema, riesgo de cáncer de piel <strong>1,000×</strong> mayor. 7 grupos de complementación + variante XPV (Pol η).</p></div>
+
+<div class="qq" id="q07"><div class="qt">¿Qué daño causa la radiación UVB?</div><div class="qo">
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">A</div>Roturas de doble hebra</button>
+<button class="qb" onclick="cq('q07',this,1)"><div class="ol">B</div>Dímeros de pirimidinas (CPD)</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">C</div>Depurinaciones masivas</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">D</div>Deaminaciones</button>
+</div><div class="qf" id="fb-q07"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('espontaneo')">← Daño Espontáneo</button><button class="btn bp" onclick="go('rep1')">Reparación I →</button></div>
+</div>
+
+
+<div class="sec" id="sec-rep1">
+<div class="chapter-header"><div class="ch-num">Capítulo 6 de 8</div><h2>🔧 Reparación I — BER y NER</h2><p>Escisión de bases, escisión de nucleótidos y reversión directa</p><div class="ch-time">⏱ ~18 min</div></div>
+
+<div class="cd"><div class="ch">🔄 Principio Universal de <span class="ac">Reparación</span></div>
+<div class="step-diagram">
+<div class="step-box"><strong style="color:var(--r)">1. Reconocer</strong><br><span style="font-size:.8rem;color:var(--t2)">Detectar daño</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--o)">2. Escindir</strong><br><span style="font-size:.8rem;color:var(--t2)">Cortar</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">3. Rellenar</strong><br><span style="font-size:.8rem;color:var(--t2)">ADN Pol</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--g)">4. Sellar</strong><br><span style="font-size:.8rem;color:var(--t2)">Ligasa</span></div>
+</div></div>
+
+<div class="cd"><div class="ch">✂️ Simulación Animada: <span class="ac">BER</span></div>
+<div class="ib"><div class="ibt">🔑 BER</div><p style="color:var(--t2)">Corrige bases únicas dañadas: deaminaciones (U en ADN), oxidaciones (8-oxoG), depurinaciones (sitios AP). La glicosilasa es la primera enzima.</p></div>
+<div class="sim">
+<canvas id="cvBER" width="900" height="400"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" id="berBtn" onclick="startBER()">▶ Iniciar BER</button>
+<button class="btn bs" onclick="resetBER()">↺ Reiniciar</button>
+<span class="sim-label" id="berStatus">Listo para iniciar</span>
+</div></div>
+<div class="sim-narr" id="berNarr">Presiona "Iniciar BER" para ver la reparación paso a paso: la glicosilasa reconoce el uracilo → AP endonucleasa corta → Pol β rellena → Ligasa sella. Observa cómo cada enzima actúa en secuencia.</div>
+</div>
+
+<div class="cd"><div class="ch">🔍 Simulación Animada: <span class="ac">NER</span></div>
+<div class="ib"><div class="ibt">🔑 NER</div><p style="color:var(--t2)">Repara lesiones voluminosas que distorsionan la hélice: dímeros UV, aductos. Reconoce la <strong>distorsión</strong>, no la lesión específica. Elimina ~24-32 nt. Defectos → Xeroderma Pigmentoso.</p></div>
+<div class="sim">
+<canvas id="cvNER" width="900" height="400"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" id="nerBtn" onclick="startNER()">▶ Iniciar NER</button>
+<button class="btn bs" onclick="resetNER()">↺ Reiniciar</button>
+<span class="sim-label" id="nerStatus">Listo para iniciar</span>
+</div></div>
+<div class="sim-narr" id="nerNarr">Presiona "Iniciar NER" para ver cómo XPC detecta la distorsión → TFIIH abre la burbuja → XPF y XPG cortan → Pol δ rellena → Ligasa sella. Observa el fragmento de ~27 nt que se libera.</div>
+</div>
+
+<table class="et"><thead><tr><th>Característica</th><th>BER</th><th>NER</th></tr></thead><tbody>
+<tr><td><strong>Daño</strong></td><td>Bases dañadas individuales</td><td>Lesiones voluminosas / distorsión</td></tr>
+<tr><td><strong>Parche</strong></td><td>1 nt (short) o 2-10 nt (long)</td><td>~24-32 nucleótidos</td></tr>
+<tr><td><strong>Enzimas clave</strong></td><td>Glicosilasa, AP endonucleasa, Pol β</td><td>XPC, TFIIH, XPF-ERCC1, XPG</td></tr>
+<tr><td><strong>Enfermedad</strong></td><td>Cáncer (MUTYH)</td><td>Xeroderma Pigmentoso</td></tr>
+</tbody></table>
+
+<div class="qq" id="q09"><div class="qt">¿Cuál enzima inicia el BER?</div><div class="qo">
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">A</div>AP endonucleasa</button>
+<button class="qb" onclick="cq('q09',this,1)"><div class="ol">B</div>ADN Glicosilasa (reconoce y elimina la base dañada)</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">C</div>ADN Polimerasa β</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">D</div>Topoisomerasa</button>
+</div><div class="qf" id="fb-q09"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('exogeno')">← Daño Exógeno</button><button class="btn bp" onclick="go('rep2')">Reparación II →</button></div>
+</div>
+
+
+<div class="sec" id="sec-rep2">
+<div class="chapter-header"><div class="ch-num">Capítulo 7 de 8</div><h2>🛡️ Reparación II — MMR, TLS, TC-NER y NHEJ</h2><p>Mismatch repair, síntesis translesional, NER acoplado a transcripción, unión de extremos</p><div class="ch-time">⏱ ~18 min</div></div>
+
+<div class="cd"><div class="ch">🔎 Simulación: <span class="ac">Mismatch Repair (MMR)</span></div>
+<div class="ib"><div class="ibt">🔑 MMR</div><p style="color:var(--t2)">Repara errores post-replicación: bases mal apareadas y pequeñas inserciones/deleciones. MSH2/MSH6 (MutSα) reconoce. MLH1/PMS2 (MutLα) coordina escisión de la hebra nueva.</p></div>
+<div class="sim">
+<canvas id="cvMMR" width="900" height="350"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" id="mmrBtn" onclick="startMMR()">▶ Iniciar MMR</button>
+<button class="btn bs" onclick="resetMMR()">↺ Reiniciar</button>
+<span class="sim-label" id="mmrStatus">Listo</span>
+</div></div>
+<div class="sim-narr" id="mmrNarr">Presiona "Iniciar MMR" para ver cómo MutSα detecta el mismatch en la hebra recién sintetizada → MutLα coordina → la hebra nueva se escinde → Pol δ rellena correctamente.</div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Síndrome de Lynch</div>
+<p class="clp">Mutaciones en <strong>MLH1, MSH2, MSH6, PMS2</strong> → inestabilidad de microsatélites (MSI) → cáncer colorrectal, endometrial. Los tumores MSI-high responden a <strong>inmunoterapia (anti-PD-1)</strong>.</p></div>
+
+<div class="cd"><div class="ch">🚧 TC-NER y <span class="ac">Síntesis Translesional</span></div>
+<div class="ib n"><div class="ibt">💡 TC-NER</div><p style="color:var(--t2)">ARN Pol II se detiene al encontrar lesión → CSA/CSB reclutan maquinaria NER → reparación prioritaria de genes activos. Defecto: <strong>Síndrome de Cockayne</strong>.</p></div>
+<div class="ib or"><div class="ibt">⚡ Síntesis Translesional (TLS)</div><p style="color:var(--t2)">Mecanismo de <strong>tolerancia</strong>. Polimerasas especiales (Pol η, ι, κ) copian pasando la lesión. Sin proofreading, solo 1-2 nt. Propensas a errores pero evitan que la replicación se detenga.</p></div>
+<div class="sim">
+<canvas id="cvTLS" width="900" height="380"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" id="tlsBtn" onclick="startTLS()">▶ Iniciar TLS</button>
+<button class="btn bs" onclick="resetTLS()">↺ Reiniciar</button>
+<span class="sim-label" id="tlsStatus">Listo</span>
+</div></div>
+<div class="sim-narr" id="tlsNarr">Presiona "Iniciar TLS" para ver cómo la polimerasa replicativa se detiene ante una lesión → se retira → Pol η (translesión) inserta 1-2 nt pasando el daño → la Pol replicativa retoma la síntesis.</div>
+</div>
+
+<div class="cd"><div class="ch">🔗 <span class="ac">NHEJ</span> — Roturas de Doble Hebra</div>
+<div class="ib w"><div class="ibt">⚠️ Quick and dirty</div><p style="color:var(--t2)">Las DSB son el daño más peligroso. NHEJ une extremos directamente sin homología. Ku70/Ku80 reconocen → DNA-PKcs → Artemis procesa → Ligasa IV/XRCC4 sella. Rápido pero puede causar pérdida de nucleótidos y reordenamientos.</p></div>
+<div class="step-diagram">
+<div class="step-box"><strong style="color:var(--r)">DSB</strong><br><span style="font-size:.8rem;color:var(--t2)">Rotura</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--y)">Ku70/80</strong><br><span style="font-size:.8rem;color:var(--t2)">Reconoce</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--p)">DNA-PKcs</strong><br><span style="font-size:.8rem;color:var(--t2)">Activa</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--o)">Artemis</strong><br><span style="font-size:.8rem;color:var(--t2)">Procesa</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--g)">Lig IV</strong><br><span style="font-size:.8rem;color:var(--t2)">Sella</span></div>
+</div></div>
+
+<div class="cd"><div class="ch">📊 Resumen de <span class="ac">Mecanismos</span></div>
+<table class="et"><thead><tr><th>Mecanismo</th><th>Daño</th><th>Enzimas Clave</th><th>Patología</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">BER</strong></td><td>Bases individuales</td><td>Glicosilasa, AP endonucl., Pol β</td><td>Cáncer (MUTYH)</td></tr>
+<tr><td><strong style="color:var(--b)">NER</strong></td><td>Lesiones voluminosas</td><td>XPC, TFIIH, XPF, XPG</td><td>Xeroderma Pigmentoso</td></tr>
+<tr><td><strong style="color:var(--p)">TC-NER</strong></td><td>Genes activos</td><td>CSA, CSB + NER</td><td>S. Cockayne</td></tr>
+<tr><td><strong style="color:var(--y)">MMR</strong></td><td>Mismatches post-replic.</td><td>MSH2/6, MLH1/PMS2</td><td>S. Lynch</td></tr>
+<tr><td><strong style="color:var(--o)">TLS</strong></td><td>Tolerancia</td><td>Pol η, ι, κ</td><td>XP variante</td></tr>
+<tr><td><strong style="color:var(--r)">NHEJ</strong></td><td>Roturas doble hebra</td><td>Ku70/80, Lig IV</td><td>Inmunodeficiencia</td></tr>
+</tbody></table></div>
+
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">Emparejar</span> mecanismo con daño</div>
+<div class="match-game" id="mg2">
+<div class="match-col"><h4 style="color:var(--g)">Mecanismo</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg2',this)">BER</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg2',this)">NER</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg2',this)">MMR</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg2',this)">NHEJ</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">Tipo de Daño</h4>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg2',this)">Roturas de doble hebra</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg2',this)">Uracilo en ADN (deaminación de C)</div>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg2',this)">Base mal apareada tras replicación</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg2',this)">Dímero de pirimidinas (UV)</div>
+</div></div>
+<div class="match-score" id="mg2-score"></div></div>
+
+<div class="qq" id="q11"><div class="qt">El Síndrome de Lynch afecta al sistema:</div><div class="qo">
+<button class="qb" onclick="cq('q11',this,0)"><div class="ol">A</div>BER</button>
+<button class="qb" onclick="cq('q11',this,0)"><div class="ol">B</div>NER</button>
+<button class="qb" onclick="cq('q11',this,1)"><div class="ol">C</div>MMR (MLH1, MSH2) — inestabilidad de microsatélites</button>
+<button class="qb" onclick="cq('q11',this,0)"><div class="ol">D</div>NHEJ</button>
+</div><div class="qf" id="fb-q11"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('rep1')">← Reparación I</button><button class="btn bp" onclick="go('glosario')">Glosario →</button></div>
+</div>
+
+
+<div class="sec" id="sec-glosario">
+<div class="chapter-header"><div class="ch-num">Recurso</div><h2>📖 Glosario Integrado</h2><p>Clic en cada término para su definición</p></div>
+<div class="fg" id="fg"></div>
+<div class="sn"><button class="btn bs" onclick="go('rep2')">← Reparación II</button><button class="btn bp" onclick="go('evaluacion')">Evaluación →</button></div>
+</div>
+
+<div class="sec" id="sec-evaluacion">
+<div class="chapter-header"><div class="ch-num">Evaluación</div><h2>🎓 Evaluación Final</h2><p>20 preguntas integradoras — selecciona TODAS antes de calificar</p></div>
+<div id="eq"></div>
+<div style="text-align:center;margin:20px 0"><button class="btn bp" id="seb" style="display:none" onclick="se()">📊 Calificar</button></div>
+<div class="sd" id="sdd" style="display:none"><div class="snm" id="sn2"></div><p class="sbl" id="sm2"></p><div class="sbr"><div class="sbf" id="sbf2" style="width:0%;background:var(--grad)"></div></div><button class="btn bs" onclick="iev()" style="margin-top:12px">↺ Reintentar</button></div>
+<div class="sn"><button class="btn bs" onclick="go('glosario')">← Glosario</button><button class="btn bp" onclick="go('inicio')">🏠 Inicio</button></div>
+</div>
+
+</div>
+
+<script>
+"use strict";
+/* ===== NAVIGATION ===== */
+var secs=["inicio","mutaciones","puntuales","cromosomicas","espontaneo","exogeno","rep1","rep2","glosario","evaluacion"];
+window.go=function(s){
+  secs.forEach(function(id){document.getElementById("sec-"+id).classList.remove("a")});
+  document.getElementById("sec-"+s).classList.add("a");
+  document.querySelectorAll(".nl button").forEach(function(b){b.classList.remove("a");if(b.dataset.s===s)b.classList.add("a")});
+  window.scrollTo({top:0,behavior:"smooth"});upd();
+  // Redraw canvases when section becomes visible
+  if(s==="inicio") drawOverview();
+  if(s==="mutaciones") drawClassif();
+  if(s==="puntuales"){drawPointMut(0);resetFrameshift();}
+  if(s==="cromosomicas") drawChromo(0);
+  if(s==="espontaneo") drawSpontan(0);
+  if(s==="exogeno") drawExo(0);
+  if(s==="rep1"){resetBER();resetNER();}
+  if(s==="rep2"){resetMMR();resetTLS();}
+};
+function upd(){var cur=document.querySelector(".nl button.a");var i=cur?secs.indexOf(cur.dataset.s):0;document.getElementById("pf").style.width=Math.round((i/(secs.length-1))*100)+"%";}
+
+/* ===== QUIZ ===== */
+window.cq=function(id,btn,c){
+  var q=document.getElementById(id);if(q.dataset.done)return;q.dataset.done="1";
+  q.querySelectorAll(".qb").forEach(function(b){b.classList.add("dis")});
+  var fb=document.getElementById("fb-"+id);
+  if(c===1){btn.classList.add("ok");fb.classList.add("sh","cf");fb.textContent="\u2705 \u00a1Correcto!";}
+  else{btn.classList.add("no");q.querySelectorAll(".qb").forEach(function(b){var oc=b.getAttribute("onclick");if(oc&&oc.indexOf(",1)")>-1)b.classList.add("ok")});fb.classList.add("sh","if");fb.textContent="\u274c Incorrecto. La respuesta correcta est\u00e1 en verde.";}
+};
+
+/* ===== MATCHING ===== */
+var ms={};
+window.mp=function(gid,el){
+  if(el.classList.contains("ok"))return;var g=ms[gid]||(ms[gid]={l:null,r:null,score:0});
+  var side=el.dataset.side;
+  if(side==="l"){if(g.l)g.l.classList.remove("sel");g.l=el;el.classList.add("sel");}
+  else{if(g.r)g.r.classList.remove("sel");g.r=el;el.classList.add("sel");}
+  if(g.l&&g.r){if(g.l.dataset.pair===g.r.dataset.pair){g.l.classList.remove("sel");g.r.classList.remove("sel");g.l.classList.add("ok");g.r.classList.add("ok");g.score++;g.l=null;g.r=null;}else{g.l.classList.add("no");g.r.classList.add("no");var ll=g.l,rr=g.r;setTimeout(function(){ll.classList.remove("sel","no");rr.classList.remove("sel","no")},500);g.l=null;g.r=null;}document.getElementById(gid+"-score").textContent="Aciertos: "+g.score;}
+};
+
+/* ===== CANVAS HELPERS ===== */
+function getCtx(id){var cv=document.getElementById(id);if(!cv)return null;cv.width=900;cv.height=cv.getAttribute("height")|0;return cv.getContext("2d");}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
+var baseColors={"A":"#00D4AA","T":"#FFD93D","G":"#00A3FF","C":"#EC4899","U":"#FF6B6B"};
+function drawBase(ctx,x,y,base,r,highlight){
+  r=r||16;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
+  ctx.fillStyle=highlight||baseColors[base]||"#8BA4BE";ctx.globalAlpha=0.25;ctx.fill();ctx.globalAlpha=1;
+  ctx.strokeStyle=highlight||baseColors[base]||"#8BA4BE";ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle=highlight||baseColors[base]||"#FFF";ctx.font="bold "+(r>12?"14":"11")+"px JetBrains Mono";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(base,x,y+1);
+}
+function drawDNABackbone(ctx,x1,x2,y,color){ctx.strokeStyle=color||"#334";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x1,y);ctx.lineTo(x2,y);ctx.stroke();}
+function drawHBond(ctx,x,y1,y2){ctx.strokeStyle="rgba(255,255,255,0.15)";ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,y1);ctx.lineTo(x,y2);ctx.stroke();ctx.setLineDash([]);}
+
+/* ===== OVERVIEW ANIMATION ===== */
+var ovParticles=[];
+function drawOverview(){
+  var ctx=getCtx("cvOverview");if(!ctx)return;var W=900,H=300;
+  ctx.clearRect(0,0,W,H);
+  // Background
+  ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  // DNA double helix
+  for(var i=0;i<W;i+=3){
+    var phase=i*0.04+Date.now()*0.001;
+    var y1=H/2+Math.sin(phase)*40;var y2=H/2+Math.sin(phase+Math.PI)*40;
+    ctx.fillStyle="rgba(0,212,170,0.5)";ctx.fillRect(i,y1,2,1);
+    ctx.fillStyle="rgba(0,163,255,0.5)";ctx.fillRect(i,y2,2,1);
+    if(i%24===0){ctx.strokeStyle="rgba(255,255,255,0.08)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(i,y1);ctx.lineTo(i,y2);ctx.stroke();}
+  }
+  // Damage particles
+  if(ovParticles.length<15){ovParticles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*2,vy:(Math.random()-0.5)*2,t:Math.random()*3|0,life:120+Math.random()*200});}
+  var labels=["ROS","UV","\u2022OH"];var cols=["#FF6B6B","#FFD93D","#F97316"];
+  ovParticles.forEach(function(p){
+    p.x+=p.vx;p.y+=p.vy;p.life--;
+    if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+    ctx.globalAlpha=Math.min(1,p.life/50);ctx.fillStyle=cols[p.t];ctx.font="bold 10px Source Sans 3";ctx.textAlign="center";ctx.fillText(labels[p.t],p.x,p.y);ctx.globalAlpha=1;
+  });
+  ovParticles=ovParticles.filter(function(p){return p.life>0;});
+  // Labels
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 18px DM Serif Display";ctx.textAlign="center";ctx.fillText("Da\u00f1o al ADN: Agentes End\u00f3genos y Ex\u00f3genos",W/2,30);
+  ctx.fillStyle="#8BA4BE";ctx.font="13px Source Sans 3";ctx.fillText("~10,000-100,000 lesiones por c\u00e9lula por d\u00eda atacan la doble h\u00e9lice",W/2,H-15);
+  // Stats
+  var stats=[{n:"Depurinaciones",v:"~5,000/d\u00eda",c:"#F97316"},{n:"Oxidaciones",v:"~10,000/d\u00eda",c:"#FF6B6B"},{n:"Deaminaciones",v:"~100-500/d\u00eda",c:"#EC4899"}];
+  stats.forEach(function(s,i){
+    var sx=150+i*250;
+    ctx.fillStyle=s.c;ctx.font="bold 22px JetBrains Mono";ctx.fillText(s.v,sx,H-70);
+    ctx.font="12px Source Sans 3";ctx.fillText(s.n,sx,H-50);
+  });
+  requestAnimationFrame(drawOverview);
+}
+
+/* ===== CLASSIFICATION DIAGRAM ===== */
+function drawClassif(){
+  var ctx=getCtx("cvClassif");if(!ctx)return;var W=900,H=380;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  // Title
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText("Clasificaci\u00f3n de las Mutaciones",W/2,30);
+  // Root
+  roundRect(ctx,340,45,220,40,12);ctx.fillStyle="rgba(0,212,170,0.15)";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle="#00D4AA";ctx.font="bold 14px Source Sans 3";ctx.fillText("MUTACIONES",450,70);
+  // Lines
+  ctx.strokeStyle="#5A7A96";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(380,85);ctx.lineTo(220,120);ctx.stroke();ctx.beginPath();ctx.moveTo(520,85);ctx.lineTo(680,120);ctx.stroke();
+  // Puntual box
+  roundRect(ctx,110,120,220,40,10);ctx.fillStyle="rgba(0,163,255,0.1)";ctx.fill();ctx.strokeStyle="#00A3FF";ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle="#00A3FF";ctx.font="bold 13px Source Sans 3";ctx.fillText("Puntuales (1-pocos pb)",220,145);
+  // Cromosomica box
+  roundRect(ctx,570,120,220,40,10);ctx.fillStyle="rgba(255,107,107,0.1)";ctx.fill();ctx.strokeStyle="#FF6B6B";ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle="#FF6B6B";ctx.font="bold 13px Source Sans 3";ctx.fillText("Cromos\u00f3micas (gran escala)",680,145);
+  // Subtypes - Puntuales
+  var ptypes=[{n:"Silent",c:"#00D4AA",d:"Sin cambio AA"},{n:"Missense",c:"#FFD93D",d:"Cambia 1 AA"},{n:"Nonsense",c:"#FF6B6B",d:"Cod\u00f3n STOP"},{n:"Frameshift",c:"#EC4899",d:"Marco lectura"}];
+  ptypes.forEach(function(t,i){
+    var x=50+i*115;ctx.strokeStyle="#5A7A96";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(220,160);ctx.lineTo(x+50,200);ctx.stroke();
+    roundRect(ctx,x,200,100,55,8);ctx.fillStyle="rgba(255,255,255,0.03)";ctx.fill();ctx.strokeStyle=t.c+"55";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle=t.c;ctx.font="bold 11px Source Sans 3";ctx.fillText(t.n,x+50,222);
+    ctx.fillStyle="#5A7A96";ctx.font="10px Source Sans 3";ctx.fillText(t.d,x+50,242);
+  });
+  // Subtypes - Cromosomicas
+  var ctypes=[{n:"Deleci\u00f3n",c:"#F97316",d:"P\u00e9rdida"},{n:"Duplicaci\u00f3n",c:"#00A3FF",d:"Copia extra"},{n:"Inversi\u00f3n",c:"#A78BFA",d:"Gira 180\u00b0"},{n:"Transloc.",c:"#EC4899",d:"Otro crom."}];
+  ctypes.forEach(function(t,i){
+    var x=510+i*105;ctx.strokeStyle="#5A7A96";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(680,160);ctx.lineTo(x+45,200);ctx.stroke();
+    roundRect(ctx,x,200,90,55,8);ctx.fillStyle="rgba(255,255,255,0.03)";ctx.fill();ctx.strokeStyle=t.c+"55";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle=t.c;ctx.font="bold 11px Source Sans 3";ctx.fillText(t.n,x+45,222);
+    ctx.fillStyle="#5A7A96";ctx.font="10px Source Sans 3";ctx.fillText(t.d,x+45,242);
+  });
+  // Bottom
+  ctx.fillStyle="#5A7A96";ctx.font="11px Source Sans 3";ctx.fillText("Espont\u00e1neas (errores de replicaci\u00f3n, hidr\u00f3lisis, ROS) o Inducidas (mutag\u00e9nicos: UV, qu\u00edmicos, radiaci\u00f3n)",W/2,310);
+  ctx.fillText("Som\u00e1ticas (no heredables) o Germinales (heredables)",W/2,335);
+  ctx.fillText("La acumulaci\u00f3n de mutaciones som\u00e1ticas est\u00e1 asociada al c\u00e1ncer y envejecimiento",W/2,360);
+}
+
+/* ===== POINT MUTATION SIMULATION ===== */
+var pmState=0;
+window.setPointMut=function(s){pmState=s;drawPointMut(s);};
+function drawPointMut(state){
+  var ctx=getCtx("cvPointMut");if(!ctx)return;var W=900,H=350;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var dna=   ["T","A","C","A","A","A","G","G","A","T","T","C"];
+  var mrna=  ["A","U","G","U","U","U","C","C","U","A","A","G"];
+  var aas=   ["Met","Phe","Pro","Lys"];
+  var labels=["Normal","Silent (G\u2192C en 3\u00aa pos.)","Missense (G\u2192C)","Nonsense (A\u2192T)"];
+  var narrs=[
+    "Secuencia normal: cada triplete codifica un amino\u00e1cido espec\u00edfico. El c\u00f3digo gen\u00e9tico traduce la informaci\u00f3n fielmente.",
+    "SILENT: El cambio GGA\u2192GGC en el ADN cambia CCU\u2192CCG en ARNm, pero \u00a1ambos codifican Prolina! La 3\u00aa posici\u00f3n es tolerante (wobble). Sin efecto en la prote\u00edna.",
+    "MISSENSE: El cambio GGA\u2192CGA en ADN cambia CCU\u2192GCU en ARNm. Pro\u2192Ala. El amino\u00e1cido cambia. Si es en posici\u00f3n cr\u00edtica, puede causar enfermedad (ej: anemia falciforme).",
+    "NONSENSE: El cambio AAA\u2192ATT en ADN cambia UUU\u2192UAA en ARNm. \u00a1UAA es cod\u00f3n de STOP! La prote\u00edna se trunca tras Met. Generalmente no funcional."
+  ];
+  // Modify based on state
+  var mdna=dna.slice(), mmrna=mrna.slice(), maas=aas.slice();
+  var highlightIdx=-1,highlightColor="";
+  if(state===1){mdna[8]="C";mmrna[8]="G";highlightIdx=8;highlightColor="#00D4AA";} // Silent
+  if(state===2){mdna[6]="C";mmrna[6]="G";maas[2]="Ala";highlightIdx=6;highlightColor="#FFD93D";} // Missense
+  if(state===3){mdna[3]="T";mdna[4]="T";mmrna[3]="A";mmrna[4]="A";maas=["Met","STOP","",""];highlightIdx=3;highlightColor="#FF6B6B";} // Nonsense
+
+  // Title
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";
+  ctx.fillText(labels[state],W/2,30);
+  // DNA strand
+  ctx.fillStyle="#00A3FF";ctx.font="bold 12px Source Sans 3";ctx.textAlign="left";ctx.fillText("ADN:",30,70);
+  drawDNABackbone(ctx,85,820,75,"rgba(0,163,255,0.3)");
+  for(var i=0;i<12;i++){
+    var bx=100+i*60;
+    var hl=(i===highlightIdx||i===highlightIdx+1&&state===3)?highlightColor:null;
+    drawBase(ctx,bx,75,mdna[i],16,hl);
+  }
+  // Complementary
+  drawDNABackbone(ctx,85,820,135,"rgba(0,212,170,0.3)");
+  var comp={"A":"T","T":"A","G":"C","C":"G"};
+  for(var i=0;i<12;i++){drawBase(ctx,100+i*60,135,comp[mdna[i]]||"?",14);drawHBond(ctx,100+i*60,91,119);}
+  // Transcription arrow
+  ctx.fillStyle="#A78BFA";ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";ctx.fillText("\u2193 Transcripci\u00f3n \u2193",W/2,170);
+  // mRNA
+  ctx.fillStyle="#A78BFA";ctx.font="bold 12px Source Sans 3";ctx.textAlign="left";ctx.fillText("ARNm:",25,200);
+  drawDNABackbone(ctx,85,820,205,"rgba(167,139,250,0.3)");
+  for(var i=0;i<12;i++){
+    var hl2=(i===highlightIdx||(i===highlightIdx+1&&state===3))?highlightColor:null;
+    drawBase(ctx,100+i*60,205,mmrna[i],16,hl2);
+  }
+  // Codon brackets
+  for(var c=0;c<4;c++){
+    var cx=100+c*180;
+    ctx.strokeStyle="rgba(255,255,255,0.2)";ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(cx-20,225);ctx.lineTo(cx-20,235);ctx.lineTo(cx+100,235);ctx.lineTo(cx+100,225);ctx.stroke();
+    ctx.fillStyle="#8BA4BE";ctx.font="10px JetBrains Mono";ctx.textAlign="center";
+    ctx.fillText(mmrna[c*3]+mmrna[c*3+1]+mmrna[c*3+2],cx+40,248);
+  }
+  // Translation
+  ctx.fillStyle="#F97316";ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";ctx.fillText("\u2193 Traducci\u00f3n \u2193",W/2,268);
+  // Amino acids
+  ctx.fillStyle="#F97316";ctx.font="bold 12px Source Sans 3";ctx.textAlign="left";ctx.fillText("Prot:",30,298);
+  for(var c=0;c<4;c++){
+    var cx=140+c*180;
+    var aa=maas[c];if(!aa)continue;
+    var col=(aa==="STOP")?"#FF6B6B":"#F97316";
+    if(state===2&&c===2)col="#FFD93D";
+    roundRect(ctx,cx-35,282,70,30,8);
+    ctx.fillStyle=col+"22";ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle=col;ctx.font="bold 13px Source Sans 3";ctx.textAlign="center";ctx.fillText(aa,cx,302);
+  }
+  // Result indicator
+  if(state>0){
+    var resCol=state===1?"#00D4AA":state===2?"#FFD93D":"#FF6B6B";
+    var resText=state===1?"\u2705 Sin efecto en prote\u00edna":state===2?"\u26a0\ufe0f Amino\u00e1cido cambiado":"\u274c Prote\u00edna truncada";
+    roundRect(ctx,W/2-150,325,300,22,6);ctx.fillStyle=resCol+"15";ctx.fill();
+    ctx.fillStyle=resCol;ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";ctx.fillText(resText,W/2,340);
+  }
+  document.getElementById("pmLabel").textContent=labels[state];
+  document.getElementById("pmNarr").innerHTML=narrs[state];
+}
+
+/* ===== FRAMESHIFT ANIMATION ===== */
+var fsAnim=null,fsFrame=0;
+window.startFrameshiftAnim=function(){
+  if(fsAnim)return;fsFrame=0;
+  document.getElementById("fsStatus").textContent="Animando...";document.getElementById("fsStatus").style.color="#FFD93D";
+  function animate(){
+    fsFrame++;drawFrameshiftFrame(fsFrame);
+    if(fsFrame<180)fsAnim=requestAnimationFrame(animate);
+    else{fsAnim=null;document.getElementById("fsStatus").textContent="\u2713 Completo";document.getElementById("fsStatus").style.color="#00D4AA";}
+  }
+  animate();
+};
+window.resetFrameshift=function(){if(fsAnim){cancelAnimationFrame(fsAnim);fsAnim=null;}fsFrame=0;drawFrameshiftFrame(0);document.getElementById("fsStatus").textContent="Listo";document.getElementById("fsStatus").style.color="#00D4AA";document.getElementById("fsNarr").innerHTML="Presiona \u201cInsertar una C\u201d para ver c\u00f3mo la inserci\u00f3n de un solo nucle\u00f3tido destruye el marco de lectura.";};
+function drawFrameshiftFrame(frame){
+  var ctx=getCtx("cvFrameshift");if(!ctx)return;var W=900,H=380;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var narr=document.getElementById("fsNarr");
+  // Original sequence
+  var orig=["A","U","G","U","U","U","C","C","U","A","A","G","G","A","C"];
+  var origAA=["Met","Phe","Pro","Lys","Asp"];
+  // After insertion of C after position 3
+  var ins=["A","U","G","C","U","U","U","C","C","U","A","A","G","G","A","C"];
+  var insAA=["Met","Leu","Ser","STOP","---"];
+  var insertProgress=Math.min(1,frame/60);
+  var shiftProgress=Math.min(1,Math.max(0,(frame-60)/60));
+  var showResult=frame>120;
+  // Title
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";
+  ctx.fillText(frame===0?"Marco de Lectura Normal":"Inserci\u00f3n de 1 Nucle\u00f3tido \u2192 Frameshift",W/2,25);
+  // BEFORE label
+  ctx.fillStyle="#00A3FF";ctx.font="bold 12px Source Sans 3";ctx.textAlign="left";ctx.fillText("ANTES:",20,60);
+  // Draw original
+  var sp=52;var sx=90;
+  drawDNABackbone(ctx,sx-10,sx+orig.length*sp+10,65,"rgba(0,163,255,0.2)");
+  for(var i=0;i<orig.length;i++){drawBase(ctx,sx+i*sp,65,orig[i],14);}
+  // Codon brackets original
+  for(var c=0;c<5;c++){
+    var bx=sx+c*sp*3;
+    ctx.strokeStyle="rgba(0,212,170,0.3)";ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(bx-12,82);ctx.lineTo(bx-12,92);ctx.lineTo(bx+sp*2+12,92);ctx.lineTo(bx+sp*2+12,82);ctx.stroke();
+    ctx.fillStyle="#00D4AA";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";ctx.fillText(origAA[c],bx+sp,106);
+  }
+  // AFTER
+  ctx.fillStyle="#EC4899";ctx.font="bold 12px Source Sans 3";ctx.textAlign="left";ctx.fillText("DESPU\u00c9S:",20,160);
+  if(frame>0){
+    // Draw inserted sequence with animation
+    drawDNABackbone(ctx,sx-10,sx+ins.length*sp+10,165,"rgba(236,72,153,0.2)");
+    for(var i=0;i<ins.length;i++){
+      var bx2=sx+i*sp;
+      var isInserted=(i===3);
+      if(isInserted){
+        // Animate the inserted base dropping in
+        var dropY=165-60*(1-insertProgress);
+        ctx.globalAlpha=insertProgress;
+        drawBase(ctx,bx2,dropY,"C",14,"#EC4899");
+        ctx.globalAlpha=1;
+        // Arrow
+        if(insertProgress>0.5){ctx.fillStyle="#EC4899";ctx.font="bold 18px Source Sans 3";ctx.textAlign="center";ctx.fillText("\u2193",bx2,140);}
+      } else {
+        // Shift bases after insertion point
+        var shifted=i>3?shiftProgress*sp*0.1:0;
+        drawBase(ctx,bx2,165,ins[i],14,i>3&&shiftProgress>0.5?"#EC4899":null);
+      }
+    }
+    // Codon brackets for mutated - show shifting
+    if(shiftProgress>0.5){
+      var wrongCodons=[["A","U","G"],["C","U","U"],["U","C","C"],["U","A","A"],["G","G","A"]];
+      for(var c=0;c<5;c++){
+        var bx3=sx+c*sp*3;
+        var isWrong=c>0;
+        ctx.strokeStyle=isWrong?"rgba(255,107,107,0.5)":"rgba(0,212,170,0.3)";ctx.lineWidth=1;
+        ctx.beginPath();ctx.moveTo(bx3-12,182);ctx.lineTo(bx3-12,192);ctx.lineTo(bx3+sp*2+12,192);ctx.lineTo(bx3+sp*2+12,182);ctx.stroke();
+        ctx.fillStyle=insAA[c]==="STOP"?"#FF6B6B":isWrong?"#EC4899":"#00D4AA";
+        ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";ctx.fillText(insAA[c],bx3+sp,206);
+      }
+    }
+    // Narration
+    if(frame<60)narr.innerHTML="<strong>Insertando una C...</strong> Observa c\u00f3mo la base extra se introduce en la secuencia.";
+    else if(frame<120)narr.innerHTML="<strong>Marco de lectura desplazado:</strong> TODOS los codones despu\u00e9s de la inserci\u00f3n cambian. UUU(Phe)\u2192CUU(Leu), CCU(Pro)\u2192UCC(Ser), AAG(Lys)\u2192UAA(\u00a1STOP!)";
+    else narr.innerHTML="<strong>Resultado devastador:</strong> La prote\u00edna se trunca en el 4\u00ba cod\u00f3n con un STOP prematuro. Solo Met es correcto. <span style='color:var(--r)'>Un solo nucle\u00f3tido destruy\u00f3 toda la prote\u00edna.</span>";
+  }
+  // Result comparison
+  if(showResult){
+    roundRect(ctx,50,240,800,120,12);ctx.fillStyle="rgba(255,107,107,0.05)";ctx.fill();ctx.strokeStyle="rgba(255,107,107,0.2)";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#E8F0F8";ctx.font="bold 14px DM Serif Display";ctx.textAlign="center";ctx.fillText("Comparaci\u00f3n del efecto",W/2,265);
+    ctx.fillStyle="#00D4AA";ctx.font="12px Source Sans 3";ctx.fillText("Normal: Met - Phe - Pro - Lys - Asp \u2192 Prote\u00edna funcional \u2705",W/2,290);
+    ctx.fillStyle="#FF6B6B";ctx.fillText("Frameshift: Met - Leu - Ser - STOP \u2192 Prote\u00edna truncada, no funcional \u274c",W/2,315);
+    ctx.fillStyle="#8BA4BE";ctx.font="11px Source Sans 3";
+    ctx.fillText("Regla: solo inserciones/deleciones que NO son m\u00faltiplo de 3 causan frameshift",W/2,345);
+  }
+}
+
+/* ===== CHROMOSOMAL MUTATIONS ===== */
+window.setChromo=function(s){drawChromo(s);};
+function drawChromo(state){
+  var ctx=getCtx("cvChromo");if(!ctx)return;var W=900,H=400;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var labels=["Cromosoma Normal","Deleci\u00f3n","Duplicaci\u00f3n","Inversi\u00f3n","Translocaci\u00f3n"];
+  var narrs=[
+    "Cromosoma normal con 8 segmentos g\u00e9nicos (A-H). Cada color representa un gen o regi\u00f3n diferente.",
+    "DELECI\u00d3N: Los segmentos C, D y E se han perdido. Resultado: p\u00e9rdida de genes. Ejemplo cl\u00ednico: S\u00edndrome de Cri du Chat (deleci\u00f3n 5p).",
+    "DUPLICACI\u00d3N: Los segmentos C y D aparecen duplicados. Resultado: sobredosificaci\u00f3n g\u00e9nica. Puede causar desequilibrio en la expresi\u00f3n de genes.",
+    "INVERSI\u00d3N: Los segmentos C, D y E se han invertido (girado 180\u00b0). Su orden ahora es E, D, C. Puede interrumpir genes en los puntos de rotura.",
+    "TRANSLOCACI\u00d3N: Segmentos intercambiados entre dos cromosomas no hom\u00f3logos. Ejemplo: Philadelphia t(9;22) \u2192 BCR-ABL \u2192 LMC."
+  ];
+  var segs=["A","B","C","D","E","F","G","H"];
+  var segCols=["#00D4AA","#00A3FF","#FFD93D","#F97316","#A78BFA","#EC4899","#FF6B6B","#8BA4BE"];
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText(labels[state],W/2,30);
+  function drawChrom(seqArr,colArr,y,label,chromCol){
+    ctx.fillStyle=chromCol||"#00D4AA";ctx.font="bold 12px Source Sans 3";ctx.textAlign="left";ctx.fillText(label,30,y+5);
+    var sx=100;
+    for(var i=0;i<seqArr.length;i++){
+      roundRect(ctx,sx+i*85,y-18,75,36,6);ctx.fillStyle=colArr[i]+"33";ctx.fill();ctx.strokeStyle=colArr[i];ctx.lineWidth=2;ctx.stroke();
+      ctx.fillStyle=colArr[i];ctx.font="bold 16px JetBrains Mono";ctx.textAlign="center";ctx.fillText(seqArr[i],sx+i*85+37,y+6);
+    }
+  }
+  // Before
+  drawChrom(segs,segCols,80,"Antes:","#8BA4BE");
+  // After
+  ctx.fillStyle="#FFD93D";ctx.font="bold 20px Source Sans 3";ctx.textAlign="center";ctx.fillText("\u2193",W/2,130);
+  var after,afterCols;
+  if(state===0){after=segs;afterCols=segCols;}
+  else if(state===1){after=["A","B","F","G","H","","",""];afterCols=[segCols[0],segCols[1],segCols[5],segCols[6],segCols[7],"","",""];after=after.filter(Boolean);afterCols=afterCols.filter(Boolean);}
+  else if(state===2){after=["A","B","C","D","C","D","E","F","G","H"];afterCols=[segCols[0],segCols[1],segCols[2],segCols[3],segCols[2],segCols[3],segCols[4],segCols[5],segCols[6],segCols[7]];}
+  else if(state===3){after=["A","B","E","D","C","F","G","H"];afterCols=[segCols[0],segCols[1],segCols[4],segCols[3],segCols[2],segCols[5],segCols[6],segCols[7]];}
+  else{// Translocacion - 2 chromosomes
+    drawChrom(["A","B","3","4"],["#00D4AA","#00A3FF","#EC4899","#8BA4BE"],170,"Crom 1:","#00A3FF");
+    drawChrom(["1","2","C","D"],["#FFD93D","#F97316","#FFD93D","#F97316"],240,"Crom 2:","#EC4899");
+    // Draw second chromosome before
+    ctx.fillStyle="#8BA4BE";ctx.font="bold 12px Source Sans 3";ctx.textAlign="left";
+    // Legend
+    roundRect(ctx,100,290,700,80,12);ctx.fillStyle="rgba(236,72,153,0.05)";ctx.fill();ctx.strokeStyle="rgba(236,72,153,0.2)";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#EC4899";ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";
+    ctx.fillText("Los segmentos C,D del cromosoma 1 se intercambiaron con 3,4 del cromosoma 2",W/2,315);
+    ctx.fillStyle="#8BA4BE";ctx.font="11px Source Sans 3";
+    ctx.fillText("Ejemplo: t(9;22) \u2192 fusi\u00f3n BCR-ABL \u2192 Leucemia Mieloide Cr\u00f3nica. Tx: Imatinib",W/2,340);
+    ctx.fillText("Ejemplo: t(8;14) \u2192 MYC bajo promotor de Ig \u2192 Linfoma de Burkitt",W/2,360);
+    document.getElementById("chromoNarr").innerHTML=narrs[state];
+    return;
+  }
+  drawChrom(after,afterCols,170,"Despu\u00e9s:","#FFD93D");
+  // Highlight deleted/modified region
+  if(state===1){
+    ctx.fillStyle="rgba(255,107,107,0.1)";roundRect(ctx,260,52,260,46,8);ctx.fill();ctx.strokeStyle="#FF6B6B55";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";ctx.fillText("\u2716 Eliminados",390,50);
+  }
+  document.getElementById("chromoNarr").innerHTML=narrs[state];
+}
+
+/* ===== SPONTANEOUS DAMAGE ===== */
+window.setSpontan=function(s){drawSpontan(s);};
+function drawSpontan(state){
+  var ctx=getCtx("cvSpontaneous");if(!ctx)return;var W=900,H=400;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var labels=["ADN Normal","Depurinaci\u00f3n (p\u00e9rdida de A)","Deaminaci\u00f3n (C \u2192 U)","5-Metilcitosina \u2192 Timina"];
+  var narrs=[
+    "Doble h\u00e9lice normal con apareamientos correctos: A=T, G\u2261C. Los enlaces glucos\u00eddicos y grupos amino est\u00e1n intactos.",
+    "DEPURINACI\u00d3N: El enlace glucos\u00eddico de la Adenina se hidroliza espont\u00e1neamente. La base se pierde, dejando un <strong>sitio AP</strong> (vac\u00edo). ~5,000/c\u00e9lula/d\u00eda. Si no se repara: la polimerasa salta el sitio \u2192 deleci\u00f3n. Reparaci\u00f3n: <strong>BER</strong> (AP endonucleasa).",
+    "DEAMINACI\u00d3N de C\u2192U: La citosina pierde su grupo -NH\u2082 y se convierte en <strong>uracilo</strong>. El U se aparea con A en lugar de G. Si se replica: transici\u00f3n G:C\u2192A:T. Reparaci\u00f3n: <strong>Uracil-ADN glicosilasa</strong> detecta U en ADN \u2192 BER.",
+    "5-METILCITOSINA (5mC) se deamina a <strong>TIMINA</strong> (no uracilo). Crea un mismatch T:G m\u00e1s dif\u00edcil de detectar. Los sitios CpG son <strong>hotspots mutacionales</strong>. Glicosilasa especial: TDG/MBD4."
+  ];
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText(labels[state],W/2,30);
+  // Draw DNA segment
+  var top=["G","A","T","C","G"];var bot=["C","T","A","G","C"];
+  var topMod=top.slice(),botMod=bot.slice();
+  var highlights=[null,null,null,null,null];
+  var topHL=[null,null,null,null,null];
+  if(state===1){topMod[1]="\u2205";topHL[1]="#FF6B6B";} // depurination - A lost
+  if(state===2){botMod[3]="U";highlights[3]="#FF6B6B";} // deamination C->U
+  if(state===3){botMod[3]="T";highlights[3]="#FFD93D";} // 5mC -> T
+  var sx=150,sp=130;
+  // Top strand
+  drawDNABackbone(ctx,sx-30,sx+4*sp+30,100,"rgba(0,163,255,0.3)");
+  for(var i=0;i<5;i++){drawBase(ctx,sx+i*sp,100,topMod[i],20,topHL[i]);}
+  // H-bonds
+  for(var i=0;i<5;i++){
+    if(state===1&&i===1)continue; // no bond for AP site
+    drawHBond(ctx,sx+i*sp,120,175);
+    if(topMod[i]==="G"||botMod[i]==="G"){drawHBond(ctx,sx+i*sp-4,122,173);drawHBond(ctx,sx+i*sp+4,122,173);} // triple H-bond
+  }
+  // Bottom strand
+  drawDNABackbone(ctx,sx-30,sx+4*sp+30,195,"rgba(0,212,170,0.3)");
+  for(var i=0;i<5;i++){drawBase(ctx,sx+i*sp,195,botMod[i],20,highlights[i]);}
+  // Annotations
+  if(state===1){
+    // Show free A floating away
+    ctx.globalAlpha=0.6;drawBase(ctx,sx+sp+60,60,"A",14,"#FF6B6B");ctx.globalAlpha=1;
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";
+    ctx.fillText("A libre (perdida)",sx+sp+60,40);
+    ctx.fillText("Sitio AP",sx+sp,140);
+    // Arrow showing hydrolysis
+    ctx.strokeStyle="#FF6B6B";ctx.lineWidth=1.5;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(sx+sp,80);ctx.lineTo(sx+sp+50,55);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillText("H\u2082O (hidr\u00f3lisis)",sx+sp+30,75);
+  }
+  if(state===2){
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";
+    ctx.fillText("-NH\u2082 \u2192 =O",sx+3*sp,240);
+    ctx.fillText("U se aparea con A (\u00a1no con G!)",sx+3*sp,260);
+    ctx.fillStyle="#00D4AA";ctx.fillText("Reparaci\u00f3n: Uracil-ADN glicosilasa \u2192 BER",W/2,290);
+    // Mismatch indicator
+    ctx.strokeStyle="#FF6B6B";ctx.lineWidth=2;ctx.beginPath();ctx.arc(sx+3*sp,147,30,0,Math.PI*2);ctx.stroke();
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 10px Source Sans 3";ctx.fillText("\u00a1Mismatch!",sx+3*sp+40,150);
+  }
+  if(state===3){
+    ctx.fillStyle="#FFD93D";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";
+    ctx.fillText("5mC deaminada \u2192 T",sx+3*sp,240);
+    ctx.fillText("T:G mismatch (parece normal \u2192 dif\u00edcil detectar)",sx+3*sp,260);
+    ctx.fillStyle="#EC4899";ctx.fillText("Hotspot mutacional en sitios CpG",W/2,290);
+    ctx.fillStyle="#00D4AA";ctx.fillText("Reparaci\u00f3n: TDG/MBD4 glicosilasa especial",W/2,310);
+  }
+  // Bottom: T vs U explanation
+  if(state>=2){
+    roundRect(ctx,100,330,700,55,10);ctx.fillStyle="rgba(255,217,61,0.05)";ctx.fill();ctx.strokeStyle="rgba(255,217,61,0.2)";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#FFD93D";ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";
+    ctx.fillText("\u00bfPor qu\u00e9 T y no U? \u2192 Timina = 5-metiluracilo. Permite detectar U como da\u00f1o.",W/2,352);
+    ctx.fillStyle="#8BA4BE";ctx.font="11px Source Sans 3";
+    ctx.fillText("Si el ADN usara U, no podr\u00edamos distinguir U leg\u00edtimo de U por deaminaci\u00f3n de C",W/2,372);
+  }
+  document.getElementById("spontNarr").innerHTML=narrs[state];
+}
+
+/* ===== EXOGENOUS DAMAGE ===== */
+window.setExo=function(s){drawExo(s);};
+function drawExo(state){
+  var ctx=getCtx("cvExogenous");if(!ctx)return;var W=900,H=380;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var labels=["ADN Normal","Dímero de Timina (UV)","Rotura de Doble Hebra (Rad. Ionizante)","Agente Intercalante"];
+  var narrs=[
+    "Doble h\u00e9lice normal sin distorsiones. Las bases est\u00e1n correctamente apiladas y apareadas.",
+    "RADIACI\u00d3N UVB crea un enlace covalente (ciclobutano) entre timinas adyacentes \u2192 <strong>d\u00edmero T=T (CPD)</strong>. Distorsiona la h\u00e9lice y bloquea replicaci\u00f3n/transcripci\u00f3n. Reparaci\u00f3n: <strong>NER</strong>. Defecto en NER \u2192 Xeroderma Pigmentoso.",
+    "RADIACI\u00d3N IONIZANTE (rayos X, gamma) arranca electrones \u2192 <strong>rotura de doble hebra (DSB)</strong>. El da\u00f1o m\u00e1s peligroso: no hay hebra complementaria intacta. Reparaci\u00f3n: <strong>NHEJ</strong> (r\u00e1pido, impreciso) o recombinaci\u00f3n hom\u00f3loga.",
+    "AGENTES INTERCALANTES (bromuro de etidio, acridina, benzo[a]pireno) se insertan entre bases apiladas. <strong>Estiran el ADN</strong> \u2192 la polimerasa inserta bases extra \u2192 mutaciones <strong>frameshift</strong>."
+  ];
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText(labels[state],W/2,30);
+  // Draw DNA
+  var bases=["A","T","T","G","C","A","T","G"];var comp=["T","A","A","C","G","T","A","C"];
+  var sx=100,sp=90;
+  if(state===0||state===1){
+    drawDNABackbone(ctx,sx-20,sx+7*sp+20,120,"rgba(0,163,255,0.3)");
+    drawDNABackbone(ctx,sx-20,sx+7*sp+20,210,"rgba(0,212,170,0.3)");
+    for(var i=0;i<8;i++){
+      var hl=null;
+      if(state===1&&(i===1||i===2))hl="#FFD93D";
+      drawBase(ctx,sx+i*sp,120,bases[i],18,hl);
+      drawBase(ctx,sx+i*sp,210,comp[i],18,hl);
+      if(!(state===1&&(i===1||i===2)))drawHBond(ctx,sx+i*sp,138,192);
+    }
+    if(state===1){
+      // Dimer bond
+      ctx.strokeStyle="#FFD93D";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(sx+sp,100);ctx.bezierCurveTo(sx+sp+20,80,sx+2*sp-20,80,sx+2*sp,100);ctx.stroke();
+      ctx.fillStyle="#FFD93D";ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";ctx.fillText("T=T Ciclobutano",sx+1.5*sp,75);
+      // Distortion
+      ctx.strokeStyle="rgba(255,217,61,0.3)";ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.arc(sx+1.5*sp,165,55,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle="#FF6B6B";ctx.font="11px Source Sans 3";ctx.fillText("Distorsi\u00f3n helicoidal",sx+1.5*sp,250);
+      ctx.fillStyle="#00D4AA";ctx.fillText("Reparaci\u00f3n: NER (reconoce distorsi\u00f3n)",W/2,280);
+    }
+  }
+  if(state===2){
+    // DSB
+    var gap=40;
+    drawDNABackbone(ctx,sx-20,sx+3*sp,120,"rgba(0,163,255,0.3)");
+    drawDNABackbone(ctx,sx+4*sp,sx+7*sp+20,120,"rgba(0,163,255,0.3)");
+    drawDNABackbone(ctx,sx-20,sx+3*sp,210,"rgba(0,212,170,0.3)");
+    drawDNABackbone(ctx,sx+4*sp,sx+7*sp+20,210,"rgba(0,212,170,0.3)");
+    for(var i=0;i<8;i++){
+      if(i===3||i===4)continue;
+      drawBase(ctx,sx+i*sp+(i>3?gap:0),120,bases[i],18);
+      drawBase(ctx,sx+i*sp+(i>3?gap:0),210,comp[i],18);
+      drawHBond(ctx,sx+i*sp+(i>3?gap:0),138,192);
+    }
+    // Break visualization
+    ctx.strokeStyle="#FF6B6B";ctx.lineWidth=3;
+    ctx.beginPath();ctx.moveTo(sx+3*sp+20,100);ctx.lineTo(sx+4*sp-20+gap,100);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(sx+3*sp+20,230);ctx.lineTo(sx+4*sp-20+gap,230);ctx.stroke();
+    // Lightning bolt
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 30px Source Sans 3";ctx.textAlign="center";ctx.fillText("\u26a1",W/2,170);
+    ctx.font="bold 12px Source Sans 3";ctx.fillText("Rotura de doble hebra (DSB)",W/2,260);
+    ctx.fillStyle="#8BA4BE";ctx.font="11px Source Sans 3";ctx.fillText("No hay hebra complementaria intacta como molde",W/2,285);
+    ctx.fillStyle="#00D4AA";ctx.fillText("Reparaci\u00f3n: NHEJ (r\u00e1pido, impreciso) o Recombinaci\u00f3n Hom\u00f3loga",W/2,310);
+  }
+  if(state===3){
+    // Intercalating agent
+    drawDNABackbone(ctx,sx-20,sx+7*sp+60,120,"rgba(0,163,255,0.3)");
+    drawDNABackbone(ctx,sx-20,sx+7*sp+60,210,"rgba(0,212,170,0.3)");
+    for(var i=0;i<8;i++){
+      var extra=(i>=3)?40:0;
+      drawBase(ctx,sx+i*sp+extra,120,bases[i],18);
+      drawBase(ctx,sx+i*sp+extra,210,comp[i],18);
+      drawHBond(ctx,sx+i*sp+extra,138,192);
+    }
+    // Intercalating molecule
+    var ix=sx+2.5*sp+10;
+    roundRect(ctx,ix-15,125,30,60,4);ctx.fillStyle="rgba(236,72,153,0.4)";ctx.fill();ctx.strokeStyle="#EC4899";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#EC4899";ctx.font="bold 9px Source Sans 3";ctx.textAlign="center";ctx.fillText("EtBr",ix,160);
+    // Stretch arrows
+    ctx.fillStyle="#EC4899";ctx.font="bold 16px Source Sans 3";ctx.fillText("\u2190",ix-30,165);ctx.fillText("\u2192",ix+30,165);
+    ctx.font="bold 12px Source Sans 3";ctx.fillText("Estira el ADN",ix,250);
+    ctx.fillStyle="#8BA4BE";ctx.font="11px Source Sans 3";ctx.fillText("La Pol inserta base extra \u2192 mutaci\u00f3n frameshift",W/2,280);
+  }
+  document.getElementById("exoNarr").innerHTML=narrs[state];
+}
+
+/* ===== BER ANIMATION ===== */
+var berAnim=null,berFrame=0;
+window.startBER=function(){if(berAnim)return;berFrame=0;document.getElementById("berStatus").textContent="Reparando...";document.getElementById("berStatus").style.color="#FFD93D";function a(){berFrame++;drawBERFrame(berFrame);if(berFrame<300)berAnim=requestAnimationFrame(a);else{berAnim=null;document.getElementById("berStatus").textContent="\u2713 Reparado";document.getElementById("berStatus").style.color="#00D4AA";}}a();};
+window.resetBER=function(){if(berAnim){cancelAnimationFrame(berAnim);berAnim=null;}berFrame=0;drawBERFrame(0);document.getElementById("berStatus").textContent="Listo";document.getElementById("berStatus").style.color="#00D4AA";document.getElementById("berNarr").innerHTML="Presiona \u201cIniciar BER\u201d para ver la reparaci\u00f3n paso a paso.";};
+function drawBERFrame(f){
+  var ctx=getCtx("cvBER");if(!ctx)return;var W=900,H=400;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var narr=document.getElementById("berNarr");
+  var top=["G","A","T","C","G","A"];var bot=["C","T","A","G","C","T"];
+  // Damage: C deaminated to U at position 3 (bot strand)
+  var phase=f<70?0:f<140?1:f<210?2:f<280?3:4;
+  var phaseNames=["Da\u00f1o: C deaminada \u2192 U","1. Glicosilasa reconoce U","2. AP Endonucleasa corta","3. Pol \u03b2 rellena con C","4. Ligasa sella \u2192 \u00a1Reparado!"];
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText("BER: "+phaseNames[phase],W/2,30);
+  var sx=120,sp=110;
+  // Top strand
+  drawDNABackbone(ctx,sx-30,sx+5*sp+30,120,"rgba(0,163,255,0.3)");
+  for(var i=0;i<6;i++){drawBase(ctx,sx+i*sp,120,top[i],20);}
+  // Bottom strand
+  drawDNABackbone(ctx,sx-30,sx+5*sp+30,240,"rgba(0,212,170,0.3)");
+  for(var i=0;i<6;i++){
+    if(i===3){
+      if(phase===0){drawBase(ctx,sx+i*sp,240,"U",20,"#FF6B6B");}
+      else if(phase===1){
+        // Glicosilasa removing U - animate flip
+        var flipY=240-((f-70)/70)*60;
+        ctx.globalAlpha=1-(f-70)/70*0.8;drawBase(ctx,sx+i*sp,flipY,"U",20,"#FF6B6B");ctx.globalAlpha=1;
+        // Enzyme
+        roundRect(ctx,sx+i*sp-35,260,70,30,8);ctx.fillStyle="rgba(0,212,170,0.2)";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=1.5;ctx.stroke();
+        ctx.fillStyle="#00D4AA";ctx.font="bold 10px Source Sans 3";ctx.textAlign="center";ctx.fillText("Glicosilasa",sx+i*sp,280);
+      }
+      else if(phase===2){
+        // AP site - empty
+        drawBase(ctx,sx+i*sp,240,"\u2205",20,"#FF6B6B");
+        // Endonuclease cutting
+        roundRect(ctx,sx+i*sp-35,260,70,30,8);ctx.fillStyle="rgba(249,115,22,0.2)";ctx.fill();ctx.strokeStyle="#F97316";ctx.lineWidth=1.5;ctx.stroke();
+        ctx.fillStyle="#F97316";ctx.font="bold 10px Source Sans 3";ctx.textAlign="center";ctx.fillText("AP Endonucl.",sx+i*sp,280);
+        // Scissors
+        ctx.fillStyle="#F97316";ctx.font="16px Source Sans 3";ctx.fillText("\u2702",sx+i*sp-30,245);
+      }
+      else if(phase===3){
+        // Pol beta inserting C
+        var insertAlpha=Math.min(1,(f-210)/40);
+        ctx.globalAlpha=insertAlpha;drawBase(ctx,sx+i*sp,240,"C",20,"#00D4AA");ctx.globalAlpha=1;
+        roundRect(ctx,sx+i*sp-30,260,60,25,6);ctx.fillStyle="rgba(0,163,255,0.2)";ctx.fill();ctx.strokeStyle="#00A3FF";ctx.lineWidth=1.5;ctx.stroke();
+        ctx.fillStyle="#00A3FF";ctx.font="bold 10px Source Sans 3";ctx.textAlign="center";ctx.fillText("Pol \u03b2",sx+i*sp,278);
+      }
+      else{drawBase(ctx,sx+i*sp,240,"C",20,"#00D4AA");} // Repaired!
+    }else{drawBase(ctx,sx+i*sp,240,bot[i],20);}
+    // H-bonds
+    if(!(phase<3&&i===3))drawHBond(ctx,sx+i*sp,140,220);
+  }
+  // Phase-specific narration
+  if(f===0)narr.innerHTML="La Citosina en posici\u00f3n 4 ha sufrido <strong>deaminaci\u00f3n</strong> \u2192 se convirti\u00f3 en <strong>Uracilo</strong> (rojo). El U no es base normal del ADN \u2192 debe repararse.";
+  else if(phase===1)narr.innerHTML="<strong>Paso 1:</strong> La <strong>Uracil-ADN Glicosilasa</strong> (verde) reconoce el U y lo voltea fuera de la h\u00e9lice (base flipping). Rompe el enlace glucos\u00eddico, liberando la base da\u00f1ada.";
+  else if(phase===2)narr.innerHTML="<strong>Paso 2:</strong> Queda un sitio AP (\u2205). La <strong>AP Endonucleasa</strong> (naranja) corta el esqueleto az\u00facar-fosfato en el lado 5\u2032 del sitio AP. Una fosfodiesterasa elimina el az\u00facar residual.";
+  else if(phase===3)narr.innerHTML="<strong>Paso 3:</strong> <strong>ADN Polimerasa \u03b2</strong> (azul) rellena el hueco con la base correcta (C), usando la hebra complementaria (G) como molde.";
+  else narr.innerHTML="<strong>Paso 4:</strong> <strong>ADN Ligasa III</strong> sella el nick. \u00a1El ADN est\u00e1 completamente reparado! La secuencia original ha sido restaurada: G:C \u2705";
+  // Progress bar
+  roundRect(ctx,100,H-30,W-200,12,6);ctx.fillStyle="rgba(255,255,255,0.05)";ctx.fill();
+  roundRect(ctx,100,H-30,(W-200)*Math.min(1,f/280),12,6);ctx.fillStyle="rgba(0,212,170,0.4)";ctx.fill();
+  ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";ctx.textAlign="center";ctx.fillText(phaseNames[phase],W/2,H-8);
+}
+
+/* ===== NER ANIMATION ===== */
+var nerAnim=null,nerFrame=0;
+window.startNER=function(){if(nerAnim)return;nerFrame=0;document.getElementById("nerStatus").textContent="Reparando...";document.getElementById("nerStatus").style.color="#FFD93D";function a(){nerFrame++;drawNERFrame(nerFrame);if(nerFrame<360)nerAnim=requestAnimationFrame(a);else{nerAnim=null;document.getElementById("nerStatus").textContent="\u2713 Reparado";document.getElementById("nerStatus").style.color="#00D4AA";}}a();};
+window.resetNER=function(){if(nerAnim){cancelAnimationFrame(nerAnim);nerAnim=null;}nerFrame=0;drawNERFrame(0);document.getElementById("nerStatus").textContent="Listo";document.getElementById("nerStatus").style.color="#00D4AA";document.getElementById("nerNarr").innerHTML="Presiona \u201cIniciar NER\u201d para ver la reparaci\u00f3n de un d\u00edmero de timinas paso a paso.";};
+function drawNERFrame(f){
+  var ctx=getCtx("cvNER");if(!ctx)return;var W=900,H=400;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var narr=document.getElementById("nerNarr");
+  var phase=f<80?0:f<160?1:f<240?2:f<320?3:4;
+  var phaseNames=["Da\u00f1o: D\u00edmero T=T (UV)","1. XPC detecta distorsi\u00f3n","2. TFIIH abre burbuja + XPF/XPG cortan","3. Pol \u03b4 rellena ~27 nt","4. Ligasa sella \u2192 \u00a1Reparado!"];
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText("NER: "+phaseNames[phase],W/2,30);
+  var top="AGCTTGCATGCA";var bot="TCGAACGTACGT";
+  var sx=70,sp=65;
+  // Draw DNA strands
+  drawDNABackbone(ctx,sx-20,sx+11*sp+20,120,"rgba(0,163,255,0.3)");
+  drawDNABackbone(ctx,sx-20,sx+11*sp+20,220,"rgba(0,212,170,0.3)");
+  for(var i=0;i<12;i++){
+    var isDimer=(i===3||i===4);
+    if(phase>=2&&phase<4&&isDimer)continue; // excised
+    if(phase>=2&&phase<4&&i>=2&&i<=6)continue; // bubble region
+    var hl=isDimer&&phase<2?"#FFD93D":null;
+    drawBase(ctx,sx+i*sp,120,top[i],14,hl);
+    drawBase(ctx,sx+i*sp,220,bot[i],14);
+    if(!(isDimer&&phase<2))drawHBond(ctx,sx+i*sp,134,206);
+  }
+  // Dimer bond
+  if(phase<2){
+    ctx.strokeStyle="#FFD93D";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(sx+3*sp,100);ctx.bezierCurveTo(sx+3*sp+15,85,sx+4*sp-15,85,sx+4*sp,100);ctx.stroke();
+    ctx.fillStyle="#FFD93D";ctx.font="bold 10px Source Sans 3";ctx.textAlign="center";ctx.fillText("T=T",sx+3.5*sp,82);
+  }
+  // Phase 1: XPC
+  if(phase===1){
+    roundRect(ctx,sx+2.5*sp,130,sp*3,40,10);ctx.fillStyle="rgba(167,139,250,0.15)";ctx.fill();ctx.strokeStyle="#A78BFA";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#A78BFA";ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";ctx.fillText("XPC-RAD23B",sx+4*sp,155);
+    narr.innerHTML="<strong>Paso 1:</strong> <strong>XPC-RAD23B</strong> patrulla el genoma y detecta la <strong>distorsi\u00f3n</strong> en la h\u00e9lice causada por el d\u00edmero. No reconoce la lesi\u00f3n qu\u00edmica \u2014 reconoce la deformaci\u00f3n estructural.";
+  }
+  // Phase 2: Bubble + dual incision
+  if(phase===2){
+    // Open bubble
+    ctx.strokeStyle="rgba(255,217,61,0.3)";ctx.lineWidth=2;ctx.beginPath();
+    ctx.moveTo(sx+1.5*sp,120);ctx.bezierCurveTo(sx+3*sp,70,sx+5*sp,70,sx+6.5*sp,120);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(sx+1.5*sp,220);ctx.bezierCurveTo(sx+3*sp,270,sx+5*sp,270,sx+6.5*sp,220);ctx.stroke();
+    // TFIIH
+    roundRect(ctx,sx+3*sp-20,50,100,30,8);ctx.fillStyle="rgba(0,163,255,0.2)";ctx.fill();ctx.strokeStyle="#00A3FF";ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle="#00A3FF";ctx.font="bold 10px Source Sans 3";ctx.textAlign="center";ctx.fillText("TFIIH (XPB/XPD)",sx+3.5*sp+10,70);
+    // Cut marks
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 20px Source Sans 3";
+    ctx.fillText("\u2702",sx+1.5*sp,170);ctx.fillText("\u2702",sx+6.5*sp,170);
+    ctx.font="10px Source Sans 3";ctx.fillText("XPF-ERCC1",sx+1.5*sp,190);ctx.fillText("XPG",sx+6.5*sp,190);
+    // Fragment being removed
+    var removeY=170+((f-160)/80)*40;
+    ctx.globalAlpha=1-(f-160)/80;
+    roundRect(ctx,sx+2*sp,removeY-10,sp*4,20,6);ctx.fillStyle="rgba(255,107,107,0.2)";ctx.fill();ctx.strokeStyle="#FF6B6B";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#FF6B6B";ctx.font="9px Source Sans 3";ctx.textAlign="center";ctx.fillText("~27 nt (con lesi\u00f3n)",sx+4*sp,removeY+4);
+    ctx.globalAlpha=1;
+    narr.innerHTML="<strong>Paso 2:</strong> <strong>TFIIH</strong> abre una burbuja de ~30 nt. <strong>XPF-ERCC1</strong> corta en 5\u2032 y <strong>XPG</strong> corta en 3\u2032. Se libera un fragmento de <strong>~24-32 nt</strong> conteniendo la lesi\u00f3n.";
+  }
+  // Phase 3: Pol filling
+  if(phase===3){
+    var fillProgress=(f-240)/80;
+    for(var i=2;i<=6;i++){
+      if((i-2)/5<=fillProgress){
+        ctx.globalAlpha=Math.min(1,fillProgress*5-(i-2));
+        drawBase(ctx,sx+i*sp,120,top[i],14,"#00D4AA");
+        drawHBond(ctx,sx+i*sp,134,206);
+        drawBase(ctx,sx+i*sp,220,bot[i],14);
+        ctx.globalAlpha=1;
+      }
+    }
+    // Pol delta
+    var polX=sx+(2+fillProgress*4)*sp;
+    roundRect(ctx,polX-25,85,50,25,6);ctx.fillStyle="rgba(0,163,255,0.2)";ctx.fill();ctx.strokeStyle="#00A3FF";ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle="#00A3FF";ctx.font="bold 9px Source Sans 3";ctx.textAlign="center";ctx.fillText("Pol \u03b4",polX,102);
+    narr.innerHTML="<strong>Paso 3:</strong> <strong>ADN Polimerasa \u03b4</strong> (con PCNA y RFC) rellena el hueco usando la hebra complementaria intacta como molde. Los nuevos nucle\u00f3tidos (verde) restauran la secuencia.";
+  }
+  // Phase 4: Done
+  if(phase===4){
+    for(var i=0;i<12;i++){
+      drawBase(ctx,sx+i*sp,120,top[i],14,i>=2&&i<=6?"#00D4AA":null);
+      drawBase(ctx,sx+i*sp,220,bot[i],14);
+      drawHBond(ctx,sx+i*sp,134,206);
+    }
+    narr.innerHTML="<strong>Paso 4:</strong> <strong>ADN Ligasa I</strong> sella los nicks. \u00a1Reparaci\u00f3n completa! La secuencia original ha sido restaurada sin el d\u00edmero. NER es el sistema m\u00e1s <strong>vers\u00e1til</strong> porque reconoce distorsi\u00f3n, no lesi\u00f3n espec\u00edfica.";
+    roundRect(ctx,W/2-100,260,200,28,8);ctx.fillStyle="rgba(0,212,170,0.15)";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle="#00D4AA";ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";ctx.fillText("\u2705 ADN Reparado",W/2,278);
+  }
+  if(f===0)narr.innerHTML="La radiaci\u00f3n UVB ha creado un <strong>d\u00edmero de timinas</strong> (T=T, amarillo) que distorsiona la doble h\u00e9lice. Presiona \u201cIniciar NER\u201d.";
+  // Progress
+  roundRect(ctx,100,H-30,W-200,12,6);ctx.fillStyle="rgba(255,255,255,0.05)";ctx.fill();
+  roundRect(ctx,100,H-30,(W-200)*Math.min(1,f/340),12,6);ctx.fillStyle="rgba(0,163,255,0.4)";ctx.fill();
+}
+
+/* ===== MMR ANIMATION ===== */
+var mmrAnim=null,mmrFrame=0;
+window.startMMR=function(){if(mmrAnim)return;mmrFrame=0;document.getElementById("mmrStatus").textContent="Reparando...";document.getElementById("mmrStatus").style.color="#FFD93D";function a(){mmrFrame++;drawMMRFrame(mmrFrame);if(mmrFrame<250)mmrAnim=requestAnimationFrame(a);else{mmrAnim=null;document.getElementById("mmrStatus").textContent="\u2713 Reparado";document.getElementById("mmrStatus").style.color="#00D4AA";}}a();};
+window.resetMMR=function(){if(mmrAnim){cancelAnimationFrame(mmrAnim);mmrAnim=null;}mmrFrame=0;drawMMRFrame(0);document.getElementById("mmrStatus").textContent="Listo";document.getElementById("mmrStatus").style.color="#00D4AA";document.getElementById("mmrNarr").innerHTML="Presiona \u201cIniciar MMR\u201d para ver c\u00f3mo se corrige un error de replicaci\u00f3n.";};
+function drawMMRFrame(f){
+  var ctx=getCtx("cvMMR");if(!ctx)return;var W=900,H=350;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var narr=document.getElementById("mmrNarr");
+  var phase=f<60?0:f<120?1:f<190?2:f<240?3:4;
+  var phaseNames=["Mismatch: G-T (deber\u00eda ser G-C)","1. MutS\u03b1 detecta mismatch","2. MutL\u03b1 coordina escisi\u00f3n","3. Pol \u03b4 rellena correctamente","4. \u00a1Reparado!"];
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText("MMR: "+phaseNames[phase],W/2,30);
+  var template="AGCTTGCA";var newStrand="TCGATCGT"; // T at position 4 should be C (mismatch with G)
+  var sx=100,sp=90;
+  // Template (old)
+  ctx.fillStyle="#8BA4BE";ctx.font="bold 11px Source Sans 3";ctx.textAlign="left";ctx.fillText("Hebra molde (vieja):",20,90);
+  drawDNABackbone(ctx,sx-20,sx+7*sp+20,100,"rgba(0,163,255,0.3)");
+  for(var i=0;i<8;i++){drawBase(ctx,sx+i*sp,100,template[i],16);}
+  // New strand
+  ctx.fillStyle="#8BA4BE";ctx.fillText("Hebra nueva:",20,210);
+  drawDNABackbone(ctx,sx-20,sx+7*sp+20,220,"rgba(0,212,170,0.3)");
+  for(var i=0;i<8;i++){
+    if(i===4){
+      if(phase<3){drawBase(ctx,sx+i*sp,220,"T",16,"#FF6B6B");} // mismatch
+      else{
+        var alpha=Math.min(1,(f-190)/30);
+        ctx.globalAlpha=alpha;drawBase(ctx,sx+i*sp,220,"C",16,"#00D4AA");ctx.globalAlpha=1;
+      }
+    }else{drawBase(ctx,sx+i*sp,220,newStrand[i],16);}
+    if(!(i===4&&phase<3))drawHBond(ctx,sx+i*sp,116,204);
+  }
+  // Mismatch highlight
+  if(phase<3&&phase>=0){
+    ctx.strokeStyle="#FF6B6B";ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(sx+4*sp,160,35,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 10px Source Sans 3";ctx.textAlign="center";ctx.fillText("G:T \u2260 G:C",sx+4*sp,165);
+  }
+  if(phase===1){
+    roundRect(ctx,sx+3*sp,250,sp*2.5,30,8);ctx.fillStyle="rgba(255,217,61,0.15)";ctx.fill();ctx.strokeStyle="#FFD93D";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#FFD93D";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";ctx.fillText("MSH2/MSH6 (MutS\u03b1)",sx+4.2*sp,270);
+    narr.innerHTML="<strong>Paso 1:</strong> <strong>MutS\u03b1 (MSH2/MSH6)</strong> escanea el ADN reci\u00e9n replicado y detecta el <strong>mismatch G:T</strong>. Se une al sitio del error.";
+  }
+  if(phase===2){
+    roundRect(ctx,sx+2*sp,250,sp*4,30,8);ctx.fillStyle="rgba(167,139,250,0.15)";ctx.fill();ctx.strokeStyle="#A78BFA";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#A78BFA";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";ctx.fillText("MLH1/PMS2 (MutL\u03b1) + Exonucleasa",sx+4*sp,270);
+    narr.innerHTML="<strong>Paso 2:</strong> <strong>MutL\u03b1 (MLH1/PMS2)</strong> se une. Identifica la <strong>hebra nueva</strong> (por nicks no sellados + PCNA). Coordina la <strong>escisi\u00f3n</strong> de la hebra nueva alrededor del error.";
+  }
+  if(phase===3)narr.innerHTML="<strong>Paso 3:</strong> <strong>Pol \u03b4</strong> rellena el hueco con la base correcta (C) usando la hebra molde (G) como gu\u00eda.";
+  if(phase===4){narr.innerHTML="<strong>Paso 4:</strong> Ligasa sella. \u00a1Reparado! G:C restaurado. MMR reduce la tasa de error de ~10\u207b\u2077 a ~10\u207b\u2079-10\u207b\u00b9\u2070. Defecto en MMR \u2192 <strong>S\u00edndrome de Lynch</strong>.";
+    roundRect(ctx,W/2-80,290,160,25,8);ctx.fillStyle="rgba(0,212,170,0.15)";ctx.fill();ctx.fillStyle="#00D4AA";ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";ctx.fillText("\u2705 G:C Restaurado",W/2,307);
+  }
+  if(f===0)narr.innerHTML="Tras la replicaci\u00f3n, la Pol insert\u00f3 <strong>T</strong> en lugar de <strong>C</strong> frente a G. Este mismatch escap\u00f3 al proofreading. El MMR debe corregirlo.";
+}
+
+/* ===== TLS ANIMATION ===== */
+var tlsAnim=null,tlsFrame=0;
+window.startTLS=function(){if(tlsAnim)return;tlsFrame=0;document.getElementById("tlsStatus").textContent="Procesando...";document.getElementById("tlsStatus").style.color="#FFD93D";function a(){tlsFrame++;drawTLSFrame(tlsFrame);if(tlsFrame<300)tlsAnim=requestAnimationFrame(a);else{tlsAnim=null;document.getElementById("tlsStatus").textContent="\u2713 Completo";document.getElementById("tlsStatus").style.color="#00D4AA";}}a();};
+window.resetTLS=function(){if(tlsAnim){cancelAnimationFrame(tlsAnim);tlsAnim=null;}tlsFrame=0;drawTLSFrame(0);document.getElementById("tlsStatus").textContent="Listo";document.getElementById("tlsStatus").style.color="#00D4AA";document.getElementById("tlsNarr").innerHTML="Presiona \u201cIniciar TLS\u201d para ver c\u00f3mo la c\u00e9lula tolera una lesi\u00f3n no reparada.";};
+function drawTLSFrame(f){
+  var ctx=getCtx("cvTLS");if(!ctx)return;var W=900,H=380;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var narr=document.getElementById("tlsNarr");
+  var phase=f<70?0:f<140?1:f<210?2:f<270?3:4;
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";
+  var phaseNames=["Pol replicativa se detiene ante lesi\u00f3n","1. PCNA monoubiquitinado","2. Pol \u03b7 inserta 1-2 nt","3. Pol replicativa retoma","4. Lesi\u00f3n tolerada (no reparada)"];
+  ctx.fillText("TLS: "+phaseNames[phase],W/2,30);
+  // Template with lesion
+  var template="AGCTTGCA";
+  var sx=100,sp=90;
+  drawDNABackbone(ctx,sx-20,sx+7*sp+20,130,"rgba(0,163,255,0.3)");
+  for(var i=0;i<8;i++){
+    var isDimer=(i===3||i===4);
+    var hl=isDimer?"#FFD93D":null;
+    drawBase(ctx,sx+i*sp,130,template[i],16,hl);
+  }
+  // Dimer mark
+  ctx.strokeStyle="#FFD93D";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(sx+3*sp,110);ctx.bezierCurveTo(sx+3*sp+15,98,sx+4*sp-15,98,sx+4*sp,110);ctx.stroke();
+  ctx.fillStyle="#FFD93D";ctx.font="9px Source Sans 3";ctx.textAlign="center";ctx.fillText("T=T",sx+3.5*sp,95);
+  // New strand being built
+  drawDNABackbone(ctx,sx-20,sx+2*sp+20,230,"rgba(0,212,170,0.3)");
+  var newBases=["T","C","G"];
+  for(var i=0;i<3;i++){drawBase(ctx,sx+i*sp,230,newBases[i],16);drawHBond(ctx,sx+i*sp,146,214);}
+  // Phase-specific elements
+  if(phase===0){
+    // Replicative Pol stuck
+    var polX=sx+2.5*sp;
+    roundRect(ctx,polX,180,70,35,8);ctx.fillStyle="rgba(0,163,255,0.2)";ctx.fill();ctx.strokeStyle="#00A3FF";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#00A3FF";ctx.font="bold 10px Source Sans 3";ctx.textAlign="center";ctx.fillText("Pol \u03b4",polX+35,195);ctx.fillText("DETENIDA",polX+35,210);
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 14px Source Sans 3";ctx.fillText("\u26d4",polX+80,195);
+    narr.innerHTML="La <strong>Pol \u03b4 replicativa</strong> se detiene al encontrar el d\u00edmero T=T. No puede incorporar nucle\u00f3tidos frente a la lesi\u00f3n.";
+  }
+  if(phase===1){
+    // PCNA ubiquitinated
+    ctx.fillStyle="#A78BFA";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";
+    roundRect(ctx,sx+2*sp,260,sp*3,30,8);ctx.fillStyle="rgba(167,139,250,0.15)";ctx.fill();ctx.strokeStyle="#A78BFA";ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle="#A78BFA";ctx.fillText("RAD6/RAD18 \u2192 PCNA-Ub (se\u00f1al de cambio)",sx+3.5*sp,280);
+    narr.innerHTML="<strong>Paso 1:</strong> El bloqueo activa <strong>RAD6/RAD18</strong> que <strong>monoubiquitina PCNA</strong>. Esta se\u00f1al indica que la Pol replicativa debe ser reemplazada temporalmente.";
+  }
+  if(phase>=2){
+    // TLS Pol inserts bases
+    var tlsBases=phase>=3?["A","A"]:[(f-140)/70>0.5?"A":"",f>180?"A":""];
+    for(var i=0;i<tlsBases.length;i++){
+      if(tlsBases[i]){
+        ctx.globalAlpha=Math.min(1,(f-140-i*30)/30);
+        drawBase(ctx,sx+(3+i)*sp,230,tlsBases[i],16,"#F97316");
+        drawHBond(ctx,sx+(3+i)*sp,146,214);
+        ctx.globalAlpha=1;
+      }
+    }
+    if(phase===2){
+      roundRect(ctx,sx+3*sp-10,255,sp*2,30,8);ctx.fillStyle="rgba(249,115,22,0.15)";ctx.fill();ctx.strokeStyle="#F97316";ctx.lineWidth=2;ctx.stroke();
+      ctx.fillStyle="#F97316";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";ctx.fillText("Pol \u03b7 (translesi\u00f3n)",sx+4*sp,275);
+      narr.innerHTML="<strong>Paso 2:</strong> <strong>Pol \u03b7 (eta)</strong> reemplaza a Pol \u03b4. Inserta <strong>correctamente 2 adeninas</strong> frente al d\u00edmero T=T. Solo a\u00f1ade 1-2 nt, <strong>sin proofreading</strong>.";
+    }
+  }
+  if(phase>=3){
+    // Regular Pol resumes
+    for(var i=5;i<8;i++){
+      var alpha=Math.min(1,(f-210-(i-5)*20)/20);
+      if(alpha>0){ctx.globalAlpha=alpha;var compBase={"T":"A","G":"C","C":"G","A":"T"}[template[i]];drawBase(ctx,sx+i*sp,230,compBase,16);drawHBond(ctx,sx+i*sp,146,214);ctx.globalAlpha=1;}
+    }
+    drawDNABackbone(ctx,sx+2*sp+20,sx+7*sp+20,230,"rgba(0,212,170,0.3)");
+    if(phase===3){
+      roundRect(ctx,sx+5.5*sp,255,sp*2,30,8);ctx.fillStyle="rgba(0,163,255,0.15)";ctx.fill();ctx.strokeStyle="#00A3FF";ctx.lineWidth=2;ctx.stroke();
+      ctx.fillStyle="#00A3FF";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";ctx.fillText("Pol \u03b4 retoma",sx+6.5*sp,275);
+      narr.innerHTML="<strong>Paso 3:</strong> Pol \u03b7 se retira tras insertar 1-2 nt. La <strong>Pol \u03b4 replicativa</strong> retoma la s\u00edntesis normal con alta fidelidad.";
+    }
+  }
+  if(phase===4){
+    narr.innerHTML="<strong>Resultado:</strong> La replicaci\u00f3n contin\u00faa. La lesi\u00f3n T=T <strong>sigue en la hebra molde</strong> (tolerancia, no reparaci\u00f3n). Las Pol TLS son propensas a errores \u2192 responsables de la mayor\u00eda de mutaciones puntuales acumuladas.";
+    roundRect(ctx,W/2-120,310,240,28,8);ctx.fillStyle="rgba(249,115,22,0.1)";ctx.fill();ctx.strokeStyle="#F97316";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#F97316";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";ctx.fillText("\u26a0 Tolerancia, NO reparaci\u00f3n",W/2,328);
+  }
+}
+
+/* ===== GLOSSARY ===== */
+var gt=[
+  {t:"Mutaci\u00f3n",d:"Cambio permanente en la secuencia de nucle\u00f3tidos del ADN."},
+  {t:"Mut\u00e1geno",d:"Agente que aumenta la tasa de mutaci\u00f3n. Ej: UV, benzopireno."},
+  {t:"Silent",d:"Cambio de base sin efecto en amino\u00e1cido (3\u00aa posici\u00f3n wobble)."},
+  {t:"Missense",d:"Cambio de base \u2192 amino\u00e1cido diferente. Ej: anemia falciforme."},
+  {t:"Nonsense",d:"Cod\u00f3n STOP prematuro \u2192 prote\u00edna truncada."},
+  {t:"Frameshift",d:"Ins/del no m\u00faltiplo de 3 \u2192 cambia marco de lectura."},
+  {t:"Depurinaci\u00f3n",d:"P\u00e9rdida de purina por hidr\u00f3lisis. ~5,000/c\u00e9l/d\u00eda. Sitio AP."},
+  {t:"Deaminaci\u00f3n",d:"P\u00e9rdida de -NH\u2082. C\u2192U (m\u00e1s frecuente). Transici\u00f3n G:C\u2192A:T."},
+  {t:"BER",d:"Base Excision Repair. Glicosilasa \u2192 AP endonucl. \u2192 Pol \u03b2 \u2192 Ligasa."},
+  {t:"NER",d:"Nucleotide Excision Repair. XPC \u2192 TFIIH \u2192 XPF/XPG \u2192 Pol \u03b4. ~27 nt."},
+  {t:"MMR",d:"Mismatch Repair. MSH2/6 + MLH1/PMS2. Post-replicaci\u00f3n."},
+  {t:"TLS",d:"Tolerancia. Pol \u03b7, \u03b9, \u03ba. Sin proofreading. 1-2 nt."},
+  {t:"NHEJ",d:"Non-Homologous End Joining. Ku70/80 \u2192 Lig IV. DSB."},
+  {t:"TC-NER",d:"NER acoplado a transcripci\u00f3n. CSA/CSB. S. Cockayne."},
+  {t:"XP",d:"Xeroderma Pigmentoso. Defecto NER. Riesgo c\u00e1ncer 1000\u00d7."},
+  {t:"Lynch",d:"Defecto MMR. MSI. C\u00e1ncer colorrectal. Anti-PD1."},
+  {t:"Philadelphia",d:"t(9;22). BCR-ABL \u2192 LMC. Imatinib."},
+  {t:"Anemia Falcif.",d:"Missense Glu\u2192Val \u03b2-globina. HbS."},
+  {t:"MGMT",d:"Enzima suicida. Revierte O\u2076-metilG. Temozolomida."},
+  {t:"Cockayne",d:"Defecto TC-NER (CSA/CSB). Retraso crecimiento."},
+  {t:"Timina vs U",d:"ADN usa T (5-metilU) para detectar U de deaminaci\u00f3n de C."},
+  {t:"D\u00edmero T=T",d:"Enlace ciclobutano por UV. Distorsiona h\u00e9lice. NER."},
+  {t:"Intercalante",d:"Mol\u00e9cula plana entre bases. Estira ADN \u2192 frameshift."},
+  {t:"Sitio AP",d:"Posici\u00f3n sin base. AP endonucleasa \u2192 BER."},
+  {t:"5-Metilcitosina",d:"Epigen\u00e9tica CpG. Deamina \u2192 T. Hotspot mutacional."}
+];
+function ifc(){var g=document.getElementById("fg");if(!g)return;g.innerHTML="";gt.sort(function(a,b){return a.t.localeCompare(b.t)});gt.forEach(function(it){var c=document.createElement("div");c.className="fc";c.onclick=function(){this.classList.toggle("fl")};c.innerHTML="<div class=\"ft\">"+it.t+"</div><div class=\"fd\">"+it.d+"</div><div class=\"fh\">Clic para ver</div>";g.appendChild(c);});}
+
+/* ===== FINAL EVALUATION ===== */
+var evq=[
+  {q:"Una mutaci\u00f3n es:",o:["Da\u00f1o reparable","Cambio permanente en secuencia de nucle\u00f3tidos","Error transitorio","Solo en c\u00e9lulas germinales"],c:1,f:"Cambio permanente incorporado al genoma."},
+  {q:"La anemia falciforme es mutaci\u00f3n:",o:["Silent","Frameshift","Missense (Glu\u2192Val)","Nonsense"],c:2,f:"GAG\u2192GTG en \u03b2-globina."},
+  {q:"Nonsense produce:",o:["AA diferente","Prote\u00edna truncada (STOP prematuro)","Sin efecto","Inversi\u00f3n"],c:1,f:"Genera UAA/UAG/UGA."},
+  {q:"Inserci\u00f3n de 2 nt causa:",o:["Silent","Missense","Frameshift","Duplicaci\u00f3n"],c:2,f:"2 no es m\u00faltiplo de 3."},
+  {q:"Philadelphia t(9;22):",o:["Deleci\u00f3n","Duplicaci\u00f3n","Translocaci\u00f3n \u2192 BCR-ABL","Inversi\u00f3n"],c:2,f:"BCR-ABL \u2192 LMC. Tx: Imatinib."},
+  {q:"Depurinaci\u00f3n:",o:["P\u00e9rdida grupo amino","Hidr\u00f3lisis enlace glucos\u00eddico \u2192 purina perdida","Inserci\u00f3n U","D\u00edmeros"],c:1,f:"~5,000/c\u00e9l/d\u00eda. Sitio AP."},
+  {q:"Deaminaci\u00f3n de C produce:",o:["T","A","U (aparea con A)","G"],c:2,f:"C\u2192U. Transici\u00f3n G:C\u2192A:T."},
+  {q:"\u00bfPor qu\u00e9 T y no U en ADN?",o:["M\u00e1s barata","Detectar U de deaminaci\u00f3n de C","M\u00e1s puentes H","U es t\u00f3xico"],c:1,f:"T permite detectar U como da\u00f1o."},
+  {q:"5mC deaminada produce:",o:["U","T (mismatch T:G)","Hipoxantina","Xantina"],c:1,f:"Hotspot CpG. TDG/MBD4."},
+  {q:"UVB causa:",o:["DSB","Depurinaciones","D\u00edmeros pirimidinas (CPD)","Deaminaciones"],c:2,f:"Ciclobutano T=T. NER."},
+  {q:"Intercalantes causan:",o:["Silent","Frameshift","Translocaciones","Depurinaciones"],c:1,f:"Estiran ADN \u2192 Pol inserta bases extra."},
+  {q:"BER inicia con:",o:["AP endonucleasa","Ligasa","ADN Glicosilasa","Topoisomerasa"],c:2,f:"Reconoce y elimina base da\u00f1ada."},
+  {q:"NER elimina:",o:["1 nt","~24-32 nt con lesi\u00f3n","100 nt","Toda la hebra"],c:1,f:"Incisi\u00f3n dual XPF+XPG."},
+  {q:"XP es defecto en:",o:["BER","NER (XPA-XPG)","MMR","NHEJ"],c:1,f:"C\u00e1ncer piel 1000\u00d7."},
+  {q:"MMR usa:",o:["XPC+TFIIH","Ku70/80","MSH2/6 + MLH1/PMS2","Pol \u03b7"],c:2,f:"MutS\u03b1 + MutL\u03b1."},
+  {q:"Lynch afecta:",o:["NER","MMR \u2192 MSI","BER","NHEJ"],c:1,f:"MSI \u2192 c\u00e1ncer colorrectal."},
+  {q:"TC-NER se activa cuando:",o:["Glicosilasa detecta","ARN Pol II se detiene ante lesi\u00f3n","MCM se detiene","PCNA ubiquitinado"],c:1,f:"CSA/CSB reclutan NER."},
+  {q:"TLS es mecanismo de:",o:["Reparaci\u00f3n","Tolerancia (replica sin reparar)","Recombinaci\u00f3n","Reversi\u00f3n"],c:1,f:"Pol especiales, sin proofreading."},
+  {q:"NHEJ reconoce DSB con:",o:["MSH2/6","XPC","Ku70/Ku80","Glicosilasas"],c:2,f:"Ku70/80 \u2192 DNA-PKcs \u2192 Lig IV."},
+  {q:"MGMT es enzima:",o:["Glicosilasa","Suicida (transfiere metilo)","Ligasa","Polimerasa"],c:1,f:"Revierte O6-metilG. Resistencia temozolomida."}
+];
+var eva={},evs=false;
+window.iev=function(){var c=document.getElementById("eq");if(!c)return;c.innerHTML="";eva={};evs=false;var sdd=document.getElementById("sdd");if(sdd)sdd.style.display="none";var seb=document.getElementById("seb");if(seb)seb.style.display="none";var lt=["A","B","C","D"];evq.forEach(function(q,qi){var d=document.createElement("div");d.className="qq";d.id="ev-"+qi;var h="<div class=\"qt\"><span style=\"color:var(--g);font-family:JetBrains Mono;font-size:.8rem\">"+(qi+1)+"/"+evq.length+"</span> "+q.q+"</div><div class=\"qo\">";q.o.forEach(function(opt,oi){h+="<button class=\"qb\" data-qi=\""+qi+"\" data-oi=\""+oi+"\" onclick=\"seo(this,"+qi+","+oi+")\"><div class=\"ol\">"+lt[oi]+"</div>"+opt+"</button>";});h+="</div><div class=\"qf\" id=\"fb-ev-"+qi+"\"></div>";d.innerHTML=h;c.appendChild(d);});};
+window.seo=function(btn,qi,oi){if(evs)return;document.getElementById("ev-"+qi).querySelectorAll(".qb").forEach(function(o){o.classList.remove("sel")});btn.classList.add("sel");eva[qi]=oi;if(Object.keys(eva).length===evq.length)document.getElementById("seb").style.display="inline-flex";};
+window.se=function(){evs=true;var sc=0;evq.forEach(function(q,qi){var c=document.getElementById("ev-"+qi),os=c.querySelectorAll(".qb");var ua=eva[qi];os.forEach(function(o,oi){o.classList.add("dis");if(oi===q.c)o.classList.add("ok");if(oi===ua&&oi!==q.c)o.classList.add("no")});if(ua===q.c)sc++;var fb=document.getElementById("fb-ev-"+qi);fb.classList.add("sh");fb.classList.add(ua===q.c?"cf":"if");fb.textContent=(ua===q.c?"\u2705 ":"\u274c ")+q.f;});document.getElementById("seb").style.display="none";var pct=Math.round(sc/evq.length*100),dd=document.getElementById("sdd");dd.style.display="block";document.getElementById("sn2").textContent=sc+"/"+evq.length;document.getElementById("sbf2").style.width=pct+"%";var msg;if(pct>=90)msg="\ud83c\udf1f \u00a1Excelente! Dominas da\u00f1o y reparaci\u00f3n del ADN.";else if(pct>=70)msg="\ud83d\udc4f \u00a1Buen trabajo! Revisa donde fallaste.";else if(pct>=50)msg="\ud83d\udcda Necesitas repasar.";else msg="\ud83d\udcaa Revisa la tutor\u00eda completa.";document.getElementById("sm2").textContent=msg;dd.scrollIntoView({behavior:"smooth",block:"center"});};
+
+/* ===== INIT ===== */
+function initAll(){
+  document.querySelectorAll(".nl button").forEach(function(b){b.addEventListener("click",function(){go(this.dataset.s)});});
+  drawOverview();ifc();iev();upd();
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initAll);else initAll();
+
+</script>
+</body></html>
