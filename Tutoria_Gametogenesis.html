@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría: Gametogénesis</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 20px}
+.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;min-height:54px;flex-wrap:wrap;gap:6px;padding:6px 0}
+.nb{font-family:'DM Serif Display',serif;font-size:1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
+.nl{display:flex;gap:2px;flex-wrap:wrap}.nl button{padding:4px 10px;border-radius:20px;border:none;background:0;color:var(--t3);font-size:.7rem;font-family:inherit;cursor:pointer;transition:.3s;white-space:nowrap}.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}
+.pb{position:fixed;top:0;left:0;right:0;z-index:200;height:3px;background:rgba(0,212,170,.1)}.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}
+.mc{max-width:960px;margin:0 auto;padding:24px 20px 80px;position:relative;z-index:1}
+.sec{display:none;animation:fi .5s}.sec.a{display:block}@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:40px 0 30px}.hi{width:80px;height:80px;margin:0 auto 16px;background:var(--grad);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:2.4rem;line-height:1.2;margin-bottom:12px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hs{font-size:1.05rem;color:var(--t2);max-width:650px;margin:0 auto 24px}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:12px 14px;display:flex;align-items:flex-start;gap:10px;transition:.3s}.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}.on{min-width:24px;height:24px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;color:#0B1622}.ot{font-size:.83rem;color:var(--t2);line-height:1.5}
+.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:20px;box-shadow:var(--sh);transition:.3s}.cd:hover{border-color:rgba(0,212,170,.25)}.ch{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:12px}.ch .ac{color:var(--g)}
+.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:16px 20px;margin:16px 0;background:rgba(0,212,170,.06)}.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}.ib.pp{background:rgba(167,139,250,.06);border-left-color:var(--p)}.ibt{font-weight:700;margin-bottom:5px;font-size:.9rem}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0}.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:20px}.cc h4{font-family:'DM Serif Display',serif;margin-bottom:8px;font-size:1rem}
+.et{width:100%;border-collapse:separate;border-spacing:0;margin:16px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}.et th{background:rgba(0,212,170,.12);padding:10px 14px;text-align:left;font-weight:600;font-size:.82rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}.et td{padding:10px 14px;border-top:1px solid var(--bdr);font-size:.87rem;color:var(--t2)}.et tr:hover td{background:var(--card2)}
+.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:22px;margin-bottom:16px}.qt{font-weight:600;font-size:.95rem;margin-bottom:14px}.qo{display:flex;flex-direction:column;gap:8px}.qb{padding:11px 16px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.9rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}.qb.dis{pointer-events:none;opacity:.7}.ol{min-width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.qf{margin-top:12px;padding:14px;border-radius:var(--r10);font-size:.87rem;line-height:1.6;display:none}.qf.sh{display:block}.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}
+.cl{background:linear-gradient(135deg,rgba(255,107,107,.06),rgba(255,217,61,.04));border:1px solid rgba(255,107,107,.2);border-radius:var(--r16);padding:24px;margin:18px 0}.clb{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,107,.15);color:var(--r);padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:.03em}.clt{font-family:'DM Serif Display',serif;font-size:1.2rem;margin-bottom:10px}.clp{color:var(--t2);margin-bottom:12px;font-size:.9rem;line-height:1.7}
+.btn{padding:10px 22px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.9rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}.bp:hover{transform:translateY(-2px)}.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}.bs:hover{background:rgba(0,212,170,.2)}
+.svg-wrap{background:rgba(0,0,0,.25);border-radius:var(--r16);padding:16px;margin:16px 0;border:1px solid var(--bdr);overflow-x:auto}.svg-wrap svg{width:100%;height:auto;display:block}
+.analogy{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(0,163,255,.06));border:1px solid rgba(167,139,250,.2);border-radius:var(--r16);padding:22px;margin:16px 0}.analogy h4{font-family:'DM Serif Display',serif;color:var(--p);margin-bottom:6px}.analogy p{color:var(--t2);font-size:.9rem}
+.sn{display:flex;justify-content:space-between;margin-top:30px;padding-top:18px;border-top:1px solid var(--bdr)}
+.mnemonic{background:linear-gradient(135deg,rgba(255,217,61,.08),rgba(249,115,22,.05));border:1px solid rgba(255,217,61,.25);border-radius:var(--r16);padding:22px;margin:16px 0;text-align:center}.mnemonic h4{font-family:'DM Serif Display',serif;color:var(--y);margin-bottom:8px}.mnemonic p{color:var(--t2);font-size:.9rem;line-height:1.7}.mnemonic .big{font-size:1.6rem;font-weight:700;letter-spacing:2px;color:var(--y);margin:8px 0}
+.chapter-header{background:linear-gradient(135deg,var(--card),var(--card2));border:2px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;text-align:center;position:relative;overflow:hidden}.chapter-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,212,170,.08),transparent 70%);pointer-events:none}.chapter-header .ch-num{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--g);text-transform:uppercase;letter-spacing:.15em;margin-bottom:6px}.chapter-header h2{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:6px}.chapter-header p{color:var(--t2);font-size:.92rem}.chapter-header .ch-time{display:inline-block;background:rgba(0,212,170,.12);color:var(--g);padding:3px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-top:8px}
+.match-game{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0}.match-col{display:flex;flex-direction:column;gap:7px}.match-col h4{text-align:center;margin-bottom:6px;font-family:'DM Serif Display',serif}.match-item{padding:10px 14px;border-radius:var(--r10);border:2px solid var(--bdr);background:var(--card2);color:var(--t2);cursor:pointer;transition:.3s;font-size:.85rem;text-align:center;user-select:none}.match-item:hover{border-color:var(--b);transform:scale(1.02)}.match-item.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}.match-item.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important;pointer-events:none}.match-item.no{border-color:var(--r)!important;animation:shake .4s}.match-score{text-align:center;margin-top:10px;font-weight:600;color:var(--g)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
+.step-diagram{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;margin:16px 0;padding:14px;background:rgba(0,0,0,.15);border-radius:var(--r10)}.step-box{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 12px;text-align:center;min-width:80px}.step-arrow{color:var(--y);font-size:1.1rem;font-weight:700}
+.sim{background:var(--card2);border-radius:14px;padding:4px;margin:16px 0;border:1px solid var(--bdr);position:relative;overflow:hidden}
+.sim canvas{display:block;width:100%;border-radius:10px;background:#080d16}
+.sim-ctrls{display:flex;flex-wrap:wrap;gap:8px;padding:12px;align-items:center;justify-content:center}
+.sim-label{font-size:.82em;font-weight:700;color:var(--g)}
+.sim-narr{background:rgba(0,212,170,.06);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px;margin-top:12px;color:var(--t2);font-size:.9rem;line-height:1.6;min-height:60px}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:18px 0}.fc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:18px;cursor:pointer;transition:.4s;min-height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.fc:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:var(--glow)}.ft{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--g)}.fd{display:none;font-size:.83rem;color:var(--t2);line-height:1.6;margin-top:6px}.fc.fl .ft{display:none}.fc.fl .fd{display:block}.fh{font-size:.7rem;color:var(--t3);margin-top:6px}.fc.fl .fh{display:none}
+.sd{text-align:center;padding:30px;margin:18px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}.snm{font-family:'DM Serif Display',serif;font-size:3rem;margin-bottom:4px}.sbl{color:var(--t2)}.sbr{width:100%;max-width:360px;height:10px;background:rgba(255,255,255,.06);border-radius:6px;margin:16px auto;overflow:hidden}.sbf{height:100%;border-radius:6px;transition:width 1s}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.72rem;font-weight:600;margin:2px 3px}
+.dd-container{margin:16px 0}.dd-item{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);margin-bottom:8px;overflow:hidden;transition:.3s}.dd-header{padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:600;font-size:.92rem;transition:.3s}.dd-header:hover{background:rgba(0,212,170,.05)}.dd-arrow{transition:.3s;color:var(--g)}.dd-item.open .dd-arrow{transform:rotate(90deg)}.dd-body{display:none;padding:0 18px 16px;color:var(--t2);font-size:.88rem;line-height:1.7}.dd-item.open .dd-body{display:block}
+@media(max-width:768px){.og,.cg,.match-game{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.hero h1{font-size:1.8rem}.ni{flex-direction:column;align-items:flex-start}.step-diagram{gap:2px}.step-box{min-width:60px;padding:6px 8px;font-size:.75rem}}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">🧬 Gametogénesis</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button><button data-s="conceptos">Conceptos</button><button data-s="espermatogenesis">Espermato.</button><button data-s="espermiogenesis">Espermiogén.</button><button data-s="oogenesis">Oogénesis</button><button data-s="meiosis">Meiosis Comp.</button><button data-s="glosario">Glosario</button><button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ===== INICIO ===== -->
+<div class="sec a" id="sec-inicio"><div class="hero"><div class="hi">🧬</div><h1>Gametogénesis</h1><p class="hs">Espermatogénesis, oogénesis, meiosis y la formación de los gametos. Sesión interactiva con correlatos clínicos, simulaciones y evaluación integrada.</p></div>
+<div class="cd"><div class="ch">🎯 Resultados de <span class="ac">Aprendizaje</span></div><p style="color:var(--t2);margin-bottom:14px">6 módulos interactivos con relevancia clínica.</p>
+<div class="og">
+<div class="oi"><div class="on">1</div><div class="ot">Definir gametogénesis y sus tipos principales.</div></div>
+<div class="oi"><div class="on">2</div><div class="ot">Describir las etapas de la espermatogénesis.</div></div>
+<div class="oi"><div class="on">3</div><div class="ot">Definir óvulo/huevo y el concepto de oogénesis.</div></div>
+<div class="oi"><div class="on">4</div><div class="ot">Describir de manera general la oogénesis y sus fases.</div></div>
+<div class="oi"><div class="on">5</div><div class="ot">Describir los procesos y etapas involucrados en espermatogénesis y oogénesis.</div></div>
+<div class="oi"><div class="on">6</div><div class="ot">Identificar características y etapas de la meiosis y sus diferencias en espermatogénesis vs. oogénesis.</div></div>
+</div></div>
+
+<div class="sim">
+<canvas id="cvHero" width="900" height="280"></canvas>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center;margin-top:4px">▲ Visualización: flujo de la gametogénesis masculina y femenina</p>
+
+<div class="mnemonic"><h4>🧠 Dato Clave</h4><div class="big">46 → 23</div><p>La gametogénesis reduce el número de cromosomas a la mitad mediante meiosis, de diploide (2n=46) a haploide (n=23), asegurando que al unirse en la fecundación se restaure el complemento diploide.</p></div>
+<div style="text-align:center;margin-top:20px"><button class="btn bp" onclick="go('conceptos')">Comenzar la tutoría →</button></div>
+</div>
+
+
+<!-- ===== CONCEPTOS ===== -->
+<div class="sec" id="sec-conceptos">
+<div class="chapter-header"><div class="ch-num">Capítulo 1 de 6</div><h2>📖 Conceptos Fundamentales</h2><p>Definición de gametogénesis, gametos, y contexto anatómico</p><div class="ch-time">⏱ ~10 min</div></div>
+
+<div class="cd"><div class="ch">📖 ¿Qué es la <span class="ac">Gametogénesis</span>?</div>
+<div class="ib"><div class="ibt">🔑 Definición</div><p style="color:var(--t2)">La <strong>gametogénesis</strong> es el proceso biológico mediante el cual las células germinales diploides (2n) se dividen y diferencian para producir <strong>gametos</strong> haploides (n) maduros, capaces de participar en la fecundación. Incluye tanto divisiones mitóticas (proliferación) como meióticas (reducción cromosómica).</p></div>
+<div class="cg">
+<div class="cc"><h4 style="color:var(--b)">♂ Espermatogénesis</h4><p style="color:var(--t2);font-size:.85rem">Producción de <strong>espermatozoides</strong> en los túbulos seminíferos del testículo. Inicia en la pubertad y es un proceso continuo. Produce ~200 millones de espermatozoides/día. Incluye espermatogénesis + espermiogénesis.</p></div>
+<div class="cc"><h4 style="color:var(--pk)">♀ Oogénesis</h4><p style="color:var(--t2);font-size:.85rem">Producción de <strong>óvulos</strong> (ovocitos) en el ovario. Inicia durante la vida embrionaria, se detiene en profase I y se reanuda cíclicamente desde la pubertad. Normalmente madura un solo ovocito por ciclo.</p></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🔬 Contexto <span class="ac">Anatómico</span></div>
+<div class="sim">
+<canvas id="cvAnatomy" width="900" height="400"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" onclick="setAnat(0)">♂ Testículo</button>
+<button class="btn bs" onclick="setAnat(1)" style="border-color:var(--pk);color:var(--pk)">♀ Ovario</button>
+</div>
+</div>
+<div class="sim-narr" id="anatNarr">Presiona cada botón para explorar la anatomía del testículo y del ovario. Observa la ubicación de las células germinales y las células de soporte.</div>
+</div>
+
+<div class="analogy"><div style="font-size:1.8rem;margin-bottom:6px">📖</div><h4>Analogía: La fábrica y el almacén</h4><p>El testículo es como una <strong>fábrica 24/7</strong> que produce millones de espermatozoides continuamente desde la pubertad. El ovario es como un <strong>almacén</strong>: nace con todos los ovocitos ya formados (~1 millón) y cada mes "despacha" uno al madurar. No produce nuevos.</p></div>
+
+<div class="ib n"><div class="ibt">💡 Concepto: Óvulo / Huevo</div><p style="color:var(--t2)">El <strong>óvulo</strong> (u oocito maduro) es el gameto femenino. Estrictamente, el ovocito secundario es ovulado en <strong>metafase II</strong> y solo completa la meiosis II si es fecundado. Es la célula más grande del cuerpo humano (~120 μm). Contiene reservas citoplásmicas (gránulos corticales, ribosomas, mitocondrias) esenciales para el desarrollo embrionario temprano.</p></div>
+
+<div class="qq" id="q01"><div class="qt">¿Qué es la gametogénesis?</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>La división de células somáticas por mitosis</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">B</div>El proceso de formación de gametos haploides a partir de células germinales diploides</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">C</div>La fecundación del óvulo por el espermatozoide</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>La implantación del embrión en el útero</button>
+</div><div class="qf" id="fb-q01"></div></div>
+
+<div class="qq" id="q02"><div class="qt">¿Cuál es la principal diferencia temporal entre espermatogénesis y oogénesis?</div><div class="qo">
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">A</div>Ambas inician en la pubertad</button>
+<button class="qb" onclick="cq('q02',this,1)"><div class="ol">B</div>La oogénesis inicia en la vida embrionaria; la espermatogénesis en la pubertad</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">C</div>Ambas inician durante la vida embrionaria</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">D</div>La espermatogénesis inicia en la vida embrionaria</button>
+</div><div class="qf" id="fb-q02"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('espermatogenesis')">Espermatogénesis →</button></div>
+</div>
+
+
+<!-- ===== ESPERMATOGÉNESIS ===== -->
+<div class="sec" id="sec-espermatogenesis">
+<div class="chapter-header"><div class="ch-num">Capítulo 2 de 6</div><h2>♂ Espermatogénesis</h2><p>Desde las espermatogonias hasta las espermátidas: mitosis, meiosis y el sincitio</p><div class="ch-time">⏱ ~18 min</div></div>
+
+<div class="cd"><div class="ch">🔬 Epitelio <span class="ac">Germinal</span></div>
+<div class="ib"><div class="ibt">🔑 Estructura del túbulo seminífero</div><p style="color:var(--t2)">Cada túbulo seminífero está revestido por un <strong>epitelio germinal</strong> con dos tipos de células: las <strong>células de Sertoli</strong> (soporte, nutrición, barrera hematotesticular) y las <strong>células germinales</strong> en distintos estadios. La membrana basal contiene células mioides contráctiles. Las <strong>células de Leydig</strong> se encuentran en el intersticio, produciendo testosterona.</p></div>
+</div>
+
+<div class="cd"><div class="ch">📊 Simulación: <span class="ac">Etapas de la Espermatogénesis</span></div>
+<div class="sim">
+<canvas id="cvSperm" width="900" height="480"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" onclick="setSperm(0)">Vista General</button>
+<button class="btn bs" onclick="setSperm(1)">Espermatogonias</button>
+<button class="btn bs" onclick="setSperm(2)" style="border-color:var(--b);color:var(--b)">Espermatocitos I</button>
+<button class="btn bs" onclick="setSperm(3)" style="border-color:var(--p);color:var(--p)">Espermatocitos II</button>
+<button class="btn bs" onclick="setSperm(4)" style="border-color:var(--pk);color:var(--pk)">Espermátidas</button>
+</div>
+</div>
+<div class="sim-narr" id="spermNarr">Presiona cada botón para ver las etapas en detalle. Observa cómo cambia la ploidía, el contenido de ADN y la morfología celular en cada paso.</div>
+</div>
+
+<div class="cd"><div class="ch">📐 Flujo de la <span class="ac">Espermatogénesis</span></div>
+<div class="step-diagram">
+<div class="step-box"><strong style="color:var(--g)">Espermatogonia</strong><br><span style="font-size:.8rem;color:var(--t2)">2n, 2C<br>Mitosis</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--b)">Espermatocito I</strong><br><span style="font-size:.8rem;color:var(--t2)">2n, 4C<br>Meiosis I</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--p)">Espermatocito II</strong><br><span style="font-size:.8rem;color:var(--t2)">n, 2C<br>Meiosis II</span></div>
+<div class="step-arrow">→</div>
+<div class="step-box"><strong style="color:var(--pk)">Espermátida</strong><br><span style="font-size:.8rem;color:var(--t2)">n, 1C<br>Haploide</span></div>
+</div>
+</div>
+
+<div class="dd-container">
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> Espermatogonias — Células madre</div><div class="dd-body"><strong>Núcleo oscuro, ovoide.</strong> Son las células madre ubicadas en la membrana basal del túbulo seminífero, asociadas a células de Sertoli. Se dividen por mitosis para dar: (a) nuevas células madre (autorrenovación) y (b) espermatogonias tipo A (núcleo más claro, se dividen rápidamente). Las tipo A sufren divisiones clonales formando un <strong>sincitio</strong> (citoplasma conectado) y originan espermatogonias <strong>tipo B</strong>. La tipo B sufre su última mitosis y produce espermatocitos primarios.</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> Espermatocitos Primarios — Meiosis I</div><div class="dd-body"><strong>Células esféricas, núcleo eucromático, 46 cromosomas (44+XY), contenido de ADN = 4C</strong> (tras replicar su ADN). Entran en la <strong>primera profase meiótica</strong> (~3 semanas de duración). Ocurre sinapsis de homólogos, formación de complejos sinaptonémicos y <strong>recombinación genética</strong> (crossing-over). La primera división meiótica (reduccional) separa los cromosomas homólogos, produciendo espermatocitos secundarios.</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> Espermatocitos Secundarios — Post meiosis I</div><div class="dd-body"><strong>Células más pequeñas, 23 cromosomas (22+X o 22+Y).</strong> PERO: cada cromosoma tiene 2 cromátides hermanas, así que el contenido de ADN = <strong>2C</strong>. Tienen vida corta y entran rápidamente en <strong>meiosis II</strong> (ecuacional).</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> Espermátidas — Células haploides</div><div class="dd-body"><strong>Resultado de meiosis II.</strong> Cada espermatocito secundario produce <strong>2 espermátidas</strong> haploides (23 cromosomas, ADN = 1C). Por cada espermatocito primario se forman <strong>4 espermátidas</strong>. Ahora deben diferenciarse en espermatozoides funcionales (espermiogénesis).</div></div>
+</div>
+
+<div class="ib go"><div class="ibt">💡 El sincitio espermatogénico</div><p style="color:var(--t2)">Después de la primera mitosis de las espermatogonias, las células hijas permanecen unidas por <strong>puentes intercelulares de citoplasma</strong> (citocinesis incompleta). Esto forma un sincitio de ~cientos de células conectadas. Los puentes permiten que las células haploides reciban productos del genoma diploide (ARN y proteínas codificadas por X o Y), compensando la haploinsuficiencia.</p></div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Síndrome de Klinefelter (47,XXY)</div>
+<p class="clp">Causa más frecuente de <strong>hipogonadismo masculino</strong> e infertilidad (1:600 varones). Los túbulos seminíferos son atróficos, con esclerosis y hialinización. Las células de Sertoli persisten pero las espermatogonias están ausentes o reducidas → <strong>azoospermia</strong>. Fenotipo: talla alta, ginecomastia, testículos pequeños. Tx: testosterona. Técnicas como TESE+ICSI pueden rescatar espermatozoides residuales en casos mosaico.</p></div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Criptorquidia y temperatura</div>
+<p class="clp">La espermatogénesis (especialmente la espermiogénesis) es <strong>sensible a temperatura</strong>. El escroto mantiene ~2-3°C menos que la temperatura corporal. La criptorquidia (testículo no descendido) expone las células germinales a temperatura abdominal → degeneración del epitelio germinal, infertilidad y riesgo aumentado de <strong>tumor testicular de células germinales</strong>. Requiere orquidopexia antes de los 12 meses.</p></div>
+
+<div class="qq" id="q03"><div class="qt">¿Cuál es el contenido de ADN de un espermatocito primario luego de replicar su ADN?</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">A</div>1C</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">B</div>2C</button>
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">C</div>4C (diploide con ADN replicado: 46 cromosomas, cada uno con 2 cromátides)</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>8C</button>
+</div><div class="qf" id="fb-q03"></div></div>
+
+<div class="qq" id="q04"><div class="qt">¿Cuántas espermátidas se producen a partir de un espermatocito primario?</div><div class="qo">
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">A</div>1</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">B</div>2</button>
+<button class="qb" onclick="cq('q04',this,1)"><div class="ol">C</div>4 (Meiosis I produce 2 espermatocitos II, cada uno da 2 espermátidas en meiosis II)</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">D</div>8</button>
+</div><div class="qf" id="fb-q04"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('conceptos')">← Conceptos</button><button class="btn bp" onclick="go('espermiogenesis')">Espermiogénesis →</button></div>
+</div>
+
+
+<!-- ===== ESPERMIOGÉNESIS ===== -->
+<div class="sec" id="sec-espermiogenesis">
+<div class="chapter-header"><div class="ch-num">Capítulo 3 de 6</div><h2>🔧 Espermiogénesis</h2><p>Diferenciación de espermátidas en espermatozoides maduros: 4 fases</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">🔄 ¿Qué es la <span class="ac">Espermiogénesis</span>?</div>
+<div class="ib"><div class="ibt">🔑 Definición</div><p style="color:var(--t2)">La <strong>espermiogénesis</strong> es la fase final de la producción de esperma: la transformación de espermátidas redondas (haploides) en espermatozoides maduros con forma aerodinámica. <strong>No hay divisiones celulares</strong> — es exclusivamente un proceso de diferenciación. Es sensible a temperatura y ocurre con las células asociadas a las células de Sertoli.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧪 Simulación: <span class="ac">4 Fases de la Espermiogénesis</span></div>
+<div class="sim">
+<canvas id="cvSpermiog" width="900" height="450"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" onclick="setSpermiog(0)">Espermátida</button>
+<button class="btn bs" onclick="setSpermiog(1)" style="border-color:var(--y);color:var(--y)">1. Golgi</button>
+<button class="btn bs" onclick="setSpermiog(2)" style="border-color:var(--o);color:var(--o)">2. Caperuza</button>
+<button class="btn bs" onclick="setSpermiog(3)" style="border-color:var(--p);color:var(--p)">3. Acrosómica</button>
+<button class="btn bs" onclick="setSpermiog(4)" style="border-color:var(--pk);color:var(--pk)">4. Maduración</button>
+</div>
+</div>
+<div class="sim-narr" id="spermiogNarr">Presiona cada fase para ver la transformación progresiva de la espermátida redonda en un espermatozoide aerodinámico maduro.</div>
+</div>
+
+<div class="cd"><div class="ch">📐 Las 4 Fases en <span class="ac">Detalle</span></div>
+<table class="et"><thead><tr><th>Fase</th><th>Eventos Clave</th><th>Estructuras formadas</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--y)">1. Golgi</strong></td><td>Vesículas proacrosómicas coalescen → caperuza acrosomal. Centriolos migran al polo opuesto.</td><td>Vesícula acrosomal, cuerpo basal, inicio de axonema</td></tr>
+<tr><td><strong style="color:var(--o)">2. Caperuza (Cap)</strong></td><td>Caperuza acrosomal se extiende ~50% del núcleo en condensación.</td><td>Acrosoma (lisosoma especializado con hialuronidasa y acrosina)</td></tr>
+<tr><td><strong style="color:var(--p)">3. Acrosómica</strong></td><td>Núcleo se elonga y condensa. Histonas → protaminas. Flagelo crece. Mitocondrias → pieza media.</td><td>Cabeza elongada, pieza media, flagelo en crecimiento</td></tr>
+<tr><td><strong style="color:var(--pk)">4. Maduración</strong></td><td>Citoplasma residual eliminado (cuerpo residual). Puentes intercelulares se rompen.</td><td>Espermatozoide maduro liberado al lumen</td></tr>
+</tbody></table>
+</div>
+
+<div class="mnemonic"><h4>🧠 Mnemotécnica: Fases de espermiogénesis</h4><div class="big">G – C – A – M</div><p><strong>G</strong>olgi → <strong>C</strong>aperuza → <strong>A</strong>crosómica → <strong>M</strong>aduración<br>"<em>Gatos Cazan Aves al Mediodía</em>"</p></div>
+
+<div class="ib n"><div class="ibt">💡 El acrosoma: un lisosoma especializado</div><p style="color:var(--t2)">El acrosoma contiene enzimas hidrolíticas esenciales para la <strong>reacción acrosómica</strong> durante la fecundación: <strong>hialuronidasa</strong> (digiere ácido hialurónico de la corona radiada) y <strong>acrosina</strong> (proteasa que penetra la zona pelúcida). Sin reacción acrosómica funcional, el espermatozoide no puede fecundar.</p></div>
+
+<div class="ib pp"><div class="ibt">🧬 Histonas → Protaminas</div><p style="color:var(--t2)">Durante la fase acrosómica, las histonas nucleosomales son reemplazadas por <strong>protaminas</strong>: péptidos pequeños ricos en arginina que compactan el ADN ~6x más que las histonas. Esto protege al ADN espermático del daño oxidativo y mecánico. Defectos en protaminización → fragmentación del ADN espermático → infertilidad.</p></div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Globozoospermia — Fallo acrosómico</div>
+<p class="clp">Defecto genético (gen DPY19L2) en el que los espermatozoides carecen de acrosoma y tienen cabeza redondeada. Incapaces de fecundar naturalmente. Tx: <strong>ICSI</strong> (inyección intracitoplasmática de espermatozoides) con activación artificial del ovocito.</p></div>
+
+<div class="qq" id="q05"><div class="qt">¿En qué fase de la espermiogénesis las histonas son reemplazadas por protaminas?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">A</div>Golgi</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">B</div>Caperuza</button>
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">C</div>Acrosómica (el núcleo se condensa y las histonas se reemplazan por protaminas)</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>Maduración</button>
+</div><div class="qf" id="fb-q05"></div></div>
+
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">Emparejar</span> fase con evento</div>
+<div class="match-game" id="mg1">
+<div class="match-col"><h4 style="color:var(--g)">Fase</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg1',this)">Golgi</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg1',this)">Caperuza</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg1',this)">Acrosómica</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg1',this)">Maduración</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">Evento clave</h4>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg1',this)">Histonas → protaminas; mitocondrias → pieza media</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg1',this)">Vesículas proacrosómicas coalescen; centriolos migran</div>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg1',this)">Citoplasma residual eliminado; liberación al lumen</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg1',this)">Acrosoma cubre 50% del núcleo; hialuronidasa + acrosina</div>
+</div></div>
+<div class="match-score" id="mg1-score"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('espermatogenesis')">← Espermatogénesis</button><button class="btn bp" onclick="go('oogenesis')">Oogénesis →</button></div>
+</div>
+
+
+<!-- ===== OOGÉNESIS ===== -->
+<div class="sec" id="sec-oogenesis">
+<div class="chapter-header"><div class="ch-num">Capítulo 4 de 6</div><h2>♀ Oogénesis</h2><p>Desde las oogonias hasta el ovocito secundario: folículos, arrestos meióticos y cuerpos polares</p><div class="ch-time">⏱ ~18 min</div></div>
+
+<div class="cd"><div class="ch">📖 Definición de <span class="ac">Oogénesis</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto</div><p style="color:var(--t2)">La <strong>oogénesis</strong> es el proceso de formación del gameto femenino funcional (óvulo). A diferencia de la espermatogénesis, las oogonias se forman exclusivamente durante el <strong>desarrollo embrionario</strong>. Después del nacimiento, no se producen más. Los oocitos primarios se arrestan en <strong>profase I (dictiotema)</strong> y permanecen así hasta la pubertad (o hasta la menopausia, sin nunca ser activados).</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧪 Simulación: <span class="ac">Etapas de la Oogénesis</span></div>
+<div class="sim">
+<canvas id="cvOog" width="900" height="480"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" onclick="setOog(0)">Vista General</button>
+<button class="btn bs" onclick="setOog(1)">Oogonias (embrión)</button>
+<button class="btn bs" onclick="setOog(2)" style="border-color:var(--b);color:var(--b)">Oocito I (arresto)</button>
+<button class="btn bs" onclick="setOog(3)" style="border-color:var(--p);color:var(--p)">Folículo antral</button>
+<button class="btn bs" onclick="setOog(4)" style="border-color:var(--pk);color:var(--pk)">Ovulación</button>
+</div>
+</div>
+<div class="sim-narr" id="oogNarr">Presiona cada botón para explorar las fases de la oogénesis, desde la vida embrionaria hasta la ovulación.</div>
+</div>
+
+<div class="cd"><div class="ch">📐 Fases del Desarrollo del <span class="ac">Oocito</span></div>
+<div class="dd-container">
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> 1. Vida Embrionaria — Oogonias y Dictiotema</div><div class="dd-body">Las <strong>oogonias</strong> proliferan por mitosis en el ovario embrionario. Crecen de tamaño y se convierten en <strong>oocitos primarios</strong>. Inician meiosis I pero se arrestan en <strong>profase I (dictiotema)</strong>. Se rodean de una capa de células epiteliales planas (foliculares) → <strong>folículo primordial</strong>. Hasta ~1 millón de oocitos primarios al nacer, la mayoría sufrirán atresia.</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> 2. Fase Pre-antral — Crecimiento del oocito</div><div class="dd-body">El oocito primario crece pero <strong>continúa arrestado en profase I</strong>. Las células foliculares proliferan → células de la <strong>granulosa</strong>. Se forma la <strong>zona pelúcida</strong> (capa glicoproteica entre el oocito y la granulosa). Las células del estroma circundante forman la <strong>teca</strong>.</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> 3. Fase Antral — Folículo secundario</div><div class="dd-body">Fluido se acumula entre las células de la granulosa formando el <strong>antro</strong> → folículo secundario (antral). El desarrollo folicular antral depende del estímulo de <strong>FSH</strong>. Varios folículos inician esta fase (~15-20), pero generalmente solo uno se convierte en folículo dominante.</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> 4. Fase Pre-ovulatoria — Meiosis I completada</div><div class="dd-body">El pico de <strong>LH</strong> estimula la reanudación de meiosis I. La división es <strong>asimétrica</strong>: una célula hija recibe la mayor parte del citoplasma → <strong>oocito secundario</strong> (grande); la otra, casi sin citoplasma → <strong>primer cuerpo polar</strong> (no funcional). Ambas entran en meiosis II. El oocito secundario <strong>se arresta en metafase II</strong>. Es en este estado que ocurre la ovulación.</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> 5. Meiosis II — Solo si hay fecundación</div><div class="dd-body">La meiosis II se completa <strong>únicamente</strong> si el espermatozoide fecunda al oocito. Produce el <strong>óvulo maduro</strong> + <strong>segundo cuerpo polar</strong>. El primer cuerpo polar también puede dividirse, resultando en un total de <strong>3 cuerpos polares + 1 óvulo funcional</strong> por cada oogonia original.</div></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">📊 Número de Gametos: <span class="ac">Línea Temporal</span></div>
+<div class="sim">
+<canvas id="cvTimeline" width="900" height="320"></canvas>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center">▲ Línea temporal del número de oocitos/folículos desde la vida embrionaria hasta la menopausia</p>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Síndrome de Turner (45,X)</div>
+<p class="clp">Monosomía del cromosoma X (1:2500 nacidas vivas). Los ovarios se transforman en <strong>gónadas estriadas</strong> (streak gonads) sin folículos funcionales → amenorrea primaria e infertilidad. Fenotipo: talla baja, cuello alado, coartación de aorta, linfedema. La atresia acelerada de oocitos ocurre antes del nacimiento.</p></div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Insuficiencia Ovárica Prematura (IOP)</div>
+<p class="clp">Menopausia antes de los 40 años. Causas: genéticas (premutación FMR1, anomalías del X), autoinmunes, iatrogénicas (quimioterapia, radioterapia). Agotamiento prematuro de la reserva folicular. Impacto: infertilidad, osteoporosis, enfermedad cardiovascular. Evaluación: <strong>FSH elevada + AMH baja</strong>.</p></div>
+
+<div class="qq" id="q06"><div class="qt">¿En qué fase meiótica se encuentra el oocito al ser ovulado?</div><div class="qo">
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">A</div>Profase I</button>
+<button class="qb" onclick="cq('q06',this,1)"><div class="ol">B</div>Metafase II (se arresta aquí hasta la fecundación)</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">C</div>Telofase II</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">D</div>Metafase I</button>
+</div><div class="qf" id="fb-q06"></div></div>
+
+<div class="qq" id="q07"><div class="qt">¿Cuántos gametos funcionales se producen de un oocito primario?</div><div class="qo">
+<button class="qb" onclick="cq('q07',this,1)"><div class="ol">A</div>1 óvulo funcional (+ 3 cuerpos polares no funcionales)</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">B</div>2 óvulos funcionales</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">C</div>4 óvulos funcionales</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">D</div>3 óvulos funcionales</button>
+</div><div class="qf" id="fb-q07"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('espermiogenesis')">← Espermiogénesis</button><button class="btn bp" onclick="go('meiosis')">Meiosis Comparada →</button></div>
+</div>
+
+
+<!-- ===== MEIOSIS COMPARADA ===== -->
+<div class="sec" id="sec-meiosis">
+<div class="chapter-header"><div class="ch-num">Capítulo 5 de 6</div><h2>⚖️ Meiosis: Espermatogénesis vs Oogénesis</h2><p>Comparación de la meiosis en ambos procesos, diferencias clave y relevancia clínica</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">📊 <span class="ac">Comparación</span> lado a lado</div>
+<div class="sim">
+<canvas id="cvCompare" width="900" height="500"></canvas>
+</div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center">▲ Diagrama comparativo: meiosis en espermatogénesis vs oogénesis</p>
+</div>
+
+<div class="cd"><div class="ch">📐 Tabla Comparativa <span class="ac">Detallada</span></div>
+<table class="et"><thead><tr><th>Característica</th><th style="color:var(--b)">♂ Espermatogénesis</th><th style="color:var(--pk)">♀ Oogénesis</th></tr></thead><tbody>
+<tr><td><strong>Inicio</strong></td><td>Pubertad</td><td>Vida embrionaria (arresto en profase I)</td></tr>
+<tr><td><strong>Duración</strong></td><td>~74 días por ciclo, continua</td><td>Décadas (arresto desde fetal hasta ovulación)</td></tr>
+<tr><td><strong>Producción</strong></td><td>~200 millones/día, continua</td><td>~1 ovocito/mes (cíclica)</td></tr>
+<tr><td><strong>Gametos/meiosis</strong></td><td>4 espermátidas funcionales</td><td>1 óvulo + 3 cuerpos polares</td></tr>
+<tr><td><strong>Tamaño celular</strong></td><td>Pequeño (~5 μm cabeza)</td><td>Grande (~120 μm)</td></tr>
+<tr><td><strong>Citocinesis</strong></td><td>Simétrica (pero incompleta → sincitio)</td><td>Asimétrica (citoplasma al oocito)</td></tr>
+<tr><td><strong>Arresto meiótico</strong></td><td>No hay arresto prolongado</td><td>Profase I (años) + Metafase II (hasta fecundación)</td></tr>
+<tr><td><strong>Meiosis II</strong></td><td>Se completa siempre</td><td>Solo se completa si hay fecundación</td></tr>
+<tr><td><strong>Fin</strong></td><td>Toda la vida post-puberal</td><td>Menopausia (~50 años)</td></tr>
+<tr><td><strong>Célula de soporte</strong></td><td>Células de Sertoli</td><td>Células de la granulosa</td></tr>
+</tbody></table>
+</div>
+
+<div class="cd"><div class="ch">🧬 Meiosis: <span class="ac">Etapas</span> y su importancia</div>
+<div class="ib"><div class="ibt">🔑 Meiosis I — División Reduccional</div><p style="color:var(--t2)">Separa <strong>cromosomas homólogos</strong> (no cromátides hermanas). Pasa de 2n,4C → n,2C. Profase I larga e importante: leptoteno, zigoteno (sinapsis), paquiteno (crossing-over), diploteno (quiasmas visibles), diacinesis. La recombinación genera <strong>diversidad genética</strong>.</p></div>
+<div class="ib or"><div class="ibt">⚡ Meiosis II — División Ecuacional</div><p style="color:var(--t2)">Similar a una mitosis: separa <strong>cromátides hermanas</strong>. Pasa de n,2C → n,1C. NO hay replicación de ADN entre meiosis I y II. Produce las células haploides definitivas.</p></div>
+<div class="cg">
+<div class="cc"><h4 style="color:var(--g)">♂ Meiosis en espermatogénesis</h4><p style="color:var(--t2);font-size:.85rem">Meiosis I: ~3 semanas (profase I más larga). Meiosis II: rápida. Produce 4 células iguales funcionales. No hay arrestos prolongados. La recombinación ocurre pero es proporcionalmente menor que en oogénesis.</p></div>
+<div class="cc"><h4 style="color:var(--pk)">♀ Meiosis en oogénesis</h4><p style="color:var(--t2);font-size:.85rem">Meiosis I: iniciada en vida fetal, completada décadas después (¡arresto en profase I hasta la ovulación!). Meiosis II: se completa solo con fecundación. División asimétrica → 1 gameto funcional. Mayor tasa de errores de no-disyunción con la edad.</p></div>
+</div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">No-disyunción y edad materna → Trisomía 21 (Síndrome de Down)</div>
+<p class="clp">El largo arresto en profase I (décadas) degrada las <strong>cohesinas</strong> que mantienen unidos los cromosomas homólogos. A mayor edad materna → mayor probabilidad de <strong>no-disyunción en meiosis I</strong> → aneuploidía. La trisomía 21 es la aneuploidía autosómica más frecuente. Riesgo: ~1:1500 a los 20 años → ~1:100 a los 40 años. En la espermatogénesis, el riesgo de no-disyunción es menor porque no hay arresto prolongado.</p></div>
+
+<div class="cl"><div class="clb">🏥 Correlato Clínico</div><div class="clt">Mola Hidatiforme — Fallo en la contribución gamética</div>
+<p class="clp"><strong>Mola completa:</strong> 46,XX (todo paterno, por duplicación de un espermatozoide que fecunda un óvulo vacío, o por dispermia). Sin embrión, hiperproliferación trofoblástica, riesgo de coriocarcinoma. <strong>Mola parcial:</strong> 69,XXY (triploidía: 2 espermatozoides + 1 óvulo). Embrión anormal. Ambas demuestran la importancia del balance gamético.</p></div>
+
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">Emparejar</span> característica con proceso</div>
+<div class="match-game" id="mg2">
+<div class="match-col"><h4 style="color:var(--g)">Característica</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg2',this)">4 gametos funcionales</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg2',this)">Arresto en Metafase II</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg2',this)">Puentes intercelulares (sincitio)</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg2',this)">Cuerpos polares</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">Proceso</h4>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg2',this)">Oogénesis</div>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg2',this)">Espermatogénesis</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg2',this)">Espermatogénesis</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg2',this)">Oogénesis</div>
+</div></div>
+<div class="match-score" id="mg2-score"></div></div>
+
+<div class="qq" id="q08"><div class="qt">¿Por qué la no-disyunción es más frecuente en la oogénesis que en la espermatogénesis?</div><div class="qo">
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">A</div>Los ovocitos tienen más cromosomas</button>
+<button class="qb" onclick="cq('q08',this,1)"><div class="ol">B</div>El largo arresto en profase I (décadas) degrada las cohesinas que unen homólogos</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">C</div>Las espermatogonias tienen mecanismos de reparación superiores</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">D</div>Los ovocitos no realizan crossing-over</button>
+</div><div class="qf" id="fb-q08"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('oogenesis')">← Oogénesis</button><button class="btn bp" onclick="go('glosario')">Glosario →</button></div>
+</div>
+
+
+<!-- ===== GLOSARIO ===== -->
+<div class="sec" id="sec-glosario">
+<div class="chapter-header"><div class="ch-num">Recurso</div><h2>📖 Glosario Integrado</h2><p>Clic en cada término para su definición</p></div>
+<div class="fg" id="fg"></div>
+<div class="sn"><button class="btn bs" onclick="go('meiosis')">← Meiosis</button><button class="btn bp" onclick="go('evaluacion')">Evaluación →</button></div>
+</div>
+
+
+<!-- ===== EVALUACIÓN ===== -->
+<div class="sec" id="sec-evaluacion">
+<div class="chapter-header"><div class="ch-num">Evaluación</div><h2>🎓 Evaluación Final</h2><p>20 preguntas integradoras — selecciona TODAS antes de calificar</p></div>
+<div id="eq"></div>
+<div style="text-align:center;margin:20px 0"><button class="btn bp" id="seb" style="display:none" onclick="se()">📊 Calificar</button></div>
+<div class="sd" id="sdd" style="display:none"><div class="snm" id="sn2"></div><p class="sbl" id="sm2"></p><div class="sbr"><div class="sbf" id="sbf2" style="width:0%;background:var(--grad)"></div></div><button class="btn bs" onclick="iev()" style="margin-top:12px">↺ Reintentar</button></div>
+<div class="sn"><button class="btn bs" onclick="go('glosario')">← Glosario</button><button class="btn bp" onclick="go('inicio')">🏠 Inicio</button></div>
+</div>
+
+</div>
+
+<script>
+"use strict";
+/* ===== NAVIGATION ===== */
+var secs=["inicio","conceptos","espermatogenesis","espermiogenesis","oogenesis","meiosis","glosario","evaluacion"];
+window.go=function(s){
+  secs.forEach(function(id){document.getElementById("sec-"+id).classList.remove("a")});
+  document.getElementById("sec-"+s).classList.add("a");
+  document.querySelectorAll(".nl button").forEach(function(b){b.classList.remove("a");if(b.dataset.s===s)b.classList.add("a")});
+  window.scrollTo({top:0,behavior:"smooth"});upd();
+  if(s==="inicio") drawHero();
+  if(s==="conceptos") setAnat(0);
+  if(s==="espermatogenesis") setSperm(0);
+  if(s==="espermiogenesis") setSpermiog(0);
+  if(s==="oogenesis"){setOog(0);drawTimeline();}
+  if(s==="meiosis") drawCompare();
+};
+function upd(){var cur=document.querySelector(".nl button.a");var i=cur?secs.indexOf(cur.dataset.s):0;document.getElementById("pf").style.width=Math.round((i/(secs.length-1))*100)+"%";}
+document.querySelectorAll(".nl button").forEach(function(b){b.addEventListener("click",function(){go(b.dataset.s)})});
+
+/* ===== QUIZ ===== */
+window.cq=function(id,btn,c){
+  var q=document.getElementById(id);if(q.dataset.done)return;q.dataset.done="1";
+  q.querySelectorAll(".qb").forEach(function(b){b.classList.add("dis")});
+  var fb=document.getElementById("fb-"+id);
+  if(c===1){btn.classList.add("ok");fb.classList.add("sh","cf");fb.textContent="\u2705 \u00a1Correcto!";}
+  else{btn.classList.add("no");q.querySelectorAll(".qb").forEach(function(b){var oc=b.getAttribute("onclick");if(oc&&oc.indexOf(",1)")>-1)b.classList.add("ok")});fb.classList.add("sh","if");fb.textContent="\u274c Incorrecto. La respuesta correcta est\u00e1 en verde.";}
+};
+
+/* ===== MATCHING ===== */
+var ms={};
+window.mp=function(gid,el){
+  if(el.classList.contains("ok"))return;var g=ms[gid]||(ms[gid]={l:null,r:null,score:0});
+  var side=el.dataset.side;
+  if(side==="l"){if(g.l)g.l.classList.remove("sel");g.l=el;el.classList.add("sel");}
+  else{if(g.r)g.r.classList.remove("sel");g.r=el;el.classList.add("sel");}
+  if(g.l&&g.r){if(g.l.dataset.pair===g.r.dataset.pair){g.l.classList.remove("sel");g.r.classList.remove("sel");g.l.classList.add("ok");g.r.classList.add("ok");g.score++;g.l=null;g.r=null;}else{g.l.classList.add("no");g.r.classList.add("no");var ll=g.l,rr=g.r;setTimeout(function(){ll.classList.remove("sel","no");rr.classList.remove("sel","no")},500);g.l=null;g.r=null;}document.getElementById(gid+"-score").textContent="Aciertos: "+g.score;}
+};
+
+/* ===== DROPDOWN ===== */
+window.toggleDD=function(el){el.parentElement.classList.toggle("open")};
+
+/* ===== CANVAS HELPERS ===== */
+function getCtx(id){var cv=document.getElementById(id);if(!cv)return null;cv.width=900;cv.height=cv.getAttribute("height")|0;return cv.getContext("2d");}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
+function drawCell(ctx,x,y,r,color,label,sub){
+  ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color+"22";ctx.fill();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke();
+  // nucleus
+  ctx.beginPath();ctx.arc(x,y-r*0.1,r*0.45,0,Math.PI*2);ctx.fillStyle=color+"44";ctx.fill();ctx.strokeStyle=color+"88";ctx.lineWidth=1;ctx.stroke();
+  if(label){ctx.fillStyle=color;ctx.font="bold "+(r>30?"13":"10")+"px Source Sans 3";ctx.textAlign="center";ctx.fillText(label,x,y+r+16);}
+  if(sub){ctx.fillStyle="#8BA4BE";ctx.font=(r>30?"11":"9")+"px Source Sans 3";ctx.fillText(sub,x,y+r+30);}
+}
+function drawArrow(ctx,x1,y1,x2,y2,color){
+  ctx.strokeStyle=color||"#5A7A96";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  var a=Math.atan2(y2-y1,x2-x1);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-10*Math.cos(a-0.4),y2-10*Math.sin(a-0.4));ctx.lineTo(x2-10*Math.cos(a+0.4),y2-10*Math.sin(a+0.4));ctx.closePath();ctx.fillStyle=color||"#5A7A96";ctx.fill();
+}
+function drawSperm(ctx,x,y,scale){
+  scale=scale||1;
+  // head
+  ctx.beginPath();ctx.ellipse(x,y,5*scale,8*scale,0,0,Math.PI*2);ctx.fillStyle="#00A3FF44";ctx.fill();ctx.strokeStyle="#00A3FF";ctx.lineWidth=1.5;ctx.stroke();
+  // acrosome
+  ctx.beginPath();ctx.arc(x,y-5*scale,4*scale,Math.PI,0);ctx.fillStyle="#00D4AA55";ctx.fill();
+  // midpiece
+  ctx.strokeStyle="#F97316";ctx.lineWidth=2*scale;ctx.beginPath();ctx.moveTo(x,y+8*scale);ctx.lineTo(x,y+18*scale);ctx.stroke();
+  // tail
+  ctx.strokeStyle="#8BA4BE";ctx.lineWidth=1*scale;ctx.beginPath();
+  for(var i=0;i<30;i++){var tx=x+Math.sin(i*0.5)*3*scale;var ty=y+18*scale+i*1.5*scale;if(i===0)ctx.moveTo(tx,ty);else ctx.lineTo(tx,ty);}
+  ctx.stroke();
+}
+
+/* ===== HERO ANIMATION ===== */
+var heroAnim;
+function drawHero(){
+  if(heroAnim)cancelAnimationFrame(heroAnim);
+  function frame(){
+    var ctx=getCtx("cvHero");if(!ctx){heroAnim=null;return;}var W=900,H=280;
+    ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+    var t=Date.now()*0.001;
+    // Left side: spermatogenesis flow
+    ctx.fillStyle="#00A3FF";ctx.font="bold 14px DM Serif Display";ctx.textAlign="center";ctx.fillText("♂ Espermatogénesis",225,25);
+    // Draw cells flowing down
+    var stages=[{l:"Espermatogonia",c:"#00D4AA",y:60,r:18},{l:"Espermatocito I",c:"#00A3FF",y:110,r:22},{l:"Espermatocito II",c:"#A78BFA",y:160,r:16},{l:"Espermátida",c:"#EC4899",y:210,r:13}];
+    stages.forEach(function(s,i){
+      var bx=225+Math.sin(t+i)*10;
+      drawCell(ctx,bx,s.y,s.r,s.c,"","");
+      ctx.fillStyle=s.c;ctx.font="bold 10px Source Sans 3";ctx.fillText(s.l,bx,s.y+s.r+12);
+      if(i<3){drawArrow(ctx,bx,s.y+s.r+16,225+Math.sin(t+i+1)*10,stages[i+1].y-stages[i+1].r-4,"#5A7A96");}
+    });
+    // Sperm at bottom
+    for(var i=0;i<4;i++){drawSperm(ctx,175+i*30,260,0.8);}
+
+    // Right side: oogenesis flow
+    ctx.fillStyle="#EC4899";ctx.font="bold 14px DM Serif Display";ctx.textAlign="center";ctx.fillText("♀ Oogénesis",675,25);
+    var ostages=[{l:"Oogonia",c:"#EC4899",y:60,r:18},{l:"Oocito I",c:"#A78BFA",y:110,r:24},{l:"Oocito II",c:"#00D4AA",y:170,r:28},{l:"Óvulo",c:"#FFD93D",y:240,r:32}];
+    ostages.forEach(function(s,i){
+      var bx=675+Math.sin(t+i+2)*8;
+      drawCell(ctx,bx,s.y,s.r,s.c,"","");
+      ctx.fillStyle=s.c;ctx.font="bold 10px Source Sans 3";ctx.fillText(s.l,bx,s.y+s.r+12);
+      if(i<3){
+        drawArrow(ctx,bx,s.y+s.r+16,675+Math.sin(t+i+3)*8,ostages[i+1].y-ostages[i+1].r-4,"#5A7A96");
+        // polar body
+        if(i>=1){
+          var pbx=bx+50+i*10;var pby=s.y+30;
+          ctx.beginPath();ctx.arc(pbx,pby,6,0,Math.PI*2);ctx.fillStyle="#FF6B6B33";ctx.fill();ctx.strokeStyle="#FF6B6B";ctx.lineWidth=1;ctx.stroke();
+          ctx.fillStyle="#FF6B6B";ctx.font="8px Source Sans 3";ctx.fillText("CP",pbx,pby+14);
+        }
+      }
+    });
+
+    // Center divider
+    ctx.strokeStyle="rgba(0,212,170,0.15)";ctx.lineWidth=1;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(450,10);ctx.lineTo(450,H-10);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle="#00D4AA";ctx.font="bold 12px DM Serif Display";ctx.textAlign="center";ctx.fillText("GAMETOGÉNESIS",450,H/2);
+    ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";ctx.fillText("2n → n",450,H/2+16);
+
+    heroAnim=requestAnimationFrame(frame);
+  }
+  frame();
+}
+drawHero();
+
+/* ===== ANATOMY DIAGRAM ===== */
+window.setAnat=function(s){drawAnat(s)};
+function drawAnat(state){
+  var ctx=getCtx("cvAnatomy");if(!ctx)return;var W=900,H=400;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  if(state===0){
+    // Testículo
+    ctx.fillStyle="#E8F0F8";ctx.font="bold 18px DM Serif Display";ctx.textAlign="center";ctx.fillText("Anatomía del Testículo",W/2,30);
+    // Testis outline
+    ctx.beginPath();ctx.ellipse(350,210,120,160,0,0,Math.PI*2);ctx.fillStyle="rgba(0,163,255,0.06)";ctx.fill();ctx.strokeStyle="rgba(0,163,255,0.3)";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#00A3FF";ctx.font="bold 13px Source Sans 3";ctx.fillText("Testículo",350,385);
+    // Túbulos seminíferos (coiled)
+    ctx.strokeStyle="rgba(0,212,170,0.4)";ctx.lineWidth=8;
+    for(var t=0;t<5;t++){
+      ctx.beginPath();
+      var sy=100+t*55;
+      for(var i=0;i<60;i++){
+        var cx=260+i*3;var cy=sy+Math.sin(i*0.5)*15;
+        if(i===0)ctx.moveTo(cx,cy);else ctx.lineTo(cx,cy);
+      }ctx.stroke();
+    }
+    ctx.fillStyle="#00D4AA";ctx.font="bold 11px Source Sans 3";ctx.textAlign="left";ctx.fillText("Túbulos seminíferos",480,120);
+    // Cross section
+    ctx.beginPath();ctx.arc(700,220,80,0,Math.PI*2);ctx.fillStyle="rgba(0,212,170,0.08)";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#00D4AA";ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";ctx.fillText("Corte transversal",700,320);
+    // Labels in cross section
+    ctx.fillStyle="#E8F0F8";ctx.font="10px Source Sans 3";
+    // Outer - basal
+    ctx.beginPath();ctx.arc(700,220,75,0,Math.PI*2);ctx.strokeStyle="#F9731666";ctx.lineWidth=3;ctx.stroke();
+    ctx.fillStyle="#F97316";ctx.fillText("Membrana basal",700,310);
+    // Spermatogonia
+    for(var i=0;i<6;i++){var a=i*Math.PI/3;ctx.beginPath();ctx.arc(700+68*Math.cos(a),220+68*Math.sin(a),6,0,Math.PI*2);ctx.fillStyle="#00D4AA55";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=1;ctx.stroke();}
+    ctx.fillStyle="#00D4AA";ctx.fillText("Espermatogonias (basal)",700,160);
+    // Sertoli
+    ctx.beginPath();ctx.ellipse(700,220,15,50,0,0,Math.PI*2);ctx.fillStyle="rgba(255,217,61,0.15)";ctx.fill();ctx.strokeStyle="#FFD93D";ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle="#FFD93D";ctx.fillText("Célula de Sertoli",700,280);
+    // Lumen
+    ctx.beginPath();ctx.arc(700,220,25,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,0.04)";ctx.fill();ctx.strokeStyle="#8BA4BE55";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#8BA4BE";ctx.font="9px Source Sans 3";ctx.fillText("Lumen",700,224);
+    // Leydig
+    ctx.beginPath();ctx.arc(560,300,12,0,Math.PI*2);ctx.fillStyle="rgba(167,139,250,0.2)";ctx.fill();ctx.strokeStyle="#A78BFA";ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle="#A78BFA";ctx.font="11px Source Sans 3";ctx.textAlign="left";ctx.fillText("Células de Leydig",580,305);
+    ctx.font="9px Source Sans 3";ctx.fillStyle="#8BA4BE";ctx.fillText("(testosterona)",580,318);
+    document.getElementById("anatNarr").innerHTML="<strong>Testículo:</strong> Los <strong>túbulos seminíferos</strong> contienen el epitelio germinal con células de Sertoli (soporte) y células germinales. Las espermatogonias están en la membrana basal. Las <strong>células de Leydig</strong> en el intersticio producen testosterona.";
+  } else {
+    // Ovario
+    ctx.fillStyle="#E8F0F8";ctx.font="bold 18px DM Serif Display";ctx.textAlign="center";ctx.fillText("Anatomía del Ovario",W/2,30);
+    // Ovary outline
+    ctx.beginPath();ctx.ellipse(450,220,200,150,0,0,Math.PI*2);ctx.fillStyle="rgba(236,72,153,0.06)";ctx.fill();ctx.strokeStyle="rgba(236,72,153,0.3)";ctx.lineWidth=2;ctx.stroke();
+    // Follicles at different stages
+    // Primordial
+    for(var i=0;i<4;i++){
+      var fx=300+i*30;var fy=130+Math.sin(i)*15;
+      ctx.beginPath();ctx.arc(fx,fy,8,0,Math.PI*2);ctx.fillStyle="rgba(167,139,250,0.2)";ctx.fill();ctx.strokeStyle="#A78BFA";ctx.lineWidth=1;ctx.stroke();
+      ctx.beginPath();ctx.arc(fx,fy,4,0,Math.PI*2);ctx.fillStyle="#A78BFA44";ctx.fill();
+    }
+    ctx.fillStyle="#A78BFA";ctx.font="bold 10px Source Sans 3";ctx.textAlign="center";ctx.fillText("Folículos primordiales",345,160);
+    // Primary follicle
+    ctx.beginPath();ctx.arc(550,140,18,0,Math.PI*2);ctx.fillStyle="rgba(0,163,255,0.1)";ctx.fill();ctx.strokeStyle="#00A3FF";ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.arc(550,140,10,0,Math.PI*2);ctx.fillStyle="#00A3FF33";ctx.fill();
+    ctx.fillStyle="#00A3FF";ctx.font="bold 10px Source Sans 3";ctx.fillText("Folículo primario",550,170);
+    // Secondary / Antral follicle
+    ctx.beginPath();ctx.arc(600,240,35,0,Math.PI*2);ctx.fillStyle="rgba(0,212,170,0.08)";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.arc(600,240,15,0,Math.PI*2);ctx.fillStyle="#00D4AA33";ctx.fill();
+    // antrum
+    ctx.beginPath();ctx.arc(610,230,8,0,Math.PI*2);ctx.fillStyle="rgba(0,163,255,0.15)";ctx.fill();
+    ctx.fillStyle="#00D4AA";ctx.font="bold 10px Source Sans 3";ctx.fillText("Folículo antral",600,290);
+    ctx.fillStyle="#00A3FF";ctx.font="8px Source Sans 3";ctx.fillText("Antro",615,233);
+    // Graafian follicle (dominant)
+    ctx.beginPath();ctx.arc(420,280,50,0,Math.PI*2);ctx.fillStyle="rgba(236,72,153,0.08)";ctx.fill();ctx.strokeStyle="#EC4899";ctx.lineWidth=2.5;ctx.stroke();
+    ctx.beginPath();ctx.arc(420,270,20,0,Math.PI*2);ctx.fillStyle="#EC489933";ctx.fill();ctx.strokeStyle="#EC489988";ctx.lineWidth=1;ctx.stroke();
+    // cumulus
+    ctx.beginPath();ctx.arc(420,280,30,0,Math.PI*2);ctx.fillStyle="rgba(236,72,153,0.05)";ctx.fill();
+    ctx.fillStyle="#EC4899";ctx.font="bold 10px Source Sans 3";ctx.fillText("Folículo de Graaf",420,345);
+    ctx.font="8px Source Sans 3";ctx.fillStyle="#8BA4BE";ctx.fillText("(pre-ovulatorio)",420,358);
+    // Corpus luteum
+    ctx.beginPath();ctx.arc(300,280,25,0,Math.PI*2);ctx.fillStyle="rgba(255,217,61,0.12)";ctx.fill();ctx.strokeStyle="#FFD93D";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#FFD93D";ctx.font="bold 10px Source Sans 3";ctx.fillText("Cuerpo lúteo",300,315);
+    // Ovulation arrow
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 12px Source Sans 3";ctx.fillText("↗ Ovulación",500,330);
+    // Zona pelucida label
+    ctx.fillStyle="#8BA4BE";ctx.font="9px Source Sans 3";ctx.fillText("Zona pelúcida",420,255);
+    document.getElementById("anatNarr").innerHTML="<strong>Ovario:</strong> Contiene folículos en distintos estadios de desarrollo. Los <strong>folículos primordiales</strong> contienen oocitos en profase I. Durante cada ciclo, folículos crecen (primario → antral → Graaf). Solo uno ovula. El folículo post-ovulación forma el <strong>cuerpo lúteo</strong> (progesterona).";
+  }
+}
+
+/* ===== SPERMATOGENESIS SIMULATION ===== */
+window.setSperm=function(s){drawSperm2(s)};
+function drawSperm2(state){
+  var ctx=getCtx("cvSperm");if(!ctx)return;var W=900,H=480;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var titles=["Espermatogénesis — Vista General","Espermatogonias (2n, 2C)","Espermatocitos Primarios (2n, 4C)","Espermatocitos Secundarios (n, 2C)","Espermátidas (n, 1C)"];
+  var narrs=[
+    "Vista general del flujo de la espermatogénesis: desde espermatogonias hasta espermátidas. Observa la reducción progresiva de ploidía y contenido de ADN.",
+    "<strong>Espermatogonias:</strong> Células madre en la membrana basal (2n, 2C). Núcleo oscuro. Se dividen por <strong>mitosis</strong>: autorrenovación → tipo A → tipo B. La tipo B da espermatocitos primarios. Las divisiones clonales mantienen las células unidas en <strong>sincitio</strong> (puentes intercelulares).",
+    "<strong>Espermatocitos Primarios:</strong> 46 cromosomas (44+XY), ADN = <strong>4C</strong> (tras replicación). Célula esférica grande con núcleo eucromático. Entran en profase I (~3 semanas): sinapsis, crossing-over, recombinación. <strong>Meiosis I</strong> (reduccional) separa homólogos → 2 espermatocitos secundarios.",
+    "<strong>Espermatocitos Secundarios:</strong> 23 cromosomas (22+X o 22+Y), pero cada cromosoma = 2 cromátides → ADN = <strong>2C</strong>. Células más pequeñas, vida corta. Entran rápidamente en <strong>meiosis II</strong> (ecuacional) para separar cromátides hermanas.",
+    "<strong>Espermátidas:</strong> Células haploides (23 cromosomas, ADN = <strong>1C</strong>). Redondas, pequeñas. 4 por cada espermatocito primario. Ahora deben diferenciarse en espermatozoides (espermiogénesis). No más divisiones."
+  ];
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText(titles[state],W/2,28);
+
+  if(state===0){
+    // Overview flow
+    var cy=70;
+    // Spermatogonia
+    drawCell(ctx,200,cy+30,28,"#00D4AA","Espermatogonia","2n, 2C");
+    ctx.fillStyle="#FFD93D";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";ctx.fillText("MITOSIS",320,cy+30);
+    drawArrow(ctx,230,cy+30,370,cy+30,"#FFD93D");
+    // More spermatogonia
+    drawCell(ctx,400,cy+10,20,"#00D4AA","","");
+    drawCell(ctx,400,cy+50,20,"#00D4AA","","");
+    ctx.fillStyle="#8BA4BE";ctx.font="9px Source Sans 3";ctx.fillText("Tipo A → Tipo B",400,cy+85);
+
+    // Espermatocito I
+    drawArrow(ctx,425,cy+50,500,cy+80,"#5A7A96");
+    drawCell(ctx,540,cy+100,32,"#00A3FF","Espermatocito I","2n, 4C");
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 11px Source Sans 3";ctx.fillText("MEIOSIS I",540,cy+150);
+    drawArrow(ctx,540,cy+155,450,cy+200,"#FF6B6B");
+    drawArrow(ctx,540,cy+155,630,cy+200,"#FF6B6B");
+
+    // Espermatocitos II
+    drawCell(ctx,450,cy+220,22,"#A78BFA","Esperm. II","n, 2C");
+    drawCell(ctx,630,cy+220,22,"#A78BFA","Esperm. II","n, 2C");
+    ctx.fillStyle="#EC4899";ctx.font="bold 11px Source Sans 3";
+    ctx.fillText("MEIOSIS II",450,cy+265);ctx.fillText("MEIOSIS II",630,cy+265);
+
+    // Espermátidas
+    drawArrow(ctx,430,cy+255,380,cy+290,"#EC4899");drawArrow(ctx,470,cy+255,510,cy+290,"#EC4899");
+    drawArrow(ctx,610,cy+255,570,cy+290,"#EC4899");drawArrow(ctx,650,cy+255,700,cy+290,"#EC4899");
+    var spx=[380,510,570,700];
+    spx.forEach(function(x){drawCell(ctx,x,cy+310,14,"#EC4899","","");});
+    ctx.fillStyle="#EC4899";ctx.font="bold 11px Source Sans 3";ctx.fillText("4 Espermátidas (n, 1C)",540,cy+345);
+    // Sperms
+    spx.forEach(function(x){drawSperm(ctx,x,cy+375,0.7)});
+    ctx.fillStyle="#00A3FF";ctx.font="bold 10px Source Sans 3";ctx.fillText("Espermiogénesis →",540,cy+390);
+  } else {
+    // Detail views
+    var detailX=W/2,detailY=120;
+    var cols=["#00D4AA","#00D4AA","#00A3FF","#A78BFA","#EC4899"];
+    var radii=[35,35,40,30,22];
+    drawCell(ctx,detailX,detailY,radii[state],cols[state],"","");
+
+    // Ploidy badge
+    var ploidies=["","2n, 2C","2n, 4C","n, 2C","n, 1C"];
+    var chromNums=["","46 cromosomas","46 cromosomas (replicados)","23 cromosomas","23 cromosomas"];
+    roundRect(ctx,detailX-80,detailY+radii[state]+20,160,50,10);ctx.fillStyle=cols[state]+"15";ctx.fill();ctx.strokeStyle=cols[state]+"55";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle=cols[state];ctx.font="bold 16px JetBrains Mono";ctx.textAlign="center";ctx.fillText(ploidies[state],detailX,detailY+radii[state]+42);
+    ctx.fillStyle="#8BA4BE";ctx.font="11px Source Sans 3";ctx.fillText(chromNums[state],detailX,detailY+radii[state]+58);
+
+    // Visual chromosomes
+    var chromY=detailY+radii[state]+90;
+    if(state===1){
+      // 2n diploid - show pairs
+      ctx.fillStyle="#E8F0F8";ctx.font="bold 12px Source Sans 3";ctx.fillText("Representación esquemática: cromosomas en pares homólogos",W/2,chromY);
+      for(var i=0;i<4;i++){
+        var cx1=300+i*80;
+        ctx.strokeStyle="#00D4AA";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(cx1,chromY+20);ctx.lineTo(cx1,chromY+50);ctx.stroke();
+        ctx.strokeStyle="#00A3FF";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(cx1+12,chromY+20);ctx.lineTo(cx1+12,chromY+50);ctx.stroke();
+      }
+      ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";ctx.fillText("Par homólogo",380,chromY+68);
+    }
+    if(state===2){
+      ctx.fillStyle="#E8F0F8";ctx.font="bold 12px Source Sans 3";ctx.fillText("ADN replicado: cada cromosoma = 2 cromátides hermanas unidas por centrómero",W/2,chromY);
+      for(var i=0;i<4;i++){
+        var cx1=300+i*80;
+        // X shape for replicated chromosome
+        ctx.strokeStyle="#00A3FF";ctx.lineWidth=3;
+        ctx.beginPath();ctx.moveTo(cx1-6,chromY+20);ctx.lineTo(cx1,chromY+38);ctx.lineTo(cx1+6,chromY+20);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(cx1-6,chromY+56);ctx.lineTo(cx1,chromY+38);ctx.lineTo(cx1+6,chromY+56);ctx.stroke();
+        ctx.beginPath();ctx.arc(cx1,chromY+38,3,0,Math.PI*2);ctx.fillStyle="#FFD93D";ctx.fill();
+      }
+      ctx.fillStyle="#FFD93D";ctx.font="10px Source Sans 3";ctx.fillText("Centrómero",380,chromY+74);
+      ctx.fillStyle="#8BA4BE";ctx.fillText("Profase I: sinapsis + crossing-over (~3 semanas)",W/2,chromY+92);
+    }
+    if(state===3){
+      ctx.fillStyle="#E8F0F8";ctx.font="bold 12px Source Sans 3";ctx.fillText("23 cromosomas, cada uno con 2 cromátides (aún unidos)",W/2,chromY);
+      for(var i=0;i<3;i++){
+        var cx1=350+i*80;
+        ctx.strokeStyle="#A78BFA";ctx.lineWidth=3;
+        ctx.beginPath();ctx.moveTo(cx1-5,chromY+20);ctx.lineTo(cx1,chromY+35);ctx.lineTo(cx1+5,chromY+20);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(cx1-5,chromY+50);ctx.lineTo(cx1,chromY+35);ctx.lineTo(cx1+5,chromY+50);ctx.stroke();
+      }
+      ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";ctx.fillText("22+X  o  22+Y",W/2,chromY+68);
+    }
+    if(state===4){
+      ctx.fillStyle="#E8F0F8";ctx.font="bold 12px Source Sans 3";ctx.fillText("23 cromosomas simples (1 cromátide cada uno)",W/2,chromY);
+      for(var i=0;i<3;i++){
+        var cx1=370+i*70;
+        ctx.strokeStyle="#EC4899";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(cx1,chromY+20);ctx.lineTo(cx1,chromY+50);ctx.stroke();
+      }
+      ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";ctx.fillText("Haploide, listas para espermiogénesis",W/2,chromY+68);
+    }
+
+    // DNA content bar
+    var dnaContents=[0,2,4,2,1];
+    var barY=chromY+100;
+    ctx.fillStyle="#E8F0F8";ctx.font="bold 12px Source Sans 3";ctx.fillText("Contenido de ADN:",W/2-120,barY);
+    var maxBar=200;var barW=dnaContents[state]/4*maxBar;
+    roundRect(ctx,W/2-20,barY-12,maxBar+4,20,6);ctx.fillStyle="rgba(255,255,255,0.04)";ctx.fill();
+    roundRect(ctx,W/2-18,barY-10,barW,16,4);ctx.fillStyle=cols[state]+"44";ctx.fill();ctx.strokeStyle=cols[state];ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle=cols[state];ctx.font="bold 14px JetBrains Mono";ctx.textAlign="left";ctx.fillText(dnaContents[state]+"C",W/2+maxBar+12,barY+2);
+  }
+  document.getElementById("spermNarr").innerHTML=narrs[state];
+}
+
+/* ===== SPERMIOGENESIS SIMULATION ===== */
+window.setSpermiog=function(s){drawSpermiog(s)};
+function drawSpermiog(state){
+  var ctx=getCtx("cvSpermiog");if(!ctx)return;var W=900,H=450;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var titles=["Espermátida (inicio)","Fase 1: Golgi","Fase 2: Caperuza (Cap)","Fase 3: Acrosómica","Fase 4: Maduración"];
+  var cols=["#EC4899","#FFD93D","#F97316","#A78BFA","#EC4899"];
+  var narrs=[
+    "Espermátida redonda, haploide (n, 1C). Citoplasma abundante con Golgi prominente, mitocondria, centriolos apareados y ribosomas. El inicio de un proceso de diferenciación sin más divisiones.",
+    "<strong>Fase Golgi:</strong> Vesículas proacrosómicas del Golgi coalescen → <strong>caperuza acrosomal</strong> en un polo del núcleo. Los centriolos migran al polo opuesto; uno funciona como <strong>cuerpo basal</strong> y organiza el <strong>axonema</strong> (estructura 9+2, similar a cilio).",
+    "<strong>Fase Caperuza:</strong> El acrosoma se extiende cubriendo ~50% del núcleo (que comienza a condensarse). El acrosoma es un <strong>lisosoma especializado</strong> con <strong>hialuronidasa</strong> (corona radiada) y <strong>acrosina</strong> (zona pelúcida).",
+    "<strong>Fase Acrosómica:</strong> El núcleo se <strong>elonga y condensa</strong> intensamente: histonas → <strong>protaminas</strong> (compactación 6x). El flagelo crece hacia el lumen. Las <strong>mitocondrias</strong> se alinean en la pieza media (generan ATP para el movimiento flagelar).",
+    "<strong>Fase de Maduración:</strong> El citoplasma sobrante se elimina como <strong>cuerpo residual</strong> (fagocitado por Sertoli). Los puentes intercelulares se rompen. <strong>Espermatozoide maduro</strong> liberado al lumen del túbulo seminífero. Maduro morfológicamente pero aún no funcional → requiere capacitación en tracto femenino."
+  ];
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText(titles[state],W/2,28);
+
+  var cx=W/2,cy=200;
+  if(state===0){
+    // Round spermatid
+    ctx.beginPath();ctx.arc(cx,cy,60,0,Math.PI*2);ctx.fillStyle="#EC489915";ctx.fill();ctx.strokeStyle="#EC4899";ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy-5,28,0,Math.PI*2);ctx.fillStyle="#A78BFA33";ctx.fill();ctx.strokeStyle="#A78BFA";ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle="#A78BFA";ctx.font="bold 10px Source Sans 3";ctx.fillText("Núcleo (n,1C)",cx,cy-5);
+    // Golgi
+    roundRect(ctx,cx+20,cy-40,25,18,4);ctx.fillStyle="#FFD93D33";ctx.fill();ctx.strokeStyle="#FFD93D";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#FFD93D";ctx.font="9px Source Sans 3";ctx.fillText("Golgi",cx+32,cy-26);
+    // Centrioles
+    ctx.fillStyle="#00D4AA";ctx.fillRect(cx-3,cy+28,6,10);ctx.fillRect(cx-3,cy+42,6,10);
+    ctx.font="9px Source Sans 3";ctx.fillText("Centriolos",cx,cy+65);
+    // Mitochondria
+    for(var i=0;i<5;i++){ctx.beginPath();ctx.ellipse(cx-35+i*18,cy+15,5,3,i*0.5,0,Math.PI*2);ctx.fillStyle="#F9731644";ctx.fill();ctx.strokeStyle="#F97316";ctx.lineWidth=1;ctx.stroke();}
+    ctx.fillStyle="#F97316";ctx.font="9px Source Sans 3";ctx.fillText("Mitocondrias",cx,cy+80);
+  }
+  if(state===1){
+    // Golgi phase
+    ctx.beginPath();ctx.arc(cx,cy,55,0,Math.PI*2);ctx.fillStyle="#FFD93D08";ctx.fill();ctx.strokeStyle="#FFD93D55";ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,26,0,Math.PI*2);ctx.fillStyle="#A78BFA33";ctx.fill();ctx.strokeStyle="#A78BFA";ctx.lineWidth=1.5;ctx.stroke();
+    // Acrosomal vesicle
+    ctx.beginPath();ctx.arc(cx,cy-30,12,Math.PI,0);ctx.fillStyle="#00D4AA44";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#00D4AA";ctx.font="bold 10px Source Sans 3";ctx.fillText("Vesícula acrosomal",cx,cy-50);
+    // Axoneme start
+    ctx.strokeStyle="#8BA4BE";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx,cy+26);ctx.lineTo(cx,cy+70);ctx.stroke();
+    ctx.fillStyle="#8BA4BE";ctx.font="9px Source Sans 3";ctx.fillText("Axonema (inicio)",cx+40,cy+55);
+    // Centriole as basal body
+    ctx.fillStyle="#00A3FF";ctx.fillRect(cx-3,cy+26,6,8);
+    ctx.font="bold 9px Source Sans 3";ctx.fillStyle="#00A3FF";ctx.fillText("Cuerpo basal",cx+40,cy+35);
+    // Arrow from Golgi
+    roundRect(ctx,cx+50,cy-20,60,18,4);ctx.fillStyle="#FFD93D22";ctx.fill();ctx.strokeStyle="#FFD93D";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#FFD93D";ctx.font="9px Source Sans 3";ctx.fillText("Golgi",cx+80,cy-8);
+    drawArrow(ctx,cx+50,cy-10,cx+12,cy-24,"#FFD93D");
+  }
+  if(state===2){
+    // Cap phase
+    ctx.beginPath();ctx.arc(cx,cy,50,0,Math.PI*2);ctx.fillStyle="#F9731608";ctx.fill();ctx.strokeStyle="#F9731655";ctx.lineWidth=2;ctx.stroke();
+    // Nucleus condensing
+    ctx.beginPath();ctx.ellipse(cx,cy,24,26,0,0,Math.PI*2);ctx.fillStyle="#A78BFA44";ctx.fill();ctx.strokeStyle="#A78BFA";ctx.lineWidth=1.5;ctx.stroke();
+    // Acrosome cap (~50%)
+    ctx.beginPath();ctx.arc(cx,cy,26,Math.PI+0.3,2*Math.PI-0.3);ctx.strokeStyle="#00D4AA";ctx.lineWidth=3;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy-6,24,Math.PI+0.2,-0.2);ctx.fillStyle="#00D4AA22";ctx.fill();
+    ctx.fillStyle="#00D4AA";ctx.font="bold 10px Source Sans 3";ctx.fillText("Acrosoma (~50% del núcleo)",cx,cy-42);
+    // Enzymes label
+    roundRect(ctx,cx-120,cy+70,240,40,8);ctx.fillStyle="rgba(0,212,170,0.08)";ctx.fill();ctx.strokeStyle="rgba(0,212,170,0.2)";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#00D4AA";ctx.font="bold 11px Source Sans 3";ctx.fillText("Enzimas: Hialuronidasa + Acrosina",cx,cy+94);
+    // Flagellum growing
+    ctx.strokeStyle="#8BA4BE";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx,cy+26);for(var i=0;i<20;i++){ctx.lineTo(cx+Math.sin(i*0.6)*3,cy+26+i*3);}ctx.stroke();
+  }
+  if(state===3){
+    // Acrosomal phase - elongating
+    ctx.beginPath();ctx.ellipse(cx,cy-10,16,35,0,0,Math.PI*2);ctx.fillStyle="#A78BFA55";ctx.fill();ctx.strokeStyle="#A78BFA";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#A78BFA";ctx.font="bold 10px Source Sans 3";ctx.fillText("Núcleo elongado + condensado",cx,cy-55);
+    // Acrosome
+    ctx.beginPath();ctx.ellipse(cx,cy-35,14,12,0,0,Math.PI*2);ctx.fillStyle="#00D4AA33";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle="#00D4AA";ctx.font="9px Source Sans 3";ctx.fillText("Acrosoma",cx+30,cy-35);
+    // Midpiece with mitochondria
+    ctx.strokeStyle="#F97316";ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(cx,cy+25);ctx.lineTo(cx,cy+60);ctx.stroke();
+    ctx.fillStyle="#F97316";ctx.font="bold 10px Source Sans 3";ctx.fillText("Pieza media",cx+40,cy+45);
+    ctx.font="9px Source Sans 3";ctx.fillStyle="#8BA4BE";ctx.fillText("(mitocondrias en espiral)",cx+40,cy+58);
+    // Flagellum
+    ctx.strokeStyle="#8BA4BE";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx,cy+60);
+    for(var i=0;i<40;i++){ctx.lineTo(cx+Math.sin(i*0.4)*4,cy+60+i*2.5);}ctx.stroke();
+    ctx.fillStyle="#8BA4BE";ctx.font="9px Source Sans 3";ctx.fillText("Flagelo",cx+30,cy+120);
+    // Histones → protamines
+    roundRect(ctx,cx-150,cy+160,300,35,8);ctx.fillStyle="rgba(167,139,250,0.08)";ctx.fill();ctx.strokeStyle="rgba(167,139,250,0.2)";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#A78BFA";ctx.font="bold 11px Source Sans 3";ctx.fillText("Histonas → Protaminas (compactación 6×)",cx,cy+182);
+  }
+  if(state===4){
+    // Mature sperm
+    drawSperm(ctx,cx,cy-20,4);
+    ctx.fillStyle="#00A3FF";ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";
+    // Labels
+    ctx.fillText("Cabeza",cx-80,cy-35);drawArrow(ctx,cx-60,cy-30,cx-22,cy-25,"#00A3FF");
+    ctx.fillStyle="#00D4AA";ctx.fillText("Acrosoma",cx-80,cy-55);
+    ctx.fillStyle="#F97316";ctx.fillText("Pieza media",cx+70,cy+30);drawArrow(ctx,cx+50,cy+25,cx+5,cy+20,"#F97316");
+    ctx.fillStyle="#8BA4BE";ctx.fillText("Flagelo (cola)",cx+70,cy+80);
+    // Residual body
+    ctx.beginPath();ctx.arc(cx+60,cy-10,15,0,Math.PI*2);ctx.fillStyle="rgba(255,107,107,0.15)";ctx.fill();ctx.strokeStyle="#FF6B6B";ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle="#FF6B6B";ctx.font="9px Source Sans 3";ctx.fillText("Cuerpo residual",cx+60,cy+15);
+    ctx.fillText("(eliminado)",cx+60,cy+26);
+    // Bottom info
+    roundRect(ctx,cx-200,cy+130,400,50,10);ctx.fillStyle="rgba(0,212,170,0.06)";ctx.fill();ctx.strokeStyle="rgba(0,212,170,0.15)";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#00D4AA";ctx.font="bold 12px Source Sans 3";ctx.fillText("Espermatozoide maduro liberado al lumen",cx,cy+152);
+    ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";ctx.fillText("Maduro pero no funcional → requiere capacitación en tracto femenino",cx,cy+170);
+  }
+  document.getElementById("spermiogNarr").innerHTML=narrs[state];
+}
+
+/* ===== OOGENESIS SIMULATION ===== */
+window.setOog=function(s){drawOog(s)};
+function drawOog(state){
+  var ctx=getCtx("cvOog");if(!ctx)return;var W=900,H=480;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  var titles=["Oogénesis — Vista General","Oogonias (vida embrionaria)","Oocito Primario (arresto profase I)","Folículo Antral (estímulo FSH)","Ovulación (pico LH)"];
+  var narrs=[
+    "Vista general del flujo de la oogénesis: desde oogonias embrionarias hasta el ovocito secundario ovulado. Observa las divisiones asimétricas y los cuerpos polares.",
+    "<strong>Vida embrionaria:</strong> Las oogonias proliferan por <strong>mitosis</strong> en el ovario fetal. Crecen y se convierten en <strong>oocitos primarios</strong> (2n, 4C tras replicar ADN). Inician meiosis I pero se <strong>arrestan en profase I (dictiotema)</strong>. Se rodean de células epiteliales planas → <strong>folículo primordial</strong>. Hasta 1 millón al nacer.",
+    "<strong>Oocito primario en folículo primordial:</strong> Arrestado en <strong>profase I</strong> desde la vida fetal. Puede permanecer así durante décadas. Las células foliculares son planas. El oocito crece, las células foliculares proliferan → <strong>granulosa</strong>. Se forma la <strong>zona pelúcida</strong>. Fase pre-antral.",
+    "<strong>Folículo antral:</strong> Estimulado por <strong>FSH</strong>. Fluido se acumula → antro. ~15-20 folículos comienzan a crecer cada ciclo, pero solo uno se vuelve <strong>dominante</strong>. Los demás sufren atresia. Se forma la teca (externa e interna) que produce andrógenos.",
+    "<strong>Ovulación:</strong> Pico de <strong>LH</strong> → reanudación de meiosis I. División <strong>asimétrica</strong>: oocito secundario (grande, con citoplasma) + 1er cuerpo polar (pequeño, no funcional). El oocito secundario <strong>se arresta en metafase II</strong>. Es ovulado en este estado. La meiosis II se completa SOLO si hay fecundación → óvulo + 2do cuerpo polar."
+  ];
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText(titles[state],W/2,28);
+
+  if(state===0){
+    // Overview flow
+    var startY=55;
+    // Oogonia
+    drawCell(ctx,150,startY+30,22,"#EC4899","Oogonia","2n, 2C");
+    ctx.fillStyle="#FFD93D";ctx.font="bold 10px Source Sans 3";ctx.fillText("MITOSIS",280,startY+25);
+    drawArrow(ctx,175,startY+30,350,startY+30,"#FFD93D");
+
+    // Oocito I
+    drawCell(ctx,400,startY+30,28,"#A78BFA","Oocito I","2n, 4C");
+    ctx.fillStyle="#FF6B6B";ctx.font="bold 9px Source Sans 3";ctx.fillText("ARRESTO",480,startY+10);ctx.fillText("Profase I",480,startY+22);
+    ctx.fillText("(décadas)",480,startY+34);
+
+    // Line down
+    drawArrow(ctx,400,startY+62,400,startY+100,"#5A7A96");
+    ctx.fillStyle="#00D4AA";ctx.font="bold 10px Source Sans 3";ctx.fillText("Pico LH →",340,startY+85);ctx.fillText("Meiosis I",340,startY+97);
+
+    // Asymmetric division
+    drawCell(ctx,350,startY+140,30,"#00D4AA","Oocito II","n, 2C");
+    drawCell(ctx,500,startY+120,10,"#FF6B6B","","");
+    ctx.fillStyle="#FF6B6B";ctx.font="9px Source Sans 3";ctx.fillText("1er CP",500,startY+140);
+
+    // Arrest in Met II
+    ctx.fillStyle="#FFD93D";ctx.font="bold 9px Source Sans 3";ctx.fillText("ARRESTO Met II",350,startY+178);
+    ctx.fillText("(hasta fecundación)",350,startY+190);
+
+    drawArrow(ctx,350,startY+195,350,startY+225,"#5A7A96");
+    ctx.fillStyle="#00A3FF";ctx.font="bold 10px Source Sans 3";ctx.fillText("Fecundación →",260,startY+215);ctx.fillText("Meiosis II",260,startY+227);
+
+    // Final division
+    drawCell(ctx,300,startY+265,32,"#FFD93D","Óvulo","n, 1C");
+    drawCell(ctx,430,startY+250,8,"#FF6B6B","","");
+    ctx.fillStyle="#FF6B6B";ctx.font="9px Source Sans 3";ctx.fillText("2do CP",430,startY+268);
+
+    // Summary
+    roundRect(ctx,150,startY+320,500,40,8);ctx.fillStyle="rgba(236,72,153,0.06)";ctx.fill();ctx.strokeStyle="rgba(236,72,153,0.15)";ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle="#EC4899";ctx.font="bold 12px Source Sans 3";ctx.textAlign="center";ctx.fillText("1 oogonia → 1 óvulo funcional + 3 cuerpos polares",400,startY+345);
+  } else {
+    var detailX=W/2,detailY=160;
+    var cols2=["","#EC4899","#A78BFA","#00D4AA","#00A3FF"];
+    var radii2=[0,35,40,45,38];
+    drawCell(ctx,detailX,detailY,radii2[state],cols2[state],"","");
+
+    if(state===1){
+      // Surrounding oogonia
+      for(var i=0;i<5;i++){
+        var ang=i*Math.PI*2/5;
+        drawCell(ctx,detailX+100*Math.cos(ang),detailY+100*Math.sin(ang),15,"#EC4899","","");
+        drawArrow(ctx,detailX+70*Math.cos(ang),detailY+70*Math.sin(ang),detailX+45*Math.cos(ang),detailY+45*Math.sin(ang),"#FFD93D");
+      }
+      ctx.fillStyle="#FFD93D";ctx.font="bold 11px Source Sans 3";ctx.fillText("Mitosis (proliferación)",detailX,detailY-60);
+      roundRect(ctx,detailX-120,detailY+120,240,60,10);ctx.fillStyle="rgba(167,139,250,0.08)";ctx.fill();
+      ctx.fillStyle="#A78BFA";ctx.font="bold 12px Source Sans 3";ctx.fillText("Crecen → Oocitos primarios",detailX,detailY+148);
+      ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";ctx.fillText("Inician meiosis I → ARRESTO en profase I",detailX,detailY+166);
+    }
+    if(state===2){
+      // Follicular cells around
+      for(var i=0;i<12;i++){
+        var ang=i*Math.PI*2/12;var fr=radii2[state]+14;
+        ctx.beginPath();ctx.arc(detailX+fr*Math.cos(ang),detailY+fr*Math.sin(ang),6,0,Math.PI*2);
+        ctx.fillStyle="#FFD93D33";ctx.fill();ctx.strokeStyle="#FFD93D";ctx.lineWidth=1;ctx.stroke();
+      }
+      ctx.fillStyle="#FFD93D";ctx.font="bold 10px Source Sans 3";ctx.fillText("Células foliculares (granulosa)",detailX,detailY-65);
+      // Zona pellucida
+      ctx.beginPath();ctx.arc(detailX,detailY,radii2[state]+3,0,Math.PI*2);ctx.strokeStyle="#00D4AA55";ctx.lineWidth=4;ctx.setLineDash([5,3]);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle="#00D4AA";ctx.font="9px Source Sans 3";ctx.fillText("Zona pelúcida",detailX+60,detailY-30);
+      // Arrest indicator
+      roundRect(ctx,detailX-100,detailY+80,200,30,8);ctx.fillStyle="rgba(255,107,107,0.1)";ctx.fill();ctx.strokeStyle="#FF6B6B55";ctx.lineWidth=1;ctx.stroke();
+      ctx.fillStyle="#FF6B6B";ctx.font="bold 11px Source Sans 3";ctx.fillText("⏸ ARRESTO en Profase I (dictiotema)",detailX,detailY+100);
+    }
+    if(state===3){
+      // Antral follicle
+      ctx.beginPath();ctx.arc(detailX,detailY,60,0,Math.PI*2);ctx.fillStyle="rgba(0,212,170,0.04)";ctx.fill();ctx.strokeStyle="#00D4AA33";ctx.lineWidth=1;ctx.stroke();
+      // Antrum
+      ctx.beginPath();ctx.arc(detailX+15,detailY-10,20,0,Math.PI*2);ctx.fillStyle="rgba(0,163,255,0.12)";ctx.fill();ctx.strokeStyle="#00A3FF55";ctx.lineWidth=1;ctx.stroke();
+      ctx.fillStyle="#00A3FF";ctx.font="bold 9px Source Sans 3";ctx.fillText("Antro",detailX+15,detailY-7);
+      // Granulosa
+      for(var i=0;i<16;i++){var ang=i*Math.PI*2/16;var fr=58;ctx.beginPath();ctx.arc(detailX+fr*Math.cos(ang),detailY+fr*Math.sin(ang),4,0,Math.PI*2);ctx.fillStyle="#FFD93D33";ctx.fill();}
+      // Teca
+      ctx.beginPath();ctx.arc(detailX,detailY,70,0,Math.PI*2);ctx.strokeStyle="#F9731644";ctx.lineWidth=3;ctx.stroke();
+      ctx.fillStyle="#F97316";ctx.font="bold 9px Source Sans 3";ctx.fillText("Teca",detailX+75,detailY);
+      ctx.fillStyle="#FFD93D";ctx.fillText("Granulosa",detailX-70,detailY+55);
+      // FSH
+      roundRect(ctx,detailX-80,detailY+85,160,25,6);ctx.fillStyle="rgba(0,163,255,0.1)";ctx.fill();
+      ctx.fillStyle="#00A3FF";ctx.font="bold 10px Source Sans 3";ctx.fillText("Estimulado por FSH",detailX,detailY+102);
+    }
+    if(state===4){
+      // Ovulation - asymmetric division
+      drawCell(ctx,detailX-50,detailY,38,"#00D4AA","Oocito II","n, 2C (grande)");
+      drawCell(ctx,detailX+80,detailY-30,12,"#FF6B6B","1er CP","(pequeño)");
+      // Arrow showing asymmetry
+      ctx.fillStyle="#E8F0F8";ctx.font="bold 12px Source Sans 3";ctx.fillText("División ASIMÉTRICA",detailX,detailY-60);
+      ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";ctx.fillText("Todo el citoplasma → Oocito",detailX-50,detailY+62);
+      // Metaphase II arrest
+      roundRect(ctx,detailX-130,detailY+80,260,30,8);ctx.fillStyle="rgba(255,217,61,0.08)";ctx.fill();ctx.strokeStyle="#FFD93D55";ctx.lineWidth=1;ctx.stroke();
+      ctx.fillStyle="#FFD93D";ctx.font="bold 11px Source Sans 3";ctx.fillText("⏸ ARRESTO en Metafase II → Ovulación",detailX,detailY+100);
+      // LH badge
+      roundRect(ctx,detailX-40,detailY-100,80,22,6);ctx.fillStyle="rgba(236,72,153,0.15)";ctx.fill();
+      ctx.fillStyle="#EC4899";ctx.font="bold 11px Source Sans 3";ctx.fillText("Pico de LH",detailX,detailY-86);
+    }
+  }
+  document.getElementById("oogNarr").innerHTML=narrs[state];
+}
+
+/* ===== TIMELINE ===== */
+function drawTimeline(){
+  var ctx=getCtx("cvTimeline");if(!ctx)return;var W=900,H=320;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 14px DM Serif Display";ctx.textAlign="center";ctx.fillText("Número de Oocitos/Folículos a lo largo de la vida",W/2,25);
+
+  var pts=[{x:100,y:60,l:"5° mes fetal",v:"~6-7 millones",c:"#EC4899"},
+           {x:250,y:100,l:"Nacimiento",v:"~1-2 millones",c:"#A78BFA"},
+           {x:400,y:160,l:"Pubertad",v:"~300,000-400,000",c:"#00D4AA"},
+           {x:600,y:220,l:"~37 años",v:"~25,000",c:"#FFD93D"},
+           {x:780,y:270,l:"Menopausia",v:"~1,000",c:"#FF6B6B"}];
+  // Axis
+  ctx.strokeStyle="#5A7A9644";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(80,50);ctx.lineTo(80,290);ctx.lineTo(820,290);ctx.stroke();
+  ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";ctx.textAlign="left";ctx.fillText("Número",20,50);ctx.textAlign="center";ctx.fillText("Edad",W/2,310);
+  // Curve
+  ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);
+  for(var i=1;i<pts.length;i++){var xc=(pts[i-1].x+pts[i].x)/2;var yc=(pts[i-1].y+pts[i].y)/2;ctx.quadraticCurveTo(pts[i-1].x,pts[i-1].y,xc,yc);}
+  ctx.lineTo(pts[pts.length-1].x,pts[pts.length-1].y);ctx.strokeStyle="#EC4899";ctx.lineWidth=3;ctx.stroke();
+  // Fill area
+  ctx.lineTo(pts[pts.length-1].x,290);ctx.lineTo(pts[0].x,290);ctx.closePath();ctx.fillStyle="rgba(236,72,153,0.08)";ctx.fill();
+  // Points
+  pts.forEach(function(p){
+    ctx.beginPath();ctx.arc(p.x,p.y,6,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();ctx.strokeStyle="#080d16";ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle=p.c;ctx.font="bold 11px Source Sans 3";ctx.textAlign="center";ctx.fillText(p.v,p.x,p.y-18);
+    ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";ctx.fillText(p.l,p.x,p.y-30);
+  });
+  // Atresia label
+  ctx.fillStyle="#FF6B6B";ctx.font="bold 10px Source Sans 3";ctx.fillText("ATRESIA continua →",500,140);
+}
+
+/* ===== COMPARISON DIAGRAM ===== */
+function drawCompare(){
+  var ctx=getCtx("cvCompare");if(!ctx)return;var W=900,H=500;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+  ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText("Meiosis: Espermatogénesis vs Oogénesis",W/2,25);
+  // Divider
+  ctx.strokeStyle="rgba(0,212,170,0.15)";ctx.lineWidth=1;ctx.setLineDash([5,5]);ctx.beginPath();ctx.moveTo(W/2,45);ctx.lineTo(W/2,H-10);ctx.stroke();ctx.setLineDash([]);
+  // Headers
+  ctx.fillStyle="#00A3FF";ctx.font="bold 15px DM Serif Display";ctx.fillText("♂ Espermatogénesis",225,55);
+  ctx.fillStyle="#EC4899";ctx.fillText("♀ Oogénesis",675,55);
+
+  // LEFT - Spermatogenesis
+  var lx=225,sy=80;
+  drawCell(ctx,lx,sy+15,18,"#00D4AA","","");ctx.fillStyle="#00D4AA";ctx.font="bold 10px Source Sans 3";ctx.fillText("Espermatocito I (2n,4C)",lx,sy+40);
+  drawArrow(ctx,lx,sy+45,lx-50,sy+90,"#FF6B6B");drawArrow(ctx,lx,sy+45,lx+50,sy+90,"#FF6B6B");
+  ctx.fillStyle="#FF6B6B";ctx.font="bold 9px Source Sans 3";ctx.fillText("Meiosis I",lx+80,sy+65);
+  drawCell(ctx,lx-50,sy+110,14,"#A78BFA","","");drawCell(ctx,lx+50,sy+110,14,"#A78BFA","","");
+  ctx.fillStyle="#A78BFA";ctx.font="9px Source Sans 3";ctx.fillText("Esperm. II (n,2C)",lx,sy+135);
+  // Meiosis II
+  drawArrow(ctx,lx-50,sy+130,lx-80,sy+170,"#EC4899");drawArrow(ctx,lx-50,sy+130,lx-20,sy+170,"#EC4899");
+  drawArrow(ctx,lx+50,sy+130,lx+20,sy+170,"#EC4899");drawArrow(ctx,lx+50,sy+130,lx+80,sy+170,"#EC4899");
+  ctx.fillStyle="#EC4899";ctx.font="bold 9px Source Sans 3";ctx.fillText("Meiosis II",lx+110,sy+150);
+  var spxs=[-80,-20,20,80];
+  spxs.forEach(function(dx){drawCell(ctx,lx+dx,sy+190,10,"#EC4899","","");});
+  ctx.fillStyle="#EC4899";ctx.font="bold 10px Source Sans 3";ctx.fillText("4 Espermátidas (n,1C)",lx,sy+215);
+  ctx.fillStyle="#00D4AA";ctx.font="bold 9px Source Sans 3";ctx.fillText("= iguales, todas funcionales",lx,sy+230);
+  // Sperms
+  spxs.forEach(function(dx){drawSperm(ctx,lx+dx,sy+260,0.6)});
+  ctx.fillStyle="#00A3FF";ctx.font="bold 10px Source Sans 3";ctx.fillText("4 Espermatozoides",lx,sy+310);
+
+  // Key differences
+  roundRect(ctx,lx-130,sy+330,260,50,8);ctx.fillStyle="rgba(0,163,255,0.06)";ctx.fill();ctx.strokeStyle="rgba(0,163,255,0.15)";ctx.lineWidth=1;ctx.stroke();
+  ctx.fillStyle="#00A3FF";ctx.font="bold 10px Source Sans 3";ctx.fillText("✓ Citocinesis simétrica",lx,sy+348);
+  ctx.fillText("✓ Continua desde pubertad",lx,sy+362);
+  ctx.fillText("✓ ~200 millones/día",lx,sy+376);
+
+  // RIGHT - Oogenesis
+  var rx=675;
+  drawCell(ctx,rx,sy+15,20,"#A78BFA","","");ctx.fillStyle="#A78BFA";ctx.font="bold 10px Source Sans 3";ctx.fillText("Oocito I (2n,4C)",rx,sy+42);
+  // Meiosis I (asymmetric)
+  drawArrow(ctx,rx,sy+48,rx-40,sy+100,"#FF6B6B");drawArrow(ctx,rx,sy+48,rx+60,sy+85,"#FF6B6B");
+  ctx.fillStyle="#FF6B6B";ctx.font="bold 9px Source Sans 3";ctx.fillText("Meiosis I",rx+90,sy+65);
+  ctx.fillText("(asimétrica)",rx+90,sy+77);
+  drawCell(ctx,rx-40,sy+120,18,"#00D4AA","","");
+  ctx.fillStyle="#00D4AA";ctx.font="9px Source Sans 3";ctx.fillText("Oocito II (n,2C)",rx-40,sy+146);
+  // Polar body 1
+  drawCell(ctx,rx+60,sy+95,8,"#FF6B6B","","");ctx.fillStyle="#FF6B6B";ctx.font="8px Source Sans 3";ctx.fillText("1er CP",rx+60,sy+112);
+  // Meiosis II
+  drawArrow(ctx,rx-40,sy+150,rx-60,sy+200,"#EC4899");drawArrow(ctx,rx-40,sy+150,rx+10,sy+190,"#EC4899");
+  ctx.fillStyle="#EC4899";ctx.font="bold 9px Source Sans 3";ctx.fillText("Meiosis II",rx+40,sy+170);
+  ctx.fillText("(solo si fecundación)",rx+40,sy+182);
+  drawCell(ctx,rx-60,sy+225,22,"#FFD93D","","");
+  ctx.fillStyle="#FFD93D";ctx.font="bold 10px Source Sans 3";ctx.fillText("Óvulo (n,1C)",rx-60,sy+255);
+  drawCell(ctx,rx+10,sy+200,6,"#FF6B6B","","");
+  ctx.fillStyle="#FF6B6B";ctx.font="8px Source Sans 3";ctx.fillText("2do CP",rx+10,sy+215);
+
+  ctx.fillStyle="#EC4899";ctx.font="bold 10px Source Sans 3";ctx.fillText("1 Óvulo funcional",rx,sy+290);
+  ctx.fillStyle="#FF6B6B";ctx.font="9px Source Sans 3";ctx.fillText("+ 3 cuerpos polares",rx,sy+305);
+
+  roundRect(ctx,rx-130,sy+330,260,50,8);ctx.fillStyle="rgba(236,72,153,0.06)";ctx.fill();ctx.strokeStyle="rgba(236,72,153,0.15)";ctx.lineWidth=1;ctx.stroke();
+  ctx.fillStyle="#EC4899";ctx.font="bold 10px Source Sans 3";ctx.fillText("✓ Citocinesis asimétrica",rx,sy+348);
+  ctx.fillText("✓ Arresto profase I + metafase II",rx,sy+362);
+  ctx.fillText("✓ ~1 ovocito/mes hasta menopausia",rx,sy+376);
+}
+
+/* ===== GLOSSARY ===== */
+var glossaryData=[
+  {t:"Gametogénesis",d:"Proceso de formación de gametos haploides (espermatozoides y óvulos) a partir de células germinales diploides mediante mitosis y meiosis."},
+  {t:"Espermatogénesis",d:"Formación de espermátidas a partir de espermatogonias, incluye mitosis y meiosis en los túbulos seminíferos. Inicia en la pubertad."},
+  {t:"Espermiogénesis",d:"Diferenciación de espermátidas redondas en espermatozoides maduros. 4 fases: Golgi, Caperuza, Acrosómica, Maduración. Sin divisiones celulares."},
+  {t:"Oogénesis",d:"Formación del gameto femenino. Inicia en vida fetal. Arresto en profase I hasta la ovulación y en metafase II hasta la fecundación."},
+  {t:"Espermatogonia",d:"Célula madre germinal masculina (2n) en la membrana basal del túbulo seminífero. Tipos: células madre oscuras, tipo A y tipo B."},
+  {t:"Espermatocito primario",d:"Célula germinal (2n, 4C) que realiza meiosis I. Profase I dura ~3 semanas con sinapsis y crossing-over."},
+  {t:"Espermatocito secundario",d:"Producto de meiosis I (n, 2C). 23 cromosomas con 2 cromátides cada uno. Vida corta, rápidamente entra en meiosis II."},
+  {t:"Espermátida",d:"Célula haploide (n, 1C) producto de meiosis II. Se diferencia en espermatozoide durante la espermiogénesis."},
+  {t:"Oocito primario",d:"Célula germinal femenina (2n, 4C) arrestada en profase I (dictiotema) dentro de un folículo. Puede permanecer así décadas."},
+  {t:"Oocito secundario",d:"Producto de meiosis I asimétrica (n, 2C). Arrestado en metafase II. Es ovulado en este estado."},
+  {t:"Cuerpo polar",d:"Célula pequeña, casi sin citoplasma, producto de las divisiones meióticas asimétricas en la oogénesis. No funcional."},
+  {t:"Células de Sertoli",d:"Células de soporte del epitelio germinal testicular. Nutren, protegen y regulan las células germinales. Forman barrera hematotesticular."},
+  {t:"Células de Leydig",d:"Células intersticiales del testículo que producen testosterona, esencial para la espermatogénesis y caracteres sexuales."},
+  {t:"Acrosoma",d:"Lisosoma especializado en la cabeza del espermatozoide. Contiene hialuronidasa y acrosina para penetrar las cubiertas del óvulo."},
+  {t:"Protaminas",d:"Péptidos ricos en arginina que reemplazan histonas durante la espermiogénesis, compactando el ADN espermático 6x más."},
+  {t:"Sincitio espermatogénico",d:"Red de células germinales masculinas conectadas por puentes intercelulares (citocinesis incompleta). Permite compartir productos génicos."},
+  {t:"Folículo primordial",d:"Estructura ovárica más simple: un oocito primario rodeado de una capa de células epiteliales planas."},
+  {t:"Zona pelúcida",d:"Capa glicoproteica entre el oocito y las células de la granulosa. Contiene receptores para espermatozoides (ZP3)."},
+  {t:"Dictiotema",d:"Estado de arresto prolongado en profase I de meiosis en los oocitos primarios, desde la vida fetal hasta la ovulación."},
+  {t:"Meiosis",d:"División celular especial que produce células haploides. Meiosis I separa homólogos, meiosis II separa cromátides hermanas."},
+  {t:"No-disyunción",d:"Fallo en la separación de cromosomas homólogos (meiosis I) o cromátides hermanas (meiosis II) → aneuploidía."},
+  {t:"Crossing-over",d:"Intercambio de segmentos entre cromátides de homólogos durante profase I. Genera recombinación y diversidad genética."},
+  {t:"FSH",d:"Hormona foliculoestimulante. En mujeres: estimula crecimiento folicular. En hombres: estimula células de Sertoli."},
+  {t:"LH",d:"Hormona luteinizante. En mujeres: pico ovulatorio que reanuda meiosis I. En hombres: estimula células de Leydig."}
+];
+(function buildGlossary(){
+  var fg=document.getElementById("fg");if(!fg)return;
+  glossaryData.forEach(function(g){
+    var fc=document.createElement("div");fc.className="fc";fc.onclick=function(){fc.classList.toggle("fl")};
+    fc.innerHTML='<div class="ft">'+g.t+'</div><div class="fd">'+g.d+'</div><div class="fh">Clic para ver</div>';
+    fg.appendChild(fc);
+  });
+})();
+
+/* ===== FINAL EVALUATION ===== */
+var evalQs=[
+  {q:"¿Qué es la gametogénesis?",o:["Mitosis de células somáticas","Formación de gametos haploides a partir de células germinales diploides","Fecundación del óvulo","Implantación del embrión"],a:1},
+  {q:"¿Dónde ocurre la espermatogénesis?",o:["En el epidídimo","En los túbulos seminíferos del testículo","En las vesículas seminales","En la próstata"],a:1},
+  {q:"¿Cuál es la función de las células de Sertoli?",o:["Producir testosterona","Soporte, nutrición y protección de las células germinales","Producir espermatozoides","Producir FSH"],a:1},
+  {q:"¿Cuántos cromosomas tiene un espermatocito secundario?",o:["46","23 (cada uno con 2 cromátides)","23 (simples)","92"],a:1},
+  {q:"Un espermatocito primario produce:",o:["1 espermátida","2 espermátidas","4 espermátidas","8 espermátidas"],a:2},
+  {q:"¿Qué son los puentes intercelulares del sincitio espermatogénico?",o:["Uniones gap","Resultado de citocinesis incompleta que conecta células germinales","Conexiones entre Sertoli y Leydig","Uniones entre túbulos"],a:1},
+  {q:"Las fases de la espermiogénesis en orden son:",o:["Caperuza, Golgi, Maduración, Acrosómica","Golgi, Caperuza, Acrosómica, Maduración","Acrosómica, Golgi, Caperuza, Maduración","Golgi, Acrosómica, Caperuza, Maduración"],a:1},
+  {q:"¿Qué contiene el acrosoma?",o:["ADN mitocondrial","Hialuronidasa y acrosina","Protaminas","Testosterona"],a:1},
+  {q:"Durante la fase acrosómica, las histonas son reemplazadas por:",o:["Actina","Tubulina","Protaminas","Queratina"],a:2},
+  {q:"¿Cuándo se forman las oogonias?",o:["En la pubertad","Durante la vida embrionaria","Al nacer","En la menopausia"],a:1},
+  {q:"El oocito primario se arresta en:",o:["Metafase I","Metafase II","Profase I (dictiotema)","Anafase I"],a:2},
+  {q:"¿Qué hormona desencadena la ovulación?",o:["FSH","Estrógeno","Progesterona","LH (pico de LH)"],a:3},
+  {q:"¿En qué fase meiótica se ovula el oocito?",o:["Profase I","Metafase II","Telofase I","Anafase II"],a:1},
+  {q:"¿Cuántos óvulos funcionales produce un oocito primario?",o:["4","3","2","1 (+ 3 cuerpos polares)"],a:3},
+  {q:"La principal diferencia en la citocinesis entre espermatogénesis y oogénesis es:",o:["No hay diferencia","En oogénesis es asimétrica (citoplasma al oocito)","En espermatogénesis es asimétrica","Ambas son incompletas"],a:1},
+  {q:"¿Por qué la no-disyunción es más frecuente con mayor edad materna?",o:["Más mutaciones en el ADN","Degradación de cohesinas por el largo arresto en profase I","El ovario envejece y produce menos FSH","Los espermatozoides son de menor calidad"],a:1},
+  {q:"El síndrome de Klinefelter (47,XXY) se caracteriza por:",o:["Ovarios estriados","Azoospermia, hipogonadismo, túbulos atróficos","Trisomía 21","Ambigüedad genital"],a:1},
+  {q:"¿Cuál NO es una fase de la espermiogénesis?",o:["Golgi","Caperuza","Profásica","Maduración"],a:2},
+  {q:"¿Qué células producen testosterona?",o:["Sertoli","Espermatogonias","Leydig","Granulosa"],a:2},
+  {q:"La meiosis II en la oogénesis se completa:",o:["Antes de la ovulación","Durante la ovulación","Solo si hay fecundación","En la vida fetal"],a:2}
+];
+(function buildEval(){
+  var eq=document.getElementById("eq");if(!eq)return;
+  evalQs.forEach(function(q,i){
+    var div=document.createElement("div");div.className="qq";div.id="eq"+i;
+    var html='<div class="qt">'+(i+1)+". "+q.q+'</div><div class="qo">';
+    q.o.forEach(function(o,j){
+      html+='<button class="qb" onclick="eqa('+i+',this,'+j+')"><div class="ol">'+String.fromCharCode(65+j)+'</div>'+o+'</button>';
+    });
+    html+='</div><div class="qf" id="fb-eq'+i+'"></div>';
+    div.innerHTML=html;eq.appendChild(div);
+  });
+})();
+var evalAnswered=0;
+window.eqa=function(qi,btn,ans){
+  var q=document.getElementById("eq"+qi);if(q.dataset.done)return;q.dataset.done="1";
+  q.querySelectorAll(".qb").forEach(function(b){b.classList.add("dis")});
+  var fb=document.getElementById("fb-eq"+qi);
+  if(ans===evalQs[qi].a){btn.classList.add("ok");fb.classList.add("sh","cf");fb.textContent="\u2705 \u00a1Correcto!";}
+  else{btn.classList.add("no");var btns=q.querySelectorAll(".qb");btns[evalQs[qi].a].classList.add("ok");fb.classList.add("sh","if");fb.textContent="\u274c Incorrecto.";}
+  evalAnswered++;if(evalAnswered>=evalQs.length)document.getElementById("seb").style.display="inline-flex";
+};
+window.se=function(){
+  var correct=0;evalQs.forEach(function(q,i){var el=document.getElementById("eq"+i);if(el.querySelector(".qb.ok")&&!el.querySelector(".qb.no"))correct++});
+  var pct=Math.round(correct/evalQs.length*100);
+  document.getElementById("sn2").textContent=correct+"/"+evalQs.length;
+  document.getElementById("sm2").textContent=pct+"% — "+(pct>=80?"¡Excelente dominio!":pct>=60?"Buen progreso, revisa los temas débiles.":"Necesitas repasar. Regresa a los módulos.");
+  document.getElementById("sdd").style.display="block";
+  setTimeout(function(){document.getElementById("sbf2").style.width=pct+"%";document.getElementById("sbf2").style.background=pct>=80?"var(--grad)":pct>=60?"linear-gradient(135deg,#FFD93D,#F97316)":"linear-gradient(135deg,#FF6B6B,#EC4899)"},100);
+};
+window.iev=function(){
+  evalAnswered=0;document.getElementById("seb").style.display="none";document.getElementById("sdd").style.display="none";
+  evalQs.forEach(function(q,i){
+    var el=document.getElementById("eq"+i);el.removeAttribute("data-done");
+    el.querySelectorAll(".qb").forEach(function(b){b.classList.remove("ok","no","dis")});
+    var fb=document.getElementById("fb-eq"+i);fb.classList.remove("sh","cf","if");fb.textContent="";
+  });
+};
+
+/* ===== INIT ===== */
+document.querySelectorAll(".nl button").forEach(function(b){b.addEventListener("click",function(){go(b.dataset.s)})});
+drawHero();
+</script>
+</body>
+</html>
