@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SME | Cronograma Detallado de Estudio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F8F6F1;--bg-warm:#F0EDE5;--surface:#FFFFFF;--surface-alt:#FAF8F4;
+  --border:#E4DFD5;--border-dark:#D1CABD;
+  --text:#1D1B16;--text-mid:#52504A;--text-light:#8A867D;
+  --accent-red:#B5362A;--accent-red-l:#D94D3F;
+  --accent-teal:#1A7A6A;--accent-teal-l:#25A08C;
+  --accent-blue:#2D5FA0;--accent-blue-l:#4080CC;
+  --accent-amber:#C08A20;--accent-amber-l:#E0A82E;
+  --accent-plum:#7A3B8A;--accent-plum-l:#9D58AF;
+  --accent-olive:#5A7040;
+  --shadow-sm:0 1px 3px rgba(29,27,22,.06);
+  --shadow-md:0 4px 16px rgba(29,27,22,.08);
+  --radius:12px;--radius-lg:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent-teal);color:#fff}
+
+.hero{min-height:62vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem;position:relative;overflow:hidden;background:linear-gradient(165deg,#0F1A14 0%,#1A2A22 30%,#0D1F2A 60%,#0F1A14 100%)}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 700px 500px at 25% 35%,rgba(26,122,106,.15),transparent 70%),radial-gradient(ellipse 500px 600px at 75% 65%,rgba(45,95,160,.10),transparent 70%),radial-gradient(ellipse 300px 300px at 50% 80%,rgba(181,54,42,.08),transparent 70%);pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hero-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border:1px solid rgba(255,255,255,.12);border-radius:40px;color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:2rem;backdrop-filter:blur(6px);animation:slideDown .7s ease both}
+.hero-chip .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-teal-l);animation:glow 2.5s ease infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(37,160,140,.5)}50%{box-shadow:0 0 0 8px rgba(37,160,140,0)}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5.5vw,3.6rem);color:#fff;line-height:1.1;max-width:850px;animation:slideUp .9s ease both .15s}
+.hero h1 em{font-style:italic;color:var(--accent-teal-l)}
+.hero-desc{color:rgba(255,255,255,.5);font-size:1rem;font-weight:300;max-width:640px;margin-top:1.5rem;animation:slideUp .9s ease both .3s}
+@keyframes slideUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+
+.topnav{position:sticky;top:0;z-index:100;background:rgba(248,246,241,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:.55rem 1rem;display:flex;gap:.4rem;overflow-x:auto;justify-content:center}
+.topnav a{white-space:nowrap;padding:.35rem .9rem;border-radius:40px;text-decoration:none;font-size:.78rem;font-weight:500;color:var(--text-mid);border:1px solid transparent;transition:all .22s}
+.topnav a:hover,.topnav a.on{background:var(--surface);border-color:var(--border);color:var(--text)}
+
+.wrap{max-width:1140px;margin:0 auto;padding:4rem 1.5rem}
+.stag{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;color:var(--text-mid)}
+.stag i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.wrap h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.2;margin-bottom:.4rem}
+.wrap .intro{font-size:1.02rem;color:var(--text-mid);max-width:700px;margin-bottom:2rem}
+.rule{max-width:1140px;margin:0 auto;padding:0 1.5rem}
+.rule hr{border:none;border-top:1px solid var(--border)}
+
+.week-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.week-header h3{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:.3rem}
+.week-header .wh-theme{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:.8rem}
+.week-header .wh-obj{font-size:.9rem;color:var(--text-mid);line-height:1.6}
+.week-header .wh-eval{margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.week-header .wh-eval span{padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.3px}
+
+.day-sched{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden;transition:box-shadow .3s}
+.day-sched:hover{box-shadow:var(--shadow-sm)}
+.day-head{padding:1rem 1.4rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:background .2s;border-bottom:1px solid transparent}
+.day-head:hover{background:var(--bg-warm)}
+.day-sched.open .day-head{border-bottom-color:var(--border)}
+.day-dot{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:#fff;flex-shrink:0}
+.day-title{flex:1}
+.day-title strong{font-size:.95rem;display:block}
+.day-title span{font-size:.75rem;color:var(--text-light)}
+.day-hours{font-family:'Fira Code',monospace;font-size:.78rem;color:var(--accent-teal);font-weight:500;background:rgba(26,122,106,.06);padding:3px 10px;border-radius:20px}
+.day-arrow{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--text-light);transition:transform .3s;font-size:.8rem}
+.day-sched.open .day-arrow{transform:rotate(180deg)}
+.day-body{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.day-sched.open .day-body{max-height:6000px}
+.day-inner{padding:0 1.4rem 1.4rem}
+
+.time-block{display:flex;gap:1rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px dashed var(--border)}
+.time-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.tb-time{flex-shrink:0;width:100px;text-align:right;padding-top:2px}
+.tb-time .t-range{font-family:'Fira Code',monospace;font-size:.76rem;color:var(--accent-teal);font-weight:500;display:block;line-height:1.3}
+.tb-time .t-dur{font-size:.68rem;color:var(--text-light)}
+.tb-content{flex:1;min-width:0}
+.tb-content h5{font-size:.9rem;font-weight:600;margin-bottom:.2rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.tb-content h5 .tb-tag{font-size:.6rem;padding:1px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.tb-content p{font-size:.85rem;color:var(--text-mid);line-height:1.6}
+.tb-content .tb-tip{margin-top:.5rem;padding:.5rem .8rem;border-radius:8px;font-size:.8rem;line-height:1.5;border-left:3px solid}
+.tb-content .tb-resources{margin-top:.5rem;font-family:'Fira Code',monospace;font-size:.72rem;color:var(--text-light)}
+
+.strat-box{background:var(--bg-warm);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem;margin-top:1rem}
+.strat-box h5{font-size:.85rem;font-weight:700;margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
+.strat-box p,.strat-box li{font-size:.83rem;color:var(--text-mid);line-height:1.6}
+.strat-box ul{padding-left:1.1rem;margin:.3rem 0}
+.strat-box li{margin-bottom:.2rem}
+.strat-box li strong{color:var(--text)}
+
+.mnemonic{background:linear-gradient(135deg,rgba(26,122,106,.04),rgba(45,95,160,.04));border:1px solid rgba(26,122,106,.15);border-radius:10px;padding:1rem 1.2rem;margin-top:.8rem}
+.mnemonic h6{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent-teal);margin-bottom:.3rem}
+.mnemonic p{font-family:'Fira Code',monospace;font-size:.82rem;color:var(--text);line-height:1.6}
+.mnemonic .mn-explain{font-family:'Source Sans 3',sans-serif;font-size:.8rem;color:var(--text-mid);margin-top:.3rem}
+
+.integ-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.5rem;margin-top:.8rem}
+.integ-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.6rem .8rem;text-align:center;font-size:.78rem;border-top:3px solid}
+.integ-item strong{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.15rem}
+
+.exam-banner{background:linear-gradient(135deg,rgba(181,54,42,.06),rgba(181,54,42,.02));border:1px solid rgba(181,54,42,.2);border-radius:var(--radius);padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.exam-banner .eb-icon{font-size:1.8rem}
+.exam-banner .eb-text{flex:1;min-width:200px}
+.exam-banner .eb-text strong{font-size:1rem;color:var(--accent-red);display:block}
+.exam-banner .eb-text span{font-size:.85rem;color:var(--text-mid)}
+
+.foot{text-align:center;padding:3rem 1.5rem;border-top:1px solid var(--border);font-size:.78rem;color:var(--text-light)}
+.foot strong{color:var(--text-mid)}
+
+@media(max-width:700px){
+  .wrap{padding:2.5rem 1rem}
+  .time-block{flex-direction:column;gap:.3rem}
+  .tb-time{width:auto;text-align:left}
+  .integ-map{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:1.8rem}
+  .exam-banner{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-chip"><span class="pulse-dot"></span> Cronograma Detallado &bull; SME 2026</div>
+  <h1>Cronograma <em>Expandido</em> con Estrategias por Semana</h1>
+  <p class="hero-desc">Plan flexible por bloques de estudio con duraciones sugeridas, ayudas pedagógicas, mnemotecnias y protocolos pre-evaluación. Los sumativos son los lunes: el fin de semana previo es tu ventana de consolidación.</p>
+</section>
+
+<nav class="topnav">
+  <a href="#sem1">Sem 1 · Piel</a><a href="#sem2">Sem 2 · M. Estriado</a><a href="#sem3">Sem 3 · M. Liso</a>
+  <a href="#sem4">Sem 4 · Cartílago</a><a href="#sem5">Sem 5 · Hueso I</a><a href="#sem6">Sem 6 · Hueso II</a><a href="#sem7">Sem 7 · Finales</a>
+</nav>
+
+<!-- ============================================================ -->
+<!--                       SEMANA 1: PIEL                          -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem1">
+<div class="stag"><i style="background:var(--accent-red)"></i> SEMANA 01</div>
+<div class="week-header" style="border-left:4px solid var(--accent-red)">
+  <div class="wh-theme" style="color:var(--accent-red)">Tema Central &mdash; Piel</div>
+  <h3>Piel: De la Histología al Diagnóstico Clínico</h3>
+  <p class="wh-obj">Primera semana del bloque. Conectar la histología normal de piel con sus patologías infecciosas, neoplásicas y farmacoterapia antimicrobiana. Todo el contenido de esta semana y la siguiente será evaluado en el <strong>Sumativo 01 el lunes de la Semana 3</strong>.</p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">Sumativo 01 → lunes Sem 3</span>
+    <span style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Cortos: Histo, BQ, Farmaco, Conducta</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">~28h estudio sugeridas</span>
+  </div>
+</div>
+
+<!-- DÍA 1 S1 -->
+<div class="day-sched open" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-teal)">1</div>
+    <div class="day-title"><strong>Día de Citohistología + Bioquímica</strong><span>Piel (Histología) &bull; Bioenergética &bull; Glucólisis / Gluconeogénesis</span></div>
+    <div class="day-hours">~5.5h estudio</div>
+    <span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Antes de clase</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128257; Anki &mdash; Revisión de tarjetas maduras <span class="tb-tag" style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Diario</span></h5><p>Revisar todas las tarjetas programadas. Si es el primer día, iniciar con un deck básico de histología general.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Antes de clase</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128214; Pre-lectura: Histología de Piel</h5><p>Gartner BRS, sección de piel. Identificar: epidermis (5 estratos), dermis, hipodermis. Marcar células clave: queratinocitos, melanocitos, Langerhans, Merkel. Solo familiarizarse, no memorizar aún.</p><div class="tb-resources">&#128218; Gartner BRS Cell Biology & Histology, 6ta ed.</div></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">En clase</span><span class="t-dur">1h + 2h</span></div>
+      <div class="tb-content">
+        <h5>&#127979; Clase Histo: Piel + Clase BQ: Bioenergética y Glucólisis <span class="tb-tag" style="background:rgba(122,59,138,.1);color:var(--accent-plum)">Presencial</span></h5>
+        <p><strong>Histo:</strong> Estratos, células, anexos. Anotar: ¿qué célula → qué función → qué patología si falla? <strong>BQ:</strong> Moléculas de alta energía, enzimas reguladoras de glucólisis (hexoquinasa, PFK-1, piruvato quinasa), pasos de gluconeogénesis.</p>
+        <div class="tb-tip" style="background:rgba(26,122,106,.04);border-color:var(--accent-teal)"><strong>&#128161; En clase:</strong> No copiar todo. Anotar solo lo que NO está en el libro: énfasis del profesor, correlaciones clínicas, pistas sobre evaluaciones.</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Post-clase</span><span class="t-dur">50 min</span></div>
+      <div class="tb-content"><h5>&#128221; Pomodoro 1: Crear Flashcards <span class="tb-tag" style="background:rgba(181,54,42,.1);color:var(--accent-red)">Activo</span></h5><p>20-25 tarjetas Anki del material de hoy. Formato clínico: "Célula de la epidermis con gránulos de Birbeck, participa en inmunidad cutánea." → "Célula de Langerhans — dendrítica, origen médula ósea, estrato espinoso."</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Post-clase</span><span class="t-dur">50 min</span></div>
+      <div class="tb-content"><h5>&#128300; Pomodoro 2: Dibujar Glucólisis de Memoria</h5><p>Vía completa sin ver notas. Marcar con colores: enzimas reguladoras (rojo), reacciones irreversibles (azul), conexiones con otras vías (verde). Verificar contra el libro.</p><div class="tb-resources">&#128218; Baynes Medical Biochemistry 6ed, Cap 8</div></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Cierre</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#127912; Revisión Visual: Imágenes Histológicas de Piel</h5><p>10 cortes histológicos mínimo: estrato córneo, basal, folículos, glándulas sebáceas y sudoríparas.</p></div>
+    </div>
+    <div class="mnemonic">
+      <h6>&#128161; Estratos de la Epidermis</h6>
+      <p>"<strong>C</strong>arolina <strong>L</strong>ee <strong>G</strong>ana <strong>E</strong>n <strong>B</strong>aile"</p>
+      <p class="mn-explain">Córneo → Lúcido → Granuloso → Espinoso → Basal (superficial a profundo). Lúcido solo en piel gruesa.</p>
+    </div>
+    <div class="strat-box"><h5>&#9889; Integración del día</h5><p>¿Cómo se relacionan glucólisis y piel? Los queratinocitos superficiales dependen de glucólisis anaeróbica porque la epidermis es avascular. Relevante para cicatrización y susceptibilidad a infecciones en diabéticos.</p></div>
+  </div></div>
+</div>
+
+<!-- DÍA 2 S1 -->
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-blue)">2</div>
+    <div class="day-title"><strong>Día de Anatomía + Patología</strong><span>Embriología SME + Cráneo &bull; Patología de Piel (Infecciones + Tumores)</span></div>
+    <div class="day-hours">~6h estudio</div>
+    <span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Antes de clase</span><span class="t-dur">30+30 min</span></div>
+      <div class="tb-content"><h5>&#128257; Anki + &#128214; Pre-lectura Embriología</h5><p>Anki: tarjetas de ayer + revisiones. Pre-lectura: Moore Cap 15. Somitas → esclerotomo (hueso) y miotomo (músculo). Anomalías embrionarias.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">En clase</span><span class="t-dur">2h + 2h</span></div>
+      <div class="tb-content">
+        <h5>&#127979; Anatomía: Embriología + Cráneo &bull; Patología: Piel (2 clases) <span class="tb-tag" style="background:rgba(181,54,42,.1);color:var(--accent-red)">Alta prioridad</span></h5>
+        <p><strong>Anatomía:</strong> Cráneo, fosas, forámenes. <strong>Pato Clase 1:</strong> Infecciones cutáneas + pigmentación. <strong>Clase 2:</strong> Tumores — nevos vs melanoma, BCC vs SCC.</p>
+        <div class="tb-tip" style="background:rgba(181,54,42,.04);border-color:var(--accent-red)"><strong>&#9888; NBME:</strong> Melanoma (ABCDE, Breslow), BCC vs SCC, infecciones bacterianas (impétigo, celulitis, fascitis) son temas recurrentes.</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Post-clase</span><span class="t-dur">50+50+30 min</span></div>
+      <div class="tb-content"><h5>&#128221; Pomodoro 1: Tablas Comparativas de Tumores de Piel &bull; Pomodoro 2: Cráneo en App 3D &bull; Cierre: Flashcards clínicas</h5>
+      <p><strong>Tabla 1:</strong> BCC | SCC | Melanoma (factores, localización, histología, pronóstico). <strong>Tabla 2:</strong> Impétigo | Celulitis | Fascitis (bacteria, profundidad, tto). <strong>3D:</strong> Rotar cráneo, nombrar forámenes sin etiquetas. <strong>Flashcards:</strong> "Lesión perlada con telangiectasias en nariz." → BCC nodular.</p></div>
+    </div>
+    <div class="mnemonic">
+      <h6>&#128161; Melanoma — Regla ABCDE</h6>
+      <p><strong>A</strong>simetría &bull; <strong>B</strong>ordes irregulares &bull; <strong>C</strong>olor variable &bull; <strong>D</strong>iámetro >6mm &bull; <strong>E</strong>volución</p>
+      <p class="mn-explain">Breslow (grosor) = factor pronóstico #1. Nodular = más agresivo. In situ = excelente pronóstico.</p>
+    </div>
+  </div></div>
+</div>
+
+<!-- DÍA 3 S1 -->
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-amber)">3</div>
+    <div class="day-title"><strong>Día de Farmacología + Anatomía Virtual</strong><span>Betalactámicos / Glicopéptidos &bull; Musculatura del Cráneo (TBL)</span></div>
+    <div class="day-hours">~5h estudio</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Antes de clase</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128257; Anki &mdash; Mantener disciplina</h5><p>Con 2 días de tarjetas nuevas acumuladas, no posponer: tarjetas atrasadas crecen exponencialmente.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">En clase</span><span class="t-dur">2h + 2h</span></div>
+      <div class="tb-content">
+        <h5>&#127979; Farmaco: Betalactámicos + Glicopéptidos &bull; Anatomía Virtual: Cráneo (TBL) <span class="tb-tag" style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Alta prioridad</span></h5>
+        <p>Penicilinas, cefalosporinas (generaciones 1-4), carbapenems, monobactams. Vancomicina: PK/PD, Red Man syndrome. Anatomía Virtual: músculos faciales, inervación cutánea (V1-V3).</p>
+        <div class="tb-tip" style="background:rgba(192,138,32,.04);border-color:var(--accent-amber)"><strong>&#9889; Estrategia Farmaco:</strong> "Tarjeta de identidad" por antimicrobiano: Mecanismo → Espectro → PK → EA → Resistencia. Sketchy Pharm es excelente complemento.</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Post-clase</span><span class="t-dur">2×50 min</span></div>
+      <div class="tb-content">
+        <h5>&#128300; Árbol de Beta-lactámicos + Mapa de Integración Semanal</h5>
+        <p><strong>P1:</strong> Árbol de clasificación completo. Por grupo: 1 ejemplo, espectro, EA. <strong>P2:</strong> Mapa integrando Histo piel → Patología infecciosa → Antimicrobiano apropiado.</p>
+        <div class="integ-map">
+          <div class="integ-item" style="border-top-color:var(--accent-plum)"><strong>Histo</strong>Estratos, células, anexos</div>
+          <div class="integ-item" style="border-top-color:var(--accent-blue)"><strong>Anat</strong>Embriología, cráneo</div>
+          <div class="integ-item" style="border-top-color:var(--accent-olive)"><strong>BQ</strong>Glucólisis, gluconeogénesis</div>
+          <div class="integ-item" style="border-top-color:var(--accent-red)"><strong>Pato</strong>Infecciones, tumores piel</div>
+          <div class="integ-item" style="border-top-color:var(--accent-amber)"><strong>Farmaco</strong>β-lactámicos, glicopéptidos</div>
+          <div class="integ-item" style="border-top-color:var(--accent-teal)"><strong>Fisiopato</strong>Dermatosis inflamatorias</div>
+        </div>
+      </div>
+    </div>
+    <div class="mnemonic">
+      <h6>&#128161; Cefalosporinas por Generación</h6>
+      <p>"<strong>1</strong>ra = Gram<strong>+</strong> &bull; <strong>3</strong>ra = Gram<strong>-</strong> &bull; A mayor generación → más Gram-, menos Gram+"</p>
+      <p class="mn-explain">Cefazolina (1ra, profilaxis Qx) → Ceftriaxona (3ra, meningitis, gonorrea) → Cefepime (4ta, Pseudomonas)</p>
+    </div>
+  </div></div>
+</div>
+
+<!-- DÍA 4 S1 -->
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-plum)">4</div>
+    <div class="day-title"><strong>Día de Fisiopatología + Conducta Humana</strong><span>Dermatosis Inflamatorias (prof. invitado) &bull; Fibromialgia vs Fatiga Crónica</span></div>
+    <div class="day-hours">~4.5h estudio</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Antes de clase</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128257; Anki &mdash; Priorizar Patología + Farmaco</h5><p>Las materias con mayor peso evaluativo primero en la revisión.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">En clase</span><span class="t-dur">1h + 1h</span></div>
+      <div class="tb-content">
+        <h5>&#127979; Fisiopatología: Dermatosis Inflamatorias &bull; Conducta: Fibromialgia vs Fatiga Crónica</h5>
+        <p>Lesiones primarias/secundarias, urticaria, dermatitis, acné, exantemas. Fibromialgia, somatización, factores de riesgo. Incluye cortos diagnóstico y al final de clase.</p>
+        <div class="tb-tip" style="background:rgba(26,122,106,.04);border-color:var(--accent-teal)"><strong>&#9888; Corto acumulativo Fisiopato:</strong> Incluye contenido de citohistología y patología. Repasar correlación histo-patológica.</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Post-clase</span><span class="t-dur">50+50+30 min</span></div>
+      <div class="tb-content"><h5>&#129504; Blank Page + &#129309; Teach-Back + &#128221; Flashcards</h5>
+      <p><strong>Blank Page:</strong> Todo lo que recuerdas de la semana, sin notas, cubriendo las 6 materias. Marcar lagunas = prioridad del fin de semana. <strong>Teach-Back:</strong> Explicar tumores de piel y beta-lactámicos a compañero sin notas. <strong>Flashcards:</strong> Fisiopato + conducta humana.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- DÍA 5 S1 -->
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-olive)">5</div>
+    <div class="day-title"><strong>Día de Consolidación</strong><span>Autoevaluación &bull; Preguntas NBME &bull; Pre-lectura Semana 2</span></div>
+    <div class="day-hours">~3.5h estudio</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Bloque 1</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128257; Anki &mdash; Identificar tarjetas que más fallas</h5></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Bloque 2</span><span class="t-dur">50 min</span></div>
+      <div class="tb-content"><h5>&#128300; Autoevaluación de Resultados de Aprendizaje</h5><p>Calificar CADA resultado de aprendizaje de CADA materia 1-5. Todo ≤3 = prioridad para el fin de semana. Esta es la clave de la metacognición.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Bloque 3</span><span class="t-dur">2×50 min</span></div>
+      <div class="tb-content"><h5>&#128221; 15-20 Preguntas Estilo NBME</h5><p>AMBOSS o UWorld: dermatología, piel, infecciones. Revisar TODAS las explicaciones. Anki de lo fallado.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Bloque 4</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128214; Pre-lectura Semana 2</h5><p>Lectura superficial: músculo estriado (Gartner), cuello y columna (Moore), contracción muscular (Baynes). Solo vocabulario.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- FIN DE SEMANA S1 -->
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">F/S</div>
+    <div class="day-title"><strong>Fin de Semana &mdash; Repaso + Descanso</strong><span>Sin sumativo cercano: repaso normal + descanso reparador</span></div>
+    <div class="day-hours">~5h (distribuidas en 2 días)</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Día libre 1</span><span class="t-dur">~3h</span></div>
+      <div class="tb-content"><h5>&#128257; Anki (30min) + Repaso tema débil (90min) + Preguntas (60min)</h5><p>Identificar materia más insegura. Estudio con recuperación activa, no releer. 15 preguntas NBME más.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Día libre 2</span><span class="t-dur">~2h + &#128164;</span></div>
+      <div class="tb-content"><h5>&#128257; Anki + Preparación Semana 2 &bull; Luego: Descanso Obligatorio</h5><p>Lectura previa de los temas clave de Sem 2. <strong>Luego descanso:</strong> ejercicio (30-60 min), socialización, dormir 7-8h. La consolidación de memoria ocurre durante el sueño.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="strat-box" style="margin-top:1.5rem;border-left:4px solid var(--accent-red)">
+  <h5>&#127919; Resumen Sem 1 — Distribución por disciplina</h5>
+  <ul>
+    <li><strong>Patología (piel): ~6h</strong> — Tumores e infecciones = alta prioridad NBME</li>
+    <li><strong>Farmacología (antimicrobianos): ~4h</strong> — Beta-lactámicos y glicopéptidos: mecanismo + EA</li>
+    <li><strong>Citohistología (piel): ~4h</strong> — Imágenes histológicas evaluadas directamente</li>
+    <li><strong>Bioquímica (glucólisis): ~4h</strong> — Base metabólica para semanas siguientes</li>
+    <li><strong>Anatomía (embriología + cráneo): ~4h</strong> — Base del bloque</li>
+    <li><strong>Fisiopatología + Conducta: ~3h</strong> — Integración clínica</li>
+    <li><strong>Anki diario: ~3.5h/semana</strong></li>
+  </ul>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                    SEMANA 2: MÚSCULO ESTRIADO                 -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem2">
+<div class="stag"><i style="background:var(--accent-teal)"></i> SEMANA 02</div>
+<div class="week-header" style="border-left:4px solid var(--accent-teal)">
+  <div class="wh-theme" style="color:var(--accent-teal)">Tema Central &mdash; Músculo Estriado</div>
+  <h3>Contracción, Distrofias y la Unión Neuromuscular</h3>
+  <p class="wh-obj">Semana de alta carga: todas las materias tienen clase. Eje integrador: contracción muscular desde histología → bioquímica → fisiología → patología (distrofias). <strong>El Sumativo 01 es el lunes siguiente (inicio de Sem 3).</strong> El fin de semana de esta semana es la ventana de consolidación pre-sumativo.</p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; SUMATIVO 01 → lunes de Semana 3</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">CBL: Debilidad Muscular</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">~32h estudio sugeridas</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 2</h5>
+  <ul>
+    <li><strong>Día 1 (Histo+BQ):</strong> Anki (30min) → Pre-lectura (30min) → Clase Histo: Músculo estriado → Clase BQ: Contracción + Glucógeno → Post-clase: Integrar sarcómero con puentes cruzados (50min) → Tabla glucogenopatías (50min) → Flashcards (30min)</li>
+    <li><strong>Día 2 (Anat+Pato):</strong> Anki (30min) → Pre-lectura (30min) → Clase Anat: Cuello + Columna (3h) → Clase Pato: Miopatías y Distrofias (2h) → Tablas comparativas Duchenne/Becker/Miotónica + Miastenia/Lambert-Eaton (50min) → Flashcards (50min) → Anatomía 3D columna (30min)</li>
+    <li><strong>Día 3 (Fisio+Farmaco):</strong> Anki (30min) → Clase Fisio: M. Esquelético I-II (2h) → Clase Farmaco: Tto Osteoporosis (1h) → Dibujar curvas longitud-tensión de memoria (50min) → Esquema bifosfonatos (50min) → Gran Mapa de Integración semanal (50min)</li>
+    <li><strong>Día 4 (Fisiopato+Nutri):</strong> Anki (30min) → CBL: Debilidad Muscular (2h, preparar artículo Larson 2020) → Clase Nutrición: Ejercicio (1h) → Blank Page + Teach-Back con compañero (2h)</li>
+    <li><strong>Día 5 (Consolidación):</strong> Anki (30min) → Autoevaluación resultados Sem 1-2 (50min) → 20-25 preguntas NBME (2×50min) → Crear lista priorizada de lagunas para el fin de semana</li>
+  </ul>
+</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#9888;&#65039;</div>
+  <div class="eb-text">
+    <strong>Protocolo Pre-Sumativo 01 — Fin de semana antes del lunes</strong>
+    <span>El Sumativo 01 es el lunes de Semana 3. Este fin de semana es tu ventana de consolidación. NO dejar todo para estos 2 días: solo reforzar lagunas identificadas durante las 2 semanas.</span>
+  </div>
+</div>
+
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">F/S</div>
+    <div class="day-title"><strong>Fin de Semana Pre-Sumativo 01</strong><span>&#9888; Ventana de consolidación antes del examen del lunes</span></div>
+    <div class="day-hours">~8-10h (distribuidas en 2 días)</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado AM</span><span class="t-dur">~4h</span></div>
+      <div class="tb-content"><h5>&#128300; Repaso Dirigido de Lagunas (48h antes)</h5><p>Anki completo (30min) + 3 Pomodoros dedicados a temas calificados ≤3 en la autoevaluación del viernes. Usar recuperación activa: autoexaminarse, dibujar de memoria, explicar en voz alta. <strong>No releer pasivamente.</strong></p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado PM</span><span class="t-dur">~2h</span></div>
+      <div class="tb-content"><h5>&#128221; 20-25 Preguntas NBME de Sem 1-2</h5><p>Cubrir: tumores de piel, infecciones, distrofias, antimicrobianos, contracción muscular. Revisar explicaciones completas. Crear Anki de errores.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo AM</span><span class="t-dur">~2-3h</span></div>
+      <div class="tb-content"><h5>&#129504; Consolidación Final (24h antes)</h5><p>Anki solo tarjetas maduras (30min). Repasar tablas comparativas creadas durante las 2 semanas. Resolver 15-20 preguntas más. Repasar todas las mnemotecnias (ABCDE, glucogenopatías, MG vs LE). <strong>NO aprender material nuevo.</strong></p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo PM</span><span class="t-dur">&#128164;</span></div>
+      <div class="tb-content"><h5>&#127774; Descanso Pre-Examen</h5><p>Máximo 30 min de repaso de esquemas visuales. Luego: descanso activo, cena ligera, preparar materiales para mañana. <strong>Dormir mínimo 7-8 horas.</strong> Estudiar hasta la madrugada produce peor rendimiento que dormir bien.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">&#127919; Lunes</span><span class="t-dur">EXAMEN</span></div>
+      <div class="tb-content"><h5>SUMATIVO 01 — Lunes de Semana 3</h5><p>Desayuno nutritivo, hidratación. No estudiar material nuevo. Máximo 15 min de mnemotecnias. Confiar en la preparación. <strong>Post-examen:</strong> clasificar errores por tipo (no sabía / confundí / mala interpretación) para ajustar estrategia para Sumativo 02.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Distrofias — Duchenne vs Becker</h6>
+  <p><strong>Duchenne = Deleción (sin distrofina)</strong> → inicio ~3-5a, pseudohipertrofia, Gowers+, CPK &#8593;&#8593;&#8593;</p>
+  <p><strong>Becker = Benigna (distrofina anormal)</strong> → inicio tardío, progresión lenta, CPK &#8593;</p>
+  <p class="mn-explain">Ambas ligadas a X. Duchenne: silla de ruedas ~12a, muerte ~20-30a. Becker: ambulatorio >16a.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Miastenia Gravis vs Lambert-Eaton</h6>
+  <p>Miastenia = Mejora con descanso, empeora con actividad → anti-AChR (post) → timoma</p>
+  <p>Lambert = Mejora con actividad repetida → anti-VGCC (pre) → SCLC</p>
+  <p class="mn-explain">Edrofonio mejora MG pero no LE. MG: ptosis, diplopía primero. LE: extremidades proximales primero.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Glucogenopatías — "Very Poor Carbohydrate Metabolism"</h6>
+  <p><strong>V</strong>on Gierke (I): G6Pasa, hígado &#8593;, hipoglicemia | <strong>P</strong>ompe (II): α-glucosidasa, corazón &#8593;&#8593;</p>
+  <p><strong>C</strong>ori (III): desramificante, hígado | <strong>M</strong>cArdle (V): fosforilasa muscular, calambres + mioglobinuria</p>
+</div>
+<div class="strat-box" style="margin-top:1rem;border-left:4px solid var(--accent-teal)">
+  <h5>&#9889; Integración clave — Contracción muscular en 4 niveles</h5>
+  <ul>
+    <li><strong>Histología:</strong> Sarcómero → líneas Z, bandas A/I, zona H → filamentos gruesos/delgados</li>
+    <li><strong>Bioquímica:</strong> Ca²⁺ → troponina C → conformación → ciclo ATPasa miosina → ATP para desacople</li>
+    <li><strong>Fisiología:</strong> Unidad motora → PA → Ca²⁺ del RS → acoplamiento E-C → sumación → curvas L-T y F-V</li>
+    <li><strong>Patología:</strong> Sin distrofina → daño sarcolema → &#8593;CPK → necrosis → distrofia. Anti-AChR → falla transmisión → miastenia</li>
+  </ul>
+  <p><strong>Crear un mapa conceptual que conecte los 4 niveles.</strong> Este es el mejor simulacro para el NBME.</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                    SEMANA 3: MÚSCULO LISO                     -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem3">
+<div class="stag"><i style="background:var(--accent-blue)"></i> SEMANA 03</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#127919;</div>
+  <div class="eb-text">
+    <strong>SUMATIVO 01 — Lunes de esta semana</strong>
+    <span>Después del examen del lunes, inicia el contenido nuevo de Semanas 3-4 que será evaluado en el Sumativo 02 (lunes de Semana 5).</span>
+  </div>
+</div>
+
+<div class="week-header" style="border-left:4px solid var(--accent-blue)">
+  <div class="wh-theme" style="color:var(--accent-blue)">Tema Central &mdash; Músculo Liso + Miembro Superior</div>
+  <h3>Del Músculo Liso a los Tumores de Tejidos Blandos</h3>
+  <p class="wh-obj">Lunes: Sumativo 01, luego inicia contenido nuevo. Comparar contracción liso vs estriado (calmodulina vs troponina). Anatomía del miembro superior. Patología de tumores de tejidos blandos. Fisiopatología de miastenia gravis. Farmaco: inhibidores de síntesis de proteína.</p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; Lunes = Sumativo 01</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Sumativo 02 → lunes Sem 5</span>
+    <span style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Cortos: Histo, BQ, Fisio, Farmaco, Conducta</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 3</h5>
+  <ul>
+    <li><strong>Lunes = SUMATIVO 01.</strong> Después del examen: descanso breve, análisis de errores, luego pre-lectura de contenido nuevo si hay energía. No forzar.</li>
+    <li><strong>Día 2 (Histo+BQ):</strong> Anki (30min) → Pre-lectura (30min) → Clase Histo: Músculo liso → Clase BQ: Regulación de glucosa → Post-clase: Tabla comparativa músculo liso vs estriado (histología + BQ + fisiología), dibujar regulación glucosa hepática (2×50min) → Flashcards (30min)</li>
+    <li><strong>Día 3 (Anat+Pato):</strong> Anki (30min) → Pre-lectura (30min) → Clase Anatomía: Hombro, brazo, antebrazo (3h) → Clase Patología: Tumores tejidos blandos y musculares → Post-clase: Tablas O-I-A-N músculos del brazo, tabla tumores benignos vs malignos, explorar hombro en 3D (2.5h)</li>
+    <li><strong>Día 4 (Fisio+Farmaco):</strong> Anki (30min) → Clase Fisio: Músculo liso I-II → Clase Farmaco: Aminoglucósidos/Tetraciclinas/Macrólidos → Post-clase: Comparar Ca²⁺ en liso vs estriado, "tarjetas de identidad" antimicrobianos, mapa integración semanal (2.5h)</li>
+    <li><strong>Día 5 (Fisiopato+Conducta+Nutri):</strong> Anki (30min) → Clase Fisiopato: Miastenia Gravis → Clase Conducta: Tics/Tourette → Clase Nutrición: Ergogénicos → Post-clase: Blank Page + Teach-Back (2h)</li>
+    <li><strong>Día 6 (Consolidación):</strong> Anki (30min) → Autoevaluación (50min) → 20 preguntas NBME (2×50min) → Pre-lectura Sem 4 (30min)</li>
+    <li><strong>Fin de semana:</strong> Sin sumativo la próxima semana → Anki + repaso tema débil (3h) → Repaso espaciado Sem 1-2 (1.5h) → Descanso obligatorio</li>
+  </ul>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Músculo Liso vs Estriado — Contracción</h6>
+  <p>Liso: Ca²⁺ + <strong>Calmodulina</strong> → <strong>MLCK</strong> → fosforila cadena ligera miosina → contracción</p>
+  <p>Estriado: Ca²⁺ + <strong>Troponina C</strong> → desplaza tropomiosina → expone sitios actina-miosina</p>
+  <p class="mn-explain">Liso: sin sarcómeros, involuntario (ANS + hormonas), tónico. Estriado: sarcómeros organizados, voluntario, fásico.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Antimicrobianos — Subunidad ribosomal</h6>
+  <p>"<strong>Buy AT 30, CELL at 50</strong>"</p>
+  <p class="mn-explain"><strong>30S:</strong> Aminoglucósidos (bactericida, nefro/ototóxico), Tetraciclinas (fotosensibilidad, NO embarazo/niños). <strong>50S:</strong> Cloranfenicol (aplasia medular), Eritromicina (&#8593;QT, CYP), Lincosamidas/clindamicina (C. diff), Linezolid (serotonina).</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                    SEMANA 4: CARTÍLAGO                        -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem4">
+<div class="stag"><i style="background:var(--accent-amber)"></i> SEMANA 04</div>
+<div class="week-header" style="border-left:4px solid var(--accent-amber)">
+  <div class="wh-theme" style="color:var(--accent-amber)">Tema Central &mdash; Cartílago + Transición a Hueso</div>
+  <h3>Cartílago, Colágeno y Enfermedades Genéticas Óseas</h3>
+  <p class="wh-obj">Histología de cartílago e introducción a células óseas. BQ de proteínas y síntesis de colágeno. Patología genética ósea (acondroplasia, OI, osteopetrosis) y tumores de cartílago. Anatomía: mano y plexo braquial. Fisiología: regulación Ca²⁺/PO₄. <strong>El Sumativo 02 es el lunes de Semana 5 — el fin de semana es tu ventana de consolidación.</strong></p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; SUMATIVO 02 → lunes de Semana 5</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Anat Virtual: Articulaciones MS (TBL)</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">~30h estudio sugeridas</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 4</h5>
+  <ul>
+    <li><strong>Día 1 (Histo+BQ):</strong> Anki (30min) → Pre-lectura (30min) → Clase Histo: Cartílago + células óseas → Clase BQ: Proteínas + Síntesis colágeno → Post-clase: Tabla 3 tipos de cartílago, dibujar síntesis de colágeno paso a paso (Vit C, Cu²⁺) (2×50min) → Flashcards (30min)</li>
+    <li><strong>Día 2 (Anat+Pato):</strong> Anki (30min) → Pre-lectura (30min) → Clase Anatomía: Mano + Plexo braquial → Clase Patología: Acondroplasia, OI, osteopetrosis + Tumores cartílago → Post-clase: <strong>Dibujar plexo braquial completo de memoria (3 intentos)</strong>, tabla enfermedades genéticas óseas (2.5h)</li>
+    <li><strong>Día 3 (Fisio+Farmaco+VR):</strong> Anki (30min) → Clase Fisio: Regulación Ca²⁺/PO₄ → Clase Farmaco: Tto osteomielitis → Anatomía Virtual TBL: Articulaciones MS → Post-clase: Esquema integrado PTH-VitD-Calcitonina (2h)</li>
+    <li><strong>Día 4 (Fisiopato):</strong> Anki (30min) → Clase Fisiopato: Osteomielitis/pie diabético → Post-clase: Autoevaluación resultados Sem 3-4 completa, crear lista priorizada de lagunas (2.5h)</li>
+    <li><strong>Día 5 (Pre-sumativo):</strong> Anki (30min) → 3 Pomodoros repaso dirigido temas ≤3 → 25 preguntas NBME Sem 3-4 (4h total)</li>
+  </ul>
+</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#9888;&#65039;</div>
+  <div class="eb-text">
+    <strong>Protocolo Pre-Sumativo 02 — Fin de semana antes del lunes</strong>
+    <span>El Sumativo 02 es el lunes de Semana 5. Usar el mismo protocolo: sábado repaso dirigido + preguntas, domingo consolidación + descanso, dormir bien.</span>
+  </div>
+</div>
+
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">F/S</div>
+    <div class="day-title"><strong>Fin de Semana Pre-Sumativo 02</strong><span>&#9888; Consolidación antes del examen del lunes</span></div>
+    <div class="day-hours">~8-10h (distribuidas)</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado</span><span class="t-dur">~5-6h</span></div>
+      <div class="tb-content"><h5>&#128300; Repaso Dirigido + Preguntas</h5><p>Anki completo (30min) + Pomodoros en temas ≤3 (3×50min) + 20-25 preguntas NBME Sem 3-4 con revisión de explicaciones (90min). Repasar tablas creadas: tumores tejidos blandos, liso vs estriado, antimicrobianos 30S/50S, plexo braquial.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo AM</span><span class="t-dur">~2-3h</span></div>
+      <div class="tb-content"><h5>&#129504; Consolidación Final</h5><p>Anki tarjetas maduras (30min). Repasar mnemotecnias. 15-20 preguntas finales. Repasar esquemas de colágeno, PTH-VitD, plexo braquial. <strong>NO material nuevo.</strong></p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo PM</span><span class="t-dur">&#128164;</span></div>
+      <div class="tb-content"><h5>&#127774; Descanso Pre-Examen → Dormir 7-8h</h5></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">&#127919; Lunes</span><span class="t-dur">EXAMEN</span></div>
+      <div class="tb-content"><h5>SUMATIVO 02 — Lunes de Semana 5</h5><p>Post-examen: clasificar errores, ajustar estrategia para Sumativo 03.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Plexo Braquial — "Robert Taylor Drinks Cold Beer"</h6>
+  <p><strong>R</strong>oots → <strong>T</strong>runks → <strong>D</strong>ivisions → <strong>C</strong>ords → <strong>B</strong>ranches</p>
+  <p>Terminales: Musculocutáneo (bíceps) → Axilar (deltoides) → Radial (extensores, wrist drop) → Mediano (tenar) → Ulnar (garra)</p>
+  <p class="mn-explain">Erb-Duchenne (C5-C6): "waiter's tip". Klumpke (C8-T1): garra + Horner. Radial = surco espiral del húmero → fractura → wrist drop.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Síntesis de Colágeno</h6>
+  <p>Intra: Traducción → <strong>Hidroxilación (Vit C!)</strong> → Glicosilación → Triple hélice</p>
+  <p>Extra: Escisión propéptidos → Tropocolágeno → <strong>Cross-linking (lisil oxidasa, Cu²⁺)</strong></p>
+  <p class="mn-explain">Sin Vit C → escorbuto. Sin Cu²⁺ → Menkes. Defecto Col I → OI (fracturas, escleras azules). Defecto Col III → Ehlers-Danlos vascular.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Regulación del Calcio</h6>
+  <p><strong>PTH = "Phosphate Trashing Hormone"</strong> → &#8593;Ca²⁺, &#8595;PO₄</p>
+  <p>PTH → hueso: resorción (RANKL) → riñón: reabsorbe Ca²⁺, pierde PO₄, activa 1α-hidroxilasa → &#8593;Calcitriol → intestino: absorbe Ca²⁺+PO₄</p>
+  <p class="mn-explain">Calcitonina = "tono down" → inhibe osteoclastos, de células C parafoliculares. Bifosfonatos imitan calcitonina.</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                    SEMANA 5: HUESO I                          -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem5">
+<div class="stag"><i style="background:var(--accent-olive)"></i> SEMANA 05</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#127919;</div>
+  <div class="eb-text">
+    <strong>SUMATIVO 02 — Lunes de esta semana</strong>
+    <span>Después del examen, inicia contenido de Semanas 5-6 para el Sumativo 03 (lunes de Semana 7).</span>
+  </div>
+</div>
+
+<div class="week-header" style="border-left:4px solid var(--accent-olive)">
+  <div class="wh-theme" style="color:var(--accent-olive)">Tema Central &mdash; Hueso I</div>
+  <h3>Fisiología Ósea, Tumores y Osteoporosis</h3>
+  <p class="wh-obj">Lunes: Sumativo 02. Luego: histología del tejido óseo, fisiología de remodelación, tumores óseos, osteoporosis, anatomía de miembro inferior, farmacología de osteoporosis.</p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; Lunes = Sumativo 02</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Sumativo 03 → lunes Sem 7</span>
+    <span style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Conducta: Prof. invitado (asistencia)</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 5</h5>
+  <ul>
+    <li><strong>Lunes = SUMATIVO 02.</strong> Post-examen: análisis de errores, descanso breve. Si hay energía, pre-lectura de tejido óseo.</li>
+    <li><strong>Día 2 (Histo+BQ):</strong> Anki (30min) → Clase Histo: Tejido óseo y células → Clase BQ: Glucuronato → Post-clase: Tabla células óseas (osteoblasto: FA+ / osteocito: mecanosensor / osteoclasto: TRAP+, RANKL), esquema glucuronato (2×50min)</li>
+    <li><strong>Día 3 (Anat+Pato):</strong> Anki (30min) → Clase Anat: Articulaciones + Cadera/muslo (3h) → Clase Pato: Tumores óseos benignos/malignos + patología no neoplásica → Post-clase: <strong>Tabla tumores óseos por edad y localización</strong>, cadera en 3D, tablas O-I-A-N (2.5h)</li>
+    <li><strong>Día 4 (Fisio+Farmaco+VR):</strong> Anki (30min) → Clase Fisio: Fisiología del hueso → Clase Farmaco: Tto osteoporosis → Anatomía Virtual: articulaciones MS → Post-clase: Integrar remodelación ósea (Fisio) + bifosfonatos (Farmaco) + osteoporosis (Fisiopato) (2h)</li>
+    <li><strong>Día 5 (Fisiopato+Conducta+Nutri):</strong> Anki (30min) → Clase Fisiopato: Osteoporosis → Clase Conducta: Impacto psicosocial (prof. invitado, asistencia) → Clase Nutrición: Salud ósea pediátrica → Post-clase: Teach-Back + Blank Page (1.5h)</li>
+    <li><strong>Día 6 (Consolidación):</strong> Anki (30min) → Autoevaluación resultados (50min) → 25 preguntas NBME hueso/osteoporosis/tumores (2×50min) → Pre-lectura Sem 6 (30min)</li>
+    <li><strong>Fin de semana:</strong> Sin sumativo la próxima semana → Anki + repaso (3h) → Repaso espaciado acumulativo Sem 1-4 (2h) → Descanso</li>
+  </ul>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Tumores Óseos — Edad + Localización + Imagen Rx</h6>
+  <p><strong>&lt;20a:</strong> Osteosarcoma (metáfisis, "sunburst", &#8593;FA, Codman) &bull; Ewing (diáfisis, "piel de cebolla", t(11;22))</p>
+  <p><strong>20-40a:</strong> T. células gigantes (epífisis, "burbuja de jabón")</p>
+  <p><strong>&gt;40a:</strong> Metástasis >>> primario (mama, próstata, pulmón, riñón, tiroides)</p>
+  <p class="mn-explain">Osteocondroma = benigno #1. Condrosarcoma = maligno cartilaginoso, >40a, pelvis. Osteoma osteoide = dolor nocturno mejora con aspirina.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Osteoporosis — Diagnóstico y Tratamiento</h6>
+  <p>DEXA: T ≤ -2.5 = osteoporosis &bull; -1 a -2.5 = osteopenia &bull; > -1 = normal</p>
+  <p><strong>1ra línea:</strong> Bifosfonatos (alendronato, zoledronato) → inhiben osteoclastos → EA: osteonecrosis mandibular, fractura atípica, esofagitis</p>
+  <p class="mn-explain">Alternativas: Denosumab (anti-RANKL), Teriparatida (PTH, anabólico), Raloxifeno (SERM, riesgo TVP).</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                    SEMANA 6: HUESO II                         -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem6">
+<div class="stag"><i style="background:var(--accent-plum)"></i> SEMANA 06</div>
+<div class="week-header" style="border-left:4px solid var(--accent-plum)">
+  <div class="wh-theme" style="color:var(--accent-plum)">Tema Central &mdash; Hueso II / Articulaciones</div>
+  <h3>Osificación, Gota y Repaso Final Pre-Sumativo 03</h3>
+  <p class="wh-obj">Última semana de contenido nuevo. Histo: osificación y fracturas. BQ: ácido úrico. Anatomía: miembro inferior + plexo lumbosacro. Fisiopato: gota/pseudogota. Farmaco: AINEs, DMARDs, gota. TBL Fisiología. <strong>Sumativo 03 el lunes de Semana 7 — el fin de semana es tu última ventana de consolidación antes de finales.</strong></p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; SUMATIVO 03 → lunes de Semana 7</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">TBL Fisiología: Hueso (IRAT+GRAT)</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">Lab Patología: Tumores &bull; ~32h estudio</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 6</h5>
+  <ul>
+    <li><strong>Día 1 (Histo+BQ):</strong> Anki (30min) → Clase Histo: Osificación + reparación fracturas → Clase BQ: Ácido úrico → Post-clase: Dibujar ambos tipos de osificación de memoria, esquema síntesis/excreción ácido úrico (2×50min) → Flashcards (30min)</li>
+    <li><strong>Día 2 (Anat+Pato):</strong> Anki (30min) → Clase Anat: Pierna, pie + plexo lumbosacro (3h) → Clase Pato: Tumores óseos (repaso) + Lab tumores (2h) → Post-clase: <strong>Dibujar plexo lumbosacro</strong>, repasar láminas (2h)</li>
+    <li><strong>Día 3 (Fisio+Farmaco):</strong> Anki (30min) → TBL Fisiología: Hueso (IRAT+GRAT, preparar Berne & Levy) → Clase Farmaco: AINEs + AR + Gota (2h) → Post-clase: Tabla COX-1 vs COX-2, esquema gota aguda vs crónica, integrar BQ ácido úrico + Fisiopato gota + Farmaco (2.5h)</li>
+    <li><strong>Día 4 (Fisiopato+Nutri):</strong> Anki (30min) → Clase Fisiopato: Gota y pseudogota → Clase Nutrición: Salud ósea adultos → Autoevaluación resultados Sem 5-6, crear lista lagunas (2.5h)</li>
+    <li><strong>Día 5 (Pre-sumativo):</strong> Anki (30min) → 3 Pomodoros temas débiles → 25-30 preguntas NBME Sem 5-6 (4h total)</li>
+  </ul>
+</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#9888;&#65039;</div>
+  <div class="eb-text">
+    <strong>Protocolo Pre-Sumativo 03 — Fin de semana antes del lunes</strong>
+    <span>El Sumativo 03 es el lunes de Semana 7. Mismo protocolo: sábado repaso + preguntas, domingo consolidación + descanso. Además, este fin de semana marca el inicio del repaso integral para el NBME final.</span>
+  </div>
+</div>
+
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">F/S</div>
+    <div class="day-title"><strong>Fin de Semana Pre-Sumativo 03</strong><span>&#9888; Último sumativo + inicio de repaso para NBME</span></div>
+    <div class="day-hours">~8-10h (distribuidas)</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado</span><span class="t-dur">~5-6h</span></div>
+      <div class="tb-content"><h5>&#128300; Repaso Dirigido Sem 5-6 + Preguntas</h5><p>Anki (30min) + Pomodoros temas ≤3 (3×50min) + 20-25 preguntas NBME. Repasar: tumores óseos por edad, osificación, gota vs pseudogota, AINEs COX, ácido úrico, plexo lumbosacro.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo AM</span><span class="t-dur">~2-3h</span></div>
+      <div class="tb-content"><h5>&#129504; Consolidación Final para Sumativo 03</h5><p>Anki maduras (30min). Tablas + mnemotecnias. 15-20 preguntas. NO material nuevo.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo PM</span><span class="t-dur">&#128164;</span></div>
+      <div class="tb-content"><h5>&#127774; Descanso → Dormir 7-8h</h5></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">&#127919; Lunes</span><span class="t-dur">EXAMEN</span></div>
+      <div class="tb-content"><h5>SUMATIVO 03 — Lunes de Semana 7</h5><p>Después del examen: inicio inmediato de repaso integral para NBME y finales.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; AINEs — COX-1 vs COX-2</h6>
+  <p>No selectivos (ibuprofeno, naproxeno): gastropatía, nefrotoxicidad, antiplaquetario</p>
+  <p>COX-2 selectivos (celecoxib): &#8595;GI pero &#8593;riesgo cardiovascular</p>
+  <p class="mn-explain">Aspirina: irreversible sobre COX-1 plaquetaria → efecto 7-10 días. Única AINE irreversible.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Gota vs Pseudogota — Cristales</h6>
+  <p><strong>Gota:</strong> Urato monosódico = aguja, birrefringencia negativa, 1er MTF ("podagra")</p>
+  <p><strong>Pseudogota:</strong> Pirofosfato Ca²⁺ = romboide, birrefringencia positiva, rodilla</p>
+  <p class="mn-explain">Aguda: colchicina + AINEs + corticoides. Crónica: alopurinol/febuxostat. NUNCA alopurinol en crisis. Lesch-Nyhan: HGPRT → hiperuricemia + automutilación.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Osificación — Endocondral vs Intramembranosa</h6>
+  <p><strong>Endocondral:</strong> Cartílago → hueso. Huesos largos, vértebras. Placa epifisiaria (reserva→proliferación→hipertrofia→calcificación→osificación)</p>
+  <p><strong>Intramembranosa:</strong> Mesénquima → hueso directo. Cráneo, clavícula, mandíbula</p>
+  <p class="mn-explain">Acondroplasia = defecto osificación endocondral (FGFR3). Huesos intramembranosos no se afectan.</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                    SEMANA 7: FINALES + NBME                   -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem7">
+<div class="stag"><i style="background:var(--accent-red)"></i> SEMANA 07</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#127919;</div>
+  <div class="eb-text">
+    <strong>SUMATIVO 03 — Lunes de esta semana &bull; Luego: NBME + Finales</strong>
+    <span>El lunes es el último sumativo. El resto de la semana son exámenes finales de cada disciplina + el NBME (30% de la nota total).</span>
+  </div>
+</div>
+
+<div class="week-header" style="border-left:4px solid var(--accent-red)">
+  <div class="wh-theme" style="color:var(--accent-red)">&#127919; Evaluaciones Finales + NBME</div>
+  <h3>Semana de Finales: Repaso Integral Estratégico</h3>
+  <p class="wh-obj">Lunes: Sumativo 03. Resto de la semana: exámenes finales + NBME. No hay contenido nuevo. Enfoque total: integración entre disciplinas, preguntas de práctica masivas y consolidación de mnemotecnias.</p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; Lunes = Sumativo 03</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">NBME = 30% de la nota final</span>
+    <span style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Finales de todas las disciplinas</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Plan de Repaso — Semana 7 (post-Sumativo 03)</h5>
+  <ul>
+    <li><strong>Lunes = SUMATIVO 03.</strong> Después del examen: descanso breve, luego iniciar repaso integral para finales.</li>
+    <li><strong>Día 2 — Patología + Farmacología:</strong> Anki completo (45min) → Repasar TODAS las tablas comparativas del bloque (2h) → 30 preguntas NBME variadas (1.5h) → Farmacología: antimicrobianos + AINEs + osteoporosis + gota en secuencia (2h)</li>
+    <li><strong>Día 3 — Fisiología + Bioquímica:</strong> Anki (45min) → Dibujar de memoria: curvas contracción, regulación Ca²⁺, remodelación ósea (2h) → Rutas BQ: glucólisis, glucógeno, colágeno, ácido úrico (2h) → 30 preguntas NBME (1.5h)</li>
+    <li><strong>Día 4 — Anatomía + Citohistología:</strong> Anki (45min) → Plexos braquial + lumbosacro con lesiones clínicas de memoria (2h) → Imágenes histológicas de todos los tejidos del bloque (1.5h) → 25 preguntas NBME integradas (1.5h)</li>
+    <li><strong>Día 5 — Lagunas + Fisiopatología + Conducta + Nutrición:</strong> Anki (30min) → Temas con lagunas (2h) → Fisiopato: debilidad muscular, osteoporosis, gota, osteomielitis, miastenia (1.5h) → Conducta + Nutrición rápido (1h) → Descanso PM</li>
+    <li><strong>Días de examen:</strong> Noche antes: solo mnemotecnias (30min) + dormir 7-8h. Entre exámenes: Anki + repaso dirigido del siguiente.</li>
+  </ul>
+</div>
+
+<div class="strat-box" style="margin-top:1rem;border-left:4px solid var(--accent-teal)">
+  <h5>&#9745; Checklist Pre-NBME — Temas de Mayor Rendimiento</h5>
+  <ul>
+    <li><strong>Patología:</strong> Melanoma (ABCDE, Breslow) &#9745; BCC vs SCC &#9745; Duchenne vs Becker &#9745; Miastenia vs Lambert-Eaton &#9745; Osteosarcoma vs Ewing &#9745; Enfermedades metabólicas óseas &#9745; Gota vs pseudogota</li>
+    <li><strong>Farmacología:</strong> Beta-lactámicos &#9745; 30S vs 50S &#9745; AINEs COX-1/COX-2 &#9745; Bifosfonatos &#9745; Gota aguda vs crónica &#9745; Relajantes musculares</li>
+    <li><strong>Fisiología:</strong> Contracción muscular &#9745; Regulación Ca²⁺/PO₄ &#9745; Fibras musculares I/II &#9745; Remodelación ósea &#9745; Liso vs estriado</li>
+    <li><strong>Bioquímica:</strong> Glucogenopatías &#9745; Síntesis colágeno &#9745; Ácido úrico &#9745; Contracción bioquímica</li>
+    <li><strong>Anatomía:</strong> Plexo braquial (Erb, Klumpke, wrist/ape/garra) &#9745; Plexo lumbosacro (foot drop) &#9745; Articulaciones principales</li>
+    <li><strong>Histo:</strong> Piel &#9745; Músculo (3 tipos) &#9745; Cartílago (3 tipos) &#9745; Hueso &#9745; Osificación</li>
+  </ul>
+</div>
+</section>
+
+<div class="foot">
+  <p><strong>Sistema Músculo Esquelético — Cronograma Expandido</strong> &bull; Facultad de Medicina UFM &bull; Abril 2026</p>
+  <p style="margin-top:.3rem">Sumativos: lunes de Sem 3, 5 y 7 &bull; NBME: Semana 7 &bull; Fin de semana previo = ventana de consolidación</p>
+  <p style="margin-top:.5rem;font-size:.7rem">Evidencia: Durrani et al. BMC Med Educ 2024 &bull; Martinengo et al. JMIR 2024 &bull; PMC 10842980 &bull; PMC 12292765 &bull; Springer Med Sci Educ 2025</p>
+</div>
+
+<script>
+function toggleDay(el){el.classList.toggle('open')}
+const sections=document.querySelectorAll('.wrap[id]');
+const navLinks=document.querySelectorAll('.topnav a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){navLinks.forEach(l=>l.classList.remove('on'));const a=document.querySelector('.topnav a[href="#'+e.target.id+'"]');if(a)a.classList.add('on')}})
+},{threshold:.15});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

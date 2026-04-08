@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomía MSK | Estrategias para el Éxito</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F6F1;
+  --bg-warm: #F0EDE5;
+  --surface: #FFFFFF;
+  --surface-alt: #FAF8F4;
+  --border: #E4DFD5;
+  --border-dark: #D1CABD;
+  --text: #1D1B16;
+  --text-mid: #52504A;
+  --text-light: #8A867D;
+  --accent-red: #B5362A;
+  --accent-red-l: #D94D3F;
+  --accent-teal: #1A7A6A;
+  --accent-teal-l: #25A08C;
+  --accent-blue: #2D5FA0;
+  --accent-blue-l: #4080CC;
+  --accent-amber: #C08A20;
+  --accent-amber-l: #E0A82E;
+  --accent-plum: #7A3B8A;
+  --accent-plum-l: #9D58AF;
+  --accent-olive: #5A7040;
+  --shadow-sm: 0 1px 3px rgba(29,27,22,.06);
+  --shadow-md: 0 4px 16px rgba(29,27,22,.08);
+  --shadow-lg: 0 12px 40px rgba(29,27,22,.10);
+  --radius: 12px;
+  --radius-lg: 18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent-teal);color:#fff}
+img{max-width:100%;display:block}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:2rem;position:relative;overflow:hidden;
+  background:linear-gradient(165deg,#0F1A14 0%,#1A2A22 30%,#0D1F2A 60%,#0F1A14 100%);
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 700px 500px at 25% 35%,rgba(26,122,106,.15),transparent 70%),
+    radial-gradient(ellipse 500px 600px at 75% 65%,rgba(45,95,160,.10),transparent 70%),
+    radial-gradient(ellipse 300px 300px at 50% 80%,rgba(181,54,42,.08),transparent 70%);
+  pointer-events:none;
+}
+.hero>*{position:relative;z-index:1}
+.hero-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 16px;border:1px solid rgba(255,255,255,.12);
+  border-radius:40px;color:rgba(255,255,255,.5);
+  font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;
+  margin-bottom:2rem;backdrop-filter:blur(6px);
+  animation:slideDown .7s ease both;
+}
+.hero-chip .pulse-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--accent-teal-l);
+  animation:glow 2.5s ease infinite;
+}
+@keyframes glow{
+  0%,100%{box-shadow:0 0 0 0 rgba(37,160,140,.5)}
+  50%{box-shadow:0 0 0 8px rgba(37,160,140,0)}
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,6.5vw,4.8rem);
+  color:#fff;line-height:1.1;max-width:850px;
+  animation:slideUp .9s ease both .15s;
+}
+.hero h1 em{font-style:italic;color:var(--accent-teal-l)}
+.hero-desc{
+  color:rgba(255,255,255,.5);font-size:1.05rem;font-weight:300;
+  max-width:620px;margin-top:1.5rem;
+  animation:slideUp .9s ease both .3s;
+}
+.hero-actions{
+  margin-top:2.5rem;display:flex;gap:.8rem;flex-wrap:wrap;
+  justify-content:center;animation:slideUp .9s ease both .45s;
+}
+.hero-actions a{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.75rem 1.6rem;border-radius:40px;
+  text-decoration:none;font-weight:600;font-size:.88rem;
+  transition:all .3s;
+}
+.btn-fill{background:var(--accent-teal);color:#fff}
+.btn-fill:hover{background:var(--accent-teal-l);transform:translateY(-2px)}
+.btn-ghost{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.7)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);color:#fff}
+@keyframes slideUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== STICKY NAV ===== */
+.topnav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(248,246,241,.93);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:.55rem 1rem;display:flex;gap:.4rem;
+  overflow-x:auto;justify-content:center;
+}
+.topnav a{
+  white-space:nowrap;padding:.35rem .9rem;border-radius:40px;
+  text-decoration:none;font-size:.78rem;font-weight:500;
+  color:var(--text-mid);border:1px solid transparent;
+  transition:all .22s;
+}
+.topnav a:hover,.topnav a.on{background:var(--surface);border-color:var(--border);color:var(--text)}
+
+/* ===== SECTIONS ===== */
+.wrap{max-width:1080px;margin:0 auto;padding:4rem 1.5rem}
+.stag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
+  font-weight:600;margin-bottom:1rem;color:var(--text-mid);
+}
+.stag i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.wrap h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.2;margin-bottom:.4rem}
+.wrap .intro{font-size:1.02rem;color:var(--text-mid);max-width:680px;margin-bottom:2rem}
+.rule{max-width:1080px;margin:0 auto;padding:0 1.5rem}
+.rule hr{border:none;border-top:1px solid var(--border)}
+
+/* ===== DIAGNOSIS PANEL (identify the problem) ===== */
+.diag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.2rem;margin-top:1.5rem}
+.diag-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.6rem;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.diag-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.diag-card .d-icon{
+  width:42px;height:42px;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;font-size:1.2rem;
+  margin-bottom:.8rem;
+}
+.diag-card h3{font-size:1.05rem;font-weight:600;margin-bottom:.4rem}
+.diag-card p{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+.diag-card .d-tag{
+  margin-top:.8rem;display:inline-block;padding:2px 8px;
+  border-radius:4px;font-size:.68rem;font-weight:600;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+
+/* ===== EVIDENCE ACCORDION ===== */
+.accordion{display:flex;flex-direction:column;gap:.6rem;margin-top:1.5rem}
+.acc-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:box-shadow .3s;
+}
+.acc-item:hover{box-shadow:var(--shadow-sm)}
+.acc-head{
+  padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1rem;
+  cursor:pointer;transition:background .2s;
+}
+.acc-head:hover{background:var(--bg-warm)}
+.acc-badge{
+  width:36px;height:36px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.acc-title{flex:1;font-weight:600;font-size:.95rem}
+.acc-evi{
+  font-size:.65rem;text-transform:uppercase;letter-spacing:1px;
+  padding:2px 8px;border-radius:20px;font-weight:600;
+  white-space:nowrap;
+}
+.acc-arrow{
+  width:20px;height:20px;display:flex;align-items:center;
+  justify-content:center;color:var(--text-light);
+  transition:transform .3s;font-size:.8rem;
+}
+.acc-item.open .acc-arrow{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.acc-item.open .acc-body{max-height:2000px}
+.acc-inner{padding:0 1.4rem 1.4rem;font-size:.9rem;color:var(--text-mid);line-height:1.7}
+.acc-inner h4{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text);margin-bottom:.5rem}
+.acc-inner ul{padding-left:1.2rem;margin:.6rem 0}
+.acc-inner li{margin-bottom:.4rem}
+.acc-inner li strong{color:var(--text)}
+.acc-inner .cite{
+  margin-top:.8rem;padding-top:.6rem;border-top:1px solid var(--border);
+  font-family:'Fira Code',monospace;font-size:.72rem;color:var(--text-light);
+}
+
+/* ===== MSK ANATOMY MAP ===== */
+.region-tabs{display:flex;gap:.3rem;margin-bottom:1.2rem;overflow-x:auto;padding-bottom:.3rem}
+.region-btn{
+  padding:.55rem 1.1rem;border:1px solid var(--border);
+  border-radius:40px;background:var(--surface);
+  font-family:'Source Sans 3',sans-serif;font-size:.82rem;
+  font-weight:500;color:var(--text-mid);cursor:pointer;
+  white-space:nowrap;transition:all .22s;
+}
+.region-btn:hover{border-color:var(--accent-teal);color:var(--accent-teal)}
+.region-btn.active{background:var(--accent-teal);color:#fff;border-color:var(--accent-teal)}
+.region-panel{display:none;animation:slideUp .35s ease}
+.region-panel.active{display:block}
+.anat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.anat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.3rem;
+  border-left:3px solid;transition:all .3s;
+}
+.anat-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.anat-card h4{font-size:.95rem;font-weight:600;margin-bottom:.3rem}
+.anat-card p{font-size:.85rem;color:var(--text-mid);line-height:1.6}
+.anat-card .mnemonic{
+  margin-top:.6rem;padding:.5rem .8rem;
+  background:var(--bg-warm);border-radius:8px;
+  font-family:'Fira Code',monospace;font-size:.78rem;
+  color:var(--accent-teal);font-weight:500;
+}
+
+/* ===== INTERVENTION TIMELINE ===== */
+.timeline{position:relative;margin-top:2rem;padding-left:40px}
+.timeline::before{
+  content:'';position:absolute;left:16px;top:0;bottom:0;
+  width:2px;background:linear-gradient(to bottom,var(--accent-teal),var(--accent-blue),var(--accent-plum));
+  border-radius:2px;
+}
+.tl-item{position:relative;margin-bottom:2rem}
+.tl-dot{
+  position:absolute;left:-32px;top:4px;
+  width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:700;color:#fff;
+}
+.tl-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.4rem 1.6rem;
+  transition:all .3s;
+}
+.tl-card:hover{box-shadow:var(--shadow-md)}
+.tl-card h4{font-size:1rem;font-weight:600;margin-bottom:.3rem}
+.tl-card .tl-when{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:1px;
+  font-weight:600;margin-bottom:.5rem;
+}
+.tl-card p,.tl-card li{font-size:.88rem;color:var(--text-mid);line-height:1.65}
+.tl-card ul{padding-left:1.1rem;margin:.5rem 0}
+.tl-card li{margin-bottom:.3rem}
+
+/* ===== SELF-ASSESSMENT TOOL ===== */
+.assess-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:2rem;margin-top:1.5rem;
+}
+.assess-q{margin-bottom:1.5rem}
+.assess-q p{font-weight:500;margin-bottom:.6rem;font-size:.92rem}
+.likert{display:flex;gap:.4rem;flex-wrap:wrap}
+.likert label{
+  padding:.45rem .9rem;border:1px solid var(--border);
+  border-radius:8px;font-size:.8rem;cursor:pointer;
+  transition:all .22s;display:flex;align-items:center;gap:.4rem;
+}
+.likert input{display:none}
+.likert input:checked+span{font-weight:600}
+.likert label:has(input:checked){
+  background:var(--accent-teal);color:#fff;border-color:var(--accent-teal);
+}
+.likert label:hover{border-color:var(--accent-teal);background:rgba(26,122,106,.05)}
+.assess-result{
+  margin-top:1.5rem;padding:1.5rem;border-radius:var(--radius);
+  display:none;animation:slideUp .4s ease;
+}
+.assess-result.show{display:block}
+.assess-result h4{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:.5rem}
+.assess-result p{font-size:.9rem;color:var(--text-mid);line-height:1.7}
+.assess-btn{
+  margin-top:1rem;padding:.7rem 1.5rem;border:none;
+  border-radius:40px;background:var(--accent-teal);
+  color:#fff;font-family:'Source Sans 3',sans-serif;
+  font-weight:600;font-size:.88rem;cursor:pointer;
+  transition:all .25s;
+}
+.assess-btn:hover{background:var(--accent-teal-l);transform:translateY(-2px)}
+
+/* ===== RESOURCE CARDS ===== */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem;margin-top:1.5rem}
+.res-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.5rem;
+  display:flex;flex-direction:column;gap:.5rem;
+  transition:all .3s;
+}
+.res-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.res-card .r-type{
+  font-size:.65rem;text-transform:uppercase;letter-spacing:1.5px;
+  font-weight:600;
+}
+.res-card h4{font-size:1rem;font-weight:600}
+.res-card p{font-size:.85rem;color:var(--text-mid);line-height:1.6;flex:1}
+.res-card .r-tags{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.4rem}
+.res-card .r-tag{
+  padding:2px 7px;border-radius:4px;font-size:.68rem;
+  font-weight:600;text-transform:uppercase;letter-spacing:.3px;
+}
+
+/* ===== WEEKLY PLANNER ===== */
+.planner{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.5rem}
+.plan-day{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.3rem;
+  transition:all .3s;
+}
+.plan-day:hover{box-shadow:var(--shadow-sm)}
+.plan-day .pd-label{
+  font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;
+  font-weight:700;margin-bottom:.5rem;display:flex;
+  align-items:center;gap:.5rem;
+}
+.plan-day .pd-label i{
+  width:22px;height:22px;border-radius:6px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:.65rem;color:#fff;font-style:normal;
+}
+.plan-day ul{padding-left:1rem;margin:0}
+.plan-day li{font-size:.85rem;color:var(--text-mid);margin-bottom:.3rem;line-height:1.55}
+.plan-day li strong{color:var(--text)}
+
+/* ===== FOOTER ===== */
+.foot{
+  text-align:center;padding:3rem 1.5rem;
+  border-top:1px solid var(--border);
+  font-size:.78rem;color:var(--text-light);
+}
+.foot strong{color:var(--text-mid)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:700px){
+  .wrap{padding:2.5rem 1rem}
+  .anat-grid,.res-grid,.planner{grid-template-columns:1fr}
+  .diag-grid{grid-template-columns:1fr}
+  .region-tabs{gap:.2rem}
+  .hero h1{font-size:2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-chip"><span class="pulse-dot"></span> Anatomía MSK &bull; Evidencia 2024-2026</div>
+  <h1>Dominando la <em>Anatomía</em> Musculoesquelética</h1>
+  <p class="hero-desc">Recursos, estrategias e intervenciones basadas en evidencia para estudiantes de medicina que enfrentan retos en anatomía del sistema musculoesquelético.</p>
+  <div class="hero-actions">
+    <a href="#diagnostico" class="btn-fill">&#9660; Identificar el reto</a>
+    <a href="#estrategias" class="btn-ghost">Ver estrategias &#8594;</a>
+  </div>
+</section>
+
+<!-- ========== NAV ========== -->
+<nav class="topnav" id="nav">
+  <a href="#diagnostico">Diagnóstico</a>
+  <a href="#estrategias">Estrategias</a>
+  <a href="#regiones">Atlas Integrado</a>
+  <a href="#intervenciones">Intervenciones</a>
+  <a href="#autoevaluacion">Autoevaluación</a>
+  <a href="#planificador">Planificador</a>
+  <a href="#recursos">Recursos</a>
+</nav>
+
+<!-- ========== 1. DIAGNÓSTICO ========== -->
+<section class="wrap" id="diagnostico">
+  <div class="stag"><i style="background:var(--accent-red)"></i> SECCIÓN 01</div>
+  <h2>¿Por qué es difícil la anatomía MSK?</h2>
+  <p class="intro">El primer paso para mejorar es identificar la raíz de la dificultad. La evidencia muestra que los estudiantes con dificultades en anatomía suelen presentar patrones identificables que pueden abordarse con intervenciones específicas.</p>
+
+  <div class="diag-grid">
+    <div class="diag-card">
+      <div class="d-icon" style="background:rgba(181,54,42,.08);color:var(--accent-red)">&#128736;</div>
+      <h3>Estrategias de estudio ineficaces</h3>
+      <p>Releer notas y resaltar texto son las estrategias más utilizadas pero menos efectivas. Los estudiantes con dificultades dedican más tiempo a crear material que a practicar recuperación activa.</p>
+      <span class="d-tag" style="background:rgba(181,54,42,.08);color:var(--accent-red)">Más frecuente</span>
+    </div>
+    <div class="diag-card">
+      <div class="d-icon" style="background:rgba(26,122,106,.08);color:var(--accent-teal)">&#128065;</div>
+      <h3>Déficit en razonamiento espacial</h3>
+      <p>La anatomía MSK exige visualización tridimensional. Traducir imágenes 2D de atlas a relaciones espaciales reales es un salto cognitivo que muchos estudiantes no han desarrollado previamente.</p>
+      <span class="d-tag" style="background:rgba(26,122,106,.08);color:var(--accent-teal)">Específico MSK</span>
+    </div>
+    <div class="diag-card">
+      <div class="d-icon" style="background:rgba(45,95,160,.08);color:var(--accent-blue)">&#128300;</div>
+      <h3>Memorización sin contexto clínico</h3>
+      <p>Memorizar estructuras aisladas sin conectarlas con presentaciones clínicas resulta en conocimiento frágil que no resiste la transferencia a viñetas clínicas en exámenes.</p>
+      <span class="d-tag" style="background:rgba(45,95,160,.08);color:var(--accent-blue)">Alto impacto</span>
+    </div>
+    <div class="diag-card">
+      <div class="d-icon" style="background:rgba(192,138,32,.08);color:var(--accent-amber)">&#9200;</div>
+      <h3>Sobrecarga y mala distribución del tiempo</h3>
+      <p>El volumen del material MSK lleva a "maratones" de estudio concentrado antes de exámenes. La práctica masiva produce retención a corto plazo pero no consolida memoria duradera.</p>
+      <span class="d-tag" style="background:rgba(192,138,32,.08);color:var(--accent-amber)">Gestión</span>
+    </div>
+    <div class="diag-card">
+      <div class="d-icon" style="background:rgba(122,59,138,.08);color:var(--accent-plum)">&#128161;</div>
+      <h3>Baja metacognición</h3>
+      <p>Estudiantes con dificultades tienden a sobreestimar su nivel de preparación. No identifican con precisión qué saben y qué no, lo que lleva a una distribución ineficiente del esfuerzo.</p>
+      <span class="d-tag" style="background:rgba(122,59,138,.08);color:var(--accent-plum)">Metacognitivo</span>
+    </div>
+    <div class="diag-card">
+      <div class="d-icon" style="background:rgba(90,112,64,.08);color:var(--accent-olive)">&#129504;</div>
+      <h3>Desconexión entre disciplinas</h3>
+      <p>Tratar anatomía como un silo separado de histología, fisiología y patología impide la integración necesaria para responder preguntas de evaluaciones integradas por sistemas.</p>
+      <span class="d-tag" style="background:rgba(90,112,64,.08);color:var(--accent-olive)">Integración</span>
+    </div>
+  </div>
+</section>
+
+<div class="rule"><hr></div>
+
+<!-- ========== 2. ESTRATEGIAS BASADAS EN EVIDENCIA ========== -->
+<section class="wrap" id="estrategias">
+  <div class="stag"><i style="background:var(--accent-teal)"></i> SECCIÓN 02</div>
+  <h2>Estrategias con Mayor Evidencia</h2>
+  <p class="intro">Cada estrategia incluye su nivel de evidencia, aplicación específica para anatomía MSK y referencias clave. Expandir cada una para ver los detalles de implementación.</p>
+
+  <div class="accordion" id="accStrategies">
+
+    <div class="acc-item" onclick="toggleAcc(this)">
+      <div class="acc-head">
+        <div class="acc-badge" style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#128257;</div>
+        <span class="acc-title">1. Reaprendizaje Sucesivo (Successive Relearning)</span>
+        <span class="acc-evi" style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Evidencia alta</span>
+        <span class="acc-arrow">&#9660;</span>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <h4>La combinación más poderosa: práctica de recuperación + distribución espaciada</h4>
+        <p>Esta estrategia combina auto-evaluación activa (flashcards, preguntas) con repetición distribuida hasta que el estudiante puede responder correctamente todas las preguntas. Es la estrategia con mayor evidencia para anatomía clínica.</p>
+        <ul>
+          <li><strong>Cómo aplicar en MSK:</strong> Crear un set de preguntas por región anatómica (ej: 20 preguntas sobre el hombro). Practicar hasta acertar todas. Repetir el set 3 días después, luego 7 días después, luego 14 días.</li>
+          <li><strong>Formato ideal:</strong> Preguntas de aplicación clínica: "Un paciente no puede abducir el brazo de 0° a 15°. ¿Qué músculo está afectado?" en lugar de "¿Cuál es la función del supraespinoso?"</li>
+          <li><strong>Herramientas:</strong> Anki con algoritmo de repetición espaciada, decks de anatomía prexistentes (AnKing), o creación propia (preferible por el efecto de generación).</li>
+          <li><strong>Evidencia del efecto:</strong> Dobson et al. (2017) demostraron que la recuperación distribuida produjo retención significativamente superior de información anatómica comparada con estudio masivo.</li>
+        </ul>
+        <div class="cite">Rawson et al., 2013 &bull; Dobson et al., Anat Sci Educ 2017 &bull; PMC 7379743</div>
+      </div></div>
+    </div>
+
+    <div class="acc-item" onclick="toggleAcc(this)">
+      <div class="acc-head">
+        <div class="acc-badge" style="background:rgba(26,122,106,.1);color:var(--accent-teal)">&#127912;</div>
+        <span class="acc-title">2. Codificación Dual y Visualización 3D</span>
+        <span class="acc-evi" style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Evidencia alta</span>
+        <span class="acc-arrow">&#9660;</span>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <h4>Combinar representaciones verbales con modelos visuales tridimensionales</h4>
+        <p>Una revisión sistemática encontró que la mayoría de estudios muestran superioridad de modelos 3D sobre métodos 2D tradicionales para anatomía MSK. Los estudiantes con modelos 3D reportan mayor confianza y mejor capacidad de visualización.</p>
+        <ul>
+          <li><strong>Aplicación MSK:</strong> Usar software 3D (Complete Anatomy, Visible Body, BioDigital) para rotar, aislar y explorar estructuras del hombro, cadera, rodilla antes de revisar el texto.</li>
+          <li><strong>Estrategia "desensamblaje mental":</strong> En la app 3D, quitar capas (piel → fascia → músculo → nervios → vasos → hueso) mientras verbalizas la función de cada estructura.</li>
+          <li><strong>Auto-dibujo:</strong> Después de estudiar con 3D, cerrar la app y dibujar de memoria las estructuras clave con sus relaciones. Comparar con la imagen original.</li>
+          <li><strong>Hallazgo clave:</strong> Los modelos 3D son especialmente efectivos para regiones de alta complejidad espacial como el hombro y la pelvis (Safir et al., Anat Sci Educ 2025).</li>
+        </ul>
+        <div class="cite">Triepels et al., Clin Anat 2019 &bull; Safir et al., 2025 &bull; Yammine & Violato, 2015</div>
+      </div></div>
+    </div>
+
+    <div class="acc-item" onclick="toggleAcc(this)">
+      <div class="acc-head">
+        <div class="acc-badge" style="background:rgba(45,95,160,.1);color:var(--accent-blue)">&#128300;</div>
+        <span class="acc-title">3. Aprendizaje Basado en Casos Clínicos</span>
+        <span class="acc-evi" style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Evidencia alta</span>
+        <span class="acc-arrow">&#9660;</span>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <h4>Construir conocimiento anatómico desde las presentaciones clínicas</h4>
+        <p>Un estudio en tres escuelas de medicina norteamericanas encontró que los estudiantes que integraron casos clínicos con su estudio de anatomía tuvieron calificaciones significativamente mejores en evaluaciones prácticas. Construir conocimiento desde la clínica hacia la ciencia básica es más eficiente y produce recuerdos más duraderos.</p>
+        <ul>
+          <li><strong>"Backward design" en MSK:</strong> Partir de presentaciones comunes: caída de muñeca → nervio radial → surco espiral del húmero → fractura de diáfisis → mecanismo de lesión.</li>
+          <li><strong>Presentaciones clave para anclar:</strong> Wrist drop, foot drop, escápula alada, mano en garra, "waiter's tip", síndrome del túnel carpiano, hombro doloroso.</li>
+          <li><strong>Método:</strong> Para cada presentación clínica, mapear: (1) nervio afectado, (2) origen anatómico, (3) mecanismo de lesión, (4) músculos afectados, (5) déficit sensitivo, (6) prueba clínica.</li>
+          <li><strong>Evidencia:</strong> Módulos en línea con casos clínicos mejoraron significativamente el conocimiento MSK en estudiantes preclínicos (PMC 11527842, 2024).</li>
+        </ul>
+        <div class="cite">Anat Sci Educ 2021 &bull; PMC 11527842, 2024 &bull; Musculoskeletal Key, 2025</div>
+      </div></div>
+    </div>
+
+    <div class="acc-item" onclick="toggleAcc(this)">
+      <div class="acc-head">
+        <div class="acc-badge" style="background:rgba(192,138,32,.1);color:var(--accent-amber)">&#129309;</div>
+        <span class="acc-title">4. Aprendizaje entre Pares y Enseñanza Recíproca</span>
+        <span class="acc-evi" style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Evidencia moderada-alta</span>
+        <span class="acc-arrow">&#9660;</span>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <h4>Enseñar a otros como la forma más profunda de aprendizaje</h4>
+        <p>Explicar conceptos anatómicos a un compañero obliga a organizar el conocimiento, identificar lagunas y reformular información en lenguaje propio. Los programas de tutorías entre pares (near-peer teaching) han demostrado beneficios tanto para el tutor como para el tutorado.</p>
+        <ul>
+          <li><strong>Formato "Teach-Back":</strong> Después de estudiar una región, explicarla a un compañero sin notas. El compañero hace preguntas. Intercambiar roles.</li>
+          <li><strong>Laboratorio colaborativo:</strong> En equipos de 3-4, asignar subestructuras. Cada miembro enseña su parte al grupo, luego se evalúan mutuamente.</li>
+          <li><strong>Disección guiada por pares:</strong> Koelker-Wolfe et al. (Harvard, 2025) documentaron que las disecciones lideradas por estudiantes avanzados promueven "productive struggle" y retención superior.</li>
+          <li><strong>Beneficio metacognitivo:</strong> Al enseñar, el estudiante descubre exactamente qué sabe bien y qué no puede explicar. Esto es más preciso que la autopercepción pasiva.</li>
+        </ul>
+        <div class="cite">PMC 12198547, 2025 &bull; AMA, 2025 &bull; BMC Med Educ 2019</div>
+      </div></div>
+    </div>
+
+    <div class="acc-item" onclick="toggleAcc(this)">
+      <div class="acc-head">
+        <div class="acc-badge" style="background:rgba(122,59,138,.1);color:var(--accent-plum)">&#128203;</div>
+        <span class="acc-title">5. Práctica de Auto-evaluación con Preguntas de Aplicación</span>
+        <span class="acc-evi" style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Evidencia alta</span>
+        <span class="acc-arrow">&#9660;</span>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <h4>Resolver y crear preguntas como estrategia de aprendizaje profundo</h4>
+        <p>La práctica de recuperación con preguntas tipo MCQ es el predictor más fuerte de rendimiento en exámenes de licenciamiento. Además, la creación de preguntas propias ha demostrado mejorar significativamente el rendimiento, especialmente en estudiantes de bajo desempeño.</p>
+        <ul>
+          <li><strong>Bancos de preguntas:</strong> Resolver preguntas de UWorld, Amboss o el banco institucional. Revisar TODAS las respuestas (correctas e incorrectas) con sus explicaciones.</li>
+          <li><strong>Crear preguntas propias:</strong> Una revisión sistemática de 17 estudios encontró que escribir MCQs mejoró las calificaciones de los estudiantes y fue especialmente beneficioso para los de bajo rendimiento.</li>
+          <li><strong>Formato NBME para MSK:</strong> Escribir viñetas que integren: presentación clínica → estructura anatómica → correlación con otra disciplina (ej: histología del tejido afectado, farmacología del tratamiento).</li>
+          <li><strong>Revisión entre pares:</strong> Intercambiar preguntas creadas con compañeros para resolverlas. La combinación de escritura + revisión por pares es más efectiva que solo escribir.</li>
+        </ul>
+        <div class="cite">Deng et al., 2015 &bull; PMC 8725700, 2022 &bull; PMC 7549389, 2020</div>
+      </div></div>
+    </div>
+
+    <div class="acc-item" onclick="toggleAcc(this)">
+      <div class="acc-head">
+        <div class="acc-badge" style="background:rgba(90,112,64,.1);color:var(--accent-olive)">&#128171;</div>
+        <span class="acc-title">6. Actividades Predictivas y "Pre-testing"</span>
+        <span class="acc-evi" style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Evidencia moderada</span>
+        <span class="acc-arrow">&#9660;</span>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <h4>Predecir antes de aprender activa el cerebro para retener mejor</h4>
+        <p>Responder preguntas sobre un tema ANTES de estudiarlo — incluso si la respuesta es incorrecta — mejora significativamente la retención posterior. Las predicciones incorrectas generan curiosidad y preparan el cerebro para la información correcta.</p>
+        <ul>
+          <li><strong>Antes de clase:</strong> "¿Qué movimientos crees que son posibles en la articulación del hombro?" Predecir, luego verificar en clase.</li>
+          <li><strong>Pre-test personal:</strong> Antes de estudiar una región, intentar responder 5 preguntas sobre ella. Registrar las respuestas. Después de estudiar, comparar.</li>
+          <li><strong>Efecto:</strong> Lang (2021) documenta que las predicciones, incluso incorrectas, revelan las lagunas de conocimiento al estudiante y activan redes neuronales que facilitan la codificación posterior.</li>
+          <li><strong>Aplicación sencilla:</strong> Antes de abrir el capítulo de "rodilla", escribir en un papel todo lo que crees saber sobre esta articulación (2 minutos). Luego estudiar activamente para llenar los vacíos identificados.</li>
+        </ul>
+        <div class="cite">Lang, Small Teaching, 2021 &bull; AAA Blog, 2025 &bull; Roediger et al., 2011</div>
+      </div></div>
+    </div>
+
+    <div class="acc-item" onclick="toggleAcc(this)">
+      <div class="acc-head">
+        <div class="acc-badge" style="background:rgba(45,95,160,.1);color:var(--accent-blue)">&#129516;</div>
+        <span class="acc-title">7. Disección Cadavérica y Aprendizaje Kinestésico</span>
+        <span class="acc-evi" style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Evidencia alta</span>
+        <span class="acc-arrow">&#9660;</span>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <h4>La memoria táctil produce retención duradera que no se replica con otras modalidades</h4>
+        <p>La disección sigue siendo el método más efectivo para consolidar conocimiento anatómico espacial. Los estudiantes que completaron secuencias de disección estructuradas retuvieron contenido MSK a tasas significativamente mayores 6 meses después, comparados con quienes usaron solo recursos digitales.</p>
+        <ul>
+          <li><strong>Preparación pre-laboratorio:</strong> Siempre completar la lectura previa y revisar las estructuras en 3D ANTES de la sesión. Llegar al laboratorio con objetivos claros.</li>
+          <li><strong>Participación activa:</strong> No ser observador pasivo. Usar las manos. Trazar el recorrido de nervios y vasos. Identificar relaciones entre estructuras.</li>
+          <li><strong>Post-laboratorio:</strong> Inmediatamente después, dibujar de memoria las estructuras disecadas y sus relaciones. Este paso de recuperación post-disección es crítico.</li>
+          <li><strong>Si no hay acceso a cadáveres:</strong> Modelos 3D impresos combinados con atlas interactivos. Los modelos físicos que se pueden tocar y manipular activan memoria kinestésica similar.</li>
+        </ul>
+        <div class="cite">PMC 12198547, 2025 &bull; Cleveland Clinic Foundation &bull; Pettepher, AMA 2025</div>
+      </div></div>
+    </div>
+
+    <div class="acc-item" onclick="toggleAcc(this)">
+      <div class="acc-head">
+        <div class="acc-badge" style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#128200;</div>
+        <span class="acc-title">8. Taxonomía SOLO: Escalar Niveles Cognitivos</span>
+        <span class="acc-evi" style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Evidencia moderada</span>
+        <span class="acc-arrow">&#9660;</span>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <h4>Progresar desde memorización hacia integración y aplicación</h4>
+        <p>La taxonomía SOLO (Structure of Observed Learning Outcomes) define niveles cognitivos que el estudiante debe escalar. Los exámenes integrados evalúan niveles relacionales y abstracto-extendido, pero muchos estudiantes se quedan en nivel uniestructural (memorizar hechos aislados).</p>
+        <ul>
+          <li><strong>Nivel 1 — Uniestructural:</strong> "El nervio radial inerva los extensores de la muñeca." (Hecho aislado.)</li>
+          <li><strong>Nivel 2 — Multiestructural:</strong> "El nervio radial pasa por el surco espiral, inerva extensores, y su lesión causa wrist drop." (Múltiples hechos.)</li>
+          <li><strong>Nivel 3 — Relacional:</strong> "Una fractura de diáfisis humeral puede lesionar el nervio radial en el surco espiral, causando wrist drop y pérdida sensitiva en la tabaquera anatómica, lo que se diferencia de la lesión del nervio mediano por la distribución del déficit." (Hechos integrados.)</li>
+          <li><strong>Nivel 4 — Abstracto extendido:</strong> "Ante un paciente con fractura humeral y caída de muñeca, debo evaluar la extensión de la lesión neurológica, considerar si la pérdida es neuropraxia vs axonotmesis, planificar manejo y anticipar el pronóstico de recuperación." (Transferencia a nuevos contextos.)</li>
+          <li><strong>Meta:</strong> Estudiar siempre buscando llegar al nivel relacional o superior. Preguntarse: "¿Puedo explicar POR QUÉ y CÓMO, o solo CUÁL?"</li>
+        </ul>
+        <div class="cite">Biggs & Collis, 1982 &bull; PMC 7379743 &bull; Dunlosky et al., 2013</div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="rule"><hr></div>
+
+<!-- ========== 3. ATLAS INTEGRADO POR REGIONES ========== -->
+<section class="wrap" id="regiones">
+  <div class="stag"><i style="background:var(--accent-blue)"></i> SECCIÓN 03</div>
+  <h2>Atlas Integrado por Región Anatómica</h2>
+  <p class="intro">Contenido de alto rendimiento organizado por región. Cada concepto incluye la correlación clínica, mnemónicos y puntos de integración con otras disciplinas. Selecciona una región para explorar.</p>
+
+  <div class="region-tabs" id="regionTabs">
+    <button class="region-btn active" onclick="switchRegion('hombro')">Hombro</button>
+    <button class="region-btn" onclick="switchRegion('brazo')">Brazo y antebrazo</button>
+    <button class="region-btn" onclick="switchRegion('mano')">Mano y muñeca</button>
+    <button class="region-btn" onclick="switchRegion('cadera')">Cadera y muslo</button>
+    <button class="region-btn" onclick="switchRegion('rodilla')">Rodilla y pierna</button>
+    <button class="region-btn" onclick="switchRegion('columna')">Columna vertebral</button>
+  </div>
+
+  <!-- HOMBRO -->
+  <div class="region-panel active" id="reg-hombro">
+    <div class="anat-grid">
+      <div class="anat-card" style="border-color:var(--accent-red)">
+        <h4>Manguito Rotador</h4>
+        <p>Supraespinoso (abducción 0-15°, más lesionado), infraespinoso y teres menor (rotación externa), subescapular (rotación interna). El supraespinoso pasa bajo el acromion → síndrome de pinzamiento.</p>
+        <div class="mnemonic">SITS: Supraespinoso, Infraespinoso, Teres menor, Subescapular</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-teal)">
+        <h4>Nervio Axilar (C5-C6)</h4>
+        <p>Pasa por espacio cuadrangular. Lesión: luxación anterior del hombro o fractura del cuello quirúrgico del húmero. Déficit: pérdida de abducción (deltoides) + pérdida sensitiva en parche regimentario.</p>
+        <div class="mnemonic">Luxación anterior → Axilar → Abducción perdida + parche del hombro</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-blue)">
+        <h4>Plexo Braquial: Tronco Superior</h4>
+        <p>Erb-Duchenne (C5-C6): tracción lateral del cuello en partos o caídas. Brazo en "propina del mesero" (aducido, rotado internamente, antebrazo pronado). Afecta: deltoides, bíceps, braquial, supraespinoso, infraespinoso.</p>
+        <div class="mnemonic">Erb's = Elevadores perdidos (C5-C6) → "Waiter's tip"</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-amber)">
+        <h4>Nervio Torácico Largo (C5-C7)</h4>
+        <p>Inerva serrato anterior. Lesión: cirugía mamaria, disección axilar, trauma. Resultado: escápula alada (winging) — la escápula protruye al empujar contra pared.</p>
+        <div class="mnemonic">Long Thoracic → Serrato → Scapular winging (las 3 S)</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-plum)">
+        <h4>Articulación Glenohumeral</h4>
+        <p>Más móvil del cuerpo → más inestable → luxaciones frecuentes. Luxación anterior (95%): caída con brazo abducido y rotado externamente. Riesgo: lesión del nervio axilar y arteria circunfleja humeral posterior.</p>
+        <div class="mnemonic">Glenohumeral = Gran movilidad, Gran inestabilidad</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-olive)">
+        <h4>Integración Clínica: Hombro Doloroso</h4>
+        <p>Diagnóstico diferencial: (1) Tendinopatía del supraespinoso → arco doloroso 60-120°; (2) Capsulitis adhesiva → restricción global; (3) Desgarro completo → debilidad + incapacidad de mantener abducción; (4) Lesión del labrum → inestabilidad recurrente.</p>
+        <div class="mnemonic">Arco doloroso = Supraespinoso | Global = Capsulitis | Drop arm = Desgarro</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAZO Y ANTEBRAZO -->
+  <div class="region-panel" id="reg-brazo">
+    <div class="anat-grid">
+      <div class="anat-card" style="border-color:var(--accent-red)">
+        <h4>Nervio Radial en Surco Espiral</h4>
+        <p>Fractura de diáfisis humeral → wrist drop (caída de muñeca). Pérdida de extensión de muñeca y dedos. Pérdida sensitiva: tabaquera anatómica y dorso de la mano. "Saturday night palsy": compresión en axila.</p>
+        <div class="mnemonic">Radial = wrRist drop | Recorre surco espiRal</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-teal)">
+        <h4>Nervio Musculocutáneo (C5-C7)</h4>
+        <p>Perfora el coracobraquial, inerva bíceps y braquial (flexión del codo). Continúa como nervio cutáneo lateral del antebrazo (sensibilidad lateral). Lesión: pérdida de flexión del codo + pérdida sensitiva lateral del antebrazo.</p>
+        <div class="mnemonic">MusculoCutáneo → Músculo (bíceps, braquial) + Cutáneo (lateral antebrazo)</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-blue)">
+        <h4>Compartimentos del Antebrazo</h4>
+        <p>Anterior: flexores (nervio mediano + cubital). Posterior: extensores (nervio radial). Síndrome compartimental: dolor desproporcionado, dolor al estiramiento pasivo, parestesias → emergencia quirúrgica (fasciotomía).</p>
+        <div class="mnemonic">Anterior = Flexores (Mediano) | Posterior = Extensores (Radial)</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-amber)">
+        <h4>Fracturas Clave del Antebrazo</h4>
+        <p>Colles: caída sobre mano extendida → fractura de radio distal con desplazamiento dorsal ("deformidad en tenedor"). Smith: caída sobre dorso de mano → desplazamiento volar. Monteggia: fractura de cúbito proximal + luxación de cabeza radial. Galeazzi: fractura de radio distal + luxación radiocubital distal.</p>
+        <div class="mnemonic">MUGR: Monteggia=Ulna+luxación proximal | Galeazzi=Radio+luxación distal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANO Y MUÑECA -->
+  <div class="region-panel" id="reg-mano">
+    <div class="anat-grid">
+      <div class="anat-card" style="border-color:var(--accent-red)">
+        <h4>Túnel Carpiano</h4>
+        <p>Contenido: nervio mediano + 4 tendones FDS + 4 tendones FDP. NO pasa: nervio cubital ni arteria cubital (canal de Guyon). Síndrome: parestesias en dedos 1-3 y mitad radial del 4°, atrofia tenar, debilidad de oposición.</p>
+        <div class="mnemonic">Mediano en el Medio del túnel = Median Madness</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-teal)">
+        <h4>Nervio Cubital: Mano en Garra</h4>
+        <p>Compresión en epicóndilo medial o canal de Guyon. Pérdida de interóseos (abducción/aducción de dedos) y lumbricales 3-4. Paradoja cubital: lesión alta → garra menos pronunciada (porque FDP para dedos 4-5 también perdido).</p>
+        <div class="mnemonic">Cubital = Claw hand (dedos 4-5) | Froment positivo (aductor del pulgar)</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-blue)">
+        <h4>Fractura de Escafoides</h4>
+        <p>Más común del carpo. Caída sobre mano extendida en jóvenes. Dolor en tabaquera anatómica. Riesgo: necrosis avascular (irrigación distal → proximal). Rx inicial puede ser negativa → repetir en 2 semanas o RM.</p>
+        <div class="mnemonic">Escafoides: Snuffbox pain + riesgo de AVN (irrigación retrógrada)</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-plum)">
+        <h4>Músculos Intrínsecos de la Mano</h4>
+        <p>Tenares (mediano): oposición, abducción corta, flexor corto del pulgar. Hipotenares (cubital): abductor, flexor, oponente del meñique. Interóseos (cubital): dorsales ABducen (DAB), palmares ADucen (PAD). Lumbricales: 1-2 (mediano), 3-4 (cubital).</p>
+        <div class="mnemonic">DAB = Dorsales ABducen | PAD = Palmares ADucen</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CADERA Y MUSLO -->
+  <div class="region-panel" id="reg-cadera">
+    <div class="anat-grid">
+      <div class="anat-card" style="border-color:var(--accent-red)">
+        <h4>Nervio Ciático (L4-S3)</h4>
+        <p>Nervio más largo y grueso. Sale por agujero ciático mayor, inferior al piriforme. Componentes: tibial (posterior) y peroneo común (lateral). Inyecciones glúteas en cuadrante superoexterno para evitar lesión.</p>
+        <div class="mnemonic">Ciático = tibial + peroneo Común | Sale bajo el piriforme</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-teal)">
+        <h4>Triángulo Femoral</h4>
+        <p>Límites: ligamento inguinal (superior), sartorio (lateral), aductor largo (medial). Contenido (lateral a medial): Nervio femoral, Arteria femoral, Vena femoral, espacio vacío, Linfáticos.</p>
+        <div class="mnemonic">NAVEL: Nervio, Arteria, Vena, Espacio, Linfáticos (lateral → medial)</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-blue)">
+        <h4>Fracturas de Cadera</h4>
+        <p>Cuello femoral (intracapsular): riesgo AVN por lesión de arteria circunfleja femoral medial. Intertrocantérica (extracapsular): menos riesgo de AVN, más sangrado. Ancianos con osteoporosis. Trendelenburg: debilidad del glúteo medio (nervio glúteo superior).</p>
+        <div class="mnemonic">Intracapsular = AVN | Extracapsular = sangrado abundante</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-amber)">
+        <h4>Compartimentos del Muslo</h4>
+        <p>Anterior (N. femoral): extensores — cuádriceps. Medial (N. obturador): aductores. Posterior (N. ciático): flexores — isquiotibiales (bíceps femoral, semitendinoso, semimembranoso). Reflejo patelar: L3-L4.</p>
+        <div class="mnemonic">Femoral = Flexión de cadera + Extensión de rodilla | Ciático = Flexión de rodilla</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODILLA Y PIERNA -->
+  <div class="region-panel" id="reg-rodilla">
+    <div class="anat-grid">
+      <div class="anat-card" style="border-color:var(--accent-red)">
+        <h4>Ligamentos de Rodilla</h4>
+        <p>LCA: previene desplazamiento anterior de tibia. Lesión: giro con pie fijo. Cajón anterior +. LCP: previene desplazamiento posterior. Lesión: golpe en tibia flexionada ("dashboard injury"). LCM: lesión por valgo forzado. LCL: lesión por varo forzado.</p>
+        <div class="mnemonic">Tríada infeliz (O'Donoghue): LCA + LCM + Menisco medial</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-teal)">
+        <h4>Nervio Peroneo Común (L4-S2)</h4>
+        <p>Rodea el cuello de la fíbula (vulnerable). Lesión: fractura de cuello de fíbula, yeso apretado, cruce de piernas prolongado. Resultado: foot drop (caída del pie), pérdida de dorsiflexión y eversión. Marcha equina (steppage gait).</p>
+        <div class="mnemonic">Peroneo = Pie caído (foot drop) | Peroneal wraps around fibular neck</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-blue)">
+        <h4>Meniscos</h4>
+        <p>Medial: forma de C, adherido a LCM → menos móvil → más frecuentemente lesionado. Lateral: forma de O, más móvil. Lesión: rotación con rodilla flexionada. McMurray test: click + dolor al rotar. Irrigación periférica (zona roja) → mejor cicatrización.</p>
+        <div class="mnemonic">Medial = adherido a MCL = Más lesionado | Lateral = Libre = Less injured</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-amber)">
+        <h4>Compartimentos de la Pierna</h4>
+        <p>Anterior (N. peroneo profundo): dorsiflexores — tibial anterior, extensores de dedos. Lateral (N. peroneo superficial): eversores — peroneos largo y corto. Posterior (N. tibial): plantiflexores — gastrocnemio, sóleo. Reflejo aquíleo: S1-S2.</p>
+        <div class="mnemonic">TIP-TAP: Tibial Invierte y Plantiflexiona | Peroneo Evierte y Dorsiflexiona</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLUMNA VERTEBRAL -->
+  <div class="region-panel" id="reg-columna">
+    <div class="anat-grid">
+      <div class="anat-card" style="border-color:var(--accent-red)">
+        <h4>Hernia Discal</h4>
+        <p>Posterolateral más común (ligamento longitudinal posterior es más débil lateralmente). L4-L5 → comprime raíz L5 (dorsiflexión débil). L5-S1 → comprime raíz S1 (plantiflexión débil, pérdida de reflejo aquíleo). La raíz comprimida es la INFERIOR al disco.</p>
+        <div class="mnemonic">Disco L4-L5 comprime L5 | Disco L5-S1 comprime S1 (raíz inferior)</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-teal)">
+        <h4>Dermatomas Clave</h4>
+        <p>C5: deltoides lateral. C6: pulgar. C7: dedo medio. C8: meñique. T4: nivel del pezón. T10: nivel del ombligo. L1: ingle. L4: rodilla medial. L5: dorso del pie, primer dedo. S1: planta lateral, talón. S2-S4: periné ("silla de montar").</p>
+        <div class="mnemonic">C6-7-8: pulgar-medio-meñique | L4-5-S1: rodilla-dorso pie-planta</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-blue)">
+        <h4>Síndrome de Cauda Equina</h4>
+        <p>Emergencia quirúrgica. Compresión de raíces lumbosacras bajo L2. Anestesia en silla de montar, retención urinaria, pérdida del tono del esfínter anal, debilidad bilateral de piernas. Causa: hernia discal masiva central, tumor, absceso.</p>
+        <div class="mnemonic">Cauda = Cola de caballo | Silla de montar + retención urinaria = URGENCIA</div>
+      </div>
+      <div class="anat-card" style="border-color:var(--accent-amber)">
+        <h4>Espondilolistesis</h4>
+        <p>Desplazamiento anterior de una vértebra sobre la inferior. L5 sobre S1 más común. Puede comprimir nervios. Tipos: ístmica (defecto en pars interarticularis, frecuente en atletas jóvenes), degenerativa (adultos mayores por artrosis facetaria).</p>
+        <div class="mnemonic">Pars fracturada → vértebra se desliza hacia adelante</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"><hr></div>
+
+<!-- ========== 4. INTERVENCIONES PARA ESTUDIANTES CON DIFICULTADES ========== -->
+<section class="wrap" id="intervenciones">
+  <div class="stag"><i style="background:var(--accent-plum)"></i> SECCIÓN 04</div>
+  <h2>Intervenciones para Estudiantes con Dificultades</h2>
+  <p class="intro">Programa de intervención escalonado basado en la evidencia de remediación en educación médica. La identificación temprana y la intervención guiada son los predictores más fuertes de recuperación académica.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--accent-teal)">1</div>
+      <div class="tl-card">
+        <div class="tl-when" style="color:var(--accent-teal)">Fase 1 — Detección Temprana (Semana 1-2)</div>
+        <h4>Identificar la necesidad de intervención lo antes posible</h4>
+        <p>La evidencia muestra que la identificación temprana maximiza el éxito de la remediación. El rendimiento bajo en la primera evaluación es el predictor más fuerte de dificultades futuras.</p>
+        <ul>
+          <li><strong>Indicadores de alerta:</strong> Calificación por debajo del percentil 25 en primer examen parcial, dificultad para completar preguntas de aplicación, uso predominante de estrategias pasivas (releer, resaltar).</li>
+          <li><strong>Acción:</strong> Auto-diagnóstico con la herramienta de esta guía (Sección 5). Reunión con mentor académico. Análisis del error: ¿qué tipo de preguntas se fallan más?</li>
+          <li><strong>Privacidad:</strong> El proceso debe ser confidencial y no punitivo. La remediación es apoyo, no castigo.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--accent-blue)">2</div>
+      <div class="tl-card">
+        <div class="tl-when" style="color:var(--accent-blue)">Fase 2 — Plan Individualizado (Semana 2-3)</div>
+        <h4>Diseñar un plan de remediación con metas específicas y medibles</h4>
+        <p>Un estudio en St. John's Medical College encontró que los estudiantes con remediación dirigida por mentores, basada en un cuestionario diagnóstico, mejoraron significativamente su rendimiento.</p>
+        <ul>
+          <li><strong>Diagnóstico de habilidades de estudio:</strong> Evaluar uso de tiempo, estrategias activas vs pasivas, hábitos de sueño y manejo del estrés.</li>
+          <li><strong>Contrato de aprendizaje:</strong> Metas semanales escritas (ej: "Completar 20 flashcards de anatomía del hombro + resolver 15 MCQs").</li>
+          <li><strong>Mentoría regular:</strong> Reuniones semanales de 30 min con un tutor/mentor para revisar progreso, resolver dudas y ajustar plan.</li>
+          <li><strong>Intervenciones en habilidades de estudio:</strong> Sesión sobre uso efectivo de Anki, técnica Pomodoro, práctica intercalada.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--accent-amber)">3</div>
+      <div class="tl-card">
+        <div class="tl-when" style="color:var(--accent-amber)">Fase 3 — Implementación Intensiva (Semana 3-8)</div>
+        <h4>Sesiones semanales de tutoría interactiva con enfoque en aplicación clínica</h4>
+        <p>El programa de tutoría remedial de la IAMSE demostró que sesiones semanales de 3-4 horas en formato interactivo de grupos pequeños, enfocadas en resolución de problemas clínicos, permitieron a todos los estudiantes en riesgo completar el curso exitosamente.</p>
+        <ul>
+          <li><strong>Formato:</strong> Grupos de 4-6 estudiantes con un tutor experimentado. No repetir la clase magistral — enfocarse en aplicación.</li>
+          <li><strong>Actividades:</strong> Resolución guiada de MCQs con discusión del razonamiento, mapeo de conceptos, teach-back entre pares, práctica con modelos 3D.</li>
+          <li><strong>Metacognición:</strong> Al final de cada sesión: "¿Qué puedo explicar con confianza hoy que no podía la semana pasada? ¿Qué necesito reforzar?"</li>
+          <li><strong>Evaluación formativa continua:</strong> Quiz semanal de 10 preguntas con retroalimentación inmediata para monitorear progreso.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--accent-plum)">4</div>
+      <div class="tl-card">
+        <div class="tl-when" style="color:var(--accent-plum)">Fase 4 — Consolidación y Autonomía (Semana 8+)</div>
+        <h4>Transición hacia estudio independiente con habilidades mejoradas</h4>
+        <p>El objetivo final es que el estudiante desarrolle habilidades de aprendizaje autorregulado que le sirvan para el resto de la carrera. La remediación exitosa no solo mejora calificaciones, sino que construye resiliencia y adaptabilidad.</p>
+        <ul>
+          <li><strong>Reducción gradual de sesiones:</strong> De semanal a quincenal a mensual. Aumentar responsabilidad del estudiante.</li>
+          <li><strong>Auto-monitoreo:</strong> El estudiante debe generar sus propias evaluaciones formativas y ajustar su plan de estudio basándose en los resultados.</li>
+          <li><strong>Evidencia de éxito:</strong> Los estudiantes que aceptan y completan la remediación demuestran mejora sostenida a largo plazo comparado con quienes la rechazan.</li>
+          <li><strong>Mentalidad de crecimiento:</strong> Recordar que la dificultad no define la capacidad. Muchos médicos excelentes tuvieron retos al inicio de su formación.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"><hr></div>
+
+<!-- ========== 5. AUTOEVALUACIÓN ========== -->
+<section class="wrap" id="autoevaluacion">
+  <div class="stag"><i style="background:var(--accent-amber)"></i> SECCIÓN 05</div>
+  <h2>Herramienta de Autoevaluación</h2>
+  <p class="intro">Evalúa tus hábitos actuales de estudio en anatomía MSK. Esta herramienta identifica áreas de oportunidad y genera recomendaciones personalizadas basadas en tu perfil.</p>
+
+  <div class="assess-box" id="assessBox">
+    <div id="assessQuestions">
+      <div class="assess-q" data-cat="retrieval">
+        <p>1. ¿Con qué frecuencia practicas recuperación activa (flashcards, auto-preguntas) en lugar de releer notas?</p>
+        <div class="likert">
+          <label><input type="radio" name="q1" value="1"><span>Nunca</span></label>
+          <label><input type="radio" name="q1" value="2"><span>Rara vez</span></label>
+          <label><input type="radio" name="q1" value="3"><span>A veces</span></label>
+          <label><input type="radio" name="q1" value="4"><span>Frecuentemente</span></label>
+        </div>
+      </div>
+      <div class="assess-q" data-cat="spacing">
+        <p>2. ¿Distribuyes tu estudio de anatomía a lo largo de la semana o estudias todo junto antes del examen?</p>
+        <div class="likert">
+          <label><input type="radio" name="q2" value="1"><span>Todo junto</span></label>
+          <label><input type="radio" name="q2" value="2"><span>Mayormente junto</span></label>
+          <label><input type="radio" name="q2" value="3"><span>Algo distribuido</span></label>
+          <label><input type="radio" name="q2" value="4"><span>Bien distribuido</span></label>
+        </div>
+      </div>
+      <div class="assess-q" data-cat="visual">
+        <p>3. ¿Usas herramientas de visualización 3D (apps, modelos, atlas interactivos) para estudiar anatomía MSK?</p>
+        <div class="likert">
+          <label><input type="radio" name="q3" value="1"><span>Nunca</span></label>
+          <label><input type="radio" name="q3" value="2"><span>Rara vez</span></label>
+          <label><input type="radio" name="q3" value="3"><span>A veces</span></label>
+          <label><input type="radio" name="q3" value="4"><span>Regularmente</span></label>
+        </div>
+      </div>
+      <div class="assess-q" data-cat="clinical">
+        <p>4. ¿Conectas las estructuras anatómicas con presentaciones clínicas cuando estudias?</p>
+        <div class="likert">
+          <label><input type="radio" name="q4" value="1"><span>Nunca</span></label>
+          <label><input type="radio" name="q4" value="2"><span>Rara vez</span></label>
+          <label><input type="radio" name="q4" value="3"><span>A veces</span></label>
+          <label><input type="radio" name="q4" value="4"><span>Siempre</span></label>
+        </div>
+      </div>
+      <div class="assess-q" data-cat="metacog">
+        <p>5. ¿Puedes identificar con precisión qué temas de anatomía dominas y cuáles necesitas repasar?</p>
+        <div class="likert">
+          <label><input type="radio" name="q5" value="1"><span>No realmente</span></label>
+          <label><input type="radio" name="q5" value="2"><span>Vagamente</span></label>
+          <label><input type="radio" name="q5" value="3"><span>Bastante bien</span></label>
+          <label><input type="radio" name="q5" value="4"><span>Con precisión</span></label>
+        </div>
+      </div>
+      <div class="assess-q" data-cat="practice">
+        <p>6. ¿Cuántas preguntas de práctica (MCQ) resuelves por semana para anatomía MSK?</p>
+        <div class="likert">
+          <label><input type="radio" name="q6" value="1"><span>0-5</span></label>
+          <label><input type="radio" name="q6" value="2"><span>6-15</span></label>
+          <label><input type="radio" name="q6" value="3"><span>16-30</span></label>
+          <label><input type="radio" name="q6" value="4"><span>31+</span></label>
+        </div>
+      </div>
+      <div class="assess-q" data-cat="peer">
+        <p>7. ¿Estudias con compañeros o explicas anatomía a otros como forma de aprendizaje?</p>
+        <div class="likert">
+          <label><input type="radio" name="q7" value="1"><span>Nunca</span></label>
+          <label><input type="radio" name="q7" value="2"><span>Rara vez</span></label>
+          <label><input type="radio" name="q7" value="3"><span>Semanalmente</span></label>
+          <label><input type="radio" name="q7" value="4"><span>Múltiples veces/sem</span></label>
+        </div>
+      </div>
+      <div class="assess-q" data-cat="integration">
+        <p>8. ¿Integras anatomía con otras disciplinas (histología, fisiología, patología) al estudiar?</p>
+        <div class="likert">
+          <label><input type="radio" name="q8" value="1"><span>Nunca</span></label>
+          <label><input type="radio" name="q8" value="2"><span>Rara vez</span></label>
+          <label><input type="radio" name="q8" value="3"><span>A veces</span></label>
+          <label><input type="radio" name="q8" value="4"><span>Siempre</span></label>
+        </div>
+      </div>
+    </div>
+    <button class="assess-btn" onclick="calcAssess()">Obtener resultados &#8594;</button>
+    <div class="assess-result" id="assessResult"></div>
+  </div>
+</section>
+
+<div class="rule"><hr></div>
+
+<!-- ========== 6. PLANIFICADOR SEMANAL ========== -->
+<section class="wrap" id="planificador">
+  <div class="stag"><i style="background:var(--accent-olive)"></i> SECCIÓN 06</div>
+  <h2>Planificador Semanal de Anatomía MSK</h2>
+  <p class="intro">Plan concreto de 7 días que integra todas las estrategias basadas en evidencia. Diseñado para dedicar 1.5-2 horas diarias a anatomía MSK con máxima eficiencia.</p>
+
+  <div class="planner">
+    <div class="plan-day">
+      <div class="pd-label"><i style="background:var(--accent-red)">L</i> LUNES — Visión 3D</div>
+      <ul>
+        <li><strong>Pre-test (10 min):</strong> Escribir todo lo que sabes de la región de la semana (sin consultar).</li>
+        <li><strong>Exploración 3D (40 min):</strong> Recorrer la región en app 3D. Rotar, aislar, quitar capas. Verbalizar función de cada estructura.</li>
+        <li><strong>Dibujo de memoria (20 min):</strong> Cerrar app y dibujar las estructuras clave con sus relaciones.</li>
+        <li><strong>Flashcards nuevas (20 min):</strong> Crear 10-15 tarjetas con formato clínico para la región estudiada.</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="pd-label"><i style="background:var(--accent-teal)">M</i> MARTES — Casos Clínicos</div>
+      <ul>
+        <li><strong>Anki review (15 min):</strong> Revisar tarjetas pendientes del algoritmo de repetición espaciada.</li>
+        <li><strong>Casos clínicos (45 min):</strong> Resolver 3-5 viñetas clínicas de la región. Para cada una: identificar estructura → mecanismo → déficit → diagnóstico diferencial.</li>
+        <li><strong>Mapeo de integración (30 min):</strong> Para 1 patología, escribir conexiones con histología, fisiología y farmacología.</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="pd-label"><i style="background:var(--accent-blue)">X</i> MIÉRCOLES — Práctica Intercalada</div>
+      <ul>
+        <li><strong>Anki review (15 min):</strong> Tarjetas de regiones previas + actuales (efecto de intercalado).</li>
+        <li><strong>MCQs mixtas (50 min):</strong> 20-25 preguntas de banco mezclando múltiples regiones MSK. Revisar CADA respuesta.</li>
+        <li><strong>Análisis de errores (25 min):</strong> Para cada pregunta fallida: ¿fue error de conocimiento, de razonamiento o de lectura? Anotar patrón.</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="pd-label"><i style="background:var(--accent-amber)">J</i> JUEVES — Teach-Back</div>
+      <ul>
+        <li><strong>Anki review (15 min):</strong> Revisión espaciada diaria.</li>
+        <li><strong>Sesión de enseñanza entre pares (45 min):</strong> Explicar la región de la semana a un compañero sin notas. Recibir preguntas.</li>
+        <li><strong>Identificar lagunas (20 min):</strong> Anotar conceptos que no pudiste explicar bien → estudiar esos puntos específicos.</li>
+        <li><strong>Crear 3 MCQs propias (15 min):</strong> Integrar al menos 2 disciplinas por pregunta.</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="pd-label"><i style="background:var(--accent-plum)">V</i> VIERNES — Laboratorio/Modelos</div>
+      <ul>
+        <li><strong>Preparación (15 min):</strong> Revisar estructuras objetivo en 3D antes de asistir a lab o usar modelos.</li>
+        <li><strong>Laboratorio/Modelos (60 min):</strong> Disección o manipulación de modelos con objetivos claros. Trazar nervios y vasos.</li>
+        <li><strong>Post-lab (15 min):</strong> Inmediatamente después, dibujar de memoria las estructuras identificadas.</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="pd-label"><i style="background:var(--accent-olive)">S</i> SÁBADO — Evaluación Formativa</div>
+      <ul>
+        <li><strong>Simulacro de examen (45 min):</strong> 30 MCQs bajo condiciones de examen (1.5 min/pregunta, sin consultar).</li>
+        <li><strong>Revisión detallada (30 min):</strong> Analizar cada pregunta, correcta e incorrecta, con explicaciones.</li>
+        <li><strong>Metacognición (15 min):</strong> "¿Qué regiones domino? ¿Cuáles necesito más trabajo? ¿Mis estrategias están funcionando?"</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="pd-label"><i style="background:var(--text-light)">D</i> DOMINGO — Repaso Ligero</div>
+      <ul>
+        <li><strong>Anki review (20 min):</strong> Solo tarjetas pendientes — el algoritmo sabe qué necesitas repasar.</li>
+        <li><strong>Lectura activa opcional (30 min):</strong> Revisar un capítulo de Pathoma o BRS sobre la patología de la región de la semana.</li>
+        <li><strong>Descanso:</strong> Proteger tiempo de recuperación. El sueño consolida memoria.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="rule"><hr></div>
+
+<!-- ========== 7. RECURSOS ========== -->
+<section class="wrap" id="recursos">
+  <div class="stag"><i style="background:var(--text)"></i> SECCIÓN 07</div>
+  <h2>Recursos Recomendados</h2>
+  <p class="intro">Herramientas y materiales organizados por tipo de recurso y estrategia de aprendizaje que implementan.</p>
+
+  <div class="res-grid">
+    <div class="res-card">
+      <span class="r-type" style="color:var(--accent-teal)">Visualización 3D</span>
+      <h4>Complete Anatomy (3D4Medical)</h4>
+      <p>Atlas 3D interactivo con modelos detallados del sistema MSK. Permite aislar músculos, nervios y vasos. Incluye animaciones de movimientos articulares y correlaciones clínicas. Recomendado por múltiples estudios como superior a atlas 2D para MSK.</p>
+      <div class="r-tags">
+        <span class="r-tag" style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Codificación dual</span>
+        <span class="r-tag" style="background:rgba(45,95,160,.1);color:var(--accent-blue)">Espacial</span>
+      </div>
+    </div>
+    <div class="res-card">
+      <span class="r-type" style="color:var(--accent-red)">Repetición Espaciada</span>
+      <h4>Anki + Decks de Anatomía</h4>
+      <p>Software de flashcards con algoritmo de repetición espaciada. Deck AnKing contiene miles de tarjetas organizadas por sistema. Crear tarjetas propias potencia el efecto de generación. Integración con UpToDate disponible.</p>
+      <div class="r-tags">
+        <span class="r-tag" style="background:rgba(181,54,42,.1);color:var(--accent-red)">Recuperación</span>
+        <span class="r-tag" style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Espaciada</span>
+      </div>
+    </div>
+    <div class="res-card">
+      <span class="r-type" style="color:var(--accent-blue)">Banco de Preguntas</span>
+      <h4>UWorld / Amboss / Lecturio</h4>
+      <p>Bancos de MCQs con viñetas clínicas y explicaciones detalladas. Cada pregunta integra múltiples disciplinas. La revisión de explicaciones (correctas e incorrectas) es donde ocurre el mayor aprendizaje. Filtrar por "Musculoskeletal" para estudio dirigido.</p>
+      <div class="r-tags">
+        <span class="r-tag" style="background:rgba(122,59,138,.1);color:var(--accent-plum)">Práctica</span>
+        <span class="r-tag" style="background:rgba(45,95,160,.1);color:var(--accent-blue)">Aplicación</span>
+      </div>
+    </div>
+    <div class="res-card">
+      <span class="r-type" style="color:var(--accent-amber)">Video + Texto</span>
+      <h4>Boards & Beyond / Pathoma</h4>
+      <p>Videos integrados por sistema que conectan ciencia básica con clínica. Pathoma es especialmente fuerte en patología MSK. Boards & Beyond cubre fisiología y farmacología con enfoque en alto rendimiento. Usar como base para elaboración.</p>
+      <div class="r-tags">
+        <span class="r-tag" style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Elaboración</span>
+        <span class="r-tag" style="background:rgba(90,112,64,.1);color:var(--accent-olive)">Integración</span>
+      </div>
+    </div>
+    <div class="res-card">
+      <span class="r-type" style="color:var(--accent-plum)">Mnemónicos Visuales</span>
+      <h4>Sketchy Medical / Picmonic</h4>
+      <p>Mnemónicos basados en imágenes elaboradas que codifican información compleja en escenas memorables. La evidencia apoya que los mnemónicos autogenerados son superiores, pero los prediseñados sirven como punto de partida.</p>
+      <div class="r-tags">
+        <span class="r-tag" style="background:rgba(122,59,138,.1);color:var(--accent-plum)">Codificación dual</span>
+        <span class="r-tag" style="background:rgba(181,54,42,.1);color:var(--accent-red)">Memoria</span>
+      </div>
+    </div>
+    <div class="res-card">
+      <span class="r-type" style="color:var(--accent-olive)">Referencia Rápida</span>
+      <h4>Netter's Atlas / Gray's Anatomy for Students</h4>
+      <p>Atlas de referencia con ilustraciones de alta calidad. Netter para imágenes artísticas con relaciones espaciales claras. Gray's for Students para texto conciso con correlaciones clínicas. Usar como complemento, no como fuente primaria de estudio activo.</p>
+      <div class="r-tags">
+        <span class="r-tag" style="background:rgba(90,112,64,.1);color:var(--accent-olive)">Referencia</span>
+        <span class="r-tag" style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Visual</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="foot">
+  <p><strong>Guía de Anatomía MSK</strong> &mdash; Estrategias e intervenciones basadas en evidencia para estudiantes de medicina</p>
+  <p style="margin-top:.3rem">Fuentes: PMC 7379743, PMC 6916638, PMC 6904411, PMC 6449589, PMC 12198547, PMC 11527842, Anat Sci Educ 2017/2021/2025, BMC Med Educ 2013/2019/2020</p>
+  <p style="margin-top:.3rem">Recurso educativo &bull; Abril 2026</p>
+</footer>
+
+<script>
+/* ===== ACCORDION ===== */
+function toggleAcc(el){
+  const wasOpen=el.classList.contains('open');
+  // close all in same parent
+  el.parentElement.querySelectorAll('.acc-item').forEach(a=>a.classList.remove('open'));
+  if(!wasOpen) el.classList.add('open');
+}
+
+/* ===== REGION TABS ===== */
+function switchRegion(id){
+  document.querySelectorAll('.region-btn').forEach(b=>{b.classList.remove('active')});
+  document.querySelectorAll('.region-panel').forEach(p=>{p.classList.remove('active')});
+  event.target.classList.add('active');
+  document.getElementById('reg-'+id).classList.add('active');
+}
+
+/* ===== SELF-ASSESSMENT ===== */
+function calcAssess(){
+  const qs=document.querySelectorAll('.assess-q');
+  let total=0,answered=0;
+  let scores={retrieval:0,spacing:0,visual:0,clinical:0,metacog:0,practice:0,peer:0,integration:0};
+  qs.forEach(q=>{
+    const cat=q.dataset.cat;
+    const checked=q.querySelector('input:checked');
+    if(checked){
+      scores[cat]=parseInt(checked.value);
+      total+=scores[cat];
+      answered++;
+    }
+  });
+  if(answered<8){alert('Por favor responde todas las preguntas.');return;}
+  
+  const pct=Math.round(total/(8*4)*100);
+  const res=document.getElementById('assessResult');
+  
+  let weakAreas=[];
+  let recs=[];
+  
+  if(scores.retrieval<=2){weakAreas.push('Práctica de recuperación');recs.push('Cambiar de releer notas a usar flashcards y auto-preguntas. Iniciar con Anki y el deck AnKing filtrado por MSK.');}
+  if(scores.spacing<=2){weakAreas.push('Distribución del estudio');recs.push('Distribuir el estudio de anatomía en sesiones de 45-60 min a lo largo de la semana. Usar el planificador semanal de esta guía.');}
+  if(scores.visual<=2){weakAreas.push('Visualización 3D');recs.push('Incorporar una app de anatomía 3D (Complete Anatomy, Visible Body). Dedicar 20 min antes de cada tema nuevo a explorar la región en 3D.');}
+  if(scores.clinical<=2){weakAreas.push('Correlación clínica');recs.push('Estudiar desde las presentaciones clínicas: aprender primero la lesión/enfermedad, luego la anatomía relevante. Usar viñetas clínicas como punto de entrada.');}
+  if(scores.metacog<=2){weakAreas.push('Metacognición');recs.push('Al final de cada sesión de estudio, escribir: "¿Qué puedo explicar con confianza? ¿Qué NO puedo explicar?" Usar esto para dirigir la siguiente sesión.');}
+  if(scores.practice<=2){weakAreas.push('Preguntas de práctica');recs.push('Aumentar a mínimo 20-30 MCQs por semana. Revisar TODAS las explicaciones, no solo la respuesta correcta. Considerar UWorld o Amboss.');}
+  if(scores.peer<=2){weakAreas.push('Aprendizaje entre pares');recs.push('Buscar un compañero de estudio para sesiones semanales de teach-back. Explicar anatomía sin notas es el mejor test de comprensión.');}
+  if(scores.integration<=2){weakAreas.push('Integración interdisciplinar');recs.push('Para cada estructura, preguntar: ¿cuál es su histología? ¿Qué pasa si falla (patología)? ¿Cómo se trata (farmacología)?');}
+  
+  let level,levelColor,levelMsg;
+  if(pct>=80){level='Avanzado';levelColor='var(--accent-teal)';levelMsg='Tus estrategias son sólidas. Enfócate en mantener la consistencia y escalar a nivel relacional/abstracto en la taxonomía SOLO.';}
+  else if(pct>=55){level='Intermedio';levelColor='var(--accent-amber)';levelMsg='Tienes buena base pero hay áreas clave que mejorar. Implementar las recomendaciones específicas puede producir mejoras significativas.';}
+  else{level='Necesita intervención';levelColor='var(--accent-red)';levelMsg='Hay oportunidad importante de mejorar. Recomendamos seguir el programa de intervención escalonado (Sección 4) y el planificador semanal (Sección 6).';}
+  
+  let recHTML=recs.map(r=>'<li>'+r+'</li>').join('');
+  
+  res.innerHTML=`
+    <h4 style="color:${levelColor}">Resultado: ${level} (${pct}%)</h4>
+    <p>${levelMsg}</p>
+    ${weakAreas.length>0?`<p style="margin-top:.8rem"><strong>Áreas prioritarias:</strong> ${weakAreas.join(', ')}</p>
+    <ul style="padding-left:1.2rem;margin-top:.5rem">${recHTML}</ul>`:'<p style="margin-top:.5rem">¡Todas tus áreas están bien cubiertas! Considera ser tutor de pares para otros estudiantes.</p>'}
+  `;
+  res.className='assess-result show';
+  res.style.background=pct>=80?'rgba(26,122,106,.06)':pct>=55?'rgba(192,138,32,.06)':'rgba(181,54,42,.06)';
+  res.style.borderLeft='3px solid '+levelColor;
+  res.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+/* ===== NAV HIGHLIGHT ===== */
+const secs=document.querySelectorAll('.wrap');
+const navAs=document.querySelectorAll('.topnav a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130) cur=s.getAttribute('id')});
+  navAs.forEach(a=>{a.classList.remove('on');if(a.getAttribute('href')==='#'+cur)a.classList.add('on')});
+});
+</script>
+</body>
+</html>
