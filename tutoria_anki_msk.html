@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Anki | Anatomía MSK</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F2EC;
+  --bg-warm: #EDEAE2;
+  --surface: #FFFFFF;
+  --surface-alt: #FAF8F4;
+  --border: #DED9CE;
+  --border-dark: #C8C1B4;
+  --text: #18170F;
+  --text-mid: #4A483F;
+  --text-light: #8A867A;
+  --teal: #127A68;
+  --teal-l: #1A9E86;
+  --teal-bg: rgba(18,122,104,.07);
+  --red: #A8321E;
+  --red-l: #CC4433;
+  --red-bg: rgba(168,50,30,.06);
+  --blue: #2456A0;
+  --blue-l: #3876D0;
+  --amber: #A87A10;
+  --amber-l: #CC9820;
+  --amber-bg: rgba(168,122,16,.06);
+  --plum: #6E2E80;
+  --plum-l: #923EAA;
+  --olive: #4E6830;
+  --dark: #0F1A14;
+  --dark2: #1A2A22;
+  --shadow-sm: 0 1px 4px rgba(24,23,15,.05);
+  --shadow-md: 0 4px 20px rgba(24,23,15,.08);
+  --shadow-lg: 0 12px 48px rgba(24,23,15,.12);
+  --radius: 14px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  height: 100vh;
+}
+::selection { background: var(--teal); color: #fff; }
+
+/* ═══ APP SHELL ═══ */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ═══ HEADER ═══ */
+.header {
+  background: linear-gradient(160deg, #0F1A14 0%, #1A2A22 45%, #0D1F2A 100%);
+  padding: 18px 20px 10px;
+  color: #fff;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 400px 250px at 20% 60%, rgba(18,122,104,.14), transparent 70%),
+    radial-gradient(ellipse 300px 200px at 80% 30%, rgba(36,86,160,.08), transparent 70%);
+  pointer-events: none;
+}
+.header > * { position: relative; z-index: 1; }
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.header-chip {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--teal-l);
+  font-weight: 700;
+}
+.header-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 2px;
+  line-height: 1.2;
+}
+.header-counter {
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══ NAV TABS ═══ */
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 4px 0 8px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  padding: 5px 11px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: transparent;
+  color: rgba(255,255,255,.35);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .25s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-tab:hover { border-color: rgba(255,255,255,.25); color: rgba(255,255,255,.6); }
+.nav-tab.visited { color: var(--teal-l); border-color: rgba(26,158,134,.3); }
+.nav-tab.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+.nav-tab .tab-label { display: none; }
+.nav-tab.active .tab-label { display: inline; }
+
+/* ═══ PROGRESS ═══ */
+.progress-bar {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding: 6px 0 2px;
+}
+.progress-dot {
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255,255,255,.15);
+  transition: all .5s cubic-bezier(.4,0,.2,1);
+}
+.progress-dot.done { background: var(--teal-l); }
+.progress-dot.current { background: var(--teal-l); width: 24px !important; }
+
+/* ═══ CONTENT AREA ═══ */
+.content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.content-wrap {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 28px 20px 50px;
+}
+
+/* ═══ SECTION STYLES ═══ */
+.section { display: none; animation: fadeSlide .4s ease both; }
+.section.active { display: block; }
+@keyframes fadeSlide { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ═══ CARDS ═══ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .3s;
+}
+.card:hover { box-shadow: var(--shadow-md); }
+
+/* ═══ TYPOGRAPHY ═══ */
+.sec-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+.sec-desc { font-size: 14px; color: var(--text-mid); margin-bottom: 20px; line-height: 1.7; }
+.card-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.card-text { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 10px; }
+
+/* ═══ TIPS & WARNINGS ═══ */
+.tip {
+  background: var(--teal-bg);
+  border: 1px solid rgba(18,122,104,.2);
+  border-left: 4px solid var(--teal);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.warning {
+  background: var(--red-bg);
+  border: 1px solid rgba(168,50,30,.18);
+  border-left: 4px solid var(--red);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+/* ═══ PILLS ═══ */
+.pill {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+/* ═══ FEATURE ROW ═══ */
+.feature-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  background: var(--surface-alt);
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.feature-row .emoji { font-size: 22px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+.feature-row .f-title { font-weight: 600; font-size: 14px; }
+.feature-row .f-desc { font-size: 12px; color: var(--text-light); }
+
+/* ═══ RETENTION BARS ═══ */
+.bar-wrap { margin-bottom: 12px; }
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.bar-track {
+  height: 12px;
+  background: var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  width: 0;
+}
+.bar-fill.animate { width: var(--w); }
+
+/* ═══ INTERVAL CHIPS ═══ */
+.interval-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+  gap: 6px;
+  margin: 14px 0;
+}
+.interval-chip {
+  text-align: center;
+  padding: 10px 6px;
+  border-radius: 10px;
+  border: 1px solid rgba(18,122,104,.15);
+}
+.interval-chip .val { font-size: 16px; font-weight: 800; color: var(--teal); }
+.interval-chip .sub { font-size: 9px; color: var(--text-light); margin-top: 1px; }
+
+/* ═══ SETTINGS LIST ═══ */
+.setting-row {
+  display: flex;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--surface-alt);
+  border-radius: 10px;
+  margin-bottom: 6px;
+  align-items: flex-start;
+}
+.setting-badge {
+  background: var(--teal-bg);
+  color: var(--teal);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  min-width: 52px;
+  text-align: center;
+}
+.setting-name { font-weight: 600; font-size: 13px; }
+.setting-note { font-size: 11px; color: var(--text-light); }
+
+/* ═══ DECK TREE ═══ */
+.deck-tree {
+  background: var(--dark);
+  border-radius: 12px;
+  padding: 16px 18px;
+  color: var(--teal-l);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 2;
+  margin-bottom: 14px;
+  overflow-x: auto;
+}
+
+/* ═══ COMPARE BOX ═══ */
+.compare-box {
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.compare-box.bad { border: 2px solid rgba(168,50,30,.2); background: var(--red-bg); }
+.compare-box.good { border: 2px solid rgba(18,122,104,.2); background: var(--teal-bg); }
+.compare-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+/* ═══ SOLO LEVELS ═══ */
+.solo-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+.solo-icon { font-size: 20px; flex-shrink: 0; }
+.solo-name { font-weight: 700; font-size: 13px; }
+.solo-desc { font-size: 12px; color: var(--text-mid); }
+
+/* ═══ CARD BUILDER ═══ */
+.builder-step { margin-bottom: 10px; }
+.builder-step label {
+  font-size: 12px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+  transition: color .3s;
+}
+.builder-step textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 50px;
+  transition: all .3s;
+  background: var(--surface);
+}
+.builder-step textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(18,122,104,.1);
+}
+.builder-step.locked label { color: var(--border-dark); }
+.builder-step.locked textarea { opacity: .4; background: var(--bg); pointer-events: none; }
+
+/* ═══ FLASHCARD 3D ═══ */
+.flashcard-container {
+  perspective: 900px;
+  cursor: pointer;
+  min-height: 220px;
+  margin-bottom: 8px;
+  -webkit-tap-highlight-color: transparent;
+}
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  transition: transform .6s cubic-bezier(.4,0,.2,1);
+  transform-style: preserve-3d;
+}
+.flashcard-inner.flipped { transform: rotateY(180deg); }
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flashcard-front {
+  background: linear-gradient(150deg, #0F1A14, #1A2A22 50%, #0D1F2A);
+  color: #fff;
+  box-shadow: 0 8px 36px rgba(0,0,0,.25);
+}
+.flashcard-back {
+  transform: rotateY(180deg);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+.fc-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* ═══ ANKI BUTTONS ═══ */
+.anki-btns {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+.anki-btn {
+  flex: 1;
+  padding: 10px 4px;
+  border: 2px solid;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+  transition: all .2s;
+}
+.anki-btn:hover { filter: brightness(1.1); }
+.anki-btn .ab-label { font-weight: 700; font-size: 12px; }
+.anki-btn .ab-sub { font-size: 9px; color: var(--text-light); margin-top: 1px; }
+
+/* ═══ REGION TABS ═══ */
+.region-tabs {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+  scrollbar-width: none;
+}
+.region-tabs::-webkit-scrollbar { display: none; }
+.region-tab {
+  padding: 7px 13px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-mid);
+  font-weight: 600;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s;
+}
+.region-tab:hover { border-color: var(--teal); color: var(--teal); }
+.region-tab.active { background: var(--teal); border-color: var(--teal); color: #fff; }
+
+/* ═══ STATS BAR ═══ */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  text-align: center;
+  margin-top: 16px;
+}
+.stat-val { font-size: 22px; font-weight: 800; }
+.stat-label { font-size: 10px; color: var(--text-light); }
+
+/* ═══ DAY CARD ═══ */
+.day-card {
+  border-left: 4px solid;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+}
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.day-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.day-title { font-weight: 700; font-size: 14px; }
+.day-tasks { padding-left: 38px; }
+.day-task {
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-bottom: 3px;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+.day-task .arrow { font-weight: 700; flex-shrink: 0; }
+
+/* ═══ ERROR CARD ═══ */
+.error-card { display: flex; gap: 12px; align-items: flex-start; }
+.error-icon { font-size: 24px; flex-shrink: 0; }
+.error-name { font-weight: 700; font-size: 14px; color: var(--red); margin-bottom: 4px; }
+.error-fix {
+  background: var(--teal-bg);
+  border: 1px solid rgba(18,122,104,.15);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 8px;
+}
+.error-fix-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
+.error-fix-text { font-size: 13px; color: var(--text-mid); line-height: 1.55; }
+
+/* ═══ QUIZ ═══ */
+.quiz-card { margin-bottom: 10px; transition: border-left .3s; }
+.quiz-card.correct { border-left: 4px solid var(--teal); }
+.quiz-card.wrong { border-left: 4px solid var(--red); }
+.quiz-q { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+.quiz-opt {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  margin-bottom: 5px;
+  font-size: 13px;
+  line-height: 1.5;
+  transition: all .2s;
+}
+.quiz-opt:hover { border-color: var(--teal); background: var(--teal-bg); }
+.quiz-opt.selected { border-color: rgba(18,122,104,.5); background: var(--teal-bg); }
+.quiz-opt.show-correct { border-color: var(--teal); background: var(--teal-bg); }
+.quiz-opt.show-wrong { border-color: var(--red); background: var(--red-bg); }
+.quiz-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border-dark);
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #fff;
+  font-weight: 700;
+  transition: all .2s;
+}
+.quiz-opt.selected .quiz-radio { border-color: var(--teal); background: var(--teal); }
+.quiz-opt.show-wrong .quiz-radio { border-color: var(--red); background: var(--red); }
+.quiz-opt.show-correct .quiz-radio { border-color: var(--teal); background: var(--teal); }
+.quiz-explain {
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  display: none;
+}
+.quiz-explain.show { display: block; }
+
+/* ═══ BUTTONS ═══ */
+.btn-primary {
+  padding: 12px 24px;
+  border-radius: 40px;
+  border: none;
+  background: var(--teal);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .25s;
+}
+.btn-primary:hover { background: var(--teal-l); transform: translateY(-1px); }
+.btn-primary:disabled { opacity: .45; cursor: default; transform: none; }
+.btn-secondary {
+  padding: 12px 24px;
+  border-radius: 40px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-mid);
+  font-weight: 700;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .25s;
+}
+.btn-secondary:hover { border-color: var(--border-dark); background: var(--surface); }
+.btn-secondary:disabled { opacity: .3; cursor: default; }
+
+/* ═══ FOOTER NAV ═══ */
+.foot-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+/* ═══ CENTER BOX ═══ */
+.center-box { text-align: center; }
+
+/* ═══ HERO SPLASH (step 0) ═══ */
+.hero-icon { font-size: 56px; margin-bottom: 10px; }
+.hero-title { font-family: 'DM Serif Display', serif; font-size: 26px; line-height: 1.25; margin-bottom: 6px; }
+.hero-sub { font-size: 14px; color: var(--text-mid); max-width: 480px; margin: 0 auto; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 600px) {
+  .header { padding: 14px 14px 6px; }
+  .header-title { font-size: 17px; }
+  .content-wrap { padding: 20px 14px 40px; }
+  .sec-title { font-size: 20px; }
+  .card { padding: 16px 14px; }
+  .anki-btns { flex-wrap: wrap; }
+  .anki-btn { min-width: 65px; }
+  .stats-bar { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .interval-grid { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="header-chip">Tutoría Interactiva</div>
+        <div class="header-title">Anki para Anatomía MSK</div>
+      </div>
+      <div class="header-counter" id="stepCounter">1 / 8</div>
+    </div>
+    <div class="nav-tabs" id="navTabs"></div>
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content-scroll" id="contentScroll">
+    <div class="content-wrap" id="contentWrap">
+      <!-- Sections injected by JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   DATA
+   ═══════════════════════════════════════ */
+
+const STEPS = [
+  { id:'bienvenida', label:'Inicio', icon:'🎯' },
+  { id:'ciencia', label:'La Ciencia', icon:'🧠' },
+  { id:'setup', label:'Configuración', icon:'⚙️' },
+  { id:'tarjetas', label:'Crear Tarjetas', icon:'📝' },
+  { id:'atlas', label:'Atlas de Cards', icon:'🗺️' },
+  { id:'rutina', label:'Tu Rutina', icon:'📅' },
+  { id:'errores', label:'Errores', icon:'⚠️' },
+  { id:'quiz', label:'Autoevaluación', icon:'✅' },
+];
+
+const REGIONS_ORDER = ['hombro','brazo','mano','cadera','rodilla','columna'];
+const REGIONS = {
+  hombro: { label:'Hombro', emoji:'🦴', cards:[
+    { front:'Un paciente no puede abducir el brazo de 0° a 15° tras una caída. ¿Qué músculo está afectado y qué nervio lo inerva?', back:'Supraespinoso (nervio supraescapular, C5-C6). Inicia la abducción 0-15°. Pasa bajo el acromion → vulnerable a pinzamiento.', type:'Clínica → Estructura', tags:['manguito-rotador','nervio-supraescapular'], tier:'Relacional' },
+    { front:'Tras luxación anterior del hombro, el paciente pierde abducción del brazo y tiene hipoestesia en \'parche regimentario\'. ¿Qué nervio se lesionó y por dónde pasa?', back:'Nervio axilar (C5-C6). Pasa por el espacio cuadrangular. Inerva deltoides (abducción) y teres menor. Sensitivo: parche regimentario.', type:'Clínica → Estructura', tags:['nervio-axilar','luxación'], tier:'Relacional' },
+    { front:'Recién nacido con brazo en \'propina del mesero\' (aducido, rotado internamente, antebrazo pronado). ¿Qué raíces del plexo están lesionadas?', back:'Erb-Duchenne: tronco superior C5-C6. Tracción lateral del cuello en parto. Afecta: deltoides, bíceps, braquial, supraespinoso, infraespinoso.', type:'Clínica → Estructura', tags:['plexo-braquial','erb-duchenne'], tier:'Abstracto ext.' },
+    { front:'¿Qué mnemónico recuerda los músculos del manguito rotador y cuál es el más frecuentemente lesionado?', back:'SITS: Supraespinoso, Infraespinoso, Teres menor, Subescapular. El supraespinoso es el más lesionado (pasa bajo el acromion).', type:'Recall directo', tags:['manguito-rotador','mnemónico'], tier:'Multiestructural' },
+  ]},
+  brazo: { label:'Brazo y Antebrazo', emoji:'💪', cards:[
+    { front:'Paciente con fractura de diáfisis humeral presenta caída de muñeca. ¿Qué nervio está lesionado y cuál es el déficit sensitivo?', back:'Nervio radial → surco espiral del húmero. Wrist drop: pérdida de extensión de muñeca y dedos. Sensitivo: tabaquera anatómica y dorso de mano.', type:'Clínica → Estructura', tags:['nervio-radial','wrist-drop'], tier:'Relacional' },
+    { front:'Caída sobre mano extendida → fractura de radio distal con desplazamiento dorsal (deformidad en tenedor). ¿Qué tipo de fractura es?', back:'Fractura de Colles. Smith = desplazamiento volar. MUGR: Monteggia = cúbito proximal + luxación radial. Galeazzi = radio distal + luxación radiocubital distal.', type:'Clínica → Estructura', tags:['fracturas','colles'], tier:'Relacional' },
+    { front:'¿Qué nervio inerva el compartimento anterior del antebrazo (flexores) y cuál el posterior (extensores)?', back:'Anterior (flexores): nervio mediano + cubital. Posterior (extensores): nervio radial.', type:'Recall directo', tags:['compartimentos','antebrazo'], tier:'Multiestructural' },
+  ]},
+  mano: { label:'Mano y Muñeca', emoji:'✋', cards:[
+    { front:'Paciente con parestesias en dedos 1-3 y mitad radial del 4°, con atrofia tenar. ¿Diagnóstico y estructura comprimida?', back:'Síndrome del túnel carpiano. Compresión del nervio mediano. Túnel contiene: mediano + 4 FDS + 4 FDP. NO pasa el cubital (canal de Guyon).', type:'Clínica → Estructura', tags:['tunel-carpiano','nervio-mediano'], tier:'Relacional' },
+    { front:'¿Qué es la \'paradoja cubital\' en lesiones del nervio cubital?', back:'Lesión alta → garra MENOS pronunciada (FDP para dedos 4-5 también se pierde). Lesión baja → garra más evidente.', type:'Concepto avanzado', tags:['nervio-cubital','paradoja'], tier:'Abstracto ext.' },
+    { front:'Joven cae sobre mano extendida. Dolor en tabaquera anatómica. Rx inicial negativa. ¿Sospecha y por qué es urgente?', back:'Fractura de escafoides. Urgente por riesgo de necrosis avascular: irrigación distal → proximal (retrógrada). Repetir Rx en 2 semanas o RM.', type:'Clínica → Estructura', tags:['escafoides','avascular'], tier:'Relacional' },
+  ]},
+  cadera: { label:'Cadera y Muslo', emoji:'🦵', cards:[
+    { front:'Contenido del triángulo femoral de lateral a medial. ¿Qué mnemónico lo recuerda?', back:'NAVEL: Nervio femoral, Arteria femoral, Vena femoral, Espacio vacío, Linfáticos.', type:'Recall directo', tags:['triángulo-femoral','mnemónico'], tier:'Multiestructural' },
+    { front:'Anciana con fractura intracapsular del cuello femoral. ¿Por qué tiene riesgo de necrosis avascular?', back:'La arteria circunfleja femoral medial irriga la cabeza femoral. Fractura intracapsular lesiona esta arteria → AVN. Extracapsular = menos riesgo AVN, más sangrado.', type:'Clínica → Estructura', tags:['fractura-cadera','avascular'], tier:'Relacional' },
+    { front:'Paciente con Trendelenburg positivo. ¿Qué músculo y nervio están afectados?', back:'Glúteo medio debilitado. Nervio glúteo superior (L4-S1). El glúteo medio estabiliza la pelvis durante la marcha.', type:'Clínica → Estructura', tags:['glúteo-medio','trendelenburg'], tier:'Relacional' },
+  ]},
+  rodilla: { label:'Rodilla y Pierna', emoji:'🦿', cards:[
+    { front:'Paciente con foot drop tras fractura de cuello de fíbula. ¿Qué nervio se lesionó y qué movimientos se pierden?', back:'Nervio peroneo común (L4-S2). Rodea el cuello de la fíbula. Pérdida de dorsiflexión y eversión. Marcha en steppage.', type:'Clínica → Estructura', tags:['peroneo-comun','foot-drop'], tier:'Relacional' },
+    { front:'¿Qué es la \'tríada infeliz\' de O\'Donoghue en lesión de rodilla?', back:'LCA + LCM + menisco medial. Mecanismo: fuerza en valgo con rotación externa y pie fijo.', type:'Recall directo', tags:['rodilla','triada-infeliz'], tier:'Multiestructural' },
+    { front:'TIP-TAP: explica este mnemónico para compartimentos de la pierna.', back:'Tibial: Invierte y Plantiflexiona (posterior). Peroneo: evierte y Dorsiflexiona (anterior y lateral). Reflejo aquíleo: S1-S2.', type:'Mnemónico', tags:['compartimentos','pierna'], tier:'Multiestructural' },
+  ]},
+  columna: { label:'Columna Vertebral', emoji:'🔩', cards:[
+    { front:'Hernia discal L4-L5. ¿Qué raíz se comprime y qué déficit produce?', back:'Comprime raíz L5 (la raíz INFERIOR al disco). Déficit: dorsiflexión débil del pie.', type:'Clínica → Estructura', tags:['hernia-discal','raíces'], tier:'Relacional' },
+    { front:'Paciente con anestesia en silla de montar, retención urinaria y debilidad bilateral de piernas. ¿Diagnóstico y urgencia?', back:'Síndrome de cauda equina. EMERGENCIA QUIRÚRGICA. Compresión de raíces lumbosacras bajo L2.', type:'Clínica → Estructura', tags:['cauda-equina','emergencia'], tier:'Abstracto ext.' },
+    { front:'Dermatomas clave de miembro inferior: L4, L5, S1.', back:'L4: rodilla medial. L5: dorso del pie y primer dedo. S1: planta lateral y talón. S2-S4: periné (silla de montar).', type:'Recall directo', tags:['dermatomas','miembro-inferior'], tier:'Multiestructural' },
+  ]},
+};
+
+const QUIZ = [
+  { q:'¿Cuál es el formato MÁS efectivo para una tarjeta de Anki en anatomía MSK?', opts:['Definición directa: \"¿Qué inerva el nervio radial?\"','Viñeta clínica: \"Paciente con wrist drop tras fractura humeral. ¿Qué nervio se lesionó?\"','Lista completa: \"Enumera todos los músculos del antebrazo\"','Copia textual del atlas'], correct:1, explain:'Las viñetas clínicas activan recuperación contextual y alcanzan nivel relacional en la taxonomía SOLO.' },
+  { q:'¿Cuántas tarjetas nuevas por día recomienda la evidencia para estudio sostenible?', opts:['5-10','10-20','30-50','Todas las posibles'], correct:1, explain:'10-20 tarjetas nuevas/día es sostenible. Más de 20 genera acumulación insostenible de revisiones.' },
+  { q:'Si presionas \'Again\' en Anki, ¿qué pasa con el intervalo de la tarjeta?', opts:['Se elimina la tarjeta','Se reinicia a 1 minuto','Se mantiene igual','Se duplica para revisión'], correct:1, explain:'\"Again\" reinicia el intervalo. La tarjeta vuelve pronto. Es lo correcto cuando no recuerdas.' },
+  { q:'Según el reaprendizaje sucesivo, ¿cuál es la secuencia óptima de repaso?', opts:['Cada día hasta el examen','Día 1 → Día 3 → Día 7 → Día 14','Solo la noche antes del examen','Una vez por semana el mismo día'], correct:1, explain:'La distribución espaciada con intervalos crecientes es lo que automatiza Anki.' },
+  { q:'¿Qué nivel de la taxonomía SOLO debería alcanzar una buena tarjeta de Anki para MSK?', opts:['Uniestructural (un hecho aislado)','Multiestructural (varios hechos)','Relacional (hechos integrados con mecanismo)','No importa el nivel'], correct:2, explain:'Las tarjetas deben apuntar al nivel relacional o superior.' },
+  { q:'¿Por qué es MEJOR crear tus propias tarjetas que solo usar decks prefabricados?', opts:['Porque los decks prefabricados tienen errores','Por el \"efecto de generación\": crear activa codificación más profunda','Porque es más rápido','No es mejor, los prefabricados son superiores'], correct:1, explain:'El efecto de generación: crear material propio produce codificación más profunda.' },
+];
+
+/* ═══════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════ */
+let currentStep = 0;
+let currentRegion = 'hombro';
+let currentCardIdx = 0;
+let cardFlipped = false;
+let ankiRated = false;
+let builderUnlocked = 0;
+let quizAnswers = {};
+let quizSubmitted = false;
+
+/* ═══════════════════════════════════════
+   RENDERING
+   ═══════════════════════════════════════ */
+
+function pill(text, color) {
+  return `<span class="pill" style="color:${color};background:${color}18">${text}</span>`;
+}
+
+function renderNav() {
+  const tabs = document.getElementById('navTabs');
+  tabs.innerHTML = STEPS.map((s, i) => {
+    let cls = 'nav-tab';
+    if (i === currentStep) cls += ' active';
+    else if (i < currentStep) cls += ' visited';
+    return `<button class="${cls}" onclick="goToStep(${i})">${s.icon}<span class="tab-label">${s.label}</span></button>`;
+  }).join('');
+
+  document.getElementById('stepCounter').textContent = `${currentStep + 1} / ${STEPS.length}`;
+
+  const pb = document.getElementById('progressBar');
+  pb.innerHTML = STEPS.map((_, i) => {
+    let cls = 'progress-dot';
+    if (i === currentStep) cls += ' current';
+    else if (i < currentStep) cls += ' done';
+    return `<div class="${cls}" style="width:${i === currentStep ? 24 : 8}px"></div>`;
+  }).join('');
+}
+
+function renderContent() {
+  const wrap = document.getElementById('contentWrap');
+  wrap.innerHTML = buildSection(STEPS[currentStep].id) + buildFootNav();
+  document.getElementById('contentScroll').scrollTop = 0;
+
+  // Trigger bar animations after render
+  setTimeout(() => {
+    document.querySelectorAll('.bar-fill').forEach(b => b.classList.add('animate'));
+  }, 200);
+}
+
+function buildFootNav() {
+  const prevDisabled = currentStep === 0 ? 'disabled' : '';
+  const isLast = currentStep === STEPS.length - 1;
+  return `
+    <div class="foot-nav">
+      <button class="btn-secondary" ${prevDisabled} onclick="prevStep()">← Anterior</button>
+      ${isLast
+        ? `<button class="btn-primary" style="background:var(--plum)" onclick="goToStep(0)">🔄 Reiniciar</button>`
+        : `<button class="btn-primary" onclick="nextStep()">Siguiente →</button>`
+      }
+    </div>`;
+}
+
+/* ═══════════════════════════════════════
+   SECTIONS
+   ═══════════════════════════════════════ */
+
+function buildSection(id) {
+  switch (id) {
+    case 'bienvenida': return sectionBienvenida();
+    case 'ciencia': return sectionCiencia();
+    case 'setup': return sectionSetup();
+    case 'tarjetas': return sectionTarjetas();
+    case 'atlas': return sectionAtlas();
+    case 'rutina': return sectionRutina();
+    case 'errores': return sectionErrores();
+    case 'quiz': return sectionQuiz();
+    default: return '';
+  }
+}
+
+function sectionBienvenida() {
+  const features = [
+    ['🧠','La ciencia detrás de Anki','Por qué la repetición espaciada funciona mejor que releer notas'],
+    ['⚙️','Configuración óptima','Ajustes específicos para anatomía MSK en segundo año'],
+    ['📝','Crear tarjetas efectivas','Formato clínico que alcanza niveles altos de la taxonomía SOLO'],
+    ['🗺️','Atlas de tarjetas modelo','Ejemplos listos por cada región anatómica MSK'],
+    ['📅','Integrar con tu rutina','Cómo encaja Anki en el planificador semanal de estrategias'],
+    ['⚠️','Errores comunes','Lo que NO debes hacer para no desperdiciar tiempo'],
+  ];
+  return `
+    <div class="center-box" style="margin-bottom:28px">
+      <div class="hero-icon">🃏</div>
+      <h2 class="hero-title">Tutoría: Anki para Anatomía MSK</h2>
+      <p class="hero-sub">Aprende a usar la herramienta de estudio más poderosa basada en evidencia, aplicada específicamente a tu curso de sistema musculoesquelético.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">🎯 ¿Qué vas a aprender en esta tutoría?</div>
+      <div style="margin-top:12px">
+        ${features.map(([e, t, d]) => `
+          <div class="feature-row">
+            <span class="emoji">${e}</span>
+            <div><div class="f-title">${t}</div><div class="f-desc">${d}</div></div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    <div class="tip">
+      <strong>💡 Conexión con tu tutoría previa:</strong> Esta guía aplica directamente las estrategias de Reaprendizaje Sucesivo, Codificación Dual y Práctica de Auto-evaluación que revisamos en la sesión sobre estrategias basadas en evidencia para anatomía MSK.
+    </div>`;
+}
+
+function sectionCiencia() {
+  const intervals = ['1 día','3 días','7 días','14 días','30 días','90 días'];
+  return `
+    <h2 class="sec-title">🧠 La Ciencia detrás de Anki</h2>
+    <p class="sec-desc">Anki no es simplemente "flashcards digitales". Es la implementación tecnológica de los dos hallazgos más robustos de la ciencia del aprendizaje.</p>
+
+    <div class="card">
+      <div class="card-title">1. Efecto de Recuperación Activa (Testing Effect)</div>
+      <p class="card-text">Cada vez que intentas recordar algo, fortaleces la conexión neuronal mucho más que al releerlo. Un examen no solo mide lo que sabes: <em>te enseña</em>.</p>
+      <div class="bar-wrap">
+        <div class="bar-label"><span>Releer notas</span><span style="color:var(--red);font-weight:700">~20% retención a 30 días</span></div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--red);--w:20%"></div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span>Anki (recuperación espaciada)</span><span style="color:var(--teal);font-weight:700">~80% retención a 30 días</span></div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--teal);--w:80%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">2. Repetición Espaciada (Spaced Repetition)</div>
+      <p class="card-text">El algoritmo de Anki calcula el momento óptimo para que repases cada tarjeta: justo antes de que la olvides.</p>
+      <div class="interval-grid">
+        ${intervals.map((d, i) => `
+          <div class="interval-chip" style="background:rgba(18,122,104,${(.03 + i * .025).toFixed(3)})">
+            <div class="val">${d}</div>
+            <div class="sub">Repaso ${i + 1}</div>
+          </div>
+        `).join('')}
+      </div>
+      <p class="card-text" style="font-size:13px">Los intervalos crecen exponencialmente. Al final, repasas cada tarjeta solo 6-7 veces y la recuerdas por meses.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">3. Efecto de Generación</div>
+      <p class="card-text">Crear tus propias tarjetas activa una codificación más profunda que usar tarjetas de otros. Por eso recomendamos que <strong>crees tus propias tarjetas con formato clínico</strong>, usando decks como AnKing solo como complemento.</p>
+    </div>
+
+    <div class="tip">
+      <strong>📖 Evidencia directa en anatomía:</strong> Dobson et al. (2017) demostraron que la recuperación distribuida produjo retención significativamente superior de información anatómica comparada con estudio masivo. Esto es exactamente lo que Anki automatiza.
+    </div>`;
+}
+
+function sectionSetup() {
+  const settings = [
+    ['15','Tarjetas nuevas/día','Sostenible sin acumulación. Sube a 20 en semanas ligeras.'],
+    ['9999','Revisiones máx/día','No limitar. Deja que el algoritmo te muestre todo lo pendiente.'],
+    ['1 10','Intervalo graduación','1 min y 10 min. Dos pasos antes de \'aprender\' una tarjeta.'],
+    ['1','Intervalo de partida','1 día. Primera revisión al día siguiente.'],
+    ['4','Intervalo fácil','4 días si presionas \'Easy\'.'],
+    ['100%','Modif. intervalos','Déjalo en 100% al inicio. Ajusta según retención.'],
+    ['180','Máx. de intervalo','6 meses máx. Suficiente para un bloque semestral.'],
+  ];
+  return `
+    <h2 class="sec-title">⚙️ Configuración de Anki para MSK</h2>
+    <p class="sec-desc">Estos ajustes están optimizados para una estudiante de 2° año en bloque MSK.</p>
+
+    <div class="card">
+      <div class="card-title">Paso 1: Descarga e Instalación</div>
+      <p class="card-text">Descarga Anki gratis desde <strong>apps.ankiweb.net</strong> (escritorio). La versión de iOS tiene costo pero la de Android (AnkiDroid) es gratuita.</p>
+      <div class="tip"><strong>💡 Sincronización:</strong> Crea una cuenta en AnkiWeb para sincronizar entre tu computadora y teléfono.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Paso 2: Crear tu Deck de MSK</div>
+      <p class="card-text">Organiza un deck principal con sub-decks por región:</p>
+      <div class="deck-tree">📂 MSK - Anatomía<br>&nbsp;&nbsp;├── 🦴 Hombro<br>&nbsp;&nbsp;├── 💪 Brazo y Antebrazo<br>&nbsp;&nbsp;├── ✋ Mano y Muñeca<br>&nbsp;&nbsp;├── 🦵 Cadera y Muslo<br>&nbsp;&nbsp;├── 🦿 Rodilla y Pierna<br>&nbsp;&nbsp;└── 🔩 Columna Vertebral</div>
+      <p class="card-text" style="font-size:13px">Estudia siempre desde el deck principal para lograr <strong>práctica intercalada</strong> — mezclar regiones mejora la retención.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Paso 3: Ajustes Recomendados</div>
+      <p class="card-text">Click derecho en tu deck → Options:</p>
+      ${settings.map(([v, n, d]) => `
+        <div class="setting-row">
+          <div class="setting-badge">${v}</div>
+          <div><div class="setting-name">${n}</div><div class="setting-note">${d}</div></div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="warning">
+      <strong>⚠️ Add-ons esenciales:</strong> Instala "Image Occlusion Enhanced" (para ocultar partes de imágenes anatómicas) y "Review Heatmap" (para ver tu consistencia). Menú Tools → Add-ons → Get Add-ons.
+    </div>`;
+}
+
+function sectionTarjetas() {
+  const soloLevels = [
+    { name:'Uniestructural', color:'var(--text-light)', desc:'Hecho aislado. Ej: "El nervio radial inerva extensores."', icon:'①' },
+    { name:'Multiestructural', color:'var(--amber)', desc:'Múltiples hechos. Ej: "Pasa por surco espiral, inerva extensores, su lesión causa wrist drop."', icon:'②' },
+    { name:'Relacional', color:'var(--teal)', desc:'Hechos integrados con mecanismo y diagnóstico diferencial.', icon:'③' },
+    { name:'Abstracto extendido', color:'var(--plum)', desc:'Transferencia a nuevos contextos, manejo y pronóstico.', icon:'④' },
+  ];
+  const fields = [
+    { label:'1. Escenario clínico', ph:'Ej: \"Paciente con caída de muñeca tras fractura de diáfisis humeral...\"', key:'scenario' },
+    { label:'2. Estructura/nervio implicado', ph:'Ej: \"Nervio radial en surco espiral\"', key:'structure' },
+    { label:'3. Mecanismo (¿por qué?)', ph:'Ej: \"El nervio pasa por el surco espiral del húmero, vulnerable en fracturas\"', key:'mechanism' },
+    { label:'4. Dato de integración', ph:'Ej: \"Diagnóstico diferencial con lesión del mediano por distribución del déficit\"', key:'extra' },
+  ];
+  return `
+    <h2 class="sec-title">📝 Cómo Crear Tarjetas Efectivas</h2>
+    <p class="sec-desc">La calidad de tus tarjetas determina la calidad de tu aprendizaje.</p>
+
+    <div class="card">
+      <div class="card-title">Regla de Oro: Viñeta Clínica → Estructura</div>
+      <p class="card-text">En vez de preguntar directamente por una estructura, presenta un escenario clínico que te obligue a razonar.</p>
+      <div class="compare-box bad">
+        <div class="compare-label" style="color:var(--red)">❌ Tarjeta débil (uniestructural)</div>
+        <p style="font-size:14px;margin-top:4px;color:var(--text-mid)"><strong>Frente:</strong> ¿Qué inerva el nervio axilar?<br><strong>Reverso:</strong> Deltoides y teres menor.</p>
+      </div>
+      <div class="compare-box good">
+        <div class="compare-label" style="color:var(--teal)">✅ Tarjeta fuerte (relacional)</div>
+        <p style="font-size:14px;margin-top:4px;color:var(--text-mid)"><strong>Frente:</strong> Tras luxación anterior del hombro, el paciente pierde abducción y tiene hipoestesia en 'parche regimentario'. ¿Qué nervio se lesionó?<br><strong>Reverso:</strong> Nervio axilar (C5-C6). Pasa por espacio cuadrangular. Inerva deltoides + teres menor.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Niveles SOLO en tus Tarjetas</div>
+      <p class="card-text">Apunta a que la mayoría estén en nivel relacional o superior:</p>
+      ${soloLevels.map(l => `
+        <div class="solo-row" style="border-left:4px solid ${l.color};background:${l.color}08">
+          <span class="solo-icon">${l.icon}</span>
+          <div><div class="solo-name" style="color:${l.color}">${l.name}</div><div class="solo-desc">${l.desc}</div></div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="card">
+      <div class="card-title">🛠️ Practica: Construye una Tarjeta</div>
+      <p class="card-text">Sigue los pasos para crear una tarjeta con formato clínico:</p>
+      ${fields.map((f, i) => `
+        <div class="builder-step ${i > builderUnlocked ? 'locked' : ''}" id="builder-${i}">
+          <label style="color:${i <= builderUnlocked ? 'var(--teal)' : 'var(--border-dark)'}">${f.label}</label>
+          <textarea placeholder="${f.ph}" oninput="onBuilderInput(${i}, this.value)" ${i > builderUnlocked ? 'disabled' : ''}></textarea>
+        </div>
+      `).join('')}
+      <div id="builderSuccess" style="display:none">
+        <div class="tip" style="margin-top:10px">
+          <strong>🎉 ¡Excelente!</strong> Tu tarjeta tiene los 4 elementos de una tarjeta nivel relacional. Ahora en Anki: Add → escribe el frente (escenario) y el reverso (estructura + mecanismo + integración).
+        </div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>📋 Checklist de una buena tarjeta MSK:</strong><br>
+      ✓ El frente presenta un escenario clínico, no una pregunta directa<br>
+      ✓ El reverso incluye estructura + mecanismo + correlación<br>
+      ✓ Tiene tags por región y tema<br>
+      ✓ Alcanza nivel relacional o superior<br>
+      ✓ Es atómica: una idea principal por tarjeta
+    </div>`;
+}
+
+function sectionAtlas() {
+  const r = REGIONS[currentRegion];
+  const c = r.cards[currentCardIdx];
+  return `
+    <h2 class="sec-title">🗺️ Atlas de Tarjetas Modelo por Región</h2>
+    <p class="sec-desc">Explora tarjetas ejemplo para cada región MSK. Toca cada tarjeta para ver el reverso.</p>
+
+    <div class="region-tabs">
+      ${REGIONS_ORDER.map(k => `
+        <button class="region-tab ${k === currentRegion ? 'active' : ''}" onclick="switchRegion('${k}')">${REGIONS[k].emoji} ${REGIONS[k].label}</button>
+      `).join('')}
+    </div>
+
+    <div style="text-align:center;margin-bottom:10px">
+      <span style="font-size:12px;color:var(--text-light);font-weight:600">Tarjeta ${currentCardIdx + 1} de ${r.cards.length} — ${r.label}</span>
+    </div>
+
+    <div class="flashcard-container" onclick="flipCard()">
+      <div class="flashcard-inner ${cardFlipped ? 'flipped' : ''}" id="flashcardInner">
+        <div class="flashcard-face flashcard-front">
+          <div class="fc-label" style="color:var(--teal-l)">Frente — Toca para voltear</div>
+          <p style="font-size:15px;line-height:1.7">${c.front}</p>
+          <div style="margin-top:14px">${pill(c.type, '#1A9E86')} ${pill(c.tier, '#CC9820')}</div>
+        </div>
+        <div class="flashcard-face flashcard-back">
+          <div class="fc-label" style="color:var(--red)">Reverso — Toca para voltear</div>
+          <p style="font-size:15px;line-height:1.7;color:var(--text)">${c.back}</p>
+          <div style="margin-top:14px">${c.tags.map(t => pill('#' + t, '#4A483F')).join('')}</div>
+        </div>
+      </div>
+    </div>
+
+    ${cardFlipped && !ankiRated ? `
+      <div class="anki-btns" id="ankiBtns">
+        <button class="anki-btn" style="border-color:var(--red);color:var(--red)" onclick="rateAnki(0)"><div class="ab-label">Again</div><div class="ab-sub">&lt; 1 min</div></button>
+        <button class="anki-btn" style="border-color:var(--amber);color:var(--amber)" onclick="rateAnki(1)"><div class="ab-label">Hard</div><div class="ab-sub">6 min</div></button>
+        <button class="anki-btn" style="border-color:var(--teal);color:var(--teal)" onclick="rateAnki(2)"><div class="ab-label">Good</div><div class="ab-sub">10 min</div></button>
+        <button class="anki-btn" style="border-color:var(--blue);color:var(--blue)" onclick="rateAnki(3)"><div class="ab-label">Easy</div><div class="ab-sub">4 días</div></button>
+      </div>
+    ` : ''}
+
+    ${ankiRated ? `
+      <div style="text-align:center;margin-top:12px">
+        <div style="font-size:13px;color:var(--teal);font-weight:600;margin-bottom:8px">✓ En Anki real, este rating ajustaría el intervalo de repetición automáticamente.</div>
+        <button class="btn-primary" onclick="nextCard()">Siguiente tarjeta →</button>
+      </div>
+    ` : ''}
+
+    <div class="card stats-bar" style="margin-top:20px">
+      <div><div class="stat-val" style="color:var(--teal)">${r.cards.length}</div><div class="stat-label">Tarjetas ejemplo</div></div>
+      <div><div class="stat-val" style="color:var(--amber)">${r.cards.filter(c => c.tier === 'Relacional').length}</div><div class="stat-label">Nivel relacional</div></div>
+      <div><div class="stat-val" style="color:var(--plum)">${r.cards.filter(c => c.tier === 'Abstracto ext.').length}</div><div class="stat-label">Abstracto ext.</div></div>
+    </div>`;
+}
+
+function sectionRutina() {
+  const days = [
+    { d:'L', name:'Lunes', color:'var(--red)', title:'Exploración 3D + Crear tarjetas', tasks:['Explora la región nueva en app 3D (40 min)','Crea 10-15 tarjetas con formato clínico de lo aprendido (20 min)','Las tarjetas capturan lo que acabas de explorar en 3D'] },
+    { d:'M', name:'Martes', color:'var(--teal)', title:'Anki review + Casos clínicos', tasks:['Revisión de tarjetas pendientes (15 min)','Resuelve 3-5 viñetas clínicas','Agrega 3-5 tarjetas nuevas basadas en los casos'] },
+    { d:'X', name:'Miércoles', color:'var(--blue)', title:'Anki intercalado + MCQs', tasks:['Revisión mezclando regiones previas + actual (15 min)','Resuelve 20-25 MCQs mixtas','Convierte errores en tarjetas nuevas de Anki'] },
+    { d:'J', name:'Jueves', color:'var(--amber)', title:'Anki review + Teach-back', tasks:['Revisión espaciada diaria (15 min)','Enseña la región a un compañero sin notas','Lo que no pudiste explicar → tarjetas de refuerzo'] },
+    { d:'V', name:'Viernes', color:'var(--plum)', title:'Post-lab → Anki', tasks:['Revisión pre-lab (15 min)','Después de lab: dibujar de memoria','Crear tarjetas de Image Occlusion con fotos del lab'] },
+    { d:'S', name:'Sábado', color:'var(--olive)', title:'Simulacro + Análisis', tasks:['30 MCQs en condiciones de examen','Analizar errores: ¿qué tipo de preguntas fallas?','Ajustar tags/prioridad en tarjetas de Anki'] },
+    { d:'D', name:'Domingo', color:'var(--text-light)', title:'Solo Anki review', tasks:['Solo tarjetas pendientes (20 min)','El algoritmo sabe qué necesitas repasar','¡Descanso! El sueño consolida la memoria'] },
+  ];
+  return `
+    <h2 class="sec-title">📅 Anki en tu Rutina Semanal MSK</h2>
+    <p class="sec-desc">Así se integra Anki con el planificador semanal de tus estrategias de estudio.</p>
+    ${days.map(d => `
+      <div class="card day-card" style="border-left-color:${d.color}">
+        <div class="day-header">
+          <div class="day-badge" style="background:${d.color}">${d.d}</div>
+          <div class="day-title">${d.name}: ${d.title}</div>
+        </div>
+        <div class="day-tasks">
+          ${d.tasks.map(t => `<div class="day-task"><span class="arrow" style="color:${d.color}">→</span>${t}</div>`).join('')}
+        </div>
+      </div>
+    `).join('')}
+    <div class="tip">
+      <strong>⏱️ Tiempo total de Anki por semana:</strong> ~2 horas (15-20 min/día de revisión + ~1 hora de creación de tarjetas). Inversión mínima para retención máxima.
+    </div>`;
+}
+
+function sectionErrores() {
+  const errors = [
+    { icon:'📚', name:'Acumular tarjetas sin revisar', desc:'Dejar de repasar por 3+ días crea una bola de nieve de revisiones pendientes que se vuelve abrumadora.', fix:'Regla no negociable: haz tus revisiones TODOS los días, incluso si son solo 10 minutos. Es mejor 10 min diarios que 1 hora el domingo.' },
+    { icon:'📏', name:'Tarjetas demasiado largas', desc:'Si una tarjeta tiene 5 hechos diferentes, no sabes cuál olvidaste cuando la fallas.', fix:'Una idea principal por tarjeta (principio de atomicidad). Si necesitas cubrir 5 puntos, crea 5 tarjetas.' },
+    { icon:'🤥', name:'Presionar \'Good\' cuando deberías presionar \'Again\'', desc:'Inflar tu progreso engaña al algoritmo. La tarjeta aparecerá en intervalos más largos y la olvidarás en el examen.', fix:'Sé brutalmente honesta. Si dudaste más de 5 segundos o no recordaste la respuesta completa → Again.' },
+    { icon:'📦', name:'Solo usar decks de otros sin modificar', desc:'Pierdes el efecto de generación. Las tarjetas de otros no se adaptan a tu curso ni a tus errores.', fix:'Usa AnKing como base pero: modifica tarjetas para formato clínico, agrega tarjetas propias, suspende tarjetas irrelevantes para tu bloque.' },
+    { icon:'🏷️', name:'No usar tags ni organización', desc:'Sin tags no puedes filtrar por tema, región o nivel de dificultad.', fix:'Tag cada tarjeta con: región (hombro, rodilla), tema (nervio, fractura, músculo) y fuente (clase, caso-clínico, error-examen).' },
+    { icon:'📱', name:'Revisar sin concentración', desc:'La recuperación activa requiere esfuerzo cognitivo. Revisar distraída es casi tan inefectivo como releer.', fix:'Dedica 15-20 min de concentración total. Sin teléfono, sin música con letra. Momento ideal: primera hora de la mañana.' },
+  ];
+  return `
+    <h2 class="sec-title">⚠️ Errores Comunes con Anki</h2>
+    <p class="sec-desc">Estos errores pueden hacer que pierdas tiempo o que Anki sea contraproducente.</p>
+    ${errors.map(e => `
+      <div class="card">
+        <div class="error-card">
+          <span class="error-icon">${e.icon}</span>
+          <div>
+            <div class="error-name">${e.name}</div>
+            <p class="card-text">${e.desc}</p>
+            <div class="error-fix">
+              <div class="error-fix-label">✅ Solución</div>
+              <div class="error-fix-text">${e.fix}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('')}`;
+}
+
+function sectionQuiz() {
+  return `
+    <h2 class="sec-title">✅ Autoevaluación</h2>
+    <p class="sec-desc">Responde estas preguntas para verificar que comprendiste los conceptos clave.</p>
+    ${QUIZ.map((q, qi) => {
+      const answered = quizAnswers[qi] !== undefined;
+      const isCorrect = answered && quizAnswers[qi] === q.correct;
+      let cardCls = 'card quiz-card';
+      if (quizSubmitted) cardCls += isCorrect ? ' correct' : ' wrong';
+      return `
+        <div class="${cardCls}">
+          <div class="quiz-q">${qi + 1}. ${q.q}</div>
+          ${q.opts.map((o, oi) => {
+            const sel = quizAnswers[qi] === oi;
+            let cls = 'quiz-opt';
+            if (quizSubmitted && oi === q.correct) cls += ' show-correct';
+            else if (quizSubmitted && sel && oi !== q.correct) cls += ' show-wrong';
+            else if (sel) cls += ' selected';
+            return `
+              <div class="${cls}" onclick="${quizSubmitted ? '' : `selectQuiz(${qi},${oi})`}">
+                <div class="quiz-radio">${sel ? '✓' : ''}</div>
+                <span>${o}</span>
+              </div>`;
+          }).join('')}
+          <div class="quiz-explain ${quizSubmitted ? 'show' : ''}" style="background:${isCorrect ? 'var(--teal-bg)' : 'var(--amber-bg)'}">
+            ${q.explain}
+          </div>
+        </div>`;
+    }).join('')}
+    ${!quizSubmitted ? `
+      <div class="center-box" style="margin-top:16px">
+        <button class="btn-primary" onclick="submitQuiz()" ${Object.keys(quizAnswers).length < QUIZ.length ? 'disabled' : ''}>
+          Verificar respuestas
+        </button>
+        ${Object.keys(quizAnswers).length < QUIZ.length ? `<p style="font-size:12px;color:var(--text-light);margin-top:8px">Responde todas las preguntas (${Object.keys(quizAnswers).length}/${QUIZ.length})</p>` : ''}
+      </div>
+    ` : buildQuizResult()}`;
+}
+
+function buildQuizResult() {
+  const score = Object.entries(quizAnswers).filter(([k, v]) => QUIZ[k].correct === v).length;
+  let emoji, color, msg;
+  if (score >= 5) { emoji = '🎉'; color = 'var(--teal)'; msg = '¡Estás lista para empezar con Anki! Aplica estos principios desde hoy.'; }
+  else if (score >= 3) { emoji = '👍'; color = 'var(--amber)'; msg = 'Buen inicio. Revisa las secciones donde tuviste errores antes de empezar.'; }
+  else { emoji = '📖'; color = 'var(--red)'; msg = 'Te recomiendo repasar la tutoría completa. Los conceptos fundamentales son clave para usar Anki bien.'; }
+  const bgColor = score >= 5 ? 'var(--teal-bg)' : score >= 3 ? 'var(--amber-bg)' : 'var(--red-bg)';
+  return `
+    <div class="card center-box" style="background:${bgColor};border-color:${color}30">
+      <div style="font-size:36px;margin-bottom:8px">${emoji}</div>
+      <div style="font-size:22px;font-weight:800;color:${color}">${score}/${QUIZ.length} correctas</div>
+      <p class="card-text" style="margin-top:8px;max-width:400px;margin-left:auto;margin-right:auto">${msg}</p>
+      <button class="btn-secondary" style="margin-top:12px" onclick="resetQuiz()">Intentar de nuevo</button>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════
+   INTERACTIONS
+   ═══════════════════════════════════════ */
+
+function goToStep(i) {
+  currentStep = i;
+  renderNav();
+  renderContent();
+}
+function nextStep() { if (currentStep < STEPS.length - 1) goToStep(currentStep + 1); }
+function prevStep() { if (currentStep > 0) goToStep(currentStep - 1); }
+
+function flipCard() {
+  cardFlipped = !cardFlipped;
+  renderContent();
+}
+
+function rateAnki(r) {
+  ankiRated = true;
+  renderContent();
+}
+
+function nextCard() {
+  const r = REGIONS[currentRegion];
+  currentCardIdx = (currentCardIdx + 1) % r.cards.length;
+  cardFlipped = false;
+  ankiRated = false;
+  renderContent();
+}
+
+function switchRegion(k) {
+  currentRegion = k;
+  currentCardIdx = 0;
+  cardFlipped = false;
+  ankiRated = false;
+  renderContent();
+}
+
+function onBuilderInput(idx, val) {
+  if (val.length > 5 && idx === builderUnlocked && builderUnlocked < 3) {
+    builderUnlocked = idx + 1;
+    renderContent();
+    // Re-focus the next textarea
+    setTimeout(() => {
+      const next = document.querySelector(`#builder-${idx + 1} textarea`);
+      if (next) next.focus();
+    }, 100);
+  } else if (val.length > 5 && idx === 3) {
+    builderUnlocked = 4;
+    const el = document.getElementById('builderSuccess');
+    if (el) el.style.display = 'block';
+  }
+}
+
+function selectQuiz(qi, oi) {
+  quizAnswers[qi] = oi;
+  renderContent();
+}
+
+function submitQuiz() {
+  if (Object.keys(quizAnswers).length === QUIZ.length) {
+    quizSubmitted = true;
+    renderContent();
+  }
+}
+
+function resetQuiz() {
+  quizAnswers = {};
+  quizSubmitted = false;
+  renderContent();
+}
+
+/* ═══════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════ */
+renderNav();
+renderContent();
+</script>
+</body>
+</html>
