@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría: Cuadro de Punnett — Guía Completa</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 20px}
+.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;min-height:54px;flex-wrap:wrap;gap:6px;padding:6px 0}
+.nb{font-family:'DM Serif Display',serif;font-size:1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
+.nl{display:flex;gap:2px;flex-wrap:wrap}.nl button{padding:4px 10px;border-radius:20px;border:none;background:0;color:var(--t3);font-size:.7rem;font-family:inherit;cursor:pointer;transition:.3s;white-space:nowrap}.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}
+.pb{position:fixed;top:0;left:0;right:0;z-index:200;height:3px;background:rgba(0,212,170,.1)}.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}
+.mc{max-width:960px;margin:0 auto;padding:24px 20px 80px;position:relative;z-index:1}
+.sec{display:none;animation:fi .5s}.sec.a{display:block}@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:40px 0 30px}.hi{width:80px;height:80px;margin:0 auto 16px;background:var(--grad);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:2.2rem;line-height:1.2;margin-bottom:12px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hs{font-size:1.05rem;color:var(--t2);max-width:650px;margin:0 auto 24px}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:12px 14px;display:flex;align-items:flex-start;gap:10px;transition:.3s}.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}.on{min-width:24px;height:24px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;color:#0B1622}.ot{font-size:.83rem;color:var(--t2);line-height:1.5}
+.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:20px;box-shadow:var(--sh);transition:.3s}.cd:hover{border-color:rgba(0,212,170,.25)}.ch{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:12px}.ch .ac{color:var(--g)}
+.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:16px 20px;margin:16px 0;background:rgba(0,212,170,.06)}.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}.ib.pp{background:rgba(167,139,250,.06);border-left-color:var(--p)}.ibt{font-weight:700;margin-bottom:5px;font-size:.9rem}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:20px}.cc h4{font-family:'DM Serif Display',serif;margin-bottom:8px;font-size:1rem}
+.et{width:100%;border-collapse:separate;border-spacing:0;margin:16px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}.et th{background:rgba(0,212,170,.12);padding:10px 14px;text-align:left;font-weight:600;font-size:.82rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}.et td{padding:10px 14px;border-top:1px solid var(--bdr);font-size:.87rem;color:var(--t2)}.et tr:hover td{background:var(--card2)}
+.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:22px;margin-bottom:16px}.qt{font-weight:600;font-size:.95rem;margin-bottom:14px}.qo{display:flex;flex-direction:column;gap:8px}.qb{padding:11px 16px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.9rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}.qb.dis{pointer-events:none;opacity:.7}.ol{min-width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.qf{margin-top:12px;padding:14px;border-radius:var(--r10);font-size:.87rem;line-height:1.6;display:none}.qf.sh{display:block}.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}
+.cl{background:linear-gradient(135deg,rgba(255,107,107,.06),rgba(255,217,61,.04));border:1px solid rgba(255,107,107,.2);border-radius:var(--r16);padding:24px;margin:18px 0}.clb{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,107,.15);color:var(--r);padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:.03em}.clt{font-family:'DM Serif Display',serif;font-size:1.2rem;margin-bottom:10px}.clp{color:var(--t2);margin-bottom:12px;font-size:.9rem;line-height:1.7}
+.btn{padding:10px 22px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.9rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}.bp:hover{transform:translateY(-2px)}.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}.bs:hover{background:rgba(0,212,170,.2)}
+.analogy{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(0,163,255,.06));border:1px solid rgba(167,139,250,.2);border-radius:var(--r16);padding:22px;margin:16px 0}.analogy h4{font-family:'DM Serif Display',serif;color:var(--p);margin-bottom:6px}.analogy p{color:var(--t2);font-size:.9rem}
+.sn{display:flex;justify-content:space-between;margin-top:30px;padding-top:18px;border-top:1px solid var(--bdr)}
+.mnemonic{background:linear-gradient(135deg,rgba(255,217,61,.08),rgba(249,115,22,.05));border:1px solid rgba(255,217,61,.25);border-radius:var(--r16);padding:22px;margin:16px 0;text-align:center}.mnemonic h4{font-family:'DM Serif Display',serif;color:var(--y);margin-bottom:8px}.mnemonic p{color:var(--t2);font-size:.9rem;line-height:1.7}.mnemonic .big{font-size:1.6rem;font-weight:700;letter-spacing:2px;color:var(--y);margin:8px 0}
+.chapter-header{background:linear-gradient(135deg,var(--card),var(--card2));border:2px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;text-align:center;position:relative;overflow:hidden}.chapter-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,212,170,.08),transparent 70%);pointer-events:none}.chapter-header .ch-num{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--g);text-transform:uppercase;letter-spacing:.15em;margin-bottom:6px}.chapter-header h2{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:6px}.chapter-header p{color:var(--t2);font-size:.92rem}.chapter-header .ch-time{display:inline-block;background:rgba(0,212,170,.12);color:var(--g);padding:3px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-top:8px}
+.sim{background:var(--card2);border-radius:14px;padding:4px;margin:16px 0;border:1px solid var(--bdr);position:relative;overflow:hidden}
+.sim canvas{display:block;width:100%;border-radius:10px;background:#080d16}
+.sim-ctrls{display:flex;flex-wrap:wrap;gap:8px;padding:12px;align-items:center;justify-content:center}
+.sim-narr{background:rgba(0,212,170,.06);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px;margin-top:12px;color:var(--t2);font-size:.9rem;line-height:1.6;min-height:60px}
+.dd-container{margin:16px 0}.dd-item{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);margin-bottom:8px;overflow:hidden}.dd-header{padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:600;font-size:.92rem;transition:.3s}.dd-header:hover{background:rgba(0,212,170,.05)}.dd-arrow{transition:.3s;color:var(--g)}.dd-item.open .dd-arrow{transform:rotate(90deg)}.dd-body{display:none;padding:0 18px 16px;color:var(--t2);font-size:.88rem;line-height:1.7}.dd-item.open .dd-body{display:block}
+.sd{text-align:center;padding:30px;margin:18px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}.snm{font-family:'DM Serif Display',serif;font-size:3rem;margin-bottom:4px}.sbl{color:var(--t2)}.sbr{width:100%;max-width:360px;height:10px;background:rgba(255,255,255,.06);border-radius:6px;margin:16px auto;overflow:hidden}.sbf{height:100%;border-radius:6px;transition:width 1s}
+/* Punnett Interactive Grid */
+.pg-wrap{text-align:center;margin:16px 0}
+.pg{display:inline-grid;gap:3px;background:rgba(0,0,0,.3);border-radius:var(--r10);padding:14px;font-family:'JetBrains Mono',monospace}
+.pg .h{display:flex;align-items:center;justify-content:center;font-weight:700;padding:10px;font-size:.95rem;min-width:80px;min-height:50px}
+.pg .c{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--card);border-radius:8px;border:2px solid var(--bdr);padding:10px 8px;min-height:60px;transition:.4s;cursor:default;position:relative}
+.pg .c:hover{border-color:var(--g);background:var(--card2);transform:scale(1.04)}
+.pg .c .gt{font-weight:700;font-size:1.05rem}.pg .c .ph{font-size:.65rem;margin-top:3px;padding:2px 8px;border-radius:10px;font-weight:600}
+.pg .c.hi-dom{box-shadow:inset 0 0 0 2px rgba(0,212,170,.3)}.pg .c.hi-rec{box-shadow:inset 0 0 0 2px rgba(236,72,153,.3)}
+/* Step builder */
+.step-builder{background:var(--card);border:2px solid var(--bdr);border-radius:var(--r16);padding:24px;margin:16px 0}
+.sb-step{border-left:3px solid var(--t3);padding:16px 20px;margin:12px 0;border-radius:0 var(--r10) var(--r10) 0;background:rgba(0,0,0,.1);opacity:.4;transition:.5s}
+.sb-step.active{border-left-color:var(--g);background:rgba(0,212,170,.05);opacity:1}
+.sb-step.done{border-left-color:var(--b);opacity:.8}
+.sb-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--grad);color:#0B1622;font-weight:700;font-size:.8rem;margin-right:8px}
+.sb-title{font-weight:700;font-size:.95rem;margin-bottom:6px}
+.sb-content{color:var(--t2);font-size:.88rem;line-height:1.7}
+/* Fill-in Punnett exercise */
+.fill-pg{display:inline-grid;gap:3px;background:rgba(0,0,0,.3);border-radius:var(--r10);padding:14px;font-family:'JetBrains Mono',monospace}
+.fill-pg .h{display:flex;align-items:center;justify-content:center;font-weight:700;padding:8px;font-size:.95rem;min-width:90px;min-height:45px}
+.fill-pg .fc{min-height:55px;min-width:90px}
+.fill-pg input{width:60px;background:var(--card2);border:2px solid var(--bdr);border-radius:6px;color:var(--t1);font-family:'JetBrains Mono',monospace;font-size:1rem;text-align:center;padding:6px 4px;transition:.3s}
+.fill-pg input:focus{border-color:var(--b);outline:none;background:var(--card)}
+.fill-pg input.correct{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}
+.fill-pg input.wrong{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}
+/* Interactive select builder */
+.ipb{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin:16px 0}
+.ipb-row{display:flex;align-items:center;gap:12px;margin:10px 0;flex-wrap:wrap}
+.ipb-row label{font-size:.88rem;color:var(--t2);min-width:100px}
+.ipb-sel{background:var(--card2);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;color:var(--t1);font-family:'JetBrains Mono',monospace;font-size:.95rem;cursor:pointer;appearance:none;-webkit-appearance:none;min-width:140px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238BA4BE'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+.ipb-sel option{background:var(--card2);color:var(--t1)}
+.ipb-results{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.ipb-rbox{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px;text-align:center}
+.ipb-rbox .rbl{font-size:.72rem;color:var(--t3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.ipb-rbox .rv{font-family:'DM Serif Display',serif;font-size:1.1rem}
+/* Case box */
+.case-box{background:linear-gradient(135deg,rgba(0,163,255,.06),rgba(167,139,250,.04));border:1px solid rgba(0,163,255,.2);border-radius:var(--r16);padding:24px;margin:16px 0}
+.case-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,163,255,.15);color:var(--b);padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:.03em}
+.case-title{font-family:'DM Serif Display',serif;font-size:1.15rem;margin-bottom:10px}
+.case-text{color:var(--t2);font-size:.9rem;line-height:1.7;margin-bottom:12px}
+@media(max-width:768px){.og,.cg,.ipb-results{grid-template-columns:1fr}.hero h1{font-size:1.7rem}.ni{flex-direction:column;align-items:flex-start}.pg,.fill-pg{font-size:.8rem}.pg .h,.fill-pg .h{min-width:60px;font-size:.75rem;padding:6px}.pg .c{padding:6px 4px;min-height:46px}.fill-pg input{width:45px;font-size:.85rem}}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">📐 Cuadro de Punnett</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button>
+<button data-s="quees">¿Qué es?</button>
+<button data-s="paso1">Paso a Paso</button>
+<button data-s="mono">Monohíbrido</button>
+<button data-s="di">Dihíbrido</button>
+<button data-s="xlink">Ligado al X</button>
+<button data-s="special">Especiales</button>
+<button data-s="errores">Errores</button>
+<button data-s="practica">Práctica</button>
+<button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ===== INICIO ===== -->
+<div class="sec a" id="sec-inicio"><div class="hero"><div class="hi">📐</div><h1>Cuadro de Punnett: Guía Completa Paso a Paso</h1><p class="hs">Aprende a construir, usar e interpretar cuadros de Punnett desde cero. Cruces monohíbridos, dihíbridos, ligados al X, codominancia y casos clínicos con ejercicios interactivos.</p></div>
+<div class="cd"><div class="ch">🎯 Lo que <span class="ac">Aprenderás</span></div>
+<div class="og">
+<div class="oi"><div class="on">1</div><div class="ot">Entender qué es un cuadro de Punnett y para qué sirve exactamente.</div></div>
+<div class="oi"><div class="on">2</div><div class="ot">Construir uno paso a paso: identificar gametos, llenar la cuadrícula y leer resultados.</div></div>
+<div class="oi"><div class="on">3</div><div class="ot">Resolver cruces monohíbridos, dihíbridos y ligados al X sin confusiones.</div></div>
+<div class="oi"><div class="on">4</div><div class="ot">Interpretar resultados para asesoría genética y correlatos clínicos.</div></div>
+<div class="oi"><div class="on">5</div><div class="ot">Aplicar cuadros a codominancia, dominancia incompleta y alelos múltiples.</div></div>
+<div class="oi"><div class="on">6</div><div class="ot">Identificar y evitar errores comunes que producen resultados incorrectos.</div></div>
+</div></div>
+<div class="sim"><canvas id="cvHero" width="900" height="300"></canvas></div>
+<div style="text-align:center;margin-top:20px"><button class="btn bp" onclick="go('quees')">Comenzar →</button></div>
+</div>
+
+<!-- ===== ¿QUÉ ES? ===== -->
+<div class="sec" id="sec-quees">
+<div class="chapter-header"><div class="ch-num">Módulo 1 de 8</div><h2>📖 ¿Qué es un Cuadro de Punnett?</h2><p>Origen, definición y lógica fundamental</p><div class="ch-time">⏱ ~8 min</div></div>
+
+<div class="cd"><div class="ch">📖 Definición <span class="ac">Clara</span></div>
+<div class="ib"><div class="ibt">🔑 ¿Qué es?</div><p style="color:var(--t2)">El cuadro de Punnett es una <strong>tabla</strong> que cruza los gametos posibles de un progenitor (columnas) con los gametos del otro (filas). Cada celda muestra un <strong>genotipo posible</strong> de la descendencia. Su propósito es <strong>predecir las proporciones</strong> genotípicas y fenotípicas de la descendencia de un cruce genético.</p></div>
+<div class="ib n"><div class="ibt">💡 ¿Para qué sirve concretamente?</div><p style="color:var(--t2)">Sirve para responder preguntas como: "Si ambos padres son portadores de fibrosis quística, ¿qué probabilidad tiene cada hijo de estar afectado?" o "Si la madre es portadora de hemofilia y el padre es sano, ¿cuántos hijos varones podrían ser hemofílicos?"</p></div>
+</div>
+
+<div class="analogy"><div style="font-size:1.8rem;margin-bottom:6px">📖</div><h4>Analogía: La tabla de multiplicar genética</h4><p>Piensa en la tabla de multiplicar: en un eje pones los números del 1 al 10, en el otro eje lo mismo, y en cada celda pones el producto. El cuadro de Punnett funciona igual: en un eje pones los gametos del padre, en el otro los de la madre, y en cada celda <strong>combinas</strong> un gameto de cada uno para obtener el genotipo del hijo.</p></div>
+
+<div class="cd"><div class="ch">🧬 Conceptos <span class="ac">Previos Esenciales</span></div>
+<p style="color:var(--t2);margin-bottom:12px">Antes de construir un Punnett, necesitas entender esto con claridad:</p>
+<div class="dd-container">
+<div class="dd-item open"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> ¿Qué es un gameto?</div><div class="dd-body">Un gameto es una célula sexual (espermatozoide u óvulo) que es <strong>haploide</strong>: tiene <strong>solo 1 alelo</strong> de cada gen. Si un individuo es <strong>Aa</strong>, sus gametos son: <strong>A</strong> o <strong>a</strong> (nunca "Aa" — eso es el genotipo de la célula diploide, no del gameto). La meiosis se encarga de que cada gameto reciba solo un alelo de cada par.</div></div>
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> ¿Qué gametos produce cada genotipo?</div><div class="dd-body"><strong>AA</strong> → solo produce gametos <strong>A</strong> (todos iguales).<br><strong>Aa</strong> → produce gametos <strong>A</strong> y gametos <strong>a</strong> (50% cada uno).<br><strong>aa</strong> → solo produce gametos <strong>a</strong> (todos iguales).<br><br>La clave: un <strong>homocigoto</strong> produce un solo tipo de gameto; un <strong>heterocigoto</strong> produce dos tipos.</div></div>
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> ¿Qué es genotipo vs. fenotipo?</div><div class="dd-body"><strong>Genotipo:</strong> las letras (AA, Aa, aa) — la combinación de alelos.<br><strong>Fenotipo:</strong> lo que se ve — con dominancia completa, AA y Aa se ven IGUAL (fenotipo dominante), solo aa se ve diferente (recesivo). Por eso la proporción genotípica 1:2:1 se convierte en fenotípica 3:1.</div></div>
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> ¿Qué significan las letras mayúsculas y minúsculas?</div><div class="dd-body"><strong>Mayúscula (A):</strong> alelo dominante.<br><strong>Minúscula (a):</strong> alelo recesivo.<br>Por convención, escribimos el alelo dominante primero: <strong>Aa</strong> (no aA). Para codominancia o alelos múltiples se usan superíndices: I<sup>A</sup>I<sup>B</sup>.</div></div>
+</div>
+</div>
+
+<div class="qq" id="q01"><div class="qt">Un individuo Aa, ¿qué gametos produce?</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>Solo gametos Aa</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">B</div>Gametos A y gametos a (50% cada uno)</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">C</div>Solo gametos A</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>Gametos AA y aa</button>
+</div><div class="qf" id="fb-q01"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('paso1')">Paso a Paso →</button></div>
+</div>
+
+<!-- ===== PASO A PASO ===== -->
+<div class="sec" id="sec-paso1">
+<div class="chapter-header"><div class="ch-num">Módulo 2 de 8</div><h2>🔧 Construcción Paso a Paso</h2><p>Los 5 pasos para construir cualquier cuadro de Punnett correctamente</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">🔧 Los 5 Pasos <span class="ac">Fundamentales</span></div>
+<div class="step-builder" id="sb1">
+<div class="sb-step active" id="sbs1"><div class="sb-title"><span class="sb-num">1</span> Identificar el genotipo de CADA progenitor</div><div class="sb-content">Antes de hacer cualquier cuadrícula, escribe el genotipo completo de padre y madre. Ejemplo: Padre = <strong>Aa</strong>, Madre = <strong>Aa</strong>. Si el problema dice "ambos son portadores de fibrosis quística", traduce: portador = heterocigoto = <strong>Ff</strong>.<br><br><strong>Pregúntate:</strong> ¿Cuántos genes estoy considerando? ¿1 gen (monohíbrido) o 2 genes (dihíbrido)?</div></div>
+<div class="sb-step" id="sbs2"><div class="sb-title"><span class="sb-num">2</span> Determinar los gametos posibles de CADA progenitor</div><div class="sb-content">Separa los alelos de cada progenitor en sus gametos posibles:<br>• <strong>Aa</strong> → gametos: <strong>A</strong> y <strong>a</strong><br>• <strong>AA</strong> → gameto: solo <strong>A</strong><br>• <strong>aa</strong> → gameto: solo <strong>a</strong><br>• <strong>AaBb</strong> → gametos: <strong>AB, Ab, aB, ab</strong> (4 combinaciones)<br><br><strong>Regla:</strong> Cada gameto lleva UN alelo de CADA gen. Nunca "Aa" como gameto.</div></div>
+<div class="sb-step" id="sbs3"><div class="sb-title"><span class="sb-num">3</span> Dibujar la cuadrícula y colocar los gametos</div><div class="sb-content">• Gametos de un progenitor → <strong>columnas</strong> (arriba)<br>• Gametos del otro progenitor → <strong>filas</strong> (izquierda)<br>• Para monohíbrido Aa × Aa → cuadrícula <strong>2×2</strong> (4 celdas)<br>• Para dihíbrido AaBb × AaBb → cuadrícula <strong>4×4</strong> (16 celdas)<br><br><strong>Tamaño de la cuadrícula = número de gametos de un padre × número de gametos del otro.</strong></div></div>
+<div class="sb-step" id="sbs4"><div class="sb-title"><span class="sb-num">4</span> Llenar cada celda combinando gametos</div><div class="sb-content">En cada celda, escribe la <strong>combinación del gameto de la columna + gameto de la fila</strong>. Por convención, escribe primero el alelo dominante (mayúscula).<br><br>Ejemplo: columna = <strong>A</strong>, fila = <strong>a</strong> → celda = <strong>Aa</strong> (no aA).<br>Columna = <strong>a</strong>, fila = <strong>a</strong> → celda = <strong>aa</strong>.</div></div>
+<div class="sb-step" id="sbs5"><div class="sb-title"><span class="sb-num">5</span> Contar y calcular proporciones</div><div class="sb-content"><strong>Genotípica:</strong> cuenta cuántas celdas tienen cada genotipo diferente.<br><strong>Fenotípica:</strong> agrupa los genotipos según qué fenotipo expresan.<br><br>Ejemplo Aa × Aa:<br>• Genotípica: 1 AA : 2 Aa : 1 aa → <strong>1:2:1</strong><br>• Fenotípica (dom. completa): 3 dominante : 1 recesivo → <strong>3:1</strong><br><br><strong>Cada celda = probabilidad igual.</strong> Si hay 4 celdas, cada una = 25% = ¼.</div></div>
+</div>
+<div class="sim-ctrls">
+<button class="btn bp" onclick="showStep(1)">Paso 1</button>
+<button class="btn bs" onclick="showStep(2)">Paso 2</button>
+<button class="btn bs" onclick="showStep(3)" style="border-color:var(--b);color:var(--b)">Paso 3</button>
+<button class="btn bs" onclick="showStep(4)" style="border-color:var(--p);color:var(--p)">Paso 4</button>
+<button class="btn bs" onclick="showStep(5)" style="border-color:var(--pk);color:var(--pk)">Paso 5</button>
+</div>
+</div>
+
+<div class="mnemonic"><h4>🧠 Mnemotécnica: 5 pasos</h4><div class="big">G – G – C – L – P</div><p><strong>G</strong>enotipo de padres → <strong>G</strong>ametos posibles → <strong>C</strong>uadrícula → <strong>L</strong>lenar celdas → <strong>P</strong>roporciones<br><em>"Genotipos Generan Cuadrículas Llenas de Probabilidades"</em></p></div>
+
+<div class="cd"><div class="ch">🧪 Simulación Visual: <span class="ac">Construyendo Aa × Aa</span></div>
+<div class="sim"><canvas id="cvBuild" width="900" height="520"></canvas>
+<div class="sim-ctrls">
+<button class="btn bp" onclick="setBuild(0)">Paso 1: Genotipos</button>
+<button class="btn bs" onclick="setBuild(1)">Paso 2: Gametos</button>
+<button class="btn bs" onclick="setBuild(2)" style="border-color:var(--b);color:var(--b)">Paso 3: Cuadrícula</button>
+<button class="btn bs" onclick="setBuild(3)" style="border-color:var(--p);color:var(--p)">Paso 4: Llenar</button>
+<button class="btn bs" onclick="setBuild(4)" style="border-color:var(--pk);color:var(--pk)">Paso 5: Resultado</button>
+</div></div>
+<div class="sim-narr" id="buildNarr">Presiona cada paso para ver la construcción visual del cuadro de Punnett para el cruce Aa × Aa.</div>
+</div>
+
+<div class="qq" id="q02"><div class="qt">Si un progenitor es AaBb, ¿cuántos tipos diferentes de gametos produce?</div><div class="qo">
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">A</div>2 (AB y ab)</button>
+<button class="qb" onclick="cq('q02',this,1)"><div class="ol">B</div>4 (AB, Ab, aB, ab)</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">C</div>8</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">D</div>1 (AaBb)</button>
+</div><div class="qf" id="fb-q02"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('quees')">← ¿Qué es?</button><button class="btn bp" onclick="go('mono')">Monohíbrido →</button></div>
+</div>
+
+<!-- ===== MONOHÍBRIDO ===== -->
+<div class="sec" id="sec-mono">
+<div class="chapter-header"><div class="ch-num">Módulo 3 de 8</div><h2>🔬 Cruce Monohíbrido</h2><p>Dominancia completa con un solo gen: AA, Aa, aa y todas sus combinaciones</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">📐 Todos los Cruces <span class="ac">Monohíbridos Posibles</span></div>
+<div class="ib"><div class="ibt">🔑 ¿Cuántos cruces monohíbridos existen?</div><p style="color:var(--t2)">Con 3 genotipos posibles (AA, Aa, aa), hay <strong>6 cruces diferentes</strong>. Cada uno produce proporciones distintas. Apréndetelos todos.</p></div>
+</div>
+
+<!-- Interactive: select cross and see Punnett -->
+<div class="ipb">
+<h4 style="font-family:'DM Serif Display',serif;color:var(--g);margin-bottom:14px">🧪 Explorador de Cruces Monohíbridos</h4>
+<div class="ipb-row">
+<label>♂ Padre:</label>
+<select class="ipb-sel" id="monoP1" onchange="buildMono()"><option value="AA">AA</option><option value="Aa" selected>Aa</option><option value="aa">aa</option></select>
+</div>
+<div class="ipb-row">
+<label>♀ Madre:</label>
+<select class="ipb-sel" id="monoP2" onchange="buildMono()"><option value="AA">AA</option><option value="Aa" selected>Aa</option><option value="aa">aa</option></select>
+</div>
+<div class="pg-wrap" id="monoGrid"></div>
+<div class="ipb-results" id="monoRes"></div>
+<div class="sim-narr" id="monoNarr" style="margin-top:12px"></div>
+</div>
+
+<div class="cd"><div class="ch">📊 Tabla Resumen: <span class="ac">6 Cruces Monohíbridos</span></div>
+<table class="et"><thead><tr><th>Cruce</th><th>Genotípica</th><th>Fenotípica</th><th>Uso clínico</th></tr></thead><tbody>
+<tr><td><strong>AA × AA</strong></td><td>100% AA</td><td>100% dominante</td><td>Línea pura</td></tr>
+<tr><td><strong>AA × Aa</strong></td><td>50% AA : 50% Aa</td><td>100% dominante</td><td>Todos sanos (portador × sano)</td></tr>
+<tr><td><strong style="color:var(--y)">Aa × Aa</strong></td><td style="color:var(--y)">1 AA : 2 Aa : 1 aa</td><td style="color:var(--y)">3:1</td><td style="color:var(--y)">Portador × portador: 25% riesgo</td></tr>
+<tr><td><strong>AA × aa</strong></td><td>100% Aa</td><td>100% dominante</td><td>Todos portadores</td></tr>
+<tr><td><strong>Aa × aa</strong></td><td>50% Aa : 50% aa</td><td>1:1</td><td>Cruce de prueba (test cross)</td></tr>
+<tr><td><strong>aa × aa</strong></td><td>100% aa</td><td>100% recesivo</td><td>Ambos afectados</td></tr>
+</tbody></table>
+</div>
+
+<div class="ib go"><div class="ibt">💡 El cruce de prueba (Test Cross)</div><p style="color:var(--t2)">Si tienes un individuo con fenotipo dominante y no sabes si es AA o Aa, lo cruzas con un homocigoto recesivo (aa). Si <strong>todos los hijos son dominantes</strong> → era AA. Si <strong>aparecen hijos recesivos</strong> (~50%) → era Aa. Este cruce diagnóstico se llama <strong>test cross</strong> o retrocruce.</p></div>
+
+<!-- FILL-IN EXERCISE -->
+<div class="cd"><div class="ch">✏️ Ejercicio: <span class="ac">Completa el Punnett</span></div>
+<p style="color:var(--t2);margin-bottom:12px">Cruce: <strong>Aa × Aa</strong>. Escribe el genotipo correcto en cada celda y verifica.</p>
+<div class="pg-wrap">
+<div class="fill-pg" style="grid-template-columns:90px 90px 90px;grid-template-rows:45px 55px 55px">
+<div class="h"></div><div class="h" style="color:var(--b)">A</div><div class="h" style="color:var(--b)">a</div>
+<div class="h" style="color:var(--pk)">A</div><div class="fc" style="display:flex;align-items:center;justify-content:center"><input type="text" id="fc00" maxlength="2" placeholder="?"></div><div class="fc" style="display:flex;align-items:center;justify-content:center"><input type="text" id="fc01" maxlength="2" placeholder="?"></div>
+<div class="h" style="color:var(--pk)">a</div><div class="fc" style="display:flex;align-items:center;justify-content:center"><input type="text" id="fc10" maxlength="2" placeholder="?"></div><div class="fc" style="display:flex;align-items:center;justify-content:center"><input type="text" id="fc11" maxlength="2" placeholder="?"></div>
+</div>
+</div>
+<div style="text-align:center;margin-top:12px"><button class="btn bp" onclick="checkFill1()">✓ Verificar Respuestas</button></div>
+<div id="fill1Fb" style="text-align:center;margin-top:10px;font-size:.9rem"></div>
+</div>
+
+<div class="cl"><div class="clb">🏥 Caso Clínico</div><div class="clt">Asesoría: Padres Portadores de Fibrosis Quística</div>
+<p class="clp">Ambos padres son <strong>Ff</strong> (portadores de fibrosis quística). El cuadro Ff × Ff → 1 FF : 2 Ff : 1 ff. <strong>Probabilidad de hijo afectado = ¼ = 25%.</strong> Probabilidad de hijo portador = ½ = 50%. Probabilidad de hijo no portador y no afectado = ¼ = 25%. Cada embarazo tiene las mismas probabilidades independientemente de los hijos previos.</p></div>
+
+<div class="qq" id="q03"><div class="qt">En el cruce Aa × aa, ¿cuál es la proporción fenotípica?</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">A</div>3:1</button>
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">B</div>1:1 (50% dominante : 50% recesivo)</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">C</div>100% dominante</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>100% recesivo</button>
+</div><div class="qf" id="fb-q03"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('paso1')">← Paso a Paso</button><button class="btn bp" onclick="go('di')">Dihíbrido →</button></div>
+</div>
+
+<!-- ===== DIHÍBRIDO ===== -->
+<div class="sec" id="sec-di">
+<div class="chapter-header"><div class="ch-num">Módulo 4 de 8</div><h2>🧬 Cruce Dihíbrido</h2><p>Dos genes independientes: cuadrícula 4×4 y la proporción 9:3:3:1</p><div class="ch-time">⏱ ~18 min</div></div>
+
+<div class="cd"><div class="ch">📐 ¿Cómo determinar gametos de <span class="ac">dos genes</span>?</div>
+<div class="ib"><div class="ibt">🔑 Regla FOIL para gametos dihíbridos</div><p style="color:var(--t2)">Para un individuo <strong>AaBb</strong>, cada gameto lleva UN alelo del gen A y UN alelo del gen B. Las combinaciones posibles son:</p></div>
+<div class="sim"><canvas id="cvGametes" width="900" height="340"></canvas></div>
+<p style="color:var(--t3);font-size:.82rem;text-align:center">▲ Diagrama: Cómo se forman los 4 gametos de un individuo AaBb</p>
+
+<div class="ib or"><div class="ibt">⚠️ Error común</div><p style="color:var(--t2)"><strong>INCORRECTO:</strong> "AaBb produce gametos Aa y Bb" → ¡NO! Eso serían genotipos diploides, no gametos.<br><strong>CORRECTO:</strong> AaBb produce gametos <strong>AB, Ab, aB, ab</strong> — cada uno con UN alelo de cada gen.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧪 Simulador: <span class="ac">Cuadro Dihíbrido Completo</span></div>
+<div class="ipb">
+<h4 style="font-family:'DM Serif Display',serif;color:var(--b);margin-bottom:14px">🧪 Constructor Dihíbrido Interactivo</h4>
+<div class="ipb-row">
+<label>♂ Padre:</label>
+<select class="ipb-sel" id="diP1" onchange="buildDi()"><option value="AaBb" selected>AaBb</option><option value="AABB">AABB</option><option value="AABb">AABb</option><option value="AaBB">AaBB</option><option value="AAbb">AAbb</option><option value="Aabb">Aabb</option><option value="aaBB">aaBB</option><option value="aaBb">aaBb</option><option value="aabb">aabb</option></select>
+</div>
+<div class="ipb-row">
+<label>♀ Madre:</label>
+<select class="ipb-sel" id="diP2" onchange="buildDi()"><option value="AaBb" selected>AaBb</option><option value="AABB">AABB</option><option value="AABb">AABb</option><option value="AaBB">AaBB</option><option value="AAbb">AAbb</option><option value="Aabb">Aabb</option><option value="aaBB">aaBB</option><option value="aaBb">aaBb</option><option value="aabb">aabb</option></select>
+</div>
+<div class="pg-wrap" id="diGrid" style="overflow-x:auto"></div>
+<div class="ipb-results" id="diRes"></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">📊 Interpretando <span class="ac">9:3:3:1</span></div>
+<div class="ib"><div class="ibt">🔑 ¿De dónde sale?</div><p style="color:var(--t2)">En el cruce <strong>AaBb × AaBb</strong> (cuadrícula 4×4 = 16 celdas):</p></div>
+<table class="et"><thead><tr><th>Fenotipo</th><th>Genotipos</th><th>Cantidad</th><th>Proporción</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Dominante A y B</strong></td><td>A_B_ (AABB, AABb, AaBB, AaBb)</td><td style="color:var(--g)"><strong>9</strong> /16</td><td>56.25%</td></tr>
+<tr><td><strong style="color:var(--b)">Dominante A, recesivo b</strong></td><td>A_bb (AAbb, Aabb)</td><td style="color:var(--b)"><strong>3</strong> /16</td><td>18.75%</td></tr>
+<tr><td><strong style="color:var(--p)">Recesivo a, dominante B</strong></td><td>aaB_ (aaBB, aaBb)</td><td style="color:var(--p)"><strong>3</strong> /16</td><td>18.75%</td></tr>
+<tr><td><strong style="color:var(--pk)">Recesivo ambos</strong></td><td>aabb</td><td style="color:var(--pk)"><strong>1</strong> /16</td><td>6.25%</td></tr>
+</tbody></table>
+<div class="ib pp"><div class="ibt">💡 Atajo mental</div><p style="color:var(--t2)">La proporción <strong>9:3:3:1</strong> es simplemente el producto de dos cruces 3:1 independientes: <strong>(3:1) × (3:1) = 9:3:3:1</strong>. Esto confirma que los genes se distribuyen independientemente (2ª ley de Mendel).</p></div>
+</div>
+
+<div class="qq" id="q04"><div class="qt">¿Qué tamaño tiene la cuadrícula de un cruce dihíbrido entre dos heterocigotos (AaBb × AaBb)?</div><div class="qo">
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">A</div>2×2 (4 celdas)</button>
+<button class="qb" onclick="cq('q04',this,1)"><div class="ol">B</div>4×4 (16 celdas)</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">C</div>3×3 (9 celdas)</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">D</div>8×8 (64 celdas)</button>
+</div><div class="qf" id="fb-q04"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('mono')">← Monohíbrido</button><button class="btn bp" onclick="go('xlink')">Ligado al X →</button></div>
+</div>
+
+<!-- ===== LIGADO AL X ===== -->
+<div class="sec" id="sec-xlink">
+<div class="chapter-header"><div class="ch-num">Módulo 5 de 8</div><h2>🔬 Punnett Ligado al Cromosoma X</h2><p>Hemofilia, Duchenne, daltonismo: cómo construir el Punnett con X e Y</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="cd"><div class="ch">📐 ¿Cómo cambia el Punnett <span class="ac">con genes ligados al X</span>?</div>
+<div class="ib"><div class="ibt">🔑 Diferencias clave</div><p style="color:var(--t2)">En genes ligados al X, los <strong>gametos NO son simples letras</strong> (A/a). Son <strong>cromosomas completos</strong>: X<sup>A</sup>, X<sup>a</sup>, o Y. Esto cambia la construcción.</p></div>
+
+<div class="ib w"><div class="ibt">⚠️ Reglas especiales</div><p style="color:var(--t2)"><strong>Mujer (XX):</strong> puede ser X<sup>A</sup>X<sup>A</sup> (sana), X<sup>A</sup>X<sup>a</sup> (portadora), o X<sup>a</sup>X<sup>a</sup> (afectada). Produce gametos X<sup>A</sup> y/o X<sup>a</sup>.<br><strong>Varón (XY):</strong> puede ser X<sup>A</sup>Y (sano) o X<sup>a</sup>Y (afectado). Produce gametos X<sup>A</sup> o X<sup>a</sup> + Y.<br>El <strong>Y no lleva alelo</strong> para el gen en cuestión → varones son <strong>hemicigotos</strong>.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧪 Simulador Interactivo: <span class="ac">Cruces Ligados al X</span></div>
+<div class="ipb">
+<h4 style="font-family:'DM Serif Display',serif;color:var(--pk);margin-bottom:14px">🧪 Constructor de Punnett Ligado al X</h4>
+<div class="ipb-row">
+<label>♀ Madre:</label>
+<select class="ipb-sel" id="xlM" onchange="buildXl()"><option value="XAXa" selected>X^A X^a (portadora)</option><option value="XAXA">X^A X^A (sana)</option><option value="XaXa">X^a X^a (afectada)</option></select>
+</div>
+<div class="ipb-row">
+<label>♂ Padre:</label>
+<select class="ipb-sel" id="xlP" onchange="buildXl()"><option value="XAY" selected>X^A Y (sano)</option><option value="XaY">X^a Y (afectado)</option></select>
+</div>
+<div class="pg-wrap" id="xlGrid"></div>
+<div class="ipb-results" id="xlRes"></div>
+<div class="sim-narr" id="xlNarr" style="margin-top:12px"></div>
+</div>
+</div>
+
+<div class="case-box">
+<div class="case-badge">📋 Caso Clínico Guiado</div>
+<div class="case-title">Hemofilia A: Madre Portadora × Padre Sano</div>
+<div class="case-text">María (X<sup>H</sup>X<sup>h</sup>) y Juan (X<sup>H</sup>Y) quieren saber el riesgo para sus hijos.</div>
+</div>
+<div class="qq" id="q05"><div class="qt">¿Qué gametos produce María (X<sup>H</sup>X<sup>h</sup>)?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">A</div>X^H y X^h (50% cada uno)</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">B</div>X^H X^h (un solo gameto)</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">C</div>X^H, X^h, y Y</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>Solo X^H</button>
+</div><div class="qf" id="fb-q05"></div></div>
+<div class="qq" id="q06"><div class="qt">¿Qué gametos produce Juan (X<sup>H</sup>Y)?</div><div class="qo">
+<button class="qb" onclick="cq('q06',this,1)"><div class="ol">A</div>X^H y Y</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">B</div>X^H y X^h</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">C</div>Solo Y</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">D</div>X^H, X^h, Y</button>
+</div><div class="qf" id="fb-q06"></div></div>
+<div class="qq" id="q07"><div class="qt">Del cuadro X<sup>H</sup>X<sup>h</sup> × X<sup>H</sup>Y, ¿qué proporción de HIJOS VARONES serán hemofílicos?</div><div class="qo">
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">A</div>25% de toda la descendencia</button>
+<button class="qb" onclick="cq('q07',this,1)"><div class="ol">B</div>50% de los hijos varones</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">C</div>100% de los hijos varones</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">D</div>0%</button>
+</div><div class="qf" id="fb-q07"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('di')">← Dihíbrido</button><button class="btn bp" onclick="go('special')">Especiales →</button></div>
+</div>
+
+<!-- ===== ESPECIALES ===== -->
+<div class="sec" id="sec-special">
+<div class="chapter-header"><div class="ch-num">Módulo 6 de 8</div><h2>🎨 Punnett para Casos Especiales</h2><p>Codominancia, dominancia incompleta y grupo sanguíneo ABO</p><div class="ch-time">⏱ ~12 min</div></div>
+
+<div class="cd"><div class="ch">🩸 Grupo Sanguíneo <span class="ac">ABO</span></div>
+<div class="ib"><div class="ibt">🔑 3 alelos, codominancia + recesividad</div><p style="color:var(--t2)">El sistema ABO tiene <strong>3 alelos</strong>: I<sup>A</sup>, I<sup>B</sup> e i. I<sup>A</sup> e I<sup>B</sup> son codominantes entre sí, pero ambos son dominantes sobre i.</p></div>
+<table class="et"><thead><tr><th>Genotipo</th><th>Fenotipo (Grupo)</th><th>Antígenos</th></tr></thead><tbody>
+<tr><td>I<sup>A</sup>I<sup>A</sup> o I<sup>A</sup>i</td><td><strong style="color:var(--r)">Tipo A</strong></td><td>Antígeno A</td></tr>
+<tr><td>I<sup>B</sup>I<sup>B</sup> o I<sup>B</sup>i</td><td><strong style="color:var(--b)">Tipo B</strong></td><td>Antígeno B</td></tr>
+<tr><td>I<sup>A</sup>I<sup>B</sup></td><td><strong style="color:var(--p)">Tipo AB</strong></td><td>Antígeno A y B</td></tr>
+<tr><td>ii</td><td><strong style="color:var(--y)">Tipo O</strong></td><td>Ninguno</td></tr>
+</tbody></table>
+</div>
+
+<div class="ipb">
+<h4 style="font-family:'DM Serif Display',serif;color:var(--r);margin-bottom:14px">🧪 Constructor ABO</h4>
+<div class="ipb-row">
+<label>♂ Padre:</label>
+<select class="ipb-sel" id="aboP1" onchange="buildABO()"><option value="IAi" selected>I^A i (Tipo A heterocigoto)</option><option value="IAIA">I^A I^A (Tipo A homocigoto)</option><option value="IBi">I^B i (Tipo B heterocigoto)</option><option value="IBIB">I^B I^B (Tipo B homocigoto)</option><option value="IAIB">I^A I^B (Tipo AB)</option><option value="ii">ii (Tipo O)</option></select>
+</div>
+<div class="ipb-row">
+<label>♀ Madre:</label>
+<select class="ipb-sel" id="aboP2" onchange="buildABO()"><option value="IBi" selected>I^B i (Tipo B heterocigoto)</option><option value="IAIA">I^A I^A</option><option value="IAi">I^A i</option><option value="IBIB">I^B I^B</option><option value="IAIB">I^A I^B (Tipo AB)</option><option value="ii">ii (Tipo O)</option></select>
+</div>
+<div class="pg-wrap" id="aboGrid"></div>
+<div class="ipb-results" id="aboRes"></div>
+</div>
+
+<div class="cd"><div class="ch">🌸 Dominancia <span class="ac">Incompleta</span></div>
+<div class="ib"><div class="ibt">🔑 3 fenotipos, no 2</div><p style="color:var(--t2)">El Punnett se construye igual, pero la interpretación cambia: Rr NO se ve como RR. Rr tiene fenotipo <strong>intermedio</strong>.</p></div>
+<div class="pg-wrap">
+<div class="pg" style="grid-template-columns:80px 110px 110px;grid-template-rows:40px 65px 65px">
+<div class="h"></div><div class="h" style="color:var(--r)">R</div><div class="h" style="color:var(--r)">r</div>
+<div class="h" style="color:var(--pk)">R</div><div class="c"><div class="gt" style="color:var(--r)">RR</div><div class="ph" style="background:rgba(255,0,0,.15);color:var(--r)">🔴 Roja</div></div><div class="c"><div class="gt" style="color:var(--o)">Rr</div><div class="ph" style="background:rgba(255,180,180,.15);color:var(--o)">🌸 Rosa</div></div>
+<div class="h" style="color:var(--pk)">r</div><div class="c"><div class="gt" style="color:var(--o)">Rr</div><div class="ph" style="background:rgba(255,180,180,.15);color:var(--o)">🌸 Rosa</div></div><div class="c"><div class="gt" style="color:var(--t2)">rr</div><div class="ph" style="background:rgba(255,255,255,.1);color:var(--t2)">⚪ Blanca</div></div>
+</div>
+</div>
+<p style="text-align:center;color:var(--t2);font-size:.85rem;margin-top:8px">Genotípica: 1 RR : 2 Rr : 1 rr → Fenotípica: <span style="color:var(--y)">1 roja : 2 rosa : 1 blanca (1:2:1)</span></p>
+<div class="ib go"><div class="ibt">💡 Diferencia clave con dominancia completa</div><p style="color:var(--t2)">En dominancia completa → proporción fenotípica <strong>3:1</strong> (AA y Aa se ven igual).<br>En dominancia incompleta → proporción fenotípica <strong>1:2:1</strong> (cada genotipo tiene su propio fenotipo).<br>La proporción genotípica es SIEMPRE 1:2:1 en ambos casos — lo que cambia es la traducción a fenotipos.</p></div>
+</div>
+
+<div class="qq" id="q08"><div class="qt">Padre tipo A (I<sup>A</sup>i) × Madre tipo B (I<sup>B</sup>i). ¿Puede tener un hijo tipo O?</div><div class="qo">
+<button class="qb" onclick="cq('q08',this,1)"><div class="ol">A</div>Sí — ambos pueden pasar i, formando ii (tipo O). Probabilidad = 25%</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">B</div>No — A y B son dominantes, imposible tener tipo O</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">C</div>Sí, pero solo si la madre es tipo O</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">D</div>No — tipo O requiere que ambos padres sean tipo O</button>
+</div><div class="qf" id="fb-q08"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('xlink')">← Ligado al X</button><button class="btn bp" onclick="go('errores')">Errores Comunes →</button></div>
+</div>
+
+<!-- ===== ERRORES COMUNES ===== -->
+<div class="sec" id="sec-errores">
+<div class="chapter-header"><div class="ch-num">Módulo 7 de 8</div><h2>⚠️ Errores Comunes y Cómo Evitarlos</h2><p>Los 6 errores que más se cometen al hacer cuadros de Punnett</p><div class="ch-time">⏱ ~10 min</div></div>
+
+<div class="dd-container">
+<div class="dd-item open"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> ❌ Error 1: Poner genotipos en vez de gametos</div><div class="dd-body"><strong>INCORRECTO:</strong> Poner "Aa" como gameto → imposible, los gametos son haploides.<br><strong>CORRECTO:</strong> Aa produce gametos <strong>A</strong> y <strong>a</strong>. Un gameto = UNA sola letra (o un cromosoma X/Y).<br><br><strong>RECUERDA:</strong> la meiosis SEPARA los alelos. Cada gameto recibe solo UNO.</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> ❌ Error 2: No descartar gametos duplicados en homocigotos</div><div class="dd-body"><strong>INCORRECTO:</strong> AA produce gametos "A y A" → luego hacen cuadrícula 2×2 con gametos idénticos y cuentan mal.<br><strong>CORRECTO:</strong> AA produce UN solo tipo de gameto: <strong>A</strong>. Solo necesitas 1 columna/fila, no 2. Si insistes en 2, al menos reconoce que ambas columnas son idénticas → usa solo los tipos ÚNICOS para contar proporciones.</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> ❌ Error 3: Confundir proporción genotípica con fenotípica</div><div class="dd-body"><strong>Genotípica</strong> de Aa × Aa → <strong>1:2:1</strong> (1 AA : 2 Aa : 1 aa)<br><strong>Fenotípica</strong> (con dominancia completa) → <strong>3:1</strong> (3 dominantes : 1 recesivo)<br><br>La diferencia: AA y Aa se <strong>ven igual</strong> en dominancia completa → se agrupan como "fenotipo dominante". Solo en dominancia <strong>incompleta</strong> la proporción fenotípica = genotípica (1:2:1).</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> ❌ Error 4: En dihíbridos, hacer gametos incorrectos</div><div class="dd-body"><strong>INCORRECTO:</strong> AaBb → gametos "Aa" y "Bb" (esos son genotipos, no gametos).<br><strong>CORRECTO:</strong> AaBb → gametos AB, Ab, aB, ab. Cada gameto lleva UN alelo del gen A y UN alelo del gen B.<br><br><strong>Regla:</strong> Para determinar gametos de un individuo con n genes heterocigotos, hay 2<sup>n</sup> gametos posibles. AaBb (2 heterocigotos) = 2² = 4 gametos.</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> ❌ Error 5: Pensar que la probabilidad cambia con hijos previos</div><div class="dd-body">"Ya tuvimos un hijo afectado, así que los próximos 3 serán sanos" → <strong>FALSO</strong>.<br>Cada embarazo es un evento <strong>independiente</strong>. Si Aa × Aa → 25% riesgo, esa probabilidad es la misma para <strong>cada</strong> hijo, sin importar cuántos afectados hayan tenido antes. Es como lanzar una moneda: que salga cara 3 veces seguidas no hace más probable que la próxima sea cruz.</div></div>
+
+<div class="dd-item"><div class="dd-header" onclick="toggleDD(this)"><span class="dd-arrow">▶</span> ❌ Error 6: En ligados al X, olvidar el cromosoma Y</div><div class="dd-body"><strong>INCORRECTO:</strong> Para X<sup>A</sup>Y, poner gametos "A y Y" → confunde porque no muestra que A va en el X.<br><strong>CORRECTO:</strong> Gametos son <strong>X<sup>A</sup></strong> y <strong>Y</strong>. El alelo va SIEMPRE pegado al cromosoma X. El Y no lleva alelo para ese gen.<br><br>Esto es crucial porque explica por qué los varones son hemicigotos: un solo X<sup>a</sup> basta para ser afectado.</div></div>
+</div>
+
+<div class="qq" id="q09"><div class="qt">Si una pareja Aa × Aa ya tuvo 3 hijos con fenotipo dominante, ¿cuál es la probabilidad de que su 4° hijo tenga fenotipo recesivo?</div><div class="qo">
+<button class="qb" onclick="cq('q09',this,1)"><div class="ol">A</div>25% — cada embarazo es independiente</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">B</div>100% — ya le "toca" al recesivo</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">C</div>0% — si no salió antes, no saldrá</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">D</div>75%</button>
+</div><div class="qf" id="fb-q09"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('special')">← Especiales</button><button class="btn bp" onclick="go('practica')">Práctica →</button></div>
+</div>
+
+<!-- ===== PRÁCTICA ===== -->
+<div class="sec" id="sec-practica">
+<div class="chapter-header"><div class="ch-num">Módulo 8 de 8</div><h2>💪 Práctica Integradora</h2><p>6 problemas clínicos para resolver con cuadros de Punnett</p><div class="ch-time">⏱ ~15 min</div></div>
+
+<div class="case-box"><div class="case-badge">📋 Problema 1</div><div class="case-title">Albinismo (Autosómico Recesivo)</div><div class="case-text">Un hombre sano cuyo padre era albino (aa) se casa con una mujer sana sin antecedentes familiares de albinismo. ¿El hombre es AA o Aa?</div></div>
+<div class="qq" id="qP1"><div class="qt">Si el padre del hombre era aa, ¿cuál es el genotipo del hombre?</div><div class="qo">
+<button class="qb" onclick="cq('qP1',this,1)"><div class="ol">A</div>Aa — recibió al menos un alelo 'a' de su padre (que era aa)</button>
+<button class="qb" onclick="cq('qP1',this,0)"><div class="ol">B</div>AA — porque es sano</button>
+<button class="qb" onclick="cq('qP1',this,0)"><div class="ol">C</div>aa — porque su padre era albino</button>
+<button class="qb" onclick="cq('qP1',this,0)"><div class="ol">D</div>No se puede saber</button>
+</div><div class="qf" id="fb-qP1"></div></div>
+
+<div class="case-box"><div class="case-badge">📋 Problema 2</div><div class="case-title">Daltonismo y herencia ligada al X</div><div class="case-text">Una mujer con visión normal cuyo padre era daltónico se casa con un hombre con visión normal.</div></div>
+<div class="qq" id="qP2"><div class="qt">¿La mujer es portadora de daltonismo? ¿Cuál es su genotipo?</div><div class="qo">
+<button class="qb" onclick="cq('qP2',this,1)"><div class="ol">A</div>Sí, X^D X^d — recibió X^d de su padre daltónico (X^d Y)</button>
+<button class="qb" onclick="cq('qP2',this,0)"><div class="ol">B</div>No, X^D X^D — porque ella ve bien</button>
+<button class="qb" onclick="cq('qP2',this,0)"><div class="ol">C</div>No se puede determinar</button>
+<button class="qb" onclick="cq('qP2',this,0)"><div class="ol">D</div>X^d X^d — heredó el gen del padre</button>
+</div><div class="qf" id="fb-qP2"></div></div>
+
+<div class="case-box"><div class="case-badge">📋 Problema 3</div><div class="case-title">Grupo Sanguíneo y Paternidad</div><div class="case-text">Una madre es tipo O (ii) y el hijo es tipo A. ¿Qué genotipos posibles tiene el padre biológico?</div></div>
+<div class="qq" id="qP3"><div class="qt">Si la madre es ii y el hijo es tipo A, el padre DEBE haber contribuido un alelo I<sup>A</sup>. ¿Cuáles son los genotipos posibles del padre?</div><div class="qo">
+<button class="qb" onclick="cq('qP3',this,1)"><div class="ol">A</div>I^A I^A o I^A i o I^A I^B — cualquier genotipo con al menos un I^A</button>
+<button class="qb" onclick="cq('qP3',this,0)"><div class="ol">B</div>Solo I^A I^A</button>
+<button class="qb" onclick="cq('qP3',this,0)"><div class="ol">C</div>ii (tipo O)</button>
+<button class="qb" onclick="cq('qP3',this,0)"><div class="ol">D</div>I^B I^B</button>
+</div><div class="qf" id="fb-qP3"></div></div>
+
+<div class="case-box"><div class="case-badge">📋 Problema 4</div><div class="case-title">Enfermedad Autosómica Recesiva: Probabilidad Compuesta</div><div class="case-text">Dos padres portadores (Aa × Aa) quieren tener 2 hijos. ¿Cuál es la probabilidad de que AMBOS hijos estén afectados?</div></div>
+<div class="qq" id="qP4"><div class="qt">Aplica la regla de la multiplicación:</div><div class="qo">
+<button class="qb" onclick="cq('qP4',this,0)"><div class="ol">A</div>1/2 (25% + 25%)</button>
+<button class="qb" onclick="cq('qP4',this,1)"><div class="ol">B</div>1/16 (1/4 × 1/4 = 1/16 = 6.25%)</button>
+<button class="qb" onclick="cq('qP4',this,0)"><div class="ol">C</div>1/4 (25%)</button>
+<button class="qb" onclick="cq('qP4',this,0)"><div class="ol">D</div>1/8</button>
+</div><div class="qf" id="fb-qP4"></div></div>
+
+<div class="case-box"><div class="case-badge">📋 Problema 5</div><div class="case-title">Padre Afectado × Madre Portadora (Ligado al X)</div><div class="case-text">Un padre hemofílico (X<sup>h</sup>Y) se casa con una mujer portadora (X<sup>H</sup>X<sup>h</sup>).</div></div>
+<div class="qq" id="qP5"><div class="qt">¿Pueden tener una HIJA hemofílica?</div><div class="qo">
+<button class="qb" onclick="cq('qP5',this,1)"><div class="ol">A</div>Sí — X^h del padre + X^h de la madre = X^h X^h → hija afectada (50% de hijas)</button>
+<button class="qb" onclick="cq('qP5',this,0)"><div class="ol">B</div>No — las mujeres nunca pueden ser hemofílicas</button>
+<button class="qb" onclick="cq('qP5',this,0)"><div class="ol">C</div>Sí, pero solo si es XXY (Klinefelter)</button>
+<button class="qb" onclick="cq('qP5',this,0)"><div class="ol">D</div>No — necesitarían 3 copias del alelo</button>
+</div><div class="qf" id="fb-qP5"></div></div>
+
+<div class="case-box"><div class="case-badge">📋 Problema 6</div><div class="case-title">Cruce Dihíbrido con Epistasis</div><div class="case-text">En Labradores: gen B (negro/chocolate) y gen E (extensión). BbEe × BbEe. Con epistasis recesiva (ee enmascara a B).</div></div>
+<div class="qq" id="qP6"><div class="qt">¿Cuál es la proporción fenotípica esperada?</div><div class="qo">
+<button class="qb" onclick="cq('qP6',this,0)"><div class="ol">A</div>9:3:3:1 (clásica sin epistasis)</button>
+<button class="qb" onclick="cq('qP6',this,1)"><div class="ol">B</div>9:3:4 (9 negros : 3 chocolate : 4 amarillos — ee agrupa 3+1)</button>
+<button class="qb" onclick="cq('qP6',this,0)"><div class="ol">C</div>12:3:1</button>
+<button class="qb" onclick="cq('qP6',this,0)"><div class="ol">D</div>3:1</button>
+</div><div class="qf" id="fb-qP6"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('errores')">← Errores</button><button class="btn bp" onclick="go('evaluacion')">Evaluación →</button></div>
+</div>
+
+<!-- ===== EVALUACIÓN ===== -->
+<div class="sec" id="sec-evaluacion">
+<div class="chapter-header"><div class="ch-num">Evaluación Final</div><h2>🎓 Evaluación Integral de Cuadros de Punnett</h2><p>15 preguntas — contesta TODAS antes de calificar</p></div>
+<div id="eq"></div>
+<div style="text-align:center;margin:20px 0"><button class="btn bp" id="seb" style="display:none" onclick="se()">📊 Calificar</button></div>
+<div class="sd" id="sdd" style="display:none"><div class="snm" id="sn2"></div><p class="sbl" id="sm2"></p><div class="sbr"><div class="sbf" id="sbf2" style="width:0%;background:var(--grad)"></div></div><button class="btn bs" onclick="iev()" style="margin-top:12px">↺ Reintentar</button></div>
+<div class="sn"><button class="btn bs" onclick="go('practica')">← Práctica</button><button class="btn bp" onclick="go('inicio')">🏠 Inicio</button></div>
+</div>
+
+</div>
+<script>
+"use strict";
+var secs=["inicio","quees","paso1","mono","di","xlink","special","errores","practica","evaluacion"];
+window.go=function(s){secs.forEach(function(id){document.getElementById("sec-"+id).classList.remove("a")});document.getElementById("sec-"+s).classList.add("a");document.querySelectorAll(".nl button").forEach(function(b){b.classList.remove("a");if(b.dataset.s===s)b.classList.add("a")});window.scrollTo({top:0,behavior:"smooth"});upd();
+if(s==="inicio")drawHero();if(s==="mono")buildMono();if(s==="di"){buildDi();drawGametes();}if(s==="xlink")buildXl();if(s==="special")buildABO();};
+function upd(){var cur=document.querySelector(".nl button.a");var i=cur?secs.indexOf(cur.dataset.s):0;document.getElementById("pf").style.width=Math.round((i/(secs.length-1))*100)+"%";}
+
+window.cq=function(id,btn,c){var q=document.getElementById(id);if(q.dataset.done)return;q.dataset.done="1";q.querySelectorAll(".qb").forEach(function(b){b.classList.add("dis")});var fb=document.getElementById("fb-"+id);if(c===1){btn.classList.add("ok");fb.classList.add("sh","cf");fb.textContent="✅ ¡Correcto!";}else{btn.classList.add("no");q.querySelectorAll(".qb").forEach(function(b){var oc=b.getAttribute("onclick");if(oc&&oc.indexOf(",1)")>-1)b.classList.add("ok")});fb.classList.add("sh","if");fb.textContent="❌ Incorrecto. La respuesta correcta está en verde.";}};
+window.toggleDD=function(el){el.parentElement.classList.toggle("open")};
+
+/* STEP BUILDER */
+window.showStep=function(n){for(var i=1;i<=5;i++){var s=document.getElementById("sbs"+i);s.classList.remove("active","done");if(i<n)s.classList.add("done");if(i===n)s.classList.add("active");}};
+
+/* CANVAS */
+function getCtx(id){var cv=document.getElementById(id);if(!cv)return null;cv.width=900;cv.height=parseInt(cv.getAttribute("height"))||300;return cv.getContext("2d");}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
+
+/* HERO */
+var heroAnim;function drawHero(){if(heroAnim)cancelAnimationFrame(heroAnim);function frame(){var ctx=getCtx("cvHero");if(!ctx){heroAnim=null;return;}var W=900,H=300;ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);var t=Date.now()*.001;
+var gx=W/2-90,gy=50,gs=85;
+ctx.strokeStyle="rgba(0,212,170,0.3)";ctx.lineWidth=1;
+for(var i=0;i<=2;i++){ctx.beginPath();ctx.moveTo(gx+55,gy+i*gs);ctx.lineTo(gx+55+2*gs,gy+i*gs);ctx.stroke();ctx.beginPath();ctx.moveTo(gx+55+i*gs,gy);ctx.lineTo(gx+55+i*gs,gy+2*gs);ctx.stroke();}
+var pulse=.5+.5*Math.sin(t*2);
+ctx.textAlign="center";
+ctx.font="bold 18px JetBrains Mono";
+ctx.fillStyle="rgba(0,163,255,"+(0.5+pulse*.5)+")";ctx.fillText("A",gx+97,gy-14);ctx.fillText("a",gx+97+gs,gy-14);
+ctx.fillStyle="rgba(236,72,153,"+(0.5+pulse*.5)+")";ctx.fillText("A",gx+30,gy+48);ctx.fillText("a",gx+30,gy+48+gs);
+ctx.fillStyle="#8BA4BE";ctx.font="bold 9px Source Sans 3";ctx.fillText("Gametos ♂",gx+55+gs,gy-30);
+ctx.save();ctx.translate(gx+12,gy+gs);ctx.rotate(-Math.PI/2);ctx.fillText("Gametos ♀",0,0);ctx.restore();
+var cells=[{gt:"AA",c:"#00D4AA",x:0,y:0},{gt:"Aa",c:"#00A3FF",x:1,y:0},{gt:"Aa",c:"#00A3FF",x:0,y:1},{gt:"aa",c:"#EC4899",x:1,y:1}];
+cells.forEach(function(cl,i){var alpha=Math.max(0,Math.min(1,(Math.sin(t*1.5-i*.5)+1)/2));ctx.fillStyle=cl.c;ctx.globalAlpha=.3+alpha*.7;ctx.font="bold 22px JetBrains Mono";ctx.textAlign="center";ctx.fillText(cl.gt,gx+97+cl.x*gs,gy+50+cl.y*gs);ctx.globalAlpha=1;});
+ctx.fillStyle="#FFD93D";ctx.font="bold 14px DM Serif Display";ctx.textAlign="center";ctx.fillText("Genotípica: 1 AA : 2 Aa : 1 aa",W/2,gy+2*gs+40);
+ctx.fillStyle="#8BA4BE";ctx.font="11px Source Sans 3";ctx.fillText("Fenotípica (dom. completa): 3 dominante : 1 recesivo",W/2,gy+2*gs+60);
+heroAnim=requestAnimationFrame(frame);}frame();}
+
+/* BUILD SIMULATION */
+window.setBuild=function(s){drawBuild(s)};
+function drawBuild(state){var ctx=getCtx("cvBuild");if(!ctx)return;var W=900,H=520;ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+var narrs=["<strong>Paso 1:</strong> Identificamos los genotipos. Padre = <strong>Aa</strong>. Madre = <strong>Aa</strong>. Ambos portan un alelo dominante (A) y uno recesivo (a).","<strong>Paso 2:</strong> Determinamos gametos. Aa → produce 2 tipos: <strong>A</strong> (50%) y <strong>a</strong> (50%). Se aplica a ambos padres.","<strong>Paso 3:</strong> Dibujamos la cuadrícula 2×2. Gametos del padre en las <strong>columnas</strong>. Gametos de la madre en las <strong>filas</strong>. 4 celdas en total.","<strong>Paso 4:</strong> Llenamos cada celda: columna A + fila A = <strong>AA</strong>. Columna a + fila A = <strong>Aa</strong>. Y así sucesivamente.","<strong>Paso 5:</strong> Contamos: 1 AA + 2 Aa + 1 aa. Genotípica: <strong>1:2:1</strong>. Fenotípica: <strong>3:1</strong>."];
+document.getElementById("buildNarr").innerHTML=narrs[state];
+ctx.fillStyle="#E8F0F8";ctx.font="bold 16px DM Serif Display";ctx.textAlign="center";ctx.fillText("Paso "+(state+1)+" de 5",W/2,30);
+var cx=W/2;
+if(state===0){
+roundRect(ctx,cx-240,70,200,90,14);ctx.fillStyle="rgba(0,163,255,0.1)";ctx.fill();ctx.strokeStyle="#00A3FF";ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle="#00A3FF";ctx.font="bold 30px JetBrains Mono";ctx.textAlign="center";ctx.fillText("Aa",cx-140,125);
+ctx.fillStyle="#8BA4BE";ctx.font="14px Source Sans 3";ctx.fillText("♂ Padre (heterocigoto)",cx-140,180);
+roundRect(ctx,cx+40,70,200,90,14);ctx.fillStyle="rgba(236,72,153,0.1)";ctx.fill();ctx.strokeStyle="#EC4899";ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle="#EC4899";ctx.font="bold 30px JetBrains Mono";ctx.fillText("Aa",cx+140,125);
+ctx.fillStyle="#8BA4BE";ctx.font="14px Source Sans 3";ctx.fillText("♀ Madre (heterocigoto)",cx+140,180);
+ctx.fillStyle="#FFD93D";ctx.font="bold 13px Source Sans 3";ctx.fillText("1 gen → cruce MONOHÍBRIDO → cuadrícula 2×2",cx,260);
+}else if(state===1){
+ctx.fillStyle="#00A3FF";ctx.font="bold 14px Source Sans 3";ctx.fillText("♂ Padre: Aa",cx-180,60);
+ctx.beginPath();ctx.arc(cx-230,130,35,0,Math.PI*2);ctx.fillStyle="rgba(0,212,170,0.1)";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle="#00D4AA";ctx.font="bold 26px JetBrains Mono";ctx.fillText("A",cx-230,138);
+ctx.beginPath();ctx.arc(cx-130,130,35,0,Math.PI*2);ctx.fillStyle="rgba(0,163,255,0.1)";ctx.fill();ctx.strokeStyle="#00A3FF";ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle="#00A3FF";ctx.font="bold 26px JetBrains Mono";ctx.fillText("a",cx-130,138);
+ctx.fillStyle="#8BA4BE";ctx.font="12px Source Sans 3";ctx.fillText("50%",cx-230,182);ctx.fillText("50%",cx-130,182);
+ctx.fillStyle="#EC4899";ctx.font="bold 14px Source Sans 3";ctx.fillText("♀ Madre: Aa",cx+180,60);
+ctx.beginPath();ctx.arc(cx+130,130,35,0,Math.PI*2);ctx.fillStyle="rgba(0,212,170,0.1)";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle="#00D4AA";ctx.font="bold 26px JetBrains Mono";ctx.fillText("A",cx+130,138);
+ctx.beginPath();ctx.arc(cx+230,130,35,0,Math.PI*2);ctx.fillStyle="rgba(236,72,153,0.1)";ctx.fill();ctx.strokeStyle="#EC4899";ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle="#EC4899";ctx.font="bold 26px JetBrains Mono";ctx.fillText("a",cx+230,138);
+ctx.fillStyle="#8BA4BE";ctx.font="12px Source Sans 3";ctx.fillText("50%",cx+130,182);ctx.fillText("50%",cx+230,182);
+ctx.fillStyle="#FFD93D";ctx.font="bold 13px Source Sans 3";ctx.fillText("Cada heterocigoto produce 2 tipos de gametos",cx,260);
+}else if(state>=2){
+var gx=cx-120,gy=80,gs=110;
+ctx.strokeStyle="rgba(0,212,170,0.4)";ctx.lineWidth=2;
+for(var i=0;i<=2;i++){ctx.beginPath();ctx.moveTo(gx+80,gy+i*gs);ctx.lineTo(gx+80+2*gs,gy+i*gs);ctx.stroke();ctx.beginPath();ctx.moveTo(gx+80+i*gs,gy);ctx.lineTo(gx+80+i*gs,gy+2*gs);ctx.stroke();}
+ctx.font="bold 20px JetBrains Mono";ctx.textAlign="center";
+ctx.fillStyle="#00A3FF";ctx.fillText("A",gx+135,gy-18);ctx.fillText("a",gx+135+gs,gy-18);
+ctx.fillStyle="#EC4899";ctx.fillText("A",gx+48,gy+60);ctx.fillText("a",gx+48,gy+60+gs);
+ctx.fillStyle="#8BA4BE";ctx.font="bold 10px Source Sans 3";
+ctx.fillText("Gametos ♂ Padre",gx+80+gs,gy-38);
+ctx.save();ctx.translate(gx+20,gy+gs+20);ctx.rotate(-Math.PI/2);ctx.fillText("Gametos ♀ Madre",0,0);ctx.restore();
+if(state>=3){
+ctx.font="bold 28px JetBrains Mono";ctx.textAlign="center";
+ctx.fillStyle="#00D4AA";ctx.fillText("AA",gx+135,gy+64);
+ctx.fillStyle="#00A3FF";ctx.fillText("Aa",gx+135+gs,gy+64);
+ctx.fillStyle="#00A3FF";ctx.fillText("Aa",gx+135,gy+64+gs);
+ctx.fillStyle="#EC4899";ctx.fillText("aa",gx+135+gs,gy+64+gs);}
+if(state>=4){
+var by=gy+2*gs+30;
+ctx.fillStyle="#FFD93D";ctx.font="bold 14px Source Sans 3";ctx.textAlign="center";
+ctx.fillText("Genotípica: 1 AA : 2 Aa : 1 aa  (1:2:1)",cx,by);
+ctx.fillText("Fenotípica: 3 dominante : 1 recesivo  (3:1)",cx,by+24);
+ctx.fillStyle="#00D4AA";ctx.font="12px Source Sans 3";
+ctx.fillText("Cada celda = 1/4 = 25% de probabilidad",cx,by+52);}}}
+
+/* GAMETES DIAGRAM */
+function drawGametes(){var ctx=getCtx("cvGametes");if(!ctx)return;var W=900,H=340;ctx.clearRect(0,0,W,H);ctx.fillStyle="#080d16";ctx.fillRect(0,0,W,H);
+ctx.fillStyle="#E8F0F8";ctx.font="bold 15px DM Serif Display";ctx.textAlign="center";ctx.fillText("Formación de gametos de AaBb",W/2,28);
+roundRect(ctx,W/2-65,48,130,50,12);ctx.fillStyle="rgba(0,212,170,0.1)";ctx.fill();ctx.strokeStyle="#00D4AA";ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle="#00D4AA";ctx.font="bold 18px JetBrains Mono";ctx.fillText("AaBb",W/2,80);
+ctx.fillStyle="#8BA4BE";ctx.font="11px Source Sans 3";ctx.fillText("1 alelo de cada gen por gameto",W/2,118);
+var gam=[
+{l:"AB",c:"#00D4AA",d1:"A (gen 1)",d2:"B (gen 2)"},
+{l:"Ab",c:"#00A3FF",d1:"A (gen 1)",d2:"b (gen 2)"},
+{l:"aB",c:"#A78BFA",d1:"a (gen 1)",d2:"B (gen 2)"},
+{l:"ab",c:"#EC4899",d1:"a (gen 1)",d2:"b (gen 2)"}];
+gam.forEach(function(g,i){
+var gx=115+i*195,gy=200;
+ctx.strokeStyle=g.c+"55";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(W/2+(i-1.5)*25,105);ctx.lineTo(gx,gy-38);ctx.stroke();
+ctx.beginPath();ctx.arc(gx,gy,34,0,Math.PI*2);ctx.fillStyle=g.c+"15";ctx.fill();ctx.strokeStyle=g.c;ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle=g.c;ctx.font="bold 22px JetBrains Mono";ctx.textAlign="center";ctx.fillText(g.l,gx,gy+8);
+ctx.fillStyle="#8BA4BE";ctx.font="10px Source Sans 3";
+ctx.fillText(g.d1,gx,gy+52);
+ctx.fillText(g.d2,gx,gy+66);
+ctx.fillStyle=g.c;ctx.font="bold 11px JetBrains Mono";
+ctx.fillText("25%",gx,gy+84);
+});}
+
+/* MONOHYBRID BUILDER */
+function getG(gt){if(gt==="AA")return["A"];if(gt==="aa")return["a"];return["A","a"];}
+window.buildMono=function(){var p1=document.getElementById("monoP1").value,p2=document.getElementById("monoP2").value;var g1=getG(p1),g2=getG(p2);
+var html='<div class="pg" style="grid-template-columns:80px '+"110px ".repeat(g1.length)+';grid-template-rows:45px '+"70px ".repeat(g2.length)+'">';
+html+='<div class="h" style="font-size:.7rem;color:var(--t3)">♂↓ ♀→</div>';g1.forEach(function(a){html+='<div class="h" style="color:var(--b)">'+a+'</div>';});
+var counts={};
+g2.forEach(function(a2){html+='<div class="h" style="color:var(--pk)">'+a2+'</div>';g1.forEach(function(a1){var pair=[a1,a2].sort(function(x,y){return x===x.toUpperCase()&&y!==y.toUpperCase()?-1:y===y.toUpperCase()&&x!==x.toUpperCase()?1:0;});var gt=pair.join("");counts[gt]=(counts[gt]||0)+1;var isDom=gt!=="aa";var c=gt==="AA"?"var(--g)":gt==="Aa"?"var(--b)":"var(--pk)";html+='<div class="c '+(isDom?"hi-dom":"hi-rec")+'"><div class="gt" style="color:'+c+'">'+gt+'</div><div class="ph" style="background:'+(isDom?"rgba(0,212,170,.12)":"rgba(236,72,153,.12)")+';color:'+(isDom?"var(--g)":"var(--pk)")+'">'+(isDom?"Dominante":"Recesivo")+'</div></div>';});});html+='</div>';
+document.getElementById("monoGrid").innerHTML=html;
+var total=g1.length*g2.length;var dom=(counts["AA"]||0)+(counts["Aa"]||0);var rec=counts["aa"]||0;
+var gtStr=Object.keys(counts).map(function(k){return counts[k]+" "+k}).join(" : ");
+var rhtml='<div class="ipb-rbox"><div class="rbl">Genotípica</div><div class="rv">'+gtStr+'</div></div>';
+rhtml+='<div class="ipb-rbox"><div class="rbl">Fenotípica</div><div class="rv"><span style="color:var(--g)">'+dom+' dom.</span> : <span style="color:var(--pk)">'+rec+' rec.</span></div></div>';
+document.getElementById("monoRes").innerHTML=rhtml;
+var pctA=Math.round(rec/total*100);document.getElementById("monoNarr").innerHTML="<strong>Cruce "+p1+" × "+p2+":</strong> Probabilidad de hijo con fenotipo recesivo = <strong>"+rec+"/"+total+" = "+pctA+"%</strong>. Probabilidad de hijo portador (Aa) = <strong>"+(counts["Aa"]||0)+"/"+total+" = "+Math.round((counts["Aa"]||0)/total*100)+"%</strong>.";};
+
+/* DIHYBRID BUILDER */
+function getDiG(gt){var a1=gt[0],a2=gt[1],b1=gt[2],b2=gt[3];var as=a1===a2?[a1]:[a1,a2];var bs=b1===b2?[b1]:[b1,b2];var gam=[];as.forEach(function(a){bs.forEach(function(b){var g=a+b;if(gam.indexOf(g)===-1)gam.push(g);});});return gam;}
+window.buildDi=function(){var p1=document.getElementById("diP1").value,p2=document.getElementById("diP2").value;var g1=getDiG(p1),g2=getDiG(p2);
+var html='<div class="pg" style="grid-template-columns:60px '+"80px ".repeat(g1.length)+';grid-template-rows:36px '+"52px ".repeat(g2.length)+'">';
+html+='<div class="h" style="font-size:.6rem;color:var(--t3)">♂↓♀→</div>';g1.forEach(function(a){html+='<div class="h" style="color:var(--b);font-size:.85rem">'+a+'</div>';});
+var phC={"dom-dom":0,"dom-rec":0,"rec-dom":0,"rec-rec":0};
+g2.forEach(function(a2){html+='<div class="h" style="color:var(--pk);font-size:.85rem">'+a2+'</div>';g1.forEach(function(a1){var allA=[a1[0],a2[0]].sort(function(x,y){return x===x.toUpperCase()?-1:1;});var allB=[a1[1],a2[1]].sort(function(x,y){return x===x.toUpperCase()?-1:1;});var gt=allA.join("")+allB.join("");var hA=allA[0]===allA[0].toUpperCase();var hB=allB[0]===allB[0].toUpperCase();var key=(hA?"dom":"rec")+"-"+(hB?"dom":"rec");phC[key]++;var c=hA&&hB?"var(--g)":hA?"var(--b)":hB?"var(--p)":"var(--pk)";html+='<div class="c"><div class="gt" style="color:'+c+';font-size:.78rem">'+gt+'</div></div>';});});
+html+='</div>';document.getElementById("diGrid").innerHTML=html;
+var total=g1.length*g2.length;
+var rhtml='<div class="ipb-rbox"><div class="rbl">A_B_ (doble dom.)</div><div class="rv" style="color:var(--g)">'+phC["dom-dom"]+'/'+total+'</div></div>';
+rhtml+='<div class="ipb-rbox"><div class="rbl">A_bb | aaB_ | aabb</div><div class="rv"><span style="color:var(--b)">'+phC["dom-rec"]+'</span> : <span style="color:var(--p)">'+phC["rec-dom"]+'</span> : <span style="color:var(--pk)">'+phC["rec-rec"]+'</span></div></div>';
+document.getElementById("diRes").innerHTML=rhtml;};
+
+/* X-LINKED BUILDER */
+window.buildXl=function(){var m=document.getElementById("xlM").value,p=document.getElementById("xlP").value;
+var mG=m==="XAXA"?["XA"]:m==="XAXa"?["XA","Xa"]:["Xa"];
+var pG=p==="XAY"?["XA","Y"]:["Xa","Y"];
+var html='<div class="pg" style="grid-template-columns:80px '+"120px ".repeat(pG.length)+';grid-template-rows:45px '+"75px ".repeat(mG.length)+'">';
+html+='<div class="h" style="font-size:.65rem;color:var(--t3)">♀↓ ♂→</div>';pG.forEach(function(a){var d=a==="Y"?"Y":"X<sup>"+(a==="XA"?"A":"a")+"</sup>";html+='<div class="h" style="color:var(--b)">'+d+'</div>';});
+var stats={sanas:0,portadoras:0,afectadasF:0,sanos:0,afectadosM:0};
+mG.forEach(function(mg){var d="X<sup>"+(mg==="XA"?"A":"a")+"</sup>";html+='<div class="h" style="color:var(--pk)">'+d+'</div>';pG.forEach(function(pg){var gt,sex,status,c;if(pg==="Y"){sex="♂";gt=mg+"Y";if(mg==="XA"){status="Sano";c="var(--g)";stats.sanos++;}else{status="AFECTADO";c="var(--r)";stats.afectadosM++;}}else{sex="♀";var al1=mg,al2=pg;gt=al1+al2;var hasA=(al1==="XA"||al2==="XA");if(!hasA){status="Afectada";c="var(--r)";stats.afectadasF++;}else if(al1==="Xa"||al2==="Xa"){status="Portadora";c="var(--y)";stats.portadoras++;}else{status="Sana";c="var(--g)";stats.sanas++;}}
+var label=gt.replace(/XA/g,"X<sup>A</sup>").replace(/Xa/g,"X<sup>a</sup>");html+='<div class="c"><div class="gt" style="color:'+c+';font-size:.85rem">'+label+'</div><div class="ph" style="background:'+c+'22;color:'+c+'">'+sex+' '+status+'</div></div>';});});
+html+='</div>';document.getElementById("xlGrid").innerHTML=html;
+var tM=stats.sanos+stats.afectadosM;var tF=stats.sanas+stats.portadoras+stats.afectadasF;
+var rhtml='<div class="ipb-rbox"><div class="rbl">Hijos Varones</div><div class="rv">'+(tM?'<span style="color:var(--g)">'+Math.round(stats.sanos/tM*100)+'% sanos</span> <span style="color:var(--r)">'+Math.round(stats.afectadosM/tM*100)+'% afect.</span>':'—')+'</div></div>';
+rhtml+='<div class="ipb-rbox"><div class="rbl">Hijas</div><div class="rv">'+(tF?'<span style="color:var(--g)">'+Math.round(stats.sanas/tF*100)+'%</span> <span style="color:var(--y)">'+Math.round(stats.portadoras/tF*100)+'% port.</span> <span style="color:var(--r)">'+Math.round(stats.afectadasF/tF*100)+'% afect.</span>':'—')+'</div></div>';
+document.getElementById("xlRes").innerHTML=rhtml;
+var parentDesc={"XAXA":"sana homocigota","XAXa":"portadora","XaXa":"afectada","XAY":"sano","XaY":"afectado"};
+document.getElementById("xlNarr").innerHTML="<strong>Madre "+parentDesc[m]+" × Padre "+parentDesc[p]+":</strong> "+
+(stats.afectadosM?"<span style='color:var(--r)'>"+Math.round(stats.afectadosM/tM*100)+"% de hijos varones afectados.</span> ":"Ningún hijo varón afectado. ")+
+(stats.portadoras?"<span style='color:var(--y)'>"+Math.round(stats.portadoras/tF*100)+"% de hijas portadoras.</span> ":"")+
+(stats.afectadasF?"<span style='color:var(--r)'>"+Math.round(stats.afectadasF/tF*100)+"% de hijas afectadas.</span>":"");};
+
+/* ABO BUILDER */
+function aboG(gt){if(gt==="IAIA")return["IA"];if(gt==="IAi")return["IA","i"];if(gt==="IBIB")return["IB"];if(gt==="IBi")return["IB","i"];if(gt==="IAIB")return["IA","IB"];return["i"];}
+function aboPheno(gt){var a=gt.split("-");var has=a.join("");if(has.indexOf("IA")>-1&&has.indexOf("IB")>-1)return{t:"AB",c:"var(--p)"};if(has.indexOf("IA")>-1)return{t:"A",c:"var(--r)"};if(has.indexOf("IB")>-1)return{t:"B",c:"var(--b)"};return{t:"O",c:"var(--y)"};}
+window.buildABO=function(){var p1=document.getElementById("aboP1").value,p2=document.getElementById("aboP2").value;var g1=aboG(p1),g2=aboG(p2);
+var html='<div class="pg" style="grid-template-columns:80px '+"120px ".repeat(g1.length)+';grid-template-rows:45px '+"75px ".repeat(g2.length)+'">';
+html+='<div class="h" style="font-size:.65rem;color:var(--t3)">♂↓♀→</div>';g1.forEach(function(a){var d=a==="IA"?"I<sup>A</sup>":a==="IB"?"I<sup>B</sup>":"i";html+='<div class="h" style="color:var(--b)">'+d+'</div>';});
+var phCounts={A:0,B:0,AB:0,O:0};
+g2.forEach(function(a2){var d2=a2==="IA"?"I<sup>A</sup>":a2==="IB"?"I<sup>B</sup>":"i";html+='<div class="h" style="color:var(--pk)">'+d2+'</div>';g1.forEach(function(a1){var gt=a1+"-"+a2;var ph=aboPheno(gt);phCounts[ph.t]++;var label=[a1,a2].map(function(x){return x==="IA"?"I<sup>A</sup>":x==="IB"?"I<sup>B</sup>":"i"}).join("");html+='<div class="c"><div class="gt" style="color:'+ph.c+';font-size:.85rem">'+label+'</div><div class="ph" style="background:'+ph.c+'22;color:'+ph.c+'">Tipo '+ph.t+'</div></div>';});});
+html+='</div>';document.getElementById("aboGrid").innerHTML=html;
+var total=g1.length*g2.length;var rhtml='<div class="ipb-rbox"><div class="rbl">Grupos Sanguíneos</div><div class="rv">';
+["A","B","AB","O"].forEach(function(t){if(phCounts[t])rhtml+='<span style="color:'+(t==="A"?"var(--r)":t==="B"?"var(--b)":t==="AB"?"var(--p)":"var(--y)")+'"> '+t+':'+Math.round(phCounts[t]/total*100)+'%</span>';});
+rhtml+='</div></div><div class="ipb-rbox"><div class="rbl">Total Combinaciones</div><div class="rv">'+total+'</div></div>';
+document.getElementById("aboRes").innerHTML=rhtml;};
+
+/* FILL-IN EXERCISE */
+window.checkFill1=function(){var answers={fc00:"AA",fc01:"Aa",fc10:"Aa",fc11:"aa"};var all=true;Object.keys(answers).forEach(function(id){var inp=document.getElementById(id);var val=inp.value.trim();var alt=val.split("").sort().join("");var correct=answers[id].split("").sort().join("");if(alt.toLowerCase()===correct.toLowerCase()){inp.classList.add("correct");inp.classList.remove("wrong");}else{inp.classList.add("wrong");inp.classList.remove("correct");all=false;}});document.getElementById("fill1Fb").innerHTML=all?'<span style="color:var(--g)">✅ ¡Todas correctas! AA, Aa, Aa, aa → proporción 1:2:1</span>':'<span style="color:var(--r)">❌ Algunas celdas son incorrectas. Recuerda: combina el gameto de la columna con el de la fila. El dominante (mayúscula) va primero.</span>';};
+
+/* EVALUATION */
+var evalQs=[
+{q:"¿Qué se coloca en las columnas y filas del cuadro de Punnett?",o:["Los genotipos de los padres","Los gametos posibles de cada progenitor","Los fenotipos de los hijos","Los cromosomas completos"],a:1},
+{q:"Un individuo AA produce __ tipo(s) de gameto(s):",o:["2 tipos (A y a)","1 tipo (solo A)","4 tipos","Depende del sexo"],a:1},
+{q:"¿Cuál es la proporción genotípica de Aa × Aa?",o:["3:1","1:1","1:2:1","9:3:3:1"],a:2},
+{q:"¿Cuál es la proporción FENOTÍPICA de Aa × Aa con dominancia completa?",o:["1:2:1","3:1","1:1","9:3:3:1"],a:1},
+{q:"¿Cuántos gametos diferentes produce AaBb?",o:["2","4","8","16"],a:1},
+{q:"Un cruce Aa × aa produce __ proporción fenotípica:",o:["3:1","1:1","100% dominante","100% recesivo"],a:1},
+{q:"En herencia ligada al X, los gametos de un varón X^AY son:",o:["A y Y","X^A y Y","X^A y X^a","A, a, X, Y"],a:1},
+{q:"¿Por qué el 50% de hijos varones de una portadora X^AX^a son afectados?",o:["Porque X e Y se combinan mal","Porque reciben X^A o X^a de mamá, y siempre Y de papá; X^aY = afectado","Porque el padre es portador","Porque la meiosis es defectuosa"],a:1},
+{q:"En dominancia incompleta, la proporción fenotípica de Rr × Rr es:",o:["3:1","1:2:1 (tres fenotipos diferentes)","1:1","9:3:3:1"],a:1},
+{q:"I^Ai × I^Bi puede producir hijos tipo O?",o:["No, es imposible","Sí, con probabilidad 25% (gameto i de cada padre → ii)","Sí, pero solo 12.5%","Solo si la madre es tipo O"],a:1},
+{q:"¿Cuántas celdas tiene un cuadro dihíbrido AaBb × AaBb?",o:["4","8","16","32"],a:2},
+{q:"La proporción 9:3:3:1 solo se obtiene cuando:",o:["Hay dominancia incompleta","Ambos padres son heterocigotos para 2 genes INDEPENDIENTES con dominancia completa","Hay epistasis","Los genes están ligados"],a:1},
+{q:"Si Aa × Aa ya tuvo 2 hijos dominantes, la probabilidad del 3° hijo recesivo es:",o:["100% (ya le toca)","0% (no tiene el gen)","25% (cada hijo es independiente)","50%"],a:2},
+{q:"¿Qué es un test cross (cruce de prueba)?",o:["Cruzar dos heterocigotos","Cruzar un individuo dominante desconocido con un homocigoto recesivo","Cruzar dos homocigotos","Cruzar padres con hijos"],a:1},
+{q:"¿Por qué una mujer puede ser portadora pero no afectada en herencia recesiva ligada al X?",o:["Porque tiene 2 cromosomas X: uno con alelo normal compensa al mutado","Porque las mujeres no expresan genes del X","Porque el Y tiene el gen de respaldo","Porque la compensación de dosis activa ambos X"],a:0}
+];
+(function(){var eq=document.getElementById("eq");if(!eq)return;evalQs.forEach(function(q,i){var d=document.createElement("div");d.className="qq";d.id="eq"+i;var h='<div class="qt">'+(i+1)+". "+q.q+'</div><div class="qo">';q.o.forEach(function(o,j){h+='<button class="qb" onclick="eqa('+i+',this,'+j+')"><div class="ol">'+String.fromCharCode(65+j)+'</div>'+o+'</button>';});h+='</div><div class="qf" id="fb-eq'+i+'"></div>';d.innerHTML=h;eq.appendChild(d);});})();
+var evalAns=0;window.eqa=function(qi,btn,ans){var q=document.getElementById("eq"+qi);if(q.dataset.done)return;q.dataset.done="1";q.querySelectorAll(".qb").forEach(function(b){b.classList.add("dis")});var fb=document.getElementById("fb-eq"+qi);if(ans===evalQs[qi].a){btn.classList.add("ok");fb.classList.add("sh","cf");fb.textContent="✅ ¡Correcto!";}else{btn.classList.add("no");q.querySelectorAll(".qb")[evalQs[qi].a].classList.add("ok");fb.classList.add("sh","if");fb.textContent="❌ Incorrecto.";}evalAns++;if(evalAns>=evalQs.length)document.getElementById("seb").style.display="inline-flex";};
+window.se=function(){var c=0;evalQs.forEach(function(q,i){var el=document.getElementById("eq"+i);if(el.querySelector(".qb.ok")&&!el.querySelector(".qb.no"))c++});var pct=Math.round(c/evalQs.length*100);document.getElementById("sn2").textContent=c+"/"+evalQs.length;document.getElementById("sm2").textContent=pct+"% — "+(pct>=80?"¡Excelente dominio!":pct>=60?"Buen progreso.":"Necesitas repasar.");document.getElementById("sdd").style.display="block";setTimeout(function(){document.getElementById("sbf2").style.width=pct+"%";document.getElementById("sbf2").style.background=pct>=80?"var(--grad)":pct>=60?"linear-gradient(135deg,#FFD93D,#F97316)":"linear-gradient(135deg,#FF6B6B,#EC4899)"},100);};
+window.iev=function(){evalAns=0;document.getElementById("seb").style.display="none";document.getElementById("sdd").style.display="none";evalQs.forEach(function(q,i){var el=document.getElementById("eq"+i);el.removeAttribute("data-done");el.querySelectorAll(".qb").forEach(function(b){b.classList.remove("ok","no","dis")});var fb=document.getElementById("fb-eq"+i);fb.classList.remove("sh","cf","if");fb.textContent="";});};
+
+document.querySelectorAll(".nl button").forEach(function(b){b.addEventListener("click",function(){go(b.dataset.s)})});
+drawHero();
+</script>
+</body>
+</html>
