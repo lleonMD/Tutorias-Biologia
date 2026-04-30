@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Interactiva: Matriz Extracelular y Tejidos</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 24px}
+.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}
+.nb{font-family:'DM Serif Display',serif;font-size:1.1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nl{display:flex;gap:3px;flex-wrap:wrap}
+.nl button{padding:5px 12px;border-radius:20px;border:none;background:0;color:var(--t2);font-size:.76rem;font-family:inherit;cursor:pointer;transition:.3s}
+.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}
+.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}
+.pb{position:fixed;top:58px;left:0;right:0;z-index:99;height:3px;background:rgba(0,212,170,.1)}
+.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}
+.mc{max-width:960px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1}
+.sec{display:none;animation:fi .5s}.sec.a{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:50px 0 36px}
+.hi{width:90px;height:90px;margin:0 auto 20px;background:var(--grad);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:2.8rem;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hs{font-size:1.1rem;color:var(--t2);max-width:680px;margin:0 auto 28px}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0}
+.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px 16px;display:flex;align-items:flex-start;gap:10px;transition:.3s}
+.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}
+.on{min-width:26px;height:26px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;color:#0B1622}
+.ot{font-size:.85rem;color:var(--t2);line-height:1.5}
+.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;box-shadow:var(--sh);transition:.3s}
+.cd:hover{border-color:rgba(0,212,170,.25)}
+.ch{font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:14px}
+.ch .ac{color:var(--g)}
+.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:18px 22px;margin:18px 0;background:rgba(0,212,170,.06)}
+.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}
+.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}
+.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}
+.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}
+.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}
+.ibt{font-weight:700;margin-bottom:5px;font-size:.93rem}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin:18px 0}
+.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px}
+.cc h4{font-family:'DM Serif Display',serif;margin-bottom:10px;font-size:1.05rem}
+.et{width:100%;border-collapse:separate;border-spacing:0;margin:18px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}
+.et th{background:rgba(0,212,170,.12);padding:12px 16px;text-align:left;font-weight:600;font-size:.85rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}
+.et td{padding:11px 16px;border-top:1px solid var(--bdr);font-size:.9rem;color:var(--t2)}
+.et tr:hover td{background:var(--card2)}
+.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:18px}
+.qt{font-weight:600;font-size:1rem;margin-bottom:16px}
+.qo{display:flex;flex-direction:column;gap:9px}
+.qb{padding:12px 18px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.93rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}
+.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}
+.qb.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}
+.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}
+.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}
+.qb.dis{pointer-events:none;opacity:.7}
+.ol{min-width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem}
+.qf{margin-top:14px;padding:16px;border-radius:var(--r10);font-size:.9rem;line-height:1.6;display:none}
+.qf.sh{display:block}
+.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}
+.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}
+.btn{padding:11px 24px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.93rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}
+.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}
+.bp:hover{transform:translateY(-2px)}
+.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}
+.bs:hover{background:rgba(0,212,170,.2)}
+.tb{display:flex;gap:5px;margin-bottom:20px;border-bottom:1px solid var(--bdr)}
+.tbtn{padding:9px 18px;border:none;background:0;color:var(--t3);font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:.3s;border-radius:7px 7px 0 0}
+.tbtn:hover{color:var(--t2)}
+.tbtn.a{color:var(--g);border-bottom-color:var(--g);background:rgba(0,212,170,.06)}
+.tc{display:none;animation:fi .4s}.tc.a{display:block}
+.sn{display:flex;justify-content:space-between;margin-top:36px;padding-top:20px;border-top:1px solid var(--bdr)}
+.pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.76rem;font-weight:600;margin:2px 3px}
+.pg{background:rgba(0,212,170,.15);color:var(--g)}.pb2{background:rgba(0,163,255,.12);color:var(--b)}.pw{background:rgba(255,107,107,.12);color:var(--r)}.py{background:rgba(255,217,61,.12);color:var(--y)}.pp{background:rgba(167,139,250,.12);color:var(--p)}.ppk{background:rgba(236,72,153,.12);color:var(--pk)}.por{background:rgba(249,115,22,.12);color:var(--o)}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:20px 0}
+.fc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px;cursor:pointer;transition:.4s;min-height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.fc:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:var(--glow)}
+.ft{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--g)}
+.fd{display:none;font-size:.88rem;color:var(--t2);line-height:1.6;margin-top:7px}
+.fc.fl .ft{display:none}.fc.fl .fd{display:block}
+.fh{font-size:.73rem;color:var(--t3);margin-top:8px}.fc.fl .fh{display:none}
+.sd{text-align:center;padding:36px;margin:20px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}
+.snm{font-family:'DM Serif Display',serif;font-size:3.5rem;margin-bottom:6px}
+.sbl{color:var(--t2)}
+.sbr{width:100%;max-width:380px;height:11px;background:rgba(255,255,255,.06);border-radius:6px;margin:18px auto;overflow:hidden}
+.sbf{height:100%;border-radius:6px;transition:width 1s}
+.step-diagram{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:18px 0}
+.step-box{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:12px 16px;text-align:center;min-width:110px;transition:.3s;cursor:default}
+.step-box:hover{border-color:var(--g);transform:translateY(-2px)}
+.step-arrow{color:var(--g);font-size:1.4rem;font-weight:700}
+.svg-wrap{background:rgba(0,0,0,.25);border-radius:var(--r16);padding:20px;margin:20px 0;border:1px solid var(--bdr);overflow-x:auto}
+.svg-wrap svg{width:100%;height:auto;display:block}
+.sim-box{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin:20px 0}
+.sim-controls{display:flex;gap:10px;justify-content:center;margin:16px 0;flex-wrap:wrap}
+.sim-btn{padding:8px 20px;border-radius:8px;border:2px solid var(--g);background:0;color:var(--g);font-family:inherit;font-weight:600;font-size:.88rem;cursor:pointer;transition:.3s}
+.sim-btn:hover{background:rgba(0,212,170,.15)}
+.sim-btn.active{background:var(--g);color:#0B1622}
+.sim-btn:disabled{opacity:.4;cursor:default}
+.sim-narration{background:rgba(0,212,170,.06);border:1px solid var(--bdr);border-radius:var(--r10);padding:16px;margin-top:14px;color:var(--t2);font-size:.92rem;line-height:1.6;min-height:60px;text-align:left}
+.sim-step-ind{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.sim-dot{padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.06);color:var(--t3);font-size:.75rem;font-weight:600;transition:.3s;cursor:pointer;border:1px solid transparent}
+.sim-dot:hover{border-color:var(--g);color:var(--t2)}
+.sim-dot.act{background:rgba(0,212,170,.2);color:var(--g);border-color:var(--g);box-shadow:0 0 12px rgba(0,212,170,.3)}
+.sim-dot.done{background:rgba(0,212,170,.08);color:var(--g);border-color:rgba(0,212,170,.15)}
+.match-game{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:18px 0}
+.match-col{display:flex;flex-direction:column;gap:8px}
+.match-col h4{text-align:center;margin-bottom:8px;font-family:'DM Serif Display',serif}
+.match-item{padding:12px 16px;border-radius:var(--r10);border:2px solid var(--bdr);background:var(--card2);color:var(--t2);cursor:pointer;transition:.3s;font-size:.88rem;text-align:center;user-select:none}
+.match-item:hover{border-color:var(--b);transform:scale(1.02)}
+.match-item.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}
+.match-item.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important;pointer-events:none}
+.match-item.no{border-color:var(--r)!important;animation:shake .4s}
+.match-score{text-align:center;margin-top:12px;font-weight:600;color:var(--g)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
+.analogy{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(0,163,255,.06));border:1px solid rgba(167,139,250,.2);border-radius:var(--r16);padding:24px;margin:18px 0}
+.analogy .analogy-icon{font-size:2rem;margin-bottom:8px}
+.analogy h4{font-family:'DM Serif Display',serif;color:var(--p);margin-bottom:8px}
+.analogy p{color:var(--t2);font-size:.92rem}
+.timeline{position:relative;padding-left:30px;margin:18px 0}
+.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--g),var(--b),var(--p))}
+.timeline-item{position:relative;margin-bottom:18px;padding:16px;background:var(--card2);border-radius:var(--r10);border:1px solid var(--bdr)}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--g);border:2px solid var(--bg)}
+.reveal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:18px 0}
+.reveal-card{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:18px;cursor:pointer;transition:.4s;text-align:center;min-height:100px;display:flex;flex-direction:column;justify-content:center}
+.reveal-card:hover{border-color:var(--g);transform:translateY(-2px)}
+.reveal-card .rv-q{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--g)}
+.reveal-card .rv-a{display:none;font-size:.85rem;color:var(--t2);margin-top:8px;line-height:1.5}
+.reveal-card .rv-h{font-size:.7rem;color:var(--t3);margin-top:6px}
+.reveal-card.open .rv-q{color:var(--t1);font-size:.85rem;font-family:'Source Sans 3',sans-serif;font-weight:700}
+.reveal-card.open .rv-a{display:block}
+.reveal-card.open .rv-h{display:none}
+.order-game{margin:18px 0}
+.order-item{padding:14px 18px;margin:6px 0;border-radius:var(--r10);border:2px solid var(--bdr);background:var(--card2);color:var(--t2);cursor:grab;transition:.3s;font-size:.9rem;display:flex;align-items:center;gap:10px;user-select:none}
+.order-item:active{cursor:grabbing;border-color:var(--b);background:rgba(0,163,255,.08)}
+.order-item .oi-num{min-width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:var(--t3)}
+.order-item.correct{border-color:var(--g)!important;background:rgba(0,212,170,.08)!important}
+.order-item.correct .oi-num{background:var(--g);color:#0B1622}
+.order-item.wrong{border-color:var(--r)!important;background:rgba(255,107,107,.06)!important}
+.order-check{margin-top:14px;text-align:center}
+/* Slider simulation */
+.slider-wrap{margin:18px 0;text-align:center}
+.slider-wrap input[type=range]{-webkit-appearance:none;width:80%;max-width:500px;height:8px;border-radius:4px;background:rgba(255,255,255,.08);outline:none;margin:10px 0}
+.slider-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--g);cursor:pointer;box-shadow:0 0 10px rgba(0,212,170,.4)}
+.slider-label{display:flex;justify-content:space-between;max-width:500px;margin:0 auto;font-size:.8rem;color:var(--t3)}
+@media(max-width:768px){.og,.cg,.match-game{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.hero h1{font-size:2rem}.step-diagram{flex-direction:column}.step-arrow{transform:rotate(90deg)}.nl{display:none}}
+::-webkit-scrollbar{width:7px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">🧬 Matriz Extracelular y Tejidos</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button>
+<button data-s="tejidos">Tejidos</button>
+<button data-s="mec">MEC</button>
+<button data-s="gags">GAGs</button>
+<button data-s="colageno">Colágeno</button>
+<button data-s="elasticas">F. Elásticas</button>
+<button data-s="adhesivas">Adhesivas</button>
+<button data-s="membrana">Membrana Basal</button>
+<button data-s="integrinas">Integrinas</button>
+<button data-s="glosario">Glosario</button>
+<button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ======================== INICIO ======================== -->
+<div class="sec a" id="sec-inicio">
+<div class="hero"><div class="hi">🧬</div>
+<h1>Matriz Extracelular y Tejidos</h1>
+<p class="hs">Definición de tejidos, componentes moleculares de la MEC, GAGs, proteoglicanos, colágeno, fibras elásticas, glicoproteínas adhesivas, membrana basal e integrinas.</p></div>
+<div class="cd"><div class="ch">🎯 Resultados de <span class="ac">Aprendizaje</span></div>
+<div class="og">
+<div class="oi"><div class="on">1</div><div class="ot">Definir qué es un tejido y la matriz extracelular (MEC).</div></div>
+<div class="oi"><div class="on">2</div><div class="ot">Describir los 3 componentes moleculares de la MEC y las funciones de la MEC.</div></div>
+<div class="oi"><div class="on">3</div><div class="ot">Definir GAGs, proteoglicanos y ácido hialurónico; describir sus funciones.</div></div>
+<div class="oi"><div class="on">4</div><div class="ot">Describir las funciones y la síntesis del colágeno.</div></div>
+<div class="oi"><div class="on">5</div><div class="ot">Describir las fibras elásticas: elastina, microfibrillas y Fibrilina-1.</div></div>
+<div class="oi"><div class="on">6</div><div class="ot">Describir las glicoproteínas adhesivas; definir laminina y fibronectina.</div></div>
+<div class="oi"><div class="on">7</div><div class="ot">Definir membrana basal, lámina basal y sus componentes.</div></div>
+<div class="oi"><div class="on">8</div><div class="ot">Definir integrinas; describir su estructura, funciones y localización.</div></div>
+</div></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="22" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Panorama: Organización de la Matriz Extracelular</text>
+<!-- Cells -->
+<rect x="30" y="50" width="130" height="50" rx="12" fill="rgba(236,72,153,0.1)" stroke="#EC4899" stroke-width="1.5"/>
+<text x="95" y="72" text-anchor="middle" fill="#EC4899" font-size="11" font-weight="700">Células</text>
+<text x="95" y="88" text-anchor="middle" fill="#8BA4BE" font-size="8">Producen la MEC</text>
+<line x1="168" y1="75" x2="200" y2="75" stroke="#5A7A96" stroke-width="2" marker-end="url(#ao)"/>
+<!-- MEC central -->
+<rect x="210" y="40" width="200" height="70" rx="14" fill="rgba(0,212,170,0.1)" stroke="#00D4AA" stroke-width="2"/>
+<text x="310" y="65" text-anchor="middle" fill="#00D4AA" font-size="13" font-weight="700">MATRIZ EXTRACELULAR</text>
+<text x="310" y="82" text-anchor="middle" fill="#8BA4BE" font-size="9">Red compleja fuera de las células</text>
+<text x="310" y="97" text-anchor="middle" fill="#5A7A96" font-size="8">Sustancia fundamental + Fibras + Glicoproteínas</text>
+<!-- 3 components -->
+<line x1="310" y1="115" x2="150" y2="155" stroke="#FFD93D" stroke-width="1.5"/>
+<line x1="310" y1="115" x2="310" y2="155" stroke="#00A3FF" stroke-width="1.5"/>
+<line x1="310" y1="115" x2="470" y2="155" stroke="#A78BFA" stroke-width="1.5"/>
+<rect x="50" y="155" width="200" height="55" rx="10" fill="rgba(255,217,61,0.08)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="150" y="175" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="700">Sustancia Fundamental</text>
+<text x="150" y="190" text-anchor="middle" fill="#8BA4BE" font-size="8">GAGs + Proteoglicanos</text>
+<text x="150" y="202" text-anchor="middle" fill="#8BA4BE" font-size="8">+ Ácido Hialurónico</text>
+<rect x="210" y="155" width="200" height="55" rx="10" fill="rgba(0,163,255,0.08)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="310" y="175" text-anchor="middle" fill="#00A3FF" font-size="10" font-weight="700">Proteínas Fibrosas</text>
+<text x="310" y="190" text-anchor="middle" fill="#8BA4BE" font-size="8">Colágeno (resistencia)</text>
+<text x="310" y="202" text-anchor="middle" fill="#8BA4BE" font-size="8">Elastina (elasticidad)</text>
+<rect x="370" y="155" width="200" height="55" rx="10" fill="rgba(167,139,250,0.08)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="470" y="175" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="700">Glicoproteínas Adhesivas</text>
+<text x="470" y="190" text-anchor="middle" fill="#8BA4BE" font-size="8">Fibronectina</text>
+<text x="470" y="202" text-anchor="middle" fill="#8BA4BE" font-size="8">Laminina</text>
+<!-- integrinas -->
+<rect x="620" y="50" width="250" height="60" rx="12" fill="rgba(249,115,22,0.08)" stroke="#F97316" stroke-width="1.5"/>
+<text x="745" y="72" text-anchor="middle" fill="#F97316" font-size="11" font-weight="700">INTEGRINAS (Receptores)</text>
+<text x="745" y="90" text-anchor="middle" fill="#8BA4BE" font-size="8">Conectan MEC ↔ Citoesqueleto</text>
+<line x1="418" y1="75" x2="615" y2="75" stroke="#F97316" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#ao)"/>
+<!-- Membrana basal -->
+<rect x="620" y="155" width="250" height="55" rx="10" fill="rgba(0,212,170,0.06)" stroke="rgba(0,212,170,0.3)" stroke-width="1.5"/>
+<text x="745" y="175" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="700">MEMBRANA BASAL</text>
+<text x="745" y="190" text-anchor="middle" fill="#8BA4BE" font-size="8">Lámina basal + Lámina reticular</text>
+<text x="745" y="202" text-anchor="middle" fill="#8BA4BE" font-size="8">Colágeno IV, Laminina, Nidógeno, Perlecán</text>
+<!-- Bottom note -->
+<rect x="100" y="230" width="700" height="40" rx="10" fill="rgba(0,212,170,0.04)" stroke="rgba(0,212,170,0.15)" stroke-width="1"/>
+<text x="450" y="254" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="600">Las proporciones de los 3 componentes varían según el tipo de tejido → determinan las propiedades mecánicas</text>
+<defs><marker id="ao" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#8BA4BE"/></marker></defs>
+</svg>
+</div>
+<div style="text-align:center;margin-top:22px"><button class="btn bp" onclick="go('tejidos')">Comenzar la tutoría →</button></div>
+</div>
+
+<!-- ======================== TEJIDOS (RA 1) ======================== -->
+<div class="sec" id="sec-tejidos">
+<div class="cd"><div class="ch">🔬 ¿Qué es un <span class="ac">Tejido</span>? <span class="pill pg">RA 1</span></div>
+<div class="ib"><div class="ibt">🔑 Definición Central</div>
+<p style="color:var(--t2)">Un <strong>tejido</strong> es un conjunto organizado de <strong>células similares</strong> que, junto con su <strong>matriz extracelular</strong>, trabajan de manera coordinada para realizar una o varias <strong>funciones específicas</strong>. Las células de un tejido comparten un origen embriológico común y están unidas tanto estructural como funcionalmente.</p></div>
+
+<div class="analogy"><div class="analogy-icon">🏗️</div><h4>Analogía: La construcción de un edificio</h4>
+<p>Imagina un edificio (el tejido). Los <strong>ladrillos</strong> son las células, y el <strong>cemento, las varillas de acero y el mortero</strong> que los rodea es la <strong>matriz extracelular</strong>. Según el tipo de edificio (casa, puente, rascacielos), la proporción de ladrillos vs. cemento cambia — así como cambian las proporciones de la MEC según el tejido.</p></div>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--y)">Componentes de un tejido</h4>
+<p style="color:var(--t2);font-size:.9rem"><strong>1. Células:</strong> unidades vivas que realizan funciones específicas (fibroblastos, condrocitos, osteocitos, etc.).<br><br><strong>2. Matriz Extracelular (MEC):</strong> material no celular secretado por las células que llena el espacio entre ellas. Proporciona soporte estructural y señalización.</p></div>
+<div class="cc"><h4 style="color:var(--b)">4 tipos fundamentales de tejidos</h4>
+<p style="color:var(--t2);font-size:.9rem"><strong style="color:var(--g)">Epitelial:</strong> recubre superficies. Poca MEC.<br><strong style="color:var(--y)">Conectivo:</strong> sostén y conexión. Mucha MEC.<br><strong style="color:var(--pk)">Muscular:</strong> contracción. MEC moderada.<br><strong style="color:var(--p)">Nervioso:</strong> impulsos eléctricos. Poca MEC.</p></div>
+</div>
+
+<div class="ib n"><div class="ibt">📝 Punto clave</div>
+<p style="color:var(--t2)">El <strong>tejido conectivo</strong> es el que posee la <strong>mayor cantidad de MEC</strong>, y es donde mejor se estudian sus componentes. Ejemplos: hueso, cartílago, tendón, dermis, sangre.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q01"><div class="qt">¿Cuál es la definición más completa de un tejido?</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>Un grupo de células idénticas</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">B</div>Un conjunto de células similares + MEC que trabajan coordinadamente para una función específica</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">C</div>La parte sólida del cuerpo</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>Solo las células sin considerar el espacio extracelular</button>
+</div><div class="qf" id="fb-q01"></div></div>
+<div class="qq" id="q02"><div class="qt">¿Qué tipo de tejido tiene mayor proporción de MEC?</div><div class="qo">
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">A</div>Nervioso</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">B</div>Epitelial</button>
+<button class="qb" onclick="cq('q02',this,1)"><div class="ol">C</div>Conectivo</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">D</div>Muscular</button>
+</div><div class="qf" id="fb-q02"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('mec')">Matriz Extracelular →</button></div>
+</div>
+
+<!-- ======================== MEC (RA 2) ======================== -->
+<div class="sec" id="sec-mec">
+<div class="cd"><div class="ch">🧱 Matriz <span class="ac">Extracelular</span> (MEC) <span class="pill pg">RA 2</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div>
+<p style="color:var(--t2)">La <strong>Matriz Extracelular (MEC)</strong> es una <strong>red tridimensional compleja</strong> de macromoléculas secretadas por las células al espacio extracelular. Proporciona <strong>soporte estructural, señalización bioquímica</strong> y un microambiente dinámico que regula el comportamiento celular. Es producida principalmente por <strong>fibroblastos</strong> en tejido conectivo.</p></div>
+
+<div class="ch" style="margin-top:28px">Tres Componentes Moleculares de la MEC</div>
+<div class="cg3">
+<div class="cc" style="border-color:rgba(255,217,61,.3)"><h4 style="color:var(--y)">1. Sustancia Fundamental</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>GAGs</strong> (glucosaminoglicanos) y <strong>proteoglicanos</strong> forman un gel hidratado que resiste la compresión. El <strong>ácido hialurónico</strong> es el GAG más grande.<br><br><em style="color:var(--y)">Función:</em> hidratación, resistencia a compresión, filtración molecular.</p></div>
+<div class="cc" style="border-color:rgba(0,163,255,.3)"><h4 style="color:var(--b)">2. Proteínas Fibrosas</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>Colágeno:</strong> resistencia a la tensión. Proteína más abundante del cuerpo (~30%).<br><strong>Elastina:</strong> elasticidad y retroceso elástico.<br><br><em style="color:var(--b)">Función:</em> soporte mecánico, resistencia, elasticidad.</p></div>
+<div class="cc" style="border-color:rgba(167,139,250,.3)"><h4 style="color:var(--p)">3. Glicoproteínas Adhesivas</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>Fibronectina</strong> y <strong>laminina:</strong> conectan las células con la MEC mediante <strong>integrinas</strong>.<br><br><em style="color:var(--p)">Función:</em> adhesión celular, migración, señalización célula-MEC.</p></div>
+</div>
+
+<!-- Proportions simulation -->
+<div class="sim-box">
+<div class="ch">🎛️ Simulador: <span class="ac">Proporciones de MEC</span> según el tejido</div>
+<p style="color:var(--t2);font-size:.9rem;margin-bottom:16px">Ajusta el control para explorar cómo varían las proporciones de los 3 componentes en distintos tejidos:</p>
+<div class="slider-wrap">
+<input type="range" min="0" max="4" value="0" id="tissueSlider" oninput="updateTissue()">
+<div class="slider-label"><span>Cartílago</span><span>Dermis</span><span>Tendón</span><span>Pulmón</span><span>Membrana Basal</span></div>
+</div>
+<div id="tissueDisplay" style="margin-top:20px"></div>
+</div>
+
+<div class="ch" style="margin-top:28px">Funciones de la MEC</div>
+<table class="et"><thead><tr><th>Función</th><th>Descripción</th><th>Ejemplo</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Soporte estructural</strong></td><td>Armazón que mantiene la forma del tejido</td><td>Colágeno en tendón</td></tr>
+<tr><td><strong style="color:var(--b)">Resistencia mecánica</strong></td><td>Soporta tensión, compresión y cizallamiento</td><td>Cartílago articular</td></tr>
+<tr><td><strong style="color:var(--y)">Regulación celular</strong></td><td>Controla proliferación, diferenciación y migración</td><td>Señalización por integrinas</td></tr>
+<tr><td><strong style="color:var(--p)">Reservorio de factores</strong></td><td>Almacena factores de crecimiento (FGF, TGF-β)</td><td>Reparación de heridas</td></tr>
+<tr><td><strong style="color:var(--pk)">Filtración</strong></td><td>Barrera selectiva de permeabilidad</td><td>Membrana basal glomerular</td></tr>
+<tr><td><strong style="color:var(--o)">Adhesión y migración</strong></td><td>Guía la migración celular durante el desarrollo</td><td>Fibronectina en embriogénesis</td></tr>
+</tbody></table>
+
+<div class="ib w"><div class="ibt">⚠️ Clínica</div>
+<p style="color:var(--t2)">Las alteraciones de la MEC están implicadas en <strong>fibrosis</strong> (exceso de colágeno), <strong>metástasis tumoral</strong> (degradación de MEC por metaloproteinasas), y <strong>enfermedades del tejido conectivo</strong> (Marfan, Ehlers-Danlos, osteogénesis imperfecta).</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q03"><div class="qt">¿Cuáles son los 3 componentes moleculares principales de la MEC?</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">A</div>ADN, ARN y proteínas</button>
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">B</div>Sustancia fundamental (GAGs/proteoglicanos), proteínas fibrosas (colágeno/elastina) y glicoproteínas adhesivas</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">C</div>Lípidos, carbohidratos y vitaminas</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>Actina, miosina y tubulina</button>
+</div><div class="qf" id="fb-q03"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('tejidos')">← Tejidos</button><button class="btn bp" onclick="go('gags')">GAGs y Proteoglicanos →</button></div>
+</div>
+
+<!-- ======================== GAGs (RA 3) ======================== -->
+<div class="sec" id="sec-gags">
+<div class="cd"><div class="ch">🔗 GAGs, Proteoglicanos y <span class="ac">Ácido Hialurónico</span> <span class="pill pg">RA 3</span></div>
+<div class="ib"><div class="ibt">🔑 Definiciones</div>
+<p style="color:var(--t2)"><strong>Glucosaminoglicanos (GAGs):</strong> polisacáridos lineales no ramificados formados por unidades repetidas de disacáridos (un aminoazúcar + un ácido urónico). Son <strong>altamente negativos</strong> (por grupos sulfato y carboxilo), lo que atrae agua y cationes → forman un <strong>gel hidratado</strong>.<br><br>
+<strong>Proteoglicanos:</strong> macromoléculas formadas por una <strong>proteína central (core)</strong> a la que se unen <strong>covalentemente uno o más GAGs</strong>. Son como un «cepillo para botellas» molecular.<br><br>
+<strong>Ácido Hialurónico (Hialuronano):</strong> el <strong>único GAG no sulfatado</strong> y que <strong>no se une a una proteína core</strong>. Es un polisacárido gigante (hasta 25,000 disacáridos). No forma parte de proteoglicanos sino que actúa como eje central de <strong>agregados de proteoglicanos</strong>.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="24" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura de un Agregado de Proteoglicanos</text>
+<!-- Hyaluronic acid backbone -->
+<line x1="100" y1="160" x2="800" y2="160" stroke="#00D4AA" stroke-width="4" stroke-linecap="round"/>
+<text x="450" y="150" text-anchor="middle" fill="#00D4AA" font-size="11" font-weight="700">Ácido Hialurónico (eje central)</text>
+<!-- Proteoglycans -->
+<g transform="translate(180,160)">
+<line x1="0" y1="0" x2="0" y2="-60" stroke="#FFD93D" stroke-width="2"/>
+<circle cx="0" cy="-60" r="5" fill="#FFD93D"/>
+<line x1="-20" y1="-50" x2="20" y2="-50" stroke="#FF6B6B" stroke-width="1.5"/>
+<line x1="-18" y1="-40" x2="18" y2="-40" stroke="#FF6B6B" stroke-width="1.5"/>
+<line x1="-15" y1="-30" x2="15" y2="-30" stroke="#FF6B6B" stroke-width="1.5"/>
+<line x1="-20" y1="-70" x2="20" y2="-70" stroke="#FF6B6B" stroke-width="1.5"/>
+<line x1="-18" y1="-80" x2="18" y2="-80" stroke="#FF6B6B" stroke-width="1.5"/>
+<text x="0" y="-92" text-anchor="middle" fill="#FFD93D" font-size="7">Proteoglicano</text>
+</g>
+<g transform="translate(300,160)">
+<line x1="0" y1="0" x2="0" y2="60" stroke="#FFD93D" stroke-width="2"/>
+<circle cx="0" cy="60" r="5" fill="#FFD93D"/>
+<line x1="-20" y1="50" x2="20" y2="50" stroke="#00A3FF" stroke-width="1.5"/>
+<line x1="-18" y1="40" x2="18" y2="40" stroke="#00A3FF" stroke-width="1.5"/>
+<line x1="-15" y1="30" x2="15" y2="30" stroke="#00A3FF" stroke-width="1.5"/>
+<line x1="-20" y1="70" x2="20" y2="70" stroke="#00A3FF" stroke-width="1.5"/>
+</g>
+<g transform="translate(420,160)">
+<line x1="0" y1="0" x2="0" y2="-60" stroke="#FFD93D" stroke-width="2"/>
+<circle cx="0" cy="-60" r="5" fill="#FFD93D"/>
+<line x1="-20" y1="-50" x2="20" y2="-50" stroke="#A78BFA" stroke-width="1.5"/>
+<line x1="-18" y1="-40" x2="18" y2="-40" stroke="#A78BFA" stroke-width="1.5"/>
+<line x1="-20" y1="-70" x2="20" y2="-70" stroke="#A78BFA" stroke-width="1.5"/>
+<line x1="-18" y1="-80" x2="18" y2="-80" stroke="#A78BFA" stroke-width="1.5"/>
+</g>
+<g transform="translate(540,160)">
+<line x1="0" y1="0" x2="0" y2="60" stroke="#FFD93D" stroke-width="2"/>
+<circle cx="0" cy="60" r="5" fill="#FFD93D"/>
+<line x1="-20" y1="50" x2="20" y2="50" stroke="#EC4899" stroke-width="1.5"/>
+<line x1="-18" y1="40" x2="18" y2="40" stroke="#EC4899" stroke-width="1.5"/>
+<line x1="-15" y1="30" x2="15" y2="30" stroke="#EC4899" stroke-width="1.5"/>
+</g>
+<g transform="translate(660,160)">
+<line x1="0" y1="0" x2="0" y2="-60" stroke="#FFD93D" stroke-width="2"/>
+<circle cx="0" cy="-60" r="5" fill="#FFD93D"/>
+<line x1="-20" y1="-50" x2="20" y2="-50" stroke="#F97316" stroke-width="1.5"/>
+<line x1="-18" y1="-40" x2="18" y2="-40" stroke="#F97316" stroke-width="1.5"/>
+<line x1="-20" y1="-70" x2="20" y2="-70" stroke="#F97316" stroke-width="1.5"/>
+</g>
+<!-- Labels -->
+<rect x="60" y="260" width="160" height="36" rx="8" fill="rgba(255,217,61,0.08)" stroke="#FFD93D" stroke-width="1"/>
+<text x="140" y="282" text-anchor="middle" fill="#FFD93D" font-size="9" font-weight="600">Proteína core + GAGs = Proteoglicano</text>
+<rect x="260" y="260" width="160" height="36" rx="8" fill="rgba(255,107,107,0.08)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="340" y="282" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">GAGs (cadenas laterales sulfatadas)</text>
+<rect x="460" y="260" width="160" height="36" rx="8" fill="rgba(0,212,170,0.08)" stroke="#00D4AA" stroke-width="1"/>
+<text x="540" y="282" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">Ác. Hialurónico = NO sulfatado</text>
+<rect x="660" y="260" width="180" height="36" rx="8" fill="rgba(167,139,250,0.08)" stroke="#A78BFA" stroke-width="1"/>
+<text x="750" y="282" text-anchor="middle" fill="#A78BFA" font-size="9" font-weight="600">Enlace proteína ↔ HA = no covalente</text>
+</svg>
+</div>
+
+<div class="ch" style="margin-top:18px">Principales GAGs</div>
+<table class="et"><thead><tr><th>GAG</th><th>Sulfatado</th><th>Localización principal</th><th>Función clave</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Ácido hialurónico</strong></td><td>❌ No</td><td>Líquido sinovial, humor vítreo, cordón umbilical</td><td>Hidratación, lubricación, migración celular</td></tr>
+<tr><td><strong style="color:var(--b)">Condroitín sulfato</strong></td><td>✅ Sí</td><td>Cartílago, hueso, piel</td><td>Resistencia a compresión</td></tr>
+<tr><td><strong style="color:var(--y)">Heparán sulfato</strong></td><td>✅ Sí</td><td>Membrana basal, superficie celular</td><td>Unión de factores de crecimiento (FGF)</td></tr>
+<tr><td><strong style="color:var(--pk)">Heparina</strong></td><td>✅ Sí (más sulfatado)</td><td>Gránulos de mastocitos</td><td>Anticoagulante</td></tr>
+<tr><td><strong style="color:var(--p)">Queratán sulfato</strong></td><td>✅ Sí</td><td>Córnea, cartílago</td><td>Transparencia corneal</td></tr>
+<tr><td><strong style="color:var(--o)">Dermatán sulfato</strong></td><td>✅ Sí</td><td>Piel, tendones, vasos</td><td>Soporte dérmico</td></tr>
+</tbody></table>
+
+<div class="ch" style="margin-top:18px">Funciones de GAGs y Proteoglicanos</div>
+<div class="cg">
+<div class="cc"><h4 style="color:var(--y)">Funciones de los GAGs</h4>
+<p style="color:var(--t2);font-size:.88rem">• Atraen agua → <strong>gel hidratado</strong> que resiste compresión<br>• Actúan como <strong>filtro molecular</strong> selectivo<br>• Permiten <strong>difusión</strong> de nutrientes y señales<br>• <strong>Lubricación</strong> (ácido hialurónico en articulaciones)</p></div>
+<div class="cc"><h4 style="color:var(--b)">Funciones de los Proteoglicanos</h4>
+<p style="color:var(--t2);font-size:.88rem">• <strong>Agrecán</strong> en cartílago: resistencia a compresión<br>• <strong>Perlecán</strong> en membrana basal: filtración<br>• <strong>Sindecán</strong> (transmembrana): co-receptor de factores de crecimiento<br>• Regulan la <strong>señalización</strong> de FGF, Wnt, Hedgehog</p></div>
+</div>
+
+<div class="analogy"><div class="analogy-icon">🧽</div><h4>Analogía: La esponja molecular</h4>
+<p>Los GAGs son como <strong>esponjas microscópicas</strong>. Sus cargas negativas atraen agua como un imán, creando un gel que actúa como <strong>amortiguador</strong>. Imagina que caminas sobre una alfombra empapada vs. una seca — la empapada (con GAGs) absorbe el impacto. Los <strong>proteoglicanos</strong> son las esponjas montadas en un <strong>palo</strong> (proteína core), y muchos palos montados en una <strong>cuerda</strong> (ácido hialurónico) forman los enormes agregados del cartílago.</p></div>
+</div>
+
+<!-- Match game GAGs -->
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">Emparejar</span> GAG con característica</div>
+<div class="match-game" id="mg1">
+<div class="match-col"><h4 style="color:var(--g)">GAG</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg1',this)">Ácido hialurónico</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg1',this)">Heparina</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg1',this)">Condroitín sulfato</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg1',this)">Heparán sulfato</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">Característica</h4>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg1',this)">Abundante en cartílago</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg1',this)">Único GAG no sulfatado</div>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg1',this)">Une factores de crecimiento (FGF)</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg1',this)">Anticoagulante, en mastocitos</div>
+</div></div>
+<div class="match-score" id="mg1-score"></div></div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q04"><div class="qt">¿Qué diferencia al ácido hialurónico de los demás GAGs?</div><div class="qo">
+<button class="qb" onclick="cq('q04',this,1)"><div class="ol">A</div>No es sulfatado y no se une covalentemente a una proteína core</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">B</div>Es el más pequeño de todos los GAGs</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">C</div>Se encuentra solo en el hueso</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">D</div>Es una proteína, no un polisacárido</button>
+</div><div class="qf" id="fb-q04"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('mec')">← MEC</button><button class="btn bp" onclick="go('colageno')">Colágeno →</button></div>
+</div>
+
+<!-- ======================== COLÁGENO (RA 4) ======================== -->
+<div class="sec" id="sec-colageno">
+<div class="cd"><div class="ch">🦴 <span class="ac">Colágeno:</span> Síntesis y Funciones <span class="pill pb2">RA 4</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div>
+<p style="color:var(--t2)">El <strong>colágeno</strong> es la <strong>proteína más abundante del cuerpo humano</strong> (~30% de las proteínas totales). Proporciona <strong>resistencia a la tensión</strong>. Su unidad estructural es el <strong>tropocolágeno</strong>: una triple hélice formada por 3 cadenas α enrolladas (rica en <strong>Gly-X-Y</strong>, donde X=prolina, Y=hidroxiprolina). Existen <strong>>28 tipos</strong> de colágeno; los principales son I, II, III, IV y V.</p></div>
+
+<div class="ch" style="margin-top:18px">Tipos principales de colágeno</div>
+<table class="et"><thead><tr><th>Tipo</th><th>Estructura</th><th>Localización</th><th>Función</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Tipo I</strong></td><td>Fibrilar (90% del colágeno)</td><td>Hueso, piel, tendón, dentina</td><td>Resistencia a tensión</td></tr>
+<tr><td><strong style="color:var(--b)">Tipo II</strong></td><td>Fibrilar</td><td>Cartílago, humor vítreo</td><td>Resistencia a compresión intermitente</td></tr>
+<tr><td><strong style="color:var(--pk)">Tipo III</strong></td><td>Fibrilar (reticular)</td><td>Vasos, útero, piel fetal, hígado</td><td>Soporte de órganos distensibles</td></tr>
+<tr><td><strong style="color:var(--y)">Tipo IV</strong></td><td>Lámina (red)</td><td>Membrana basal</td><td>Filtración, soporte epitelial</td></tr>
+<tr><td><strong style="color:var(--p)">Tipo V</strong></td><td>Fibrilar</td><td>Córnea, placenta</td><td>Regula diámetro de fibrillas de tipo I</td></tr>
+</tbody></table>
+
+<!-- Collagen synthesis simulation -->
+<div class="sim-box">
+<div class="ch">🔬 Simulación: <span class="ac">Síntesis del Colágeno</span></div>
+<p style="color:var(--t2);font-size:.9rem;margin-bottom:10px">Explora paso a paso cómo se sintetiza el colágeno, desde el RER hasta la fibra madura en la MEC:</p>
+<div class="sim-step-ind" id="colSim-ind"></div>
+<div class="svg-wrap" id="colSim-svg"></div>
+<div class="sim-controls">
+<button class="sim-btn" id="colPrev" onclick="colStep(-1)">← Anterior</button>
+<button class="sim-btn" id="colNext" onclick="colStep(1)">Siguiente →</button>
+<button class="sim-btn" onclick="colStep(0,true)">↺ Reiniciar</button>
+</div>
+<div class="sim-narration" id="colSim-nar"></div>
+</div>
+
+<div class="ib w"><div class="ibt">⚠️ Clínica: Enfermedades del colágeno</div>
+<p style="color:var(--t2)"><strong style="color:var(--r)">Osteogénesis imperfecta:</strong> mutación en colágeno tipo I → huesos frágiles.<br>
+<strong style="color:var(--r)">Ehlers-Danlos:</strong> defecto en colágeno III o V → hiperlaxitud articular, piel hiperextensible.<br>
+<strong style="color:var(--r)">Escorbuto:</strong> deficiencia de vitamina C → no se hidroxila Pro/Lys → colágeno inestable → hemorragias, encías sangrantes.<br>
+<strong style="color:var(--r)">Síndrome de Alport:</strong> mutación en colágeno IV → nefritis, sordera.</p></div>
+
+<div class="ib go"><div class="ibt">💡 Dato clave</div>
+<p style="color:var(--t2)">La <strong>vitamina C (ascorbato)</strong> es cofactor esencial de la <strong>prolil-hidroxilasa</strong> y la <strong>lisil-hidroxilasa</strong>. Sin ella, las cadenas α no forman puentes de hidrógeno estables → triple hélice inestable → <strong>escorbuto</strong>.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q05"><div class="qt">¿Qué secuencia de aminoácidos es característica del colágeno?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">A</div>Ala-Val-Leu</button>
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">B</div>Gly-X-Y (X=Pro, Y=Hyp)</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">C</div>Cys-Cys-Cys</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>Trp-Phe-Tyr</button>
+</div><div class="qf" id="fb-q05"></div></div>
+<div class="qq" id="q06"><div class="qt">¿Por qué la vitamina C es esencial para la síntesis de colágeno?</div><div class="qo">
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">A</div>Es parte de la secuencia de aminoácidos</button>
+<button class="qb" onclick="cq('q06',this,1)"><div class="ol">B</div>Es cofactor de prolil-hidroxilasa y lisil-hidroxilasa, necesarias para estabilizar la triple hélice</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">C</div>Activa los ribosomas para traducir el ARNm</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">D</div>Protege al colágeno de la digestión por proteasas</button>
+</div><div class="qf" id="fb-q06"></div></div></div>
+
+<!-- Order game: collagen synthesis -->
+<div class="cd"><div class="ch">🎮 Actividad: Ordena los <span class="ac">pasos de la síntesis del colágeno</span></div>
+<p style="color:var(--t2);font-size:.9rem;margin-bottom:12px">Arrastra para ordenar los pasos correctamente:</p>
+<div class="order-game" id="og1"></div>
+<div class="order-check"><button class="btn bs" onclick="checkOrder('og1')">Verificar orden</button> <span id="og1-result" style="margin-left:12px;font-weight:600"></span></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('gags')">← GAGs</button><button class="btn bp" onclick="go('elasticas')">Fibras Elásticas →</button></div>
+</div>
+
+<!-- ======================== FIBRAS ELÁSTICAS (RA 5) ======================== -->
+<div class="sec" id="sec-elasticas">
+<div class="cd"><div class="ch">🎯 Fibras <span class="ac">Elásticas:</span> Elastina y Fibrilina-1 <span class="pill pp">RA 5</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto Central</div>
+<p style="color:var(--t2)">Las <strong>fibras elásticas</strong> permiten que los tejidos se <strong>estiren y recuperen su forma original</strong>. Están compuestas por dos elementos: un <strong>núcleo de elastina</strong> (proteína amorfa, hidrófoba, con enlaces cruzados de desmosina) rodeado por una vaina de <strong>microfibrillas</strong> (principalmente <strong>Fibrilina-1</strong>).</p></div>
+
+<div class="cg">
+<div class="cc" style="border-color:rgba(0,163,255,.3)"><h4 style="color:var(--b)">Elastina</h4>
+<p style="color:var(--t2);font-size:.88rem">• Proteína hidrófoba y <strong>amorfa</strong> (no cristalina)<br>• Rica en <strong>Gly, Val, Ala, Pro</strong> (no tiene Hyp como colágeno)<br>• Forma <strong>enlaces cruzados</strong> covalentes de <strong>desmosina e isodesmosina</strong> (a partir de lisina, por lisil-oxidasa)<br>• Extremadamente <strong>duradera</strong> — vida media muy larga<br>• Se estira hasta <strong>150%</strong> de su longitud y retrocede</p></div>
+<div class="cc" style="border-color:rgba(167,139,250,.3)"><h4 style="color:var(--p)">Microfibrillas (Fibrilina-1)</h4>
+<p style="color:var(--t2);font-size:.88rem">• <strong>Fibrilina-1:</strong> glicoproteína rica en cisteína que forma microfibrillas de 10-12 nm<br>• Actúan como <strong>andamio/molde</strong> para el depósito de elastina durante el desarrollo<br>• Regulan la <strong>biodisponibilidad de TGF-β</strong> (lo secuestran en la MEC)<br>• Las microfibrillas también pueden existir <strong>sin elastina</strong> (zonula del cristalino)</p></div>
+</div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="24" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura de una Fibra Elástica</text>
+<!-- Relaxed state -->
+<text x="225" y="55" text-anchor="middle" fill="#00A3FF" font-size="11" font-weight="600">Estado RELAJADO</text>
+<!-- Microfibrils sheath -->
+<ellipse cx="225" cy="120" rx="180" ry="55" fill="rgba(167,139,250,0.08)" stroke="#A78BFA" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="225" y="185" text-anchor="middle" fill="#A78BFA" font-size="9">Vaina de microfibrillas (Fibrilina-1)</text>
+<!-- Elastin core - coiled -->
+<path d="M80,110 C100,80 120,140 140,110 C160,80 180,140 200,110 C220,80 240,140 260,110 C280,80 300,140 320,110 C340,80 360,140 370,120" fill="none" stroke="#00A3FF" stroke-width="5" stroke-linecap="round"/>
+<text x="225" y="145" text-anchor="middle" fill="#00A3FF" font-size="9" font-weight="600">Elastina (enrollada, amorfa)</text>
+<!-- Stretched state -->
+<text x="675" y="55" text-anchor="middle" fill="#FF6B6B" font-size="11" font-weight="600">Estado ESTIRADO</text>
+<ellipse cx="675" cy="120" rx="210" ry="35" fill="rgba(255,107,107,0.06)" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="5,3"/>
+<!-- Elastin core - stretched -->
+<path d="M480,115 C510,108 540,122 570,115 C600,108 630,122 660,115 C690,108 720,122 750,115 C780,108 810,122 840,115" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+<text x="675" y="145" text-anchor="middle" fill="#FF6B6B" font-size="9">Elastina (estirada)</text>
+<!-- Arrow between states -->
+<line x1="405" y1="105" x2="455" y2="105" stroke="#FFD93D" stroke-width="2" marker-end="url(#ao)"/>
+<text x="430" y="100" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="600">Tensión</text>
+<line x1="455" y1="135" x2="405" y2="135" stroke="#00D4AA" stroke-width="2" marker-end="url(#ao)"/>
+<text x="430" y="150" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="600">Retroceso</text>
+<!-- Desmosine cross-links -->
+<circle cx="150" cy="110" r="4" fill="#FFD93D"/>
+<circle cx="260" cy="110" r="4" fill="#FFD93D"/>
+<text x="205" y="198" text-anchor="middle" fill="#FFD93D" font-size="8">● = Enlaces de desmosina (lisil-oxidasa)</text>
+</svg>
+</div>
+
+<div class="ib w"><div class="ibt">⚠️ Clínica: Síndrome de Marfan</div>
+<p style="color:var(--t2)">Mutación en el gen <strong>FBN1</strong> (Fibrilina-1, cromosoma 15) → microfibrillas defectuosas → <strong>exceso de señalización TGF-β</strong> + fibras elásticas anormales. Manifestaciones: individuos altos, aracnodactilia, <strong>subluxación del cristalino</strong>, <strong>dilatación/disección de la aorta</strong> (la complicación más peligrosa), prolapso de válvula mitral.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q07"><div class="qt">¿Cuáles son los dos componentes principales de las fibras elásticas?</div><div class="qo">
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">A</div>Colágeno I y colágeno III</button>
+<button class="qb" onclick="cq('q07',this,1)"><div class="ol">B</div>Núcleo de elastina + vaina de microfibrillas (Fibrilina-1)</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">C</div>Actina y miosina</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">D</div>Laminina y fibronectina</button>
+</div><div class="qf" id="fb-q07"></div></div>
+<div class="qq" id="q08"><div class="qt">El Síndrome de Marfan se debe a mutación en:</div><div class="qo">
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">A</div>Colágeno tipo I</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">B</div>Elastina</button>
+<button class="qb" onclick="cq('q08',this,1)"><div class="ol">C</div>Fibrilina-1 (gen FBN1)</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">D</div>Fibronectina</button>
+</div><div class="qf" id="fb-q08"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('colageno')">← Colágeno</button><button class="btn bp" onclick="go('adhesivas')">Glicoproteínas Adhesivas →</button></div>
+</div>
+
+<!-- ======================== ADHESIVAS (RA 6) ======================== -->
+<div class="sec" id="sec-adhesivas">
+<div class="cd"><div class="ch">🔗 Glicoproteínas <span class="ac">Adhesivas</span> <span class="pill ppk">RA 6</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto</div>
+<p style="color:var(--t2)">Las <strong>glicoproteínas adhesivas</strong> son proteínas grandes, glicosiladas, que actúan como <strong>puentes moleculares</strong> entre las células y los demás componentes de la MEC. Poseen dominios de unión a <strong>colágeno, GAGs, integrinas</strong> y otros receptores de superficie celular. Las dos principales son la <strong>fibronectina</strong> (en tejido conectivo intersticial) y la <strong>laminina</strong> (en la membrana basal).</p></div>
+
+<div class="cg">
+<div class="cc" style="border-color:rgba(249,115,22,.3)"><h4 style="color:var(--o)">Fibronectina</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>Dímero</strong> unido por puentes disulfuro en el extremo C-terminal.<br><br>
+<strong>Localización:</strong> MEC intersticial y plasma sanguíneo (fibronectina plasmática).<br><br>
+<strong>Secuencia clave:</strong> motivo <strong>RGD</strong> (Arg-Gly-Asp) — reconocido por integrinas (α5β1).<br><br>
+<strong>Dominios de unión a:</strong> colágeno, fibrina, heparán sulfato, integrinas, superficie celular.<br><br>
+<strong>Funciones:</strong> adhesión celular, migración (embriogénesis, cicatrización), opsonización, guía de movimiento celular.</p></div>
+<div class="cc" style="border-color:rgba(236,72,153,.3)"><h4 style="color:var(--pk)">Laminina</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>Heterotrímero</strong> en forma de <strong>cruz</strong> (3 cadenas: α, β, γ).<br><br>
+<strong>Localización:</strong> exclusiva de la <strong>membrana basal (lámina basal)</strong>.<br><br>
+<strong>Dominios de unión a:</strong> colágeno IV, nidógeno/entactina, perlecán (heparán sulfato), integrinas (α6β1, α6β4).<br><br>
+<strong>Funciones:</strong> adhesión de epitelio a membrana basal, diferenciación celular, migración, supervivencia celular, organización de la lámina basal.</p></div>
+</div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="24" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Fibronectina vs. Laminina — Estructura y Dominios</text>
+<!-- Fibronectin -->
+<text x="225" y="55" text-anchor="middle" fill="#F97316" font-size="12" font-weight="700">FIBRONECTINA (dímero)</text>
+<line x1="80" y1="90" x2="370" y2="90" stroke="#F97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="110" x2="370" y2="110" stroke="#F97316" stroke-width="4" stroke-linecap="round"/>
+<!-- S-S bonds -->
+<line x1="350" y1="90" x2="350" y2="110" stroke="#FFD93D" stroke-width="2"/>
+<line x1="360" y1="90" x2="360" y2="110" stroke="#FFD93D" stroke-width="2"/>
+<text x="375" y="105" fill="#FFD93D" font-size="8">S-S</text>
+<!-- Domains -->
+<rect x="85" y="78" width="50" height="14" rx="4" fill="rgba(167,139,250,0.3)" stroke="#A78BFA" stroke-width="1"/>
+<text x="110" y="89" text-anchor="middle" fill="#A78BFA" font-size="7">Heparina</text>
+<rect x="145" y="78" width="50" height="14" rx="4" fill="rgba(0,163,255,0.3)" stroke="#00A3FF" stroke-width="1"/>
+<text x="170" y="89" text-anchor="middle" fill="#00A3FF" font-size="7">Colágeno</text>
+<rect x="220" y="78" width="40" height="14" rx="4" fill="rgba(0,212,170,0.4)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="240" y="89" text-anchor="middle" fill="#00D4AA" font-size="7" font-weight="700">RGD</text>
+<rect x="280" y="78" width="55" height="14" rx="4" fill="rgba(236,72,153,0.3)" stroke="#EC4899" stroke-width="1"/>
+<text x="307" y="89" text-anchor="middle" fill="#EC4899" font-size="7">Fibrina</text>
+<text x="240" y="70" text-anchor="middle" fill="#00D4AA" font-size="7">↑ Integrina α5β1</text>
+<!-- Laminin -->
+<text x="675" y="55" text-anchor="middle" fill="#EC4899" font-size="12" font-weight="700">LAMININA (heterotrímero en cruz)</text>
+<!-- Cross shape -->
+<line x1="675" y1="80" x2="675" y2="210" stroke="#EC4899" stroke-width="4" stroke-linecap="round"/>
+<line x1="590" y1="130" x2="760" y2="130" stroke="#EC4899" stroke-width="3" stroke-linecap="round"/>
+<!-- Labels -->
+<text x="675" y="76" text-anchor="middle" fill="#EC4899" font-size="8">cadena α</text>
+<text x="583" y="126" text-anchor="end" fill="#EC4899" font-size="8">β</text>
+<text x="767" y="126" text-anchor="start" fill="#EC4899" font-size="8">γ</text>
+<!-- Domains on laminin -->
+<rect x="655" y="195" width="40" height="14" rx="4" fill="rgba(0,212,170,0.3)" stroke="#00D4AA" stroke-width="1"/>
+<text x="675" y="206" text-anchor="middle" fill="#00D4AA" font-size="7">Integrina</text>
+<rect x="655" y="85" width="40" height="14" rx="4" fill="rgba(255,217,61,0.3)" stroke="#FFD93D" stroke-width="1"/>
+<text x="675" y="96" text-anchor="middle" fill="#FFD93D" font-size="7">Col IV</text>
+<rect x="725" y="120" width="40" height="14" rx="4" fill="rgba(167,139,250,0.3)" stroke="#A78BFA" stroke-width="1"/>
+<text x="745" y="131" text-anchor="middle" fill="#A78BFA" font-size="7">Nidógeno</text>
+<rect x="600" y="120" width="40" height="14" rx="4" fill="rgba(0,163,255,0.3)" stroke="#00A3FF" stroke-width="1"/>
+<text x="620" y="131" text-anchor="middle" fill="#00A3FF" font-size="7">Perlecán</text>
+<text x="675" y="235" text-anchor="middle" fill="#8BA4BE" font-size="9">Integrina α6β1 / α6β4 → adhesión epitelio-membrana basal</text>
+</svg>
+</div>
+
+<div class="ib n"><div class="ibt">📝 Diferencias clave</div>
+<p style="color:var(--t2)"><strong>Fibronectina:</strong> en MEC intersticial y plasma → conecta células a colágeno I/III → motivo RGD → integrina α5β1.<br>
+<strong>Laminina:</strong> solo en membrana basal → conecta epitelio a colágeno IV → integrina α6β1/α6β4.<br>
+Ambas son esenciales para la <strong>adhesión, migración y diferenciación</strong> celular.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q09"><div class="qt">¿Qué motivo de la fibronectina es reconocido por las integrinas?</div><div class="qo">
+<button class="qb" onclick="cq('q09',this,1)"><div class="ol">A</div>RGD (Arg-Gly-Asp)</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">B</div>Gly-X-Y</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">C</div>AAUAAA</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">D</div>Cys-Cys-Cys</button>
+</div><div class="qf" id="fb-q09"></div></div>
+<div class="qq" id="q10"><div class="qt">¿Dónde se localiza la laminina exclusivamente?</div><div class="qo">
+<button class="qb" onclick="cq('q10',this,0)"><div class="ol">A</div>En el plasma sanguíneo</button>
+<button class="qb" onclick="cq('q10',this,0)"><div class="ol">B</div>En el citoplasma</button>
+<button class="qb" onclick="cq('q10',this,1)"><div class="ol">C</div>En la membrana basal (lámina basal)</button>
+<button class="qb" onclick="cq('q10',this,0)"><div class="ol">D</div>En las mitocondrias</button>
+</div><div class="qf" id="fb-q10"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('elasticas')">← F. Elásticas</button><button class="btn bp" onclick="go('membrana')">Membrana Basal →</button></div>
+</div>
+
+<!-- ======================== MEMBRANA BASAL (RA 7) ======================== -->
+<div class="sec" id="sec-membrana">
+<div class="cd"><div class="ch">🧱 <span class="ac">Membrana Basal</span> y Lámina Basal <span class="pill por">RA 7</span></div>
+<div class="ib"><div class="ibt">🔑 Definiciones</div>
+<p style="color:var(--t2)"><strong>Membrana basal:</strong> estructura especializada de la MEC que se encuentra <strong>debajo de los epitelios, rodeando células musculares, adipocitos y células de Schwann</strong>. Es visible al microscopio óptico (tinción PAS+). Está formada por dos capas:<br><br>
+<strong>1. Lámina basal</strong> (ultraestructural, vista al ME): capa delgada (~40-120 nm) producida por las células que reposan sobre ella. Se subdivide en <strong>lámina lúcida</strong> (clara, adyacente a la célula) y <strong>lámina densa</strong> (electrodensa).<br><br>
+<strong>2. Lámina reticular:</strong> capa de fibras reticulares (colágeno III) producida por fibroblastos del tejido conectivo subyacente.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 350" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="24" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura de la Membrana Basal</text>
+<!-- Epithelial cells -->
+<rect x="80" y="40" width="120" height="60" rx="20" fill="rgba(236,72,153,0.12)" stroke="#EC4899" stroke-width="1.5"/>
+<text x="140" y="75" text-anchor="middle" fill="#EC4899" font-size="9">Célula epitelial</text>
+<rect x="220" y="40" width="120" height="60" rx="20" fill="rgba(236,72,153,0.12)" stroke="#EC4899" stroke-width="1.5"/>
+<text x="280" y="75" text-anchor="middle" fill="#EC4899" font-size="9">Célula epitelial</text>
+<rect x="360" y="40" width="120" height="60" rx="20" fill="rgba(236,72,153,0.12)" stroke="#EC4899" stroke-width="1.5"/>
+<text x="420" y="75" text-anchor="middle" fill="#EC4899" font-size="9">Célula epitelial</text>
+<!-- Integrins -->
+<line x1="140" y1="100" x2="140" y2="120" stroke="#F97316" stroke-width="2"/>
+<line x1="280" y1="100" x2="280" y2="120" stroke="#F97316" stroke-width="2"/>
+<line x1="420" y1="100" x2="420" y2="120" stroke="#F97316" stroke-width="2"/>
+<text x="530" y="112" fill="#F97316" font-size="9" font-weight="600">← Integrinas (α6β4)</text>
+<!-- Lamina lucida -->
+<rect x="60" y="120" width="440" height="25" rx="0" fill="rgba(255,217,61,0.08)" stroke="#FFD93D" stroke-width="1"/>
+<text x="280" y="137" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="600">LÁMINA LÚCIDA (clara) — Laminina</text>
+<!-- Lamina densa -->
+<rect x="60" y="145" width="440" height="30" rx="0" fill="rgba(0,163,255,0.12)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="280" y="165" text-anchor="middle" fill="#00A3FF" font-size="10" font-weight="600">LÁMINA DENSA — Colágeno IV + Nidógeno + Perlecán</text>
+<!-- Brace for lamina basal -->
+<text x="530" y="145" fill="#00D4AA" font-size="9" font-weight="700">} LÁMINA BASAL</text>
+<text x="530" y="158" fill="#8BA4BE" font-size="8">(microscopio electrónico)</text>
+<!-- Lamina reticularis -->
+<rect x="60" y="185" width="440" height="35" rx="0" fill="rgba(167,139,250,0.08)" stroke="#A78BFA" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="280" y="207" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="600">LÁMINA RETICULAR — Colágeno III (fibras reticulares)</text>
+<text x="530" y="200" fill="#A78BFA" font-size="9">Producida por fibroblastos</text>
+<!-- Brace for membrane basal -->
+<rect x="520" y="118" width="4" height="105" rx="2" fill="var(--g)"/>
+<text x="540" y="178" fill="#00D4AA" font-size="10" font-weight="700">MEMBRANA</text>
+<text x="540" y="192" fill="#00D4AA" font-size="10" font-weight="700">BASAL</text>
+<text x="540" y="206" fill="#8BA4BE" font-size="8">(microscopio óptico)</text>
+<!-- Connective tissue -->
+<rect x="60" y="230" width="440" height="40" rx="8" fill="rgba(0,212,170,0.04)" stroke="rgba(0,212,170,0.15)" stroke-width="1"/>
+<text x="280" y="255" text-anchor="middle" fill="#5A7A96" font-size="10">TEJIDO CONECTIVO SUBYACENTE (fibroblastos, colágeno I, MEC intersticial)</text>
+<!-- Components detail -->
+<rect x="570" y="240" width="300" height="95" rx="10" fill="rgba(0,212,170,0.06)" stroke="rgba(0,212,170,0.2)" stroke-width="1"/>
+<text x="720" y="260" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="700">Componentes de la Lámina Basal</text>
+<text x="590" y="278" fill="#FFD93D" font-size="9">• Colágeno IV (red estructural)</text>
+<text x="590" y="293" fill="#EC4899" font-size="9">• Laminina (adhesión a células)</text>
+<text x="590" y="308" fill="#A78BFA" font-size="9">• Nidógeno/Entactina (enlace Col IV-Laminina)</text>
+<text x="590" y="323" fill="#00A3FF" font-size="9">• Perlecán (filtración, heparán sulfato PG)</text>
+</svg>
+</div>
+
+<div class="ch" style="margin-top:18px">Funciones de la Membrana Basal</div>
+<div class="reveal-grid">
+<div class="reveal-card" onclick="this.classList.toggle('open')"><div class="rv-q">Soporte estructural</div><div class="rv-a">Ancla el epitelio al tejido conectivo subyacente, manteniendo la arquitectura tisular.</div><div class="rv-h">Clic para ver</div></div>
+<div class="reveal-card" onclick="this.classList.toggle('open')"><div class="rv-q">Filtración</div><div class="rv-a">Filtra moléculas por tamaño y carga (ej: membrana basal glomerular filtra plasma → orina primaria). Las cargas negativas del perlecán repelen proteínas.</div><div class="rv-h">Clic para ver</div></div>
+<div class="reveal-card" onclick="this.classList.toggle('open')"><div class="rv-q">Barrera</div><div class="rv-a">Impide la invasión de células (ej: tumores malignos deben degradar la MB para hacer metástasis — producen MMPs).</div><div class="rv-h">Clic para ver</div></div>
+<div class="reveal-card" onclick="this.classList.toggle('open')"><div class="rv-q">Polaridad celular</div><div class="rv-a">Define el lado basal de las células epiteliales, estableciendo la polaridad apical-basal.</div><div class="rv-h">Clic para ver</div></div>
+<div class="reveal-card" onclick="this.classList.toggle('open')"><div class="rv-q">Regeneración</div><div class="rv-a">Guía la regeneración celular después de una lesión. Si la MB está intacta, las células pueden regenerar la arquitectura normal.</div><div class="rv-h">Clic para ver</div></div>
+<div class="reveal-card" onclick="this.classList.toggle('open')"><div class="rv-q">Señalización</div><div class="rv-a">Almacena factores de crecimiento y señales que regulan diferenciación y supervivencia celular.</div><div class="rv-h">Clic para ver</div></div>
+</div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q11"><div class="qt">¿Cuáles son las dos capas que forman la membrana basal?</div><div class="qo">
+<button class="qb" onclick="cq('q11',this,0)"><div class="ol">A</div>Capa mucosa y capa serosa</button>
+<button class="qb" onclick="cq('q11',this,1)"><div class="ol">B</div>Lámina basal (lúcida + densa) y lámina reticular</button>
+<button class="qb" onclick="cq('q11',this,0)"><div class="ol">C</div>Epidermis y dermis</button>
+<button class="qb" onclick="cq('q11',this,0)"><div class="ol">D</div>Endotelio y adventicia</button>
+</div><div class="qf" id="fb-q11"></div></div>
+<div class="qq" id="q12"><div class="qt">¿Qué tipo de colágeno es el componente estructural principal de la lámina basal?</div><div class="qo">
+<button class="qb" onclick="cq('q12',this,0)"><div class="ol">A</div>Colágeno I</button>
+<button class="qb" onclick="cq('q12',this,0)"><div class="ol">B</div>Colágeno III</button>
+<button class="qb" onclick="cq('q12',this,1)"><div class="ol">C</div>Colágeno IV</button>
+<button class="qb" onclick="cq('q12',this,0)"><div class="ol">D</div>Colágeno II</button>
+</div><div class="qf" id="fb-q12"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('adhesivas')">← Adhesivas</button><button class="btn bp" onclick="go('integrinas')">Integrinas →</button></div>
+</div>
+
+<!-- ======================== INTEGRINAS (RA 8) ======================== -->
+<div class="sec" id="sec-integrinas">
+<div class="cd"><div class="ch">⚡ <span class="ac">Integrinas:</span> Conectando Célula y MEC <span class="pill pw">RA 8</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div>
+<p style="color:var(--t2)">Las <strong>integrinas</strong> son <strong>receptores de adhesión transmembrana heterodíméricos</strong> formados por una subunidad <strong>α</strong> y una subunidad <strong>β</strong> unidas de forma no covalente. Conectan la <strong>MEC (extracelular)</strong> con el <strong>citoesqueleto (intracelular)</strong>, transmitiendo señales en ambas direcciones (<strong>señalización bidireccional</strong>).</p></div>
+
+<div class="cg">
+<div class="cc" style="border-color:rgba(249,115,22,.3)"><h4 style="color:var(--o)">Estructura</h4>
+<p style="color:var(--t2);font-size:.88rem">• <strong>Heterodímero:</strong> 1 subunidad α + 1 subunidad β<br>• 18 subunidades α y 8 subunidades β → <strong>24 combinaciones</strong> conocidas<br>• <strong>Dominio extracelular:</strong> grande, reconoce ligandos de la MEC (RGD, colágeno, laminina)<br>• <strong>Dominio transmembrana:</strong> hélice α que cruza la membrana una vez<br>• <strong>Dominio citoplasmático:</strong> corto, se une a proteínas adaptadoras (talina, vinculina, α-actinina) → <strong>citoesqueleto de actina</strong><br>• Requieren <strong>Ca²⁺ o Mg²⁺</strong> para funcionar</p></div>
+<div class="cc" style="border-color:rgba(0,212,170,.3)"><h4 style="color:var(--g)">Funciones</h4>
+<p style="color:var(--t2);font-size:.88rem">• <strong>Adhesión:</strong> unen la célula a la MEC<br>• <strong>Señalización outside-in:</strong> MEC → integrina → señales intracelulares (FAK, Src, Ras/MAPK)<br>• <strong>Señalización inside-out:</strong> señales internas activan la integrina (conformación abierta/activa)<br>• <strong>Migración celular:</strong> adhesión-desadhesión dinámica<br>• <strong>Mecanotransducción:</strong> detectan fuerzas mecánicas<br>• <strong>Supervivencia:</strong> previenen anoikis (apoptosis por pérdida de adhesión)</p></div>
+</div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="24" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura y Señalización de las Integrinas</text>
+<!-- MEC -->
+<rect x="150" y="40" width="600" height="40" rx="8" fill="rgba(0,212,170,0.06)" stroke="rgba(0,212,170,0.2)" stroke-width="1"/>
+<text x="450" y="65" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="600">MATRIZ EXTRACELULAR (Fibronectina-RGD, Colágeno, Laminina)</text>
+<!-- Ligand binding -->
+<rect x="410" y="80" width="80" height="20" rx="6" fill="rgba(255,217,61,0.2)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="450" y="94" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="700">RGD / ligando</text>
+<!-- Integrin -->
+<path d="M420,100 C400,130 380,180 400,220" fill="none" stroke="#F97316" stroke-width="4" stroke-linecap="round"/>
+<path d="M480,100 C500,130 520,180 500,220" fill="none" stroke="#00A3FF" stroke-width="4" stroke-linecap="round"/>
+<text x="385" y="160" text-anchor="end" fill="#F97316" font-size="11" font-weight="700">α</text>
+<text x="520" y="160" fill="#00A3FF" font-size="11" font-weight="700">β</text>
+<!-- Ca/Mg -->
+<circle cx="450" cy="115" r="8" fill="rgba(255,217,61,0.3)" stroke="#FFD93D" stroke-width="1"/>
+<text x="450" y="119" text-anchor="middle" fill="#FFD93D" font-size="6" font-weight="700">Ca²⁺</text>
+<!-- Membrane -->
+<rect x="150" y="215" width="600" height="16" rx="0" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1"/>
+<text x="750" y="228" fill="#A78BFA" font-size="9">Membrana plasmática</text>
+<!-- Cytoplasmic tails -->
+<line x1="400" y1="231" x2="400" y2="270" stroke="#F97316" stroke-width="3"/>
+<line x1="500" y1="231" x2="500" y2="280" stroke="#00A3FF" stroke-width="3"/>
+<!-- Adapter proteins -->
+<rect x="460" y="270" width="80" height="20" rx="6" fill="rgba(236,72,153,0.2)" stroke="#EC4899" stroke-width="1"/>
+<text x="500" y="284" text-anchor="middle" fill="#EC4899" font-size="8" font-weight="600">Talina / Vinculina</text>
+<!-- Actin -->
+<line x1="460" y1="300" x2="540" y2="300" stroke="#FF6B6B" stroke-width="6" stroke-linecap="round"/>
+<line x1="440" y1="315" x2="560" y2="315" stroke="#FF6B6B" stroke-width="6" stroke-linecap="round"/>
+<text x="500" y="340" text-anchor="middle" fill="#FF6B6B" font-size="10" font-weight="600">Filamentos de Actina (Citoesqueleto)</text>
+<!-- Signaling arrows -->
+<line x1="260" y1="140" x2="260" y2="180" stroke="#00D4AA" stroke-width="2" marker-end="url(#ao)"/>
+<text x="260" y="135" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="600">OUTSIDE-IN</text>
+<text x="260" y="198" text-anchor="middle" fill="#00D4AA" font-size="7">MEC → Célula</text>
+<line x1="650" y1="180" x2="650" y2="140" stroke="#FFD93D" stroke-width="2" marker-end="url(#ao)"/>
+<text x="650" y="198" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="600">INSIDE-OUT</text>
+<text x="650" y="135" text-anchor="middle" fill="#FFD93D" font-size="7">Célula → activa integrina</text>
+<!-- FAK -->
+<rect x="340" y="260" width="50" height="18" rx="5" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="1"/>
+<text x="365" y="273" text-anchor="middle" fill="#00D4AA" font-size="7" font-weight="600">FAK</text>
+<text x="365" y="292" text-anchor="middle" fill="#8BA4BE" font-size="7">↓ Ras/MAPK</text>
+</svg>
+</div>
+
+<div class="ch" style="margin-top:18px">Integrinas principales y sus ligandos</div>
+<table class="et"><thead><tr><th>Integrina</th><th>Ligando principal</th><th>Localización / Contexto</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--o)">α5β1</strong></td><td>Fibronectina (RGD)</td><td>Fibroblastos, MEC intersticial</td></tr>
+<tr><td><strong style="color:var(--pk)">α6β1</strong></td><td>Laminina</td><td>Epitelio sobre membrana basal</td></tr>
+<tr><td><strong style="color:var(--pk)">α6β4</strong></td><td>Laminina</td><td>Hemidesmosomas (unión fuerte epitelio-MB)</td></tr>
+<tr><td><strong style="color:var(--b)">α1β1, α2β1</strong></td><td>Colágeno</td><td>Células sobre colágeno</td></tr>
+<tr><td><strong style="color:var(--r)">αIIbβ3</strong></td><td>Fibrinógeno</td><td>Plaquetas (agregación plaquetaria)</td></tr>
+<tr><td><strong style="color:var(--g)">αLβ2 (LFA-1)</strong></td><td>ICAM-1</td><td>Leucocitos (migración, respuesta inmune)</td></tr>
+</tbody></table>
+
+<div class="ib w"><div class="ibt">⚠️ Clínica</div>
+<p style="color:var(--t2)"><strong style="color:var(--r)">Trombastenia de Glanzmann:</strong> defecto en integrina αIIbβ3 → plaquetas no agregan → sangrado.<br>
+<strong style="color:var(--r)">Deficiencia de adhesión leucocitaria (LAD):</strong> defecto en subunidad β2 → leucocitos no migran → infecciones recurrentes.<br>
+<strong style="color:var(--r)">Metástasis:</strong> las células tumorales alteran la expresión de integrinas para desprenderse, migrar e invadir nuevos tejidos.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q13"><div class="qt">Las integrinas son:</div><div class="qo">
+<button class="qb" onclick="cq('q13',this,0)"><div class="ol">A</div>Homodímeros de subunidades α</button>
+<button class="qb" onclick="cq('q13',this,1)"><div class="ol">B</div>Heterodímeros transmembrana (α + β) que conectan MEC con citoesqueleto</button>
+<button class="qb" onclick="cq('q13',this,0)"><div class="ol">C</div>Enzimas que degradan la MEC</button>
+<button class="qb" onclick="cq('q13',this,0)"><div class="ol">D</div>Componentes de los ribosomas</button>
+</div><div class="qf" id="fb-q13"></div></div>
+<div class="qq" id="q14"><div class="qt">¿Qué tipo de señalización realizan las integrinas?</div><div class="qo">
+<button class="qb" onclick="cq('q14',this,0)"><div class="ol">A</div>Solo autocrina</button>
+<button class="qb" onclick="cq('q14',this,1)"><div class="ol">B</div>Bidireccional: outside-in (MEC→célula) e inside-out (célula→activación de integrina)</button>
+<button class="qb" onclick="cq('q14',this,0)"><div class="ol">C</div>Solo endocrina</button>
+<button class="qb" onclick="cq('q14',this,0)"><div class="ol">D</div>Solo paracrina</button>
+</div><div class="qf" id="fb-q14"></div></div></div>
+
+<!-- Match game integrinas -->
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">Emparejar</span> integrina con ligando</div>
+<div class="match-game" id="mg2">
+<div class="match-col"><h4 style="color:var(--g)">Integrina</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg2',this)">α5β1</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg2',this)">α6β4</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg2',this)">αIIbβ3</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg2',this)">αLβ2 (LFA-1)</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">Ligando</h4>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg2',this)">ICAM-1 (leucocitos)</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg2',this)">Fibronectina (RGD)</div>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg2',this)">Fibrinógeno (plaquetas)</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg2',this)">Laminina (hemidesmosoma)</div>
+</div></div>
+<div class="match-score" id="mg2-score"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('membrana')">← Membrana Basal</button><button class="btn bp" onclick="go('glosario')">Glosario →</button></div>
+</div>
+
+<!-- ======================== GLOSARIO ======================== -->
+<div class="sec" id="sec-glosario">
+<div class="cd"><div class="ch">📚 <span class="ac">Glosario</span> — Tarjetas de Repaso</div>
+<p style="color:var(--t2);margin-bottom:16px">Haz clic en cada tarjeta para revelar la definición:</p>
+<div class="fg" id="fcards"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('integrinas')">← Integrinas</button><button class="btn bp" onclick="go('evaluacion')">Evaluación Final →</button></div>
+</div>
+
+<!-- ======================== EVALUACIÓN ======================== -->
+<div class="sec" id="sec-evaluacion">
+<div class="cd"><div class="ch">📝 Evaluación <span class="ac">Final</span></div>
+<p style="color:var(--t2);margin-bottom:6px">Responde todas las preguntas y luego presiona "Calificar" para ver tu resultado.</p>
+<div id="eq"></div>
+<div style="text-align:center;margin-top:22px"><button class="btn bp" id="seb" style="display:none" onclick="se()">📊 Calificar Evaluación</button></div>
+<div class="sd" id="sdd" style="display:none"><div class="snm" id="sn2"></div><div class="sbl" id="sm2"></div><div class="sbr"><div class="sbf" id="sbf2" style="width:0%;background:var(--grad)"></div></div>
+<button class="btn bs" onclick="iev()" style="margin-top:16px">↺ Reintentar</button></div>
+</div>
+<div class="sn"><button class="btn bs" onclick="go('glosario')">← Glosario</button><button class="btn bp" onclick="go('inicio')">🏠 Inicio</button></div>
+</div>
+
+</div><!-- mc -->
+
+<script>
+/* === Navigation === */
+var secs=['inicio','tejidos','mec','gags','colageno','elasticas','adhesivas','membrana','integrinas','glosario','evaluacion'];
+function go(id){secs.forEach(function(s){var el=document.getElementById('sec-'+s);if(el)el.classList.remove('a')});var t=document.getElementById('sec-'+id);if(t){t.classList.add('a');window.scrollTo({top:0,behavior:'smooth'})}up(id)}
+function up(id){id=id||'inicio';var i=secs.indexOf(id);var p=Math.round((i/(secs.length-1))*100);document.getElementById('pf').style.width=p+'%';document.querySelectorAll('#navLinks button').forEach(function(b){b.classList.remove('a');if(b.getAttribute('data-s')===id)b.classList.add('a')})}
+
+/* === Quiz logic === */
+var fbData={
+'q01':{c:1,y:'✅ Correcto. Un tejido = células similares + MEC + función coordinada.',n:'❌ Incorrecto. Un tejido incluye las células Y la MEC trabajando juntas para una función específica.'},
+'q02':{c:2,y:'✅ Correcto. El tejido conectivo es el más rico en MEC.',n:'❌ Incorrecto. El tejido conectivo tiene la mayor proporción de MEC.'},
+'q03':{c:1,y:'✅ Correcto. Los 3 componentes son: sustancia fundamental, proteínas fibrosas y glicoproteínas adhesivas.',n:'❌ Incorrecto. Los 3 componentes son: sustancia fundamental (GAGs/proteoglicanos), proteínas fibrosas (colágeno/elastina), y glicoproteínas adhesivas (fibronectina/laminina).'},
+'q04':{c:0,y:'✅ Correcto. El ácido hialurónico es el único GAG no sulfatado y no se une covalentemente a proteínas core.',n:'❌ Incorrecto. A diferencia de los demás GAGs, el ácido hialurónico NO es sulfatado y NO se une a proteínas core.'},
+'q05':{c:1,y:'✅ Correcto. Gly-X-Y (donde X suele ser Pro y Y suele ser Hyp) es la secuencia repetitiva del colágeno.',n:'❌ Incorrecto. La secuencia característica del colágeno es Gly-X-Y (con Pro e Hyp).'},
+'q06':{c:1,y:'✅ Correcto. La vitamina C es cofactor de las hidroxilasas que estabilizan la triple hélice.',n:'❌ Incorrecto. La vitamina C es cofactor de prolil-hidroxilasa y lisil-hidroxilasa, esenciales para la triple hélice.'},
+'q07':{c:1,y:'✅ Correcto. Fibras elásticas = núcleo de elastina + vaina de microfibrillas (Fibrilina-1).',n:'❌ Incorrecto. Las fibras elásticas tienen un núcleo de elastina rodeado por microfibrillas de Fibrilina-1.'},
+'q08':{c:2,y:'✅ Correcto. El Síndrome de Marfan se debe a mutación en FBN1 (Fibrilina-1).',n:'❌ Incorrecto. El Marfan es por mutación en FBN1 (Fibrilina-1), no en elastina ni en colágeno.'},
+'q09':{c:0,y:'✅ Correcto. El motivo RGD (Arg-Gly-Asp) de la fibronectina es reconocido por integrinas como α5β1.',n:'❌ Incorrecto. El motivo que reconocen las integrinas en la fibronectina es RGD (Arg-Gly-Asp).'},
+'q10':{c:2,y:'✅ Correcto. La laminina se encuentra exclusivamente en la membrana basal (lámina basal).',n:'❌ Incorrecto. La laminina es exclusiva de la membrana basal.'},
+'q11':{c:1,y:'✅ Correcto. Membrana basal = lámina basal (lúcida + densa) + lámina reticular.',n:'❌ Incorrecto. La membrana basal tiene dos capas: lámina basal y lámina reticular.'},
+'q12':{c:2,y:'✅ Correcto. El colágeno tipo IV forma la red estructural de la lámina basal.',n:'❌ Incorrecto. El colágeno IV (no fibrilar, en red) es el componente estructural de la lámina basal.'},
+'q13':{c:1,y:'✅ Correcto. Las integrinas son heterodímeros αβ transmembrana que conectan MEC con citoesqueleto.',n:'❌ Incorrecto. Las integrinas son heterodímeros (α+β) transmembrana.'},
+'q14':{c:1,y:'✅ Correcto. Las integrinas tienen señalización bidireccional: outside-in e inside-out.',n:'❌ Incorrecto. Las integrinas realizan señalización bidireccional.'}
+};
+function cq(qid,btn,correct){var q=document.getElementById(qid);if(q.classList.contains('answered'))return;q.classList.add('answered');var bs=q.querySelectorAll('.qb');var fb=document.getElementById('fb-'+qid);var data=fbData[qid];bs.forEach(function(b){b.classList.add('dis')});if(correct===1){btn.classList.add('ok');fb.className='qf sh cf';fb.textContent=data.y;}else{btn.classList.add('no');bs.forEach(function(b,i){if(i===data.c)b.classList.add('ok')});fb.className='qf sh if';fb.textContent=data.n;}}
+
+/* === Match Game === */
+var matchSel={};
+function mp(gid,el){var g=document.getElementById(gid);var side=el.getAttribute('data-side');if(el.classList.contains('ok'))return;if(!matchSel[gid])matchSel[gid]={};if(matchSel[gid][side]){matchSel[gid][side].classList.remove('sel')}matchSel[gid][side]=el;el.classList.add('sel');if(matchSel[gid].l&&matchSel[gid].r){var lp=matchSel[gid].l.getAttribute('data-pair');var rp=matchSel[gid].r.getAttribute('data-pair');if(lp===rp){matchSel[gid].l.classList.remove('sel');matchSel[gid].r.classList.remove('sel');matchSel[gid].l.classList.add('ok');matchSel[gid].r.classList.add('ok');matchSel[gid]={};var ok=g.querySelectorAll('.match-item.ok').length;var total=g.querySelectorAll('.match-item').length;document.getElementById(gid+'-score').textContent=ok===total?'🎉 ¡Completado!':Math.floor(ok/2)+'/'+Math.floor(total/2)+' parejas';}else{matchSel[gid].l.classList.add('no');matchSel[gid].r.classList.add('no');var l=matchSel[gid].l,r=matchSel[gid].r;matchSel[gid]={};setTimeout(function(){l.classList.remove('sel','no');r.classList.remove('sel','no')},500);}}}
+
+/* === Ordering Game === */
+var orderGames={
+'og1':{correct:[0,1,2,3,4,5,6],items:['1. Síntesis de cadenas α (pre-procolágeno) en RER','2. Hidroxilación de Pro y Lys (vitamina C) en RER','3. Glicosilación y formación de triple hélice → procolágeno','4. Secreción al espacio extracelular por exocitosis','5. Corte de propéptidos por proteinasas → tropocolágeno','6. Autoensamblaje en fibrillas con patrón estriado (67 nm)','7. Entrecruzamiento por lisil-oxidasa → fibra estable']}
+};
+function initOrders(){for(var gid in orderGames){var g=orderGames[gid];var el=document.getElementById(gid);if(!el)continue;el.innerHTML='';var shuffled=g.items.map(function(t,i){return{t:t,oi:i}});for(var i=shuffled.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=shuffled[i];shuffled[i]=shuffled[j];shuffled[j]=tmp;}shuffled.forEach(function(item,idx){var d=document.createElement('div');d.className='order-item';d.setAttribute('draggable','true');d.setAttribute('data-oi',item.oi);d.innerHTML='<div class="oi-num">'+(idx+1)+'</div><span>'+item.t+'</span>';d.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain',Array.from(el.children).indexOf(this).toString());this.style.opacity='.4'});d.addEventListener('dragend',function(){this.style.opacity='1'});d.addEventListener('dragover',function(e){e.preventDefault()});d.addEventListener('drop',function(e){e.preventDefault();var from=parseInt(e.dataTransfer.getData('text/plain'));var children=Array.from(el.children);var to=children.indexOf(this);if(from!==to){var f=children[from];if(from<to){this.parentNode.insertBefore(f,this.nextSibling)}else{this.parentNode.insertBefore(f,this)}Array.from(el.children).forEach(function(c,ci){c.querySelector('.oi-num').textContent=ci+1;c.classList.remove('correct','wrong')})}});el.appendChild(d)})}}
+function checkOrder(gid){var g=orderGames[gid],el=document.getElementById(gid),children=Array.from(el.children),allCorrect=true;children.forEach(function(c,ci){var oi=parseInt(c.getAttribute('data-oi'));if(g.correct[ci]===oi){c.classList.add('correct');c.classList.remove('wrong')}else{c.classList.add('wrong');c.classList.remove('correct');allCorrect=false}});document.getElementById(gid+'-result').textContent=allCorrect?'✅ ¡Orden correcto!':'❌ Revisa el orden e intenta de nuevo';document.getElementById(gid+'-result').style.color=allCorrect?'var(--g)':'var(--r)'}
+
+/* === Flashcards === */
+var fcData=[
+{t:"Tejido",d:"Conjunto organizado de células similares + MEC que trabajan coordinadamente para realizar funciones específicas. 4 tipos: epitelial, conectivo, muscular, nervioso."},
+{t:"MEC",d:"Matriz Extracelular: red tridimensional de macromoléculas secretadas por las células. 3 componentes: sustancia fundamental, proteínas fibrosas, glicoproteínas adhesivas."},
+{t:"GAGs",d:"Glucosaminoglicanos: polisacáridos lineales no ramificados de disacáridos repetidos. Altamente negativos (sulfato + carboxilo) → atraen agua → gel hidratado."},
+{t:"Ácido Hialurónico",d:"Único GAG no sulfatado, no unido a proteína core. Gigante (hasta 25,000 disacáridos). Eje de agregados de proteoglicanos. Lubricación, hidratación."},
+{t:"Proteoglicanos",d:"Proteína core + GAGs unidos covalentemente. 'Cepillo para botellas' molecular. Ej: agrecán (cartílago), perlecán (MB), sindecán (transmembrana)."},
+{t:"Colágeno",d:"Proteína más abundante (~30%). Triple hélice (Gly-X-Y). Resistencia a tensión. 28+ tipos. I (hueso), II (cartílago), III (reticular), IV (MB). Requiere Vit C."},
+{t:"Tropocolágeno",d:"Unidad de colágeno: triple hélice de 3 cadenas α (~300 nm). Se ensambla en fibrillas con patrón estriado de 67 nm. Entrecruzado por lisil-oxidasa."},
+{t:"Elastina",d:"Proteína amorfa, hidrófoba. Forma fibras elásticas (se estira 150%). Enlaces de desmosina (lisil-oxidasa). Rica en Gly, Val, Ala, Pro."},
+{t:"Fibrilina-1",d:"Glicoproteína de microfibrillas (10-12 nm). Andamio para elastina. Secuestra TGF-β. Mutación en FBN1 → Síndrome de Marfan."},
+{t:"Fibronectina",d:"Dímero con puentes S-S. En MEC intersticial y plasma. Motivo RGD → integrina α5β1. Dominios para colágeno, fibrina, heparina. Migración y adhesión."},
+{t:"Laminina",d:"Heterotrímero (α,β,γ) en forma de cruz. Solo en membrana basal. Une epitelio a Col IV vía integrinas α6β1/α6β4. Esencial para organización de lámina basal."},
+{t:"Membrana Basal",d:"Estructura especializada debajo de epitelios. Lámina basal (lúcida + densa) + lámina reticular (Col III). Visible al MO con PAS."},
+{t:"Lámina Basal",d:"Capa de 40-120 nm visible al ME. Lámina lúcida (laminina) + Lámina densa (Col IV, nidógeno, perlecán). Producida por las propias células epiteliales."},
+{t:"Integrinas",d:"Receptores transmembrana heterodímero (α+β). Conectan MEC ↔ citoesqueleto. Señalización bidireccional. Requieren Ca²⁺/Mg²⁺. 24 combinaciones conocidas."},
+{t:"Señalización bidireccional",d:"Outside-in: MEC → integrina → FAK → Ras/MAPK (señales intracelulares). Inside-out: señales internas → activan la integrina → afinidad por ligando."},
+{t:"Desmosina",d:"Enlace cruzado covalente exclusivo de elastina. Formado por 4 residuos de lisina. Catalizado por lisil-oxidasa (requiere Cu²⁺). Da elasticidad irreversible."},
+{t:"Escorbuto",d:"Deficiencia de vitamina C → no se hidroxilan Pro/Lys → triple hélice inestable → colágeno defectuoso → hemorragias, encías sangrantes, dientes flojos."},
+{t:"Síndrome de Marfan",d:"Mutación FBN1 (Fibrilina-1). Exceso TGF-β. Aracnodactilia, talla alta, subluxación del cristalino, dilatación/disección aórtica."},
+{t:"Perlecán",d:"Proteoglicano de heparán sulfato de la lámina basal. Filtración molecular (glomérulo renal). Co-receptor de factores de crecimiento."},
+{t:"Nidógeno/Entactina",d:"Glicoproteína que actúa como puente entre la red de colágeno IV y la laminina en la lámina basal. Estabiliza la estructura."}
+];
+function ifc(){var c=document.getElementById('fcards');c.innerHTML='';fcData.forEach(function(f){var d=document.createElement('div');d.className='fc';d.innerHTML='<div class="ft">'+f.t+'</div><div class="fd">'+f.d+'</div><div class="fh">Clic para ver definición</div>';d.onclick=function(){this.classList.toggle('fl')};c.appendChild(d)})}
+
+/* === Tissue proportion simulator === */
+var tissueData=[
+{name:'Cartílago',sf:70,fib:25,adh:5,desc:'El cartílago tiene una MEC abundantísima dominada por GAGs (agrecán) y colágeno tipo II. Los GAGs atraen grandes cantidades de agua, lo que da resistencia a la compresión. Las células (condrocitos) están aisladas en lagunas.',color:'#FFD93D'},
+{name:'Dermis',sf:30,fib:60,adh:10,desc:'La dermis es rica en fibras: colágeno tipo I (resistencia) y elastina (elasticidad). La proporción de fibras le da firmeza pero también flexibilidad a la piel. Los fibroblastos son las células principales.',color:'#00A3FF'},
+{name:'Tendón',sf:10,fib:85,adh:5,desc:'El tendón es casi todo colágeno tipo I organizado en haces paralelos. Mínima sustancia fundamental. Diseñado para resistir tensión unidireccional enorme (transmitir fuerza músculo→hueso).',color:'#00D4AA'},
+{name:'Pulmón',sf:20,fib:55,adh:25,desc:'El pulmón necesita mucha elastina para expandirse y retraerse con cada respiración. Las glicoproteínas adhesivas son importantes para la unión del epitelio alveolar. Balance entre resistencia y elasticidad.',color:'#A78BFA'},
+{name:'Membrana Basal',sf:15,fib:30,adh:55,desc:'La membrana basal es dominada por glicoproteínas adhesivas (laminina) y colágeno tipo IV (red, no fibrilar). Alta proporción de adhesivas porque su función principal es anclar células.',color:'#EC4899'}
+];
+function updateTissue(){var v=parseInt(document.getElementById('tissueSlider').value);var t=tissueData[v];var el=document.getElementById('tissueDisplay');el.innerHTML='<div style="text-align:center;margin-bottom:18px"><span style="font-family:DM Serif Display,serif;font-size:1.3rem;color:'+t.color+'">'+t.name+'</span></div>'+
+'<div style="display:flex;gap:4px;height:36px;border-radius:8px;overflow:hidden;margin-bottom:14px">'+
+'<div style="width:'+t.sf+'%;background:rgba(255,217,61,0.4);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#FFD93D">'+(t.sf>10?t.sf+'% SF':'')+'</div>'+
+'<div style="width:'+t.fib+'%;background:rgba(0,163,255,0.3);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#00A3FF">'+(t.fib>10?t.fib+'% Fibras':'')+'</div>'+
+'<div style="width:'+t.adh+'%;background:rgba(167,139,250,0.3);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#A78BFA">'+(t.adh>10?t.adh+'% Adh':'')+'</div>'+
+'</div>'+
+'<div style="display:flex;gap:18px;justify-content:center;margin-bottom:12px;flex-wrap:wrap">'+
+'<span style="font-size:.8rem"><span style="color:#FFD93D">■</span> Sustancia Fundamental: '+t.sf+'%</span>'+
+'<span style="font-size:.8rem"><span style="color:#00A3FF">■</span> Proteínas Fibrosas: '+t.fib+'%</span>'+
+'<span style="font-size:.8rem"><span style="color:#A78BFA">■</span> Glicoproteínas Adhesivas: '+t.adh+'%</span>'+
+'</div>'+
+'<div class="ib" style="margin:0"><p style="color:var(--t2);font-size:.9rem">'+t.desc+'</p></div>'}
+
+/* === Collagen synthesis simulation === */
+var colSteps=[
+{title:'Pre-procolágeno',svg:'<rect x="200" y="60" width="500" height="120" rx="14" fill="rgba(255,107,107,0.06)" stroke="#FF6B6B" stroke-width="1.5"/><text x="450" y="90" text-anchor="middle" fill="#FF6B6B" font-size="13" font-weight="700">Paso 1: Síntesis en el RER</text><rect x="280" y="105" width="340" height="30" rx="8" fill="rgba(236,72,153,0.15)" stroke="#EC4899" stroke-width="1"/><text x="450" y="125" text-anchor="middle" fill="#EC4899" font-size="10">Ribosoma → cadena α (pre-procolágeno)</text><text x="450" y="155" text-anchor="middle" fill="#8BA4BE" font-size="9">Péptido señal dirige al RER</text>',
+nar:'Los ribosomas del RER sintetizan las cadenas α del colágeno (pre-procolágeno). Un péptido señal dirige la cadena naciente al lumen del RER.'},
+{title:'Hidroxilación',svg:'<rect x="200" y="60" width="500" height="120" rx="14" fill="rgba(255,217,61,0.06)" stroke="#FFD93D" stroke-width="1.5"/><text x="450" y="90" text-anchor="middle" fill="#FFD93D" font-size="13" font-weight="700">Paso 2: Hidroxilación (RER)</text><text x="450" y="115" text-anchor="middle" fill="#FFD93D" font-size="10">Prolil-hidroxilasa: Pro → Hyp</text><text x="450" y="135" text-anchor="middle" fill="#FFD93D" font-size="10">Lisil-hidroxilasa: Lys → Hyl</text><rect x="350" y="148" width="200" height="22" rx="6" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="1.5"/><text x="450" y="163" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="700">Cofactor: Vitamina C + Fe²⁺</text>',
+nar:'En el RER, la prolil-hidroxilasa convierte Pro en Hyp, y la lisil-hidroxilasa convierte Lys en Hyl. Ambas requieren vitamina C (ascorbato) y Fe²⁺ como cofactores. La hidroxiprolina forma puentes de H que estabilizan la triple hélice.'},
+{title:'Triple hélice',svg:'<rect x="200" y="60" width="500" height="120" rx="14" fill="rgba(0,163,255,0.06)" stroke="#00A3FF" stroke-width="1.5"/><text x="450" y="90" text-anchor="middle" fill="#00A3FF" font-size="13" font-weight="700">Paso 3: Glicosilación y triple hélice</text><text x="450" y="115" text-anchor="middle" fill="#00A3FF" font-size="10">Glicosilación de Hyl + formación de puentes S-S</text><path d="M300,140 C320,125 340,155 360,140 C380,125 400,155 420,140 C440,125 460,155 480,140 C500,125 520,155 540,140 C560,125 580,155 600,140" fill="none" stroke="#00A3FF" stroke-width="3"/><text x="450" y="170" text-anchor="middle" fill="#8BA4BE" font-size="9">= PROCOLÁGENO (triple hélice + propéptidos N y C)</text>',
+nar:'Las cadenas α se glicosilan en residuos de Hyl. Tres cadenas se asocian por sus propéptidos C-terminales (puentes disulfuro) y se enrollan en una triple hélice → procolágeno. Los propéptidos N y C impiden el ensamblaje prematuro dentro de la célula.'},
+{title:'Secreción',svg:'<rect x="200" y="60" width="500" height="120" rx="14" fill="rgba(167,139,250,0.06)" stroke="#A78BFA" stroke-width="1.5"/><text x="450" y="90" text-anchor="middle" fill="#A78BFA" font-size="13" font-weight="700">Paso 4: Secreción</text><rect x="280" y="105" width="100" height="40" rx="10" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1"/><text x="330" y="128" text-anchor="middle" fill="#A78BFA" font-size="9">Golgi</text><text x="400" y="128" fill="#5A7A96" font-size="14">→</text><rect x="420" y="105" width="100" height="40" rx="10" fill="rgba(0,212,170,0.1)" stroke="#00D4AA" stroke-width="1"/><text x="470" y="128" text-anchor="middle" fill="#00D4AA" font-size="9">Vesícula</text><text x="540" y="128" fill="#5A7A96" font-size="14">→</text><text x="600" y="128" fill="#8BA4BE" font-size="10">MEC</text><text x="450" y="170" text-anchor="middle" fill="#8BA4BE" font-size="9">Procolágeno se secreta por exocitosis</text>',
+nar:'El procolágeno pasa del RER al Golgi y se empaqueta en vesículas secretoras. Se secreta al espacio extracelular por exocitosis.'},
+{title:'Tropocolágeno',svg:'<rect x="200" y="60" width="500" height="120" rx="14" fill="rgba(0,212,170,0.06)" stroke="#00D4AA" stroke-width="1.5"/><text x="450" y="90" text-anchor="middle" fill="#00D4AA" font-size="13" font-weight="700">Paso 5: Corte de propéptidos</text><text x="450" y="115" text-anchor="middle" fill="#FF6B6B" font-size="10">Procolágeno N-peptidasa y C-peptidasa</text><text x="450" y="135" text-anchor="middle" fill="#00D4AA" font-size="10">cortan los propéptidos N y C terminales</text><rect x="320" y="148" width="260" height="22" rx="6" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="1.5"/><text x="450" y="163" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="700">= TROPOCOLÁGENO (~300 nm)</text>',
+nar:'En el espacio extracelular, proteinasas específicas (procolágeno N-peptidasa y C-peptidasa) cortan los propéptidos N y C terminales → tropocolágeno. La molécula de tropocolágeno (~300 nm de largo) ya puede autoensamblarse.'},
+{title:'Fibrillas',svg:'<rect x="200" y="60" width="500" height="55" rx="14" fill="rgba(249,115,22,0.06)" stroke="#F97316" stroke-width="1.5"/><text x="450" y="93" text-anchor="middle" fill="#F97316" font-size="13" font-weight="700">Paso 6: Autoensamblaje en fibrillas</text><line x1="220" y1="130" x2="680" y2="130" stroke="#F97316" stroke-width="3"/><line x1="250" y1="140" x2="710" y2="140" stroke="#F97316" stroke-width="3"/><line x1="220" y1="150" x2="680" y2="150" stroke="#F97316" stroke-width="3"/><text x="450" y="172" text-anchor="middle" fill="#F97316" font-size="9">Patrón estriado con periodicidad de 67 nm (D-period)</text><text x="450" y="188" text-anchor="middle" fill="#8BA4BE" font-size="9">Desplazamiento escalonado de tropocolágeno</text>',
+nar:'Los tropocolágenos se autoensamblan espontáneamente en fibrillas con un patrón estriado característico. Cada molécula está desplazada ~67 nm respecto a su vecina (D-period), creando zonas de superposición y huecos que son visibles al microscopio electrónico.'},
+{title:'Fibra madura',svg:'<rect x="200" y="60" width="500" height="130" rx="14" fill="rgba(0,212,170,0.08)" stroke="#00D4AA" stroke-width="2"/><text x="450" y="90" text-anchor="middle" fill="#00D4AA" font-size="13" font-weight="700">Paso 7: Entrecruzamiento → Fibra madura</text><text x="450" y="115" text-anchor="middle" fill="#FFD93D" font-size="11" font-weight="600">Lisil-oxidasa (Cu²⁺)</text><text x="450" y="135" text-anchor="middle" fill="#8BA4BE" font-size="10">Forma enlaces covalentes entre Lys/Hyl de moléculas vecinas</text><rect x="300" y="148" width="300" height="28" rx="8" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="2"/><text x="450" y="167" text-anchor="middle" fill="#00D4AA" font-size="11" font-weight="700">= FIBRA DE COLÁGENO MADURA ✓</text>',
+nar:'La enzima lisil-oxidasa (que requiere Cu²⁺ como cofactor) cataliza la formación de enlaces covalentes aldol entre residuos de lisina e hidroxilisina de tropocolágenos adyacentes. Esto estabiliza la fibrilla y forma la fibra de colágeno madura, resistente a la tensión.'}
+];
+var colIdx=0;
+function renderColSim(){var s=colSteps[colIdx];document.getElementById('colSim-svg').innerHTML='<svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg">'+s.svg+'</svg>';document.getElementById('colSim-nar').textContent=s.nar;var ind=document.getElementById('colSim-ind');ind.innerHTML='';colSteps.forEach(function(st,i){var d=document.createElement('span');d.className='sim-dot'+(i===colIdx?' act':(i<colIdx?' done':''));d.textContent=st.title;d.onclick=function(){colIdx=i;renderColSim()};ind.appendChild(d)});document.getElementById('colPrev').disabled=colIdx===0;document.getElementById('colNext').disabled=colIdx===colSteps.length-1}
+function colStep(dir,reset){if(reset){colIdx=0}else{colIdx=Math.max(0,Math.min(colSteps.length-1,colIdx+dir))}renderColSim()}
+
+/* === Final Evaluation === */
+var evq=[
+{q:'Un tejido se define como:',o:['Solo las células de un órgano','Células similares + MEC que trabajan para funciones específicas','El líquido intersticial','Los vasos sanguíneos de un órgano'],c:1,f:'Tejido = células + MEC + función coordinada. [RA 1]'},
+{q:'La MEC es producida principalmente por:',o:['Neuronas','Eritrocitos','Fibroblastos','Linfocitos'],c:2,f:'Los fibroblastos son los principales productores de MEC. [RA 1-2]'},
+{q:'Los 3 componentes moleculares de la MEC son:',o:['ADN, ARN, proteínas','Sustancia fundamental, proteínas fibrosas, glicoproteínas adhesivas','Lípidos, iones, vitaminas','Actina, miosina, queratina'],c:1,f:'Los 3 componentes son: sustancia fundamental (GAGs/PG), proteínas fibrosas (colágeno/elastina) y glicoproteínas adhesivas (fibronectina/laminina). [RA 2]'},
+{q:'¿Qué función NO corresponde a la MEC?',o:['Soporte estructural','Síntesis de ADN','Filtración molecular','Reservorio de factores de crecimiento'],c:1,f:'La síntesis de ADN es función del núcleo celular, no de la MEC. [RA 2]'},
+{q:'El ácido hialurónico se diferencia de los demás GAGs porque:',o:['Es el más pequeño','No es sulfatado y no se une a proteína core','Solo existe en el hueso','Es una proteína'],c:1,f:'El ácido hialurónico es el único GAG no sulfatado y no se une covalentemente a proteína core. [RA 3]'},
+{q:'Los proteoglicanos regulan la señalización de:',o:['Solo insulina','FGF, Wnt, Hedgehog (entre otros)','Solo adrenalina','Solo estrógenos'],c:1,f:'Los PG (sindecán, perlecán) actúan como co-receptores de FGF, Wnt, Hedgehog. [RA 3]'},
+{q:'La secuencia repetitiva del colágeno es:',o:['Ala-Val-Leu','Gly-X-Y (X=Pro, Y=Hyp)','Cys-Cys-Cys','Arg-Gly-Asp'],c:1,f:'Gly-X-Y es la secuencia del colágeno. Gly debe estar en cada 3er residuo para caber en el centro de la triple hélice. [RA 4]'},
+{q:'La vitamina C es cofactor de:',o:['Lisil-oxidasa','Prolil-hidroxilasa y lisil-hidroxilasa','Procolágeno peptidasa','Colagenasa'],c:1,f:'La vitamina C es cofactor de prolil-hidroxilasa y lisil-hidroxilasa. Sin ella → escorbuto. [RA 4]'},
+{q:'¿Qué enzima realiza el entrecruzamiento final del colágeno?',o:['Prolil-hidroxilasa','Procolágeno C-peptidasa','Lisil-oxidasa (Cu²⁺)','Elastasa'],c:2,f:'La lisil-oxidasa (requiere Cu²⁺) forma los enlaces covalentes entre tropocolágenos. [RA 4]'},
+{q:'Los enlaces cruzados de desmosina son exclusivos de:',o:['Colágeno','Elastina','Fibronectina','Laminina'],c:1,f:'La desmosina (4 residuos de Lys) es exclusiva de la elastina. [RA 5]'},
+{q:'La Fibrilina-1 tiene importancia clínica porque:',o:['Su mutación causa escorbuto','Su mutación causa Síndrome de Marfan','Es el principal componente del hueso','Es parte de los ribosomas'],c:1,f:'Mutación en FBN1 (Fibrilina-1) → Síndrome de Marfan (exceso de TGF-β, dilatación aórtica). [RA 5]'},
+{q:'El motivo RGD de la fibronectina es reconocido por:',o:['Colágeno','Elastina','Integrinas (α5β1)','Queratinas'],c:2,f:'Las integrinas (especialmente α5β1) reconocen el motivo RGD (Arg-Gly-Asp) en la fibronectina. [RA 6]'},
+{q:'La laminina se localiza exclusivamente en:',o:['El plasma sanguíneo','El citoplasma celular','La membrana basal (lámina basal)','Los lisosomas'],c:2,f:'La laminina es exclusiva de la lámina basal de la membrana basal. [RA 6]'},
+{q:'La membrana basal está formada por:',o:['Solo colágeno I','Lámina basal (lúcida + densa) + lámina reticular','Elastina + fibronectina','Solo ácido hialurónico'],c:1,f:'Membrana basal = lámina basal (lúcida + densa) + lámina reticular (Col III). [RA 7]'},
+{q:'El colágeno tipo IV en la lámina basal forma:',o:['Fibrillas estriadas','Una red bidimensional (no fibrilar)','Fibras elásticas','Microfibrillas'],c:1,f:'El colágeno IV forma una red (no fibrillas) que es la base estructural de la lámina basal. [RA 7]'},
+{q:'Las integrinas son:',o:['Homodímeros','Heterodímeros αβ transmembrana','Enzimas solubles','Lípidos de membrana'],c:1,f:'Las integrinas son heterodímeros (α+β) transmembrana. [RA 8]'},
+{q:'La señalización "inside-out" de las integrinas significa:',o:['La MEC envía señales al núcleo','Señales internas de la célula activan la integrina para unir su ligando','El colágeno activa a la célula','La integrina se degrada'],c:1,f:'Inside-out: señales intracelulares cambian la conformación de la integrina a estado activo/abierto. [RA 8]'},
+{q:'La trombastenia de Glanzmann se debe a defecto en:',o:['Colágeno tipo I','Integrina αIIbβ3','Fibrilina-1','Elastina'],c:1,f:'Defecto en αIIbβ3 → plaquetas no agregan → sangrado. [RA 8]'}
+];
+var eva={},evs=false;
+function iev(){var c=document.getElementById('eq');c.innerHTML='';eva={};evs=false;document.getElementById('sdd').style.display='none';document.getElementById('seb').style.display='none';var lt=['A','B','C','D'];evq.forEach(function(q,qi){var d=document.createElement('div');d.className='qq';d.id='ev-'+qi;var h='<div class="qt"><span style="color:var(--g);font-family:JetBrains Mono;font-size:.83rem">'+(qi+1)+'/'+evq.length+'</span> '+q.q+'</div><div class="qo">';q.o.forEach(function(opt,oi){h+='<button class="qb" onclick="seo(this,'+qi+','+oi+')"><div class="ol">'+lt[oi]+'</div>'+opt+'</button>'});h+='</div><div class="qf" id="fb-ev-'+qi+'"></div>';d.innerHTML=h;c.appendChild(d)})}
+function seo(btn,qi,oi){if(evs)return;document.getElementById('ev-'+qi).querySelectorAll('.qb').forEach(function(o){o.classList.remove('sel')});btn.classList.add('sel');eva[qi]=oi;if(Object.keys(eva).length===evq.length)document.getElementById('seb').style.display='inline-flex'}
+function se(){evs=true;var sc=0;evq.forEach(function(q,qi){var c=document.getElementById('ev-'+qi),os=c.querySelectorAll('.qb');var ua=eva[qi];os.forEach(function(o,oi){o.classList.add('dis');if(oi===q.c)o.classList.add('ok');if(oi===ua&&oi!==q.c)o.classList.add('no')});if(ua===q.c)sc++;var fb=document.getElementById('fb-ev-'+qi);fb.classList.add('sh');fb.classList.add(ua===q.c?'cf':'if');fb.textContent=(ua===q.c?'✅ ':'❌ ')+q.f});document.getElementById('seb').style.display='none';var pct=Math.round(sc/evq.length*100),dd=document.getElementById('sdd');dd.style.display='block';document.getElementById('sn2').textContent=sc+'/'+evq.length;document.getElementById('sbf2').style.width=pct+'%';var msg='';if(pct>=90){msg='🌟 ¡Excelente! Dominas la Matriz Extracelular.';document.getElementById('sn2').style.color='var(--g)'}else if(pct>=70){msg='👏 ¡Buen trabajo! Revisa los errores.';document.getElementById('sn2').style.color='var(--b)'}else if(pct>=50){msg='📚 Repasa los conceptos clave.';document.getElementById('sn2').style.color='var(--y)'}else{msg='💪 Necesitas repasar la tutoría.';document.getElementById('sn2').style.color='var(--r)';document.getElementById('sbf2').style.background='linear-gradient(135deg,#FF6B6B,#FFD93D)'}document.getElementById('sm2').textContent=msg;dd.scrollIntoView({behavior:'smooth',block:'center'})}
+
+/* Init */
+ifc();iev();up();initOrders();updateTissue();renderColSim();
+document.querySelectorAll('#navLinks button').forEach(function(b){b.addEventListener('click',function(){go(this.getAttribute('data-s'))})});
+</script>
+</body></html>
