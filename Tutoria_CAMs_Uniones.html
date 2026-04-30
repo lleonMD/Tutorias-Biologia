@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoría Interactiva: Moléculas de Adhesión Celular y Uniones</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1622;--card:#132236;--card2:#1A2D45;--g:#00D4AA;--b:#00A3FF;--r:#FF6B6B;--y:#FFD93D;--p:#A78BFA;--pk:#EC4899;--o:#F97316;--t1:#E8F0F8;--t2:#8BA4BE;--t3:#5A7A96;--bdr:rgba(0,212,170,0.15);--grad:linear-gradient(135deg,#00D4AA,#00A3FF);--sh:0 4px 24px rgba(0,0,0,0.4);--glow:0 0 30px rgba(0,212,170,0.15);--r16:16px;--r10:10px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden}
+.abg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(800px 600px at 15% 20%,rgba(0,212,170,.06),transparent),radial-gradient(600px 500px at 85% 80%,rgba(0,163,255,.05),transparent)}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,22,34,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 24px}
+.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}
+.nb{font-family:'DM Serif Display',serif;font-size:1.1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nl{display:flex;gap:3px;flex-wrap:wrap}
+.nl button{padding:5px 12px;border-radius:20px;border:none;background:0;color:var(--t2);font-size:.76rem;font-family:inherit;cursor:pointer;transition:.3s}
+.nl button:hover{background:rgba(0,212,170,.1);color:var(--g)}
+.nl button.a{background:rgba(0,212,170,.15);color:var(--g);font-weight:600}
+.pb{position:fixed;top:58px;left:0;right:0;z-index:99;height:3px;background:rgba(0,212,170,.1)}
+.pf{height:100%;background:var(--grad);transition:width .5s;border-radius:0 3px 3px 0}
+.mc{max-width:960px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1}
+.sec{display:none;animation:fi .5s}.sec.a{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:50px 0 36px}
+.hi{width:90px;height:90px;margin:0 auto 20px;background:var(--grad);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 8px 40px rgba(0,212,170,.3);animation:fl 3s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:2.6rem;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,var(--t1),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hs{font-size:1.1rem;color:var(--t2);max-width:680px;margin:0 auto 28px}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0}
+.oi{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:14px 16px;display:flex;align-items:flex-start;gap:10px;transition:.3s}
+.oi:hover{border-color:var(--g);box-shadow:var(--glow);transform:translateY(-2px)}
+.on{min-width:26px;height:26px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;color:#0B1622}
+.ot{font-size:.85rem;color:var(--t2);line-height:1.5}
+.cd{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:28px;margin-bottom:22px;box-shadow:var(--sh);transition:.3s}
+.cd:hover{border-color:rgba(0,212,170,.25)}
+.ch{font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:14px}
+.ch .ac{color:var(--g)}
+.ib{border-left:3px solid var(--g);border-radius:0 var(--r10) var(--r10) 0;padding:18px 22px;margin:18px 0;background:rgba(0,212,170,.06)}
+.ib.w{background:rgba(255,107,107,.08);border-left-color:var(--r)}
+.ib.n{background:rgba(0,163,255,.06);border-left-color:var(--b)}
+.ib.go{background:rgba(255,217,61,.06);border-left-color:var(--y)}
+.ib.pk{background:rgba(236,72,153,.06);border-left-color:var(--pk)}
+.ib.or{background:rgba(249,115,22,.06);border-left-color:var(--o)}
+.ibt{font-weight:700;margin-bottom:5px;font-size:.93rem}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin:18px 0}
+.cg4{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px}
+.cc h4{font-family:'DM Serif Display',serif;margin-bottom:10px;font-size:1.05rem}
+.et{width:100%;border-collapse:separate;border-spacing:0;margin:18px 0;border-radius:var(--r10);overflow:hidden;border:1px solid var(--bdr)}
+.et th{background:rgba(0,212,170,.12);padding:12px 16px;text-align:left;font-weight:600;font-size:.85rem;color:var(--g);text-transform:uppercase;letter-spacing:.03em}
+.et td{padding:11px 16px;border-top:1px solid var(--bdr);font-size:.88rem;color:var(--t2)}
+.et tr:hover td{background:var(--card2)}
+.qq{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin-bottom:18px}
+.qt{font-weight:600;font-size:1rem;margin-bottom:16px}
+.qo{display:flex;flex-direction:column;gap:9px}
+.qb{padding:12px 18px;border-radius:var(--r10);border:2px solid var(--bdr);background:0;color:var(--t2);cursor:pointer;font-family:inherit;font-size:.93rem;text-align:left;transition:.3s;display:flex;align-items:center;gap:10px}
+.qb:hover:not(.dis){border-color:var(--b);background:rgba(0,163,255,.06);color:var(--t1)}
+.qb.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}
+.qb.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important}
+.qb.no{border-color:var(--r)!important;background:rgba(255,107,107,.08)!important;color:var(--r)!important}
+.qb.dis{pointer-events:none;opacity:.7}
+.ol{min-width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem}
+.qf{margin-top:14px;padding:16px;border-radius:var(--r10);font-size:.9rem;line-height:1.6;display:none}
+.qf.sh{display:block}
+.qf.cf{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);color:var(--g)}
+.qf.if{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--r)}
+.btn{padding:11px 24px;border-radius:11px;border:none;font-family:inherit;font-weight:600;font-size:.93rem;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}
+.bp{background:var(--grad);color:#0B1622;box-shadow:0 4px 20px rgba(0,212,170,.3)}
+.bp:hover{transform:translateY(-2px)}
+.bs{background:rgba(0,212,170,.1);color:var(--g);border:1px solid rgba(0,212,170,.3)}
+.bs:hover{background:rgba(0,212,170,.2)}
+.tb{display:flex;gap:5px;margin-bottom:20px;border-bottom:1px solid var(--bdr)}
+.tbtn{padding:9px 18px;border:none;background:0;color:var(--t3);font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:.3s;border-radius:7px 7px 0 0}
+.tbtn:hover{color:var(--t2)}
+.tbtn.a{color:var(--g);border-bottom-color:var(--g);background:rgba(0,212,170,.06)}
+.tc{display:none;animation:fi .4s}.tc.a{display:block}
+.sn{display:flex;justify-content:space-between;margin-top:36px;padding-top:20px;border-top:1px solid var(--bdr)}
+.pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.76rem;font-weight:600;margin:2px 3px}
+.pg{background:rgba(0,212,170,.15);color:var(--g)}.pb2{background:rgba(0,163,255,.12);color:var(--b)}.pw{background:rgba(255,107,107,.12);color:var(--r)}.py{background:rgba(255,217,61,.12);color:var(--y)}.pp{background:rgba(167,139,250,.12);color:var(--p)}.ppk{background:rgba(236,72,153,.12);color:var(--pk)}.por{background:rgba(249,115,22,.12);color:var(--o)}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:20px 0}
+.fc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);padding:22px;cursor:pointer;transition:.4s;min-height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.fc:hover{border-color:var(--g);transform:translateY(-3px);box-shadow:var(--glow)}
+.ft{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--g)}
+.fd{display:none;font-size:.88rem;color:var(--t2);line-height:1.6;margin-top:7px}
+.fc.fl .ft{display:none}.fc.fl .fd{display:block}
+.fh{font-size:.73rem;color:var(--t3);margin-top:8px}.fc.fl .fh{display:none}
+.sd{text-align:center;padding:36px;margin:20px 0;background:var(--card);border-radius:var(--r16);border:1px solid var(--bdr)}
+.snm{font-family:'DM Serif Display',serif;font-size:3.5rem;margin-bottom:6px}
+.sbl{color:var(--t2)}
+.sbr{width:100%;max-width:380px;height:11px;background:rgba(255,255,255,.06);border-radius:6px;margin:18px auto;overflow:hidden}
+.sbf{height:100%;border-radius:6px;transition:width 1s}
+.svg-wrap{background:rgba(0,0,0,.25);border-radius:var(--r16);padding:20px;margin:20px 0;border:1px solid var(--bdr);overflow-x:auto}
+.svg-wrap svg{width:100%;height:auto;display:block}
+.sim-box{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:24px;margin:20px 0}
+.sim-controls{display:flex;gap:10px;justify-content:center;margin:16px 0;flex-wrap:wrap}
+.sim-btn{padding:8px 20px;border-radius:8px;border:2px solid var(--g);background:0;color:var(--g);font-family:inherit;font-weight:600;font-size:.88rem;cursor:pointer;transition:.3s}
+.sim-btn:hover{background:rgba(0,212,170,.15)}
+.sim-btn.active{background:var(--g);color:#0B1622}
+.sim-btn:disabled{opacity:.4;cursor:default}
+.sim-narration{background:rgba(0,212,170,.06);border:1px solid var(--bdr);border-radius:var(--r10);padding:16px;margin-top:14px;color:var(--t2);font-size:.92rem;line-height:1.6;min-height:60px;text-align:left}
+.sim-step-ind{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.sim-dot{padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.06);color:var(--t3);font-size:.75rem;font-weight:600;transition:.3s;cursor:pointer;border:1px solid transparent}
+.sim-dot:hover{border-color:var(--g);color:var(--t2)}
+.sim-dot.act{background:rgba(0,212,170,.2);color:var(--g);border-color:var(--g);box-shadow:0 0 12px rgba(0,212,170,.3)}
+.sim-dot.done{background:rgba(0,212,170,.08);color:var(--g);border-color:rgba(0,212,170,.15)}
+.match-game{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:18px 0}
+.match-col{display:flex;flex-direction:column;gap:8px}
+.match-col h4{text-align:center;margin-bottom:8px;font-family:'DM Serif Display',serif}
+.match-item{padding:12px 16px;border-radius:var(--r10);border:2px solid var(--bdr);background:var(--card2);color:var(--t2);cursor:pointer;transition:.3s;font-size:.88rem;text-align:center;user-select:none}
+.match-item:hover{border-color:var(--b);transform:scale(1.02)}
+.match-item.sel{border-color:var(--b);background:rgba(0,163,255,.1);color:var(--t1)}
+.match-item.ok{border-color:var(--g)!important;background:rgba(0,212,170,.12)!important;color:var(--g)!important;pointer-events:none}
+.match-item.no{border-color:var(--r)!important;animation:shake .4s}
+.match-score{text-align:center;margin-top:12px;font-weight:600;color:var(--g)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
+.analogy{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(0,163,255,.06));border:1px solid rgba(167,139,250,.2);border-radius:var(--r16);padding:24px;margin:18px 0}
+.analogy .analogy-icon{font-size:2rem;margin-bottom:8px}
+.analogy h4{font-family:'DM Serif Display',serif;color:var(--p);margin-bottom:8px}
+.analogy p{color:var(--t2);font-size:.92rem}
+.timeline{position:relative;padding-left:30px;margin:18px 0}
+.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--g),var(--b),var(--p))}
+.timeline-item{position:relative;margin-bottom:18px;padding:16px;background:var(--card2);border-radius:var(--r10);border:1px solid var(--bdr)}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--g);border:2px solid var(--bg)}
+.reveal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:18px 0}
+.reveal-card{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r10);padding:18px;cursor:pointer;transition:.4s;text-align:center;min-height:100px;display:flex;flex-direction:column;justify-content:center}
+.reveal-card:hover{border-color:var(--g);transform:translateY(-2px)}
+.reveal-card .rv-q{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--g)}
+.reveal-card .rv-a{display:none;font-size:.85rem;color:var(--t2);margin-top:8px;line-height:1.5}
+.reveal-card .rv-h{font-size:.7rem;color:var(--t3);margin-top:6px}
+.reveal-card.open .rv-q{color:var(--t1);font-size:.85rem;font-family:'Source Sans 3',sans-serif;font-weight:700}
+.reveal-card.open .rv-a{display:block}
+.reveal-card.open .rv-h{display:none}
+.order-game{margin:18px 0}
+.order-item{padding:14px 18px;margin:6px 0;border-radius:var(--r10);border:2px solid var(--bdr);background:var(--card2);color:var(--t2);cursor:grab;transition:.3s;font-size:.9rem;display:flex;align-items:center;gap:10px;user-select:none}
+.order-item:active{cursor:grabbing;border-color:var(--b);background:rgba(0,163,255,.08)}
+.order-item .oi-num{min-width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:var(--t3)}
+.order-item.correct{border-color:var(--g)!important;background:rgba(0,212,170,.08)!important}
+.order-item.correct .oi-num{background:var(--g);color:#0B1622}
+.order-item.wrong{border-color:var(--r)!important;background:rgba(255,107,107,.06)!important}
+.order-check{margin-top:14px;text-align:center}
+@media(max-width:768px){.og,.cg,.match-game,.cg4{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.hero h1{font-size:2rem}.nl{display:none}}
+::-webkit-scrollbar{width:7px}::-webkit-scrollbar-thumb{background:rgba(0,212,170,.2);border-radius:4px}
+</style></head><body>
+<div class="abg"></div>
+<nav><div class="ni"><div class="nb">🔗 CAMs y Uniones Celulares</div><div class="nl" id="navLinks">
+<button class="a" data-s="inicio">Inicio</button>
+<button data-s="cams">CAMs</button>
+<button data-s="familias">4 Familias</button>
+<button data-s="panorama">Uniones: Panorama</button>
+<button data-s="adherentes">Adherentes</button>
+<button data-s="desmosomas">Desmosomas</button>
+<button data-s="hemidesmo">Hemidesmosomas</button>
+<button data-s="estrechas">Estrechas</button>
+<button data-s="gap">Gap</button>
+<button data-s="focales">Focales / Costámero</button>
+<button data-s="glosario">Glosario</button>
+<button data-s="evaluacion">Evaluación</button>
+</div></div></nav>
+<div class="pb"><div class="pf" id="pf" style="width:0%"></div></div>
+<div class="mc">
+
+<!-- ======================== INICIO ======================== -->
+<div class="sec a" id="sec-inicio">
+<div class="hero"><div class="hi">🔗</div>
+<h1>Moléculas de Adhesión Celular y Uniones</h1>
+<p class="hs">CAMs, cadherinas, IgCAMs, selectinas, integrinas, uniones adherentes, desmosomas, hemidesmosomas, uniones estrechas, GAP, adhesiones focales y costámeros.</p></div>
+<div class="cd"><div class="ch">🎯 Resultados de <span class="ac">Aprendizaje</span></div>
+<div class="og">
+<div class="oi"><div class="on">1</div><div class="ot">Definir CAMs; distinguir uniones homofílicas de heterofílicas.</div></div>
+<div class="oi"><div class="on">2</div><div class="ot">Describir las 4 familias de CAM: estructura, funciones, localización y rol en embriogénesis.</div></div>
+<div class="oi"><div class="on">3</div><div class="ot">Distinguir las CAMs involucradas en adhesión cél-cél vs. cél-MEC.</div></div>
+<div class="oi"><div class="on">4</div><div class="ot">Describir componentes proteicos y localización de las uniones cél-MEC.</div></div>
+<div class="oi"><div class="on">5</div><div class="ot">Relacionar el citoesqueleto con cada tipo de unión celular.</div></div>
+<div class="oi"><div class="on">6</div><div class="ot">Distinguir uniones adherentes, desmosomas, hemidesmosomas, GAP, estrechas y adhesiones focales.</div></div>
+<div class="oi"><div class="on">7</div><div class="ot">Definir costámero y describir su función en el músculo estriado.</div></div>
+</div></div>
+
+<!-- Panorama SVG -->
+<div class="svg-wrap">
+<svg viewBox="0 0 900 310" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="22" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Panorama: Adhesión Celular — De las Moléculas a las Uniones</text>
+<!-- CAMs -->
+<rect x="300" y="40" width="300" height="50" rx="14" fill="rgba(0,212,170,0.1)" stroke="#00D4AA" stroke-width="2"/>
+<text x="450" y="62" text-anchor="middle" fill="#00D4AA" font-size="13" font-weight="700">MOLÉCULAS DE ADHESIÓN (CAMs)</text>
+<text x="450" y="80" text-anchor="middle" fill="#8BA4BE" font-size="9">Proteínas transmembrana que median adhesión</text>
+<!-- 4 families -->
+<line x1="350" y1="92" x2="130" y2="125" stroke="#FFD93D" stroke-width="1.5"/>
+<line x1="410" y1="92" x2="340" y2="125" stroke="#00A3FF" stroke-width="1.5"/>
+<line x1="490" y1="92" x2="560" y2="125" stroke="#A78BFA" stroke-width="1.5"/>
+<line x1="550" y1="92" x2="770" y2="125" stroke="#F97316" stroke-width="1.5"/>
+<rect x="40" y="125" width="180" height="45" rx="10" fill="rgba(255,217,61,0.08)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="130" y="145" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="700">Cadherinas</text>
+<text x="130" y="160" text-anchor="middle" fill="#8BA4BE" font-size="8">Homofílica • Ca²⁺-dep.</text>
+<rect x="250" y="125" width="180" height="45" rx="10" fill="rgba(0,163,255,0.08)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="340" y="145" text-anchor="middle" fill="#00A3FF" font-size="10" font-weight="700">Superfam. Ig (IgCAMs)</text>
+<text x="340" y="160" text-anchor="middle" fill="#8BA4BE" font-size="8">Homo/heterofílica • Ca²⁺-indep.</text>
+<rect x="460" y="125" width="190" height="45" rx="10" fill="rgba(167,139,250,0.08)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="555" y="145" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="700">Selectinas</text>
+<text x="555" y="160" text-anchor="middle" fill="#8BA4BE" font-size="8">Heterofílica • Lectinas • Ca²⁺</text>
+<rect x="680" y="125" width="180" height="45" rx="10" fill="rgba(249,115,22,0.08)" stroke="#F97316" stroke-width="1.5"/>
+<text x="770" y="145" text-anchor="middle" fill="#F97316" font-size="10" font-weight="700">Integrinas</text>
+<text x="770" y="160" text-anchor="middle" fill="#8BA4BE" font-size="8">Heterofílica • Cél-MEC</text>
+<!-- Arrow to junctions -->
+<text x="450" y="195" text-anchor="middle" fill="#5A7A96" font-size="9">Estas CAMs forman parte de ▼</text>
+<!-- Junctions -->
+<rect x="40" y="210" width="820" height="90" rx="14" fill="rgba(236,72,153,0.04)" stroke="rgba(236,72,153,0.2)" stroke-width="1"/>
+<text x="450" y="232" text-anchor="middle" fill="#EC4899" font-size="12" font-weight="700">UNIONES CELULARES</text>
+<rect x="60" y="245" width="110" height="35" rx="8" fill="rgba(0,212,170,0.08)" stroke="#00D4AA" stroke-width="1"/>
+<text x="115" y="261" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="600">Adherentes</text>
+<text x="115" y="274" text-anchor="middle" fill="#5A7A96" font-size="7">Cadherinas→Actina</text>
+<rect x="185" y="245" width="110" height="35" rx="8" fill="rgba(255,217,61,0.08)" stroke="#FFD93D" stroke-width="1"/>
+<text x="240" y="261" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="600">Desmosomas</text>
+<text x="240" y="274" text-anchor="middle" fill="#5A7A96" font-size="7">Cadherinas→FI</text>
+<rect x="310" y="245" width="110" height="35" rx="8" fill="rgba(249,115,22,0.08)" stroke="#F97316" stroke-width="1"/>
+<text x="365" y="261" text-anchor="middle" fill="#F97316" font-size="8" font-weight="600">Hemidesmosomas</text>
+<text x="365" y="274" text-anchor="middle" fill="#5A7A96" font-size="7">Integrinas→FI</text>
+<rect x="435" y="245" width="110" height="35" rx="8" fill="rgba(167,139,250,0.08)" stroke="#A78BFA" stroke-width="1"/>
+<text x="490" y="261" text-anchor="middle" fill="#A78BFA" font-size="8" font-weight="600">Estrechas</text>
+<text x="490" y="274" text-anchor="middle" fill="#5A7A96" font-size="7">Claudina/Ocludina</text>
+<rect x="560" y="245" width="110" height="35" rx="8" fill="rgba(0,163,255,0.08)" stroke="#00A3FF" stroke-width="1"/>
+<text x="615" y="261" text-anchor="middle" fill="#00A3FF" font-size="8" font-weight="600">Gap</text>
+<text x="615" y="274" text-anchor="middle" fill="#5A7A96" font-size="7">Conexinas→Conexón</text>
+<rect x="685" y="245" width="155" height="35" rx="8" fill="rgba(255,107,107,0.08)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="762" y="261" text-anchor="middle" fill="#FF6B6B" font-size="8" font-weight="600">Adhesiones Focales</text>
+<text x="762" y="274" text-anchor="middle" fill="#5A7A96" font-size="7">Integrinas→Actina</text>
+<defs><marker id="ao" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#8BA4BE"/></marker></defs>
+</svg>
+</div>
+<div style="text-align:center;margin-top:22px"><button class="btn bp" onclick="go('cams')">Comenzar la tutoría →</button></div>
+</div>
+
+<!-- ======================== CAMs (RA 1) ======================== -->
+<div class="sec" id="sec-cams">
+<div class="cd"><div class="ch">🔗 Moléculas de <span class="ac">Adhesión Celular</span> (CAMs) <span class="pill pg">RA 1</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div>
+<p style="color:var(--t2)">Las <strong>moléculas de adhesión celular (CAMs)</strong> son <strong>glicoproteínas transmembrana</strong> que median la adhesión entre células (cél-cél) o entre una célula y la matriz extracelular (cél-MEC). Son esenciales para la <strong>organización tisular</strong>, la <strong>señalización celular</strong>, la <strong>migración</strong> y la <strong>embriogénesis</strong>.</p></div>
+
+<div class="cg">
+<div class="cc" style="border-color:rgba(0,212,170,.3)"><h4 style="color:var(--g)">Unión Homofílica</h4>
+<p style="color:var(--t2);font-size:.88rem">Una CAM en la superficie de una célula se une a una <strong>molécula idéntica</strong> (la misma CAM) en la célula vecina.<br><br>
+<strong>Ejemplo clásico:</strong> E-cadherina ↔ E-cadherina.<br><br>
+Es como dos personas que se saludan con un <strong>apretón de manos simétrico</strong> — ambas extienden la misma mano.</p>
+<div style="text-align:center;margin-top:12px;font-size:2rem">🤝</div></div>
+<div class="cc" style="border-color:rgba(255,107,107,.3)"><h4 style="color:var(--r)">Unión Heterofílica</h4>
+<p style="color:var(--t2);font-size:.88rem">Una CAM se une a una <strong>molécula diferente</strong> en la otra célula o en la MEC.<br><br>
+<strong>Ejemplos:</strong> Integrina α5β1 ↔ Fibronectina (cél-MEC). Selectina-E ↔ Sialil-Lewis X (cél-cél).<br><br>
+Es como una <strong>llave y cerradura</strong> — cada uno aporta una pieza distinta.</p>
+<div style="text-align:center;margin-top:12px;font-size:2rem">🔑🔒</div></div>
+</div>
+
+<div class="ib n"><div class="ibt">📝 Clasificación rápida</div>
+<p style="color:var(--t2)"><strong>Homofílica:</strong> Cadherinas, algunas IgCAMs (NCAM-NCAM).<br>
+<strong>Heterofílica:</strong> Integrinas (cél-MEC), selectinas (lectina-carbohidrato), algunas IgCAMs (ICAM-1 ↔ integrina αLβ2).<br>
+<strong>Dependiente de Ca²⁺:</strong> Cadherinas, selectinas, integrinas.<br>
+<strong>Independiente de Ca²⁺:</strong> IgCAMs.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q01"><div class="qt">Las CAMs son:</div><div class="qo">
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">A</div>Lípidos de membrana que repelen células</button>
+<button class="qb" onclick="cq('q01',this,1)"><div class="ol">B</div>Glicoproteínas transmembrana que median la adhesión cél-cél o cél-MEC</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">C</div>Enzimas que degradan la MEC</button>
+<button class="qb" onclick="cq('q01',this,0)"><div class="ol">D</div>Ácidos nucleicos de la superficie celular</button>
+</div><div class="qf" id="fb-q01"></div></div>
+<div class="qq" id="q02"><div class="qt">Una unión donde E-cadherina se une a E-cadherina es:</div><div class="qo">
+<button class="qb" onclick="cq('q02',this,1)"><div class="ol">A</div>Homofílica — la misma molécula en ambas células</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">B</div>Heterofílica — moléculas diferentes</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">C</div>Autocrina</button>
+<button class="qb" onclick="cq('q02',this,0)"><div class="ol">D</div>Endocrina</button>
+</div><div class="qf" id="fb-q02"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('inicio')">← Inicio</button><button class="btn bp" onclick="go('familias')">4 Familias de CAMs →</button></div>
+</div>
+
+<!-- ======================== 4 FAMILIAS (RA 2-3) ======================== -->
+<div class="sec" id="sec-familias">
+<div class="cd"><div class="ch">👥 Las 4 Familias de <span class="ac">CAMs</span> <span class="pill pb2">RA 2–3</span></div>
+
+<!-- 4 CAM families structural SVG -->
+<div class="svg-wrap">
+<svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="22" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura Comparada de las 4 Familias de CAMs</text>
+<!-- Membranes -->
+<rect x="30" y="210" width="200" height="12" rx="0" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1"/>
+<rect x="250" y="210" width="180" height="12" rx="0" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1"/>
+<rect x="460" y="210" width="180" height="12" rx="0" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1"/>
+<rect x="670" y="210" width="200" height="12" rx="0" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1"/>
+<!-- CADHERINA -->
+<text x="130" y="48" text-anchor="middle" fill="#FFD93D" font-size="11" font-weight="700">CADHERINA</text>
+<rect x="105" y="55" width="50" height="18" rx="5" fill="rgba(255,217,61,0.15)" stroke="#FFD93D" stroke-width="1"/>
+<text x="130" y="68" text-anchor="middle" fill="#FFD93D" font-size="7">EC1</text>
+<circle cx="130" cy="82" r="4" fill="#FFD93D" opacity="0.5"/><text x="140" y="85" fill="#FFD93D" font-size="6">Ca²⁺</text>
+<rect x="105" y="88" width="50" height="18" rx="5" fill="rgba(255,217,61,0.12)" stroke="#FFD93D" stroke-width="1"/>
+<text x="130" y="101" text-anchor="middle" fill="#FFD93D" font-size="7">EC2</text>
+<circle cx="130" cy="115" r="4" fill="#FFD93D" opacity="0.5"/>
+<rect x="105" y="121" width="50" height="18" rx="5" fill="rgba(255,217,61,0.1)" stroke="#FFD93D" stroke-width="1"/>
+<text x="130" y="134" text-anchor="middle" fill="#FFD93D" font-size="7">EC3</text>
+<circle cx="130" cy="148" r="4" fill="#FFD93D" opacity="0.5"/>
+<rect x="105" y="154" width="50" height="18" rx="5" fill="rgba(255,217,61,0.08)" stroke="#FFD93D" stroke-width="1"/>
+<text x="130" y="167" text-anchor="middle" fill="#FFD93D" font-size="7">EC4</text>
+<circle cx="130" cy="181" r="4" fill="#FFD93D" opacity="0.5"/>
+<rect x="105" y="187" width="50" height="18" rx="5" fill="rgba(255,217,61,0.06)" stroke="#FFD93D" stroke-width="1"/>
+<text x="130" y="200" text-anchor="middle" fill="#FFD93D" font-size="7">EC5</text>
+<line x1="130" y1="222" x2="130" y2="260" stroke="#FFD93D" stroke-width="2"/>
+<rect x="90" y="260" width="80" height="16" rx="4" fill="rgba(255,107,107,0.15)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="130" y="272" text-anchor="middle" fill="#FF6B6B" font-size="7">β-cat / Desmopl.</text>
+<line x1="80" y1="285" x2="180" y2="285" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+<text x="130" y="300" text-anchor="middle" fill="#FF6B6B" font-size="7">Actina / FI</text>
+<text x="130" y="320" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="600">Homofílica</text>
+<text x="130" y="332" text-anchor="middle" fill="#8BA4BE" font-size="7">Ca²⁺-dependiente</text>
+<text x="130" y="344" text-anchor="middle" fill="#5A7A96" font-size="7">5 dominios EC tipo cadherina</text>
+<!-- IgCAM -->
+<text x="340" y="48" text-anchor="middle" fill="#00A3FF" font-size="11" font-weight="700">IgCAM</text>
+<ellipse cx="340" cy="80" rx="25" ry="16" fill="rgba(0,163,255,0.12)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="340" y="84" text-anchor="middle" fill="#00A3FF" font-size="6">Ig</text>
+<ellipse cx="340" cy="115" rx="25" ry="16" fill="rgba(0,163,255,0.1)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="340" y="119" text-anchor="middle" fill="#00A3FF" font-size="6">Ig</text>
+<ellipse cx="340" cy="150" rx="25" ry="16" fill="rgba(0,163,255,0.08)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="340" y="154" text-anchor="middle" fill="#00A3FF" font-size="6">Ig</text>
+<rect x="320" y="170" width="40" height="14" rx="4" fill="rgba(0,163,255,0.06)" stroke="#00A3FF" stroke-width="1"/>
+<text x="340" y="181" text-anchor="middle" fill="#00A3FF" font-size="6">FNIII</text>
+<rect x="320" y="188" width="40" height="14" rx="4" fill="rgba(0,163,255,0.06)" stroke="#00A3FF" stroke-width="1"/>
+<text x="340" y="199" text-anchor="middle" fill="#00A3FF" font-size="6">FNIII</text>
+<line x1="340" y1="222" x2="340" y2="250" stroke="#00A3FF" stroke-width="2"/>
+<text x="340" y="265" text-anchor="middle" fill="#8BA4BE" font-size="7">(variable o GPI)</text>
+<text x="340" y="320" text-anchor="middle" fill="#00A3FF" font-size="8" font-weight="600">Homo/Heterofílica</text>
+<text x="340" y="332" text-anchor="middle" fill="#8BA4BE" font-size="7">Ca²⁺-independiente</text>
+<text x="340" y="344" text-anchor="middle" fill="#5A7A96" font-size="7">Dominios Ig (S-S loop)</text>
+<!-- SELECTINA -->
+<text x="550" y="48" text-anchor="middle" fill="#A78BFA" font-size="11" font-weight="700">SELECTINA</text>
+<rect x="525" y="60" width="50" height="22" rx="8" fill="rgba(167,139,250,0.2)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="550" y="75" text-anchor="middle" fill="#A78BFA" font-size="7" font-weight="600">Lectina C</text>
+<rect x="530" y="90" width="40" height="14" rx="4" fill="rgba(167,139,250,0.1)" stroke="#A78BFA" stroke-width="1"/>
+<text x="550" y="101" text-anchor="middle" fill="#A78BFA" font-size="6">EGF</text>
+<rect x="528" y="110" width="44" height="14" rx="4" fill="rgba(167,139,250,0.08)" stroke="#A78BFA" stroke-width="1"/>
+<text x="550" y="121" text-anchor="middle" fill="#A78BFA" font-size="6">SCR</text>
+<rect x="528" y="130" width="44" height="14" rx="4" fill="rgba(167,139,250,0.06)" stroke="#A78BFA" stroke-width="1"/>
+<text x="550" y="141" text-anchor="middle" fill="#A78BFA" font-size="6">SCR</text>
+<line x1="550" y1="148" x2="550" y2="210" stroke="#A78BFA" stroke-width="2" stroke-dasharray="4,3"/>
+<line x1="550" y1="222" x2="550" y2="250" stroke="#A78BFA" stroke-width="2"/>
+<text x="595" y="76" fill="#FFD93D" font-size="6">← une sLex (Ca²⁺)</text>
+<text x="550" y="320" text-anchor="middle" fill="#A78BFA" font-size="8" font-weight="600">Heterofílica</text>
+<text x="550" y="332" text-anchor="middle" fill="#8BA4BE" font-size="7">Ca²⁺-dependiente</text>
+<text x="550" y="344" text-anchor="middle" fill="#5A7A96" font-size="7">Lectina + EGF + SCRs</text>
+<!-- INTEGRINA -->
+<text x="770" y="48" text-anchor="middle" fill="#F97316" font-size="11" font-weight="700">INTEGRINA</text>
+<path d="M745,70 C730,120 720,180 740,210" fill="none" stroke="#F97316" stroke-width="3" stroke-linecap="round"/>
+<path d="M795,70 C810,120 820,180 800,210" fill="none" stroke="#00A3FF" stroke-width="3" stroke-linecap="round"/>
+<text x="735" y="145" text-anchor="end" fill="#F97316" font-size="9" font-weight="700">α</text>
+<text x="810" y="145" fill="#00A3FF" font-size="9" font-weight="700">β</text>
+<circle cx="770" cy="80" r="6" fill="rgba(255,217,61,0.3)"/>
+<text x="770" y="83" text-anchor="middle" fill="#FFD93D" font-size="5">Ca²⁺</text>
+<rect x="750" y="60" width="40" height="14" rx="4" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="1"/>
+<text x="770" y="71" text-anchor="middle" fill="#00D4AA" font-size="6">RGD/lig</text>
+<line x1="740" y1="222" x2="740" y2="255" stroke="#F97316" stroke-width="2"/>
+<line x1="800" y1="222" x2="800" y2="260" stroke="#00A3FF" stroke-width="2"/>
+<rect x="760" y="260" width="55" height="14" rx="4" fill="rgba(255,107,107,0.15)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="787" y="271" text-anchor="middle" fill="#FF6B6B" font-size="6">Talina/Plectina</text>
+<line x1="745" y1="283" x2="830" y2="283" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+<text x="787" y="298" text-anchor="middle" fill="#FF6B6B" font-size="7">Actina / FI</text>
+<text x="770" y="320" text-anchor="middle" fill="#F97316" font-size="8" font-weight="600">Heterofílica</text>
+<text x="770" y="332" text-anchor="middle" fill="#8BA4BE" font-size="7">Ca²⁺/Mg²⁺-dep.</text>
+<text x="770" y="344" text-anchor="middle" fill="#5A7A96" font-size="7">Heterodímero αβ</text>
+<!-- Labels -->
+<text x="450" y="370" text-anchor="middle" fill="#5A7A96" font-size="9">Cada familia tiene dominios extracelulares, un paso transmembrana (excepto GPI) y cola citoplasmática</text>
+</svg>
+</div>
+
+<!-- Tabs -->
+<div class="tb">
+<button class="tbtn a" onclick="stab(this,'tab-cad')">Cadherinas</button>
+<button class="tbtn" onclick="stab(this,'tab-ig')">IgCAMs</button>
+<button class="tbtn" onclick="stab(this,'tab-sel')">Selectinas</button>
+<button class="tbtn" onclick="stab(this,'tab-int')">Integrinas</button>
+</div>
+
+<!-- Cadherinas tab -->
+<div class="tc a" id="tab-cad">
+<div class="ib go"><div class="ibt">🔑 Cadherinas</div>
+<p style="color:var(--t2)">Glicoproteínas transmembrana que median adhesión <strong>homofílica, dependiente de Ca²⁺</strong>. Poseen <strong>5 dominios extracelulares (EC1-EC5)</strong> tipo cadherina, cada uno unido por iones Ca²⁺. Son las principales responsables de la adhesión <strong>célula-célula</strong> en tejidos sólidos.</p></div>
+<table class="et"><thead><tr><th>Cadherina</th><th>Localización</th><th>Unión celular</th><th>Se une a (citoesqueleto)</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">E-cadherina</strong> (epitelial)</td><td>Epitelios</td><td>Uniones adherentes (zonula adherens)</td><td>Actina (vía β-catenina/α-catenina)</td></tr>
+<tr><td><strong style="color:var(--y)">N-cadherina</strong> (neural)</td><td>Neuronas, músculo, fibroblastos</td><td>Uniones adherentes</td><td>Actina (vía cateninas)</td></tr>
+<tr><td><strong style="color:var(--pk)">Desmogleína / Desmocolina</strong></td><td>Epitelios, músculo cardíaco</td><td>Desmosomas</td><td>Filamentos intermedios (vía desmoplaquina/placoglobina)</td></tr>
+<tr><td><strong style="color:var(--b)">VE-cadherina</strong></td><td>Endotelio vascular</td><td>Uniones adherentes endoteliales</td><td>Actina</td></tr>
+</tbody></table>
+<div class="ib pk"><div class="ibt">🧬 Embriogénesis</div>
+<p style="color:var(--t2)">La <strong>E-cadherina</strong> es esencial en la <strong>compactación del embrión</strong> (estadio de mórula). La <strong>transición epitelio-mesénquima (EMT)</strong> implica la <strong>pérdida de E-cadherina</strong> → las células se separan y migran. La N-cadherina guía la <strong>migración de la cresta neural</strong>. En cáncer, la pérdida de E-cadherina promueve <strong>metástasis</strong> (gen supresor tumoral <em>CDH1</em>).</p></div>
+</div>
+
+<!-- IgCAMs tab -->
+<div class="tc" id="tab-ig">
+<div class="ib n"><div class="ibt">🔑 Superfamilia de las Inmunoglobulinas (IgCAMs)</div>
+<p style="color:var(--t2)">Poseen <strong>dominios extracelulares tipo inmunoglobulina</strong> (plegamiento Ig: dos láminas β unidas por puente S-S). Adhesión <strong>Ca²⁺-independiente</strong>. Pueden mediar uniones <strong>homofílicas</strong> (NCAM-NCAM) o <strong>heterofílicas</strong> (ICAM-1 ↔ integrina LFA-1).</p></div>
+<table class="et"><thead><tr><th>IgCAM</th><th>Tipo de unión</th><th>Localización</th><th>Función principal</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--b)">NCAM</strong></td><td>Homofílica</td><td>Neuronas, músculo</td><td>Fasciculación de axones, sinapsis</td></tr>
+<tr><td><strong style="color:var(--g)">ICAM-1</strong></td><td>Heterofílica (↔ LFA-1)</td><td>Endotelio activado</td><td>Extravasación de leucocitos</td></tr>
+<tr><td><strong style="color:var(--y)">VCAM-1</strong></td><td>Heterofílica (↔ VLA-4)</td><td>Endotelio activado</td><td>Migración leucocitaria</td></tr>
+<tr><td><strong style="color:var(--pk)">PECAM-1 (CD31)</strong></td><td>Homofílica</td><td>Endotelio, plaquetas</td><td>Diapédesis, integridad endotelial</td></tr>
+</tbody></table>
+<div class="ib pk"><div class="ibt">🧬 Embriogénesis</div>
+<p style="color:var(--t2)"><strong>NCAM</strong> es crítica en el desarrollo del sistema nervioso: guía los <strong>conos de crecimiento axonal</strong> para establecer conexiones sinápticas. La modificación con <strong>ácido polisiálico (PSA)</strong> reduce la adhesión, permitiendo la migración y plasticidad neuronal.</p></div>
+</div>
+
+<!-- Selectinas tab -->
+<div class="tc" id="tab-sel">
+<div class="ib or"><div class="ibt">🔑 Selectinas</div>
+<p style="color:var(--t2)">Son <strong>lectinas tipo C</strong> (unen carbohidratos de forma Ca²⁺-dependiente). Median adhesión <strong>heterofílica</strong> y <strong>transitoria</strong> (rolling). Reconocen ligandos glucídicos como <strong>Sialil-Lewis X (sLe<sup>x</sup>)</strong> en glicoproteínas o glicolípidos de la célula opuesta.</p></div>
+<table class="et"><thead><tr><th>Selectina</th><th>Expresada en</th><th>Ligando</th><th>Función</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--r)">E-selectina</strong> (endotelial)</td><td>Endotelio activado (citoquinas)</td><td>sLe<sup>x</sup> en leucocitos</td><td>Rolling de leucocitos</td></tr>
+<tr><td><strong style="color:var(--p)">P-selectina</strong> (plaquetaria)</td><td>Endotelio + plaquetas (gránulos Weibel-Palade)</td><td>PSGL-1 en leucocitos</td><td>Rolling rápido post-injuria</td></tr>
+<tr><td><strong style="color:var(--b)">L-selectina</strong> (leucocitaria)</td><td>Leucocitos</td><td>GlyCAM-1, CD34 en endotelio</td><td>Homing linfocitario</td></tr>
+</tbody></table>
+<div class="ib pk"><div class="ibt">🧬 Cascada de extravasación leucocitaria</div>
+<p style="color:var(--t2)">1. <strong>Rolling:</strong> Selectinas (E,P) ↔ sLe<sup>x</sup> → unión débil, transitoria.<br>
+2. <strong>Activación:</strong> Quimiocinas activan integrinas en leucocitos (inside-out).<br>
+3. <strong>Adhesión firme:</strong> Integrinas (LFA-1) ↔ IgCAMs (ICAM-1).<br>
+4. <strong>Diapédesis:</strong> PECAM-1 ↔ PECAM-1 → leucocito cruza el endotelio.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="20" text-anchor="middle" fill="#E8F0F8" font-size="13" font-weight="700" font-family="DM Serif Display,serif">Cascada de Extravasación Leucocitaria — Integración de CAMs</text>
+<!-- Endothelium -->
+<rect x="30" y="135" width="840" height="30" rx="0" fill="rgba(0,163,255,0.08)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="450" y="155" text-anchor="middle" fill="#00A3FF" font-size="9" font-weight="600">ENDOTELIO VASCULAR</text>
+<!-- Tissue below -->
+<rect x="30" y="175" width="840" height="40" rx="0" fill="rgba(0,212,170,0.04)" stroke="rgba(0,212,170,0.1)" stroke-width="1"/>
+<text x="450" y="200" text-anchor="middle" fill="#5A7A96" font-size="9">TEJIDO INFLAMADO</text>
+<!-- Step 1: Rolling -->
+<circle cx="130" cy="95" r="30" fill="rgba(255,217,61,0.1)" stroke="#FFD93D" stroke-width="2"/>
+<text x="130" y="92" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="700">Leucocito</text>
+<text x="130" y="104" text-anchor="middle" fill="#FFD93D" font-size="7">(rolling)</text>
+<text x="130" y="42" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="700">1. ROLLING</text>
+<text x="130" y="55" text-anchor="middle" fill="#A78BFA" font-size="8">Selectina↔sLex</text>
+<line x1="100" y1="125" x2="105" y2="132" stroke="#A78BFA" stroke-width="1.5"/>
+<line x1="120" y1="125" x2="118" y2="132" stroke="#A78BFA" stroke-width="1.5"/>
+<line x1="140" y1="125" x2="145" y2="132" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="130" y="220" text-anchor="middle" fill="#5A7A96" font-size="7">Débil, transitoria</text>
+<!-- Arrow -->
+<line x1="185" y1="95" x2="235" y2="95" stroke="#5A7A96" stroke-width="2" marker-end="url(#ao)"/>
+<!-- Step 2: Activation -->
+<circle cx="310" cy="95" r="30" fill="rgba(249,115,22,0.1)" stroke="#F97316" stroke-width="2"/>
+<text x="310" y="92" text-anchor="middle" fill="#F97316" font-size="8" font-weight="700">Leucocito</text>
+<text x="310" y="104" text-anchor="middle" fill="#F97316" font-size="7">(activándose)</text>
+<text x="310" y="42" text-anchor="middle" fill="#F97316" font-size="10" font-weight="700">2. ACTIVACIÓN</text>
+<text x="310" y="55" text-anchor="middle" fill="#8BA4BE" font-size="8">Quimiocinas→inside-out</text>
+<path d="M290,130 C290,145 330,145 330,130" fill="none" stroke="#F97316" stroke-width="1.5" stroke-dasharray="3,2"/>
+<text x="310" y="220" text-anchor="middle" fill="#5A7A96" font-size="7">Integrinas se activan</text>
+<!-- Arrow -->
+<line x1="365" y1="95" x2="415" y2="95" stroke="#5A7A96" stroke-width="2" marker-end="url(#ao)"/>
+<!-- Step 3: Firm adhesion -->
+<circle cx="500" cy="95" r="30" fill="rgba(0,212,170,0.1)" stroke="#00D4AA" stroke-width="2"/>
+<text x="500" y="92" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="700">Leucocito</text>
+<text x="500" y="104" text-anchor="middle" fill="#00D4AA" font-size="7">(adherido)</text>
+<text x="500" y="42" text-anchor="middle" fill="#00D4AA" font-size="10" font-weight="700">3. ADHESIÓN FIRME</text>
+<text x="500" y="55" text-anchor="middle" fill="#00A3FF" font-size="8">LFA-1↔ICAM-1</text>
+<line x1="480" y1="125" x2="480" y2="135" stroke="#00D4AA" stroke-width="2.5"/>
+<line x1="500" y1="125" x2="500" y2="135" stroke="#00D4AA" stroke-width="2.5"/>
+<line x1="520" y1="125" x2="520" y2="135" stroke="#00D4AA" stroke-width="2.5"/>
+<text x="500" y="220" text-anchor="middle" fill="#5A7A96" font-size="7">Integrina (fuerte)</text>
+<!-- Arrow -->
+<line x1="555" y1="95" x2="605" y2="95" stroke="#5A7A96" stroke-width="2" marker-end="url(#ao)"/>
+<!-- Step 4: Diapedesis -->
+<circle cx="700" cy="145" r="28" fill="rgba(236,72,153,0.12)" stroke="#EC4899" stroke-width="2"/>
+<text x="700" y="142" text-anchor="middle" fill="#EC4899" font-size="8" font-weight="700">Leucocito</text>
+<text x="700" y="154" text-anchor="middle" fill="#EC4899" font-size="7">(cruzando)</text>
+<text x="700" y="42" text-anchor="middle" fill="#EC4899" font-size="10" font-weight="700">4. DIAPÉDESIS</text>
+<text x="700" y="55" text-anchor="middle" fill="#EC4899" font-size="8">PECAM-1↔PECAM-1</text>
+<text x="700" y="220" text-anchor="middle" fill="#5A7A96" font-size="7">Migración paracelular</text>
+<!-- Legend -->
+<rect x="200" y="230" width="500" height="18" rx="4" fill="rgba(0,212,170,0.05)"/>
+<text x="450" y="243" text-anchor="middle" fill="#8BA4BE" font-size="8">Selectinas (rolling débil) → Quimiocinas (activan integrinas) → Integrinas (adhesión fuerte) → PECAM-1 (diapédesis)</text>
+</svg>
+</div>
+</div>
+
+<!-- Integrinas tab -->
+<div class="tc" id="tab-int">
+<div class="ib"><div class="ibt">🔑 Integrinas (repaso)</div>
+<p style="color:var(--t2)"><strong>Heterodímeros αβ</strong> transmembrana. Median adhesión <strong>heterofílica</strong>, predominantemente <strong>célula-MEC</strong> (también cél-cél en leucocitos). Conectan la MEC con el <strong>citoesqueleto de actina</strong> (adhesiones focales, adherentes) o <strong>filamentos intermedios</strong> (hemidesmosomas con α6β4). Señalización <strong>bidireccional</strong> (inside-out / outside-in). Requieren <strong>Ca²⁺ o Mg²⁺</strong>.</p></div>
+<div class="ib n"><div class="ibt">📝 Integrinas en uniones celulares</div>
+<p style="color:var(--t2)"><strong style="color:var(--o)">Adhesiones focales:</strong> integrinas (α5β1, αVβ3) → talina → vinculina → actina.<br>
+<strong style="color:var(--y)">Hemidesmosomas:</strong> integrina α6β4 → plectina → filamentos intermedios (queratina).<br>
+<strong style="color:var(--b)">Cascada leucocitaria:</strong> LFA-1 (αLβ2) ↔ ICAM-1 → adhesión firme al endotelio.</p></div>
+</div>
+</div>
+
+<!-- Comparison table: cel-cel vs cel-MEC -->
+<div class="cd"><div class="ch">⚖️ CAMs: <span class="ac">Cél-Cél</span> vs. <span class="ac">Cél-MEC</span> <span class="pill pw">RA 3</span></div>
+<table class="et"><thead><tr><th>Aspecto</th><th>Adhesión Cél-Cél</th><th>Adhesión Cél-MEC</th></tr></thead><tbody>
+<tr><td><strong>CAMs principales</strong></td><td>Cadherinas, IgCAMs, Selectinas</td><td>Integrinas</td></tr>
+<tr><td><strong>Tipo de unión</strong></td><td>Homofílica (cadherinas) o heterofílica</td><td>Heterofílica (integrina ↔ fibronectina/laminina/colágeno)</td></tr>
+<tr><td><strong>Estructuras</strong></td><td>Uniones adherentes, desmosomas, estrechas, GAP</td><td>Adhesiones focales, hemidesmosomas</td></tr>
+<tr><td><strong>Citoesqueleto</strong></td><td>Actina (adherentes) o FI (desmosomas)</td><td>Actina (focales) o FI (hemidesmosomas)</td></tr>
+<tr><td><strong>Ligando</strong></td><td>CAM en célula vecina</td><td>Proteínas de la MEC (fibronectina, laminina, colágeno)</td></tr>
+</tbody></table></div>
+
+<!-- Match game families -->
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">Emparejar</span> familia con característica</div>
+<div class="match-game" id="mg1">
+<div class="match-col"><h4 style="color:var(--g)">Familia</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg1',this)">Cadherinas</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg1',this)">IgCAMs</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg1',this)">Selectinas</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg1',this)">Integrinas</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">Característica</h4>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg1',this)">Heterodímeros αβ, cél-MEC</div>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg1',this)">Lectinas tipo C, rolling leucocitario</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg1',this)">Homofílica, Ca²⁺-dep., 5 dominios EC</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg1',this)">Dominios tipo Ig, Ca²⁺-independiente</div>
+</div></div>
+<div class="match-score" id="mg1-score"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('cams')">← CAMs</button><button class="btn bp" onclick="go('panorama')">Uniones: Panorama →</button></div>
+</div>
+
+<!-- ======================== PANORAMA UNIONES (RA 4-5) ======================== -->
+<div class="sec" id="sec-panorama">
+<div class="cd"><div class="ch">🏗️ Panorama de las <span class="ac">Uniones Celulares</span> <span class="pill pp">RA 4–5</span></div>
+<div class="ib"><div class="ibt">🔑 Concepto integrador</div>
+<p style="color:var(--t2)">Las uniones celulares se clasifican en 3 categorías funcionales: <strong>uniones de anclaje</strong> (mecánicas), <strong>uniones ocluyentes</strong> (selladoras) y <strong>uniones comunicantes</strong> (canales). Cada una utiliza CAMs específicas y se conecta a un tipo particular de citoesqueleto.</p></div>
+
+<!-- Full cell cross-section with all junctions -->
+<div class="svg-wrap">
+<svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="22" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Distribución de Uniones en una Célula Epitelial — Corte Transversal</text>
+<text x="55" y="55" fill="#8BA4BE" font-size="10" font-weight="600">⬆ APICAL (lumen)</text>
+<!-- Cell 1 -->
+<rect x="180" y="60" width="250" height="400" rx="10" fill="rgba(236,72,153,0.03)" stroke="#EC4899" stroke-width="1.5"/>
+<text x="305" y="80" text-anchor="middle" fill="#EC4899" font-size="10">CÉLULA 1</text>
+<!-- Cell 2 -->
+<rect x="470" y="60" width="250" height="400" rx="10" fill="rgba(0,163,255,0.03)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="595" y="80" text-anchor="middle" fill="#00A3FF" font-size="10">CÉLULA 2</text>
+<!-- 1. TIGHT JUNCTION — most apical -->
+<rect x="405" y="90" width="90" height="24" rx="6" fill="rgba(167,139,250,0.25)" stroke="#A78BFA" stroke-width="2"/>
+<text x="450" y="106" text-anchor="middle" fill="#A78BFA" font-size="8" font-weight="700">TIGHT</text>
+<rect x="670" y="85" width="195" height="36" rx="6" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.2)" stroke-width="1"/>
+<text x="767" y="100" text-anchor="middle" fill="#A78BFA" font-size="8" font-weight="600">Claudina+Ocludina→ZO-1</text>
+<text x="767" y="113" text-anchor="middle" fill="#5A7A96" font-size="7">Sello + Polaridad (fence)</text>
+<line x1="495" y1="102" x2="670" y2="102" stroke="#A78BFA" stroke-width="1" stroke-dasharray="3,2"/>
+<!-- 2. ADHERENTE — just below -->
+<rect x="408" y="140" width="84" height="24" rx="6" fill="rgba(0,212,170,0.25)" stroke="#00D4AA" stroke-width="2"/>
+<text x="450" y="156" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="700">ADHERENTE</text>
+<!-- Actin belts -->
+<path d="M250,152 C300,148 350,148 405,152" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+<path d="M495,152 C550,148 600,148 650,152" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+<text x="310" y="170" text-anchor="middle" fill="#FF6B6B" font-size="7">Actina (cinturón)</text>
+<rect x="670" y="135" width="195" height="36" rx="6" fill="rgba(0,212,170,0.06)" stroke="rgba(0,212,170,0.2)" stroke-width="1"/>
+<text x="767" y="150" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="600">E-cadherina→cateninas→Actina</text>
+<text x="767" y="163" text-anchor="middle" fill="#5A7A96" font-size="7">Cinturón continuo cél-cél</text>
+<line x1="492" y1="152" x2="670" y2="152" stroke="#00D4AA" stroke-width="1" stroke-dasharray="3,2"/>
+<!-- 3. DESMOSOMAS — spots below -->
+<ellipse cx="450" cy="215" rx="28" ry="16" fill="rgba(255,217,61,0.2)" stroke="#FFD93D" stroke-width="2"/>
+<text x="450" y="219" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="700">DESMO</text>
+<ellipse cx="450" cy="270" rx="28" ry="16" fill="rgba(255,217,61,0.2)" stroke="#FFD93D" stroke-width="2"/>
+<text x="450" y="274" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="700">DESMO</text>
+<!-- FI going through desmosomes -->
+<path d="M250,200 C320,210 380,212 422,215" fill="none" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<path d="M478,215 C520,212 580,210 650,200" fill="none" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<path d="M250,260 C320,268 380,270 422,270" fill="none" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<path d="M478,270 C520,268 580,260 650,260" fill="none" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<text x="290" y="245" text-anchor="middle" fill="#F97316" font-size="7">FI (queratina)</text>
+<rect x="670" y="207" width="195" height="36" rx="6" fill="rgba(255,217,61,0.06)" stroke="rgba(255,217,61,0.2)" stroke-width="1"/>
+<text x="767" y="222" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="600">Dsg/Dsc→Desmopl.→FI</text>
+<text x="767" y="235" text-anchor="middle" fill="#5A7A96" font-size="7">Puntos de remache cél-cél</text>
+<line x1="478" y1="215" x2="670" y2="222" stroke="#FFD93D" stroke-width="1" stroke-dasharray="3,2"/>
+<!-- 4. GAP — scattered -->
+<circle cx="450" cy="330" r="12" fill="rgba(0,163,255,0.2)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="450" y="334" text-anchor="middle" fill="#00A3FF" font-size="6" font-weight="700">GAP</text>
+<circle cx="445" cy="365" r="12" fill="rgba(0,163,255,0.2)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="445" y="369" text-anchor="middle" fill="#00A3FF" font-size="6" font-weight="700">GAP</text>
+<rect x="670" y="325" width="195" height="28" rx="6" fill="rgba(0,163,255,0.06)" stroke="rgba(0,163,255,0.2)" stroke-width="1"/>
+<text x="767" y="343" text-anchor="middle" fill="#00A3FF" font-size="8" font-weight="600">Conexinas→Conexón→Canal</text>
+<line x1="462" y1="330" x2="670" y2="338" stroke="#00A3FF" stroke-width="1" stroke-dasharray="3,2"/>
+<!-- 5. HEMIDESMOSOMAS — at basal surface -->
+<rect x="180" y="460" width="540" height="12" rx="0" fill="rgba(0,212,170,0.1)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="450" y="490" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">LÁMINA BASAL (Laminina-332, Col IV)</text>
+<rect x="240" y="440" width="40" height="20" rx="5" fill="rgba(249,115,22,0.25)" stroke="#F97316" stroke-width="2"/>
+<text x="260" y="454" text-anchor="middle" fill="#F97316" font-size="6" font-weight="700">HD</text>
+<rect x="360" y="440" width="40" height="20" rx="5" fill="rgba(249,115,22,0.25)" stroke="#F97316" stroke-width="2"/>
+<text x="380" y="454" text-anchor="middle" fill="#F97316" font-size="6" font-weight="700">HD</text>
+<rect x="500" y="440" width="40" height="20" rx="5" fill="rgba(249,115,22,0.25)" stroke="#F97316" stroke-width="2"/>
+<text x="520" y="454" text-anchor="middle" fill="#F97316" font-size="6" font-weight="700">HD</text>
+<rect x="620" y="440" width="40" height="20" rx="5" fill="rgba(249,115,22,0.25)" stroke="#F97316" stroke-width="2"/>
+<text x="640" y="454" text-anchor="middle" fill="#F97316" font-size="6" font-weight="700">HD</text>
+<!-- FI to hemidesmosomes -->
+<path d="M260,425 C260,415 290,400 310,390" fill="none" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<path d="M380,425 C380,405 370,390 350,380" fill="none" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<rect x="670" y="440" width="195" height="36" rx="6" fill="rgba(249,115,22,0.06)" stroke="rgba(249,115,22,0.2)" stroke-width="1"/>
+<text x="767" y="455" text-anchor="middle" fill="#F97316" font-size="8" font-weight="600">α6β4→Plectina→Queratina</text>
+<text x="767" y="468" text-anchor="middle" fill="#5A7A96" font-size="7">Ancla epitelio a lámina basal</text>
+<text x="55" y="475" fill="#8BA4BE" font-size="10" font-weight="600">⬇ BASAL (MEC)</text>
+<!-- Color legend -->
+<rect x="35" y="500" width="830" height="18" rx="4" fill="rgba(0,0,0,0.2)"/>
+<circle cx="75" cy="509" r="5" fill="#A78BFA"/><text x="90" y="513" fill="#A78BFA" font-size="7">Tight</text>
+<circle cx="150" cy="509" r="5" fill="#00D4AA"/><text x="165" y="513" fill="#00D4AA" font-size="7">Adherente</text>
+<circle cx="245" cy="509" r="5" fill="#FFD93D"/><text x="260" y="513" fill="#FFD93D" font-size="7">Desmosoma</text>
+<circle cx="355" cy="509" r="5" fill="#00A3FF"/><text x="370" y="513" fill="#00A3FF" font-size="7">Gap</text>
+<circle cx="430" cy="509" r="5" fill="#F97316"/><text x="445" y="513" fill="#F97316" font-size="7">Hemidesmosoma</text>
+<circle cx="560" cy="509" r="5" fill="#FF6B6B"/><text x="575" y="513" fill="#FF6B6B" font-size="7">Actina</text>
+<circle cx="640" cy="509" r="5" fill="#F97316"/><text x="655" y="513" fill="#F97316" font-size="7">FI (queratina)</text>
+</svg>
+</div>
+
+<!-- Interactive cell diagram simulation -->
+<div class="sim-box">
+<div class="ch">🔬 Simulador: <span class="ac">Uniones en una célula epitelial</span></div>
+<p style="color:var(--t2);font-size:.9rem;margin-bottom:10px">Haz clic en cada tipo de unión para explorar su estructura, localización y conexión al citoesqueleto:</p>
+<div class="sim-step-ind" id="juncSim-ind"></div>
+<div class="svg-wrap" id="juncSim-svg"></div>
+<div class="sim-narration" id="juncSim-nar"></div>
+</div>
+
+<div class="ch" style="margin-top:18px">🧬 Citoesqueleto ↔ Uniones</div>
+<div class="ib go"><div class="ibt">💡 Relación citoesqueleto-uniones</div>
+<p style="color:var(--t2)"><strong style="color:var(--g)">Microfilamentos (actina):</strong> Uniones adherentes (zónula adherens) y adhesiones focales. Adaptadores: cateninas (α, β, p120), talina, vinculina, α-actinina.<br><br>
+<strong style="color:var(--y)">Filamentos intermedios (FI):</strong> Desmosomas (queratina en epitelios, desmina en corazón) y hemidesmosomas (queratina). Adaptadores: desmoplaquina, placoglobina, plectina, BP230.<br><br>
+<strong style="color:var(--t3)">Sin conexión directa al citoesqueleto:</strong> Uniones estrechas (tight junctions) y uniones GAP se asocian a proteínas de andamiaje (ZO-1, ZO-2) o simplemente forman canales.</p></div>
+
+<table class="et"><thead><tr><th>Unión</th><th>CAM</th><th>Citoesqueleto</th><th>Adaptadores clave</th><th>Cél-Cél / Cél-MEC</th></tr></thead><tbody>
+<tr><td><strong style="color:var(--g)">Adherente</strong></td><td>E-cadherina</td><td>Actina</td><td>β-catenina, α-catenina, p120</td><td>Cél-Cél</td></tr>
+<tr><td><strong style="color:var(--y)">Desmosoma</strong></td><td>Desmogleína, Desmocolina</td><td>FI (queratina/desmina)</td><td>Desmoplaquina, Placoglobina, Placofilina</td><td>Cél-Cél</td></tr>
+<tr><td><strong style="color:var(--o)">Hemidesmosoma</strong></td><td>Integrina α6β4</td><td>FI (queratina)</td><td>Plectina, BP230, BP180</td><td>Cél-MEC</td></tr>
+<tr><td><strong style="color:var(--r)">Adhesión focal</strong></td><td>Integrinas (α5β1, αVβ3)</td><td>Actina</td><td>Talina, Vinculina, Paxilina, FAK</td><td>Cél-MEC</td></tr>
+<tr><td><strong style="color:var(--p)">Estrecha (tight)</strong></td><td>Claudina, Ocludina, JAMs</td><td>Actina (indirecta, vía ZO)</td><td>ZO-1, ZO-2, ZO-3</td><td>Cél-Cél</td></tr>
+<tr><td><strong style="color:var(--b)">Gap</strong></td><td>Conexinas (6 = conexón)</td><td>—</td><td>ZO-1 (andamiaje)</td><td>Cél-Cél</td></tr>
+</tbody></table>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q03"><div class="qt">¿Qué tipo de citoesqueleto se asocia a los desmosomas?</div><div class="qo">
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">A</div>Microtúbulos</button>
+<button class="qb" onclick="cq('q03',this,1)"><div class="ol">B</div>Filamentos intermedios (queratina/desmina)</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">C</div>Microfilamentos de actina</button>
+<button class="qb" onclick="cq('q03',this,0)"><div class="ol">D</div>Filamentos de miosina</button>
+</div><div class="qf" id="fb-q03"></div></div>
+<div class="qq" id="q04"><div class="qt">Las adhesiones focales conectan:</div><div class="qo">
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">A</div>Cadherinas con filamentos intermedios</button>
+<button class="qb" onclick="cq('q04',this,1)"><div class="ol">B</div>Integrinas con actina (cél-MEC)</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">C</div>Conexinas con microtúbulos</button>
+<button class="qb" onclick="cq('q04',this,0)"><div class="ol">D</div>Claudinas con actina</button>
+</div><div class="qf" id="fb-q04"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('familias')">← Familias</button><button class="btn bp" onclick="go('adherentes')">U. Adherentes →</button></div>
+</div>
+
+<!-- ======================== ADHERENTES (RA 6) ======================== -->
+<div class="sec" id="sec-adherentes">
+<div class="cd"><div class="ch">🟢 Uniones <span class="ac">Adherentes</span> (Zonula Adherens) <span class="pill pg">RA 6</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div>
+<p style="color:var(--t2)">Las <strong>uniones adherentes</strong> (zonula adherens) son uniones <strong>célula-célula</strong> en las que las <strong>cadherinas clásicas</strong> (E-cadherina en epitelio) median adhesión homofílica Ca²⁺-dependiente. Intracelularmente, se conectan al <strong>citoesqueleto de actina</strong> a través de un complejo de <strong>cateninas</strong>. Forman un <strong>cinturón continuo</strong> alrededor de la célula epitelial, justo debajo de las uniones estrechas.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="24" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura Molecular de la Unión Adherente</text>
+<!-- Cell 1 -->
+<rect x="50" y="60" width="350" height="220" rx="16" fill="rgba(236,72,153,0.04)" stroke="#EC4899" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="225" y="85" text-anchor="middle" fill="#EC4899" font-size="11" font-weight="600">CÉLULA 1</text>
+<!-- Cell 2 -->
+<rect x="500" y="60" width="350" height="220" rx="16" fill="rgba(0,163,255,0.04)" stroke="#00A3FF" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="675" y="85" text-anchor="middle" fill="#00A3FF" font-size="11" font-weight="600">CÉLULA 2</text>
+<!-- Membranes -->
+<line x1="400" y1="70" x2="400" y2="270" stroke="#EC4899" stroke-width="3"/>
+<line x1="500" y1="70" x2="500" y2="270" stroke="#00A3FF" stroke-width="3"/>
+<text x="450" y="67" text-anchor="middle" fill="#5A7A96" font-size="8">Espacio intercelular (~15-20 nm)</text>
+<!-- E-cadherins -->
+<rect x="390" y="130" width="120" height="20" rx="6" fill="rgba(0,212,170,0.3)" stroke="#00D4AA" stroke-width="2"/>
+<text x="450" y="144" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="700">E-cadherina ↔ E-cadherina</text>
+<rect x="390" y="165" width="120" height="20" rx="6" fill="rgba(0,212,170,0.3)" stroke="#00D4AA" stroke-width="2"/>
+<text x="450" y="179" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="700">Unión homofílica</text>
+<!-- Ca2+ ions -->
+<circle cx="420" cy="155" r="5" fill="rgba(255,217,61,0.4)" stroke="#FFD93D" stroke-width="1"/>
+<text x="420" y="158" text-anchor="middle" fill="#FFD93D" font-size="5" font-weight="700">Ca²⁺</text>
+<circle cx="480" cy="155" r="5" fill="rgba(255,217,61,0.4)" stroke="#FFD93D" stroke-width="1"/>
+<!-- Intracellular complex Cell 1 -->
+<rect x="290" y="135" width="60" height="16" rx="4" fill="rgba(167,139,250,0.25)" stroke="#A78BFA" stroke-width="1"/>
+<text x="320" y="147" text-anchor="middle" fill="#A78BFA" font-size="7" font-weight="600">p120-cat</text>
+<rect x="250" y="160" width="65" height="16" rx="4" fill="rgba(255,107,107,0.2)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="282" y="172" text-anchor="middle" fill="#FF6B6B" font-size="7" font-weight="600">β-catenina</text>
+<rect x="190" y="185" width="65" height="16" rx="4" fill="rgba(249,115,22,0.2)" stroke="#F97316" stroke-width="1"/>
+<text x="222" y="197" text-anchor="middle" fill="#F97316" font-size="7" font-weight="600">α-catenina</text>
+<!-- Actin filaments Cell 1 -->
+<line x1="100" y1="200" x2="190" y2="193" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+<line x1="100" y1="215" x2="190" y2="193" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+<text x="130" y="240" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">Actina (microfilamentos)</text>
+<!-- Intracellular complex Cell 2 -->
+<rect x="550" y="135" width="60" height="16" rx="4" fill="rgba(167,139,250,0.25)" stroke="#A78BFA" stroke-width="1"/>
+<text x="580" y="147" text-anchor="middle" fill="#A78BFA" font-size="7" font-weight="600">p120-cat</text>
+<rect x="585" y="160" width="65" height="16" rx="4" fill="rgba(255,107,107,0.2)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="617" y="172" text-anchor="middle" fill="#FF6B6B" font-size="7" font-weight="600">β-catenina</text>
+<rect x="645" y="185" width="65" height="16" rx="4" fill="rgba(249,115,22,0.2)" stroke="#F97316" stroke-width="1"/>
+<text x="677" y="197" text-anchor="middle" fill="#F97316" font-size="7" font-weight="600">α-catenina</text>
+<!-- Actin filaments Cell 2 -->
+<line x1="710" y1="193" x2="800" y2="200" stroke="#00A3FF" stroke-width="4" stroke-linecap="round"/>
+<line x1="710" y1="193" x2="800" y2="215" stroke="#00A3FF" stroke-width="4" stroke-linecap="round"/>
+<text x="770" y="240" text-anchor="middle" fill="#00A3FF" font-size="9" font-weight="600">Actina (microfilamentos)</text>
+<!-- Summary -->
+<rect x="250" y="260" width="400" height="22" rx="6" fill="rgba(0,212,170,0.1)" stroke="rgba(0,212,170,0.2)" stroke-width="1"/>
+<text x="450" y="275" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">E-cadherina → p120 + β-catenina → α-catenina → ACTINA</text>
+</svg>
+</div>
+
+<div class="ib w"><div class="ibt">⚠️ Clínica: β-catenina y cáncer</div>
+<p style="color:var(--t2)">La <strong>β-catenina</strong> tiene doble función: en la unión adherente (estructural) y en la vía de señalización <strong>Wnt</strong> (transcripcional). Cuando se pierde la E-cadherina, la β-catenina libre activa genes de proliferación → <strong>cáncer colorrectal</strong> (mutación APC). Pérdida de E-cadherina → <strong>carcinoma gástrico difuso hereditario</strong>.</p></div>
+</div>
+
+<div class="sn"><button class="btn bs" onclick="go('panorama')">← Panorama</button><button class="btn bp" onclick="go('desmosomas')">Desmosomas →</button></div>
+</div>
+
+<!-- ======================== DESMOSOMAS (RA 6) ======================== -->
+<div class="sec" id="sec-desmosomas">
+<div class="cd"><div class="ch">🟡 <span class="ac">Desmosomas</span> (Macula Adherens) <span class="pill py">RA 6</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div>
+<p style="color:var(--t2)">Los <strong>desmosomas</strong> (macula adherens) son uniones <strong>puntuales cél-cél</strong> que proporcionan <strong>resistencia mecánica extrema</strong>. Utilizan cadherinas desmosómicas (<strong>desmogleína</strong> y <strong>desmocolina</strong>) y se anclan a <strong>filamentos intermedios</strong> (queratina en epitelios, desmina en músculo cardíaco) vía una placa densa intracelular compuesta por <strong>desmoplaquina</strong>, <strong>placoglobina</strong> (γ-catenina) y <strong>placofilina</strong>.</p></div>
+
+<div class="cg">
+<div class="cc" style="border-color:rgba(255,217,61,.3)"><h4 style="color:var(--y)">Componentes</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>CAMs (extracelular):</strong><br>• Desmogleína (Dsg1-4)<br>• Desmocolina (Dsc1-3)<br><br><strong>Placa (intracelular):</strong><br>• Placoglobina (γ-catenina)<br>• Placofilina<br>• <strong>Desmoplaquina</strong> (une la placa a los FI)<br><br><strong>Citoesqueleto:</strong><br>• Queratinas (epitelio)<br>• Desmina (músculo cardíaco)</p></div>
+<div class="cc" style="border-color:rgba(0,212,170,.3)"><h4 style="color:var(--g)">Localización y función</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>Localización:</strong> abundantes en tejidos sometidos a estrés mecánico: <strong>piel</strong> (epidermis), <strong>músculo cardíaco</strong> (discos intercalares), mucosa oral, cérvix.<br><br>
+<strong>Funciones:</strong><br>• Resistencia mecánica (tipo «remache» entre células)<br>• Distribuyen fuerzas de tensión sobre toda la red de FI<br>• Mantienen integridad tisular bajo estrés<br><br>
+<strong>Diferencia con adherentes:</strong> se unen a FI (no actina) y son puntuales (no cinturón).</p></div>
+</div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="22" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura Molecular del Desmosoma</text>
+<!-- Cell 1 -->
+<rect x="40" y="50" width="360" height="270" rx="14" fill="rgba(236,72,153,0.03)" stroke="#EC4899" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="220" y="72" text-anchor="middle" fill="#EC4899" font-size="10">CÉLULA 1</text>
+<!-- Cell 2 -->
+<rect x="500" y="50" width="360" height="270" rx="14" fill="rgba(0,163,255,0.03)" stroke="#00A3FF" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="680" y="72" text-anchor="middle" fill="#00A3FF" font-size="10">CÉLULA 2</text>
+<!-- Membranes -->
+<line x1="400" y1="55" x2="400" y2="310" stroke="#EC4899" stroke-width="3"/>
+<line x1="500" y1="55" x2="500" y2="310" stroke="#00A3FF" stroke-width="3"/>
+<text x="450" y="90" text-anchor="middle" fill="#5A7A96" font-size="8">~30 nm</text>
+<!-- Desmoglein + Desmocollin crossing -->
+<line x1="400" y1="140" x2="500" y2="160" stroke="#00D4AA" stroke-width="2.5"/>
+<line x1="400" y1="160" x2="500" y2="140" stroke="#FFD93D" stroke-width="2.5"/>
+<line x1="400" y1="190" x2="500" y2="210" stroke="#00D4AA" stroke-width="2.5"/>
+<line x1="400" y1="210" x2="500" y2="190" stroke="#FFD93D" stroke-width="2.5"/>
+<line x1="400" y1="240" x2="500" y2="260" stroke="#00D4AA" stroke-width="2.5"/>
+<line x1="400" y1="260" x2="500" y2="240" stroke="#FFD93D" stroke-width="2.5"/>
+<!-- Labels for CAMs -->
+<text x="450" y="108" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="600">Desmogleína (Dsg)</text>
+<text x="450" y="120" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="600">Desmocolina (Dsc)</text>
+<text x="450" y="132" text-anchor="middle" fill="#8BA4BE" font-size="7">(cadherinas desmosómicas)</text>
+<!-- Dense plaque Cell 1 -->
+<rect x="280" y="145" width="110" height="80" rx="10" fill="rgba(255,217,61,0.08)" stroke="#FFD93D" stroke-width="2"/>
+<text x="335" y="165" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="700">PLACA</text>
+<text x="335" y="178" text-anchor="middle" fill="#FFD93D" font-size="7">Placoglobina (γ-cat)</text>
+<text x="335" y="191" text-anchor="middle" fill="#FFD93D" font-size="7">Placofilina</text>
+<rect x="290" y="200" width="90" height="16" rx="4" fill="rgba(249,115,22,0.2)" stroke="#F97316" stroke-width="1.5"/>
+<text x="335" y="212" text-anchor="middle" fill="#F97316" font-size="7" font-weight="700">DESMOPLAQUINA</text>
+<!-- FI Cell 1 -->
+<line x1="100" y1="170" x2="280" y2="185" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+<line x1="100" y1="200" x2="280" y2="195" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+<line x1="100" y1="230" x2="280" y2="210" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+<text x="120" y="260" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">Queratina / Desmina (FI)</text>
+<!-- Dense plaque Cell 2 -->
+<rect x="510" y="145" width="110" height="80" rx="10" fill="rgba(255,217,61,0.08)" stroke="#FFD93D" stroke-width="2"/>
+<text x="565" y="165" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="700">PLACA</text>
+<text x="565" y="178" text-anchor="middle" fill="#FFD93D" font-size="7">Placoglobina (γ-cat)</text>
+<text x="565" y="191" text-anchor="middle" fill="#FFD93D" font-size="7">Placofilina</text>
+<rect x="520" y="200" width="90" height="16" rx="4" fill="rgba(249,115,22,0.2)" stroke="#F97316" stroke-width="1.5"/>
+<text x="565" y="212" text-anchor="middle" fill="#F97316" font-size="7" font-weight="700">DESMOPLAQUINA</text>
+<!-- FI Cell 2 -->
+<line x1="620" y1="185" x2="800" y2="170" stroke="#00A3FF" stroke-width="4" stroke-linecap="round"/>
+<line x1="620" y1="195" x2="800" y2="200" stroke="#00A3FF" stroke-width="4" stroke-linecap="round"/>
+<line x1="620" y1="210" x2="800" y2="230" stroke="#00A3FF" stroke-width="4" stroke-linecap="round"/>
+<text x="780" y="260" text-anchor="middle" fill="#00A3FF" font-size="9" font-weight="600">Queratina / Desmina (FI)</text>
+<!-- Chain summary -->
+<rect x="200" y="295" width="500" height="28" rx="8" fill="rgba(255,217,61,0.08)" stroke="rgba(255,217,61,0.2)" stroke-width="1"/>
+<text x="450" y="313" text-anchor="middle" fill="#FFD93D" font-size="9" font-weight="600">FI ← Desmoplaquina ← Placoglobina/Placofilina ← Dsg/Dsc ↔ Dsg/Dsc → … → FI</text>
+</svg>
+</div>
+
+<div class="ib w"><div class="ibt">⚠️ Clínica: Pénfigo vulgar</div>
+<p style="color:var(--t2)"><strong>Pénfigo vulgar:</strong> autoanticuerpos contra <strong>desmogleína-3</strong> → destrucción de desmosomas → separación de células epiteliales (<strong>acantólisis</strong>) → ampollas mucosas y cutáneas dolorosas. Es una enfermedad autoinmune potencialmente fatal sin tratamiento.<br><br>
+<strong>Cardiomiopatía arritmogénica:</strong> mutaciones en genes desmosómicos (desmoplaquina, placoglobina) → desmosomas defectuosos en corazón → muerte súbita en jóvenes deportistas.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q05"><div class="qt">¿Qué proteína une la placa desmosómica a los filamentos intermedios?</div><div class="qo">
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">A</div>β-catenina</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">B</div>Talina</button>
+<button class="qb" onclick="cq('q05',this,1)"><div class="ol">C</div>Desmoplaquina</button>
+<button class="qb" onclick="cq('q05',this,0)"><div class="ol">D</div>Vinculina</button>
+</div><div class="qf" id="fb-q05"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('adherentes')">← Adherentes</button><button class="btn bp" onclick="go('hemidesmo')">Hemidesmosomas →</button></div>
+</div>
+
+<!-- ======================== HEMIDESMOSOMAS (RA 6) ======================== -->
+<div class="sec" id="sec-hemidesmo">
+<div class="cd"><div class="ch">🟠 <span class="ac">Hemidesmosomas</span> <span class="pill por">RA 6</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div>
+<p style="color:var(--t2)">Los <strong>hemidesmosomas</strong> son uniones <strong>célula-MEC</strong> (no cél-cél) que anclan la célula epitelial a la <strong>lámina basal</strong>. Parecen "medio desmosoma" en microscopía electrónica, pero molecularmente son <strong>completamente distintos</strong>: utilizan <strong>integrinas</strong> (no cadherinas) y se conectan a <strong>filamentos intermedios de queratina</strong> (no actina).</p></div>
+
+<div class="cg">
+<div class="cc" style="border-color:rgba(249,115,22,.3)"><h4 style="color:var(--o)">Componentes moleculares</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>CAM transmembrana:</strong><br>• <strong>Integrina α6β4</strong> (principal)<br>• <strong>BP180</strong> (colágeno XVII, transmembrana)<br><br>
+<strong>Placa intracelular:</strong><br>• <strong>Plectina</strong> (une α6β4 → queratina)<br>• <strong>BP230</strong> (une placa → queratina)<br><br>
+<strong>Citoesqueleto:</strong><br>• Filamentos intermedios de <strong>queratina</strong><br><br>
+<strong>Ligando extracelular:</strong><br>• <strong>Laminina-332</strong> (laminina-5) en la lámina basal</p></div>
+<div class="cc" style="border-color:rgba(236,72,153,.3)"><h4 style="color:var(--pk)">Diferencia: Desmosoma vs Hemidesmosoma</h4>
+<table class="et" style="margin:0;font-size:.82rem"><thead><tr><th>Aspecto</th><th>Desmosoma</th><th>Hemidesmosoma</th></tr></thead><tbody>
+<tr><td><strong>Adhesión</strong></td><td>Cél-Cél</td><td>Cél-MEC</td></tr>
+<tr><td><strong>CAM</strong></td><td>Cadherinas (Dsg/Dsc)</td><td>Integrina α6β4</td></tr>
+<tr><td><strong>Unión</strong></td><td>Homofílica</td><td>Heterofílica (→laminina)</td></tr>
+<tr><td><strong>Citoesqueleto</strong></td><td>FI (queratina/desmina)</td><td>FI (queratina)</td></tr>
+<tr><td><strong>Adaptadores</strong></td><td>Desmoplaquina, Placoglobina</td><td>Plectina, BP230</td></tr>
+</tbody></table></div>
+</div>
+
+<div class="ib w"><div class="ibt">⚠️ Clínica: Penfigoide ampolloso</div>
+<p style="color:var(--t2)"><strong>Penfigoide ampolloso:</strong> autoanticuerpos contra <strong>BP180</strong> y/o <strong>BP230</strong> → hemidesmosomas defectuosos → separación del <strong>epitelio de la lámina basal</strong> → ampollas <strong>subepiteliales</strong> (a diferencia del pénfigo vulgar que son intraepiteliales).<br><br>
+<strong>Epidermólisis bullosa juncional:</strong> mutación en laminina-332 o integrina α6β4 → ampollas congénitas severas.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="22" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura Molecular del Hemidesmosoma</text>
+<!-- Epithelial Cell -->
+<rect x="100" y="40" width="700" height="140" rx="14" fill="rgba(236,72,153,0.03)" stroke="#EC4899" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="450" y="62" text-anchor="middle" fill="#EC4899" font-size="11" font-weight="600">CÉLULA EPITELIAL</text>
+<!-- Keratin FI -->
+<line x1="150" y1="90" x2="400" y2="105" stroke="#FF6B6B" stroke-width="5" stroke-linecap="round"/>
+<line x1="150" y1="110" x2="400" y2="115" stroke="#FF6B6B" stroke-width="5" stroke-linecap="round"/>
+<line x1="500" y1="105" x2="750" y2="90" stroke="#FF6B6B" stroke-width="5" stroke-linecap="round"/>
+<line x1="500" y1="115" x2="750" y2="110" stroke="#FF6B6B" stroke-width="5" stroke-linecap="round"/>
+<text x="250" y="80" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">Filamentos Intermedios de Queratina</text>
+<!-- Intracellular plaque -->
+<rect x="340" y="100" width="220" height="50" rx="10" fill="rgba(249,115,22,0.08)" stroke="#F97316" stroke-width="2"/>
+<text x="450" y="118" text-anchor="middle" fill="#F97316" font-size="9" font-weight="700">PLACA INTRACELULAR</text>
+<rect x="355" y="125" width="70" height="16" rx="4" fill="rgba(249,115,22,0.2)" stroke="#F97316" stroke-width="1"/>
+<text x="390" y="137" text-anchor="middle" fill="#F97316" font-size="7" font-weight="600">Plectina</text>
+<rect x="440" y="125" width="55" height="16" rx="4" fill="rgba(167,139,250,0.2)" stroke="#A78BFA" stroke-width="1"/>
+<text x="467" y="137" text-anchor="middle" fill="#A78BFA" font-size="7" font-weight="600">BP230</text>
+<rect x="510" y="125" width="40" height="16" rx="4" fill="rgba(0,163,255,0.15)" stroke="#00A3FF" stroke-width="1"/>
+<text x="530" y="137" text-anchor="middle" fill="#00A3FF" font-size="6" font-weight="600">CD151</text>
+<!-- Plasma Membrane -->
+<rect x="100" y="180" width="700" height="10" rx="0" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1.5"/>
+<!-- Transmembrane proteins -->
+<rect x="360" y="165" width="80" height="35" rx="6" fill="rgba(0,212,170,0.15)" stroke="#00D4AA" stroke-width="2"/>
+<text x="400" y="182" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="700">α6β4</text>
+<text x="400" y="195" text-anchor="middle" fill="#00D4AA" font-size="6">(integrina)</text>
+<rect x="480" y="168" width="55" height="30" rx="5" fill="rgba(255,217,61,0.15)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="507" y="183" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="600">BP180</text>
+<text x="507" y="194" text-anchor="middle" fill="#FFD93D" font-size="6">(Col XVII)</text>
+<!-- Extracellular connections going down -->
+<line x1="400" y1="200" x2="400" y2="230" stroke="#00D4AA" stroke-width="2"/>
+<line x1="507" y1="198" x2="507" y2="230" stroke="#FFD93D" stroke-width="2"/>
+<!-- Lamina lucida -->
+<rect x="200" y="230" width="500" height="22" rx="0" fill="rgba(255,217,61,0.05)" stroke="rgba(255,217,61,0.2)" stroke-width="1"/>
+<text x="450" y="244" text-anchor="middle" fill="#FFD93D" font-size="8">Lámina lúcida</text>
+<!-- Laminina-332 -->
+<rect x="340" y="248" width="220" height="20" rx="6" fill="rgba(236,72,153,0.15)" stroke="#EC4899" stroke-width="1.5"/>
+<text x="450" y="262" text-anchor="middle" fill="#EC4899" font-size="8" font-weight="700">LAMININA-332 (laminina-5)</text>
+<!-- Lamina densa -->
+<rect x="200" y="272" width="500" height="22" rx="0" fill="rgba(0,163,255,0.1)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="450" y="287" text-anchor="middle" fill="#00A3FF" font-size="8" font-weight="600">Lámina densa (Colágeno IV)</text>
+<!-- Chain summary -->
+<rect x="150" y="302" width="600" height="24" rx="6" fill="rgba(249,115,22,0.06)" stroke="rgba(249,115,22,0.2)" stroke-width="1"/>
+<text x="450" y="318" text-anchor="middle" fill="#F97316" font-size="9" font-weight="600">Queratina (FI) ← Plectina/BP230 ← α6β4 + BP180 → Laminina-332 → Col IV (lámina basal)</text>
+</svg>
+</div>
+</div>
+
+<div class="sn"><button class="btn bs" onclick="go('desmosomas')">← Desmosomas</button><button class="btn bp" onclick="go('estrechas')">U. Estrechas →</button></div>
+</div>
+
+<!-- ======================== ESTRECHAS (RA 6) ======================== -->
+<div class="sec" id="sec-estrechas">
+<div class="cd"><div class="ch">🟣 Uniones <span class="ac">Estrechas</span> (Tight Junctions / Zonula Occludens) <span class="pill pp">RA 6</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div>
+<p style="color:var(--t2)">Las <strong>uniones estrechas</strong> (tight junctions, zonula occludens) son uniones <strong>cél-cél</strong> que forman un <strong>sello hermético</strong> entre células epiteliales/endoteliales. Se localizan en la posición <strong>más apical</strong> del complejo de unión. Están formadas por proteínas transmembrana que crean <strong>hebras de sellado</strong> (kissing points) entre membranas adyacentes.</p></div>
+
+<div class="cg">
+<div class="cc" style="border-color:rgba(167,139,250,.3)"><h4 style="color:var(--p)">Componentes moleculares</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>Transmembrana (4 pasajes):</strong><br>• <strong>Claudinas</strong> (>24 tipos) — principal barrera; determinan selectividad iónica<br>• <strong>Ocludina</strong> — reguladora<br>• <strong>JAMs</strong> (Junctional Adhesion Molecules) — IgCAMs, diapédesis<br>• <strong>Tricelulina</strong> — sella uniones de 3 células<br><br>
+<strong>Andamiaje intracelular:</strong><br>• <strong>ZO-1, ZO-2, ZO-3</strong> (familia MAGUK) — conectan a actina y regulan señalización</p></div>
+<div class="cc" style="border-color:rgba(0,212,170,.3)"><h4 style="color:var(--g)">Funciones</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>1. Barrera paracelular:</strong> sellan el espacio entre células → controlan el paso de iones, agua y solutos por la ruta paracelular.<br><br>
+<strong>2. Cerca (fence):</strong> impiden la difusión lateral de proteínas/lípidos entre el dominio <strong>apical</strong> y el <strong>basolateral</strong> → mantienen la <strong>polaridad</strong> celular.<br><br>
+<strong>3. Selectividad:</strong> las claudinas forman <strong>poros selectivos</strong> para ciertos iones (ej: claudina-16 para Mg²⁺ en riñón).<br><br>
+<strong>Localización:</strong> epitelios, endotelio, BHE (barrera hematoencefálica).</p></div>
+</div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="22" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura Molecular de la Unión Estrecha (Tight Junction)</text>
+<!-- Cell 1 -->
+<rect x="50" y="40" width="350" height="230" rx="14" fill="rgba(236,72,153,0.03)" stroke="#EC4899" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="225" y="62" text-anchor="middle" fill="#EC4899" font-size="10">CÉLULA 1</text>
+<!-- Cell 2 -->
+<rect x="500" y="40" width="350" height="230" rx="14" fill="rgba(0,163,255,0.03)" stroke="#00A3FF" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="675" y="62" text-anchor="middle" fill="#00A3FF" font-size="10">CÉLULA 2</text>
+<!-- Membranes -->
+<line x1="400" y1="45" x2="400" y2="265" stroke="#EC4899" stroke-width="3"/>
+<line x1="500" y1="45" x2="500" y2="265" stroke="#00A3FF" stroke-width="3"/>
+<!-- Kissing points (where membranes meet) -->
+<line x1="400" y1="100" x2="500" y2="100" stroke="#A78BFA" stroke-width="3"/>
+<line x1="400" y1="130" x2="500" y2="130" stroke="#A78BFA" stroke-width="3"/>
+<line x1="400" y1="160" x2="500" y2="160" stroke="#A78BFA" stroke-width="3"/>
+<line x1="400" y1="190" x2="500" y2="190" stroke="#A78BFA" stroke-width="3"/>
+<!-- Claudin labels -->
+<rect x="420" y="88" width="60" height="14" rx="4" fill="rgba(167,139,250,0.3)" stroke="#A78BFA" stroke-width="1"/>
+<text x="450" y="99" text-anchor="middle" fill="#A78BFA" font-size="7" font-weight="700">Claudina</text>
+<rect x="420" y="118" width="60" height="14" rx="4" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="1"/>
+<text x="450" y="129" text-anchor="middle" fill="#00D4AA" font-size="7" font-weight="600">Ocludina</text>
+<rect x="420" y="148" width="60" height="14" rx="4" fill="rgba(167,139,250,0.3)" stroke="#A78BFA" stroke-width="1"/>
+<text x="450" y="159" text-anchor="middle" fill="#A78BFA" font-size="7" font-weight="700">Claudina</text>
+<rect x="425" y="178" width="50" height="14" rx="4" fill="rgba(0,163,255,0.2)" stroke="#00A3FF" stroke-width="1"/>
+<text x="450" y="189" text-anchor="middle" fill="#00A3FF" font-size="7" font-weight="600">JAM</text>
+<!-- Blocked paracelular path -->
+<text x="450" y="80" text-anchor="middle" fill="#FF6B6B" font-size="8" font-weight="700">✕ Ruta paracelular SELLADA</text>
+<text x="450" y="215" text-anchor="middle" fill="#8BA4BE" font-size="7">Hebras de sellado ("kissing points")</text>
+<!-- ZO proteins Cell 1 -->
+<rect x="290" y="105" width="55" height="16" rx="4" fill="rgba(255,217,61,0.2)" stroke="#FFD93D" stroke-width="1"/>
+<text x="317" y="117" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="600">ZO-1</text>
+<rect x="290" y="135" width="55" height="16" rx="4" fill="rgba(255,217,61,0.15)" stroke="#FFD93D" stroke-width="1"/>
+<text x="317" y="147" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="600">ZO-2</text>
+<rect x="290" y="165" width="55" height="16" rx="4" fill="rgba(255,217,61,0.1)" stroke="#FFD93D" stroke-width="1"/>
+<text x="317" y="177" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="600">ZO-3</text>
+<!-- Actin connection (indirect) Cell 1 -->
+<line x1="150" y1="140" x2="288" y2="140" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round" stroke-dasharray="5,3"/>
+<text x="180" y="158" text-anchor="middle" fill="#FF6B6B" font-size="7">Actina (indirecta)</text>
+<!-- ZO proteins Cell 2 -->
+<rect x="555" y="105" width="55" height="16" rx="4" fill="rgba(255,217,61,0.2)" stroke="#FFD93D" stroke-width="1"/>
+<text x="582" y="117" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="600">ZO-1</text>
+<rect x="555" y="135" width="55" height="16" rx="4" fill="rgba(255,217,61,0.15)" stroke="#FFD93D" stroke-width="1"/>
+<text x="582" y="147" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="600">ZO-2</text>
+<!-- Actin Cell 2 -->
+<line x1="612" y1="140" x2="750" y2="140" stroke="#00A3FF" stroke-width="3" stroke-linecap="round" stroke-dasharray="5,3"/>
+<text x="720" y="158" text-anchor="middle" fill="#00A3FF" font-size="7">Actina (indirecta)</text>
+<!-- Functions -->
+<rect x="80" y="235" width="340" height="28" rx="6" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.15)" stroke-width="1"/>
+<text x="250" y="253" text-anchor="middle" fill="#A78BFA" font-size="8" font-weight="600">🛡️ BARRERA: sella ruta paracelular</text>
+<rect x="480" y="235" width="340" height="28" rx="6" fill="rgba(0,212,170,0.06)" stroke="rgba(0,212,170,0.15)" stroke-width="1"/>
+<text x="650" y="253" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="600">🚧 FENCE: mantiene polaridad apical/basolateral</text>
+<!-- Chain -->
+<rect x="200" y="275" width="500" height="20" rx="4" fill="rgba(167,139,250,0.06)"/>
+<text x="450" y="289" text-anchor="middle" fill="#A78BFA" font-size="8" font-weight="600">Claudina/Ocludina/JAMs → ZO-1/ZO-2/ZO-3 → Actina (indirecta)</text>
+</svg>
+</div>
+
+<div class="analogy"><div class="analogy-icon">🧱</div><h4>Analogía: El cinturón impermeable</h4>
+<p>Imagina una hilera de ladrillos (células) con una <strong>banda de silicona</strong> sellando las juntas entre ellos. Esa banda es la unión estrecha. Impide que el agua pase por las <strong>rendijas</strong> (ruta paracelular) y además evita que la pintura del lado externo (apical) se mezcle con la del interno (basolateral) — mantiene la <strong>polaridad</strong>.</p></div>
+
+<div class="ib w"><div class="ibt">⚠️ Clínica</div>
+<p style="color:var(--t2)"><strong>Claudina-16 mutada:</strong> hipomagnesemia renal hereditaria (no reabsorbe Mg²⁺).<br>
+<strong>BHE:</strong> las tight junctions del endotelio cerebral son extremadamente herméticas → protegen el SNC. En esclerosis múltiple se alteran → infiltración de leucocitos.<br>
+<em>Clostridium perfringens</em> produce <strong>enterotoxina</strong> que se une a claudinas → destruye tight junctions → diarrea.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q06"><div class="qt">¿Cuáles son las dos funciones principales de las uniones estrechas?</div><div class="qo">
+<button class="qb" onclick="cq('q06',this,1)"><div class="ol">A</div>Barrera paracelular (sello) y cerca (fence, mantiene polaridad apical-basolateral)</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">B</div>Comunicación eléctrica y transporte de proteínas</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">C</div>Resistencia mecánica y anclaje al citoesqueleto</button>
+<button class="qb" onclick="cq('q06',this,0)"><div class="ol">D</div>Contracción muscular y señalización</button>
+</div><div class="qf" id="fb-q06"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('hemidesmo')">← Hemidesmosomas</button><button class="btn bp" onclick="go('gap')">Uniones Gap →</button></div>
+</div>
+
+<!-- ======================== GAP (RA 6) ======================== -->
+<div class="sec" id="sec-gap">
+<div class="cd"><div class="ch">🔵 Uniones <span class="ac">Gap</span> (Comunicantes / Nexus) <span class="pill pb2">RA 6</span></div>
+<div class="ib"><div class="ibt">🔑 Definición</div>
+<p style="color:var(--t2)">Las <strong>uniones gap</strong> (nexus, comunicantes) son canales intercelulares que permiten el <strong>paso directo</strong> de iones, segundos mensajeros (cAMP, IP₃, Ca²⁺) y metabolitos pequeños (<1-1.5 kDa) entre citoplasmas de células adyacentes. Están formadas por <strong>conexinas</strong>, que se ensamblan en <strong>conexones</strong> (hemicanales de 6 conexinas); dos conexones alineados de células vecinas forman un <strong>canal gap completo</strong>.</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="24" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura de una Unión Gap</text>
+<!-- Cell 1 -->
+<rect x="60" y="50" width="340" height="200" rx="16" fill="rgba(236,72,153,0.04)" stroke="#EC4899" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="230" y="75" text-anchor="middle" fill="#EC4899" font-size="11">CÉLULA 1</text>
+<!-- Cell 2 -->
+<rect x="500" y="50" width="340" height="200" rx="16" fill="rgba(0,163,255,0.04)" stroke="#00A3FF" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="670" y="75" text-anchor="middle" fill="#00A3FF" font-size="11">CÉLULA 2</text>
+<!-- Membranes -->
+<line x1="400" y1="55" x2="400" y2="245" stroke="#EC4899" stroke-width="3"/>
+<line x1="500" y1="55" x2="500" y2="245" stroke="#00A3FF" stroke-width="3"/>
+<!-- Connexon 1 -->
+<circle cx="400" cy="140" r="22" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="2"/>
+<text x="400" y="144" text-anchor="middle" fill="#00D4AA" font-size="7" font-weight="700">Conexón</text>
+<text x="400" y="155" text-anchor="middle" fill="#00D4AA" font-size="6">(6 conexinas)</text>
+<!-- Connexon 2 -->
+<circle cx="500" cy="140" r="22" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="2"/>
+<text x="500" y="144" text-anchor="middle" fill="#00D4AA" font-size="7" font-weight="700">Conexón</text>
+<!-- Channel -->
+<rect x="418" y="128" width="64" height="24" rx="6" fill="rgba(255,217,61,0.2)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="450" y="144" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="700">Canal Gap</text>
+<!-- Arrows through channel -->
+<text x="450" y="115" text-anchor="middle" fill="#FFD93D" font-size="8">↔ iones, cAMP, IP₃, Ca²⁺</text>
+<text x="450" y="170" text-anchor="middle" fill="#8BA4BE" font-size="8">&lt; 1-1.5 kDa</text>
+<!-- Gap of 2-4nm -->
+<text x="450" y="195" text-anchor="middle" fill="#5A7A96" font-size="8">Brecha: 2-4 nm</text>
+<!-- Connexin detail -->
+<rect x="130" y="180" width="180" height="55" rx="8" fill="rgba(0,212,170,0.06)" stroke="rgba(0,212,170,0.2)" stroke-width="1"/>
+<text x="220" y="198" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">Conexina (Cx)</text>
+<text x="220" y="212" text-anchor="middle" fill="#8BA4BE" font-size="8">4 dominios transmembrana</text>
+<text x="220" y="226" text-anchor="middle" fill="#8BA4BE" font-size="8">Cx43 (corazón), Cx26 (oído)</text>
+<!-- Types -->
+<rect x="570" y="180" width="220" height="55" rx="8" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.2)" stroke-width="1"/>
+<text x="680" y="198" text-anchor="middle" fill="#A78BFA" font-size="9" font-weight="600">Tipos de canales</text>
+<text x="680" y="212" text-anchor="middle" fill="#8BA4BE" font-size="8">Homotípico: 2 conexones iguales</text>
+<text x="680" y="226" text-anchor="middle" fill="#8BA4BE" font-size="8">Heterotípico: 2 conexones diferentes</text>
+</svg>
+</div>
+
+<div class="cg">
+<div class="cc"><h4 style="color:var(--b)">Funciones</h4>
+<p style="color:var(--t2);font-size:.88rem">• <strong>Acoplamiento eléctrico:</strong> transmiten potenciales de acción entre cardiomiocitos (Cx43) → contracción sincrónica del corazón<br>• <strong>Acoplamiento metabólico:</strong> comparten metabolitos, nutrientes, segundos mensajeros<br>• <strong>Coordinación celular:</strong> sincronización de respuestas en tejidos (músculo liso, epitelios)<br>• <strong>Regulación:</strong> se cierran con ↓pH, ↑Ca²⁺, fosforilación → aislan células dañadas</p></div>
+<div class="cc"><h4 style="color:var(--pk)">Localización</h4>
+<p style="color:var(--t2);font-size:.88rem">• <strong>Corazón:</strong> discos intercalares (Cx43) — sincitio funcional<br>• <strong>Músculo liso:</strong> coordinación de contracciones<br>• <strong>Hígado:</strong> hepatocitos (Cx32)<br>• <strong>Sistema nervioso:</strong> sinapsis eléctricas (Cx36)<br>• <strong>Oído interno:</strong> Cx26 (mutación → sordera congénita DFNB1)<br>• <strong>Ausentes en:</strong> músculo esquelético adulto, eritrocitos, espermatozoides</p></div>
+</div>
+
+<!-- Disco intercalar -->
+<div class="cd"><div class="ch">❤️ <span class="ac">Disco Intercalar</span> del Músculo Cardíaco — Integración de 3 Uniones</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="22" text-anchor="middle" fill="#E8F0F8" font-size="13" font-weight="700" font-family="DM Serif Display,serif">Disco Intercalar: 3 Tipos de Uniones en el Corazón</text>
+<!-- Cardiomyocyte 1 -->
+<rect x="40" y="50" width="370" height="140" rx="12" fill="rgba(255,107,107,0.04)" stroke="#FF6B6B" stroke-width="1.5"/>
+<text x="225" y="72" text-anchor="middle" fill="#FF6B6B" font-size="10" font-weight="600">CARDIOMIOCITO 1</text>
+<!-- Cardiomyocyte 2 -->
+<rect x="490" y="50" width="370" height="140" rx="12" fill="rgba(0,163,255,0.04)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="675" y="72" text-anchor="middle" fill="#00A3FF" font-size="10" font-weight="600">CARDIOMIOCITO 2</text>
+<!-- Disc zone -->
+<rect x="400" y="50" width="100" height="140" rx="0" fill="rgba(255,217,61,0.06)" stroke="#FFD93D" stroke-width="2"/>
+<text x="450" y="45" text-anchor="middle" fill="#FFD93D" font-size="10" font-weight="700">DISCO INTERCALAR</text>
+<!-- 1. Fascia adherens (adherent junction) -->
+<rect x="410" y="70" width="80" height="22" rx="5" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="450" y="85" text-anchor="middle" fill="#00D4AA" font-size="7" font-weight="700">F. Adherens</text>
+<!-- Actin connections -->
+<line x1="250" y1="82" x2="410" y2="82" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+<line x1="490" y1="82" x2="650" y2="82" stroke="#00A3FF" stroke-width="3" stroke-linecap="round"/>
+<text x="320" y="96" text-anchor="middle" fill="#FF6B6B" font-size="6">Actina</text>
+<!-- 2. Desmosomas -->
+<ellipse cx="450" cy="120" rx="30" ry="12" fill="rgba(255,217,61,0.2)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="450" y="124" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="700">Desmosoma</text>
+<!-- Desmin connections -->
+<line x1="280" y1="120" x2="420" y2="120" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<line x1="480" y1="120" x2="620" y2="120" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<text x="310" y="134" text-anchor="middle" fill="#F97316" font-size="6">Desmina (FI)</text>
+<!-- 3. Gap junctions -->
+<circle cx="435" cy="160" r="10" fill="rgba(0,163,255,0.2)" stroke="#00A3FF" stroke-width="1.5"/>
+<circle cx="465" cy="160" r="10" fill="rgba(0,163,255,0.2)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="450" y="164" text-anchor="middle" fill="#00A3FF" font-size="6" font-weight="700">GAP</text>
+<text x="450" y="180" text-anchor="middle" fill="#00A3FF" font-size="7">Cx43</text>
+<!-- Summary boxes -->
+<rect x="60" y="200" width="240" height="45" rx="8" fill="rgba(0,212,170,0.06)" stroke="rgba(0,212,170,0.15)" stroke-width="1"/>
+<text x="180" y="216" text-anchor="middle" fill="#00D4AA" font-size="8" font-weight="600">Fascia adherens (N-cadherina)</text>
+<text x="180" y="230" text-anchor="middle" fill="#8BA4BE" font-size="7">Adhesión mecánica → actina</text>
+<text x="180" y="242" text-anchor="middle" fill="#8BA4BE" font-size="7">Similar a zonula adherens</text>
+<rect x="330" y="200" width="240" height="45" rx="8" fill="rgba(255,217,61,0.06)" stroke="rgba(255,217,61,0.15)" stroke-width="1"/>
+<text x="450" y="216" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="600">Desmosomas (Dsg2/Dsc2)</text>
+<text x="450" y="230" text-anchor="middle" fill="#8BA4BE" font-size="7">Resistencia mecánica → desmina</text>
+<text x="450" y="242" text-anchor="middle" fill="#8BA4BE" font-size="7">Mutación → cardiomiopatía</text>
+<rect x="600" y="200" width="240" height="45" rx="8" fill="rgba(0,163,255,0.06)" stroke="rgba(0,163,255,0.15)" stroke-width="1"/>
+<text x="720" y="216" text-anchor="middle" fill="#00A3FF" font-size="8" font-weight="600">Gap (Conexina 43)</text>
+<text x="720" y="230" text-anchor="middle" fill="#8BA4BE" font-size="7">Sincitio eléctrico → contracción</text>
+<text x="720" y="242" text-anchor="middle" fill="#8BA4BE" font-size="7">sincrónica del corazón</text>
+</svg>
+</div>
+<div class="ib n"><div class="ibt">📝 Integración clave</div>
+<p style="color:var(--t2)">Los discos intercalares del corazón contienen <strong>3 tipos de uniones</strong> trabajando en conjunto: <strong>fascia adherens</strong> (N-cadherina → actina), <strong>desmosomas</strong> (desmogleína-2/desmocolina-2 → desmina) y <strong>uniones gap</strong> (Cx43 → sincitio funcional). Esta combinación garantiza adhesión mecánica, resistencia al estrés y coordinación eléctrica.</p></div></div>
+
+<div class="ib w"><div class="ibt">⚠️ Clínica</div>
+<p style="color:var(--t2)"><strong>Cx26 (GJB2):</strong> mutación más frecuente de sordera no sindrómica congénita (DFNB1).<br>
+<strong>Cx43:</strong> mutación → síndrome oculodentodigital.<br>
+<strong>Cx32:</strong> mutación → enfermedad de Charcot-Marie-Tooth tipo X (neuropatía).</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q07"><div class="qt">Un conexón está formado por:</div><div class="qo">
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">A</div>4 conexinas</button>
+<button class="qb" onclick="cq('q07',this,1)"><div class="ol">B</div>6 conexinas</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">C</div>2 integrinas</button>
+<button class="qb" onclick="cq('q07',this,0)"><div class="ol">D</div>3 cadherinas</button>
+</div><div class="qf" id="fb-q07"></div></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('estrechas')">← Estrechas</button><button class="btn bp" onclick="go('focales')">Focales / Costámero →</button></div>
+</div>
+
+<!-- ======================== FOCALES + COSTÁMERO (RA 6-7) ======================== -->
+<div class="sec" id="sec-focales">
+<div class="cd"><div class="ch">🔴 Adhesiones <span class="ac">Focales</span> y <span class="ac">Costámeros</span> <span class="pill pw">RA 6–7</span></div>
+<div class="ib"><div class="ibt">🔑 Adhesiones Focales</div>
+<p style="color:var(--t2)">Las <strong>adhesiones focales</strong> (contactos focales) son uniones <strong>cél-MEC</strong> donde las <strong>integrinas</strong> (α5β1, αVβ3) se agrupan y conectan la MEC (fibronectina, vitronectina) con el <strong>citoesqueleto de actina</strong> a través de un complejo multiproteico de señalización. Son sitios de <strong>mecanotransducción</strong> y puntos clave de señalización (FAK, Src).</p></div>
+
+<div class="cg">
+<div class="cc" style="border-color:rgba(255,107,107,.3)"><h4 style="color:var(--r)">Componentes</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>CAM:</strong> Integrinas (α5β1, αVβ3)<br>
+<strong>Adaptadores:</strong> <strong>Talina</strong> (une integrina→actina), <strong>vinculina</strong>, <strong>paxilina</strong>, <strong>α-actinina</strong><br>
+<strong>Señalización:</strong> <strong>FAK</strong> (quinasa de adhesión focal), <strong>Src</strong>, Ras/MAPK, PI3K/Akt<br>
+<strong>Citoesqueleto:</strong> fibras de estrés de <strong>actina</strong> (stress fibers)<br>
+<strong>Ligando:</strong> fibronectina (motivo RGD), vitronectina, colágeno</p></div>
+<div class="cc" style="border-color:rgba(0,212,170,.3)"><h4 style="color:var(--g)">Funciones</h4>
+<p style="color:var(--t2);font-size:.88rem">• <strong>Anclaje</strong> de la célula a la MEC<br>
+• <strong>Migración celular:</strong> adhesión-desadhesión dinámica en el frente de avance (lamelipodio)<br>
+• <strong>Mecanotransducción:</strong> detectan rigidez del sustrato → regulan comportamiento celular<br>
+• <strong>Señalización:</strong> FAK/Src activan vías de supervivencia, proliferación y motilidad<br>
+• <strong>Prevención de anoikis:</strong> la adhesión activa señales anti-apoptóticas<br>
+• Son <strong>dinámicas</strong> (se arman y desarman continuamente durante la migración)</p></div>
+</div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 290" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="22" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura Molecular de la Adhesión Focal</text>
+<!-- Cell -->
+<rect x="100" y="40" width="700" height="120" rx="14" fill="rgba(236,72,153,0.03)" stroke="#EC4899" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="450" y="58" text-anchor="middle" fill="#EC4899" font-size="10">CITOPLASMA</text>
+<!-- Stress fibers (actin) -->
+<line x1="130" y1="80" x2="780" y2="80" stroke="#FF6B6B" stroke-width="5" stroke-linecap="round"/>
+<line x1="130" y1="95" x2="780" y2="95" stroke="#FF6B6B" stroke-width="5" stroke-linecap="round"/>
+<text x="200" y="75" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">Stress fibers de ACTINA</text>
+<!-- α-actinin bridges -->
+<rect x="350" y="83" width="50" height="10" rx="3" fill="rgba(167,139,250,0.2)" stroke="#A78BFA" stroke-width="1"/>
+<text x="375" y="91" text-anchor="middle" fill="#A78BFA" font-size="5">α-actinina</text>
+<!-- Adapter complex -->
+<rect x="300" y="108" width="300" height="45" rx="10" fill="rgba(255,107,107,0.06)" stroke="#FF6B6B" stroke-width="1.5"/>
+<rect x="315" y="115" width="60" height="16" rx="4" fill="rgba(255,107,107,0.2)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="345" y="127" text-anchor="middle" fill="#FF6B6B" font-size="7" font-weight="600">Vinculina</text>
+<rect x="390" y="115" width="50" height="16" rx="4" fill="rgba(0,212,170,0.2)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="415" y="127" text-anchor="middle" fill="#00D4AA" font-size="7" font-weight="700">Talina</text>
+<rect x="455" y="115" width="55" height="16" rx="4" fill="rgba(249,115,22,0.2)" stroke="#F97316" stroke-width="1"/>
+<text x="482" y="127" text-anchor="middle" fill="#F97316" font-size="7" font-weight="600">Paxilina</text>
+<rect x="525" y="115" width="60" height="16" rx="4" fill="rgba(255,217,61,0.2)" stroke="#FFD93D" stroke-width="1.5"/>
+<text x="555" y="127" text-anchor="middle" fill="#FFD93D" font-size="7" font-weight="700">FAK</text>
+<text x="555" y="146" text-anchor="middle" fill="#FFD93D" font-size="6">(señalización)</text>
+<text x="345" y="146" text-anchor="middle" fill="#8BA4BE" font-size="7">Complejo adaptador</text>
+<!-- Plasma membrane -->
+<rect x="100" y="160" width="700" height="10" rx="0" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="820" y="168" fill="#A78BFA" font-size="8">Membrana</text>
+<!-- Integrins (cluster) -->
+<path d="M370,145 C360,155 355,165 360,173" fill="none" stroke="#F97316" stroke-width="3"/>
+<path d="M390,145 C395,155 400,165 395,173" fill="none" stroke="#00A3FF" stroke-width="3"/>
+<text x="380" y="143" text-anchor="middle" fill="#F97316" font-size="6">α β</text>
+<path d="M450,145 C440,155 435,165 440,173" fill="none" stroke="#F97316" stroke-width="3"/>
+<path d="M470,145 C475,155 480,165 475,173" fill="none" stroke="#00A3FF" stroke-width="3"/>
+<text x="460" y="143" text-anchor="middle" fill="#F97316" font-size="6">α β</text>
+<path d="M530,145 C520,155 515,165 520,173" fill="none" stroke="#F97316" stroke-width="3"/>
+<path d="M550,145 C555,155 560,165 555,173" fill="none" stroke="#00A3FF" stroke-width="3"/>
+<text x="540" y="143" text-anchor="middle" fill="#F97316" font-size="6">α β</text>
+<text x="460" y="187" text-anchor="middle" fill="#F97316" font-size="9" font-weight="600">INTEGRINAS agrupadas (α5β1 / αVβ3)</text>
+<!-- Extracellular connections -->
+<line x1="380" y1="170" x2="380" y2="210" stroke="#F97316" stroke-width="1.5"/>
+<line x1="460" y1="170" x2="460" y2="210" stroke="#F97316" stroke-width="1.5"/>
+<line x1="540" y1="170" x2="540" y2="210" stroke="#F97316" stroke-width="1.5"/>
+<!-- MEC -->
+<rect x="200" y="210" width="500" height="30" rx="8" fill="rgba(0,212,170,0.06)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="450" y="229" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">MEC: Fibronectina (RGD) / Vitronectina / Colágeno</text>
+<!-- Signaling -->
+<rect x="610" y="105" width="170" height="45" rx="8" fill="rgba(255,217,61,0.06)" stroke="rgba(255,217,61,0.15)" stroke-width="1"/>
+<text x="695" y="120" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="600">Señalización</text>
+<text x="695" y="133" text-anchor="middle" fill="#8BA4BE" font-size="7">FAK→Src→Ras/MAPK</text>
+<text x="695" y="145" text-anchor="middle" fill="#8BA4BE" font-size="7">PI3K/Akt (supervivencia)</text>
+<!-- Chain -->
+<rect x="175" y="255" width="550" height="24" rx="6" fill="rgba(255,107,107,0.06)" stroke="rgba(255,107,107,0.15)" stroke-width="1"/>
+<text x="450" y="271" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">Actina ← Vinculina ← Talina ← Integrina αβ → Fibronectina-RGD (MEC)</text>
+</svg>
+</div>
+</div>
+
+<!-- COSTÁMERO -->
+<div class="cd"><div class="ch">💪 <span class="ac">Costámero</span> <span class="pill por">RA 7</span></div>
+<div class="ib go"><div class="ibt">🔑 Definición</div>
+<p style="color:var(--t2)">El <strong>costámero</strong> es una estructura especializada de adhesión <strong>célula-MEC</strong> presente en el <strong>músculo estriado</strong> (esquelético y cardíaco). Se localiza en la cara interna del sarcolema, <strong>alineado con las líneas Z</strong> (bandas Z) del sarcómero. Conecta el aparato contráctil interno con la <strong>lámina basal</strong> que rodea la fibra muscular, transmitiendo la fuerza de contracción al tejido conectivo circundante.</p></div>
+
+<div class="cg">
+<div class="cc" style="border-color:rgba(249,115,22,.3)"><h4 style="color:var(--o)">Componentes del costámero</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong>Complejos principales:</strong><br>
+• <strong>Complejo integrina-vinculina-talina:</strong> Integrinas (α7β1) → talina → vinculina → actina del citoesqueleto cortical (y líneas Z vía desmina)<br><br>
+• <strong>Complejo distrofina-distroglicano (DGC):</strong> Distrofina (une actina F cortical al β-distroglicano) → α-distroglicano → laminina-2 (merosina) en lámina basal<br><br>
+<strong>Función:</strong> transmitir la fuerza de contracción lateral al endomisio</p></div>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
+<text x="450" y="22" text-anchor="middle" fill="#E8F0F8" font-size="14" font-weight="700" font-family="DM Serif Display,serif">Estructura del Costámero — Dos Complejos de Anclaje</text>
+<!-- Sarcomere inside -->
+<rect x="80" y="40" width="740" height="80" rx="10" fill="rgba(236,72,153,0.03)" stroke="#EC4899" stroke-width="1" stroke-dasharray="5,3"/>
+<text x="450" y="58" text-anchor="middle" fill="#EC4899" font-size="10">INTERIOR DE LA FIBRA MUSCULAR</text>
+<!-- Z lines -->
+<line x1="200" y1="70" x2="200" y2="115" stroke="#FFD93D" stroke-width="3"/>
+<text x="200" y="68" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="700">Línea Z</text>
+<line x1="450" y1="70" x2="450" y2="115" stroke="#FFD93D" stroke-width="3"/>
+<text x="450" y="68" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="700">Línea Z</text>
+<line x1="700" y1="70" x2="700" y2="115" stroke="#FFD93D" stroke-width="3"/>
+<text x="700" y="68" text-anchor="middle" fill="#FFD93D" font-size="8" font-weight="700">Línea Z</text>
+<!-- Actin filaments between Z lines -->
+<line x1="205" y1="85" x2="445" y2="85" stroke="#FF6B6B" stroke-width="2"/>
+<line x1="205" y1="95" x2="445" y2="95" stroke="#FF6B6B" stroke-width="2"/>
+<line x1="455" y1="85" x2="695" y2="85" stroke="#FF6B6B" stroke-width="2"/>
+<line x1="455" y1="95" x2="695" y2="95" stroke="#FF6B6B" stroke-width="2"/>
+<text x="325" y="108" text-anchor="middle" fill="#FF6B6B" font-size="7">Sarcómero</text>
+<!-- Desmin connecting Z to costamere -->
+<line x1="200" y1="115" x2="200" y2="140" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<line x1="450" y1="115" x2="450" y2="140" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<line x1="700" y1="115" x2="700" y2="140" stroke="#F97316" stroke-width="2" stroke-dasharray="4,2"/>
+<text x="330" y="135" text-anchor="middle" fill="#F97316" font-size="7">Desmina (FI) conecta Z → sarcolema</text>
+<!-- Sarcolemma -->
+<rect x="80" y="140" width="740" height="12" rx="0" fill="rgba(167,139,250,0.15)" stroke="#A78BFA" stroke-width="1.5"/>
+<text x="50" y="150" text-anchor="end" fill="#A78BFA" font-size="8">Sarcolema</text>
+<!-- Complex 1: Integrin-vinculin-talin -->
+<rect x="100" y="160" width="320" height="100" rx="12" fill="rgba(0,163,255,0.04)" stroke="#00A3FF" stroke-width="1.5"/>
+<text x="260" y="178" text-anchor="middle" fill="#00A3FF" font-size="10" font-weight="700">Complejo Integrina-Vinculina-Talina</text>
+<rect x="130" y="188" width="65" height="18" rx="5" fill="rgba(0,163,255,0.15)" stroke="#00A3FF" stroke-width="1"/>
+<text x="162" y="201" text-anchor="middle" fill="#00A3FF" font-size="7" font-weight="600">α7β1</text>
+<text x="210" y="201" fill="#5A7A96" font-size="10">→</text>
+<rect x="220" y="188" width="55" height="18" rx="5" fill="rgba(0,212,170,0.15)" stroke="#00D4AA" stroke-width="1"/>
+<text x="247" y="201" text-anchor="middle" fill="#00D4AA" font-size="7" font-weight="600">Talina</text>
+<text x="290" y="201" fill="#5A7A96" font-size="10">→</text>
+<rect x="300" y="188" width="65" height="18" rx="5" fill="rgba(255,107,107,0.15)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="332" y="201" text-anchor="middle" fill="#FF6B6B" font-size="7" font-weight="600">Vinculina</text>
+<text x="260" y="225" text-anchor="middle" fill="#8BA4BE" font-size="8">→ Actina cortical → Desmina → Línea Z</text>
+<text x="260" y="250" text-anchor="middle" fill="#00A3FF" font-size="7">Ligando: Laminina-2 (merosina)</text>
+<!-- Complex 2: Dystrophin-DGC -->
+<rect x="480" y="160" width="330" height="100" rx="12" fill="rgba(249,115,22,0.04)" stroke="#F97316" stroke-width="1.5"/>
+<text x="645" y="178" text-anchor="middle" fill="#F97316" font-size="10" font-weight="700">Complejo Distrofina-Distroglicano (DGC)</text>
+<rect x="500" y="188" width="70" height="18" rx="5" fill="rgba(255,107,107,0.15)" stroke="#FF6B6B" stroke-width="1"/>
+<text x="535" y="201" text-anchor="middle" fill="#FF6B6B" font-size="7" font-weight="600">Actina F</text>
+<text x="582" y="201" fill="#5A7A96" font-size="10">→</text>
+<rect x="590" y="188" width="70" height="18" rx="5" fill="rgba(249,115,22,0.2)" stroke="#F97316" stroke-width="1.5"/>
+<text x="625" y="201" text-anchor="middle" fill="#F97316" font-size="7" font-weight="700">Distrofina</text>
+<text x="672" y="201" fill="#5A7A96" font-size="10">→</text>
+<rect x="680" y="188" width="50" height="18" rx="5" fill="rgba(0,212,170,0.15)" stroke="#00D4AA" stroke-width="1"/>
+<text x="705" y="201" text-anchor="middle" fill="#00D4AA" font-size="6" font-weight="600">β-DG</text>
+<rect x="735" y="188" width="50" height="18" rx="5" fill="rgba(236,72,153,0.15)" stroke="#EC4899" stroke-width="1"/>
+<text x="760" y="201" text-anchor="middle" fill="#EC4899" font-size="6" font-weight="600">α-DG</text>
+<text x="645" y="225" text-anchor="middle" fill="#8BA4BE" font-size="8">α-DG se une a Laminina-2 en lámina basal</text>
+<text x="645" y="250" text-anchor="middle" fill="#FF6B6B" font-size="8" font-weight="600">★ Mutación en DISTROFINA = Duchenne</text>
+<!-- Lamina basal -->
+<rect x="80" y="270" width="740" height="22" rx="0" fill="rgba(0,212,170,0.08)" stroke="#00D4AA" stroke-width="1.5"/>
+<text x="450" y="285" text-anchor="middle" fill="#00D4AA" font-size="9" font-weight="600">LÁMINA BASAL — Laminina-2 (merosina) + Colágeno IV</text>
+<!-- Endomysium -->
+<rect x="80" y="298" width="740" height="22" rx="0" fill="rgba(0,212,170,0.04)" stroke="rgba(0,212,170,0.1)" stroke-width="1"/>
+<text x="450" y="313" text-anchor="middle" fill="#5A7A96" font-size="9">ENDOMISIO (tejido conectivo que rodea cada fibra muscular)</text>
+<!-- Summary arrows -->
+<text x="450" y="338" text-anchor="middle" fill="#F97316" font-size="9" font-weight="600">Fuerza contráctil: Sarcómero → Línea Z → Desmina → Costámero → Lámina basal → Endomisio</text>
+</svg>
+</div>
+<div class="cc" style="border-color:rgba(255,107,107,.3)"><h4 style="color:var(--r)">Clínica: Distrofias musculares</h4>
+<p style="color:var(--t2);font-size:.88rem"><strong style="color:var(--r)">Distrofia muscular de Duchenne (DMD):</strong> mutación en gen de <strong>distrofina</strong> (Xp21) → costámero defectuoso → la fuerza de contracción daña la membrana → necrosis muscular progresiva.<br><br>
+<strong style="color:var(--r)">Distrofia muscular de Becker:</strong> distrofina parcialmente funcional → fenotipo más leve.<br><br>
+La <strong>ausencia de distrofina</strong> rompe la conexión citoesqueleto↔MEC → las fibras musculares se destruyen con cada contracción.</p></div>
+</div>
+
+<div class="analogy"><div class="analogy-icon">⚙️</div><h4>Analogía: Los pernos de un motor</h4>
+<p>El sarcómero es el <strong>pistón</strong> que genera fuerza. El costámero es el <strong>perno</strong> que fija el pistón a la estructura del motor (MEC). Sin los pernos (distrofina), cada golpe del pistón sacude y daña el motor. En Duchenne, los pernos faltan → cada contracción destruye la fibra muscular.</p></div>
+</div>
+
+<div class="cd"><div class="ch">🧠 Comprensión</div>
+<div class="qq" id="q08"><div class="qt">El costámero se localiza:</div><div class="qo">
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">A</div>En el retículo sarcoplásmico</button>
+<button class="qb" onclick="cq('q08',this,1)"><div class="ol">B</div>En el sarcolema, alineado con las líneas Z del sarcómero</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">C</div>En el núcleo de la fibra muscular</button>
+<button class="qb" onclick="cq('q08',this,0)"><div class="ol">D</div>En el espacio sináptico</button>
+</div><div class="qf" id="fb-q08"></div></div>
+<div class="qq" id="q09"><div class="qt">La distrofia muscular de Duchenne se debe a mutación en:</div><div class="qo">
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">A</div>Colágeno tipo I</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">B</div>Fibrilina-1</button>
+<button class="qb" onclick="cq('q09',this,1)"><div class="ol">C</div>Distrofina (componente del costámero)</button>
+<button class="qb" onclick="cq('q09',this,0)"><div class="ol">D</div>E-cadherina</button>
+</div><div class="qf" id="fb-q09"></div></div></div>
+
+<!-- Match game: junctions -->
+<div class="cd"><div class="ch">🎮 Actividad: <span class="ac">Emparejar</span> unión con componentes</div>
+<div class="match-game" id="mg2">
+<div class="match-col"><h4 style="color:var(--g)">Unión</h4>
+<div class="match-item" data-pair="a" data-side="l" onclick="mp('mg2',this)">Adherente</div>
+<div class="match-item" data-pair="b" data-side="l" onclick="mp('mg2',this)">Desmosoma</div>
+<div class="match-item" data-pair="c" data-side="l" onclick="mp('mg2',this)">Hemidesmosoma</div>
+<div class="match-item" data-pair="d" data-side="l" onclick="mp('mg2',this)">Adhesión focal</div>
+</div>
+<div class="match-col"><h4 style="color:var(--b)">CAM → Citoesqueleto</h4>
+<div class="match-item" data-pair="c" data-side="r" onclick="mp('mg2',this)">Integrina α6β4 → queratina (FI)</div>
+<div class="match-item" data-pair="a" data-side="r" onclick="mp('mg2',this)">E-cadherina → actina (cateninas)</div>
+<div class="match-item" data-pair="d" data-side="r" onclick="mp('mg2',this)">Integrinas α5β1 → actina (talina/FAK)</div>
+<div class="match-item" data-pair="b" data-side="r" onclick="mp('mg2',this)">Dsg/Dsc → FI (desmoplaquina)</div>
+</div></div>
+<div class="match-score" id="mg2-score"></div></div>
+
+<div class="sn"><button class="btn bs" onclick="go('gap')">← Gap</button><button class="btn bp" onclick="go('glosario')">Glosario →</button></div>
+</div>
+
+<!-- ======================== GLOSARIO ======================== -->
+<div class="sec" id="sec-glosario">
+<div class="cd"><div class="ch">📚 <span class="ac">Glosario</span> — Tarjetas de Repaso</div>
+<p style="color:var(--t2);margin-bottom:16px">Haz clic en cada tarjeta para revelar la definición:</p>
+<div class="fg" id="fcards"></div></div>
+<div class="sn"><button class="btn bs" onclick="go('focales')">← Focales / Costámero</button><button class="btn bp" onclick="go('evaluacion')">Evaluación Final →</button></div>
+</div>
+
+<!-- ======================== EVALUACIÓN ======================== -->
+<div class="sec" id="sec-evaluacion">
+<div class="cd"><div class="ch">📝 Evaluación <span class="ac">Final</span></div>
+<p style="color:var(--t2);margin-bottom:6px">Responde todas las preguntas y luego presiona «Calificar».</p>
+<div id="eq"></div>
+<div style="text-align:center;margin-top:22px"><button class="btn bp" id="seb" style="display:none" onclick="se()">📊 Calificar Evaluación</button></div>
+<div class="sd" id="sdd" style="display:none"><div class="snm" id="sn2"></div><div class="sbl" id="sm2"></div><div class="sbr"><div class="sbf" id="sbf2" style="width:0%;background:var(--grad)"></div></div>
+<button class="btn bs" onclick="iev()" style="margin-top:16px">↺ Reintentar</button></div>
+</div>
+<div class="sn"><button class="btn bs" onclick="go('glosario')">← Glosario</button><button class="btn bp" onclick="go('inicio')">🏠 Inicio</button></div>
+</div>
+
+</div><!-- mc -->
+
+<script>
+/* === Navigation === */
+var secs=['inicio','cams','familias','panorama','adherentes','desmosomas','hemidesmo','estrechas','gap','focales','glosario','evaluacion'];
+function go(id){secs.forEach(function(s){var el=document.getElementById('sec-'+s);if(el)el.classList.remove('a')});var t=document.getElementById('sec-'+id);if(t){t.classList.add('a');window.scrollTo({top:0,behavior:'smooth'})}up(id)}
+function up(id){id=id||'inicio';var i=secs.indexOf(id);var p=Math.round((i/(secs.length-1))*100);document.getElementById('pf').style.width=p+'%';document.querySelectorAll('#navLinks button').forEach(function(b){b.classList.remove('a');if(b.getAttribute('data-s')===id)b.classList.add('a')})}
+
+/* === Tabs === */
+function stab(btn,tid){var p=btn.parentNode;p.querySelectorAll('.tbtn').forEach(function(b){b.classList.remove('a')});btn.classList.add('a');var card=p.parentNode;card.querySelectorAll('.tc').forEach(function(t){t.classList.remove('a')});document.getElementById(tid).classList.add('a')}
+
+/* === Quiz logic === */
+var fbData={
+'q01':{c:1,y:'✅ Correcto. Las CAMs son glicoproteínas transmembrana de adhesión cél-cél o cél-MEC.',n:'❌ Las CAMs son glicoproteínas transmembrana que median adhesión celular.'},
+'q02':{c:0,y:'✅ Correcto. E-cadherina ↔ E-cadherina es una unión homofílica (la misma molécula).',n:'❌ Cuando la misma CAM interactúa consigo misma = homofílica.'},
+'q03':{c:1,y:'✅ Correcto. Desmosomas se anclan a filamentos intermedios (queratina/desmina) vía desmoplaquina.',n:'❌ Los desmosomas se conectan a filamentos intermedios, no a actina ni microtúbulos.'},
+'q04':{c:1,y:'✅ Correcto. Adhesiones focales: integrinas → talina/vinculina → actina (cél-MEC).',n:'❌ Las adhesiones focales conectan integrinas con actina (cél-MEC).'},
+'q05':{c:2,y:'✅ Correcto. La desmoplaquina es el puente entre la placa desmosómica y los filamentos intermedios.',n:'❌ La desmoplaquina es la proteína que une la placa a los FI.'},
+'q06':{c:0,y:'✅ Correcto. Las tight junctions hacen barrera paracelular y fence (mantienen polaridad).',n:'❌ Las uniones estrechas sellan el espacio paracelular (barrera) y mantienen la polaridad (fence).'},
+'q07':{c:1,y:'✅ Correcto. Un conexón = 6 conexinas. Dos conexones = canal gap completo.',n:'❌ Un conexón está formado por 6 subunidades de conexina.'},
+'q08':{c:1,y:'✅ Correcto. El costámero está en el sarcolema, alineado con las líneas Z.',n:'❌ El costámero se ubica en el sarcolema alineado con las bandas Z del sarcómero.'},
+'q09':{c:2,y:'✅ Correcto. DMD = mutación en distrofina, componente del costámero/DGC.',n:'❌ La distrofia de Duchenne se debe a mutación en distrofina (componente del costámero).'}
+};
+function cq(qid,btn,correct){var q=document.getElementById(qid);if(q.classList.contains('answered'))return;q.classList.add('answered');var bs=q.querySelectorAll('.qb');var fb=document.getElementById('fb-'+qid);var data=fbData[qid];bs.forEach(function(b){b.classList.add('dis')});if(correct===1){btn.classList.add('ok');fb.className='qf sh cf';fb.textContent=data.y;}else{btn.classList.add('no');bs.forEach(function(b,i){if(i===data.c)b.classList.add('ok')});fb.className='qf sh if';fb.textContent=data.n;}}
+
+/* === Match Game === */
+var matchSel={};
+function mp(gid,el){var g=document.getElementById(gid);var side=el.getAttribute('data-side');if(el.classList.contains('ok'))return;if(!matchSel[gid])matchSel[gid]={};if(matchSel[gid][side]){matchSel[gid][side].classList.remove('sel')}matchSel[gid][side]=el;el.classList.add('sel');if(matchSel[gid].l&&matchSel[gid].r){var lp=matchSel[gid].l.getAttribute('data-pair');var rp=matchSel[gid].r.getAttribute('data-pair');if(lp===rp){matchSel[gid].l.classList.remove('sel');matchSel[gid].r.classList.remove('sel');matchSel[gid].l.classList.add('ok');matchSel[gid].r.classList.add('ok');matchSel[gid]={};var ok=g.querySelectorAll('.match-item.ok').length;var total=g.querySelectorAll('.match-item').length;document.getElementById(gid+'-score').textContent=ok===total?'🎉 ¡Completado!':Math.floor(ok/2)+'/'+Math.floor(total/2)+' parejas'}else{matchSel[gid].l.classList.add('no');matchSel[gid].r.classList.add('no');var l=matchSel[gid].l,r=matchSel[gid].r;matchSel[gid]={};setTimeout(function(){l.classList.remove('sel','no');r.classList.remove('sel','no')},500)}}}
+
+/* === Junction Simulator === */
+var juncSteps=[
+{title:'Estrechas',svg:'<rect x="100" y="40" width="300" height="160" rx="14" fill="rgba(167,139,250,0.06)" stroke="#A78BFA" stroke-width="2"/><text x="250" y="65" text-anchor="middle" fill="#A78BFA" font-size="13" font-weight="700">UNIÓN ESTRECHA (Tight Junction)</text><text x="250" y="85" text-anchor="middle" fill="#8BA4BE" font-size="9">Posición: MÁS APICAL</text><text x="250" y="105" text-anchor="middle" fill="#A78BFA" font-size="9">CAMs: Claudinas + Ocludina + JAMs</text><text x="250" y="125" text-anchor="middle" fill="#8BA4BE" font-size="9">Adaptadores: ZO-1, ZO-2, ZO-3</text><text x="250" y="145" text-anchor="middle" fill="#A78BFA" font-size="9">Función: Barrera + Fence (polaridad)</text><text x="250" y="165" text-anchor="middle" fill="#5A7A96" font-size="8">Sello entre células • Cél-Cél</text><rect x="500" y="40" width="300" height="160" rx="14" fill="rgba(167,139,250,0.04)" stroke="#A78BFA" stroke-width="1" stroke-dasharray="5,3"/><text x="650" y="80" text-anchor="middle" fill="#A78BFA" font-size="10">⬆ APICAL</text><rect x="545" y="95" width="210" height="15" rx="4" fill="rgba(167,139,250,0.3)"/><text x="650" y="106" text-anchor="middle" fill="#A78BFA" font-size="8" font-weight="700">Tight Junction (cinturón)</text><rect x="550" y="120" width="200" height="12" rx="3" fill="rgba(0,212,170,0.2)"/><text x="650" y="130" text-anchor="middle" fill="#00D4AA" font-size="7">Adherente</text><circle cx="590" cy="150" r="8" fill="rgba(255,217,61,0.3)" stroke="#FFD93D"/><circle cx="630" cy="150" r="8" fill="rgba(255,217,61,0.3)" stroke="#FFD93D"/><text x="650" y="153" text-anchor="middle" fill="#FFD93D" font-size="7">Desmosomas</text><text x="650" y="180" text-anchor="middle" fill="#8BA4BE" font-size="10">⬇ BASAL</text>',
+nar:'Las UNIONES ESTRECHAS (tight junctions / zonula occludens) están en la posición MÁS APICAL del complejo de unión epitelial. Formadas por claudinas, ocludina y JAMs, sellan el espacio paracelular (función de barrera) e impiden la difusión lateral de proteínas de membrana (función de fence → mantienen la polaridad apical-basolateral). Se asocian a ZO-1/2/3.'},
+{title:'Adherente',svg:'<rect x="100" y="40" width="300" height="160" rx="14" fill="rgba(0,212,170,0.06)" stroke="#00D4AA" stroke-width="2"/><text x="250" y="65" text-anchor="middle" fill="#00D4AA" font-size="13" font-weight="700">UNIÓN ADHERENTE (Zonula Adherens)</text><text x="250" y="85" text-anchor="middle" fill="#8BA4BE" font-size="9">Posición: justo DEBAJO de tight junctions</text><text x="250" y="105" text-anchor="middle" fill="#00D4AA" font-size="9">CAM: E-cadherina (homofílica, Ca²⁺)</text><text x="250" y="125" text-anchor="middle" fill="#8BA4BE" font-size="9">Adaptadores: β-catenina → α-catenina</text><text x="250" y="145" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">Citoesqueleto: ACTINA</text><text x="250" y="165" text-anchor="middle" fill="#5A7A96" font-size="8">Cinturón continuo • Cél-Cél</text><rect x="500" y="60" width="300" height="130" rx="14" fill="rgba(0,212,170,0.04)" stroke="#00D4AA" stroke-width="1" stroke-dasharray="5,3"/><text x="650" y="90" text-anchor="middle" fill="#00D4AA" font-size="10">Cadherina↔Cadherina</text><line x1="580" y1="110" x2="720" y2="110" stroke="#00D4AA" stroke-width="3"/><text x="650" y="130" text-anchor="middle" fill="#FF6B6B" font-size="9">Actina ←cateninas← cadherina</text><line x1="530" y1="145" x2="650" y2="135" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/><line x1="650" y1="135" x2="770" y2="145" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/><text x="650" y="170" text-anchor="middle" fill="#5A7A96" font-size="8">Forma un cinturón alrededor de la célula</text>',
+nar:'La UNIÓN ADHERENTE (zonula adherens) está justo debajo de las tight junctions. La E-cadherina en cada célula forma una unión homofílica Ca²⁺-dependiente. Intracelularmente: p120-catenina estabiliza la cadherina, β-catenina conecta con α-catenina, y α-catenina se une a la ACTINA. Forma un cinturón continuo. La β-catenina también participa en la vía Wnt.'},
+{title:'Desmosoma',svg:'<rect x="100" y="40" width="300" height="160" rx="14" fill="rgba(255,217,61,0.06)" stroke="#FFD93D" stroke-width="2"/><text x="250" y="65" text-anchor="middle" fill="#FFD93D" font-size="13" font-weight="700">DESMOSOMA (Macula Adherens)</text><text x="250" y="85" text-anchor="middle" fill="#8BA4BE" font-size="9">Posición: debajo de adherentes (puntos focales)</text><text x="250" y="105" text-anchor="middle" fill="#FFD93D" font-size="9">CAMs: Desmogleína + Desmocolina</text><text x="250" y="125" text-anchor="middle" fill="#8BA4BE" font-size="9">Placa: Desmoplaquina, Placoglobina, Placofilina</text><text x="250" y="145" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">Citoesqueleto: FILAMENTOS INTERMEDIOS</text><text x="250" y="165" text-anchor="middle" fill="#5A7A96" font-size="8">Puntos de remache • Cél-Cél</text><rect x="500" y="55" width="300" height="140" rx="14" fill="rgba(255,217,61,0.04)" stroke="#FFD93D" stroke-width="1" stroke-dasharray="5,3"/><ellipse cx="650" cy="115" rx="50" ry="40" fill="rgba(255,217,61,0.1)" stroke="#FFD93D" stroke-width="2"/><text x="650" y="110" text-anchor="middle" fill="#FFD93D" font-size="9" font-weight="600">Placa densa</text><text x="650" y="125" text-anchor="middle" fill="#8BA4BE" font-size="7">Desmoplaquina</text><line x1="560" y1="100" x2="600" y2="115" stroke="#F97316" stroke-width="3" stroke-linecap="round"/><line x1="560" y1="130" x2="600" y2="115" stroke="#F97316" stroke-width="3" stroke-linecap="round"/><text x="555" y="80" text-anchor="middle" fill="#F97316" font-size="8">Queratina (FI)</text><line x1="700" y1="115" x2="740" y2="100" stroke="#F97316" stroke-width="3" stroke-linecap="round"/><line x1="700" y1="115" x2="740" y2="130" stroke="#F97316" stroke-width="3" stroke-linecap="round"/>',
+nar:'Los DESMOSOMAS (macula adherens) son puntos de adhesión cél-cél extremadamente fuertes. Utilizan cadherinas desmosómicas (desmogleína y desmocolina) y se anclan a FILAMENTOS INTERMEDIOS (queratina en epitelios, desmina en corazón) mediante la placa desmosómica (desmoplaquina, placoglobina, placofilina). Son como remaches que resisten fuerzas de tracción. Abundan en piel y corazón.'},
+{title:'Hemidesmosoma',svg:'<rect x="100" y="40" width="300" height="160" rx="14" fill="rgba(249,115,22,0.06)" stroke="#F97316" stroke-width="2"/><text x="250" y="65" text-anchor="middle" fill="#F97316" font-size="13" font-weight="700">HEMIDESMOSOMA</text><text x="250" y="85" text-anchor="middle" fill="#8BA4BE" font-size="9">Posición: superficie BASAL del epitelio</text><text x="250" y="105" text-anchor="middle" fill="#F97316" font-size="9">CAM: Integrina α6β4 + BP180</text><text x="250" y="125" text-anchor="middle" fill="#8BA4BE" font-size="9">Adaptadores: Plectina + BP230</text><text x="250" y="145" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">Citoesqueleto: FI (queratina)</text><text x="250" y="165" text-anchor="middle" fill="#5A7A96" font-size="8">Cél-MEC • Ancla epitelio a lámina basal</text><rect x="500" y="50" width="300" height="150" rx="14" fill="rgba(249,115,22,0.04)" stroke="#F97316" stroke-width="1" stroke-dasharray="5,3"/><rect x="530" y="65" width="240" height="30" rx="8" fill="rgba(236,72,153,0.08)" stroke="#EC4899" stroke-width="1"/><text x="650" y="84" text-anchor="middle" fill="#EC4899" font-size="9">Célula epitelial</text><line x1="650" y1="95" x2="650" y2="125" stroke="#F97316" stroke-width="3"/><text x="680" y="115" fill="#F97316" font-size="7">α6β4</text><rect x="570" y="130" width="160" height="22" rx="4" fill="rgba(0,212,170,0.15)" stroke="#00D4AA" stroke-width="1"/><text x="650" y="145" text-anchor="middle" fill="#00D4AA" font-size="8">LÁMINA BASAL (Laminina-332)</text><rect x="560" y="160" width="180" height="22" rx="4" fill="rgba(0,163,255,0.08)" stroke="#00A3FF" stroke-width="1"/><text x="650" y="175" text-anchor="middle" fill="#00A3FF" font-size="8">TEJIDO CONECTIVO</text>',
+nar:'Los HEMIDESMOSOMAS anclan la célula epitelial a la LÁMINA BASAL (cél-MEC). Utilizan integrina α6β4 y BP180 como CAMs transmembrana, que se unen a laminina-332 en la lámina basal. Intracelularmente, plectina y BP230 conectan a FILAMENTOS INTERMEDIOS de queratina. Aunque parecen "medio desmosoma" al ME, molecularmente son muy diferentes (integrinas, no cadherinas).'},
+{title:'Gap',svg:'<rect x="100" y="40" width="300" height="160" rx="14" fill="rgba(0,163,255,0.06)" stroke="#00A3FF" stroke-width="2"/><text x="250" y="65" text-anchor="middle" fill="#00A3FF" font-size="13" font-weight="700">UNIÓN GAP (Nexus)</text><text x="250" y="85" text-anchor="middle" fill="#8BA4BE" font-size="9">Posición: variable (basolateral)</text><text x="250" y="105" text-anchor="middle" fill="#00A3FF" font-size="9">Proteínas: Conexinas → Conexón (6)</text><text x="250" y="125" text-anchor="middle" fill="#8BA4BE" font-size="9">2 conexones = canal gap</text><text x="250" y="145" text-anchor="middle" fill="#00A3FF" font-size="9">Pasan: iones, cAMP, Ca²⁺ (<1.5 kDa)</text><text x="250" y="165" text-anchor="middle" fill="#5A7A96" font-size="8">Comunicante • Cél-Cél</text><rect x="500" y="60" width="300" height="130" rx="14" fill="rgba(0,163,255,0.04)" stroke="#00A3FF" stroke-width="1" stroke-dasharray="5,3"/><circle cx="620" cy="120" r="20" fill="rgba(0,163,255,0.2)" stroke="#00A3FF" stroke-width="2"/><circle cx="680" cy="120" r="20" fill="rgba(0,163,255,0.2)" stroke="#00A3FF" stroke-width="2"/><rect x="636" y="110" width="28" height="20" rx="5" fill="rgba(255,217,61,0.2)" stroke="#FFD93D" stroke-width="1.5"/><text x="650" y="105" text-anchor="middle" fill="#FFD93D" font-size="7">↔</text><text x="650" y="155" text-anchor="middle" fill="#8BA4BE" font-size="8">Sincitio funcional (corazón)</text>',
+nar:'Las UNIONES GAP son canales intercelulares formados por CONEXINAS. 6 conexinas = 1 conexón (hemicanal). 2 conexones alineados = canal gap completo. Permiten el paso directo de iones, segundos mensajeros (cAMP, IP₃, Ca²⁺) y metabolitos pequeños (<1.5 kDa). Son esenciales en corazón (Cx43, sincitio funcional), oído (Cx26) y sistema nervioso (sinapsis eléctricas).'},
+{title:'Focal',svg:'<rect x="100" y="40" width="300" height="160" rx="14" fill="rgba(255,107,107,0.06)" stroke="#FF6B6B" stroke-width="2"/><text x="250" y="65" text-anchor="middle" fill="#FF6B6B" font-size="13" font-weight="700">ADHESIÓN FOCAL</text><text x="250" y="85" text-anchor="middle" fill="#8BA4BE" font-size="9">Posición: superficie basal</text><text x="250" y="105" text-anchor="middle" fill="#FF6B6B" font-size="9">CAMs: Integrinas (α5β1, αVβ3)</text><text x="250" y="125" text-anchor="middle" fill="#8BA4BE" font-size="9">Adaptadores: Talina, Vinculina, Paxilina, FAK</text><text x="250" y="145" text-anchor="middle" fill="#FF6B6B" font-size="9" font-weight="600">Citoesqueleto: ACTINA (stress fibers)</text><text x="250" y="165" text-anchor="middle" fill="#5A7A96" font-size="8">Cél-MEC • Migración + Señalización</text><rect x="500" y="55" width="300" height="140" rx="14" fill="rgba(255,107,107,0.04)" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="5,3"/><line x1="530" y1="120" x2="770" y2="120" stroke="#FF6B6B" stroke-width="5" stroke-linecap="round"/><text x="650" y="115" text-anchor="middle" fill="#FF6B6B" font-size="8">Stress fibers (actina)</text><line x1="650" y1="125" x2="650" y2="155" stroke="#F97316" stroke-width="3"/><text x="680" y="145" fill="#F97316" font-size="7">Talina+Integrinas</text><rect x="580" y="160" width="140" height="20" rx="4" fill="rgba(0,212,170,0.1)" stroke="#00D4AA" stroke-width="1"/><text x="650" y="174" text-anchor="middle" fill="#00D4AA" font-size="8">MEC (Fibronectina-RGD)</text>',
+nar:'Las ADHESIONES FOCALES son uniones dinámicas cél-MEC donde las integrinas (α5β1, αVβ3) se agrupan y conectan la fibronectina/vitronectina con ACTINA vía talina, vinculina, paxilina y α-actinina. Son sitios de mecanotransducción (FAK/Src). Se arman y desarman durante la migración celular. Previenen la anoikis (apoptosis por desadhesión).'}
+];
+var juncIdx=0;
+function renderJuncSim(){var s=juncSteps[juncIdx];document.getElementById('juncSim-svg').innerHTML='<svg viewBox="0 0 900 210" xmlns="http://www.w3.org/2000/svg">'+s.svg+'</svg>';document.getElementById('juncSim-nar').textContent=s.nar;var ind=document.getElementById('juncSim-ind');ind.innerHTML='';juncSteps.forEach(function(st,i){var d=document.createElement('span');d.className='sim-dot'+(i===juncIdx?' act':'');d.textContent=st.title;d.onclick=function(){juncIdx=i;renderJuncSim()};ind.appendChild(d)})}
+
+/* === Flashcards === */
+var fcData=[
+{t:"CAM",d:"Cell Adhesion Molecule. Glicoproteína transmembrana que media adhesión cél-cél o cél-MEC. 4 familias: cadherinas, IgCAMs, selectinas, integrinas."},
+{t:"Homofílica",d:"Unión donde la misma CAM interactúa consigo misma en la célula vecina. Ej: E-cadherina ↔ E-cadherina."},
+{t:"Heterofílica",d:"Unión donde una CAM se une a una molécula diferente. Ej: Integrina ↔ fibronectina, selectina ↔ sLex."},
+{t:"Cadherinas",d:"CAMs homofílicas, Ca²⁺-dependientes, 5 dominios EC. E-cadherina (epitelio), N-cadherina (neural), desmogleína/desmocolina (desmosomas), VE-cadherina (endotelio)."},
+{t:"IgCAMs",d:"Superfamilia de inmunoglobulinas. Dominios Ig extracelulares. Ca²⁺-independientes. NCAM (homofílica), ICAM-1, VCAM-1, PECAM-1 (CD31)."},
+{t:"Selectinas",d:"Lectinas tipo C, Ca²⁺-dep. Adhesión heterofílica transitoria (rolling). E-selectina (endotelio), P-selectina (plaquetas/endotelio), L-selectina (leucocitos). Reconocen sLex."},
+{t:"Integrinas",d:"Heterodímeros αβ. Adhesión heterofílica, cél-MEC (también cél-cél). Conectan MEC ↔ citoesqueleto. Señalización bidireccional. Ca²⁺/Mg²⁺-dep."},
+{t:"Unión adherente",d:"Zonula adherens. Cél-cél. E-cadherina → p120/β-catenina → α-catenina → ACTINA. Cinturón continuo bajo tight junctions."},
+{t:"Desmosoma",d:"Macula adherens. Cél-cél. Desmogleína/Desmocolina → desmoplaquina/placoglobina → FI (queratina/desmina). Puntos de resistencia mecánica."},
+{t:"Hemidesmosoma",d:"Cél-MEC. Integrina α6β4 + BP180 → plectina/BP230 → FI (queratina). Ancla epitelio a lámina basal (laminina-332). NO es medio desmosoma molecularmente."},
+{t:"Tight junction",d:"Zonula occludens. Más apical. Claudinas + ocludina + JAMs → ZO-1/2/3. Barrera paracelular + fence (polaridad). Cél-cél."},
+{t:"Unión Gap",d:"Nexus. Conexinas (6 = conexón). 2 conexones = canal. Pasan iones, cAMP, Ca²⁺ (<1.5 kDa). Sincitio funcional (Cx43 en corazón). Cél-cél."},
+{t:"Adhesión focal",d:"Cél-MEC. Integrinas → talina/vinculina/paxilina/FAK → ACTINA (stress fibers). Mecanotransducción, migración, señalización. Dinámica."},
+{t:"Costámero",d:"Estructura de adhesión cél-MEC en músculo estriado. En sarcolema alineado con líneas Z. Complejo integrina-vinculina-talina + complejo distrofina-distroglicano (DGC). Transmite fuerza contráctil."},
+{t:"Distrofina",d:"Proteína del costámero/DGC. Une actina cortical → β-distroglicano → α-distroglicano → laminina-2 (merosina). Mutación → Duchenne (DMD)."},
+{t:"β-catenina",d:"Doble función: estructural (unión adherente, une cadherina→α-catenina→actina) y señalización (vía Wnt → transcripción). Su desregulación → cáncer."},
+{t:"Desmoplaquina",d:"Proteína de la placa desmosómica que une el complejo cadherinas-placoglobina a los filamentos intermedios. Esencial para resistencia mecánica."},
+{t:"Pénfigo vulgar",d:"Autoanticuerpos contra desmogleína-3 → destrucción de desmosomas → acantólisis → ampollas intraepiteliales. Autoinmune."},
+{t:"Conexina 43",d:"Principal conexina cardíaca. Forma uniones gap en discos intercalares → sincitio funcional → contracción sincrónica. Mutación → s. oculodentodigital."},
+{t:"EMT",d:"Transición epitelio-mesénquima. Pérdida de E-cadherina → células pierden adhesión, ganan motilidad. Clave en embriogénesis (cresta neural) y metástasis tumoral."}
+];
+function ifc(){var c=document.getElementById('fcards');c.innerHTML='';fcData.forEach(function(f){var d=document.createElement('div');d.className='fc';d.innerHTML='<div class="ft">'+f.t+'</div><div class="fd">'+f.d+'</div><div class="fh">Clic para ver definición</div>';d.onclick=function(){this.classList.toggle('fl')};c.appendChild(d)})}
+
+/* === Final Evaluation === */
+var evq=[
+{q:'Las CAMs son:',o:['Lípidos de la MEC','Glicoproteínas transmembrana de adhesión cél-cél o cél-MEC','Factores de transcripción','Subunidades del ribosoma'],c:1,f:'CAMs = glicoproteínas transmembrana de adhesión. [RA 1]'},
+{q:'Una unión en la que integrina se une a fibronectina es:',o:['Homofílica','Heterofílica','Autocrina','Endocrina'],c:1,f:'Integrina ↔ fibronectina = moléculas diferentes = heterofílica. [RA 1]'},
+{q:'Las cadherinas se caracterizan por:',o:['Ser Ca²⁺-independientes y heterofílicas','Tener dominios tipo inmunoglobulina','Ser homofílicas, Ca²⁺-dependientes, con 5 dominios EC','Ser lectinas que unen carbohidratos'],c:2,f:'Cadherinas: homofílicas, 5 dominios EC, requieren Ca²⁺. [RA 2]'},
+{q:'¿Cuál familia de CAMs es Ca²⁺-independiente?',o:['Cadherinas','Selectinas','Integrinas','IgCAMs (superfamilia de inmunoglobulinas)'],c:3,f:'Las IgCAMs (NCAM, ICAM-1) no requieren Ca²⁺. [RA 2]'},
+{q:'Las selectinas median:',o:['Adhesión firme permanente','Rolling transitorio de leucocitos (unión a sLex)','Anclaje a MEC','Uniones gap'],c:1,f:'Selectinas = lectinas Ca²⁺-dep → rolling de leucocitos vía sLex. [RA 2]'},
+{q:'En la EMT, ¿qué molécula se pierde?',o:['N-cadherina','Fibronectina','E-cadherina','Conexina-43'],c:2,f:'EMT = pérdida de E-cadherina → células pierden adhesión y migran (embriogénesis, metástasis). [RA 2]'},
+{q:'Las uniones adherentes conectan cadherinas con:',o:['Filamentos intermedios','Microtúbulos','Actina (vía cateninas)','Conexinas'],c:2,f:'Adherentes: E-cadherina → β-catenina → α-catenina → ACTINA. [RA 5-6]'},
+{q:'¿Qué proteína une la placa desmosómica a los FI?',o:['Talina','β-catenina','ZO-1','Desmoplaquina'],c:3,f:'Desmoplaquina conecta la placa del desmosoma a queratina/desmina (FI). [RA 6]'},
+{q:'Los hemidesmosomas utilizan como CAM principal:',o:['E-cadherina','Desmogleína','Integrina α6β4','Claudina'],c:2,f:'Hemidesmosomas: integrina α6β4 → plectina → queratina (FI). Cél-MEC. [RA 6]'},
+{q:'Las uniones estrechas mantienen la polaridad celular porque:',o:['Transmiten iones entre células','Anclan la célula a la MEC','Impiden la difusión lateral de proteínas entre dominio apical y basolateral (fence)','Degradan proteínas de membrana'],c:2,f:'Función fence: las tight junctions impiden la mezcla de proteínas apicales/basolaterales → polaridad. [RA 6]'},
+{q:'Un conexón está formado por:',o:['4 claudinas','2 cadherinas','6 conexinas','8 integrinas'],c:2,f:'6 conexinas = 1 conexón (hemicanal). 2 conexones = canal gap. [RA 6]'},
+{q:'La Cx43 es importante en:',o:['La córnea','El corazón (sincitio funcional en discos intercalares)','Los eritrocitos','Los espermatozoides'],c:1,f:'Cx43 en discos intercalares cardíacos → sincitio funcional → contracción sincrónica. [RA 6]'},
+{q:'Las adhesiones focales conectan:',o:['Cadherinas con FI','Integrinas con actina (vía talina/FAK)','Conexinas con microtúbulos','Claudinas con ZO-1'],c:1,f:'Adhesiones focales: integrinas → talina/vinculina/FAK → actina. Cél-MEC. [RA 6]'},
+{q:'El costámero se localiza en:',o:['El núcleo celular','El sarcolema, alineado con las líneas Z','El retículo endoplásmico','La membrana nuclear'],c:1,f:'Costámero: sarcolema alineado con bandas Z. Transmite fuerza de contracción. [RA 7]'},
+{q:'La distrofia de Duchenne se debe a mutación en:',o:['E-cadherina','Conexina-43','Distrofina (componente del costámero/DGC)','Colágeno tipo I'],c:2,f:'DMD: mutación en distrofina → costámero defectuoso → daño muscular progresivo. [RA 7]'},
+{q:'¿Cuál es la posición correcta de las uniones desde apical a basal?',o:['Gap → Desmosoma → Adherente → Tight','Tight → Adherente → Desmosoma → Hemidesmosoma (basal)','Desmosoma → Tight → Gap → Focal','Adherente → Tight → Gap → Hemidesmosoma'],c:1,f:'Orden apical→basal: Tight → Adherente → Desmosomas → (Gap dispersas) → Hemidesmosomas (basal). [RA 6]'},
+{q:'El pénfigo vulgar se produce por autoanticuerpos contra:',o:['BP180 y BP230','Desmogleína-3 (desmosomas)','Conexina-26','E-cadherina'],c:1,f:'Pénfigo vulgar: anti-desmogleína-3 → acantólisis intraepitelial. [RA 6]'},
+{q:'Los discos intercalares del corazón contienen:',o:['Solo tight junctions','Desmosomas + Uniones adherentes + Gap (Cx43)','Solo hemidesmosomas','Solo adhesiones focales'],c:1,f:'Discos intercalares: desmosomas (resistencia), adherentes (actina), gap-Cx43 (sincitio eléctrico). [RA 6]'}
+];
+var eva={},evs=false;
+function iev(){var c=document.getElementById('eq');c.innerHTML='';eva={};evs=false;document.getElementById('sdd').style.display='none';document.getElementById('seb').style.display='none';var lt=['A','B','C','D'];evq.forEach(function(q,qi){var d=document.createElement('div');d.className='qq';d.id='ev-'+qi;var h='<div class="qt"><span style="color:var(--g);font-family:JetBrains Mono;font-size:.83rem">'+(qi+1)+'/'+evq.length+'</span> '+q.q+'</div><div class="qo">';q.o.forEach(function(opt,oi){h+='<button class="qb" onclick="seo(this,'+qi+','+oi+')"><div class="ol">'+lt[oi]+'</div>'+opt+'</button>'});h+='</div><div class="qf" id="fb-ev-'+qi+'"></div>';d.innerHTML=h;c.appendChild(d)})}
+function seo(btn,qi,oi){if(evs)return;document.getElementById('ev-'+qi).querySelectorAll('.qb').forEach(function(o){o.classList.remove('sel')});btn.classList.add('sel');eva[qi]=oi;if(Object.keys(eva).length===evq.length)document.getElementById('seb').style.display='inline-flex'}
+function se(){evs=true;var sc=0;evq.forEach(function(q,qi){var c=document.getElementById('ev-'+qi),os=c.querySelectorAll('.qb');var ua=eva[qi];os.forEach(function(o,oi){o.classList.add('dis');if(oi===q.c)o.classList.add('ok');if(oi===ua&&oi!==q.c)o.classList.add('no')});if(ua===q.c)sc++;var fb=document.getElementById('fb-ev-'+qi);fb.classList.add('sh');fb.classList.add(ua===q.c?'cf':'if');fb.textContent=(ua===q.c?'✅ ':'❌ ')+q.f});document.getElementById('seb').style.display='none';var pct=Math.round(sc/evq.length*100),dd=document.getElementById('sdd');dd.style.display='block';document.getElementById('sn2').textContent=sc+'/'+evq.length;document.getElementById('sbf2').style.width=pct+'%';var msg='';if(pct>=90){msg='🌟 ¡Excelente! Dominas CAMs y Uniones Celulares.';document.getElementById('sn2').style.color='var(--g)'}else if(pct>=70){msg='👏 ¡Buen trabajo! Revisa los errores.';document.getElementById('sn2').style.color='var(--b)'}else if(pct>=50){msg='📚 Repasa los conceptos clave.';document.getElementById('sn2').style.color='var(--y)'}else{msg='💪 Necesitas repasar la tutoría.';document.getElementById('sn2').style.color='var(--r)';document.getElementById('sbf2').style.background='linear-gradient(135deg,#FF6B6B,#FFD93D)'}document.getElementById('sm2').textContent=msg;dd.scrollIntoView({behavior:'smooth',block:'center'})}
+
+/* Init */
+ifc();iev();up();renderJuncSim();
+document.querySelectorAll('#navLinks button').forEach(function(b){b.addEventListener('click',function(){go(this.getAttribute('data-s'))})});
+</script>
+</body></html>
