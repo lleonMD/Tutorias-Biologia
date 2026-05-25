@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico — Biología Humana I</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0a0d12;--surface:#111620;--surface2:#171d29;--surface3:#1e2636;
+--border:#253045;--border2:#354565;
+--text:#e4e9f2;--text2:#8e9ab8;--text3:#5c6a88;
+--accent:#f0a500;--accent2:#e09500;--accent-dim:rgba(240,165,0,.1);
+--warn:#ef4444;--warn-dim:rgba(239,68,68,.1);
+--gold:#fbbf24;--gold-dim:rgba(251,191,36,.1);
+--blue:#60a5fa;--blue-dim:rgba(96,165,250,.1);
+--green:#34d399;--green-dim:rgba(52,211,153,.1);
+--purple:#a78bfa;--purple-dim:rgba(167,139,250,.1);
+--cyan:#22d3ee;--cyan-dim:rgba(34,211,238,.1);
+--rose:#fb7185;--rose-dim:rgba(251,113,133,.1);
+--orange:#fb923c;--orange-dim:rgba(251,146,60,.1);
+}
+html{font-size:15px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Source Sans 3',sans-serif;line-height:1.6;min-height:100vh}
+::selection{background:var(--accent);color:var(--bg)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.container{max-width:920px;margin:0 auto;padding:1.5rem}
+.hero{text-align:center;padding:3rem 1rem 2rem;position:relative}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(240,165,0,.07),transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent-dim);border:1px solid rgba(240,165,0,.2);color:var(--accent);padding:.35rem 1rem;border-radius:99px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.2rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;line-height:1.15;margin-bottom:.8rem;background:linear-gradient(135deg,var(--text),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--text2);max-width:580px;margin:0 auto;font-size:.92rem;line-height:1.7}
+.tab-bar{display:flex;gap:.25rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.3rem;margin:2rem 0 1.5rem;overflow-x:auto}
+.tab-btn{flex:1;min-width:0;padding:.65rem .5rem;border:none;background:transparent;color:var(--text3);font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;border-radius:9px;transition:all .2s;white-space:nowrap}
+.tab-btn:hover{color:var(--text2);background:var(--surface2)}
+.tab-btn.active{background:var(--accent-dim);color:var(--accent);box-shadow:0 0 0 1px rgba(240,165,0,.2)}
+.tab-panel{display:none}.tab-panel.active{display:block;animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.global-progress{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1.5rem}
+.gp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
+.gp-label{font-size:.78rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.06em}
+.gp-count{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--accent)}
+.gp-track{height:6px;background:var(--surface3);border-radius:3px;overflow:hidden}
+.gp-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:3px;transition:width .5s ease;width:0%}
+.system-section{margin-bottom:1.5rem}
+.system-header{display:flex;align-items:center;gap:.75rem;padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:12px 12px 0 0;cursor:pointer;user-select:none;transition:background .2s}
+.system-header:hover{background:var(--surface2)}
+.system-header.collapsed{border-radius:12px}
+.sys-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.sys-info{flex:1;min-width:0}.sys-name{font-weight:600;font-size:.93rem}
+.sys-topics{font-size:.72rem;color:var(--text3);margin-top:.1rem}
+.sys-score{font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:600;padding:.25rem .7rem;border-radius:6px;white-space:nowrap}
+.sys-chevron{color:var(--text3);transition:transform .3s;font-size:.8rem}
+.system-header.collapsed .sys-chevron{transform:rotate(-90deg)}
+.system-body{border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;overflow:hidden}
+.q-card{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);transition:background .2s}
+.q-card:last-child{border-bottom:none}
+.q-meta{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;flex-wrap:wrap}
+.q-tag{font-size:.63rem;font-weight:700;padding:.15rem .5rem;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
+.q-tag.teoria{background:var(--blue-dim);color:var(--blue)}
+.q-tag.clinico{background:var(--purple-dim);color:var(--purple)}
+.q-tag.topic{background:var(--surface3);color:var(--text3)}
+.q-text{font-size:.9rem;line-height:1.65;margin-bottom:.8rem}
+.q-options{display:flex;flex-direction:column;gap:.4rem}
+.q-opt{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem .8rem;border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:.84rem;line-height:1.5}
+.q-opt:hover{border-color:var(--border2);background:var(--surface2)}
+.q-opt .bullet{width:18px;height:18px;border:2px solid var(--border2);border-radius:50%;flex-shrink:0;margin-top:2px;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.q-opt.selected{border-color:var(--accent);background:var(--accent-dim)}
+.q-opt.selected .bullet{border-color:var(--accent);background:var(--accent)}
+.q-opt.selected .bullet::after{content:'';width:6px;height:6px;background:var(--bg);border-radius:50%}
+.q-opt.correct{border-color:var(--green);background:var(--green-dim)}
+.q-opt.correct .bullet{border-color:var(--green);background:var(--green)}
+.q-opt.incorrect{border-color:var(--warn);background:var(--warn-dim)}
+.q-opt.incorrect .bullet{border-color:var(--warn);background:var(--warn)}
+.q-opt.disabled{pointer-events:none;opacity:.7}
+.q-opt.reveal-correct{border-color:var(--green);background:var(--green-dim)}
+.q-feedback{margin-top:.6rem;padding:.7rem .9rem;border-radius:8px;font-size:.82rem;line-height:1.6;display:none}
+.q-feedback.show{display:block;animation:fadeUp .3s ease}
+.q-feedback.right{background:var(--green-dim);color:var(--green);border:1px solid rgba(52,211,153,.2)}
+.q-feedback.wrong{background:var(--warn-dim);color:#fca5a5;border:1px solid rgba(239,68,68,.15)}
+.results-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;backdrop-filter:blur(6px);overflow-y:auto;padding:2rem 1rem}
+.results-overlay.show{display:flex;align-items:flex-start;justify-content:center;animation:fadeUp .4s ease}
+.results-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;max-width:800px;width:100%;padding:2rem;margin:auto}
+.results-card h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:.3rem}
+.results-summary{color:var(--text2);font-size:.88rem;margin-bottom:1.5rem}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:1.5rem}
+.res-item{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.9rem 1rem}
+.res-item-name{font-size:.75rem;font-weight:600;color:var(--text2);margin-bottom:.4rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res-bar-track{height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;margin-bottom:.3rem}
+.res-bar-fill{height:100%;border-radius:3px;transition:width .8s ease}
+.res-item-score{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600}
+.res-section-title{font-size:.85rem;font-weight:700;color:var(--text);margin:1.5rem 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.res-weakness{padding:.7rem 1rem;background:var(--warn-dim);border:1px solid rgba(239,68,68,.15);border-radius:8px;margin-bottom:.5rem;font-size:.84rem;color:#fca5a5}
+.res-strength{padding:.7rem 1rem;background:var(--green-dim);border:1px solid rgba(52,211,153,.15);border-radius:8px;margin-bottom:.5rem;font-size:.84rem;color:var(--green)}
+.close-results{position:absolute;top:1rem;right:1rem;background:var(--surface3);border:none;color:var(--text);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.study-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:.7rem}
+.study-card h3{font-size:.93rem;font-weight:700;margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem}
+.study-card p{font-size:.84rem;color:var(--text2);line-height:1.65}
+.study-likert{display:flex;gap:.3rem;margin-top:.7rem;flex-wrap:wrap}
+.likert-opt{padding:.4rem .7rem;border:1px solid var(--border);border-radius:6px;font-size:.73rem;cursor:pointer;transition:all .2s;color:var(--text3);font-weight:500}
+.likert-opt:hover{border-color:var(--border2);color:var(--text2)}
+.likert-opt.selected{border-color:var(--accent);background:var(--accent-dim);color:var(--accent)}
+.evidence-badge{font-size:.58rem;padding:.12rem .4rem;border-radius:3px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.evidence-high{background:var(--green-dim);color:var(--green)}
+.evidence-med{background:var(--gold-dim);color:var(--gold)}
+.submit-row{text-align:center;padding:2rem 0}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);border:none;padding:.8rem 2.5rem;border-radius:10px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(240,165,0,.25)}
+.btn-primary:disabled{opacity:.4;pointer-events:none}
+.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border);padding:.6rem 1.5rem;border-radius:8px;font-family:inherit;font-size:.84rem;font-weight:600;cursor:pointer;transition:all .2s;margin:.3rem}
+.btn-secondary:hover{background:var(--surface3);border-color:var(--border2)}
+@media(max-width:600px){.hero h1{font-size:1.8rem}.tab-btn{font-size:.68rem;padding:.5rem .3rem}.res-grid{grid-template-columns:1fr}.container{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="hero">
+  <div class="hero-badge">🔬 Sesión Diagnóstica Inicial</div>
+  <h1>Biología Humana I</h1>
+  <p>Evaluación diagnóstica de biología celular y molecular. Identifica tus fortalezas, debilidades y la brecha entre conocimiento teórico y aplicación clínica para diseñar tu plan de tutoría personalizado.</p>
+</div>
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" data-tab="eval">Autoevaluación Temática</button>
+  <button class="tab-btn" data-tab="methods">Métodos de Estudio</button>
+  <button class="tab-btn" data-tab="results">Ver Resultados</button>
+</div>
+<div class="global-progress" id="globalProgress">
+  <div class="gp-header"><span class="gp-label">Progreso de evaluación</span><span class="gp-count" id="gpCount">0 / 0</span></div>
+  <div class="gp-track"><div class="gp-fill" id="gpFill"></div></div>
+</div>
+<div class="tab-panel active" id="panelEval"></div>
+<div class="tab-panel" id="panelMethods"></div>
+<div class="tab-panel" id="panelResults">
+  <div style="text-align:center;padding:3rem 1rem">
+    <p style="color:var(--text3);font-size:.9rem">Completa al menos el 50% de las preguntas para generar tu diagnóstico.</p>
+    <button class="btn-primary" style="margin-top:1rem" onclick="generateResults()" id="btnGenResults" disabled>Generar Diagnóstico</button>
+  </div>
+</div>
+</div>
+<div class="results-overlay" id="resultsOverlay"><div class="results-card" style="position:relative" id="resultsContent"></div></div>
+
+<script>
+const SYSTEMS=[
+{id:'bio',name:'Biomoléculas',icon:'🧪',color:'#60a5fa',parciales:'1',
+topics:['Proteínas','Carbohidratos','Ácidos Nucleicos','Lípidos'],
+questions:[
+{topic:'Proteínas',type:'teoria',q:'¿Cuál es el nivel de estructura proteica que describe la secuencia lineal de aminoácidos unidos por enlaces peptídicos?',opts:['Estructura primaria','Estructura secundaria','Estructura terciaria','Estructura cuaternaria'],correct:0,fb:'La estructura primaria es la secuencia lineal de aminoácidos unidos covalentemente por enlaces peptídicos. Esta secuencia determina todos los niveles superiores de estructura (2°, 3°, 4°) y, por ende, la función de la proteína.'},
+{topic:'Proteínas',type:'clinico',q:'Un paciente con anemia de células falciformes tiene una sustitución de Glu→Val en la posición 6 de la cadena β de hemoglobina. ¿Qué nivel de estructura proteica se altera directamente?',opts:['Estructura primaria (cambio de un aminoácido)','Estructura secundaria (pérdida de α-hélice)','Estructura cuaternaria exclusivamente','Grupo prostético (hemo)'],correct:0,fb:'La mutación E6V es un cambio en la estructura primaria: un aminoácido hidrofílico (Glu) es reemplazado por uno hidrofóbico (Val). Esto altera el plegamiento y favorece la polimerización de desoxi-HbS, deformando el eritrocito en forma de hoz.'},
+{topic:'Carbohidratos',type:'teoria',q:'¿Qué tipo de enlace une dos monosacáridos para formar un disacárido?',opts:['Enlace glucosídico','Enlace peptídico','Enlace fosfodiéster','Enlace éster'],correct:0,fb:'El enlace glucosídico (O-glucosídico) se forma por condensación entre el grupo hidroxilo anomérico de un monosacárido y un hidroxilo de otro, liberando agua. La orientación α o β del enlace determina si es digerible (α, como almidón) o no (β, como celulosa).'},
+{topic:'Ácidos Nucleicos',type:'teoria',q:'¿Qué tipo de enlace une los nucleótidos en una cadena de ADN?',opts:['Enlace fosfodiéster','Enlace glucosídico','Enlace peptídico','Puente de hidrógeno'],correct:0,fb:'El enlace fosfodiéster une el grupo fosfato en posición 5\' de un nucleótido con el hidroxilo 3\' del nucleótido anterior, formando el esqueleto azúcar-fosfato. Los puentes de hidrógeno unen las bases complementarias entre las dos cadenas (A=T con 2 puentes; G≡C con 3).'},
+{topic:'Lípidos',type:'teoria',q:'¿Cuál es la diferencia fundamental entre un ácido graso saturado y uno insaturado?',opts:['El insaturado tiene dobles enlaces C=C; el saturado no','El saturado es más largo','El insaturado es siempre trans','El saturado tiene grupos fosfato'],correct:0,fb:'Los ácidos grasos saturados carecen de dobles enlaces C=C (cadena recta, empaquetamiento compacto, sólidos a T° ambiente). Los insaturados tienen uno o más dobles enlaces C=C (cis = plegamiento, mayor fluidez de membrana).'},
+{topic:'Lípidos',type:'clinico',q:'Un paciente consume una dieta alta en grasas trans. ¿Qué efecto tienen los ácidos grasos trans sobre la membrana celular comparado con los cis?',opts:['Se empaquetan como los saturados, rigidizando la membrana','Aumentan la fluidez como los ácidos grasos cis','No tienen efecto en la membrana','Se integran exclusivamente en lipoproteínas'],correct:0,fb:'Los ácidos grasos trans tienen configuración recta (similar a los saturados) a pesar de tener dobles enlaces, por lo que se empaquetan densamente, rigidizan la membrana y se asocian con mayor riesgo cardiovascular.'},
+]},
+{id:'memb',name:'Membrana y Transporte',icon:'🫧',color:'#22d3ee',parciales:'2',
+topics:['Membrana Celular','Transporte Pasivo','Transporte Activo','Canales Iónicos y Potencial de Membrana'],
+questions:[
+{topic:'Membrana Celular',type:'teoria',q:'Según el modelo de mosaico fluido, ¿qué componente es responsable de regular la fluidez de la membrana celular?',opts:['Colesterol','Proteínas integrales','Glucocálix','Citoesqueleto'],correct:0,fb:'El colesterol se intercala entre los fosfolípidos: a altas temperaturas reduce la fluidez (inmoviliza cadenas); a bajas temperaturas evita la cristalización (impide el empaquetamiento). Así actúa como "amortiguador" de la fluidez, manteniendo la Tm óptima.'},
+{topic:'Transporte Pasivo',type:'teoria',q:'Una célula se coloca en una solución hipertónica. ¿Qué ocurre con el agua?',opts:['Sale de la célula por ósmosis (crenación)','Entra a la célula por ósmosis','No hay movimiento neto','Entra por transporte activo'],correct:0,fb:'En solución hipertónica, la concentración de solutos es mayor fuera de la célula. El agua sale por ósmosis siguiendo su gradiente de concentración (de menor a mayor concentración de soluto), causando crenación (encogimiento) en eritrocitos o plasmólisis en células vegetales.'},
+{topic:'Transporte Activo',type:'teoria',q:'La bomba Na⁺/K⁺-ATPasa transporta iones contra su gradiente. ¿Cuántos iones mueve por cada ATP hidrolizado?',opts:['3 Na⁺ hacia fuera y 2 K⁺ hacia dentro','2 Na⁺ hacia fuera y 3 K⁺ hacia dentro','3 Na⁺ y 3 K⁺ en la misma dirección','1 Na⁺ y 1 K⁺ en direcciones opuestas'],correct:0,fb:'La Na⁺/K⁺-ATPasa es una bomba tipo P (se fosforila). Por cada ATP hidrolizado exporta 3 Na⁺ e importa 2 K⁺, generando un transporte electrogénico neto (contribuye ~10% al potencial de membrana en reposo).'},
+{topic:'Transporte Activo',type:'clinico',q:'La fibrosis quística se debe a un defecto en la proteína CFTR. ¿Qué tipo de transportador es CFTR?',opts:['Canal de Cl⁻ tipo ABC regulado por AMPc','Bomba de Na⁺ tipo P','Cotransportador Na⁺/glucosa','Canal de K⁺ voltaje-dependiente'],correct:0,fb:'CFTR (Cystic Fibrosis Transmembrane conductance Regulator) es un canal de Cl⁻ de la familia ABC, activado por fosforilación (PKA, dependiente de AMPc). Su disfunción impide la secreción de Cl⁻ y agua, produciendo moco espeso en pulmones, páncreas e intestino.'},
+{topic:'Canales Iónicos y Potencial de Membrana',type:'teoria',q:'¿Qué ecuación permite calcular el potencial de equilibrio de un ión individual a través de una membrana?',opts:['Ecuación de Nernst','Ecuación de Goldman','Ecuación de Henderson-Hasselbalch','Ecuación de Michaelis-Menten'],correct:0,fb:'La ecuación de Nernst calcula el potencial de equilibrio (E) para un ión: E = (RT/zF) × ln([ión]ext/[ión]int). La ecuación de Goldman integra la permeabilidad relativa de múltiples iones para calcular el potencial de membrana en reposo.'},
+]},
+{id:'met',name:'Metabolismo Energético',icon:'⚡',color:'#f0a500',parciales:'2–3',
+topics:['Metabolismo y Enzimas','Glucólisis','Ciclo de Krebs (TCA)','CTE y Fosforilación Oxidativa','Beta-oxidación'],
+questions:[
+{topic:'Metabolismo y Enzimas',type:'teoria',q:'¿Qué efecto tiene una enzima sobre la energía de activación de una reacción?',opts:['Disminuye la energía de activación','Aumenta la energía de activación','Cambia el ΔG de la reacción','Aumenta la energía libre de los productos'],correct:0,fb:'Las enzimas son catalizadores biológicos que disminuyen la energía de activación (Ea) al estabilizar el estado de transición. No alteran el ΔG (cambio de energía libre) ni el equilibrio de la reacción; solo aumentan la velocidad.'},
+{topic:'Metabolismo y Enzimas',type:'teoria',q:'¿Qué tipo de inhibición enzimática se supera aumentando la concentración de sustrato?',opts:['Inhibición competitiva','Inhibición no competitiva','Inhibición acompetitiva','Inhibición irreversible'],correct:0,fb:'En la inhibición competitiva, el inhibidor compite con el sustrato por el sitio activo. Al aumentar [S], se desplaza al inhibidor. La Km aparente aumenta, pero la Vmax no cambia. En la inhibición no competitiva, aumentar [S] no revierte el efecto.'},
+{topic:'Glucólisis',type:'teoria',q:'¿Cuál es el rendimiento neto de ATP por molécula de glucosa en la glucólisis?',opts:['2 ATP (neto)','4 ATP','36 ATP','1 ATP'],correct:0,fb:'La glucólisis consume 2 ATP (fases de fosforilación de glucosa y fructosa-6-P) y produce 4 ATP (por fosforilación a nivel de sustrato). El rendimiento neto es 2 ATP + 2 NADH + 2 piruvato por glucosa.'},
+{topic:'Glucólisis',type:'clinico',q:'Durante el ejercicio anaeróbico intenso, el piruvato se convierte en lactato. ¿Cuál es el propósito metabólico de esta conversión?',opts:['Regenerar NAD⁺ para que la glucólisis continúe','Producir más ATP','Alimentar el ciclo de Krebs','Sintetizar glucógeno'],correct:0,fb:'La fermentación láctica reduce piruvato a lactato usando NADH, regenerando NAD⁺ citoplasmático. Sin NAD⁺, la glucólisis se detendría (se necesita en la reacción de GAPDH). Esto permite producción anaeróbica continua de 2 ATP/glucosa.'},
+{topic:'Ciclo de Krebs (TCA)',type:'teoria',q:'¿En qué compartimiento mitocondrial ocurre el ciclo del ácido cítrico (TCA)?',opts:['Matriz mitocondrial','Espacio intermembrana','Membrana interna','Membrana externa'],correct:0,fb:'El TCA ocurre en la matriz mitocondrial, donde el acetil-CoA (2C) se condensa con oxaloacetato (4C) para formar citrato (6C). Cada vuelta produce 3 NADH, 1 FADH₂, 1 GTP y libera 2 CO₂.'},
+{topic:'CTE y Fosforilación Oxidativa',type:'teoria',q:'¿Cuál es el aceptor final de electrones en la cadena de transporte de electrones mitocondrial?',opts:['O₂ (oxígeno molecular)','NAD⁺','FAD','CO₂'],correct:0,fb:'El O₂ es el aceptor final: recibe electrones del complejo IV (citocromo c oxidasa) y se reduce a H₂O. Sin O₂, la CTE se detiene, el NADH no puede reoxidarse y el metabolismo aeróbico cesa (por eso necesitamos respirar).'},
+{topic:'CTE y Fosforilación Oxidativa',type:'clinico',q:'Un paciente presenta acidosis láctica severa por intoxicación con cianuro. ¿Por qué se acumula lactato?',opts:['El cianuro inhibe el complejo IV, bloqueando toda la CTE','El cianuro inhibe la glucólisis','El cianuro destruye las mitocondrias','El cianuro activa la fermentación alcohólica'],correct:0,fb:'El cianuro (CN⁻) inhibe la citocromo c oxidasa (complejo IV), bloqueando la CTE. Sin fosforilación oxidativa, las células dependen exclusivamente de la glucólisis anaeróbica → acumulación de lactato y acidosis metabólica severa.'},
+{topic:'Beta-oxidación',type:'teoria',q:'¿Dónde ocurre principalmente la β-oxidación de ácidos grasos de cadena larga en la célula?',opts:['Matriz mitocondrial','Citoplasma','Retículo endoplásmico liso','Peroxisomas exclusivamente'],correct:0,fb:'La β-oxidación de ácidos grasos de cadena larga (>12C) ocurre en la matriz mitocondrial. Los ácidos grasos necesitan el ciclo de carnitina (CPT-I y CPT-II) para cruzar la membrana interna mitocondrial. Los de cadena muy larga (>22C) se acortan primero en peroxisomas.'},
+]},
+{id:'nuc',name:'Núcleo, Genoma y Replicación',icon:'🧬',color:'#a78bfa',parciales:'3',
+topics:['Genoma Humano','Empaquetamiento del ADN','Núcleo','Duplicación del ADN'],
+questions:[
+{topic:'Empaquetamiento del ADN',type:'teoria',q:'¿Cuál es la unidad básica de empaquetamiento de la cromatina?',opts:['Nucleosoma (ADN enrollado alrededor de un octámero de histonas)','Cromosoma','Cromátida','Centrómero'],correct:0,fb:'El nucleosoma consiste en ~147 pb de ADN enrollados ~1.7 vueltas alrededor de un octámero de histonas (2 copias de H2A, H2B, H3 y H4). La histona H1 estabiliza el ADN linker entre nucleosomas, formando la fibra de 30 nm.'},
+{topic:'Núcleo',type:'teoria',q:'¿Qué molécula pequeña GTPasa controla el transporte bidireccional a través del complejo de poro nuclear?',opts:['Ran-GTP','Ras-GTP','Rab-GTP','Rho-GTP'],correct:0,fb:'Ran-GTP controla la direccionalidad del transporte nuclear. En el núcleo predomina Ran-GTP (por RCC1, un GEF nuclear), que libera la carga de las importinas y carga las exportinas. En el citoplasma, RanGAP hidroliza Ran-GTP a Ran-GDP.'},
+{topic:'Duplicación del ADN',type:'teoria',q:'¿En qué dirección sintetiza la ADN polimerasa nuevas cadenas de ADN?',opts:['5\' → 3\'','3\' → 5\'','Ambas direcciones simultáneamente','No tiene direccionalidad'],correct:0,fb:'La ADN polimerasa solo añade nucleótidos en dirección 5\'→3\' (al OH libre en 3\'). Esto crea una asimetría: la hebra líder se sintetiza continuamente, mientras la hebra rezagada se sintetiza en fragmentos de Okazaki (procesados por ADN ligasa).'},
+{topic:'Duplicación del ADN',type:'teoria',q:'¿Qué enzima sintetiza el cebador de ARN necesario para iniciar la replicación del ADN?',opts:['Primasa (ARN primasa)','ADN polimerasa α','Helicasa','Topoisomerasa'],correct:0,fb:'La primasa (un tipo de ARN polimerasa) sintetiza un cebador corto de ARN (~10 nt) complementario a la cadena molde. La ADN polimerasa necesita un extremo 3\'-OH libre para elongar, por eso no puede iniciar síntesis de novo.'},
+]},
+{id:'exp',name:'Expresión Génica',icon:'📜',color:'#34d399',parciales:'4',
+topics:['Transcripción','Mod. Postranscripcionales','Ribosomas y Código Genético','Traducción','Mod. Postraduccionales'],
+questions:[
+{topic:'Transcripción',type:'teoria',q:'¿Qué ARN polimerasa transcribe los genes que codifican proteínas (genes tipo II) en eucariotas?',opts:['ARN polimerasa II','ARN polimerasa I','ARN polimerasa III','ADN polimerasa'],correct:0,fb:'La ARN pol II transcribe genes codificantes de proteínas (ARNm) y algunos ARN pequeños. La ARN pol I transcribe ARNr (28S, 18S, 5.8S) y la ARN pol III transcribe ARNt, ARNr 5S y otros ARN pequeños.'},
+{topic:'Mod. Postranscripcionales',type:'teoria',q:'¿Cuáles son las tres modificaciones principales del pre-ARNm antes de su exportación al citoplasma?',opts:['Capping 5\' (7-metilguanosina), splicing de intrones, poliadenilación 3\'','Metilación, acetilación, fosforilación','Ubiquitinación, glicosilación, splicing','Capping, traducción parcial, degradación'],correct:0,fb:'El pre-ARNm sufre: 1) Capping en 5\' (adición de 7-metilguanosina, protege de exonucleasas y facilita traducción), 2) Splicing (remoción de intrones por el espliceosoma), 3) Poliadenilación en 3\' (cola poli-A de ~200 adeninas, estabilidad y exportación).'},
+{topic:'Traducción',type:'teoria',q:'¿En qué sitio del ribosoma se ubica el aminoacil-ARNt que porta el nuevo aminoácido durante la elongación?',opts:['Sitio A (aminoacil)','Sitio P (peptidil)','Sitio E (exit)','Subunidad pequeña solamente'],correct:0,fb:'El sitio A recibe el aminoacil-ARNt entrante. El sitio P contiene el peptidil-ARNt (cadena en crecimiento). Tras la formación del enlace peptídico (catalizado por el ARNr 28S, una ribozima), ocurre la translocación: el ARNt vacío pasa al sitio E y sale.'},
+{topic:'Traducción',type:'clinico',q:'Ciertos antibióticos como la eritromicina inhiben la traducción bacteriana. ¿Por qué no afectan a los ribosomas humanos citoplásmicos?',opts:['Los ribosomas bacterianos (70S) tienen estructura diferente a los eucariotas (80S)','Las bacterias no tienen ribosomas','Los antibióticos no entran a células humanas','Los ribosomas humanos son más resistentes'],correct:0,fb:'Los ribosomas bacterianos son 70S (subunidades 30S + 50S) vs. los eucariotas citoplásmicos que son 80S (40S + 60S). Las diferencias estructurales permiten que antibióticos como eritromicina, tetraciclina y cloranfenicol sean selectivos contra bacterias.'},
+{topic:'Mod. Postraduccionales',type:'teoria',q:'¿Qué modificación postraduccional marca proteínas para su degradación por el proteosoma?',opts:['Ubiquitinación (adición de ubiquitina)','Fosforilación','Glucosilación','Acetilación'],correct:0,fb:'La ubiquitinación (adición de cadenas de poliubiquitina K48) marca proteínas para degradación por el proteosoma 26S. Requiere tres enzimas: E1 (activadora), E2 (conjugadora) y E3 (ligasa, da especificidad de sustrato). Es esencial para el control de calidad proteico.'},
+]},
+{id:'cito',name:'Citoesqueleto',icon:'🕸️',color:'#fb7185',parciales:'4–5',
+topics:['Microtúbulos','Microfilamentos','Filamentos Intermedios','Proteínas Motoras'],
+questions:[
+{topic:'Microtúbulos',type:'teoria',q:'¿Cuál es la subunidad proteica que forma los microtúbulos?',opts:['Heterodímeros de α- y β-tubulina','Actina globular (G-actina)','Queratina','Vimentina'],correct:0,fb:'Los microtúbulos son cilindros huecos de ~25 nm formados por 13 protofilamentos de heterodímeros α/β-tubulina. Tienen polaridad: el extremo (+) crece más rápido (β-tubulina expuesta) y el extremo (-) suele estar anclado al centrosoma (COMT).'},
+{topic:'Microtúbulos',type:'clinico',q:'El síndrome de Kartagener se debe a un defecto en la dineína ciliar. ¿Qué manifestaciones clínicas presenta?',opts:['Situs inversus, bronquiectasias, sinusitis crónica e infertilidad','Solo infertilidad masculina','Debilidad muscular progresiva','Ampollas cutáneas'],correct:0,fb:'La dineína ciliar defectuosa impide el movimiento ciliar normal: bronquiectasias y sinusitis (mal aclaramiento mucociliar), situs inversus (los cilios nodales embrionarios no generan flujo lateralizado), e infertilidad masculina (flagelo espermático inmóvil).'},
+{topic:'Microfilamentos',type:'teoria',q:'¿Qué nucleótido utiliza la actina para su polimerización?',opts:['ATP','GTP','UTP','CTP'],correct:0,fb:'La G-actina une ATP y se polimeriza en F-actina (filamento). Tras la incorporación, el ATP se hidroliza a ADP+Pi, debilitando las interacciones. Esto genera el "treadmilling": polimerización neta en el extremo (+) barbado y despolimerización en el extremo (-) puntiagudo.'},
+{topic:'Proteínas Motoras',type:'teoria',q:'¿Qué proteína motora es responsable del transporte anterógrado (hacia el extremo +) sobre microtúbulos?',opts:['Quinesina','Dineína citoplasmática','Miosina II','Miosina V'],correct:0,fb:'La quinesina camina hacia el extremo (+) del microtúbulo (hacia la periferia celular = anterógrado). La dineína citoplasmática camina hacia el extremo (-) (hacia el centrosoma = retrógrado). Ambas usan ATP como fuente de energía.'},
+]},
+{id:'signal',name:'Señalización Celular',icon:'📡',color:'#fbbf24',parciales:'5',
+topics:['Señalización Celular','Direccionamiento Proteico','Plegamiento Proteico'],
+questions:[
+{topic:'Señalización Celular',type:'teoria',q:'¿Qué tipo de receptor activa una proteína G heterotrimérica como paso inicial de su cascada de señalización?',opts:['Receptor acoplado a proteína G (GPCR)','Receptor tirosina cinasa (RTK)','Receptor nuclear','Canal iónico ligando-dependiente'],correct:0,fb:'Los GPCR (7 dominios transmembrana) activan proteínas G heterotriméricas (αβγ). Al unir el ligando, el receptor actúa como GEF: intercambia GDP→GTP en Gα, que se disocia de Gβγ. Gα-GTP activa efectores como adenilato ciclasa (→AMPc) o fosfolipasa C (→IP₃+DAG).'},
+{topic:'Señalización Celular',type:'clinico',q:'El óxido nítrico (NO) actúa como vasodilatador. ¿Cómo ejerce su efecto a nivel molecular?',opts:['Activa la guanilato ciclasa soluble → GMPc → relajación del músculo liso','Bloquea canales de Ca²⁺ directamente','Activa receptores nucleares de esteroides','Inhibe la bomba Na⁺/K⁺'],correct:0,fb:'El NO es un gas mensajero que difunde libremente a través de membranas. Se une al grupo hemo de la guanilato ciclasa soluble, estimulando la producción de GMPc. El GMPc activa PKG, que reduce el Ca²⁺ intracelular y produce relajación del músculo liso vascular.'},
+{topic:'Direccionamiento Proteico',type:'teoria',q:'¿Qué complejo reconoce la secuencia señal de una proteína destinada al RER durante su traducción?',opts:['Partícula de reconocimiento de señal (SRP)','Translocón Sec61','Complejo de poro nuclear','Clatrina'],correct:0,fb:'La SRP (Signal Recognition Particle) reconoce la secuencia señal hidrofóbica N-terminal que emerge del ribosoma, pausa la traducción y dirige el complejo ribosoma-cadena naciente al receptor de SRP en la membrana del RER, donde el translocón Sec61 permite la inserción co-traduccional.'},
+{topic:'Plegamiento Proteico',type:'teoria',q:'¿Qué ocurre con una proteína mal plegada que no puede ser rescatada por chaperonas en el RER?',opts:['Se retrotransloca al citosol y se degrada por el proteosoma (vía ERAD)','Se secreta normalmente','Se almacena en el Golgi indefinidamente','Se degrada en el lisosoma directamente'],correct:0,fb:'ERAD (ER-Associated Degradation): la proteína mal plegada se retrotransloca al citoplasma a través del translocón, se ubiquitina y se degrada por el proteosoma 26S. Si la acumulación de proteínas mal plegadas es excesiva, se activa la UPR (Unfolded Protein Response).'},
+]},
+{id:'endo',name:'Sistema Endomembranal',icon:'📦',color:'#fb923c',parciales:'5',
+topics:['RER y REL','Transporte Vesicular','Golgi y Lisosomas','Endo/Exo/Transcitosis'],
+questions:[
+{topic:'Transporte Vesicular',type:'teoria',q:'¿Qué cubierta proteica recubre las vesículas que transportan carga desde el RER hacia el Golgi (transporte anterógrado)?',opts:['COP II','COP I','Clatrina','Caveolina'],correct:0,fb:'Las vesículas COP II (Coat Protein complex II) median el transporte anterógrado RER→Golgi (vía ERGIC). Las vesículas COP I median el transporte retrógrado Golgi→RER (recuperación de proteínas residentes del RE con señal KDEL). La clatrina media transporte desde la red trans-Golgi y endocitosis.'},
+{topic:'Golgi y Lisosomas',type:'teoria',q:'¿Qué marcador molecular dirige las enzimas hidrolíticas hacia los lisosomas?',opts:['Manosa-6-fosfato (M6P)','Señal KDEL','Ubiquitina','Cola poli-A'],correct:0,fb:'En el cis-Golgi, las hidrolasas lisosomales reciben una etiqueta de manosa-6-fosfato (M6P) por la GlcNAc-fosfotransferasa. El receptor de M6P en la red trans-Golgi empaqueta estas enzimas en vesículas con clatrina dirigidas a endosomas tardíos/lisosomas.'},
+{topic:'Golgi y Lisosomas',type:'clinico',q:'Un niño presenta hepatoesplenomegalia y retraso del desarrollo. Se diagnostica enfermedad de Gaucher por déficit de glucocerebrosidasa. ¿A qué tipo de patología pertenece?',opts:['Enfermedad por acumulación lisosomal','Enfermedad mitocondrial','Enfermedad del citoesqueleto','Enfermedad de señalización'],correct:0,fb:'Las enfermedades de acumulación lisosomal se deben al déficit de hidrolasas específicas. Sin glucocerebrosidasa, el glucocerebrósido se acumula en lisosomas de macrófagos (células de Gaucher), afectando hígado, bazo, hueso y sistema nervioso.'},
+{topic:'Endo/Exo/Transcitosis',type:'teoria',q:'¿Qué proteína forma el "cuello" de la vesícula endocítica y facilita su escisión de la membrana?',opts:['Dinamina','Clatrina','Adaptina','SNAREs'],correct:0,fb:'La dinamina es una GTPasa mecánica que se ensambla en anillos alrededor del cuello de la vesícula. La hidrólisis de GTP provoca constricción y fisión de la vesícula. Sin dinamina funcional, las vesículas recubiertas de clatrina no pueden separarse de la membrana plasmática.'},
+{topic:'Endo/Exo/Transcitosis',type:'clinico',q:'La toxina botulínica y la toxina tetánica actúan sobre proteínas SNARE. ¿Cuál es el efecto de la toxina botulínica en la unión neuromuscular?',opts:['Impide la fusión de vesículas sinápticas → parálisis flácida','Estimula la liberación excesiva de ACh → espasmo','Bloquea receptores postsinápticos de ACh','Destruye las mitocondrias del terminal axónico'],correct:0,fb:'La toxina botulínica es una proteasa que cliva v-SNAREs (VAMP/sinaptobrevina) y t-SNAREs en el terminal presináptico, impidiendo la fusión de vesículas con ACh. Sin liberación de neurotransmisor, se produce parálisis flácida. La tetánica actúa en interneuronas inhibitorias → espasmo.'},
+]},
+{id:'ciclo',name:'Ciclo Celular y Apoptosis',icon:'🔄',color:'#c084fc',parciales:'6',
+topics:['Mitosis','Control del Ciclo Celular','Apoptosis'],
+questions:[
+{topic:'Mitosis',type:'teoria',q:'¿En qué fase de la mitosis los cromosomas se alinean en el plano ecuatorial de la célula?',opts:['Metafase','Profase','Anafase','Telofase'],correct:0,fb:'En metafase, los cromosomas condensados se alinean en la placa metafásica (plano ecuatorial). Los microtúbulos del cinetocoro de cada polo se unen a cinetocoros opuestos de cada cromátida hermana (biorientación), esencial para la segregación correcta.'},
+{topic:'Control del Ciclo Celular',type:'teoria',q:'¿Qué complejo CDK-ciclina promueve la entrada a la fase S (inicio de la replicación del ADN)?',opts:['CDK2-Ciclina E (y luego CDK2-Ciclina A)','CDK1-Ciclina B (M-CDK)','CDK4/6-Ciclina D','CDK7-Ciclina H'],correct:0,fb:'La progresión G1→S requiere la activación secuencial: CDK4/6-Ciclina D (G1 temprana, fosforila Rb) → CDK2-Ciclina E (G1 tardía/entrada a S, compromiso irreversible) → CDK2-Ciclina A (fase S, mantiene la replicación). La M-CDK (CDK1-Ciclina B) controla la entrada a mitosis.'},
+{topic:'Control del Ciclo Celular',type:'clinico',q:'En el retinoblastoma, la proteína Rb está inactivada. ¿Cuál es la consecuencia directa sobre el ciclo celular?',opts:['E2F queda constitutivamente activo → transcripción descontrolada de genes de fase S','Las ciclinas se degradan prematuramente','La célula entra en G0 permanentemente','El APC/ciclosoma se activa precozmente'],correct:0,fb:'Rb normalmente secuestra al factor de transcripción E2F en G1. Cuando CDK4/6-Ciclina D fosforila Rb, libera E2F, que activa genes de fase S (ciclina E, ADN pol, PCNA). Sin Rb funcional, E2F está siempre libre → proliferación descontrolada → tumor.'},
+{topic:'Apoptosis',type:'teoria',q:'¿Qué familia de proteínas ejecuta la destrucción celular durante la apoptosis mediante clivaje proteolítico?',opts:['Caspasas','Cinasas','Proteasomas','Catepsinas'],correct:0,fb:'Las caspasas son cisteín-proteasas que clivan después de ácido aspártico. Las iniciadoras (caspasa 8, 9) activan a las ejecutoras (caspasa 3, 6, 7), que degradan laminas nucleares, ICAD (activando la DNasa CAD), proteínas del citoesqueleto, etc.'},
+{topic:'Apoptosis',type:'clinico',q:'Un paciente con linfoma folicular tiene sobreexpresión de Bcl-2. ¿Cómo contribuye esto al cáncer?',opts:['Bcl-2 es anti-apoptótica: bloquea la liberación de citocromo c y evita la muerte celular','Bcl-2 es pro-apoptótica y mata células inmunes','Bcl-2 acelera la mitosis','Bcl-2 degrada el ADN tumoral'],correct:0,fb:'Bcl-2 es una proteína anti-apoptótica que reside en la membrana mitocondrial externa. Inhibe a Bax/Bak (que forman poros), previniendo la liberación de citocromo c. Su sobreexpresión (por translocación t(14;18)) permite la supervivencia de células que deberían morir → acumulación neoplásica.'},
+]}
+];
+
+const STUDY_METHODS=[
+{id:'sr',name:'Repetición Espaciada',evidence:'high',desc:'Revisar material en intervalos crecientes (1→3→7→21 días). Anki es la herramienta estándar en medicina. Mayor evidencia para retención a largo plazo.',q:'¿Utilizas un sistema de repetición espaciada (Anki, Quizlet espaciado) regularmente?'},
+{id:'ar',name:'Active Recall',evidence:'high',desc:'Cerrar el libro e intentar recordar la información sin consultar. Hasta 50% más retención que la relectura pasiva.',q:'¿Practicas cerrar el material y escribir/decir todo lo que recuerdas antes de revisar?'},
+{id:'il',name:'Interleaving',evidence:'high',desc:'Mezclar temas en una sesión (ej: proteínas, luego transporte, luego ciclo celular) en vez de bloques de un solo tema.',q:'¿Mezclas temas diferentes en una misma sesión de estudio?'},
+{id:'el',name:'Elaboración',evidence:'high',desc:'Preguntarte "¿por qué?" y "¿cómo?" constantemente. Conectar mecanismos entre sí. Crear cadenas causales.',q:'¿Te preguntas "por qué" funciona algo así y conectas los mecanismos entre sí?'},
+{id:'dt',name:'Dual Coding',evidence:'med',desc:'Combinar texto con imágenes y esquemas propios. Dibujar vías metabólicas, rutas de señalización, ciclo celular.',q:'¿Creas tus propios diagramas, esquemas o dibujos al estudiar?'},
+{id:'pt',name:'Practice Testing',evidence:'high',desc:'Resolver preguntas de práctica y exámenes simulados. El acto de recuperar información en formato examen fortalece la memoria.',q:'¿Resuelves preguntas de práctica o exámenes anteriores regularmente?'},
+{id:'tp',name:'Técnica Pomodoro',evidence:'med',desc:'Sesiones de 25-50 min con descansos de 5-10 min. La fatiga cognitiva reduce la codificación de memoria.',q:'¿Usas bloques de tiempo definidos con descansos programados?'},
+{id:'te',name:'Enseñar a Otros',evidence:'high',desc:'Explicar el material como si fueras profesor. Fuerza reorganización profunda del conocimiento y revela lagunas.',q:'¿Explicas los temas en voz alta como si enseñaras a alguien más?'},
+{id:'sl',name:'Sueño y Consolidación',evidence:'high',desc:'Dormir 7-9h. El sueño N3 y REM consolidan memorias declarativas. Trasnochar reduce retención hasta 40%.',q:'¿Duermes 7+ horas consistentemente y evitas trasnochar antes de exámenes?'},
+{id:'cc',name:'Casos Clínicos / Aplicación',evidence:'high',desc:'Estudiar biología celular conectándola a patologías reales. Crea anclas de memoria más fuertes que la memorización aislada.',q:'¿Estudias los temas conectándolos a casos clínicos o patologías reales?'},
+];
+
+let answers={},studyAnswers={},totalQuestions=0;
+SYSTEMS.forEach(s=>totalQuestions+=s.questions.length);
+
+function renderEvaluation(){
+const panel=document.getElementById('panelEval');let html='';
+SYSTEMS.forEach(sys=>{
+html+=`<div class="system-section" id="sys-${sys.id}"><div class="system-header" onclick="toggleSystem('${sys.id}')" id="sysH-${sys.id}"><div class="sys-icon" style="background:${sys.color}18;color:${sys.color}">${sys.icon}</div><div class="sys-info"><div class="sys-name">${sys.name}</div><div class="sys-topics">${sys.topics.length} temas · Parcial(es) ${sys.parciales} · ${sys.questions.length} preguntas</div></div><span class="sys-score" id="sysScore-${sys.id}" style="background:${sys.color}18;color:${sys.color}">—</span><span class="sys-chevron">▼</span></div><div class="system-body" id="sysB-${sys.id}">`;
+sys.questions.forEach((q,qi)=>{
+const qid=`${sys.id}-${qi}`;
+html+=`<div class="q-card" id="qcard-${qid}"><div class="q-meta"><span class="q-tag ${q.type}">${q.type==='teoria'?'📖 Teórica':'🏥 Caso Clínico'}</span><span class="q-tag topic">${q.topic}</span></div><div class="q-text">${q.q}</div><div class="q-options" id="qopts-${qid}">`;
+q.opts.forEach((opt,oi)=>{html+=`<div class="q-opt" id="opt-${qid}-${oi}" onclick="selectAnswer('${sys.id}',${qi},${oi})"><span class="bullet"></span><span>${opt}</span></div>`;});
+html+=`</div><div class="q-feedback" id="qfb-${qid}"></div></div>`;});
+html+=`</div></div>`;});
+panel.innerHTML=html;}
+
+function renderStudyMethods(){
+const panel=document.getElementById('panelMethods');
+let html=`<div style="margin-bottom:1.5rem"><h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:.4rem">Métodos de Estudio Basados en Evidencia</h2><p style="color:var(--text2);font-size:.86rem;line-height:1.7">Evalúa con honestidad qué tan frecuentemente utilizas cada método. El diagnóstico identificará oportunidades de mejora para maximizar tu retención y aplicación clínica.</p></div>`;
+const lk=['Nunca','Rara vez','A veces','Frecuentemente','Siempre'];
+STUDY_METHODS.forEach(m=>{
+const ec=m.evidence==='high'?'evidence-high':'evidence-med';
+const el=m.evidence==='high'?'Alta evidencia':'Media evidencia';
+html+=`<div class="study-card"><h3>${m.name} <span class="evidence-badge ${ec}">${el}</span></h3><p>${m.desc}</p><p style="color:var(--text);font-weight:500;margin-top:.6rem;font-size:.84rem">${m.q}</p><div class="study-likert">`;
+lk.forEach((label,li)=>{html+=`<div class="likert-opt" id="lik-${m.id}-${li}" onclick="selectLikert('${m.id}',${li})">${label}</div>`;});
+html+=`</div></div>`;});
+html+=`<div class="submit-row"><button class="btn-primary" onclick="showTab('results');generateResults()">Ver diagnóstico completo</button></div>`;
+panel.innerHTML=html;}
+
+function selectAnswer(sysId,qi,oi){
+const qid=`${sysId}-${qi}`;if(answers[qid]!==undefined)return;answers[qid]=oi;
+const sys=SYSTEMS.find(s=>s.id===sysId),q=sys.questions[qi],ok=oi===q.correct;
+q.opts.forEach((_,i)=>{const el=document.getElementById(`opt-${qid}-${i}`);el.classList.add('disabled');if(i===oi)el.classList.add(ok?'correct':'incorrect');if(!ok&&i===q.correct)el.classList.add('reveal-correct');});
+const fb=document.getElementById(`qfb-${qid}`);fb.className=`q-feedback show ${ok?'right':'wrong'}`;fb.innerHTML=`<strong>${ok?'✓ Correcto':'✗ Incorrecto'}.</strong> ${q.fb}`;
+updateProgress();updateSystemScore(sysId);checkResultsReady();}
+
+function selectLikert(mid,val){studyAnswers[mid]=val;[0,1,2,3,4].forEach(i=>{document.getElementById(`lik-${mid}-${i}`).classList.toggle('selected',i===val);});}
+function toggleSystem(sysId){const h=document.getElementById(`sysH-${sysId}`),b=document.getElementById(`sysB-${sysId}`);h.classList.toggle('collapsed');b.style.display=h.classList.contains('collapsed')?'none':'block';}
+function updateProgress(){const a=Object.keys(answers).length;document.getElementById('gpCount').textContent=`${a} / ${totalQuestions}`;document.getElementById('gpFill').style.width=`${(a/totalQuestions)*100}%`;}
+function updateSystemScore(sysId){const sys=SYSTEMS.find(s=>s.id===sysId);let c=0,t=0;sys.questions.forEach((q,qi)=>{const qid=`${sysId}-${qi}`;if(answers[qid]!==undefined){t++;if(answers[qid]===q.correct)c++;}});const el=document.getElementById(`sysScore-${sysId}`);if(t>0)el.textContent=`${Math.round((c/t)*100)}%`;}
+function checkResultsReady(){document.getElementById('btnGenResults').disabled=Object.keys(answers).length<Math.floor(totalQuestions*0.4);}
+function showTab(tab){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.getElementById(`panel${tab.charAt(0).toUpperCase()+tab.slice(1)}`).classList.add('active');document.getElementById('globalProgress').style.display=tab==='eval'?'':'none';}
+document.getElementById('tabBar').addEventListener('click',e=>{if(e.target.classList.contains('tab-btn'))showTab(e.target.dataset.tab);});
+
+function generateResults(){
+const answered=Object.keys(answers).length;
+if(answered<Math.floor(totalQuestions*0.3)){alert('Responde al menos el 30% de las preguntas.');return;}
+let systemScores=[],topicScores={},typeScores={teoria:{c:0,t:0},clinico:{c:0,t:0}},weakTopics=[],strongTopics=[];
+SYSTEMS.forEach(sys=>{let c=0,t=0;sys.questions.forEach((q,qi)=>{const qid=`${sys.id}-${qi}`;if(answers[qid]!==undefined){t++;const ok=answers[qid]===q.correct;if(ok)c++;typeScores[q.type].t++;if(ok)typeScores[q.type].c++;if(!topicScores[q.topic])topicScores[q.topic]={c:0,t:0,sys:sys.name};topicScores[q.topic].t++;if(ok)topicScores[q.topic].c++;}});systemScores.push({name:sys.name,icon:sys.icon,color:sys.color,pct:t>0?Math.round((c/t)*100):null,c,t});});
+Object.keys(topicScores).forEach(topic=>{const s=topicScores[topic],pct=Math.round((s.c/s.t)*100);if(pct<=50)weakTopics.push({topic,pct,sys:s.sys});if(pct>=100)strongTopics.push({topic,pct,sys:s.sys});});
+weakTopics.sort((a,b)=>a.pct-b.pct);
+const totalCorrect=Object.keys(answers).reduce((sum,qid)=>{const[sysId,qi]=qid.split('-');const sys=SYSTEMS.find(s=>s.id===sysId);return sum+(answers[qid]===sys.questions[parseInt(qi)].correct?1:0);},0);
+const globalPct=Math.round((totalCorrect/answered)*100);
+const teoriaPct=typeScores.teoria.t>0?Math.round((typeScores.teoria.c/typeScores.teoria.t)*100):0;
+const clinicoPct=typeScores.clinico.t>0?Math.round((typeScores.clinico.c/typeScores.clinico.t)*100):0;
+let studyHtml='';const sc=Object.keys(studyAnswers).length;
+if(sc>0){const lk=['Nunca','Rara vez','A veces','Frecuentemente','Siempre'];let highEvLow=[];STUDY_METHODS.forEach(m=>{if(studyAnswers[m.id]!==undefined&&studyAnswers[m.id]<=1&&m.evidence==='high')highEvLow.push(m.name);});
+if(highEvLow.length>0){studyHtml=`<div class="res-section-title">⚠️ Métodos de Alta Evidencia Subutilizados</div>`;highEvLow.forEach(n=>{studyHtml+=`<div class="res-weakness">No utilizas o utilizas muy poco: <strong>${n}</strong> — Su implementación mejorará significativamente tu retención.</div>`;});}
+studyHtml+=`<div class="res-section-title">📊 Tu Perfil de Métodos de Estudio</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.5rem">`;
+STUDY_METHODS.forEach(m=>{if(studyAnswers[m.id]!==undefined){const val=studyAnswers[m.id],pct=val*25,col=pct>=75?'var(--green)':pct>=50?'var(--gold)':'var(--warn)';studyHtml+=`<div class="res-item"><div class="res-item-name">${m.name}</div><div class="res-bar-track"><div class="res-bar-fill" style="width:${pct}%;background:${col}"></div></div><div class="res-item-score" style="color:${col}">${lk[val]}</div></div>`;}});
+studyHtml+=`</div>`;}
+let html=`<button class="close-results" onclick="document.getElementById('resultsOverlay').classList.remove('show')">✕</button><h2>Diagnóstico Integral — BH-I</h2><div class="results-summary">Respondiste ${answered} de ${totalQuestions} preguntas. Puntaje global: <strong style="color:${globalPct>=70?'var(--green)':globalPct>=50?'var(--gold)':'var(--warn)'}">${globalPct}%</strong> · Teoría: <strong style="color:${teoriaPct>=70?'var(--green)':'var(--warn)'}">${teoriaPct}%</strong> · Casos clínicos: <strong style="color:${clinicoPct>=70?'var(--green)':'var(--warn)'}">${clinicoPct}%</strong></div>`;
+if(clinicoPct<teoriaPct)html+=`<div style="background:var(--purple-dim);border:1px solid rgba(167,139,250,.2);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1.2rem;font-size:.84rem;color:var(--purple)"><strong>📌 Observación clave:</strong> Tu desempeño en teoría (${teoriaPct}%) supera al de casos clínicos (${clinicoPct}%). Esto confirma la dificultad reportada en aplicación del conocimiento. Las tutorías integrarán casos clínicos con razonamiento fisiopatológico desde la biología celular.</div>`;
+else if(clinicoPct>teoriaPct)html+=`<div style="background:var(--blue-dim);border:1px solid rgba(96,165,250,.2);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1.2rem;font-size:.84rem;color:var(--blue)"><strong>📌 Observación:</strong> Tu razonamiento clínico (${clinicoPct}%) supera la base teórica (${teoriaPct}%). Las tutorías reforzarán fundamentos moleculares y celulares para solidificar tu análisis.</div>`;
+html+=`<div class="res-section-title">📈 Rendimiento por Bloque Temático</div><div class="res-grid">`;
+systemScores.forEach(s=>{if(s.pct!==null){const col=s.pct>=70?'var(--green)':s.pct>=50?'var(--gold)':'var(--warn)';html+=`<div class="res-item"><div class="res-item-name">${s.icon} ${s.name}</div><div class="res-bar-track"><div class="res-bar-fill" style="width:${s.pct}%;background:${col}"></div></div><div class="res-item-score" style="color:${col}">${s.pct}% (${s.c}/${s.t})</div></div>`;}});
+html+=`</div>`;
+if(weakTopics.length>0){html+=`<div class="res-section-title">🔴 Áreas de Debilidad — Priorizar en Tutorías</div>`;weakTopics.forEach(w=>{html+=`<div class="res-weakness"><strong>${w.topic}</strong> (${w.sys}) — ${w.pct}% de aciertos</div>`;});}
+if(strongTopics.length>0){html+=`<div class="res-section-title">🟢 Áreas de Fortaleza</div>`;strongTopics.forEach(s=>{html+=`<div class="res-strength"><strong>${s.topic}</strong> (${s.sys}) — ${s.pct}%</div>`;});}
+html+=studyHtml;
+html+=`<div class="res-section-title">🗺️ Plan de Acción Sugerido</div><div style="font-size:.84rem;color:var(--text2);line-height:1.75"><p><strong style="color:var(--text)">1. Prioridad inmediata:</strong> Reforzar los temas en rojo con repetición espaciada + casos clínicos dirigidos.</p><p style="margin-top:.4rem"><strong style="color:var(--text)">2. Estrategia de estudio:</strong> Implementar active recall e interleaving en cada sesión de tutoría.</p><p style="margin-top:.4rem"><strong style="color:var(--text)">3. Aplicación clínica:</strong> Por cada tema molecular revisado, resolver al menos 2-3 viñetas clínicas que integren el mecanismo celular con la patología.</p><p style="margin-top:.4rem"><strong style="color:var(--text)">4. Metacognición:</strong> Antes de cada sesión, escribir lo que se cree saber del tema sin consultar. Esto revela las lagunas reales vs. la percepción de dominio — clave para un estudiante que refiere dominar el material.</p><p style="margin-top:.4rem"><strong style="color:var(--text)">5. Integración BH-I → BH-II:</strong> Conectar explícitamente los temas de biología celular con los sistemas de órganos de BH-II (ej: señalización → endocrino; citoesqueleto → músculo; transporte → potencial de acción).</p></div><div class="submit-row" style="padding-top:1.5rem"><button class="btn-secondary" onclick="document.getElementById('resultsOverlay').classList.remove('show')">Cerrar</button><button class="btn-secondary" onclick="window.print()">🖨️ Imprimir diagnóstico</button></div>`;
+document.getElementById('resultsContent').innerHTML=html;document.getElementById('resultsOverlay').classList.add('show');
+setTimeout(()=>{document.querySelectorAll('.res-bar-fill').forEach(el=>{const w=el.style.width;el.style.width='0%';requestAnimationFrame(()=>{el.style.width=w;});});},100);}
+
+renderEvaluation();renderStudyMethods();updateProgress();
+</script>
+</body>
+</html>
