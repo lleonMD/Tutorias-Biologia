@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ciclo Cardíaco & EKG — Tutoría Interactiva</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root {
+  --bg:#0c0f14;--bg2:#141821;--bg3:#1a1f2b;--card:#1e2433;--border:#2a3040;
+  --accent:#e94560;--accent2:#0f3460;--accent3:#16213e;
+  --teal:#00d4aa;--gold:#f0c040;--blue:#4ea8de;--purple:#b06aff;--orange:#ff8c42;--pink:#ff6b9d;
+  --text:#e8eaf0;--text2:#9ca3b4;--text3:#6b7280;
+  --success:#34d399;--error:#f87171;--radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at 50% 0%,rgba(233,69,96,.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(0,212,170,.08) 0%,transparent 50%),var(--bg);position:relative;overflow:hidden;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(233,69,96,.15);border:1px solid rgba(233,69,96,.3);border-radius:50px;font-size:.85rem;font-weight:500;color:var(--accent);margin-bottom:2rem;position:relative;z-index:1;text-transform:uppercase;letter-spacing:1.5px;}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,6vw,5rem);line-height:1.1;margin-bottom:1.5rem;position:relative;z-index:1;background:linear-gradient(135deg,#fff 30%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{font-size:1.15rem;color:var(--text2);max-width:680px;position:relative;z-index:1;margin-bottom:2.5rem;}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:var(--accent);color:#fff;border:none;border-radius:50px;font-size:1.05rem;font-weight:600;cursor:pointer;position:relative;z-index:1;transition:transform .2s,box-shadow .2s;text-decoration:none;}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(233,69,96,.4);}
+
+/* NAV */
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(12,15,20,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1rem;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
+.nav-bar::-webkit-scrollbar{display:none;}
+.nav-inner{display:flex;gap:4px;max-width:1200px;margin:0 auto;padding:8px 0;}
+.nav-btn{padding:8px 18px;border:none;background:transparent;color:var(--text2);font-family:inherit;font-size:.82rem;font-weight:500;border-radius:8px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.nav-btn:hover{color:var(--text);background:var(--bg3);}
+.nav-btn.active{color:var(--accent);background:rgba(233,69,96,.12);}
+
+/* MAIN */
+.main-container{max-width:960px;margin:0 auto;padding:2rem 1.5rem 6rem;}
+.section{display:none;animation:fadeIn .4s ease;}
+.section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* TYPOGRAPHY */
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.section-number{display:flex;align-items:center;justify-content:center;width:52px;height:52px;background:linear-gradient(135deg,var(--accent),#ff6b9d);border-radius:14px;font-family:'DM Serif Display',serif;font-size:1.5rem;color:#fff;flex-shrink:0;}
+.section-title{font-family:'DM Serif Display',serif;font-size:2rem;line-height:1.2;}
+h3{font-family:'DM Serif Display',serif;font-size:1.4rem;margin:2.5rem 0 1rem;color:var(--teal);}
+h4{font-size:1.05rem;font-weight:600;margin:1.5rem 0 .8rem;color:var(--gold);}
+p{margin-bottom:1rem;}
+
+/* CARDS */
+.concept-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.5rem 0;}
+.concept-card.hl-red{border-left:4px solid var(--accent);}
+.concept-card.hl-teal{border-left:4px solid var(--teal);}
+.concept-card.hl-gold{border-left:4px solid var(--gold);}
+.concept-card.hl-blue{border-left:4px solid var(--blue);}
+.concept-card.hl-purple{border-left:4px solid var(--purple);}
+
+.key-point{display:flex;gap:12px;padding:1rem 1.2rem;background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);border-radius:var(--radius);margin:1rem 0;font-size:.95rem;}
+.key-point .icon{font-size:1.3rem;flex-shrink:0;}
+.clinical-pearl{padding:1rem 1.2rem;background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.2);border-radius:var(--radius);margin:1rem 0;font-size:.95rem;}
+.clinical-pearl::before{content:'💡 Perla Clínica';display:block;font-weight:700;color:var(--gold);margin-bottom:.5rem;font-size:.85rem;text-transform:uppercase;letter-spacing:1px;}
+
+/* FORMULA */
+.formula-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.5rem;margin:1rem 0;font-family:'JetBrains Mono',monospace;font-size:1rem;text-align:center;color:var(--teal);}
+.formula-box .label{display:block;font-family:'IBM Plex Sans',sans-serif;font-size:.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.5rem;}
+
+/* CANVAS — critical fix: responsive sizing */
+.chart-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin:1.5rem 0;overflow:hidden;}
+.chart-wrap canvas{display:block;width:100%;height:auto;border-radius:8px;}
+
+/* CONTROLS */
+.controls{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin:.75rem 0;padding:1rem 1.2rem;background:var(--bg3);border-radius:var(--radius);}
+.control-group{display:flex;flex-direction:column;gap:4px;flex:1;min-width:180px;}
+.control-group label{font-size:.82rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1px;}
+input[type="range"]{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:var(--border);outline:none;}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid #fff;}
+.val{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--teal);}
+
+/* QUIZ */
+.quiz-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:2rem 0;}
+.quiz-box h4{color:var(--purple);margin-top:0;}
+.quiz-q{font-weight:500;margin-bottom:1rem;}
+.quiz-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:.5rem;}
+.qopt{padding:10px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95rem;}
+.qopt:hover{border-color:var(--accent);background:rgba(233,69,96,.08);}
+.qopt.correct{border-color:var(--success);background:rgba(52,211,153,.12);color:var(--success);pointer-events:none;}
+.qopt.wrong{border-color:var(--error);background:rgba(248,113,113,.12);color:var(--error);pointer-events:none;}
+.qopt.dim{pointer-events:none;opacity:.55;}
+.qfb{padding:.8rem 1rem;border-radius:8px;font-size:.92rem;display:none;margin-top:.5rem;}
+.qfb.show{display:block;}
+.qfb.ok{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);color:var(--success);}
+.qfb.no{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--error);}
+
+/* BUTTONS ROW */
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0;}
+.sbtn{padding:8px 18px;border:1px solid var(--border);background:var(--bg3);color:var(--text);border-radius:8px;font-family:inherit;font-size:.88rem;cursor:pointer;transition:all .2s;}
+.sbtn:hover{border-color:var(--accent);background:rgba(233,69,96,.08);}
+.sbtn.active{border-color:var(--accent);background:rgba(233,69,96,.15);color:var(--accent);}
+
+/* TABLE */
+.dtable{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem;}
+.dtable th,.dtable td{padding:10px 14px;border:1px solid var(--border);text-align:left;}
+.dtable th{background:var(--bg3);color:var(--teal);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.5px;}
+.dtable tr:nth-child(even){background:rgba(255,255,255,.02);}
+
+/* CALC */
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;}
+.calc-input{display:flex;flex-direction:column;gap:6px;}
+.calc-input label{font-size:.82rem;font-weight:600;color:var(--text2);}
+.calc-input input{padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg3);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.95rem;outline:none;}
+.calc-input input:focus{border-color:var(--accent);}
+.calc-result{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.25);border-radius:var(--radius);padding:1.2rem;text-align:center;margin:1rem 0;}
+.calc-result .big{font-family:'JetBrains Mono',monospace;font-size:2.2rem;font-weight:700;color:var(--teal);}
+.calc-result .unit{color:var(--text2);font-size:.9rem;}
+.btn-calc{padding:12px 28px;background:var(--teal);color:var(--bg);border:none;border-radius:8px;font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;}
+
+/* WAVE LABELS */
+.wl{display:inline-block;padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:600;}
+.wl-p{background:rgba(78,168,222,.2);color:var(--blue);}
+.wl-qrs{background:rgba(233,69,96,.2);color:var(--accent);}
+.wl-t{background:rgba(0,212,170,.2);color:var(--teal);}
+.wl-st{background:rgba(240,192,64,.2);color:var(--gold);}
+.wl-pr{background:rgba(176,106,255,.2);color:var(--purple);}
+.wl-qt{background:rgba(255,140,66,.2);color:var(--orange);}
+
+/* PROGRESS */
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:200;transition:width .3s;}
+
+/* SCORE */
+.score-panel{position:fixed;bottom:24px;right:24px;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:10px 20px;display:flex;align-items:center;gap:10px;z-index:100;box-shadow:0 8px 32px rgba(0,0,0,.3);font-size:.88rem;font-weight:600;}
+.score-panel .heart{color:var(--accent);font-size:1.2rem;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+/* ECG GRID */
+.ecg-grid-bg{background:#1a0a0a;border:1px solid #3a1a1a;border-radius:var(--radius);padding:0;overflow:hidden;margin:1.5rem 0;}
+.ecg-grid-bg canvas{display:block;width:100%;height:auto;}
+
+/* PHASE ITEM */
+.phase-item{display:flex;gap:16px;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .3s;margin-bottom:.75rem;}
+.phase-item:hover,.phase-item.active{border-color:var(--accent);background:rgba(233,69,96,.05);}
+.phase-num{display:flex;align-items:center;justify-content:center;min-width:40px;height:40px;background:var(--accent3);border-radius:10px;font-weight:700;font-size:.9rem;color:var(--accent);flex-shrink:0;}
+.phase-content h5{font-size:1rem;margin-bottom:.3rem;}
+.phase-content p{font-size:.88rem;color:var(--text2);margin:0;}
+
+/* FLASHCARDS */
+.fc-deck{position:relative;width:100%;max-width:560px;margin:1.5rem auto;perspective:1200px;}
+.fc-card{position:relative;width:100%;min-height:280px;cursor:pointer;transform-style:preserve-3d;transition:transform .5s;}
+.fc-card.flipped{transform:rotateY(180deg);}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 2.5rem;text-align:center;}
+.fc-front{background:linear-gradient(145deg,#1c2236,#232a42);border:1px solid var(--border);}
+.fc-back{background:linear-gradient(145deg,#162028,#1a2e30);border:1px solid rgba(0,212,170,.25);transform:rotateY(180deg);}
+.fc-tag{position:absolute;top:14px;left:16px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:3px 10px;border-radius:50px;}
+.fc-tag-phys{background:rgba(78,168,222,.15);color:var(--blue);}
+.fc-tag-ecg{background:rgba(233,69,96,.15);color:var(--accent);}
+.fc-tag-hemo{background:rgba(0,212,170,.15);color:var(--teal);}
+.fc-tag-clin{background:rgba(240,192,64,.15);color:var(--gold);}
+.fc-front .fc-q{font-size:1.08rem;font-weight:500;line-height:1.65;}
+.fc-back .fc-a{font-size:.98rem;line-height:1.7;color:var(--teal);}
+.fc-hint{position:absolute;bottom:14px;font-size:.75rem;color:var(--text3);}
+.fc-counter{text-align:center;font-size:.88rem;color:var(--text2);margin-bottom:.5rem;font-family:'JetBrains Mono',monospace;}
+.fc-nav{display:flex;justify-content:center;gap:12px;margin-top:1.2rem;}
+.fc-btn{padding:10px 24px;border:1px solid var(--border);background:var(--bg3);color:var(--text);border-radius:8px;font-family:inherit;font-size:.9rem;cursor:pointer;transition:all .2s;}
+.fc-btn:hover{border-color:var(--accent);background:rgba(233,69,96,.08);}
+.fc-btn.fc-know{border-color:rgba(0,212,170,.3);}
+.fc-btn.fc-know:hover{border-color:var(--teal);background:rgba(0,212,170,.08);}
+.fc-btn.fc-hard{border-color:rgba(248,113,113,.3);}
+.fc-btn.fc-hard:hover{border-color:var(--error);background:rgba(248,113,113,.08);}
+.fc-progress{display:flex;gap:4px;justify-content:center;margin-top:1rem;flex-wrap:wrap;}
+.fc-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:background .3s;}
+.fc-dot.know{background:var(--teal);}
+.fc-dot.hard{background:var(--error);}
+.fc-dot.cur{box-shadow:0 0 0 2px var(--accent);background:var(--accent);}
+.fc-stats{display:flex;justify-content:center;gap:2rem;margin-top:1rem;font-size:.85rem;}
+.fc-stats span{display:flex;align-items:center;gap:6px;}
+
+/* CLINICAL CASES */
+.case-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem;margin:2rem 0;}
+.case-stem{background:var(--bg3);border-radius:8px;padding:1.2rem 1.5rem;margin-bottom:1.2rem;font-size:.95rem;line-height:1.8;border-left:4px solid var(--blue);}
+.case-stem strong{color:var(--blue);}
+.case-q{font-weight:600;margin-bottom:1rem;font-size:1rem;}
+.case-opts{display:flex;flex-direction:column;gap:8px;}
+.case-opt{padding:12px 16px;background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:.95rem;}
+.case-opt:hover{border-color:var(--accent);background:rgba(233,69,96,.05);}
+.case-opt .opt-letter{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;background:var(--border);font-size:.8rem;font-weight:700;margin-right:10px;}
+.case-opt.correct{border-color:var(--success);background:rgba(52,211,153,.08);}
+.case-opt.correct .opt-letter{background:var(--success);color:var(--bg);}
+.case-opt.wrong{border-color:var(--error);background:rgba(248,113,113,.08);}
+.case-opt.wrong .opt-letter{background:var(--error);color:#fff;}
+.case-opt.dim{opacity:.5;pointer-events:none;}
+.case-expl{margin-top:1rem;padding:1rem 1.2rem;border-radius:8px;font-size:.92rem;line-height:1.7;display:none;}
+.case-expl.show{display:block;}
+.case-expl.ok{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.2);}
+.case-expl.no{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);}
+.case-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--accent);border-radius:8px;font-weight:700;font-size:.9rem;color:#fff;margin-right:10px;}
+
+@media(max-width:640px){
+  .hero h1{font-size:2.2rem;}
+  .calc-grid{grid-template-columns:1fr;}
+  .section-header{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-badge">⚡ Fisiología Cardiovascular & Electrocardiografía</div>
+  <h1>Ciclo Cardíaco<br>& Electrocardiograma</h1>
+  <p>Tutoría interactiva que integra la fisiología del músculo cardíaco, las fases del ciclo cardíaco y la interpretación del EKG normal y anormal — con simulaciones, visualizaciones y verificación del conocimiento.</p>
+  <a href="#" class="hero-cta" onclick="start();return false;">Comenzar Tutoría →</a>
+</div>
+
+<!-- NAV -->
+<div class="nav-bar" id="navBar" style="display:none">
+  <div class="nav-inner" id="navInner"></div>
+</div>
+
+<!-- MAIN -->
+<div class="main-container" id="mainContent" style="display:none">
+
+<!-- ========== SECTION 0: FRANK-STARLING ========== -->
+<div class="section active" id="sec0">
+<div class="section-header"><div class="section-number">1</div><div class="section-title">Ley de Frank-Starling</div></div>
+
+<p>La <strong>Ley de Frank-Starling</strong> es el principio fundamental que permite al corazón ajustar automáticamente su fuerza de contracción según cuánta sangre recibe. Dentro de límites fisiológicos, a mayor volumen telediastólico (mayor estiramiento de los sarcómeros), mayor será la fuerza de contracción y mayor el volumen sistólico.</p>
+
+<div class="concept-card hl-red">
+<h4 style="margin-top:0;">Base Molecular</h4>
+<p>El mecanismo reside en la relación longitud-tensión del sarcómero cardíaco. A la longitud óptima (~2.0–2.2 μm) se maximiza: (1) el solapamiento actina-miosina, (2) la sensibilidad de la troponina C al Ca²⁺, y (3) la separación lateral de miofilamentos que facilita la formación de puentes cruzados.</p>
+<p>In vivo, el pericardio y la estructura del corazón impiden que el sarcómero se estire más allá de ~2.2 μm, por lo que el músculo cardíaco opera siempre en la porción <strong>ascendente</strong> de la curva longitud-tensión.</p>
+</div>
+
+<h3>Curva Longitud-Tensión Interactiva</h3>
+<div class="chart-wrap">
+  <div class="controls">
+    <div class="control-group">
+      <label>Longitud del Sarcómero: <span class="val" id="v_sarco">2.00 μm</span></label>
+      <input type="range" id="sl_sarco" min="140" max="260" value="200" oninput="drawLT()">
+    </div>
+  </div>
+  <canvas id="cLT" width="900" height="500"></canvas>
+  <p id="ltDesc" style="padding:.5rem;font-size:.9rem;color:var(--text2);min-height:2.5em;"></p>
+</div>
+
+<h3>Curva Fuerza-Velocidad</h3>
+<p><strong>Vmáx</strong> (velocidad máxima sin carga) es índice de contractilidad. El aumento de inotropismo desplaza toda la curva hacia arriba (mayor Vmáx). Un aumento de <em>precarga</em> aumenta la fuerza isométrica máxima (F₀) pero <strong>no</strong> cambia Vmáx.</p>
+<div class="chart-wrap">
+  <div class="controls">
+    <div class="control-group">
+      <label>Contractilidad: <span class="val" id="v_contr1">Normal</span></label>
+      <input type="range" id="sl_contr1" min="50" max="150" value="100" oninput="drawFV()">
+    </div>
+    <div class="control-group">
+      <label>Precarga: <span class="val" id="v_pre1">Normal</span></label>
+      <input type="range" id="sl_pre1" min="60" max="140" value="100" oninput="drawFV()">
+    </div>
+  </div>
+  <canvas id="cFV" width="900" height="500"></canvas>
+</div>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">¿Cuál es la longitud óptima del sarcómero cardíaco para generar máxima tensión?</div>
+<div class="quiz-opts" id="q1">
+  <div class="qopt" onclick="quiz('q1',this,0)">1.6 μm — solapamiento excesivo</div>
+  <div class="qopt" onclick="quiz('q1',this,1)">2.0 – 2.2 μm — solapamiento óptimo</div>
+  <div class="qopt" onclick="quiz('q1',this,0)">2.6 μm — estiramiento máximo</div>
+</div><div class="qfb" id="q1fb"></div></div>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">Un aumento aislado de precarga (sin cambio en contractilidad) produce en la curva fuerza-velocidad:</div>
+<div class="quiz-opts" id="q1b">
+  <div class="qopt" onclick="quiz('q1b',this,0)">Aumento de Vmáx</div>
+  <div class="qopt" onclick="quiz('q1b',this,1)">Aumento de F₀ sin cambio de Vmáx</div>
+  <div class="qopt" onclick="quiz('q1b',this,0)">Aplanamiento total de la curva</div>
+</div><div class="qfb" id="q1bfb"></div></div>
+</div>
+
+<!-- ========== SECTION 1: PRECARGA & POSTCARGA ========== -->
+<div class="section" id="sec1">
+<div class="section-header"><div class="section-number">2</div><div class="section-title">Precarga, Postcarga y Vasodilatadores</div></div>
+
+<h3>Precarga</h3>
+<p>Tensión de la pared ventricular al final de la diástole. Aproximada clínicamente por el <strong>volumen telediastólico</strong> (VTD) o la presión telediastólica (PTDVI).</p>
+<div class="formula-box"><span class="label">Ley de Laplace</span>σ = (P × r) / (2h)</div>
+
+<div class="concept-card hl-teal">
+<h4 style="margin-top:0;">Factores Determinantes de la Precarga</h4>
+<p>1. <strong>Retorno venoso</strong> — principal determinante (volumen sanguíneo, posición corporal, bomba musculovenosa, presión intratorácica, tono venoso).</p>
+<p>2. <strong>Compliance ventricular</strong> — un ventrículo rígido genera mayor presión para igual volumen.</p>
+<p>3. <strong>Frecuencia cardíaca</strong> — taquicardia acorta diástole, reduciendo precarga.</p>
+<p>4. <strong>Contracción auricular ("atrial kick")</strong> — aporta 15-25% del llenado. Se pierde en fibrilación auricular.</p>
+</div>
+
+<h3>Postcarga</h3>
+<p>Resistencia que enfrenta el ventrículo durante la eyección. Aproximada por la <strong>resistencia vascular sistémica</strong> (RVS) y la presión arterial.</p>
+
+<h3>Vasodilatadores</h3>
+<table class="dtable">
+<thead><tr><th>Tipo</th><th>Efecto</th><th>Ejemplo</th></tr></thead>
+<tbody>
+<tr><td><strong>Venodilatador</strong></td><td>↓ Precarga (↓ retorno venoso → ↓ VTD)</td><td>Nitroglicerina (bajas dosis)</td></tr>
+<tr><td><strong>Arteriodilatador</strong></td><td>↓ Postcarga (↓ RVS → ↑ VS)</td><td>Hidralazina</td></tr>
+<tr><td><strong>Mixto</strong></td><td>↓ Precarga + ↓ Postcarga</td><td>IECA, Nitroprusiato</td></tr>
+</tbody></table>
+
+<h3>Simulación: Asa Presión-Volumen</h3>
+<div class="chart-wrap">
+  <div class="btn-row">
+    <button class="sbtn active" onclick="setPV('normal',this)">Normal</button>
+    <button class="sbtn" onclick="setPV('pre_up',this)">↑ Precarga</button>
+    <button class="sbtn" onclick="setPV('pre_dn',this)">↓ Precarga</button>
+    <button class="sbtn" onclick="setPV('aft_up',this)">↑ Postcarga</button>
+    <button class="sbtn" onclick="setPV('aft_dn',this)">↓ Postcarga</button>
+  </div>
+  <canvas id="cPV" width="900" height="560"></canvas>
+  <p id="pvDesc" style="padding:.5rem;font-size:.9rem;color:var(--text2);min-height:2.5em;"></p>
+</div>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">Un paciente recibe nitroglicerina sublingual. ¿Cuál es el efecto hemodinámico principal a dosis bajas?</div>
+<div class="quiz-opts" id="q2">
+  <div class="qopt" onclick="quiz('q2',this,0)">↓ Postcarga por vasodilatación arteriolar</div>
+  <div class="qopt" onclick="quiz('q2',this,1)">↓ Precarga por venodilatación</div>
+  <div class="qopt" onclick="quiz('q2',this,0)">↑ Contractilidad directa</div>
+</div><div class="qfb" id="q2fb"></div></div>
+</div>
+
+<!-- ========== SECTION 2: CONTRACTILIDAD ========== -->
+<div class="section" id="sec2">
+<div class="section-header"><div class="section-number">3</div><div class="section-title">Contractilidad y sus Índices</div></div>
+
+<p><strong>Contractilidad</strong> (inotropismo) es la capacidad intrínseca del miocardio de generar fuerza, <em>independiente de precarga y postcarga</em>. Determinada por la disponibilidad de Ca²⁺ intracelular y la sensibilidad de los miofilamentos.</p>
+
+<div class="concept-card hl-red"><h4 style="margin-top:0;">1. dP/dt máx</h4>
+<p>Tasa máxima de aumento de presión ventricular durante contracción isovolumétrica (mmHg/s). Limitación: parcialmente dependiente de carga.</p></div>
+
+<div class="concept-card hl-teal"><h4 style="margin-top:0;">2. ESPVR / Ees — Estándar de Oro</h4>
+<p>La pendiente de la relación presión-volumen telesistólica (end-systolic elastance). Índice independiente de carga. ↑ Contractilidad → pendiente más empinada, desplazamiento a la izquierda.</p></div>
+
+<div class="concept-card hl-gold"><h4 style="margin-top:0;">3. Fracción de Eyección (FE)</h4>
+<p>FE = (VS/VTD) × 100%. Normal 55-70%. Dependiente de carga pero fácil de medir por ecocardiografía.</p></div>
+
+<div class="concept-card"><h4 style="margin-top:0;">4. Otros</h4>
+<p>Vmáx (curva fuerza-velocidad), dP/dt/P, Índice de Tei.</p></div>
+
+<h3>Simulación: Contractilidad en el Asa PV</h3>
+<div class="chart-wrap">
+  <div class="btn-row">
+    <button class="sbtn active" onclick="setCPV('normal',this)">Normal</button>
+    <button class="sbtn" onclick="setCPV('pos',this)">Inotropismo (+)</button>
+    <button class="sbtn" onclick="setCPV('neg',this)">Inotropismo (−)</button>
+    <button class="sbtn" onclick="setCPV('hf',this)">IC Severa</button>
+  </div>
+  <canvas id="cCPV" width="900" height="560"></canvas>
+  <p id="cpvDesc" style="padding:.5rem;font-size:.9rem;color:var(--text2);min-height:2.5em;"></p>
+</div>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">¿Cuál es el índice estándar de oro para medir contractilidad de forma independiente de la carga?</div>
+<div class="quiz-opts" id="q3">
+  <div class="qopt" onclick="quiz('q3',this,0)">dP/dt máx</div>
+  <div class="qopt" onclick="quiz('q3',this,0)">Fracción de eyección</div>
+  <div class="qopt" onclick="quiz('q3',this,1)">Elastancia telesistólica (Ees / ESPVR)</div>
+</div><div class="qfb" id="q3fb"></div></div>
+</div>
+
+<!-- ========== SECTION 3: FASES DEL CICLO ========== -->
+<div class="section" id="sec3">
+<div class="section-header"><div class="section-number">4</div><div class="section-title">Fases del Ciclo Cardíaco</div></div>
+
+<p>El ciclo cardíaco dura ~0.8 s a 75 lpm. Se divide en <strong>sístole</strong> (~0.3 s) y <strong>diástole</strong> (~0.5 s). A continuación cada fase y su correlación con el EKG.</p>
+
+<div class="phase-item active" onclick="selPhase(this)">
+<div class="phase-num">1</div><div class="phase-content">
+<h5>Sístole Auricular</h5>
+<p><span class="wl wl-p">Onda P</span> desencadena la contracción auricular → "atrial kick" (15-25% del llenado). Genera onda <strong>"a"</strong> en curva de presión auricular y puede producir S4 si el ventrículo está rígido. Válvulas AV abiertas, semilunares cerradas.</p>
+</div></div>
+<div class="phase-item" onclick="selPhase(this)">
+<div class="phase-num">2</div><div class="phase-content">
+<h5>Contracción Isovolumétrica</h5>
+<p><span class="wl wl-qrs">QRS</span> inicia la contracción. Presión VI supera la auricular → cierre de válvulas AV → <strong>S1</strong>. Presión aún no supera la aórtica. <em>Todas las válvulas cerradas</em>. Volumen constante. Máximo dP/dt ocurre aquí.</p>
+</div></div>
+<div class="phase-item" onclick="selPhase(this)">
+<div class="phase-num">3</div><div class="phase-content">
+<h5>Eyección Ventricular</h5>
+<p><span class="wl wl-st">Segmento ST</span> corresponde a esta fase. Se abren las válvulas semilunares cuando P(VI) > P(Ao). Eyección rápida (⅔ del VS) y lenta. Presión aórtica alcanza ~120 mmHg. "x descent" en la curva auricular.</p>
+</div></div>
+<div class="phase-item" onclick="selPhase(this)">
+<div class="phase-num">4</div><div class="phase-content">
+<h5>Relajación Isovolumétrica</h5>
+<p><span class="wl wl-t">Onda T</span> (repolarización ventricular). P(VI) cae por debajo de P(Ao) → cierre de válvulas semilunares → <strong>S2</strong> + muesca dicrótica. Todas las válvulas cerradas. Onda "v" en la curva auricular.</p>
+</div></div>
+<div class="phase-item" onclick="selPhase(this)">
+<div class="phase-num">5</div><div class="phase-content">
+<h5>Llenado Ventricular</h5>
+<p>Intervalo <span class="wl wl-pr">T-P</span>. P(VI) cae por debajo de P(AI) → apertura de válvulas AV. Llenado rápido (70-80%, puede causar S3), luego llenado lento (diástasis). "y descent" en curva auricular.</p>
+</div></div>
+
+<table class="dtable">
+<thead><tr><th>Ruido</th><th>Evento</th><th>Fase</th><th>EKG</th></tr></thead>
+<tbody>
+<tr><td><strong>S1</strong></td><td>Cierre de válvulas AV</td><td>Inicio contracción isovol.</td><td>Después del QRS</td></tr>
+<tr><td><strong>S2</strong></td><td>Cierre de válvulas semilunares</td><td>Inicio relajación isovol.</td><td>Final de onda T</td></tr>
+<tr><td><strong>S3</strong></td><td>Llenado rápido (patológico en adultos)</td><td>Llenado rápido</td><td>Después de T</td></tr>
+<tr><td><strong>S4</strong></td><td>Contracción auricular vs ventrículo rígido</td><td>Sístole auricular</td><td>Antes del QRS</td></tr>
+</tbody></table>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">Durante la contracción isovolumétrica, ¿cuál es el estado de las válvulas?</div>
+<div class="quiz-opts" id="q4">
+  <div class="qopt" onclick="quiz('q4',this,0)">AV abiertas, semilunares cerradas</div>
+  <div class="qopt" onclick="quiz('q4',this,1)">Todas cerradas</div>
+  <div class="qopt" onclick="quiz('q4',this,0)">AV cerradas, semilunares abiertas</div>
+</div><div class="qfb" id="q4fb"></div></div>
+</div>
+
+<!-- ========== SECTION 4: WIGGERS & EKG ========== -->
+<div class="section" id="sec4">
+<div class="section-header"><div class="section-number">5</div><div class="section-title">Diagrama de Wiggers & Correlación EKG</div></div>
+
+<p>El <strong>Diagrama de Wiggers</strong> superpone en una línea temporal: EKG, presiones (auricular, ventricular, aórtica), volumen ventricular y ruidos cardíacos. Es la representación más completa del ciclo cardíaco.</p>
+
+<div class="chart-wrap">
+  <div class="btn-row">
+    <button class="sbtn active" onclick="setWig('all',this)">Todas</button>
+    <button class="sbtn" onclick="setWig('ecg',this)">EKG</button>
+    <button class="sbtn" onclick="setWig('lv',this)">P. Ventrículo</button>
+    <button class="sbtn" onclick="setWig('ao',this)">P. Aórtica</button>
+    <button class="sbtn" onclick="setWig('la',this)">P. Auricular</button>
+    <button class="sbtn" onclick="setWig('vol',this)">Volumen</button>
+  </div>
+  <canvas id="cWig" width="900" height="700"></canvas>
+</div>
+
+<h3>Anatomía del Electrocardiograma Normal</h3>
+<p>Cada latido produce un patrón eléctrico característico que debe interpretarse sistemáticamente. A continuación se describe cada componente y cómo se visualiza en el papel cuadriculado del EKG.</p>
+
+<h3>El EKG Normal: Visualización en Papel Milimetrado</h3>
+<div class="ecg-grid-bg">
+  <canvas id="cECGStrip" width="900" height="400"></canvas>
+</div>
+<p style="font-size:.88rem;color:var(--text2);margin-top:.5rem;">Cuadro pequeño = 1mm = 0.04 s (horizontal) / 0.1 mV (vertical). Cuadro grande = 5mm = 0.2 s / 0.5 mV.</p>
+
+<div class="concept-card hl-blue">
+<h4 style="margin-top:0;"><span class="wl wl-p">Onda P</span> — Despolarización Auricular</h4>
+<p><strong>Origen:</strong> el nodo SA despolariza secuencialmente AD → AI. <strong>Morfología normal:</strong> deflexión redondeada, positiva en II, III, aVF y negativa en aVR. Bifásica en V1 (componente positivo = AD, negativo = AI). <strong>Duración:</strong> &lt;0.12 s (3 cuadros pequeños). <strong>Amplitud:</strong> ≤2.5 mm.</p>
+<p><strong>Hallazgos anormales:</strong></p>
+<p>• <em>P mitrale</em> (crecimiento AI): onda P ancha (&gt;0.12 s), con muescas en II y componente negativo prominente en V1 (&gt;1 mm de profundidad × &gt;1 mm de ancho). Asociada a estenosis mitral, HTA.</p>
+<p>• <em>P pulmonale</em> (crecimiento AD): onda P alta (&gt;2.5 mm) y picuda en II, III, aVF. Asociada a EPOC, cor pulmonale, estenosis tricuspídea.</p>
+<p>• <em>Ondas P ausentes</em>: fibrilación auricular (línea base irregular), flutter auricular (ondas en dientes de sierra).</p>
+</div>
+
+<div class="concept-card hl-purple">
+<h4 style="margin-top:0;"><span class="wl wl-pr">Intervalo PR</span> — Conducción AV</h4>
+<p><strong>Significado:</strong> tiempo desde inicio de despolarización auricular hasta inicio de despolarización ventricular. Incluye la conducción por el nodo AV (donde ocurre el retraso fisiológico). <strong>Normal:</strong> 0.12 – 0.20 s (3-5 cuadros pequeños).</p>
+<p><strong>Hallazgos anormales:</strong></p>
+<p>• <em>PR prolongado (&gt;0.20 s)</em>: bloqueo AV de 1er grado.</p>
+<p>• <em>PR corto (&lt;0.12 s)</em>: preexcitación (WPW) — buscar onda delta.</p>
+<p>• <em>PR variable</em>: bloqueo AV de 2do grado tipo Wenckebach (alargamiento progresivo hasta QRS perdido).</p>
+<p>• <em>Disociación P-QRS</em>: bloqueo AV completo (3er grado).</p>
+</div>
+
+<div class="concept-card hl-red">
+<h4 style="margin-top:0;"><span class="wl wl-qrs">Complejo QRS</span> — Despolarización Ventricular</h4>
+<p><strong>Secuencia:</strong> septum (izq→der, genera Q septal en derivaciones laterales), luego masa ventricular (vector principal hacia izquierda/inferior). <strong>Duración normal:</strong> 0.06-0.10 s (&lt;3 cuadros pequeños). <strong>Amplitud:</strong> variable por derivación.</p>
+<p><strong>Progresión de R en precordiales:</strong> V1 tiene R pequeña con S profunda. Progresivamente la R crece y la S disminuye hasta V5-V6. La "zona de transición" (R ≈ S) normalmente en V3-V4.</p>
+<p><strong>Hallazgos anormales:</strong></p>
+<p>• <em>QRS ancho (≥0.12 s)</em>: bloqueo de rama derecha (rSR' en V1-V2), bloqueo de rama izquierda (R ancha con muescas en I, aVL, V5-V6), ritmo ventricular.</p>
+<p>• <em>Ondas Q patológicas</em> (≥0.04 s de ancho y/o ≥25% de la R): infarto previo — las derivaciones afectadas localizan el territorio.</p>
+<p>• <em>Alto voltaje</em>: hipertrofia ventricular (criterios de Sokolow-Lyon: S en V1 + R en V5 &gt;35 mm para HVI).</p>
+<p>• <em>Bajo voltaje</em>: derrame pericárdico, EPOC, obesidad, hipotiroidismo.</p>
+<p>• <em>Onda delta</em>: empastamiento del inicio del QRS — síndrome de WPW.</p>
+</div>
+
+<div class="concept-card hl-gold">
+<h4 style="margin-top:0;"><span class="wl wl-st">Segmento ST</span> — Fase de Plateau</h4>
+<p><strong>Significado:</strong> corresponde a la fase 2 del potencial de acción (plateau de Ca²⁺). Normalmente <strong>isoeléctrico</strong> (al mismo nivel que la línea base TP). Mecánicamente coincide con la eyección ventricular.</p>
+<p><strong>Hallazgos anormales (CRÍTICOS):</strong></p>
+<p>• <em>Elevación ST (&gt;1 mm en derivaciones de extremidades, &gt;2 mm en precordiales)</em>: <strong>STEMI</strong> (infarto agudo con elevación ST) — emergencia. También pericarditis (elevación difusa, cóncava), repolarización precoz benigna, aneurisma ventricular.</p>
+<p>• <em>Depresión ST (&gt;1 mm, horizontal o descendente)</em>: isquemia subendocárdica, efecto digitálico ("cazoleta"), hipertrofia ventricular (strain pattern).</p>
+<p>• <em>Punto J</em>: la unión entre el final del QRS y el inicio del ST. Su evaluación es clave para determinar elevación/depresión del ST.</p>
+</div>
+
+<div class="concept-card hl-teal">
+<h4 style="margin-top:0;"><span class="wl wl-t">Onda T</span> — Repolarización Ventricular</h4>
+<p><strong>Mecanismo:</strong> la repolarización comienza en el epicardio (última zona despolarizada) y viaja en dirección opuesta a la despolarización. Al ser ambas "alejándose" y "acercándose" respectivamente, generan deflexión positiva en las mismas derivaciones con R alta.</p>
+<p><strong>Normal:</strong> positiva en I, II, V3-V6. Puede ser negativa en aVR, III, V1. Amplitud ~⅓ a ⅔ de la R correspondiente.</p>
+<p><strong>Hallazgos anormales:</strong></p>
+<p>• <em>T invertidas simétricas y profundas</em>: isquemia transmural (derivaciones localizadoras), miocardiopatía hipertrófica, síndrome de Wellens (LAD crítica), hemorragia subaracnoidea.</p>
+<p>• <em>T picudas y estrechas</em>: hiperkalemia — primer signo, antes del ensanchamiento del QRS.</p>
+<p>• <em>T aplanadas</em>: hipokalemia, hipotiroidismo, efecto de fármacos.</p>
+</div>
+
+<div class="concept-card hl-purple">
+<h4 style="margin-top:0;"><span class="wl wl-qt">Intervalo QT</span> — Sístole Eléctrica</h4>
+<p><strong>Significado:</strong> duración total de despolarización + repolarización ventricular. Se corrige por FC con la fórmula de Bazett: <strong>QTc = QT / √RR</strong>. Normal: QTc &lt;0.44 s (hombres), &lt;0.46 s (mujeres).</p>
+<p><strong>Hallazgos anormales:</strong></p>
+<p>• <em>QT largo</em>: riesgo de Torsades de Pointes. Causas: fármacos (antiarrítmicos clase III, macrólidos, antipsicóticos), hipokalemia, hipocalcemia, hipomagnesemia, síndromes congénitos (Romano-Ward, Jervell-Lange-Nielsen).</p>
+<p>• <em>QT corto</em>: hipercalcemia, digoxina, síndrome de QT corto congénito.</p>
+</div>
+
+<h3>Localización de Isquemia/Infarto por Derivaciones</h3>
+<table class="dtable">
+<thead><tr><th>Derivaciones</th><th>Territorio</th><th>Arteria</th></tr></thead>
+<tbody>
+<tr><td>V1-V4</td><td>Anterior / Anteroseptal</td><td>Descendente anterior (LAD)</td></tr>
+<tr><td>I, aVL, V5-V6</td><td>Lateral</td><td>Circunfleja (LCx)</td></tr>
+<tr><td>II, III, aVF</td><td>Inferior</td><td>Coronaria derecha (RCA) o LCx</td></tr>
+<tr><td>V1-V2 (cambios recíprocos: R alta, ST deprimido)</td><td>Posterior</td><td>RCA o LCx</td></tr>
+<tr><td>V3R-V4R</td><td>Ventrículo derecho</td><td>RCA proximal</td></tr>
+</tbody></table>
+
+<h3>Ondas de Presión Auricular / Pulso Venoso Yugular</h3>
+<table class="dtable">
+<thead><tr><th>Onda</th><th>Causa</th><th>EKG</th><th>Anormalidades</th></tr></thead>
+<tbody>
+<tr><td><strong>a</strong></td><td>Contracción auricular</td><td>Tras onda P</td><td>Onda "a" cañón: bloqueo AV completo, taquicardia ventricular</td></tr>
+<tr><td><strong>c</strong></td><td>Abultamiento de válvulas AV</td><td>Tras QRS</td><td>—</td></tr>
+<tr><td><strong>x</strong></td><td>Relajación auricular</td><td>Segmento ST</td><td>Ausente en insuf. tricuspídea</td></tr>
+<tr><td><strong>v</strong></td><td>Llenado auricular pasivo</td><td>Tras onda T</td><td>Onda "v" gigante: insuf. tricuspídea severa</td></tr>
+<tr><td><strong>y</strong></td><td>Vaciamiento auricular</td><td>Tras S2</td><td>Descenso "y" rápido: pericarditis constrictiva</td></tr>
+</tbody></table>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">¿Qué segmento del EKG corresponde temporalmente a la fase de eyección ventricular?</div>
+<div class="quiz-opts" id="q5">
+  <div class="qopt" onclick="quiz('q5',this,0)">Intervalo PR</div>
+  <div class="qopt" onclick="quiz('q5',this,1)">Segmento ST</div>
+  <div class="qopt" onclick="quiz('q5',this,0)">Onda T</div>
+</div><div class="qfb" id="q5fb"></div></div>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">Un paciente presenta elevación del ST en V1-V4 con dolor torácico agudo. ¿Cuál es la arteria más probablemente afectada?</div>
+<div class="quiz-opts" id="q5b">
+  <div class="qopt" onclick="quiz('q5b',this,0)">Coronaria derecha (RCA)</div>
+  <div class="qopt" onclick="quiz('q5b',this,1)">Descendente anterior izquierda (LAD)</div>
+  <div class="qopt" onclick="quiz('q5b',this,0)">Circunfleja izquierda (LCx)</div>
+</div><div class="qfb" id="q5bfb"></div></div>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">El primer signo electrocardiográfico de hiperkalemia es:</div>
+<div class="quiz-opts" id="q5c">
+  <div class="qopt" onclick="quiz('q5c',this,0)">Ensanchamiento del QRS</div>
+  <div class="qopt" onclick="quiz('q5c',this,1)">Ondas T picudas y estrechas</div>
+  <div class="qopt" onclick="quiz('q5c',this,0)">Prolongación del QT</div>
+  <div class="qopt" onclick="quiz('q5c',this,0)">Desaparición de ondas P</div>
+</div><div class="qfb" id="q5cfb"></div></div>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">En un bloqueo de rama derecha, ¿qué patrón se observa en V1-V2?</div>
+<div class="quiz-opts" id="q5d">
+  <div class="qopt" onclick="quiz('q5d',this,1)">rSR' (patrón "orejas de conejo") con QRS ≥0.12 s</div>
+  <div class="qopt" onclick="quiz('q5d',this,0)">R ancha con muescas</div>
+  <div class="qopt" onclick="quiz('q5d',this,0)">QS profundo</div>
+</div><div class="qfb" id="q5dfb"></div></div>
+</div>
+
+<!-- ========== SECTION 5: FICK ========== -->
+<div class="section" id="sec5">
+<div class="section-header"><div class="section-number">6</div><div class="section-title">Principio de Fick & Gasto Cardíaco</div></div>
+
+<p>El <strong>Principio de Fick</strong> (1870) es el estándar de oro para medir gasto cardíaco. Se basa en la conservación de masa aplicada al oxígeno.</p>
+
+<div class="formula-box"><span class="label">Principio de Fick</span>GC = VO₂ / (CaO₂ − CvO₂)</div>
+
+<p>• <strong>VO₂</strong> = consumo de O₂ (mL/min). Estimado: ~125 mL/min/m² × BSA, o medido por calorimetría.</p>
+<p>• <strong>CaO₂</strong> = Hb × 1.34 × SaO₂ × 10 (mL O₂/L)</p>
+<p>• <strong>CvO₂</strong> = Hb × 1.34 × SvO₂ × 10 — sangre venosa mixta de arteria pulmonar. SvO₂ normal ≈ 75%.</p>
+
+<div class="key-point"><span class="icon">🩸</span><span>La diferencia AV de O₂ normal es ~40-60 mL/L. En choque cardiogénico aumenta (&gt;60) porque los tejidos extraen más O₂ de la poca sangre que reciben (SvO₂ baja).</span></div>
+
+<h3>Calculadora Fick</h3>
+<div class="concept-card">
+  <div class="calc-grid">
+    <div class="calc-input"><label>VO₂ (mL/min)</label><input type="number" id="fVO2" value="250"></div>
+    <div class="calc-input"><label>Hemoglobina (g/dL)</label><input type="number" id="fHb" value="15" step="0.1"></div>
+    <div class="calc-input"><label>SaO₂ (%)</label><input type="number" id="fSaO2" value="99"></div>
+    <div class="calc-input"><label>SvO₂ (%)</label><input type="number" id="fSvO2" value="75"></div>
+  </div>
+  <div style="text-align:center;margin-top:1rem;"><button class="btn-calc" onclick="calcFick()">Calcular GC</button></div>
+  <div class="calc-result" id="fickRes" style="display:none">
+    <div>CaO₂ = <span id="rCaO2">—</span> | CvO₂ = <span id="rCvO2">—</span> | ΔAV = <span id="rAV">—</span> mL O₂/L</div>
+    <div class="big" id="rGC">—</div><div class="unit">L/min (Gasto Cardíaco)</div>
+  </div>
+</div>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">Paciente en choque: VO₂=200, SaO₂=95%, SvO₂=40%, Hb=12. ¿GC aproximado?</div>
+<div class="quiz-opts" id="q6">
+  <div class="qopt" onclick="quiz('q6',this,0)">5.0 L/min</div>
+  <div class="qopt" onclick="quiz('q6',this,1)">~2.7 L/min (bajo — choque)</div>
+  <div class="qopt" onclick="quiz('q6',this,0)">8.0 L/min</div>
+</div><div class="qfb" id="q6fb"></div></div>
+</div>
+
+<!-- ========== SECTION 6: EFICIENCIA ========== -->
+<div class="section" id="sec6">
+<div class="section-header"><div class="section-number">7</div><div class="section-title">Consumo de O₂, Trabajo y Eficiencia Cardíaca</div></div>
+
+<h3>Consumo de Oxígeno Miocárdico (MVO₂)</h3>
+<p>El miocardio extrae 60-80% del O₂ en reposo (reserva mínima). Para aumentar el aporte de O₂, la <strong>única opción es aumentar el flujo coronario</strong>.</p>
+
+<div class="concept-card hl-red">
+<h4 style="margin-top:0;">Determinantes del MVO₂:</h4>
+<p>1. <strong>Tensión de pared (postcarga)</strong> — principal determinante.</p>
+<p>2. <strong>Frecuencia cardíaca</strong></p>
+<p>3. <strong>Contractilidad</strong></p>
+<p>4. Trabajo de presión &gt;&gt; trabajo de volumen en costo de O₂.</p>
+</div>
+
+<div class="formula-box"><span class="label">Trabajo Sistólico</span>SW = VS × PAM ≈ Área del asa PV</div>
+
+<p><strong>Eficiencia cardíaca</strong> = Trabajo útil / Energía total × 100% ≈ <strong>20-25%</strong>. El resto se disipa como calor.</p>
+
+<div class="key-point"><span class="icon">💡</span><span>El <strong>doble producto</strong> (RPP = FC × PAS) es el índice clínico del MVO₂. Se usa en pruebas de esfuerzo: angina aparece al alcanzar el RPP umbral del paciente.</span></div>
+
+<h3>Simulador del Doble Producto</h3>
+<div class="chart-wrap">
+  <div class="controls">
+    <div class="control-group">
+      <label>FC (lpm): <span class="val" id="v_hr">75</span></label>
+      <input type="range" id="sl_hr" min="40" max="180" value="75" oninput="drawRPP()">
+    </div>
+    <div class="control-group">
+      <label>PAS (mmHg): <span class="val" id="v_pas">120</span></label>
+      <input type="range" id="sl_pas" min="70" max="200" value="120" oninput="drawRPP()">
+    </div>
+  </div>
+  <canvas id="cRPP" width="900" height="320"></canvas>
+</div>
+
+<div class="clinical-pearl">En angina de esfuerzo, betabloqueadores reducen FC y PAS → ↓ doble producto → ↓ demanda miocárdica de O₂ → ↑ umbral de isquemia.</div>
+
+<div class="quiz-box"><h4>🧪 Verificación</h4>
+<div class="quiz-q">¿Por qué el corazón no puede aumentar la extracción de O₂ como mecanismo compensatorio?</div>
+<div class="quiz-opts" id="q7">
+  <div class="qopt" onclick="quiz('q7',this,1)">Porque la extracción basal ya es del 60-80%, dejando mínima reserva</div>
+  <div class="qopt" onclick="quiz('q7',this,0)">Porque usa ácidos grasos en lugar de oxígeno</div>
+  <div class="qopt" onclick="quiz('q7',this,0)">Porque las coronarias están siempre al máximo</div>
+</div><div class="qfb" id="q7fb"></div></div>
+
+</div>
+
+<!-- ========== SECTION 7: FLASHCARDS ========== -->
+<div class="section" id="sec7">
+<div class="section-header"><div class="section-number">8</div><div class="section-title">Flashcards — Repaso Espaciado</div></div>
+
+<p>Utiliza estas tarjetas estilo Anki para consolidar los conceptos clave. Haz clic en la tarjeta para revelar la respuesta, luego clasifícala como <strong style="color:var(--teal);">Lo sé</strong> o <strong style="color:var(--error);">Repasar</strong>. Las tarjetas marcadas para repasar reaparecerán al final del mazo.</p>
+
+<div class="fc-counter" id="fcCounter">Tarjeta 1 / 30</div>
+
+<div class="fc-deck" id="fcDeck">
+  <div class="fc-card" id="fcCard" onclick="flipCard()">
+    <div class="fc-face fc-front">
+      <div class="fc-tag fc-tag-phys" id="fcTag">FISIOLOGÍA</div>
+      <div class="fc-q" id="fcQuestion">Cargando...</div>
+      <div class="fc-hint">Toca para revelar →</div>
+    </div>
+    <div class="fc-face fc-back">
+      <div class="fc-a" id="fcAnswer">Cargando...</div>
+      <div class="fc-hint">Clasifica tu respuesta ↓</div>
+    </div>
+  </div>
+</div>
+
+<div class="fc-nav" id="fcNav" style="visibility:hidden;">
+  <button class="fc-btn fc-hard" onclick="rateCard('hard')">🔄 Repasar</button>
+  <button class="fc-btn" onclick="rateCard('ok')">👍 Bien</button>
+  <button class="fc-btn fc-know" onclick="rateCard('know')">✅ Lo sé</button>
+</div>
+
+<div class="fc-progress" id="fcDots"></div>
+
+<div class="fc-stats" id="fcStats">
+  <span><span style="color:var(--teal);">●</span> Dominadas: <strong id="fcKnow">0</strong></span>
+  <span><span style="color:var(--error);">●</span> Repasar: <strong id="fcHard">0</strong></span>
+  <span><span style="color:var(--text3);">●</span> Pendientes: <strong id="fcLeft">30</strong></span>
+</div>
+
+<div style="text-align:center;margin-top:1.5rem;">
+  <button class="fc-btn" onclick="resetFlashcards()" style="font-size:.82rem;">↻ Reiniciar Mazo</button>
+</div>
+</div>
+
+<!-- ========== SECTION 8: CLINICAL CASES ========== -->
+<div class="section" id="sec8">
+<div class="section-header"><div class="section-number">9</div><div class="section-title">Casos Clínicos de Correlación</div></div>
+
+<p>Aplica los conceptos aprendidos en escenarios clínicos realistas. Cada caso integra múltiples objetivos de aprendizaje. Lee cuidadosamente la viñeta clínica, analiza los datos y selecciona la mejor respuesta.</p>
+
+<!-- CASE 1: Frank-Starling + Precarga -->
+<div class="case-box">
+<h4 style="margin-top:0;"><span class="case-num">1</span> Frank-Starling & Precarga</h4>
+<div class="case-stem">
+Un hombre de 55 años es admitido por disnea progresiva y edema de miembros inferiores. La ecocardiografía muestra dilatación del ventrículo izquierdo con un <strong>volumen telediastólico de 220 mL</strong> (normal: 120 mL), <strong>volumen telesistólico de 170 mL</strong> y <strong>fracción de eyección del 23%</strong>. A pesar de tener un VTD marcadamente aumentado, su volumen sistólico es de solo 50 mL (normal: 70 mL).
+</div>
+<div class="case-q">¿Cuál es la mejor explicación para que el aumento del VTD no resulte en un aumento proporcional del volumen sistólico según la Ley de Frank-Starling?</div>
+<div class="case-opts" id="cc1">
+  <div class="case-opt" onclick="caseAns('cc1',this,0)"><span class="opt-letter">A</span> La precarga está disminuida por el uso de diuréticos</div>
+  <div class="case-opt" onclick="caseAns('cc1',this,0)"><span class="opt-letter">B</span> La postcarga aumentada por hipertensión es el factor limitante</div>
+  <div class="case-opt" onclick="caseAns('cc1',this,1)"><span class="opt-letter">C</span> El miocardio ha perdido su capacidad contráctil intrínseca y opera en la porción aplanada de la curva de Frank-Starling</div>
+  <div class="case-opt" onclick="caseAns('cc1',this,0)"><span class="opt-letter">D</span> Los sarcómeros han alcanzado su longitud óptima de 2.2 μm y no pueden estirarse más</div>
+</div>
+<div class="case-expl" id="cc1expl"><strong>Explicación:</strong> En la insuficiencia cardíaca con FE reducida, la curva de Frank-Starling se desplaza hacia abajo y se aplana. El miocardio ha perdido contractilidad intrínseca (↓ Ees), por lo que a pesar de un VTD muy elevado, no puede generar fuerza de contracción proporcional. Los sarcómeros están más allá de su rango óptimo en un ventrículo severamente dilatado, pero el problema principal es la pérdida de la función contráctil, no una limitación mecánica del estiramiento. La opción D confunde la fisiología: en IC dilatada, los sarcómeros sí se estiran excesivamente, pero es consecuencia de la falla contráctil, no su causa.</div>
+</div>
+
+<!-- CASE 2: Postcarga + Vasodilatadores -->
+<div class="case-box">
+<h4 style="margin-top:0;"><span class="case-num">2</span> Postcarga & Vasodilatadores</h4>
+<div class="case-stem">
+Una mujer de 68 años con insuficiencia cardíaca crónica (FE 30%) y presión arterial de 150/95 mmHg es iniciada en tratamiento con <strong>enalapril</strong> (IECA). Dos semanas después, su presión es 125/78 mmHg y reporta mejoría significativa de la disnea. La ecocardiografía de control muestra aumento del volumen sistólico de 40 mL a 55 mL.
+</div>
+<div class="case-q">¿Cuál es el mecanismo principal por el cual el enalapril mejoró el volumen sistólico en esta paciente?</div>
+<div class="case-opts" id="cc2">
+  <div class="case-opt" onclick="caseAns('cc2',this,0)"><span class="opt-letter">A</span> Efecto inotrópico positivo directo sobre los cardiomiocitos</div>
+  <div class="case-opt" onclick="caseAns('cc2',this,1)"><span class="opt-letter">B</span> Reducción de la postcarga (↓ RVS) que permite mayor eyección ventricular contra menor resistencia</div>
+  <div class="case-opt" onclick="caseAns('cc2',this,0)"><span class="opt-letter">C</span> Aumento de la precarga por retención de sodio y agua</div>
+  <div class="case-opt" onclick="caseAns('cc2',this,0)"><span class="opt-letter">D</span> Reducción de la frecuencia cardíaca que prolonga el tiempo de llenado diastólico</div>
+</div>
+<div class="case-expl" id="cc2expl"><strong>Explicación:</strong> Los IECA son vasodilatadores mixtos (arterio + venodilatadores). En IC con FE reducida, el ventrículo débil es extremadamente sensible a cambios en la postcarga. Al reducir la RVS (↓ postcarga), el ventrículo puede eyectar más sangre contra menor resistencia → ↑ VS. En el asa PV, esto se ve como un asa más ancha y menos alta. Los IECA NO tienen efecto inotrópico directo. También reducen la precarga (↓ retorno venoso), pero el efecto beneficioso predominante en IC es la ↓ postcarga.</div>
+</div>
+
+<!-- CASE 3: Contractilidad + PV Loop -->
+<div class="case-box">
+<h4 style="margin-top:0;"><span class="case-num">3</span> Contractilidad & Curva PV</h4>
+<div class="case-stem">
+En el laboratorio de hemodinámica, se evalúa la función ventricular de un paciente con miocardiopatía dilatada. Se realizan mediciones con catéter de conductancia obteniendo asas presión-volumen a diferentes niveles de precarga (oclusión de VCI). Al conectar los puntos telesistólicos, la línea ESPVR tiene una <strong>pendiente (Ees) de 0.9 mmHg/mL</strong> (normal: 2.0-2.5 mmHg/mL). Después de iniciar infusión de <strong>dobutamina</strong>, la Ees aumenta a 1.8 mmHg/mL.
+</div>
+<div class="case-q">¿Qué cambio se observaría en el asa presión-volumen tras la administración de dobutamina?</div>
+<div class="case-opts" id="cc3">
+  <div class="case-opt" onclick="caseAns('cc3',this,0)"><span class="opt-letter">A</span> El asa se desplaza hacia la derecha con mayor VTD</div>
+  <div class="case-opt" onclick="caseAns('cc3',this,0)"><span class="opt-letter">B</span> El asa se hace más alta sin cambiar el ancho (solo ↑ presión)</div>
+  <div class="case-opt" onclick="caseAns('cc3',this,1)"><span class="opt-letter">C</span> El punto telesistólico se desplaza hacia la izquierda y arriba (↓ VTS, ↑ presión sistólica), generando un asa más ancha</div>
+  <div class="case-opt" onclick="caseAns('cc3',this,0)"><span class="opt-letter">D</span> No hay cambio porque la dobutamina solo actúa sobre la frecuencia cardíaca</div>
+</div>
+<div class="case-expl" id="cc3expl"><strong>Explicación:</strong> La dobutamina es un agonista β1 que aumenta la contractilidad (inotropismo +). Esto se refleja como un aumento de Ees (pendiente de la ESPVR). En el asa PV, la ESPVR más empinada causa que el punto telesistólico se desplace hacia arriba y a la izquierda → menor VTS y mayor presión sistólica → el asa se vuelve más ancha (↑ VS). El VTD puede incluso disminuir ligeramente porque el vaciamiento ventricular es más eficiente.</div>
+</div>
+
+<!-- CASE 4: Ciclo Cardíaco + Ruidos -->
+<div class="case-box">
+<h4 style="margin-top:0;"><span class="case-num">4</span> Ciclo Cardíaco & Auscultación</h4>
+<div class="case-stem">
+Un paciente de 72 años con antecedente de hipertensión de larga evolución e hipertrofia ventricular izquierda acude por disnea. A la auscultación cardíaca se escucha un <strong>4to ruido cardíaco (S4)</strong> justo antes de S1. La ecocardiografía muestra un ventrículo con paredes gruesas, cavidad de tamaño normal y <strong>patrón de llenado diastólico alterado</strong>.
+</div>
+<div class="case-q">¿Cuál de las siguientes afirmaciones explica mejor la presencia de S4 en este paciente?</div>
+<div class="case-opts" id="cc4">
+  <div class="case-opt" onclick="caseAns('cc4',this,0)"><span class="opt-letter">A</span> Es producido por el cierre de las válvulas AV al inicio de la contracción isovolumétrica</div>
+  <div class="case-opt" onclick="caseAns('cc4',this,0)"><span class="opt-letter">B</span> Es causado por el llenado rápido pasivo de un ventrículo dilatado</div>
+  <div class="case-opt" onclick="caseAns('cc4',this,1)"><span class="opt-letter">C</span> Es producido por la contracción auricular forzando sangre contra un ventrículo rígido (baja compliance) durante la sístole auricular</div>
+  <div class="case-opt" onclick="caseAns('cc4',this,0)"><span class="opt-letter">D</span> Es generado por regurgitación mitral durante la eyección ventricular</div>
+</div>
+<div class="case-expl" id="cc4expl"><strong>Explicación:</strong> S4 ocurre en la fase de sístole auricular (inmediatamente antes del QRS en el EKG, antes de S1). Se produce cuando la aurícula se contrae para empujar sangre hacia un ventrículo con compliance disminuida (rígido). La HVI por hipertensión crónica causa engrosamiento de las paredes → menor distensibilidad → la contracción auricular genera turbulencia al forzar sangre contra la pared rígida. S4 desaparece en fibrilación auricular (no hay contracción auricular coordinada). S3, en contraste, se debe al llenado rápido pasivo.</div>
+</div>
+
+<!-- CASE 5: EKG + Isquemia -->
+<div class="case-box">
+<h4 style="margin-top:0;"><span class="case-num">5</span> Electrocardiograma & Isquemia</h4>
+<div class="case-stem">
+Un hombre de 62 años se presenta a urgencias con dolor torácico opresivo de 2 horas de evolución, irradiado al brazo izquierdo, acompañado de diaforesis. El EKG muestra: ritmo sinusal a 90 lpm, <strong>elevación del segmento ST de 4 mm en derivaciones II, III y aVF</strong>, con <strong>depresión recíproca del ST en I y aVL</strong>. Troponina I elevada. El intervalo PR es 0.16 s y el QRS mide 0.08 s.
+</div>
+<div class="case-q">¿Cuál es el diagnóstico y la arteria más probablemente involucrada?</div>
+<div class="case-opts" id="cc5">
+  <div class="case-opt" onclick="caseAns('cc5',this,0)"><span class="opt-letter">A</span> STEMI anterior — oclusión de la arteria descendente anterior izquierda (LAD)</div>
+  <div class="case-opt" onclick="caseAns('cc5',this,1)"><span class="opt-letter">B</span> STEMI inferior — oclusión de la arteria coronaria derecha (RCA)</div>
+  <div class="case-opt" onclick="caseAns('cc5',this,0)"><span class="opt-letter">C</span> Pericarditis aguda — elevación difusa del ST</div>
+  <div class="case-opt" onclick="caseAns('cc5',this,0)"><span class="opt-letter">D</span> STEMI lateral — oclusión de la arteria circunfleja izquierda (LCx)</div>
+</div>
+<div class="case-expl" id="cc5expl"><strong>Explicación:</strong> Las derivaciones II, III y aVF miran la pared <strong>inferior</strong> del corazón. La elevación del ST en estas derivaciones indica STEMI inferior. La arteria más comúnmente responsable es la coronaria derecha (RCA), que irriga la pared inferior en ~85% de los casos. Los cambios recíprocos (depresión ST en I, aVL — derivaciones laterales altas) apoyan el diagnóstico de STEMI verdadero (a diferencia de pericarditis, donde la elevación es difusa sin cambios recíprocos). El PR y QRS normales excluyen bloqueos de conducción asociados.</div>
+</div>
+
+<!-- CASE 6: EKG Hallazgos anormales -->
+<div class="case-box">
+<h4 style="margin-top:0;"><span class="case-num">6</span> EKG: Alteraciones Electrolíticas</h4>
+<div class="case-stem">
+Una paciente de 45 años con enfermedad renal crónica acude por debilidad muscular generalizada. Los laboratorios revelan <strong>potasio sérico de 7.2 mEq/L</strong> (normal: 3.5-5.0). Se obtiene un EKG que muestra: <strong>ondas T picudas y estrechas</strong> en derivaciones precordiales, <strong>ensanchamiento del QRS a 0.14 s</strong>, <strong>ondas P aplanadas</strong> y <strong>prolongación del PR a 0.24 s</strong>.
+</div>
+<div class="case-q">¿Cuál es la secuencia correcta de cambios electrocardiográficos progresivos en la hiperkalemia?</div>
+<div class="case-opts" id="cc6">
+  <div class="case-opt" onclick="caseAns('cc6',this,1)"><span class="opt-letter">A</span> T picudas → PR prolongado → P aplanadas → QRS ancho → onda sinusoidal → FV/asistolia</div>
+  <div class="case-opt" onclick="caseAns('cc6',this,0)"><span class="opt-letter">B</span> QRS ancho → T picudas → ST elevado → P aplanadas → bradicardia</div>
+  <div class="case-opt" onclick="caseAns('cc6',this,0)"><span class="opt-letter">C</span> P aplanadas → QRS ancho → T picudas → QT prolongado → taquicardia</div>
+  <div class="case-opt" onclick="caseAns('cc6',this,0)"><span class="opt-letter">D</span> ST deprimido → T invertidas → QRS ancho → P picudas → fibrilación</div>
+</div>
+<div class="case-expl" id="cc6expl"><strong>Explicación:</strong> La hiperkalemia produce cambios EKG progresivos y predecibles: (1) K⁺ 5.5-6.5: <strong>ondas T picudas, simétricas y estrechas</strong> — primer signo, por aceleración de la repolarización; (2) K⁺ 6.5-7.5: <strong>prolongación del PR</strong> y <strong>aplanamiento de ondas P</strong> — por enlentecimiento de la conducción auricular; (3) K⁺ 7.0-8.0: <strong>ensanchamiento del QRS</strong> — por enlentecimiento de la conducción intraventricular; (4) K⁺ &gt;8.0: <strong>patrón sinusoidal</strong> (fusión QRS-T) → fibrilación ventricular o asistolia. Este paciente con K⁺ de 7.2 muestra estadíos 1-3. Es una emergencia que requiere tratamiento inmediato (gluconato de calcio IV para estabilizar membranas).</div>
+</div>
+
+<!-- CASE 7: Fick + GC -->
+<div class="case-box">
+<h4 style="margin-top:0;"><span class="case-num">7</span> Principio de Fick & Gasto Cardíaco</h4>
+<div class="case-stem">
+Un paciente de 60 años con choque cardiogénico por infarto agudo es monitorizado con catéter de arteria pulmonar. Los datos son: <strong>VO₂ = 220 mL/min</strong>, <strong>Hb = 13 g/dL</strong>, <strong>SaO₂ = 96%</strong>, <strong>SvO₂ = 45%</strong> (obtenida de la arteria pulmonar). Peso 80 kg, talla 175 cm (BSA ≈ 1.95 m²).
+</div>
+<div class="case-q">¿Cuál es el gasto cardíaco de este paciente y cómo lo interpretas?</div>
+<div class="case-opts" id="cc7">
+  <div class="case-opt" onclick="caseAns('cc7',this,0)"><span class="opt-letter">A</span> GC ≈ 6.2 L/min — normal, el choque no es cardiogénico</div>
+  <div class="case-opt" onclick="caseAns('cc7',this,0)"><span class="opt-letter">B</span> GC ≈ 4.5 L/min — ligeramente bajo pero aceptable</div>
+  <div class="case-opt" onclick="caseAns('cc7',this,1)"><span class="opt-letter">C</span> GC ≈ 2.5 L/min (IC ≈ 1.3 L/min/m²) — severamente reducido, consistente con choque cardiogénico</div>
+  <div class="case-opt" onclick="caseAns('cc7',this,0)"><span class="opt-letter">D</span> GC ≈ 8.0 L/min — elevado, sugiere choque distributivo</div>
+</div>
+<div class="case-expl" id="cc7expl"><strong>Explicación:</strong> Aplicando el Principio de Fick: CaO₂ = 13 × 1.34 × 0.96 × 10 = <strong>167.2 mL/L</strong>. CvO₂ = 13 × 1.34 × 0.45 × 10 = <strong>78.4 mL/L</strong>. Diferencia AV = 167.2 − 78.4 = <strong>88.8 mL/L</strong>. GC = 220 / 88.8 = <strong>2.48 L/min</strong>. Índice cardíaco (IC) = 2.48 / 1.95 = <strong>1.27 L/min/m²</strong> (normal &gt;2.5). La SvO₂ baja (45%, normal 75%) indica que los tejidos están extrayendo mucho más O₂ de lo normal porque el flujo sanguíneo es insuficiente — hallazgo clásico de choque cardiogénico. Una diferencia AV elevada (&gt;60 mL/L) es típica de estados de bajo gasto.</div>
+</div>
+
+<!-- CASE 8: Eficiencia + Doble Producto -->
+<div class="case-box">
+<h4 style="margin-top:0;"><span class="case-num">8</span> Eficiencia Cardíaca & Demanda de O₂</h4>
+<div class="case-stem">
+Un hombre de 58 años con angina estable realiza una prueba de esfuerzo. En reposo, su FC es 68 lpm y PA 130/82 mmHg. Al alcanzar el <strong>estadío 3 del protocolo de Bruce</strong>, su FC es 148 lpm y PA 190/88 mmHg, momento en que desarrolla <strong>dolor torácico y depresión del segmento ST de 2 mm horizontal en V4-V6</strong>. La prueba se detiene. Actualmente no toma betabloqueadores.
+</div>
+<div class="case-q">¿Cuál es el doble producto (RPP) al momento de la isquemia y cuál es la intervención farmacológica más apropiada para aumentar su umbral de angina?</div>
+<div class="case-opts" id="cc8">
+  <div class="case-opt" onclick="caseAns('cc8',this,0)"><span class="opt-letter">A</span> RPP = 9,880; iniciar amlodipino para mejorar el flujo coronario</div>
+  <div class="case-opt" onclick="caseAns('cc8',this,1)"><span class="opt-letter">B</span> RPP = 28,120; iniciar metoprolol para reducir FC y PAS, disminuyendo la demanda de O₂ miocárdico</div>
+  <div class="case-opt" onclick="caseAns('cc8',this,0)"><span class="opt-letter">C</span> RPP = 28,120; iniciar digoxina para mejorar la contractilidad</div>
+  <div class="case-opt" onclick="caseAns('cc8',this,0)"><span class="opt-letter">D</span> RPP = 12,350; iniciar dobutamina para aumentar el gasto cardíaco</div>
+</div>
+<div class="case-expl" id="cc8expl"><strong>Explicación:</strong> RPP = FC × PAS = 148 × 190 = <strong>28,120</strong>. Este es el doble producto umbral de isquemia del paciente. Cuando la demanda de O₂ (reflejada por el RPP) excede el aporte limitado por estenosis coronaria, aparece isquemia → dolor + depresión ST. Los <strong>betabloqueadores</strong> (metoprolol) son primera línea: reducen tanto la FC como la PAS → ↓ RPP → el paciente puede hacer más ejercicio antes de alcanzar el umbral isquémico. La depresión ST horizontal en V4-V6 indica isquemia subendocárdica en territorio de LAD/LCx. La digoxina (C) y dobutamina (D) aumentarían la demanda de O₂.</div>
+</div>
+
+<!-- CASE 9: Wiggers + EKG Integration -->
+<div class="case-box">
+<h4 style="margin-top:0;"><span class="case-num">9</span> Integración: Ciclo Cardíaco & EKG</h4>
+<div class="case-stem">
+Un paciente de 70 años presenta un EKG con <strong>ritmo regular, FC 42 lpm</strong>. Se observan <strong>ondas P regulares a 80/min</strong>, pero <strong>sin relación constante con los complejos QRS</strong>. Los complejos QRS son anchos (0.14 s) y regulares. La presión arterial es 85/50 mmHg. A la exploración del cuello, se observan <strong>ondas "a" cañón intermitentes</strong> en el pulso venoso yugular.
+</div>
+<div class="case-q">¿Cuál es el diagnóstico y cómo se explican las ondas "a" cañón?</div>
+<div class="case-opts" id="cc9">
+  <div class="case-opt" onclick="caseAns('cc9',this,0)"><span class="opt-letter">A</span> Bloqueo AV de 2do grado tipo I — las ondas "a" se deben al alargamiento progresivo del PR</div>
+  <div class="case-opt" onclick="caseAns('cc9',this,0)"><span class="opt-letter">B</span> Fibrilación auricular con respuesta ventricular lenta — no hay ondas "a" verdaderas</div>
+  <div class="case-opt" onclick="caseAns('cc9',this,1)"><span class="opt-letter">C</span> Bloqueo AV completo (3er grado) — las ondas "a" cañón ocurren cuando la aurícula se contrae contra una válvula tricúspide cerrada</div>
+  <div class="case-opt" onclick="caseAns('cc9',this,0)"><span class="opt-letter">D</span> Taquicardia ventricular — las ondas "a" cañón son por disociación AV con conducción retrógrada</div>
+</div>
+<div class="case-expl" id="cc9expl"><strong>Explicación:</strong> El EKG muestra disociación AV completa: las ondas P (atrial) marchan a su propio ritmo (80/min) y los QRS (ritmo de escape ventricular) a 42/min, sin relación entre ellos. Esto define el <strong>bloqueo AV de 3er grado</strong>. El QRS ancho indica que el escape es ventricular (debajo del haz de His). Las <strong>ondas "a" cañón</strong> ocurren intermitentemente cuando, por coincidencia temporal, la aurícula se contrae (onda P) en el momento exacto en que la válvula tricúspide está cerrada (durante la sístole ventricular). La sangre no puede salir de la aurícula → se transmite retrógradamente a la vena yugular → onda "a" gigante visible en el cuello. No son constantes porque la disociación AV hace que la coincidencia sea intermitente.</div>
+</div>
+
+<!-- CASE 10: Comprehensive -->
+<div class="case-box">
+<h4 style="margin-top:0;"><span class="case-num">10</span> Caso Integrador Final</h4>
+<div class="case-stem">
+Una mujer de 30 años previamente sana acude por palpitaciones súbitas. El EKG muestra: FC 185 lpm, <strong>QRS estrecho (0.08 s)</strong>, ritmo regular, <strong>sin ondas P visibles</strong>, con ondas pseudo-R' en V1 y pseudo-S en derivaciones inferiores. Responde a <strong>maniobras vagales</strong> con terminación abrupta de la taquicardia. Un EKG previo (basal) era completamente normal, con PR de 0.16 s sin onda delta.
+</div>
+<div class="case-q">¿Cuál es el mecanismo más probable de esta taquicardia?</div>
+<div class="case-opts" id="cc10">
+  <div class="case-opt" onclick="caseAns('cc10',this,0)"><span class="opt-letter">A</span> Taquicardia ventricular — por la frecuencia elevada</div>
+  <div class="case-opt" onclick="caseAns('cc10',this,1)"><span class="opt-letter">B</span> Taquicardia por reentrada del nodo AV (TRNAV) — circuito de reentrada dentro del nodo AV</div>
+  <div class="case-opt" onclick="caseAns('cc10',this,0)"><span class="opt-letter">C</span> Flutter auricular — por la frecuencia cercana a 150 lpm</div>
+  <div class="case-opt" onclick="caseAns('cc10',this,0)"><span class="opt-letter">D</span> Taquicardia sinusal — por ser QRS estrecho y regular</div>
+</div>
+<div class="case-expl" id="cc10expl"><strong>Explicación:</strong> Las claves diagnósticas son: (1) QRS estrecho → taquicardia supraventricular; (2) ritmo perfectamente regular a ~185 lpm; (3) sin ondas P visibles (la activación auricular retrógrada está "escondida" dentro del QRS, produciendo pseudo-R' en V1 y pseudo-S en inferiores); (4) terminación abrupta con maniobras vagales (que bloquean la conducción por el nodo AV, interrumpiendo el circuito). Todo esto define la <strong>TRNAV (taquicardia por reentrada del nodo AV)</strong>, la taquicardia supraventricular paroxística más común. El mecanismo es un circuito de reentrada entre la vía lenta y rápida del nodo AV. No es flutter (ondas en dientes de sierra, frecuencia auricular ~300), ni TV (QRS sería ancho), ni sinusal (no hay ondas P sinusales).</div>
+</div>
+
+<div class="concept-card" style="background:linear-gradient(135deg,var(--accent3),var(--bg3));margin-top:3rem;">
+<h3 style="color:var(--accent);margin-top:0;">🏆 ¡Tutoría Completada!</h3>
+<p>Has cubierto los 7 objetivos de aprendizaje, practicado con flashcards de repaso espaciado y resuelto 10 casos clínicos integradores.</p>
+<div style="text-align:center;margin:1rem 0;"><span style="font-size:2.5rem;font-weight:700;color:var(--teal);" id="finalScore">0</span><span style="font-size:1.2rem;color:var(--text2);"> / <span id="totalQ">0</span> preguntas correctas</span></div>
+<p style="color:var(--text2);font-size:.9rem;">Revisa las secciones donde tuviste dificultad. Usa las flashcards periódicamente para consolidar el conocimiento a largo plazo.</p>
+</div>
+</div>
+
+</div><!-- main-container -->
+
+<div class="score-panel" id="scorePanel" style="display:none"><span class="heart">❤️</span><span id="scoreText">0 / 0</span></div>
+
+<script>
+// ===== GLOBALS =====
+const SECS = ['1. Frank-Starling','2. Precarga/Postcarga','3. Contractilidad','4. Fases del Ciclo','5. EKG & Wiggers','6. Principio de Fick','7. Eficiencia','8. Flashcards','9. Casos Clínicos'];
+let curSec=0, score=0, answered=0;
+
+// ===== HELPERS =====
+function $(id){return document.getElementById(id);}
+
+// Responsive canvas helper: sets internal resolution to match CSS size × devicePixelRatio
+function prepCanvas(id){
+  const c = $(id);
+  const rect = c.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  // Use the aspect ratio from width/height attributes
+  const aspectW = c.getAttribute('width')|0;
+  const aspectH = c.getAttribute('height')|0;
+  const cssW = rect.width || aspectW;
+  const cssH = cssW * (aspectH / aspectW);
+  c.style.width = cssW + 'px';
+  c.style.height = cssH + 'px';
+  c.width = Math.round(cssW * dpr);
+  c.height = Math.round(cssH * dpr);
+  const ctx = c.getContext('2d');
+  ctx.scale(dpr, dpr);
+  return {ctx, W: cssW, H: cssH};
+}
+
+// ===== NAVIGATION =====
+function buildNav(){
+  const nav = $('navInner');
+  nav.innerHTML = SECS.map((s,i)=>`<button class="nav-btn${i===0?' active':''}" onclick="showSec(${i})">${s}</button>`).join('');
+}
+function showSec(i){
+  curSec=i;
+  document.querySelectorAll('.section').forEach((s,j)=>s.classList.toggle('active',j===i));
+  document.querySelectorAll('.nav-btn').forEach((b,j)=>b.classList.toggle('active',j===i));
+  $('progressBar').style.width=((i+1)/9*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+  // Redraw canvases for current section after layout
+  requestAnimationFrame(()=>{ redrawSection(i); });
+}
+function start(){
+  $('hero').style.display='none';
+  $('navBar').style.display='block';
+  $('mainContent').style.display='block';
+  $('scorePanel').style.display='flex';
+  buildNav();
+  showSec(0);
+}
+function redrawSection(i){
+  if(i===0){drawLT();drawFV();}
+  if(i===1) drawPVLoop('normal');
+  if(i===2) drawCPV('normal');
+  if(i===4){drawWiggers('all');drawECGStrip();}
+  if(i===6) drawRPP();
+  if(i===7 && fcState.length===0) initFlashcards();
+}
+
+// ===== QUIZ =====
+function quiz(id,el,correct){
+  const opts = $(id).querySelectorAll('.qopt');
+  const fb = $(id+'fb');
+  opts.forEach(o=>{if(o!==el)o.classList.add('dim');});
+  el.classList.add(correct?'correct':'wrong');
+  answered++;
+  if(correct){score++;fb.textContent='✅ ¡Correcto!';fb.className='qfb show ok';}
+  else{fb.textContent='❌ Incorrecto. Revisa el concepto.';fb.className='qfb show no';}
+  $('scoreText').textContent=score+' / '+answered;
+  $('finalScore').textContent=score;
+  $('totalQ').textContent=answered;
+}
+function selPhase(el){document.querySelectorAll('.phase-item').forEach(p=>p.classList.remove('active'));el.classList.add('active');}
+
+// ===== DRAWING: LENGTH-TENSION =====
+function drawLT(){
+  const {ctx,W,H}=prepCanvas('cLT');
+  const val=($(('sl_sarco')).value|0)/100;
+  $('v_sarco').textContent=val.toFixed(2)+' μm';
+  const P={l:65,r:25,t:25,b:50};
+  const gW=W-P.l-P.r, gH=H-P.t-P.b;
+
+  function tension(len){if(len<1.2||len>2.8)return 0;return Math.exp(-((len-2.15)**2)/(2*0.35*0.35));}
+
+  // grid
+  ctx.strokeStyle='#222a38';ctx.lineWidth=1;
+  for(let i=0;i<=5;i++){const y=P.t+gH/5*i;ctx.beginPath();ctx.moveTo(P.l,y);ctx.lineTo(P.l+gW,y);ctx.stroke();}
+
+  // axes
+  ctx.strokeStyle='#4a5060';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(P.l,P.t);ctx.lineTo(P.l,P.t+gH);ctx.lineTo(P.l+gW,P.t+gH);ctx.stroke();
+
+  // labels
+  ctx.fillStyle='#7a8494';ctx.font='11px IBM Plex Sans';ctx.textAlign='center';
+  for(let l=1.4;l<=2.6;l+=0.2){ctx.fillText(l.toFixed(1),P.l+((l-1.2)/1.6)*gW,P.t+gH+18);}
+  ctx.fillText('Longitud del Sarcómero (μm)',P.l+gW/2,P.t+gH+40);
+  ctx.save();ctx.translate(14,P.t+gH/2);ctx.rotate(-Math.PI/2);ctx.fillText('Tensión (% máx)',0,0);ctx.restore();
+
+  // Y axis numbers
+  ctx.textAlign='right';
+  for(let i=0;i<=5;i++){ctx.fillText((i*20)+'%',P.l-6,P.t+gH-gH/5*i+4);}
+  ctx.textAlign='center';
+
+  // Operative range shading
+  const x1=P.l+((1.85-1.2)/1.6)*gW, x2=P.l+((2.25-1.2)/1.6)*gW;
+  ctx.fillStyle='rgba(0,212,170,0.07)';ctx.fillRect(x1,P.t,x2-x1,gH);
+  ctx.fillStyle='rgba(0,212,170,0.45)';ctx.font='10px IBM Plex Sans';
+  ctx.fillText('Rango operativo in vivo',(x1+x2)/2,P.t+16);
+
+  // Curve
+  ctx.strokeStyle='#e94560';ctx.lineWidth=2.5;ctx.beginPath();
+  for(let i=0;i<=200;i++){
+    const l=1.2+(i/200)*1.6;
+    let t=tension(l);if(l>2.3)t*=Math.max(0,1-(l-2.3)*2.5);
+    const x=P.l+(i/200)*gW, y=P.t+gH-t*gH;
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }ctx.stroke();
+
+  // Current point
+  let tC=tension(val);if(val>2.3)tC*=Math.max(0,1-(val-2.3)*2.5);
+  const cx=P.l+((val-1.2)/1.6)*gW, cy=P.t+gH-tC*gH;
+  ctx.beginPath();ctx.arc(cx,cy,7,0,Math.PI*2);ctx.fillStyle='#00d4aa';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='bold 12px JetBrains Mono';ctx.textAlign='left';
+  ctx.fillText((tC*100).toFixed(0)+'%',cx+12,cy+4);
+
+  let desc='';
+  if(val<1.7)desc='Solapamiento excesivo. Generación de fuerza subóptima.';
+  else if(val<2.0)desc='Zona ascendente: más estiramiento → más fuerza + más sensibilidad al Ca²⁺.';
+  else if(val<=2.25)desc='✅ Longitud óptima: máximo solapamiento actina-miosina y máxima sensibilidad al Ca²⁺.';
+  else desc='Más allá del rango fisiológico in vivo. El pericardio previene este estiramiento.';
+  $('ltDesc').textContent=desc;
+}
+
+// ===== DRAWING: FORCE-VELOCITY =====
+function drawFV(){
+  const {ctx,W,H}=prepCanvas('cFV');
+  const contr=($('sl_contr1').value|0)/100, pre=($('sl_pre1').value|0)/100;
+  $('v_contr1').textContent=contr>1.1?'↑ Aumentada':contr<0.9?'↓ Disminuida':'Normal';
+  $('v_pre1').textContent=pre>1.1?'↑ Aumentada':pre<0.9?'↓ Disminuida':'Normal';
+  const P={l:65,r:25,t:25,b:50};
+  const gW=W-P.l-P.r, gH=H-P.t-P.b;
+
+  // axes
+  ctx.strokeStyle='#4a5060';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(P.l,P.t);ctx.lineTo(P.l,P.t+gH);ctx.lineTo(P.l+gW,P.t+gH);ctx.stroke();
+  ctx.fillStyle='#7a8494';ctx.font='11px IBM Plex Sans';ctx.textAlign='center';
+  ctx.fillText('Fuerza (Postcarga)',P.l+gW/2,P.t+gH+40);
+  ctx.save();ctx.translate(14,P.t+gH/2);ctx.rotate(-Math.PI/2);ctx.fillText('Velocidad de Acortamiento',0,0);ctx.restore();
+
+  function drawCurve(vmax,f0,col,lw,dash){
+    const a=f0*0.3;ctx.strokeStyle=col;ctx.lineWidth=lw;ctx.setLineDash(dash||[]);ctx.beginPath();
+    for(let i=0;i<=100;i++){
+      const f=(i/100)*f0,v=vmax*(f0-f)/(f+a);
+      const x=P.l+(f/(1.5))*gW, y=P.t+gH-(v/1.8)*gH;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }ctx.stroke();ctx.setLineDash([]);
+  }
+  drawCurve(1.0,1.0,'rgba(150,160,180,0.25)',1.5,[5,4]);
+  drawCurve(contr,pre,'#e94560',2.5);
+
+  // Labels
+  ctx.fillStyle='#00d4aa';ctx.font='bold 11px JetBrains Mono';ctx.textAlign='left';
+  const vmY=P.t+gH-(contr/1.8)*gH;
+  ctx.fillText('Vmáx',P.l+8,vmY-8);
+  const f0X=P.l+(pre/1.5)*gW;
+  ctx.textAlign='center';ctx.fillText('F₀',f0X,P.t+gH-8);
+}
+
+// ===== DRAWING: PV LOOP =====
+let pvMode='normal';
+function setPV(mode,btn){pvMode=mode;document.querySelectorAll('#sec1 .sbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');drawPVLoop(mode);}
+
+function drawPVLoop(cond){
+  const {ctx,W,H}=prepCanvas('cPV');
+  const P={l:65,r:30,t:25,b:55};
+  const gW=W-P.l-P.r, gH=H-P.t-P.b;
+  const toX=v=>P.l+(v/170)*gW, toY=p=>P.t+gH-(p/160)*gH;
+
+  // axes
+  ctx.strokeStyle='#4a5060';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(P.l,P.t);ctx.lineTo(P.l,P.t+gH);ctx.lineTo(P.l+gW,P.t+gH);ctx.stroke();
+  ctx.fillStyle='#7a8494';ctx.font='11px IBM Plex Sans';ctx.textAlign='center';
+  ctx.fillText('Volumen (mL)',P.l+gW/2,P.t+gH+42);
+  ctx.save();ctx.translate(14,P.t+gH/2);ctx.rotate(-Math.PI/2);ctx.fillText('Presión (mmHg)',0,0);ctx.restore();
+  ctx.textAlign='right';
+  for(let p=0;p<=140;p+=20){ctx.fillText(p,P.l-6,toY(p)+4);}
+  ctx.textAlign='center';
+  for(let v=0;v<=150;v+=30){ctx.fillText(v,toX(v),P.t+gH+16);}
+
+  // ESPVR / EDPVR
+  ctx.strokeStyle='rgba(78,168,222,0.3)';ctx.lineWidth=1;ctx.setLineDash([4,3]);ctx.beginPath();
+  for(let v=10;v<170;v++){const p=2.5*(v-10);if(p>160)break;ctx.lineTo(toX(v),toY(p));}ctx.stroke();ctx.setLineDash([]);
+  ctx.strokeStyle='rgba(240,192,64,0.3)';ctx.setLineDash([4,3]);ctx.beginPath();
+  for(let v=0;v<170;v++){const p=0.005*Math.pow(v,1.6);if(p>30)break;ctx.lineTo(toX(v),toY(p));}ctx.stroke();ctx.setLineDash([]);
+
+  const cfgs={
+    normal:{edv:120,esv:50,esp:120,dp:8,col:'#e94560',d:'Asa PV normal. VTD=120, VTS=50, VS=70, FE≈58%.'},
+    pre_up:{edv:150,esv:55,esp:130,dp:12,col:'#00d4aa',d:'↑ Precarga: asa más ancha, desplazada a derecha. Mayor VS (Frank-Starling).'},
+    pre_dn:{edv:90,esv:45,esp:105,dp:5,col:'#4ea8de',d:'↓ Precarga (venodilatador): asa angosta, desplazada a izquierda. Menor VS.'},
+    aft_up:{edv:130,esv:75,esp:155,dp:10,col:'#ff8c42',d:'↑ Postcarga (HTA): asa más ALTA y estrecha. Mayor VTS, menor VS.'},
+    aft_dn:{edv:115,esv:40,esp:95,dp:7,col:'#b06aff',d:'↓ Postcarga (arteriodilatador): asa más BAJA y ancha. Mayor VS.'}
+  };
+  const c=cfgs[cond];
+
+  // reference
+  if(cond!=='normal')drawLoop(ctx,toX,toY,cfgs.normal,'rgba(233,69,96,0.15)',1,[4,3]);
+  drawLoop(ctx,toX,toY,c,c.col,2.5,[]);
+
+  ctx.fillStyle='#4ea8de';ctx.font='10px IBM Plex Sans';ctx.textAlign='left';ctx.fillText('ESPVR',toX(25),toY(35));
+  ctx.fillStyle='#f0c040';ctx.fillText('EDPVR',toX(120),toY(18));
+  $('pvDesc').textContent=c.d;
+}
+
+function drawLoop(ctx,toX,toY,p,col,lw,dash){
+  ctx.strokeStyle=col;ctx.lineWidth=lw;ctx.setLineDash(dash);ctx.beginPath();
+  // bottom: filling
+  for(let i=0;i<=20;i++){const v=p.esv+(i/20)*(p.edv-p.esv);const pr=2+p.dp*Math.pow(i/20,1.8);ctx.lineTo(toX(v),toY(pr));}
+  // right: isovol contraction
+  for(let i=0;i<=15;i++){const pr=p.dp+10+(p.esp-p.dp-10)*(i/15);ctx.lineTo(toX(p.edv),toY(pr));}
+  // top: ejection
+  for(let i=0;i<=20;i++){const v=p.edv-(i/20)*(p.edv-p.esv);const pr=p.esp-15*Math.sin((i/20)*Math.PI*0.4);ctx.lineTo(toX(v),toY(pr));}
+  // left: isovol relaxation
+  const espEnd=p.esp-15*Math.sin(Math.PI*0.4);
+  for(let i=0;i<=15;i++){const pr=espEnd-(espEnd-2)*(i/15);ctx.lineTo(toX(p.esv),toY(pr));}
+  ctx.closePath();ctx.stroke();ctx.setLineDash([]);
+  // fill
+  ctx.fillStyle=col.replace(')',',0.06)').replace('rgb','rgba').replace('#','')?`${col}0f`:'rgba(233,69,96,0.06)';
+  ctx.globalAlpha=0.08;ctx.fill();ctx.globalAlpha=1;
+}
+
+// ===== CONTRACTILITY PV =====
+let cpvMode='normal';
+function setCPV(mode,btn){cpvMode=mode;document.querySelectorAll('#sec2 .sbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');drawCPV(mode);}
+
+function drawCPV(cond){
+  const {ctx,W,H}=prepCanvas('cCPV');
+  const P={l:65,r:30,t:25,b:55};
+  const gW=W-P.l-P.r, gH=H-P.t-P.b;
+  const toX=v=>P.l+(v/180)*gW, toY=p=>P.t+gH-(p/180)*gH;
+
+  ctx.strokeStyle='#4a5060';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(P.l,P.t);ctx.lineTo(P.l,P.t+gH);ctx.lineTo(P.l+gW,P.t+gH);ctx.stroke();
+  ctx.fillStyle='#7a8494';ctx.font='11px IBM Plex Sans';ctx.textAlign='center';
+  ctx.fillText('Volumen (mL)',P.l+gW/2,P.t+gH+42);
+  ctx.save();ctx.translate(14,P.t+gH/2);ctx.rotate(-Math.PI/2);ctx.fillText('Presión (mmHg)',0,0);ctx.restore();
+
+  const cfgs={
+    normal:{ees:2.5,esv:50,edv:120,esp:120,col:'#e94560',ecol:'#4ea8de',d:'ESPVR normal. Ees=2.5. FE≈58%.'},
+    pos:{ees:4.0,esv:35,edv:120,esp:135,col:'#00d4aa',ecol:'#00d4aa',d:'↑ Contractilidad: ESPVR más empinada (Ees=4.0), desplazada izquierda. ↑VS, ↓VTS.'},
+    neg:{ees:1.5,esv:70,edv:120,esp:100,col:'#ff8c42',ecol:'#ff8c42',d:'↓ Contractilidad: ESPVR aplanada (Ees=1.5). ↓VS, ↑VTS.'},
+    hf:{ees:0.8,esv:100,edv:160,esp:85,col:'#f87171',ecol:'#f87171',d:'IC severa: ESPVR muy aplanada (Ees=0.8). Ventrículo dilatado. FE≈25%.'}
+  };
+  const c=cfgs[cond];
+
+  // Normal ESPVR reference
+  ctx.strokeStyle='rgba(78,168,222,0.2)';ctx.setLineDash([4,3]);ctx.lineWidth=1;ctx.beginPath();
+  for(let v=10;v<180;v++){const p=2.5*(v-10);if(p>180)break;ctx.lineTo(toX(v),toY(p));}ctx.stroke();ctx.setLineDash([]);
+
+  // Current ESPVR
+  ctx.strokeStyle=c.ecol;ctx.setLineDash([6,3]);ctx.lineWidth=2;ctx.beginPath();
+  for(let v=10;v<180;v++){const p=c.ees*(v-10);if(p>180)break;ctx.lineTo(toX(v),toY(p));}ctx.stroke();ctx.setLineDash([]);
+
+  // Loop
+  ctx.strokeStyle=c.col;ctx.lineWidth=2.5;ctx.beginPath();
+  for(let i=0;i<=20;i++){const v=c.esv+(i/20)*(c.edv-c.esv);const pr=5+10*Math.pow(i/20,1.8);ctx.lineTo(toX(v),toY(pr));}
+  for(let i=0;i<=15;i++){const pr=15+(c.esp-15)*(i/15);ctx.lineTo(toX(c.edv),toY(pr));}
+  for(let i=0;i<=20;i++){const v=c.edv-(i/20)*(c.edv-c.esv);const pr=c.esp-10*Math.sin((i/20)*Math.PI*0.3);ctx.lineTo(toX(v),toY(pr));}
+  const espEnd2=c.esp-10*Math.sin(Math.PI*0.3);
+  for(let i=0;i<=15;i++){const pr=espEnd2-(espEnd2-5)*(i/15);ctx.lineTo(toX(c.esv),toY(pr));}
+  ctx.closePath();ctx.stroke();
+
+  // Labels
+  ctx.fillStyle=c.ecol;ctx.font='bold 11px IBM Plex Sans';ctx.textAlign='left';
+  ctx.fillText('Ees='+c.ees.toFixed(1),P.l+12,P.t+18);
+  const fe=((c.edv-c.esv)/c.edv*100)|0;
+  ctx.fillStyle=c.col;ctx.fillText('VS='+(c.edv-c.esv)+' FE='+fe+'%',toX(c.edv)-90,toY(c.esp)-12);
+  $('cpvDesc').textContent=c.d;
+}
+
+// ===== WIGGERS DIAGRAM =====
+let wigMode='all';
+function setWig(mode,btn){wigMode=mode;document.querySelectorAll('#sec4 .btn-row .sbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');drawWiggers(mode);}
+
+function drawWiggers(mode){
+  const {ctx,W,H}=prepCanvas('cWig');
+  const P={l:72,r:20,t:18,b:20};
+  const gW=W-P.l-P.r;
+
+  const phases=[
+    {name:'Sístole Aur.',s:0,e:.1,c:'rgba(78,168,222,0.06)'},
+    {name:'Contr. Isovol.',s:.1,e:.18,c:'rgba(233,69,96,0.06)'},
+    {name:'Eyección',s:.18,e:.45,c:'rgba(240,192,64,0.06)'},
+    {name:'Relaj. Isovol.',s:.45,e:.52,c:'rgba(176,106,255,0.06)'},
+    {name:'Llenado',s:.52,e:1,c:'rgba(0,212,170,0.04)'}
+  ];
+  const tx=t=>P.l+t*gW;
+
+  // Phase bgs
+  phases.forEach(ph=>{ctx.fillStyle=ph.c;ctx.fillRect(tx(ph.s),P.t,tx(ph.e)-tx(ph.s),H-P.t-P.b);});
+  ctx.font='8px IBM Plex Sans';ctx.textAlign='center';ctx.fillStyle='#555';
+  phases.forEach(ph=>{ctx.fillText(ph.name,(tx(ph.s)+tx(ph.e))/2,P.t+10);});
+  phases.forEach(ph=>{ctx.strokeStyle='rgba(42,48,64,0.4)';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(tx(ph.s),P.t);ctx.lineTo(tx(ph.s),H-P.b);ctx.stroke();});
+
+  // Sub-plot regions
+  const ecgT=P.t+16, ecgH=70;
+  const prT=ecgT+ecgH+8, prH=H*0.32;
+  const volT=prT+prH+8, volH=H*0.16;
+  const sndT=volT+volH+6, sndH=30;
+
+  // Separators
+  [ecgT+ecgH+4,prT+prH+4,volT+volH+4].forEach(y=>{ctx.strokeStyle='rgba(42,48,64,0.5)';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(P.l,y);ctx.lineTo(P.l+gW,y);ctx.stroke();});
+
+  // Row labels
+  ctx.fillStyle='#5a6478';ctx.font='9px IBM Plex Sans';ctx.textAlign='right';
+  ctx.fillText('EKG',P.l-6,ecgT+ecgH/2+3);
+  ctx.fillText('Presión',P.l-6,prT+prH/2-4);ctx.fillText('(mmHg)',P.l-6,prT+prH/2+8);
+  ctx.fillText('Volumen',P.l-6,volT+volH/2-2);ctx.fillText('(mL)',P.l-6,volT+volH/2+10);
+  ctx.fillText('Ruidos',P.l-6,sndT+sndH/2+3);
+
+  const a=t=>(mode==='all'||mode===t)?1:0.1;
+
+  // --- ECG ---
+  const ecgBase=ecgT+ecgH*0.6, ecgAmp=ecgH*0.35;
+  ctx.strokeStyle=`rgba(78,168,222,${a('ecg')})`;ctx.lineWidth=2;ctx.beginPath();
+  for(let i=0;i<=300;i++){
+    const t=i/300;let y=0;
+    if(t>=.02&&t<.08){const p=(t-.02)/.06;y=.15*Math.sin(p*Math.PI);}
+    else if(t>=.10&&t<.105)y=-.05;
+    else if(t>=.105&&t<.12)y=-.05+(t-.105)/.015*1.05;
+    else if(t>=.12&&t<.135)y=1-(t-.12)/.015*1.2;
+    else if(t>=.135&&t<.15)y=-.2+(t-.135)/.015*.2;
+    else if(t>=.15&&t<.30)y=.02;
+    else if(t>=.30&&t<.42){const p=(t-.30)/.12;y=.25*Math.sin(p*Math.PI);}
+    const x=tx(t),yy=ecgBase-y*ecgAmp;
+    i===0?ctx.moveTo(x,yy):ctx.lineTo(x,yy);
+  }ctx.stroke();
+  if(a('ecg')>.5){
+    ctx.font='bold 10px JetBrains Mono';ctx.textAlign='center';
+    ctx.fillStyle='#4ea8de';ctx.fillText('P',tx(.05),ecgT+10);
+    ctx.fillStyle='#e94560';ctx.fillText('QRS',tx(.125),ecgT+10);
+    ctx.fillStyle='#f0c040';ctx.fillText('ST',tx(.22),ecgT+ecgH-4);
+    ctx.fillStyle='#00d4aa';ctx.fillText('T',tx(.36),ecgT+10);
+  }
+
+  // --- Pressure: LV ---
+  const pScale=p=>prT+prH-(p/140)*prH;
+  ctx.strokeStyle=`rgba(233,69,96,${a('lv')})`;ctx.lineWidth=2;ctx.beginPath();
+  for(let i=0;i<=300;i++){
+    const t=i/300;let p=8;
+    if(t<.10)p=8+4*Math.sin(t/.10*Math.PI);
+    else if(t<.18)p=12+(120-12)*((t-.10)/.08);
+    else if(t<.32)p=120+10*Math.sin((t-.18)/.14*Math.PI);
+    else if(t<.45)p=120-(120-100)*((t-.32)/.13);
+    else if(t<.52)p=100-92*((t-.45)/.07);
+    else p=8;
+    ctx.lineTo(tx(t),pScale(p));
+  }ctx.stroke();
+  if(a('lv')>.5){ctx.fillStyle='#e94560';ctx.font='9px IBM Plex Sans';ctx.textAlign='left';ctx.fillText('VI',tx(.24),pScale(128));}
+
+  // --- Pressure: Aortic ---
+  ctx.strokeStyle=`rgba(240,192,64,${a('ao')})`;ctx.lineWidth=1.8;ctx.beginPath();
+  for(let i=0;i<=300;i++){
+    const t=i/300;let p;
+    if(t<.18)p=80;
+    else if(t<.20)p=80+40*((t-.18)/.02);
+    else if(t<.35)p=120-5*((t-.20)/.15);
+    else if(t<.46){const f=(t-.35)/.11;p=115-20*f;if(f>.3&&f<.55)p+=6*Math.sin((f-.3)/.25*Math.PI);}
+    else p=95-(95-80)*Math.min(1,(t-.46)/.54);
+    ctx.lineTo(tx(t),pScale(p));
+  }ctx.stroke();
+  if(a('ao')>.5){ctx.fillStyle='#f0c040';ctx.font='9px IBM Plex Sans';ctx.textAlign='left';ctx.fillText('Ao',tx(.56),pScale(86));
+    ctx.font='8px IBM Plex Sans';ctx.fillText('Muesca dicrótica',tx(.40),pScale(88));}
+
+  // --- Pressure: LA ---
+  ctx.strokeStyle=`rgba(176,106,255,${a('la')})`;ctx.lineWidth=1.8;ctx.beginPath();
+  for(let i=0;i<=300;i++){
+    const t=i/300;let p=7;
+    if(t>=.02&&t<.09)p=7+6*Math.sin((t-.02)/.07*Math.PI);
+    else if(t>=.12&&t<.18)p=7+3*Math.sin((t-.12)/.06*Math.PI);
+    else if(t>=.18&&t<.30)p=7-3*Math.sin((t-.18)/.12*Math.PI);
+    else if(t>=.30&&t<.50)p=7+8*Math.sin((t-.30)/.20*Math.PI);
+    else if(t>=.50&&t<.65)p=15-10*((t-.50)/.15);
+    else if(t>=.65)p=5+2*((t-.65)/.35);
+    ctx.lineTo(tx(t),pScale(p));
+  }ctx.stroke();
+  if(a('la')>.5){
+    ctx.fillStyle='#b06aff';ctx.font='bold 9px JetBrains Mono';ctx.textAlign='center';
+    ctx.fillText('a',tx(.055),pScale(17));ctx.fillText('c',tx(.15),pScale(13));ctx.fillText('v',tx(.40),pScale(19));
+    ctx.font='8px IBM Plex Sans';ctx.fillText('x',tx(.24),pScale(1));ctx.fillText('y',tx(.57),pScale(1));
+    ctx.font='9px IBM Plex Sans';ctx.textAlign='right';ctx.fillText('AI',tx(.97),pScale(12));
+  }
+
+  // Pressure scale
+  ctx.fillStyle='#5a6478';ctx.font='8px JetBrains Mono';ctx.textAlign='right';
+  [0,40,80,120].forEach(p=>{ctx.fillText(p,P.l-4,pScale(p)+3);ctx.strokeStyle='rgba(42,48,64,0.2)';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(P.l,pScale(p));ctx.lineTo(P.l+gW,pScale(p));ctx.stroke();});
+
+  // --- Volume ---
+  const vScale=v=>volT+volH-((v-40)/100)*volH;
+  ctx.strokeStyle=`rgba(0,212,170,${a('vol')})`;ctx.lineWidth=2;ctx.beginPath();
+  for(let i=0;i<=300;i++){
+    const t=i/300;let v;
+    if(t<.10)v=115+5*Math.sin(t/.10*Math.PI*.5);
+    else if(t<.18)v=120;
+    else if(t<.32)v=120-60*Math.pow((t-.18)/.14,.6);
+    else if(t<.45)v=60-10*((t-.32)/.13);
+    else if(t<.52)v=50;
+    else if(t<.70)v=50+55*Math.pow((t-.52)/.18,.5);
+    else if(t<.90)v=105+10*((t-.70)/.20);
+    else v=115;
+    ctx.lineTo(tx(t),vScale(v));
+  }ctx.stroke();
+  if(a('vol')>.5){
+    ctx.fillStyle='#00d4aa';ctx.font='9px JetBrains Mono';ctx.textAlign='left';
+    ctx.fillText('VTD≈120',tx(.10)+4,vScale(122));ctx.fillText('VTS≈50',tx(.46)+4,vScale(46));
+  }
+  ctx.fillStyle='#5a6478';ctx.font='8px JetBrains Mono';ctx.textAlign='right';
+  [50,80,120].forEach(v=>{ctx.fillText(v,P.l-4,vScale(v)+3);});
+
+  // --- Heart sounds ---
+  ctx.fillStyle='#ff6b9d';ctx.font='bold 13px DM Serif Display';ctx.textAlign='center';
+  ctx.fillText('S1',tx(.11),sndT+sndH/2+5);ctx.fillText('S2',tx(.46),sndT+sndH/2+5);
+}
+
+// ===== ECG STRIP ON GRID PAPER =====
+function drawECGStrip(){
+  const {ctx,W,H}=prepCanvas('cECGStrip');
+
+  // Grid paper background
+  ctx.fillStyle='#1a0808';ctx.fillRect(0,0,W,H);
+
+  // Small grid
+  const gridSmall = W/40; // approximately 1mm per small square
+  ctx.strokeStyle='rgba(180,60,60,0.12)';ctx.lineWidth=0.5;
+  for(let x=0;x<W;x+=gridSmall){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<H;y+=gridSmall){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+
+  // Large grid (5 small = 1 large)
+  const gridLarge = gridSmall*5;
+  ctx.strokeStyle='rgba(180,60,60,0.3)';ctx.lineWidth=1;
+  for(let x=0;x<W;x+=gridLarge){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<H;y+=gridLarge){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+
+  const baseY=H*0.55;
+  const mmV=gridSmall; // 1mm vertical = 0.1mV
+  const mmH=gridSmall; // 1mm horizontal = 0.04s
+
+  // Draw 2.5 cycles of normal sinus ECG
+  function drawOneCycle(startX, rate){
+    const rrMM = 25 * (75/rate); // RR interval in mm at given rate
+    const rrPx = rrMM * mmH;
+
+    function toX(mm){return startX + mm*mmH;}
+
+    // P wave: 2.5mm wide, 2mm tall
+    const pStart=0, pW=2.5, pH=2;
+    ctx.strokeStyle='#4ea8de';ctx.lineWidth=2;ctx.beginPath();
+    for(let i=0;i<=20;i++){
+      const mm=pStart+(i/20)*pW;
+      const mv=pH*Math.sin((i/20)*Math.PI);
+      ctx.lineTo(toX(mm),baseY-mv*mmV);
+    }ctx.stroke();
+
+    // PR segment (flat): pW to 4mm
+    ctx.strokeStyle='#88cc88';ctx.beginPath();ctx.moveTo(toX(pW),baseY);ctx.lineTo(toX(4),baseY);ctx.stroke();
+
+    // QRS complex
+    const qrsStart=4;
+    ctx.strokeStyle='#e94560';ctx.lineWidth=2.5;ctx.beginPath();
+    // Q: small negative 0.5mm wide, -1mm deep
+    ctx.moveTo(toX(qrsStart),baseY);
+    ctx.lineTo(toX(qrsStart+0.3),baseY+1*mmV);
+    // R: tall positive 1mm wide, 10mm tall
+    ctx.lineTo(toX(qrsStart+1),baseY-10*mmV);
+    // S: negative 0.7mm wide, -2mm below
+    ctx.lineTo(toX(qrsStart+1.7),baseY+2*mmV);
+    // return to baseline
+    ctx.lineTo(toX(qrsStart+2),baseY);
+    ctx.stroke();
+
+    // ST segment (flat): 6 to 8mm
+    ctx.strokeStyle='#f0c040';ctx.lineWidth=1.5;ctx.beginPath();
+    ctx.moveTo(toX(6),baseY);ctx.lineTo(toX(8.5),baseY);ctx.stroke();
+
+    // T wave: 3mm wide, 3mm tall
+    ctx.strokeStyle='#00d4aa';ctx.lineWidth=2;ctx.beginPath();
+    for(let i=0;i<=20;i++){
+      const mm=8.5+(i/20)*3.5;
+      const mv=3*Math.sin((i/20)*Math.PI);
+      ctx.lineTo(toX(mm),baseY-mv*mmV);
+    }ctx.stroke();
+
+    // TP segment to end of cycle
+    ctx.strokeStyle='#88cc88';ctx.lineWidth=1;ctx.beginPath();
+    ctx.moveTo(toX(12),baseY);ctx.lineTo(toX(rrMM),baseY);ctx.stroke();
+
+    return rrPx;
+  }
+
+  // Baseline for full strip
+  ctx.strokeStyle='rgba(0,255,0,0.15)';ctx.lineWidth=0.5;
+  ctx.beginPath();ctx.moveTo(0,baseY);ctx.lineTo(W,baseY);ctx.stroke();
+
+  let xPos = gridLarge;
+  for(let cycle=0;cycle<3;cycle++){
+    const adv = drawOneCycle(xPos, 75);
+    xPos += adv;
+    if(xPos>W-gridLarge*3) break;
+  }
+
+  // Annotations
+  const annY = H*0.12;
+  ctx.font='bold 12px JetBrains Mono';ctx.textAlign='center';
+  const firstCycleX = gridLarge;
+  const mm=gridSmall;
+  ctx.fillStyle='#4ea8de';ctx.fillText('P',firstCycleX+1.25*mm,annY);
+  ctx.fillStyle='#b06aff';
+  // PR interval bracket
+  ctx.fillText('PR interval',firstCycleX+2.5*mm,annY+16);
+  ctx.strokeStyle='#b06aff';ctx.lineWidth=1;ctx.beginPath();
+  ctx.moveTo(firstCycleX,annY+20);ctx.lineTo(firstCycleX+4*mm,annY+20);ctx.stroke();
+
+  ctx.fillStyle='#e94560';ctx.fillText('QRS',firstCycleX+5*mm,annY);
+  ctx.fillStyle='#f0c040';ctx.fillText('ST',firstCycleX+7.25*mm,annY);
+  ctx.fillStyle='#00d4aa';ctx.fillText('T',firstCycleX+10.25*mm,annY);
+
+  // QT interval bracket
+  const qtY=H*0.88;
+  ctx.fillStyle='#ff8c42';ctx.font='bold 11px JetBrains Mono';
+  ctx.fillText('QT interval',firstCycleX+8*mm,qtY+14);
+  ctx.strokeStyle='#ff8c42';ctx.lineWidth=1;ctx.beginPath();
+  ctx.moveTo(firstCycleX+4*mm,qtY);ctx.lineTo(firstCycleX+12*mm,qtY);ctx.stroke();
+
+  // Scale legend
+  ctx.fillStyle='#ff6b9d';ctx.font='10px IBM Plex Sans';ctx.textAlign='left';
+  ctx.fillText('25 mm/s | 10 mm/mV',8,H-8);
+
+  // measurement annotations
+  ctx.fillStyle='rgba(255,255,255,0.5)';ctx.font='9px IBM Plex Sans';ctx.textAlign='center';
+  ctx.fillText('0.04s',gridSmall*3,H-28);
+  ctx.fillText('←1mm→',gridSmall*3,H-18);
+  ctx.fillText('0.2s',gridLarge*1.5,H-28);
+  ctx.fillText('←5mm→',gridLarge*1.5,H-18);
+}
+
+// ===== FICK =====
+function calcFick(){
+  const vo2=+$('fVO2').value, hb=+$('fHb').value, sa=+$('fSaO2').value/100, sv=+$('fSvO2').value/100;
+  const ca=hb*1.34*sa*10, cv=hb*1.34*sv*10, av=ca-cv, gc=vo2/av;
+  $('rCaO2').textContent=ca.toFixed(1);$('rCvO2').textContent=cv.toFixed(1);$('rAV').textContent=av.toFixed(1);$('rGC').textContent=gc.toFixed(2);
+  $('fickRes').style.display='block';
+}
+
+// ===== RPP / EFFICIENCY =====
+function drawRPP(){
+  const {ctx,W,H}=prepCanvas('cRPP');
+  const hr=+$('sl_hr').value, pas=+$('sl_pas').value;
+  $('v_hr').textContent=hr;$('v_pas').textContent=pas;
+  const rpp=hr*pas;
+
+  const P={l:50,r:20,t:20,b:40};
+  const gW=W-P.l-P.r, gH=H-P.t-P.b;
+
+  // Background zones
+  const zones=[
+    {max:10000,col:'rgba(0,212,170,0.1)',label:'Reposo'},
+    {max:15000,col:'rgba(78,168,222,0.08)',label:'Leve'},
+    {max:20000,col:'rgba(240,192,64,0.08)',label:'Moderado'},
+    {max:25000,col:'rgba(255,140,66,0.08)',label:'Intenso'},
+    {max:36000,col:'rgba(248,113,113,0.08)',label:'⚠️ Riesgo isquemia'}
+  ];
+  let prevMax=0;
+  zones.forEach(z=>{
+    const x1=P.l+(prevMax/36000)*gW, x2=P.l+(Math.min(z.max,36000)/36000)*gW;
+    ctx.fillStyle=z.col;ctx.fillRect(x1,P.t,x2-x1,gH);
+    ctx.fillStyle='#5a6478';ctx.font='9px IBM Plex Sans';ctx.textAlign='center';
+    ctx.fillText(z.label,(x1+x2)/2,P.t+14);
+    prevMax=z.max;
+  });
+
+  // Axes
+  ctx.strokeStyle='#4a5060';ctx.lineWidth=1.5;ctx.beginPath();
+  ctx.moveTo(P.l,P.t);ctx.lineTo(P.l,P.t+gH);ctx.lineTo(P.l+gW,P.t+gH);ctx.stroke();
+  ctx.fillStyle='#7a8494';ctx.font='11px IBM Plex Sans';ctx.textAlign='center';
+  ctx.fillText('Doble Producto (FC × PAS)',P.l+gW/2,P.t+gH+32);
+
+  // Scale
+  ctx.textAlign='center';ctx.font='9px JetBrains Mono';
+  for(let v=0;v<=36000;v+=6000){ctx.fillText((v/1000)+'k',P.l+(v/36000)*gW,P.t+gH+14);}
+
+  // Marker
+  const mx=P.l+(rpp/36000)*gW;
+  ctx.strokeStyle='#e94560';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(mx,P.t);ctx.lineTo(mx,P.t+gH);ctx.stroke();
+  ctx.beginPath();ctx.arc(mx,P.t+gH/2,8,0,Math.PI*2);ctx.fillStyle='#e94560';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='bold 13px JetBrains Mono';ctx.textAlign='center';
+  ctx.fillText(rpp.toLocaleString(),mx,P.t+gH/2-16);
+}
+
+// ===== FLASHCARD SYSTEM =====
+const FLASHCARDS = [
+  {q:"¿Qué establece la Ley de Frank-Starling?",a:"A mayor volumen telediastólico (estiramiento de sarcómeros), mayor fuerza de contracción y mayor volumen sistólico, dentro de límites fisiológicos.",tag:"phys"},
+  {q:"¿Cuál es la longitud óptima del sarcómero cardíaco?",a:"2.0 – 2.2 μm. A esta longitud se maximiza el solapamiento actina-miosina y la sensibilidad al Ca²⁺ de la troponina C.",tag:"phys"},
+  {q:"¿Qué representa Vmáx en la curva fuerza-velocidad?",a:"La velocidad máxima de acortamiento a carga cero. Refleja la tasa intrínseca de ciclaje de puentes cruzados y es un indicador de contractilidad.",tag:"phys"},
+  {q:"¿La precarga aumenta Vmáx?",a:"NO. La precarga aumenta la fuerza isométrica máxima (F₀) pero no cambia Vmáx. Solo el inotropismo modifica Vmáx.",tag:"phys"},
+  {q:"¿Cómo se define la precarga?",a:"Tensión de la pared ventricular al final de la diástole. Se aproxima clínicamente con el volumen telediastólico (VTD) o la presión telediastólica.",tag:"hemo"},
+  {q:"¿Cuál es la Ley de Laplace para tensión de pared?",a:"σ = (P × r) / (2h). Donde P = presión, r = radio de la cavidad, h = grosor de la pared.",tag:"phys"},
+  {q:"¿Cuál es el principal determinante de la precarga?",a:"El retorno venoso. Depende del volumen sanguíneo, posición corporal, bomba musculovenosa, presión intratorácica y tono venoso.",tag:"hemo"},
+  {q:"¿Qué efecto tiene un venodilatador sobre la precarga?",a:"La DISMINUYE. Al dilatar las venas de capacitancia, reduce el retorno venoso → ↓ VTD. Ejemplo: nitroglicerina a dosis bajas.",tag:"hemo"},
+  {q:"¿Qué efecto tiene un arteriodilatador en el asa PV?",a:"↓ Postcarga: el asa se hace más BAJA (menor presión) y más ANCHA (mayor VS) porque el ventrículo eyecta contra menor resistencia → ↓ VTS.",tag:"hemo"},
+  {q:"¿Qué es la ESPVR y por qué es el gold standard de contractilidad?",a:"End-Systolic Pressure-Volume Relationship. Su pendiente (Ees) es independiente de precarga y postcarga, reflejando la contractilidad intrínseca del miocardio.",tag:"phys"},
+  {q:"¿Cómo se ve un aumento de contractilidad en el asa PV?",a:"La ESPVR se vuelve más empinada (↑ Ees), el punto telesistólico se desplaza arriba y a la izquierda → ↓ VTS, ↑ VS, ↑ FE.",tag:"phys"},
+  {q:"¿Qué es dP/dt máx y cuál es su limitación?",a:"Tasa máxima de aumento de presión durante la contracción isovolumétrica. Limitación: es parcialmente dependiente de la precarga.",tag:"phys"},
+  {q:"¿Cuánto dura un ciclo cardíaco a 75 lpm?",a:"~0.8 segundos. Sístole ≈ 0.3 s, diástole ≈ 0.5 s. La diástole se acorta proporcionalmente más con taquicardia.",tag:"phys"},
+  {q:"¿Qué produce el 1er ruido cardíaco (S1)?",a:"El cierre de las válvulas AV (mitral y tricúspide) al inicio de la contracción isovolumétrica. Ocurre justo después del complejo QRS.",tag:"ecg"},
+  {q:"¿Qué produce el 2do ruido cardíaco (S2)?",a:"El cierre de las válvulas semilunares (aórtica y pulmonar) al inicio de la relajación isovolumétrica. Coincide con el final de la onda T.",tag:"ecg"},
+  {q:"¿Cuándo están TODAS las válvulas cerradas?",a:"En contracción isovolumétrica y en relajación isovolumétrica. En ambas fases el volumen ventricular no cambia.",tag:"phys"},
+  {q:"¿Qué representa la onda P del EKG?",a:"Despolarización auricular (AD → AI). Normal: positiva en II, negativa en aVR, bifásica en V1. Duración <0.12 s, amplitud ≤2.5 mm.",tag:"ecg"},
+  {q:"¿Qué indica un intervalo PR >0.20 s?",a:"Bloqueo AV de 1er grado. Retraso de conducción en el nodo AV. El PR normal es 0.12-0.20 s.",tag:"ecg"},
+  {q:"¿Qué indica un PR <0.12 s con onda delta?",a:"Preexcitación: Síndrome de Wolff-Parkinson-White (WPW). Existe una vía accesoria que cortocircuita el nodo AV.",tag:"ecg"},
+  {q:"¿Qué duración normal tiene el QRS?",a:"0.06-0.10 s (<3 cuadros pequeños). Un QRS ≥0.12 s indica bloqueo de rama, ritmo ventricular o preexcitación.",tag:"ecg"},
+  {q:"¿Qué patrón en V1 indica bloqueo de rama derecha?",a:"rSR' (orejas de conejo) con QRS ≥0.12 s. Se debe a que el ventrículo derecho se despolariza tardíamente.",tag:"ecg"},
+  {q:"¿Qué segmento del EKG coincide con la eyección ventricular?",a:"El segmento ST. Corresponde a la fase 2 (plateau) del potencial de acción. Debe ser isoeléctrico normalmente.",tag:"ecg"},
+  {q:"¿Qué indica elevación del ST >2mm en V1-V4 con dolor torácico?",a:"STEMI anterior — oclusión de la arteria descendente anterior izquierda (LAD). Emergencia que requiere reperfusión.",tag:"ecg"},
+  {q:"¿Qué indica depresión del ST horizontal >1mm?",a:"Isquemia subendocárdica. También puede verse en efecto digitálico (depresión ST en 'cazoleta') o hipertrofia ventricular.",tag:"ecg"},
+  {q:"¿Cuál es el primer signo EKG de hiperkalemia?",a:"Ondas T picudas, simétricas y estrechas. Aparecen con K⁺ 5.5-6.5 mEq/L. Progresa a PR largo → P planas → QRS ancho → sinusoidal.",tag:"ecg"},
+  {q:"¿Cuál es la fórmula del Principio de Fick?",a:"GC = VO₂ / (CaO₂ − CvO₂). Donde CaO₂ y CvO₂ se calculan como Hb × 1.34 × SaO₂(o SvO₂) × 10.",tag:"hemo"},
+  {q:"¿De dónde se obtiene la sangre venosa mixta para el Fick?",a:"De la arteria pulmonar, mediante un catéter de Swan-Ganz. Allí se mezcla toda la sangre venosa del cuerpo. SvO₂ normal ≈ 75%.",tag:"hemo"},
+  {q:"¿Qué indica una SvO₂ baja (ej: 40%)?",a:"Los tejidos están extrayendo excesivamente O₂ porque el flujo es insuficiente → bajo gasto cardíaco / choque cardiogénico.",tag:"hemo"},
+  {q:"¿Cuál es el principal determinante del MVO₂?",a:"La tensión de pared (postcarga). Otros: FC, contractilidad. El trabajo de presión consume mucho más O₂ que el trabajo de volumen.",tag:"phys"},
+  {q:"¿Qué es el doble producto (RPP) y para qué sirve?",a:"RPP = FC × PAS. Es un índice clínico del consumo miocárdico de O₂. En angina, los síntomas aparecen al alcanzar el RPP umbral del paciente.",tag:"clin"},
+];
+
+let fcIdx=0, fcState=[], fcFlipped=false;
+function initFlashcards(){
+  fcIdx=0;fcFlipped=false;
+  fcState=FLASHCARDS.map(()=>null); // null=pending, 'know', 'hard'
+  renderFC();
+}
+function renderFC(){
+  const card=FLASHCARDS[fcIdx];
+  const tagMap={phys:'fc-tag-phys',ecg:'fc-tag-ecg',hemo:'fc-tag-hemo',clin:'fc-tag-clin'};
+  const tagLabel={phys:'FISIOLOGÍA',ecg:'EKG',hemo:'HEMODINÁMICA',clin:'CLÍNICA'};
+  $('fcTag').className='fc-tag '+tagMap[card.tag];
+  $('fcTag').textContent=tagLabel[card.tag];
+  $('fcQuestion').textContent=card.q;
+  $('fcAnswer').textContent=card.a;
+  $('fcCard').classList.remove('flipped');
+  $('fcNav').style.visibility='hidden';
+  fcFlipped=false;
+  // counter
+  const pending=fcState.filter(s=>s===null).length;
+  const know=fcState.filter(s=>s==='know').length;
+  const hard=fcState.filter(s=>s==='hard').length;
+  $('fcCounter').textContent='Tarjeta '+(fcIdx+1)+' / '+FLASHCARDS.length;
+  $('fcKnow').textContent=know;
+  $('fcHard').textContent=hard;
+  $('fcLeft').textContent=pending;
+  // dots
+  let dots='';
+  fcState.forEach((s,i)=>{
+    let cls='fc-dot';
+    if(s==='know')cls+=' know';
+    if(s==='hard')cls+=' hard';
+    if(i===fcIdx)cls+=' cur';
+    dots+=`<div class="${cls}"></div>`;
+  });
+  $('fcDots').innerHTML=dots;
+}
+function flipCard(){
+  if(!fcFlipped){
+    $('fcCard').classList.add('flipped');
+    $('fcNav').style.visibility='visible';
+    fcFlipped=true;
+  }
+}
+function rateCard(rating){
+  if(rating==='know')fcState[fcIdx]='know';
+  else if(rating==='hard')fcState[fcIdx]='hard';
+  else fcState[fcIdx]='ok';
+  // Find next card: prefer pending, then hard
+  let next=-1;
+  for(let i=1;i<=FLASHCARDS.length;i++){
+    const j=(fcIdx+i)%FLASHCARDS.length;
+    if(fcState[j]===null){next=j;break;}
+  }
+  if(next===-1){
+    for(let i=1;i<=FLASHCARDS.length;i++){
+      const j=(fcIdx+i)%FLASHCARDS.length;
+      if(fcState[j]==='hard'){next=j;break;}
+    }
+  }
+  if(next===-1){
+    // All done
+    $('fcQuestion').textContent='🎉 ¡Has completado todas las tarjetas!';
+    $('fcAnswer').textContent='Reinicia el mazo para practicar de nuevo.';
+    $('fcCard').classList.remove('flipped');
+    $('fcNav').style.visibility='hidden';
+    renderFC();
+    return;
+  }
+  fcIdx=next;
+  renderFC();
+}
+function resetFlashcards(){
+  initFlashcards();
+}
+
+// ===== CLINICAL CASE ANSWERS =====
+function caseAns(id,el,correct){
+  const container=$(id);
+  const expl=$(id+'expl');
+  container.querySelectorAll('.case-opt').forEach(o=>{
+    if(o!==el)o.classList.add('dim');
+  });
+  el.classList.add(correct?'correct':'wrong');
+  expl.className='case-expl show '+(correct?'ok':'no');
+  // Update global score
+  answered++;
+  if(correct)score++;
+  $('scoreText').textContent=score+' / '+answered;
+  $('finalScore').textContent=score;
+  $('totalQ').textContent=answered;
+}
+
+// ===== RESIZE HANDLER =====
+let resizeTimer;
+window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>redrawSection(curSec),200);});
+</script>
+</body>
+</html>
