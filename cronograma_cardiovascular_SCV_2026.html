@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCV | Cronograma Detallado de Estudio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F8F6F1;--bg-warm:#F0EDE5;--surface:#FFFFFF;--surface-alt:#FAF8F4;
+  --border:#E4DFD5;--border-dark:#D1CABD;
+  --text:#1D1B16;--text-mid:#52504A;--text-light:#8A867D;
+  --accent-red:#B5362A;--accent-red-l:#D94D3F;
+  --accent-teal:#1A7A6A;--accent-teal-l:#25A08C;
+  --accent-blue:#2D5FA0;--accent-blue-l:#4080CC;
+  --accent-amber:#C08A20;--accent-amber-l:#E0A82E;
+  --accent-plum:#7A3B8A;--accent-plum-l:#9D58AF;
+  --accent-olive:#5A7040;
+  --shadow-sm:0 1px 3px rgba(29,27,22,.06);
+  --shadow-md:0 4px 16px rgba(29,27,22,.08);
+  --radius:12px;--radius-lg:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent-red);color:#fff}
+
+.hero{min-height:62vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem;position:relative;overflow:hidden;background:linear-gradient(165deg,#1A0A0A 0%,#2A1018 30%,#1A0D20 60%,#0F1A14 100%)}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 700px 500px at 25% 35%,rgba(181,54,42,.18),transparent 70%),radial-gradient(ellipse 500px 600px at 75% 65%,rgba(45,95,160,.12),transparent 70%),radial-gradient(ellipse 300px 300px at 50% 80%,rgba(26,122,106,.08),transparent 70%);pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hero-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border:1px solid rgba(255,255,255,.12);border-radius:40px;color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:2rem;backdrop-filter:blur(6px);animation:slideDown .7s ease both}
+.hero-chip .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-red-l);animation:glow 2.5s ease infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(217,77,63,.5)}50%{box-shadow:0 0 0 8px rgba(217,77,63,0)}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5.5vw,3.6rem);color:#fff;line-height:1.1;max-width:850px;animation:slideUp .9s ease both .15s}
+.hero h1 em{font-style:italic;color:var(--accent-red-l)}
+.hero-desc{color:rgba(255,255,255,.5);font-size:1rem;font-weight:300;max-width:640px;margin-top:1.5rem;animation:slideUp .9s ease both .3s}
+@keyframes slideUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+
+.topnav{position:sticky;top:0;z-index:100;background:rgba(248,246,241,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:.55rem 1rem;display:flex;gap:.4rem;overflow-x:auto;justify-content:center}
+.topnav a{white-space:nowrap;padding:.35rem .9rem;border-radius:40px;text-decoration:none;font-size:.78rem;font-weight:500;color:var(--text-mid);border:1px solid transparent;transition:all .22s}
+.topnav a:hover,.topnav a.on{background:var(--surface);border-color:var(--border);color:var(--text)}
+
+.wrap{max-width:1140px;margin:0 auto;padding:4rem 1.5rem}
+.stag{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;color:var(--text-mid)}
+.stag i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.wrap h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.2;margin-bottom:.4rem}
+.wrap .intro{font-size:1.02rem;color:var(--text-mid);max-width:700px;margin-bottom:2rem}
+.rule{max-width:1140px;margin:0 auto;padding:0 1.5rem}
+.rule hr{border:none;border-top:1px solid var(--border)}
+
+.week-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.week-header h3{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:.3rem}
+.week-header .wh-theme{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:.8rem}
+.week-header .wh-obj{font-size:.9rem;color:var(--text-mid);line-height:1.6}
+.week-header .wh-eval{margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.week-header .wh-eval span{padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.3px}
+
+.day-sched{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden;transition:box-shadow .3s}
+.day-sched:hover{box-shadow:var(--shadow-sm)}
+.day-head{padding:1rem 1.4rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:background .2s;border-bottom:1px solid transparent}
+.day-head:hover{background:var(--bg-warm)}
+.day-sched.open .day-head{border-bottom-color:var(--border)}
+.day-dot{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:#fff;flex-shrink:0}
+.day-title{flex:1}
+.day-title strong{font-size:.95rem;display:block}
+.day-title span{font-size:.75rem;color:var(--text-light)}
+.day-hours{font-family:'Fira Code',monospace;font-size:.78rem;color:var(--accent-red);font-weight:500;background:rgba(181,54,42,.06);padding:3px 10px;border-radius:20px}
+.day-arrow{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--text-light);transition:transform .3s;font-size:.8rem}
+.day-sched.open .day-arrow{transform:rotate(180deg)}
+.day-body{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.day-sched.open .day-body{max-height:6000px}
+.day-inner{padding:0 1.4rem 1.4rem}
+
+.time-block{display:flex;gap:1rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px dashed var(--border)}
+.time-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.tb-time{flex-shrink:0;width:100px;text-align:right;padding-top:2px}
+.tb-time .t-range{font-family:'Fira Code',monospace;font-size:.76rem;color:var(--accent-red);font-weight:500;display:block;line-height:1.3}
+.tb-time .t-dur{font-size:.68rem;color:var(--text-light)}
+.tb-content{flex:1;min-width:0}
+.tb-content h5{font-size:.9rem;font-weight:600;margin-bottom:.2rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.tb-content h5 .tb-tag{font-size:.6rem;padding:1px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.tb-content p{font-size:.85rem;color:var(--text-mid);line-height:1.6}
+.tb-content .tb-tip{margin-top:.5rem;padding:.5rem .8rem;border-radius:8px;font-size:.8rem;line-height:1.5;border-left:3px solid}
+.tb-content .tb-resources{margin-top:.5rem;font-family:'Fira Code',monospace;font-size:.72rem;color:var(--text-light)}
+
+.strat-box{background:var(--bg-warm);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem;margin-top:1rem}
+.strat-box h5{font-size:.85rem;font-weight:700;margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
+.strat-box p,.strat-box li{font-size:.83rem;color:var(--text-mid);line-height:1.6}
+.strat-box ul{padding-left:1.1rem;margin:.3rem 0}
+.strat-box li{margin-bottom:.2rem}
+.strat-box li strong{color:var(--text)}
+
+.mnemonic{background:linear-gradient(135deg,rgba(181,54,42,.04),rgba(45,95,160,.04));border:1px solid rgba(181,54,42,.15);border-radius:10px;padding:1rem 1.2rem;margin-top:.8rem}
+.mnemonic h6{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent-red);margin-bottom:.3rem}
+.mnemonic p{font-family:'Fira Code',monospace;font-size:.82rem;color:var(--text);line-height:1.6}
+.mnemonic .mn-explain{font-family:'Source Sans 3',sans-serif;font-size:.8rem;color:var(--text-mid);margin-top:.3rem}
+
+.integ-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.5rem;margin-top:.8rem}
+.integ-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.6rem .8rem;text-align:center;font-size:.78rem;border-top:3px solid}
+.integ-item strong{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.15rem}
+
+.exam-banner{background:linear-gradient(135deg,rgba(181,54,42,.06),rgba(181,54,42,.02));border:1px solid rgba(181,54,42,.2);border-radius:var(--radius);padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.exam-banner .eb-icon{font-size:1.8rem}
+.exam-banner .eb-text{flex:1;min-width:200px}
+.exam-banner .eb-text strong{font-size:1rem;color:var(--accent-red);display:block}
+.exam-banner .eb-text span{font-size:.85rem;color:var(--text-mid)}
+
+.foot{text-align:center;padding:3rem 1.5rem;border-top:1px solid var(--border);font-size:.78rem;color:var(--text-light)}
+.foot strong{color:var(--text-mid)}
+
+@media(max-width:700px){
+  .wrap{padding:2.5rem 1rem}
+  .time-block{flex-direction:column;gap:.3rem}
+  .tb-time{width:auto;text-align:left}
+  .integ-map{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:1.8rem}
+  .exam-banner{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-chip"><span class="pulse-dot"></span> Cronograma Detallado &bull; SCV Julio 2026</div>
+  <h1>Sistema <em>Cardiovascular</em> &mdash; Cronograma Expandido</h1>
+  <p class="hero-desc">Plan de estudio semanal con bloques de tiempo, estrategias activas, mnemotecnias y protocolos pre-evaluación. 5 sumativos + NBME. El fin de semana previo a cada sumativo es tu ventana de consolidación.</p>
+</section>
+
+<nav class="topnav">
+  <a href="#sem1">Sem 1 · Músculo Cardíaco</a><a href="#sem2">Sem 2 · Pericardio</a><a href="#sem3">Sem 3 · Bomba</a>
+  <a href="#sem4">Sem 4 · Ritmo</a><a href="#sem5">Sem 5 · Arterial I</a><a href="#sem6">Sem 6 · Arterial II</a>
+  <a href="#sem7">Sem 7 · Coronaria</a><a href="#sem8">Sem 8 · Periférica</a><a href="#sem9">Sem 9 · Micro</a>
+  <a href="#sem10">Sem 10 · Choque</a><a href="#sem11">Sem 11 · Finales</a>
+</nav>
+
+<!-- ============================================================ -->
+<!--                   SEMANA 1: MÚSCULO CARDÍACO                  -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem1">
+<div class="stag"><i style="background:var(--accent-red)"></i> SEMANA 01</div>
+<div class="week-header" style="border-left:4px solid var(--accent-red)">
+  <div class="wh-theme" style="color:var(--accent-red)">Tema Central &mdash; Músculo Cardíaco</div>
+  <h3>Del Sarcómero Cardíaco al Potencial de Acción</h3>
+  <p class="wh-obj">Primera semana del bloque. Integrar la histología del músculo cardíaco con bioquímica del ciclo de Krebs, fisiología de la contracción y potencial de acción, y farmacología de receptores cardiovasculares. Todo el contenido de esta semana y la siguiente será evaluado en el <strong>Sumativo 01 (lunes de Semana 3)</strong>. No hay Patología, Fisiopatología, Conducta ni Nutrición esta semana.</p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">Sumativo 01 → lunes Sem 3</span>
+    <span style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Cortos: Histo, Fisio, Farmaco</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">~26h estudio sugeridas</span>
+  </div>
+</div>
+
+<!-- DÍA 1 S1 -->
+<div class="day-sched open" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">1</div>
+    <div class="day-title"><strong>Día de Citohistología + Bioquímica</strong><span>Histología del Músculo Cardíaco &bull; Ciclo del Ácido Cítrico y Piruvato Deshidrogenasa</span></div>
+    <div class="day-hours">~5.5h estudio</div>
+    <span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Antes de clase</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128257; Anki &mdash; Revisión de tarjetas maduras <span class="tb-tag" style="background:rgba(181,54,42,.1);color:var(--accent-red)">Diario</span></h5><p>Revisar todas las tarjetas programadas. Si es el primer día, iniciar con un deck básico de histología muscular cardíaca. Si vienes del bloque SME, incluir tarjetas de repaso.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Antes de clase</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128214; Pre-lectura: Histología Músculo Cardíaco + BQ Krebs</h5><p>Sepúlveda págs. 125-127: Identificar discos intercalares, uniones gap, ramificaciones, estriaciones. BQ: Marks págs. 357-365 — Acetil-CoA, enzimas reguladoras del ciclo (citrato sintasa, isocitrato DH, α-cetoglutarato DH).</p><div class="tb-resources">&#128218; Sepúlveda Histología 1ed · Marks BQ 4ed Cap. Krebs</div></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">En clase</span><span class="t-dur">1h + 2h</span></div>
+      <div class="tb-content">
+        <h5>&#127979; Histo: Músculo Cardíaco + BQ: Ciclo Krebs y Piruvato DH <span class="tb-tag" style="background:rgba(122,59,138,.1);color:var(--accent-plum)">Presencial</span></h5>
+        <p><strong>Histo:</strong> Discos intercalares (fascia adherens, desmosomas, gap junctions), núcleo central, ramificaciones. Comparar músculo cardíaco vs estriado vs liso. <strong>BQ:</strong> Piruvato DH (cofactores: TPP, lipoato, CoA, FAD, NAD⁺), ciclo completo, reacciones anapleróticas, regulación por estado energético.</p>
+        <div class="tb-tip" style="background:rgba(181,54,42,.04);border-color:var(--accent-red)"><strong>&#128161; En clase:</strong> Anotar correlaciones clínicas del profesor: ¿qué pasa con el Krebs en isquemia miocárdica? ¿Déficit de tiamina (beriberi) → falla cardíaca?</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Post-clase</span><span class="t-dur">50 min</span></div>
+      <div class="tb-content"><h5>&#128221; Pomodoro 1: Crear Flashcards <span class="tb-tag" style="background:rgba(181,54,42,.1);color:var(--accent-red)">Activo</span></h5><p>20-25 tarjetas Anki. Formato clínico: "Estructura que permite sincitio funcional en músculo cardíaco" → "Uniones gap (nexos) en discos intercalares." · "Cofactores de piruvato DH" → "TPP (B1), lipoato, CoA (B5), FAD (B2), NAD⁺ (B3) — Tiamina, Lipoato, CoA, FAD, NAD = 'The Lips CoFed NAD'"</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Post-clase</span><span class="t-dur">50 min</span></div>
+      <div class="tb-content"><h5>&#128300; Pomodoro 2: Dibujar Ciclo de Krebs de Memoria</h5><p>Vía completa sin notas. Marcar: enzimas reguladoras (rojo), reacciones que generan NADH/FADH₂ (azul), GTP (verde), reacciones irreversibles. Verificar contra Marks.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Cierre</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#127912; Revisión Visual: Imágenes Histológicas Músculo Cardíaco</h5><p>10 cortes mínimo: discos intercalares, ramificaciones, núcleo central, células de Purkinje, comparación con estriado esquelético.</p></div>
+    </div>
+    <div class="mnemonic">
+      <h6>&#128161; Cofactores de Piruvato Deshidrogenasa</h6>
+      <p>"<strong>T</strong>he <strong>L</strong>ips <strong>C</strong>o<strong>F</strong>ed <strong>N</strong>AD" → <strong>T</strong>PP (B1) · <strong>L</strong>ipoato · <strong>C</strong>oA (B5) · <strong>F</strong>AD (B2) · <strong>N</strong>AD⁺ (B3)</p>
+      <p class="mn-explain">Déficit de tiamina (B1) = beriberi húmedo → falla cardíaca de alto gasto. Clave para NBME.</p>
+    </div>
+    <div class="strat-box"><h5>&#9889; Integración del día</h5><p>¿Por qué el corazón depende del Krebs? El miocardio es casi exclusivamente aeróbico — depende de fosforilación oxidativa. En isquemia, el Krebs se detiene → acumulación de lactato → acidosis → daño miocárdico. Las uniones gap permiten que esta señal se propague como sincitio funcional.</p></div>
+  </div></div>
+</div>
+
+<!-- DÍA 2 S1 -->
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-blue)">2</div>
+    <div class="day-title"><strong>Día de Anatomía + Fisiología</strong><span>Embriología Cardíaca &bull; Músculo Cardíaco y Potencial de Acción</span></div>
+    <div class="day-hours">~6h estudio</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Antes de clase</span><span class="t-dur">30+30 min</span></div>
+      <div class="tb-content"><h5>&#128257; Anki + &#128214; Pre-lectura Embriología + Fisiología</h5><p>Anki: tarjetas de ayer. Pre-lectura embriología: Moore págs. 283-330 — tubo cardíaco, tabicación, anomalías. Pre-lectura fisio: Berne & Levy págs. 268-278 (músculo) y 304-313 (PA).</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">En clase</span><span class="t-dur">1h + 2h</span></div>
+      <div class="tb-content">
+        <h5>&#127979; Anat: Embriología Cardíaca + Fisio: Músculo y Potencial de Acción <span class="tb-tag" style="background:rgba(181,54,42,.1);color:var(--accent-red)">Alta prioridad</span></h5>
+        <p><strong>Embriología:</strong> Tubo cardíaco primitivo, asa cardíaca, tabicación auricular (septum primum/secundum), tabicación ventricular, anomalías (CIA, CIV, tetralogía de Fallot). <strong>Fisiología:</strong> Acoplamiento E-C en músculo cardíaco, Ca²⁺ inducido por Ca²⁺ (CICR), regulación β-adrenérgica. PA rápido (5 fases: 0-4) vs PA lento (nodos SA/AV), corrientes iónicas por fase.</p>
+        <div class="tb-tip" style="background:rgba(181,54,42,.04);border-color:var(--accent-red)"><strong>&#9888; NBME:</strong> Fases del PA cardíaco y sus canales iónicos son pregunta casi segura. También anomalías septales (CIA, CIV) desde embriología.</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Post-clase</span><span class="t-dur">50+50+30 min</span></div>
+      <div class="tb-content"><h5>&#128221; P1: Tabla PA Rápido vs Lento &bull; P2: Mapa Embriología &bull; Cierre: Flashcards</h5>
+      <p><strong>Tabla:</strong> Fase | Corriente iónica | Canales | Fármaco que actúa | Fibra rápida vs lenta. <strong>Mapa:</strong> Tubo cardíaco → plegamiento → tabicación → anomalías con correlación clínica. <strong>Flashcards:</strong> "Fase 0 en fibras rápidas" → "Entrada rápida de Na⁺ (INa), canales dependientes de voltaje."</p></div>
+    </div>
+    <div class="mnemonic">
+      <h6>&#128161; Potencial de Acción Cardíaco — Fibras Rápidas (5 fases)</h6>
+      <p><strong>0</strong> = Na⁺ ↑ rápido &bull; <strong>1</strong> = K⁺ ↑ transitorio (Ito) &bull; <strong>2</strong> = Ca²⁺ ↑ (meseta, L-type) &bull; <strong>3</strong> = K⁺ ↑ (repolarización) &bull; <strong>4</strong> = reposo (IK1)</p>
+      <p class="mn-explain">Fibras lentas (SA/AV): sin fase 1-2 clásica. Fase 0 = ICa,L (no INa). Fase 4 = despolarización espontánea (If = funny current). Los β-bloqueadores ↓If → ↓FC.</p>
+    </div>
+  </div></div>
+</div>
+
+<!-- DÍA 3 S1 -->
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-amber)">3</div>
+    <div class="day-title"><strong>Día de Farmacología</strong><span>Receptores Farmacológicos del SCV (SNA) &bull; α, β, Muscarínicos</span></div>
+    <div class="day-hours">~4.5h estudio</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Antes de clase</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128257; Anki &mdash; Priorizar Fisiología del PA</h5><p>Las tarjetas de ayer sobre fases del PA y corrientes iónicas son críticas para conectar con farmacología hoy.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">En clase</span><span class="t-dur">1h</span></div>
+      <div class="tb-content">
+        <h5>&#127979; Farmaco: Receptores del SNA Cardiovascular <span class="tb-tag" style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Alta prioridad</span></h5>
+        <p>Receptores α₁, α₂, β₁, β₂: localización, vía de señalización (Gq, Gi, Gs), efectos cardiovasculares. Muscarínicos M₂: vía Gi, ↓FC, ↓conducción AV. Efectos de atropina y adrenalina. Respuesta hemodinámica predicha.</p>
+        <div class="tb-tip" style="background:rgba(192,138,32,.04);border-color:var(--accent-amber)"><strong>&#9889; Estrategia:</strong> Crear "tarjeta de identidad" por receptor: Receptor → Proteína G → Segundo mensajero → Efecto CV → Fármaco agonista/antagonista.</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Post-clase</span><span class="t-dur">2×50 min</span></div>
+      <div class="tb-content">
+        <h5>&#128300; Tabla de Receptores + Mapa de Integración Semanal</h5>
+        <p><strong>P1:</strong> Tabla completa: Receptor | Prot G | 2do mensajero | Localización CV | Efecto | Agonista | Antagonista. <strong>P2:</strong> Gran mapa integrando: Histo (discos intercalares → sincitio) → Fisio (PA rápido/lento → conducción) → BQ (Krebs → ATP para contracción) → Farmaco (receptores → modulación).</p>
+        <div class="integ-map">
+          <div class="integ-item" style="border-top-color:var(--accent-plum)"><strong>Histo</strong>Músculo cardíaco, discos intercalares</div>
+          <div class="integ-item" style="border-top-color:var(--accent-blue)"><strong>Anat</strong>Embriología, tubo cardíaco</div>
+          <div class="integ-item" style="border-top-color:var(--accent-olive)"><strong>BQ</strong>Krebs, piruvato DH</div>
+          <div class="integ-item" style="border-top-color:var(--accent-teal)"><strong>Fisio</strong>PA cardíaco, contracción</div>
+          <div class="integ-item" style="border-top-color:var(--accent-amber)"><strong>Farmaco</strong>Receptores α, β, M₂</div>
+        </div>
+      </div>
+    </div>
+    <div class="mnemonic">
+      <h6>&#128161; Receptores Adrenérgicos Cardiovasculares</h6>
+      <p><strong>β₁</strong> = corazón: ↑FC, ↑contractilidad, ↑conducción (Gs → ↑AMPc)</p>
+      <p><strong>β₂</strong> = vasos/bronquios: vasodilatación, broncodilatación (Gs → ↑AMPc)</p>
+      <p><strong>α₁</strong> = vasos: vasoconstricción (Gq → IP₃/DAG → ↑Ca²⁺)</p>
+      <p class="mn-explain">"β₁ = 1 corazón. β₂ = 2 pulmones. α₁ = arterias Apretadas." Atropina bloquea M₂ → ↑FC (quita freno vagal).</p>
+    </div>
+  </div></div>
+</div>
+
+<!-- DÍA 4 S1 -->
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-olive)">4</div>
+    <div class="day-title"><strong>Día de Consolidación Semana 1</strong><span>Autoevaluación &bull; Preguntas NBME &bull; Blank Page</span></div>
+    <div class="day-hours">~4h estudio</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Bloque 1</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128257; Anki &mdash; Identificar tarjetas que más fallas</h5></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Bloque 2</span><span class="t-dur">50 min</span></div>
+      <div class="tb-content"><h5>&#129504; Blank Page: Todo lo de la Semana 1</h5><p>Escribir de memoria todo lo que recuerdas cubriendo las 4 materias activas. Marcar lagunas = prioridad.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Bloque 3</span><span class="t-dur">2×50 min</span></div>
+      <div class="tb-content"><h5>&#128221; 15-20 Preguntas Estilo NBME</h5><p>AMBOSS o UWorld: cardiología básica, PA cardíaco, receptores adrenérgicos, embriología cardíaca. Revisar TODAS las explicaciones.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Bloque 4</span><span class="t-dur">30 min</span></div>
+      <div class="tb-content"><h5>&#128214; Pre-lectura Semana 2</h5><p>Lectura rápida: pericardio (Moore), cadena de transporte de electrones (Marks), excitabilidad cardíaca (Berne). Solo familiarizarse con vocabulario.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- FIN DE SEMANA S1 -->
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">F/S</div>
+    <div class="day-title"><strong>Fin de Semana &mdash; Repaso + Descanso</strong><span>Sin sumativo cercano: repaso normal + descanso reparador</span></div>
+    <div class="day-hours">~5h (distribuidas en 2 días)</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Día libre 1</span><span class="t-dur">~3h</span></div>
+      <div class="tb-content"><h5>&#128257; Anki (30min) + Repaso tema débil (90min) + Preguntas (60min)</h5><p>Identificar materia más insegura de la semana. Si es Fisio PA → redibujar de memoria. Si es BQ Krebs → re-trazar la vía. 15 preguntas NBME más.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Día libre 2</span><span class="t-dur">~2h + &#128164;</span></div>
+      <div class="tb-content"><h5>&#128257; Anki + Pre-lectura Semana 2 &bull; Luego: Descanso Obligatorio</h5><p>Lectura previa Sem 2 (pericardio, cadena de electrones, EKG). <strong>Luego descanso:</strong> ejercicio (30-60 min), socialización, dormir 7-8h.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="strat-box" style="margin-top:1.5rem;border-left:4px solid var(--accent-red)">
+  <h5>&#127919; Resumen Sem 1 — Distribución por disciplina</h5>
+  <ul>
+    <li><strong>Citohistología (músculo cardíaco): ~4h</strong> — Discos intercalares y sincitio funcional</li>
+    <li><strong>Bioquímica (Krebs + piruvato DH): ~5h</strong> — Base energética del corazón</li>
+    <li><strong>Fisiología (PA + contracción): ~6h</strong> — Fases del PA = tema de mayor peso</li>
+    <li><strong>Farmacología (receptores SNA): ~3h</strong> — Fundamento para todas las semanas siguientes</li>
+    <li><strong>Anatomía (embriología): ~3h</strong> — Base para cardiopatías congénitas en Sem 10</li>
+    <li><strong>Anki diario: ~3.5h/semana</strong></li>
+  </ul>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                   SEMANA 2: ENDOCARDIO/PERICARDIO             -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem2">
+<div class="stag"><i style="background:var(--accent-teal)"></i> SEMANA 02</div>
+<div class="week-header" style="border-left:4px solid var(--accent-teal)">
+  <div class="wh-theme" style="color:var(--accent-teal)">Tema Central &mdash; Endocardio, Pericardio & EKG</div>
+  <h3>De las Capas del Corazón a la Actividad Eléctrica</h3>
+  <p class="wh-obj">Semana de alta densidad: aparecen Patología (miocarditis, pericarditis, endocarditis), Fisiopatología (derrame pericárdico), Conducta Humana y primer laboratorio de EKG. <strong>El Sumativo 01 es el lunes de Semana 3.</strong> El fin de semana es tu ventana de consolidación pre-sumativo.</p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; SUMATIVO 01 → lunes de Semana 3</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Lab Fisio: Intro EKG Normal</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">~32h estudio sugeridas</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 2</h5>
+  <ul>
+    <li><strong>Día 1 (Histo+BQ):</strong> Anki (30min) → Pre-lectura (30min) → Clase Histo: Capas del corazón (endocardio, miocardio, epicardio, válvulas) → Clase BQ: Cadena de transporte de electrones + Fosforilación oxidativa → Post-clase: Tabla comparativa capas del corazón (50min) → Dibujar cadena de electrones de memoria con complejos I-IV y ATP sintasa (50min) → Flashcards (30min)</li>
+    <li><strong>Día 2 (Anat+Pato):</strong> Anki (30min) → Pre-lectura (30min) → Clase Anat: Pericardio (capas, senos, irrigación) → Clase Pato: Miocarditis, Pericarditis, Endocarditis → Post-clase: Tabla comparativa mio/peri/endocarditis (etiología, hallazgos, dx) + criterios de Duke (50min) → Repaso pericardio en 3D (50min) → Flashcards (30min)</li>
+    <li><strong>Día 3 (Fisio+Farmaco+RV):</strong> Anki (30min) → RV: Bases de ECG → Clase Fisio: Excitabilidad + Arritmias + Lab EKG Normal → Clase Farmaco: Tto Endocarditis → Post-clase: Practicar lectura de EKG normal (ondas, segmentos, intervalos) (50min) → Esquema antimicrobianos en endocarditis (50min) → Mapa integración semanal (30min)</li>
+    <li><strong>Día 4 (Fisiopato+Conducta):</strong> Anki (30min) → Clase Fisiopato: Enfermedad pericárdica y derrame → Clase Conducta: Implicaciones emocionales en enfermedad cardíaca → Post-clase: Blank Page semana (50min) → Teach-Back con compañero (50min) → Flashcards (30min)</li>
+    <li><strong>Día 5 (Consolidación):</strong> Anki (30min) → Autoevaluación resultados Sem 1-2 (50min) → 20-25 preguntas NBME (2×50min) → Lista priorizada de lagunas para fin de semana</li>
+  </ul>
+</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#9888;&#65039;</div>
+  <div class="eb-text">
+    <strong>Protocolo Pre-Sumativo 01 — Fin de semana antes del lunes</strong>
+    <span>El Sumativo 01 es el lunes de Semana 3. NO dejar todo para estos 2 días: solo reforzar lagunas identificadas en la autoevaluación del viernes.</span>
+  </div>
+</div>
+
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">F/S</div>
+    <div class="day-title"><strong>Fin de Semana Pre-Sumativo 01</strong><span>&#9888; Ventana de consolidación antes del examen del lunes</span></div>
+    <div class="day-hours">~8-10h (distribuidas en 2 días)</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado AM</span><span class="t-dur">~4h</span></div>
+      <div class="tb-content"><h5>&#128300; Repaso Dirigido de Lagunas (48h antes)</h5><p>Anki completo (30min) + 3 Pomodoros dedicados a temas ≤3 en autoevaluación. Priorizar: PA cardíaco (fases/corrientes), cadena de electrones (complejos + inhibidores), endocarditis (criterios Duke). Recuperación activa: dibujar de memoria, explicar en voz alta.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado PM</span><span class="t-dur">~2h</span></div>
+      <div class="tb-content"><h5>&#128221; 20-25 Preguntas NBME de Sem 1-2</h5><p>Cubrir: PA cardíaco, Krebs, cadena electrones, receptores SNA, endocarditis, pericarditis, embriología. Revisar explicaciones completas. Crear Anki de errores.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo AM</span><span class="t-dur">~2-3h</span></div>
+      <div class="tb-content"><h5>&#129504; Consolidación Final (24h antes)</h5><p>Anki maduras (30min). Repasar tablas comparativas creadas. 15-20 preguntas más. Todas las mnemotecnias. <strong>NO material nuevo.</strong></p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo PM</span><span class="t-dur">&#128164;</span></div>
+      <div class="tb-content"><h5>&#127774; Descanso Pre-Examen → Dormir 7-8h</h5></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">&#127919; Lunes</span><span class="t-dur">EXAMEN</span></div>
+      <div class="tb-content"><h5>SUMATIVO 01 — Lunes de Semana 3</h5><p>Post-examen: clasificar errores (no sabía / confundí / mala lectura) para ajustar estrategia.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Endocarditis — Criterios de Duke</h6>
+  <p><strong>Mayores:</strong> Hemocultivos positivos (2+) + Evidencia endocárdica (vegetación en eco, absceso, dehiscencia protésica nueva)</p>
+  <p><strong>Menores:</strong> "FROM JANE" — <strong>F</strong>ever, <strong>R</strong>F (predisposición), <strong>O</strong>sler nodes, <strong>M</strong>icrobiología (hemocultivo que no cumple mayor), <strong>J</strong>aneway lesions, <strong>A</strong>nemia, <strong>N</strong>ew murmur (regurgitación), <strong>E</strong>mbolic phenomena</p>
+  <p class="mn-explain">Dx definitivo: 2 mayores, o 1 mayor + 3 menores, o 5 menores. S. aureus = aguda (válvula sana). S. viridans = subaguda (válvula dañada).</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Cadena de Transporte de Electrones — Inhibidores</h6>
+  <p><strong>I</strong> = Rotenona &bull; <strong>II</strong> = (sin inhibidor clásico) &bull; <strong>III</strong> = Antimicina A &bull; <strong>IV</strong> = CN⁻, CO &bull; <strong>ATP sintasa</strong> = Oligomicina</p>
+  <p class="mn-explain">Desacopladores (DNP, termogenina): disipan gradiente H⁺ → calor sin ATP. 2,4-DNP: ↑metabolismo, hipertermia. UCP1 en grasa parda = fisiológico.</p>
+</div>
+<div class="strat-box" style="margin-top:1rem;border-left:4px solid var(--accent-teal)">
+  <h5>&#9889; Integración clave — Sem 1-2 en 4 niveles</h5>
+  <ul>
+    <li><strong>Histología:</strong> Músculo cardíaco (discos intercalares, sincitio) → capas del corazón (endocardio, miocardio, pericardio) → válvulas</li>
+    <li><strong>Bioquímica:</strong> Krebs + cadena de electrones → producción de ATP → fuente energética del miocardio</li>
+    <li><strong>Fisiología:</strong> PA cardíaco (rápido/lento) → excitabilidad → conducción → EKG normal</li>
+    <li><strong>Patología:</strong> Inflamación de capas: endocarditis (criterios Duke) / miocarditis (viral) / pericarditis (dolor pleurítico, ECG difuso)</li>
+  </ul>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--              SEMANA 3: BOMBA CARDÍACA / VÁLVULAS              -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem3">
+<div class="stag"><i style="background:var(--accent-blue)"></i> SEMANA 03</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#127919;</div>
+  <div class="eb-text">
+    <strong>SUMATIVO 01 — Lunes de esta semana</strong>
+    <span>Después del examen, inicia contenido nuevo para Sumativo 02 (lunes de Semana 5). Temas: bomba cardíaca, valvulopatías, fiebre reumática, oxidación de lípidos, antiarrítmicos.</span>
+  </div>
+</div>
+
+<div class="week-header" style="border-left:4px solid var(--accent-blue)">
+  <div class="wh-theme" style="color:var(--accent-blue)">Tema Central &mdash; Bomba Cardíaca & Válvulas</div>
+  <h3>Frank-Starling, Valvulopatías y Antiarrítmicos</h3>
+  <p class="wh-obj">Lunes: Sumativo 01, luego contenido nuevo. Eje integrador: la bomba cardíaca desde fisiología (Frank-Starling, ciclo P-V) → patología (fiebre reumática, valvulopatías) → farmacología (antiarrítmicos Vaughan-Williams). BQ: oxidación de lípidos (β-oxidación) como sustrato preferido del miocardio.</p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; Lunes = Sumativo 01</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Sumativo 02 → lunes Sem 5</span>
+    <span style="background:rgba(26,122,106,.1);color:var(--accent-teal)">RV: Hipertrofia/Bloqueos en ECG</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 3</h5>
+  <ul>
+    <li><strong>Lunes = SUMATIVO 01.</strong> Post-examen: descanso breve, análisis de errores, luego pre-lectura si hay energía.</li>
+    <li><strong>Día 2 (Anat+Pato+RV):</strong> Anki (30min) → Clase Anat: Corazón macroscópico (atrios, ventrículos, válvulas, septos) → RV: Hipertrofia y bloqueos en ECG → Clase Pato: Fiebre reumática + Valvulopatías → Post-clase: Criterios de Jones, tabla valvulopatías (estenosis vs insuficiencia × mitral vs aórtica) (2.5h)</li>
+    <li><strong>Día 3 (Fisio+BQ):</strong> Anki (30min) → Clase BQ: β-Oxidación de ácidos grasos (2h) → Clase Fisio: Bomba cardíaca (Frank-Starling, precarga, postcarga, contractilidad) → Post-clase: Dibujar curvas P-V de memoria, esquema β-oxidación, flashcards (2.5h)</li>
+    <li><strong>Día 4 (Farmaco+Fisiopato):</strong> Anki (30min) → Clase Farmaco: Antiarrítmicos (clasificación Vaughan-Williams) → Clase Fisiopato: EKG anormal → Post-clase: Tabla de 4 clases de antiarrítmicos (mecanismo, ejemplo, indicación, EA), practicar EKG anormales (2.5h)</li>
+    <li><strong>Día 5 (Consolidación):</strong> Anki (30min) → Autoevaluación (50min) → 20 preguntas NBME (2×50min) → Pre-lectura Sem 4 (30min)</li>
+    <li><strong>Fin de semana:</strong> Sin sumativo próximo → Anki + repaso tema débil (3h) + Descanso obligatorio</li>
+  </ul>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Antiarrítmicos — Vaughan-Williams</h6>
+  <p><strong>I</strong> = Bloqueadores Na⁺ (Ia: ↑QT procainamida; Ib: ↓PA lidocaína; Ic: ↑↑QRS flecainida)</p>
+  <p><strong>II</strong> = β-bloqueadores (propranolol, metoprolol) &bull; <strong>III</strong> = Bloqueadores K⁺ (amiodarona, sotalol → ↑QT)</p>
+  <p><strong>IV</strong> = Bloqueadores Ca²⁺ (verapamilo, diltiazem → nodo AV)</p>
+  <p class="mn-explain">"<strong>S</strong>ome <strong>B</strong>lock <strong>P</strong>otassium <strong>C</strong>hannels" = Sodium, Beta, Potassium, Calcium. Amiodarona actúa en las 4 clases. Adenosina y digoxina no están en la clasificación.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Fiebre Reumática — Criterios de Jones</h6>
+  <p><strong>Mayores:</strong> "<strong>J</strong>&#9825;<strong>ONES</strong>" = <strong>J</strong>oints (poliartritis migratoria), <strong>&#9825;</strong> Carditis, <strong>O</strong> (Nódulos subcutáneos), <strong>N</strong>odos de Sydenham (corea), <strong>E</strong>ritema marginado, <strong>S</strong>ubcutaneous nodules</p>
+  <p class="mn-explain">Post-infección por S. pyogenes (Grupo A). Mimetismo molecular: anticuerpos anti-M → reacción cruzada con miosina cardíaca. Cuerpos de Aschoff = hallazgo patológico patognomónico.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; β-Oxidación — El combustible favorito del corazón</h6>
+  <p>El miocardio obtiene ~70% de su ATP de ácidos grasos (β-oxidación)</p>
+  <p><strong>Paso limitante:</strong> CPT-I (carnitina palmitoil transferasa I) — inhibida por malonil-CoA</p>
+  <p class="mn-explain">Deficiencia de MCAD (acil-CoA DH cadena media): hipoglucemia hipocetósica + hepatomegalia. Perfil de acilcarnitinas alterado en tamizaje neonatal.</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                   SEMANA 4: RITMO CARDÍACO                    -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem4">
+<div class="stag"><i style="background:var(--accent-amber)"></i> SEMANA 04</div>
+<div class="week-header" style="border-left:4px solid var(--accent-amber)">
+  <div class="wh-theme" style="color:var(--accent-amber)">Tema Central &mdash; Ritmo Cardíaco</div>
+  <h3>Ciclo Cardíaco, Arritmias y Biosíntesis de Lípidos</h3>
+  <p class="wh-obj">El eje es el ritmo: ciclo cardíaco (presión-volumen) en Fisio, arritmias en Fisiopato, tto farmacológico de arritmias con casos (CAS), cardiomiopatías en Pato, biosíntesis de lípidos + colesterol en BQ, y Nutrición cardiovascular. <strong>Sumativo 02 el lunes de Semana 5.</strong></p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; SUMATIVO 02 → lunes Sem 5</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">CAS Farmaco: Tto de Arritmias</span>
+    <span style="background:rgba(26,122,106,.1);color:var(--accent-teal)">RV: Mediastino y grandes vasos</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 4</h5>
+  <ul>
+    <li><strong>Día 1 (BQ+RV):</strong> Anki (30min) → Clase BQ: Biosíntesis de ácidos grasos + colesterol (2h) → RV: Mediastino y grandes vasos → Post-clase: Esquema síntesis colesterol (HMG-CoA → mevalonato, regulación por estatinas), tablas ácidos grasos esenciales (2×50min)</li>
+    <li><strong>Día 2 (Fisio+Pato):</strong> Anki (30min) → Clase Fisio: Ciclo cardíaco (fases P-V) + Regulación FC (1h) → Clase Pato: Cardiomiopatías (dilatada, hipertrófica, restrictiva) → Post-clase: Diagrama Wiggers de memoria, tabla cardiomiopatías (2×50min)</li>
+    <li><strong>Día 3 (Farmaco+Fisiopato):</strong> Anki (30min) → Clase Farmaco CAS: Tto de arritmias (2h práctica) → Clase Fisiopato: Arritmias en EKG → Post-clase: Practicar identificación de arritmias, tabla fármaco×arritmia (2h)</li>
+    <li><strong>Día 4 (Nutri + Consolidación):</strong> Anki (30min) → Clase Nutrición: Prevención cardiovascular → Blank Page + Autoevaluación Sem 3-4 → 20 preguntas NBME (2.5h total)</li>
+    <li><strong>Fin de semana = Pre-Sumativo 02:</strong> Protocolo de consolidación (ver abajo)</li>
+  </ul>
+</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#9888;&#65039;</div>
+  <div class="eb-text">
+    <strong>Protocolo Pre-Sumativo 02 — Fin de semana antes del lunes Sem 5</strong>
+    <span>Cubrir Sem 3-4: valvulopatías, cardiomiopatías, Frank-Starling, antiarrítmicos, β-oxidación, biosíntesis lípidos/colesterol, arritmias EKG.</span>
+  </div>
+</div>
+
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">F/S</div>
+    <div class="day-title"><strong>Fin de Semana Pre-Sumativo 02</strong><span>&#9888; Ventana de consolidación</span></div>
+    <div class="day-hours">~8-10h</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado AM</span><span class="t-dur">~4h</span></div>
+      <div class="tb-content"><h5>&#128300; Repaso de Lagunas — Sem 3-4</h5><p>Anki (30min) + 3 Pomodoros en temas débiles. Temas de alto rendimiento: Vaughan-Williams, valvulopatías, Frank-Starling, cardiomiopatías, β-oxidación (MCAD), colesterol (estatinas).</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado PM</span><span class="t-dur">~2h</span></div>
+      <div class="tb-content"><h5>&#128221; 20-25 Preguntas NBME Sem 3-4</h5></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo AM</span><span class="t-dur">~2-3h</span></div>
+      <div class="tb-content"><h5>&#129504; Consolidación Final → NO material nuevo</h5></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">&#127919; Lunes</span><span class="t-dur">EXAMEN</span></div>
+      <div class="tb-content"><h5>SUMATIVO 02 — Lunes de Semana 5</h5></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Cardiomiopatías — "DHR"</h6>
+  <p><strong>D</strong>ilatada = corazón grande, ↓contractilidad, FE↓ (causa #1 = idiopática/viral). ICC sistólica.</p>
+  <p><strong>H</strong>ipertrófica = septum asimétrico, obstrucción LVOT, muerte súbita en jóvenes (mutación β-miosina/MYH7)</p>
+  <p><strong>R</strong>estrictiva = paredes rígidas, ↓compliance, FE normal. Amiloidosis, sarcoidosis, hemocromatosis.</p>
+  <p class="mn-explain">Dx por eco: Dilatada = 4 cámaras grandes. Hipertrófica = septum >15mm. Restrictiva = cavidades normales, llenado restrictivo.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Estatinas — Mecanismo y Clínica</h6>
+  <p><strong>Inhibidores de HMG-CoA reductasa</strong> → ↓síntesis colesterol hepático → ↑receptores LDL → ↓LDL plasmático</p>
+  <p class="mn-explain">EA: miopatía (↑CPK), hepatotoxicidad, rabdomiólisis (especialmente con fibratos). Estatinas = piedra angular en prevención CV primaria y secundaria.</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--            SEMANA 5: DESEMPEÑO CARDIACO + ARTERIAL I          -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem5">
+<div class="stag"><i style="background:var(--accent-plum)"></i> SEMANA 05</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#127919;</div>
+  <div class="eb-text">
+    <strong>SUMATIVO 02 — Lunes de esta semana</strong>
+    <span>Después del examen, inicia contenido para Sumativo 03 (lunes Sem 7): aterosclerosis, ICC, hipertensión, sistema arterial, hipolipemiantes.</span>
+  </div>
+</div>
+
+<div class="week-header" style="border-left:4px solid var(--accent-plum)">
+  <div class="wh-theme" style="color:var(--accent-plum)">Tema Central &mdash; Desempeño Cardíaco & Sistema Arterial I</div>
+  <h3>Aterosclerosis, ICC y el Sistema Arterial</h3>
+  <p class="wh-obj">Lunes: Sumativo 02. Contenido nuevo: Histología arterial, regulación del desempeño cardíaco, aterosclerosis + hiperlipidemias + ICC en Patología, ICC en EKG (Fisiopato), fármacos para ICC, transporte de lípidos (BQ), Nutrición de dislipidemias.</p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; Lunes = Sumativo 02</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Sumativo 03 → lunes Sem 7</span>
+    <span style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Cortos: Histo, Fisio, Farmaco, Fisiopato</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 5</h5>
+  <ul>
+    <li><strong>Lunes = SUMATIVO 02.</strong> Post-examen: análisis de errores. Pre-lectura si hay energía.</li>
+    <li><strong>Día 2 (Histo+Anat+BQ):</strong> Histo: Histología arterial (túnicas, tipos de arterias) → Anat: Mediastino superior y grandes vasos → BQ: Transporte de lípidos (quilomicrones, VLDL, LDL, HDL) → Post-clase: Tabla arterias (elásticas vs musculares vs arteriolas), esquema lipoproteínas con apolipoproteínas (3h)</li>
+    <li><strong>Día 3 (Fisio+Pato):</strong> Fisio: Regulación del desempeño cardíaco → Pato: Aterosclerosis + hiperlipidemias + ICC (2 clases) → Post-clase: Dibujar curvas Frank-Starling con efectos de inotropismo/precarga/postcarga, tabla ICC sistólica vs diastólica (3h)</li>
+    <li><strong>Día 4 (Farmaco+Fisiopato+Nutri):</strong> Farmaco: Fármacos en ICC (iECA, ARA II, β-bloq, diuréticos, Ca²⁺ antagonistas) (2h) → Fisiopato: ICC en EKG (2h) → Nutrición: Dislipidemias → Post-clase: Tablas de antihipertensivos, repaso EKG con crecimiento de cámaras (2.5h)</li>
+    <li><strong>Día 5 (Consolidación):</strong> Anki + Autoevaluación + 20 preguntas NBME + Pre-lectura Sem 6</li>
+    <li><strong>Fin de semana:</strong> Sin sumativo próximo → repaso normal + descanso</li>
+  </ul>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; ICC — Tratamiento Farmacológico "ABCD"</h6>
+  <p><strong>A</strong> = iECA/ARA II (↓postcarga, ↓remodelado) &bull; <strong>B</strong> = β-bloqueadores (carvedilol, metoprolol, bisoprolol)</p>
+  <p><strong>C</strong> = diuréticos (furosemida para congestión, espironolactona para mortalidad) &bull; <strong>D</strong> = Digoxina (↑inotropismo, ↓FC)</p>
+  <p class="mn-explain">Novedad: SGLT2i (empagliflozina, dapagliflozina) = beneficio en ICC-FEr incluso sin DM. Sacubitrilo/valsartán (ARNI) reemplaza iECA en ICC-FEr. Contraindicados: verapamilo/diltiazem en ICC-FEr (inotropismo negativo).</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Lipoproteínas — Ruta del colesterol</h6>
+  <p><strong>Exógena:</strong> Intestino → Quilomicrones (ApoB-48) → LPL → Remanentes → Hígado</p>
+  <p><strong>Endógena:</strong> Hígado → VLDL (ApoB-100) → LPL → IDL → LDL → Tejidos (receptor LDL)</p>
+  <p><strong>Transporte reverso:</strong> Tejidos → HDL (ApoA-I) → LCAT → Hígado / CETP → LDL</p>
+  <p class="mn-explain">Hipercolesterolemia familiar: mutación receptor LDL → ↑↑LDL → aterosclerosis prematura. Xantomas tendinosos = pista clínica.</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                   SEMANA 6: SISTEMA ARTERIAL II               -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem6">
+<div class="stag"><i style="background:var(--accent-olive)"></i> SEMANA 06</div>
+<div class="week-header" style="border-left:4px solid var(--accent-olive)">
+  <div class="wh-theme" style="color:var(--accent-olive)">Tema Central &mdash; Sistema Arterial II: Hipertensión</div>
+  <h3>Hemodinamia, HTA y Tratamiento de Dislipidemias</h3>
+  <p class="wh-obj">Semana densa con Fisio (Poiseuille, presión arterial), Pato (HTA + Lab aterosclerosis), Fisiopato (HTA), Farmaco (antihipertensivos + hipolipemiantes), BQ (hipercolesterolemia familiar), Conducta (estrés e HTA), Nutrición (dieta DASH). <strong>Sumativo 03 el lunes de Sem 7.</strong></p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; SUMATIVO 03 → lunes Sem 7</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">Lab Pato: Aterosclerosis</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">~34h estudio sugeridas</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 6</h5>
+  <ul>
+    <li><strong>Día 1 (Anat+BQ):</strong> Anki (30min) → Clase Anat: Ramas de la carótida (2h) → Clase BQ CBL: Hipercolesterolemia familiar → Post-clase: Esquema circulación carotídea de memoria, caso clínico HF (2.5h)</li>
+    <li><strong>Día 2 (Fisio+Pato):</strong> Anki (30min) → Clase Fisio: Hemodinamia (Poiseuille) + Sistema arterial (2h) → Clase Pato: HTA + Lab aterosclerosis (1h+1h) → Post-clase: Ecuaciones hemodinámicas, tabla causas de HTA secundaria, tabla hallazgos aterosclerosis macro/micro (3h)</li>
+    <li><strong>Día 3 (Farmaco+Fisiopato):</strong> Anki (30min) → Clase Farmaco: Antihipertensivos + Hipolipemiantes (2h) → Clase Fisiopato: HTA → Post-clase: Gran tabla de antihipertensivos (6+ clases × mecanismo/indicación/EA/CI), tabla hipolipemiantes (2.5h)</li>
+    <li><strong>Día 4 (Conducta+Nutri+Consolidación):</strong> Clase Conducta: HTA y estrés → Clase Nutrición: Dieta DASH → Blank Page + Autoevaluación Sem 5-6 → 25 preguntas NBME (3h)</li>
+    <li><strong>Fin de semana = Pre-Sumativo 03</strong> (ver protocolo abajo)</li>
+  </ul>
+</div>
+
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">F/S</div>
+    <div class="day-title"><strong>Fin de Semana Pre-Sumativo 03</strong><span>&#9888; Ventana de consolidación — Sem 5-6</span></div>
+    <div class="day-hours">~8-10h</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado AM</span><span class="t-dur">~4h</span></div>
+      <div class="tb-content"><h5>&#128300; Repaso Dirigido — Sem 5-6</h5><p>Prioridad: antihipertensivos (tabla completa), aterosclerosis (progresión de placa), ICC (sistólica vs diastólica), lipoproteínas (ruta exógena/endógena), Poiseuille y PAM. Recuperación activa: dibujar, explicar, autoexaminarse.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado PM</span><span class="t-dur">~2h</span></div>
+      <div class="tb-content"><h5>&#128221; 25 Preguntas NBME Sem 5-6</h5></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo</span><span class="t-dur">~2-3h + &#128164;</span></div>
+      <div class="tb-content"><h5>&#129504; Consolidación Final + Descanso</h5><p>Anki maduras + tablas + mnemotecnias. Luego dormir 7-8h.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">&#127919; Lunes</span><span class="t-dur">EXAMEN</span></div>
+      <div class="tb-content"><h5>SUMATIVO 03 — Lunes de Semana 7</h5></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Antihipertensivos — Esquema por mecanismo</h6>
+  <p><strong>iECA</strong> (-pril): ↓angiotensina II → ↓aldosterona. EA: tos seca, angioedema, ↑K⁺. CI: embarazo, estenosis bilateral renal</p>
+  <p><strong>ARA II</strong> (-sartán): bloquea AT₁. Similar a iECA pero sin tos</p>
+  <p><strong>Ca²⁺ antagonistas:</strong> Dihidropiridinas (-dipino) = vasodilatación. No-DHP (verapamilo, diltiazem) = ↓FC + ↓conducción</p>
+  <p><strong>Diuréticos:</strong> Tiazidas (1ra línea HTA), asa (furosemida = ICC), ahorradores K⁺ (espironolactona)</p>
+  <p class="mn-explain">1ra línea HTA: tiazida, iECA/ARA II, Ca²⁺ antagonista DHP. Crisis hipertensiva: nitroprusiato, labetalol IV.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Aterosclerosis — Progresión de la placa</h6>
+  <p>Disfunción endotelial → Estría grasa (células espumosas) → Placa fibrosa (cap fibroso + core lipídico) → Placa complicada (ruptura, trombosis)</p>
+  <p class="mn-explain">LDL oxidado = inductor clave. Macrófagos fagocitan LDL-ox → células espumosas. Sitios comunes: aorta abdominal > coronarias > poplítea > carótida interna.</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                   SEMANA 7: CIRCULACIÓN CORONARIA             -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem7">
+<div class="stag"><i style="background:var(--accent-red)"></i> SEMANA 07</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#127919;</div>
+  <div class="eb-text">
+    <strong>SUMATIVO 03 — Lunes de esta semana</strong>
+    <span>Después del examen: cardiopatía isquémica, SCA, circulación coronaria, ROS, antianginosos. Contenido para Sumativo 04 (lunes Sem 9).</span>
+  </div>
+</div>
+
+<div class="week-header" style="border-left:4px solid var(--accent-red)">
+  <div class="wh-theme" style="color:var(--accent-red)">Tema Central &mdash; Circulación Coronaria & Cardiopatía Isquémica</div>
+  <h3>Del Flujo Coronario al Infarto: SCA Integral</h3>
+  <p class="wh-obj">Semana de máxima integración clínica. Anatomía coronaria + Fisio (regulación circulación periférica y coronaria) + Pato (cardiopatía isquémica, IAM) + Fisiopato (SCA en EKG) + Farmaco (tto SCA + angina) + BQ (ROS + marcadores isquemia) + Conducta (pánico vs IAM). <strong>Todo converge en el síndrome coronario agudo.</strong></p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; Lunes = Sumativo 03</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Sumativo 04 → lunes Sem 9</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">RV: ECG Isquemia + Lab Fisio EKG SCA</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 7</h5>
+  <ul>
+    <li><strong>Lunes = SUMATIVO 03.</strong> Post-examen: descanso, análisis de errores.</li>
+    <li><strong>Día 2 (Anat+RV+BQ):</strong> Anat: Circulación coronaria (arterias, territorios, variantes) → RV: Relaciones anatómicas ECG-Isquemia → BQ: ROS + Marcadores bioquímicos de isquemia (troponinas, CK-MB) → Post-clase: Mapa coronarias→territorio→derivaciones ECG, esquema ROS y antioxidantes (3h)</li>
+    <li><strong>Día 3 (Fisio+Pato):</strong> Fisio: Regulación circulación periférica + coronaria (2h) → Pato: Cardiopatía isquémica (1h) → Post-clase: Tabla complicaciones IAM por cronología, esquema regulación flujo coronario (2.5h)</li>
+    <li><strong>Día 4 (Farmaco+Fisiopato+Conducta):</strong> Farmaco: Tto SCA + Angina (1h) → Fisiopato: SCA e isquemia en EKG (2h) → Conducta: Pánico vs IAM (dx diferencial) → Post-clase: Tabla tto SCA (MONA + estatinas + anticoagulantes), practicar ECG con cambios ST (3h)</li>
+    <li><strong>Día 5 (Consolidación):</strong> Anki + Autoevaluación + 25 preguntas NBME + Pre-lectura Sem 8</li>
+    <li><strong>Fin de semana:</strong> Sin sumativo próximo → repaso normal + descanso</li>
+  </ul>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Complicaciones del IAM — Por cronología</h6>
+  <p><strong>0-4h:</strong> Arritmias (fibrilación ventricular = causa #1 muerte temprana)</p>
+  <p><strong>4-24h:</strong> Necrosis por coagulación, ICC aguda</p>
+  <p><strong>1-3 días:</strong> Pericarditis fibrinosa</p>
+  <p><strong>3-7 días:</strong> Ruptura de pared libre (taponamiento), ruptura septal, rotura de músculo papilar (insuficiencia mitral aguda)</p>
+  <p><strong>Semanas-meses:</strong> Aneurisma ventricular, trombo mural, Sx de Dressler (pericarditis autoinmune)</p>
+  <p class="mn-explain">Evolución histológica: necrosis coagulativa → infiltrado neutrofílico (1-3d) → macrófagos + tejido de granulación (1-3 sem) → cicatriz fibrosa (meses).</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; SCA — Tratamiento "MONA-B"</h6>
+  <p><strong>M</strong>orfina &bull; <strong>O</strong>xígeno (si SpO₂ <90%) &bull; <strong>N</strong>itroglicerina &bull; <strong>A</strong>spirina (+ P2Y12: clopidogrel/ticagrelor) &bull; <strong>B</strong>eta-bloqueadores</p>
+  <p class="mn-explain">STEMI = PCI primaria (<90min) o fibrinólisis (<12h). NSTEMI = anticoagulación + estratificación de riesgo. Todos: estatinas + iECA a largo plazo. Nitratos CI en: IAM de VD, sildenafil reciente, hipotensión.</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                   SEMANA 8: CIRCULACIÓN PERIFÉRICA            -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem8">
+<div class="stag"><i style="background:var(--accent-blue)"></i> SEMANA 08</div>
+<div class="week-header" style="border-left:4px solid var(--accent-blue)">
+  <div class="wh-theme" style="color:var(--accent-blue)">Tema Central &mdash; Circulación Periférica</div>
+  <h3>Aneurismas, Vasculitis y Estrés Oxidativo</h3>
+  <p class="wh-obj">Anatomía vascular del miembro superior, integración de factores centrales y periféricos (Fisio), aneurismas y vasculitis (Pato), tto de IAM (Farmaco), vía de pentosas fosfato y deficiencia de G6PD (BQ). <strong>Sumativo 04 el lunes de Sem 9.</strong></p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; SUMATIVO 04 → lunes Sem 9</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">Lab Fisio: Rally Virtual EKG</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 8</h5>
+  <ul>
+    <li><strong>Día 1 (Anat+BQ):</strong> Anat: Ramas de subclavia + irrigación miembro superior (2h) → BQ: Vía pentosas fosfato + G6PD (2h) → Post-clase: Esquema irrigación MS, tabla deficiencia G6PD (triggers, hemólisis, frotis con cuerpos de Heinz) (2.5h)</li>
+    <li><strong>Día 2 (Fisio+Pato):</strong> Fisio: Curvas función vascular y cardíaca (Guyton) (1h) → Pato: Aneurismas + Vasculitis (2h) → Post-clase: Dibujar curvas de Guyton, tabla vasculitis (grandes/medianos/pequeños vasos) (2.5h)</li>
+    <li><strong>Día 3 (Farmaco+Consolidación):</strong> Farmaco: Tto IAM (iECA, β-bloq, vasopresores) (1h) → Autoevaluación Sem 7-8 → Blank Page → 25 preguntas NBME (3h)</li>
+    <li><strong>Fin de semana = Pre-Sumativo 04</strong></li>
+  </ul>
+</div>
+
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">F/S</div>
+    <div class="day-title"><strong>Fin de Semana Pre-Sumativo 04</strong><span>&#9888; Ventana de consolidación — Sem 7-8</span></div>
+    <div class="day-hours">~8-10h</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado AM</span><span class="t-dur">~4h</span></div>
+      <div class="tb-content"><h5>&#128300; Repaso Dirigido — Sem 7-8</h5><p>Prioridad: cardiopatía isquémica (complicaciones IAM), SCA (STEMI vs NSTEMI en EKG), vasculitis (clasificación por calibre), G6PD, regulación coronaria, curvas de Guyton.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado PM</span><span class="t-dur">~2h</span></div>
+      <div class="tb-content"><h5>&#128221; 25 Preguntas NBME Sem 7-8</h5></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Domingo</span><span class="t-dur">~2-3h + &#128164;</span></div>
+      <div class="tb-content"><h5>&#129504; Consolidación Final + Descanso → Dormir 7-8h</h5></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">&#127919; Lunes</span><span class="t-dur">EXAMEN</span></div>
+      <div class="tb-content"><h5>SUMATIVO 04 — Lunes de Semana 9</h5></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Vasculitis — Clasificación por Calibre</h6>
+  <p><strong>Grandes:</strong> Arteritis de Takayasu (arco aórtico, mujeres jóvenes, "pulseless disease") · Arteritis de células gigantes (temporal, >50a, PMR, ceguera)</p>
+  <p><strong>Medianos:</strong> Poliarteritis nodosa (PAN: HBV, no glomérulo, rosario angiográfico) · Kawasaki (niños, aneurismas coronarios)</p>
+  <p><strong>Pequeños:</strong> ANCA+: Granulomatosis con poliangeítis (Wegener: c-ANCA, silla en nariz, glomérulo, pulmón), Poliangeítis microscópica (p-ANCA), Eosinofílica (Churg-Strauss: asma + eosinofilia)</p>
+  <p class="mn-explain">PAN: NO afecta pulmón ni glomérulo (diferencia de microscópica). Kawasaki: fiebre >5 días + CRASH (Conjunctivitis, Rash, Adenopatía, Strawberry tongue, Hand/feet edema). Tto: IVIG + aspirina.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Deficiencia de G6PD</h6>
+  <p>Ligada a X → ↓NADPH → ↓glutatión reducido → estrés oxidativo → hemólisis</p>
+  <p><strong>Triggers:</strong> Sulfonamidas, primaquina, dapsona, habas (favismo), infecciones</p>
+  <p class="mn-explain">Frotis: cuerpos de Heinz (Hb precipitada) y bite cells. Protege contra malaria por P. falciparum.</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--              SEMANA 9: MICROCIRCULACIÓN / LINFÁTICOS           -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem9">
+<div class="stag"><i style="background:var(--accent-teal)"></i> SEMANA 09</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#127919;</div>
+  <div class="eb-text">
+    <strong>SUMATIVO 04 — Lunes de esta semana</strong>
+    <span>Después del examen: microcirculación, Starling capilar, tumores cardíacos/vasculares, cuerpos cetónicos, enfermedad coronaria (CBL integrado).</span>
+  </div>
+</div>
+
+<div class="week-header" style="border-left:4px solid var(--accent-teal)">
+  <div class="wh-theme" style="color:var(--accent-teal)">Tema Central &mdash; Microcirculación & Linfáticos</div>
+  <h3>Capilares, Starling y Tumores Vasculares</h3>
+  <p class="wh-obj">Histología venosa-capilar, microcirculación (ecuación de Starling), tumores cardíacos/vasculares, CBL integrado enfermedad coronaria (Fisiopato + Farmaco), cuerpos cetónicos, Conducta (estrés crónico y CV). <strong>Sumativo 05 el lunes de Sem 11.</strong></p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; Lunes = Sumativo 04</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">Sumativo 05 → lunes Sem 11</span>
+    <span style="background:rgba(26,122,106,.1);color:var(--accent-teal)">CBL integrado: Enfermedad Coronaria</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 9</h5>
+  <ul>
+    <li><strong>Lunes = SUMATIVO 04.</strong> Post-examen: análisis de errores.</li>
+    <li><strong>Día 2 (Histo+Anat+BQ):</strong> Histo: Histología venosa-capilar + vasos linfáticos → Anat: Circulación tórax y abdomen → BQ: Cuerpos cetónicos → Post-clase: Tabla capilares (continuos, fenestrados, sinusoidales), esquema cetogénesis, anatomía sistema ázigos (3h)</li>
+    <li><strong>Día 3 (Fisio+Pato):</strong> Fisio: Microcirculación (Starling) + Otras circulaciones (2h) + Lab EKG (1h) → Pato: Tumores cardíacos y vasculares → Post-clase: Ecuación de Starling con escenarios (edema, ascitis), tabla tumores vasculares (hemangioma, Kaposi, angiosarcoma) (2.5h)</li>
+    <li><strong>Día 4 (Farmaco+Fisiopato+Conducta):</strong> CBL integrado: Enfermedad coronaria (Fisiopato + Farmaco, 3h) → Conducta: Estrés crónico y CV (2h) → Post-clase: Blank Page + Teach-Back (2h)</li>
+    <li><strong>Día 5 (Consolidación):</strong> Anki + Autoevaluación + 25 preguntas NBME</li>
+    <li><strong>Fin de semana:</strong> Sin sumativo próximo → repaso + descanso</li>
+  </ul>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Ecuación de Starling — Filtración Capilar</h6>
+  <p><strong>Jv = Kf [(Pc - Pi) - σ(πc - πi)]</strong></p>
+  <p>Favorecen filtración: ↑Pc (ICC) y ↓πc (hipoalbuminemia, síndrome nefrótico)</p>
+  <p class="mn-explain">Edema = desbalance de Starling. ICC → ↑Pc → edema pulmonar/periférico. Cirrosis → ↓πc + ↑Pc portal → ascitis. Linfático insuficiente → linfedema.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Tumores Cardíacos</h6>
+  <p><strong>Mixoma:</strong> Tumor primario más común en adultos. Atrio izquierdo. "Ball-valve" → síncope posicional. Dx: eco</p>
+  <p><strong>Rabdomioma:</strong> Más común en niños. Asociado a esclerosis tuberosa</p>
+  <p class="mn-explain">Metástasis cardíacas son más frecuentes que tumores primarios. Fuentes: pulmón, mama, melanoma, linfoma.</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--              SEMANA 10: CHOQUE / CIRCULACIÓN FETAL            -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem10">
+<div class="stag"><i style="background:var(--accent-amber)"></i> SEMANA 10</div>
+<div class="week-header" style="border-left:4px solid var(--accent-amber)">
+  <div class="wh-theme" style="color:var(--accent-amber)">Tema Central &mdash; Choque, Circulación Fetal & Cardiopatías Congénitas</div>
+  <h3>Choque Hemorrágico, Circulación Fetal y Shunts</h3>
+  <p class="wh-obj">Semana final de contenido nuevo. Fisio: ejercicio, choque hemorrágico, circulación fetal. Pato: cardiopatías congénitas (acianóticas y cianóticas). Farmaco: tto choque cardiogénico (inotrópicos, vasopresores). BQ: integración metabólica. Nutrición del paciente crítico. <strong>Sumativo 05 el lunes de Sem 11.</strong></p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; SUMATIVO 05 → lunes Sem 11</span>
+    <span style="background:rgba(192,138,32,.1);color:var(--accent-amber)">CAS Farmaco: Tto Choque</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">Lab Pato: Cardiopatías Congénitas</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Distribución por días — Semana 10</h5>
+  <ul>
+    <li><strong>Día 1 (Anat+BQ):</strong> Anat: Ramas ilíacas + miembro inferior (2h) → BQ CBL: Integración del metabolismo (2h) → Post-clase: Mapa metabolismo integrado (Krebs↔β-oxidación↔cetogénesis↔pentosas↔lipoproteínas), irrigación MI (3h)</li>
+    <li><strong>Día 2 (Fisio+Pato):</strong> Fisio: Ejercicio + choque hemorrágico + circulación fetal (2h) → Pato: Cardiopatías congénitas (2h+1h lab) → Post-clase: Tabla shunts (I→D: CIV, CIA, PDA vs D→I: Fallot, transposición), dibujar circulación fetal de memoria (3h)</li>
+    <li><strong>Día 3 (Farmaco+Fisiopato+Nutri):</strong> Farmaco CAS: Tto choque cardiogénico (2h) → Fisiopato: Tipos de choque (2h) → Nutrición: Paciente crítico → Post-clase: Tabla inotrópicos/vasopresores (dopa, dobuta, norepi, epi, milrinona), tabla 4 tipos de choque (3h)</li>
+    <li><strong>Día 4 (Consolidación):</strong> Anki + Autoevaluación Sem 9-10 + 30 preguntas NBME + Pre-lectura finales</li>
+    <li><strong>Fin de semana = Pre-Sumativo 05</strong></li>
+  </ul>
+</div>
+
+<div class="day-sched" onclick="toggleDay(this)">
+  <div class="day-head">
+    <div class="day-dot" style="background:var(--accent-red)">F/S</div>
+    <div class="day-title"><strong>Fin de Semana Pre-Sumativo 05</strong><span>&#9888; Último sumativo — consolidar Sem 9-10</span></div>
+    <div class="day-hours">~8-10h</div><span class="day-arrow">&#9660;</span>
+  </div>
+  <div class="day-body"><div class="day-inner">
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado AM</span><span class="t-dur">~4h</span></div>
+      <div class="tb-content"><h5>&#128300; Repaso Dirigido — Sem 9-10</h5><p>Prioridad NBME: cardiopatías congénitas (Fallot = la más preguntada), tipos de choque, Starling capilar, circulación fetal, G6PD, vasopresores.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">Sábado PM + Domingo AM</span><span class="t-dur">~4-5h</span></div>
+      <div class="tb-content"><h5>&#128221; Preguntas NBME + Consolidación Final</h5><p>30 preguntas. Tablas + mnemotecnias. NO material nuevo.</p></div>
+    </div>
+    <div class="time-block">
+      <div class="tb-time"><span class="t-range">&#127919; Lunes</span><span class="t-dur">EXAMEN</span></div>
+      <div class="tb-content"><h5>SUMATIVO 05 — Lunes de Semana 11</h5></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="mnemonic">
+  <h6>&#128161; Cardiopatías Congénitas — Acianóticas vs Cianóticas</h6>
+  <p><strong>Acianóticas (Shunt I→D):</strong> CIV (#1 más común), CIA, PDA → ↑flujo pulmonar → con el tiempo: Eisenmenger (reversión D→I → cianosis tardía)</p>
+  <p><strong>Cianóticas (Shunt D→I):</strong> Tetralogía de Fallot (#1 cianótica), Transposición de grandes vasos, Atresia tricuspídea, Tronco arterioso, TAPVR</p>
+  <p class="mn-explain">Fallot: "PROVe" = estenosis Pulmonar, cabalgamiento (Riding) aórtico, Overriding, CIV, hipertrofia VD. "Tet spells" → posición en cuclillas (↑RVP). TGV: "huevo acostado" en Rx, depende de PDA para sobrevivir.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Tipos de Choque — Comparación</h6>
+  <p><strong>Hipovolémico:</strong> ↓precarga, ↑RVP, ↓GC. Tto: volumen</p>
+  <p><strong>Cardiogénico:</strong> ↓GC, ↑PCWP, ↑RVP. Tto: inotrópicos (dobutamina), IABP</p>
+  <p><strong>Distributivo:</strong> ↓RVP, ↑GC (fase caliente), vasodilatación. Séptico = más común. Tto: norepinefrina + ATB</p>
+  <p><strong>Obstructivo:</strong> ↓GC, tamponamiento/TEP/neumotórax a tensión. Tto: tratar causa</p>
+  <p class="mn-explain">Diferencia clave: presiones de llenado. Hipovolémico = ↓PCWP. Cardiogénico = ↑PCWP. Distributivo = ↓RVP (vasos dilatados). Obstructivo = variable según causa.</p>
+</div>
+<div class="mnemonic" style="margin-top:.8rem">
+  <h6>&#128161; Circulación Fetal — Shunts y Derivados</h6>
+  <p><strong>Ductus venoso:</strong> Vena umbilical → VCI (bypass hepático) → ligamento venoso</p>
+  <p><strong>Foramen ovale:</strong> AD → AI (bypass pulmonar) → fosa ovalis</p>
+  <p><strong>Ductus arterioso:</strong> Arteria pulmonar → aorta (bypass pulmonar) → ligamento arterioso</p>
+  <p class="mn-explain">PDA se cierra con indometacina (inhibe PGE₂). PGE₁ (alprostadil) mantiene PDA abierto cuando es necesario (TGV, coartación severa).</p>
+</div>
+</section>
+<div class="rule"><hr></div>
+
+<!-- ============================================================ -->
+<!--                   SEMANA 11: FINALES + NBME                   -->
+<!-- ============================================================ -->
+<section class="wrap" id="sem11">
+<div class="stag"><i style="background:var(--accent-red)"></i> SEMANA 11</div>
+
+<div class="exam-banner">
+  <div class="eb-icon">&#127919;</div>
+  <div class="eb-text">
+    <strong>SUMATIVO 05 — Lunes de esta semana &bull; Luego: NBME + Finales</strong>
+    <span>El lunes es el último sumativo. El resto de la semana son Conducta (Actividad Integradora) + preparación para NBME y finales. NBME = 25% de nota final.</span>
+  </div>
+</div>
+
+<div class="week-header" style="border-left:4px solid var(--accent-red)">
+  <div class="wh-theme" style="color:var(--accent-red)">&#127919; Evaluaciones Finales + NBME</div>
+  <h3>Semana de Finales: Repaso Integral Estratégico</h3>
+  <p class="wh-obj">Lunes: Sumativo 05. Resto de la semana: preparación integral para NBME y exámenes finales. No hay contenido nuevo (solo Conducta: Actividad Integradora). Enfoque total: integración entre disciplinas, preguntas masivas y consolidación de mnemotecnias.</p>
+  <div class="wh-eval">
+    <span style="background:rgba(181,54,42,.1);color:var(--accent-red)">&#9888; Lunes = Sumativo 05</span>
+    <span style="background:rgba(45,95,160,.1);color:var(--accent-blue)">NBME = 25% de la nota final</span>
+    <span style="background:rgba(26,122,106,.1);color:var(--accent-teal)">Presentación final = 5%</span>
+  </div>
+</div>
+
+<div class="strat-box">
+  <h5>&#128197; Plan de Repaso — Semana 11 (post-Sumativo 05)</h5>
+  <ul>
+    <li><strong>Lunes = SUMATIVO 05.</strong> Después del examen: descanso breve, luego iniciar repaso integral.</li>
+    <li><strong>Día 2 — Patología + Farmacología:</strong> Anki completo (45min) → Repasar TODAS las tablas comparativas del bloque (2h) → 30 preguntas NBME variadas (1.5h) → Farmacología en secuencia: receptores → antiarrítmicos → ICC → antihipertensivos → hipolipemiantes → SCA → choque (2h)</li>
+    <li><strong>Día 3 — Fisiología + Bioquímica:</strong> Anki (45min) → Dibujar de memoria: PA cardíaco, ciclo P-V, Starling, curvas Guyton, circulación fetal (2h) → BQ: Krebs, cadena electrones, β-oxidación, colesterol, lipoproteínas, ROS, pentosas, cetogénesis (2h) → 30 preguntas NBME (1.5h)</li>
+    <li><strong>Día 4 — Anatomía + Citohistología:</strong> Anki (45min) → Embriología + coronarias + circulación arterial completa de memoria (2h) → Imágenes histológicas: músculo cardíaco, capas corazón, arterias, venas, capilares (1.5h) → 25 preguntas NBME (1.5h)</li>
+    <li><strong>Día 5 — Lagunas + EKG + Conducta + Nutrición:</strong> Anki (30min) → Temas con lagunas (2h) → EKG: normal, arritmias, hipertrofia, SCA (1.5h) → Conducta + Nutrición rápido (1h)</li>
+    <li><strong>Días de examen:</strong> Noche antes: solo mnemotecnias (30min) + dormir 7-8h</li>
+  </ul>
+</div>
+
+<div class="strat-box" style="margin-top:1rem;border-left:4px solid var(--accent-teal)">
+  <h5>&#9745; Checklist Pre-NBME — Temas de Mayor Rendimiento</h5>
+  <ul>
+    <li><strong>Patología:</strong> Endocarditis (Duke) &#9745; Valvulopatías &#9745; Cardiomiopatías (D/H/R) &#9745; Aterosclerosis &#9745; ICC &#9745; HTA &#9745; Cardiopatía isquémica (IAM complicaciones) &#9745; Vasculitis &#9745; Aneurismas &#9745; Cardiopatías congénitas (Fallot, TGV)</li>
+    <li><strong>Farmacología:</strong> Receptores adrenérgicos &#9745; Antiarrítmicos (Vaughan-Williams) &#9745; Tto ICC (ABCD) &#9745; Antihipertensivos &#9745; Hipolipemiantes (estatinas) &#9745; Tto SCA (MONA-B) &#9745; Vasopresores/inotrópicos</li>
+    <li><strong>Fisiología:</strong> PA cardíaco (fases + corrientes) &#9745; Frank-Starling &#9745; Ciclo P-V &#9745; Hemodinamia (Poiseuille, PAM) &#9745; Starling capilar &#9745; Circulación coronaria &#9745; Barorreflejo &#9745; Circulación fetal</li>
+    <li><strong>Bioquímica:</strong> Krebs + piruvato DH &#9745; Cadena electrones (inhibidores) &#9745; β-oxidación (MCAD) &#9745; Colesterol + lipoproteínas &#9745; ROS + G6PD &#9745; Cuerpos cetónicos &#9745; Pentosas fosfato</li>
+    <li><strong>Anatomía:</strong> Embriología cardíaca &#9745; Pericardio &#9745; Corazón macroscópico &#9745; Coronarias &#9745; Grandes vasos &#9745; Carótida &#9745; Circulación MS/MI</li>
+    <li><strong>EKG:</strong> Normal &#9745; Arritmias &#9745; Hipertrofia/bloqueos &#9745; Isquemia/IAM &#9745;</li>
+    <li><strong>Histo:</strong> Músculo cardíaco &#9745; Capas corazón &#9745; Arterias &#9745; Venas/capilares &#9745;</li>
+  </ul>
+</div>
+</section>
+
+<div class="foot">
+  <p><strong>Sistema Cardiovascular — Cronograma Expandido</strong> &bull; Facultad de Medicina UFM &bull; Julio 2026</p>
+  <p style="margin-top:.3rem">Sumativos: lunes de Sem 3, 5, 7, 9 y 11 &bull; NBME = 25% de nota final &bull; Fin de semana previo = ventana de consolidación</p>
+  <p style="margin-top:.3rem;font-size:.72rem">Evaluación: Zona 70% (Cortos 20% + Actitudinal 5% + Sumativos 45%) · Final 30% (NBME 25% + Presentación 5%)</p>
+  <p style="margin-top:.5rem;font-size:.7rem">Basado en syllabus oficial SCV UFM 2026 · Evidencia: Durrani et al. BMC Med Educ 2024 · Martinengo et al. JMIR 2024 · PMC 10842980</p>
+</div>
+
+<script>
+function toggleDay(el){el.classList.toggle('open')}
+const sections=document.querySelectorAll('.wrap[id]');
+const navLinks=document.querySelectorAll('.topnav a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){navLinks.forEach(l=>l.classList.remove('on'));const a=document.querySelector('.topnav a[href="#'+e.target.id+'"]');if(a)a.classList.add('on')}})
+},{threshold:.15});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
